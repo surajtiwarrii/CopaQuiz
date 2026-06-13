@@ -133,7 +133,7 @@ footer{text-align:center;padding:24px;color:var(--ink-soft);font-size:.8rem}
       </div>
     </div>
   </div>
-  <div class="fulltest" onclick="goTo('copa.html')">
+  <div class="fulltest" onclick="startFullTest()">
     <div><h3 data-en="🏆 Full Syllabus Test" data-hi="🏆 पूर्ण पाठ्यक्रम टेस्ट">🏆 Full Syllabus Test</h3>
     <p data-en="100 mixed questions from every chapter — feels like the real exam." data-hi="हर अध्याय से 100 मिश्रित प्रश्न — असली परीक्षा जैसा।">100 mixed questions from every chapter — feels like the real exam.</p></div>
     <span class="ftbtn" data-en="Run Test →" data-hi="टेस्ट चलाएं →">Run Test →</span>
@@ -149,6 +149,11 @@ function applyLang(l){
 }
 document.getElementById('langBtn').onclick=()=>applyLang(body.dataset.lang==='en'?'hi':'en');
 let sv='en';try{sv=localStorage.getItem('copa_lang')||'en'}catch(e){}applyLang(sv);
+function startFullTest(){
+  const cfg={subject:'full',chapterId:0,chapterEn:'Full Syllabus Test',chapterHi:'पूर्ण पाठ्यक्रम टेस्ट',mode:'medium',size:100,set:1,lang:body.dataset.lang};
+  try{localStorage.setItem('copa_config',JSON.stringify(cfg))}catch(e){}
+  body.classList.add('exit');setTimeout(()=>location.href='quiz.html',400);
+}
 function goTo(u){body.classList.add('exit');setTimeout(()=>location.href=u,400)}
 function tick(){const d=new Date();document.getElementById('clock').textContent=d.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'})}
 tick();setInterval(tick,1000);
