@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Employability Skills — Chapters</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --c1:#FF8A6B;--c2:#FFB36B;--c3:#FF7BA8;
+  --ink:#3B2A2A;--ink-soft:#8A6E6E;
+  --glass:rgba(255,255,255,.45);
+  --glass-strong:rgba(255,255,255,.64);
+  --border:rgba(255,255,255,.72);
+  --grad:linear-gradient(120deg,#FF8A6B 0%,#FF9B7D 50%,#FF7BA8 100%);
+  --accent:#FF7E5F;
+  --easy:#48BB78;--med:#F6AD55;--hard:#FC8181;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Poppins',sans-serif;color:var(--ink);min-height:100vh;overflow-x:hidden;position:relative;background:#FFF1EC}
+body[data-lang="hi"]{font-family:'Noto Sans Devanagari','Poppins',sans-serif}
+body.exit{animation:pageOut .45s ease forwards}
+@keyframes pageOut{to{opacity:0;transform:scale(.97)}}
+.wall{position:fixed;inset:0;z-index:-3;background:
+  radial-gradient(60% 50% at 15% 20%,#FFD9C2 0%,transparent 60%),
+  radial-gradient(55% 55% at 85% 25%,#FFD0DE 0%,transparent 60%),
+  radial-gradient(60% 60% at 50% 90%,#FFE5C2 0%,transparent 60%),
+  linear-gradient(160deg,#FFF3EE,#FFF0F4);
+  background-size:200% 200%;animation:wallShift 22s ease-in-out infinite}
+@keyframes wallShift{0%,100%{background-position:0% 0%}50%{background-position:100% 100%}}
+.grain{position:fixed;inset:0;z-index:-1;opacity:.04;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.menubar{position:fixed;top:0;left:0;right:0;z-index:60;height:46px;display:flex;align-items:center;justify-content:space-between;
+  padding:0 clamp(14px,4vw,32px);background:var(--glass-strong);backdrop-filter:blur(22px) saturate(160%);
+  border-bottom:1px solid var(--border);font-size:.82rem;font-weight:600;animation:slideDown .6s cubic-bezier(.2,.8,.2,1) both}
+@keyframes slideDown{from{transform:translateY(-100%)}to{transform:translateY(0)}}
+.mb-left{display:flex;align-items:center;gap:12px}
+.back{display:flex;align-items:center;gap:7px;cursor:pointer;color:var(--ink);font-weight:600;font-size:.85rem;
+  background:rgba(255,255,255,.6);border:1px solid var(--border);padding:7px 14px;border-radius:20px;transition:gap .3s,transform .3s}
+.back:hover{gap:11px;transform:translateX(-2px)}
+.mb-left b{letter-spacing:-.3px;font-size:.95rem;margin-left:4px}
+.mb-right{display:flex;align-items:center;gap:14px}
+.langbtn{display:flex;background:rgba(255,255,255,.6);border:1px solid var(--border);border-radius:20px;padding:3px;cursor:pointer;position:relative;font-weight:700}
+.langbtn .pill{position:absolute;top:3px;bottom:3px;width:calc(50% - 3px);left:3px;background:var(--accent);border-radius:20px;transition:transform .35s cubic-bezier(.6,.2,.1,1);box-shadow:0 2px 8px rgba(255,126,95,.45)}
+body[data-lang="hi"] .langbtn .pill{transform:translateX(100%)}
+.langbtn span{position:relative;z-index:1;padding:4px 13px;font-size:.72rem;color:var(--ink-soft);transition:color .3s}
+.langbtn span.on{color:#fff}
+.stage{max-width:1080px;margin:0 auto;padding:88px clamp(18px,5vw,40px) 60px}
+.head{text-align:center;margin-bottom:40px}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:.74rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--accent);background:rgba(255,126,95,.12);padding:8px 16px;border-radius:30px;margin-bottom:18px;animation:fadeUp .6s .05s both}
+.eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);animation:pulse 1.8s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,126,95,.6)}50%{box-shadow:0 0 0 7px rgba(255,126,95,0)}}
+h1{font-size:clamp(2rem,5vw,3.2rem);font-weight:800;letter-spacing:-1.5px;animation:fadeUp .6s .12s both}
+h1 .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.headsub{color:var(--ink-soft);margin-top:12px;font-size:1rem;animation:fadeUp .6s .2s both}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px;margin-top:10px}
+.ch{position:relative;border-radius:20px;cursor:pointer;overflow:hidden;background:var(--glass);
+  backdrop-filter:blur(24px) saturate(180%);border:1px solid var(--border);
+  box-shadow:0 14px 36px rgba(200,110,90,.12),inset 0 1px 0 rgba(255,255,255,.6);
+  transition:transform .45s cubic-bezier(.2,.8,.2,1),box-shadow .45s;
+  padding:22px;display:flex;align-items:center;gap:16px;animation:chIn .6s both}
+@keyframes chIn{from{opacity:0;transform:translateY(26px) scale(.97)}to{opacity:1;transform:none}}
+.ch:hover{transform:translateY(-7px);box-shadow:0 24px 50px rgba(200,110,90,.2),inset 0 1px 0 rgba(255,255,255,.7)}
+.ch .num{flex-shrink:0;width:52px;height:52px;border-radius:15px;display:grid;place-items:center;
+  font-family:'JetBrains Mono';font-weight:700;font-size:1.15rem;color:#fff;background:var(--grad);
+  box-shadow:0 6px 16px rgba(255,126,95,.32);transition:transform .45s}
+.ch:hover .num{transform:scale(1.08) rotate(-4deg)}
+.ch .info{flex:1;min-width:0}
+.ch .info h3{font-size:1.04rem;font-weight:600;letter-spacing:-.3px;line-height:1.25}
+.ch .info p{font-size:.76rem;color:var(--ink-soft);margin-top:3px}
+.ch .arrow{flex-shrink:0;color:var(--accent);font-size:1.2rem;transition:transform .3s;opacity:.5}
+.ch:hover .arrow{transform:translateX(4px);opacity:1}
+.overlay{position:fixed;inset:0;z-index:100;background:rgba(60,40,40,.32);backdrop-filter:blur(8px);
+  display:none;align-items:center;justify-content:center;padding:20px;opacity:0;transition:opacity .3s}
+.overlay.show{display:flex;opacity:1}
+.modal{width:100%;max-width:440px;border-radius:26px;background:var(--glass-strong);backdrop-filter:blur(30px) saturate(180%);
+  border:1px solid var(--border);box-shadow:0 30px 70px rgba(200,110,90,.3);padding:30px 28px;
+  transform:scale(.9) translateY(20px);transition:transform .35s cubic-bezier(.2,.9,.3,1.2);max-height:90vh;overflow-y:auto}
+.overlay.show .modal{transform:none}
+.modal .mtop{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:22px}
+.modal .mtop h2{font-size:1.3rem;font-weight:700;letter-spacing:-.4px;line-height:1.25;padding-right:10px}
+.modal .mtop .mc{font-size:.74rem;color:var(--accent);font-weight:600;margin-top:4px}
+.xbtn{flex-shrink:0;width:34px;height:34px;border-radius:50%;border:none;background:rgba(255,255,255,.6);cursor:pointer;
+  font-size:1.1rem;color:var(--ink-soft);display:grid;place-items:center;transition:background .3s,transform .3s}
+.xbtn:hover{background:#fff;transform:rotate(90deg)}
+.mlabel{font-size:.72rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--ink-soft);margin:18px 0 10px}
+.modes{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.mode{padding:13px 8px;border-radius:14px;border:2px solid transparent;background:rgba(255,255,255,.5);cursor:pointer;
+  text-align:center;font-weight:600;font-size:.88rem;transition:all .25s}
+.mode .em{display:block;font-size:1.1rem;margin-bottom:3px}
+.mode[data-m="easy"]{color:var(--easy)}.mode[data-m="medium"]{color:var(--med)}.mode[data-m="hard"]{color:var(--hard)}
+.mode.sel[data-m="easy"]{background:rgba(72,187,120,.14);border-color:var(--easy)}
+.mode.sel[data-m="medium"]{background:rgba(246,173,85,.14);border-color:var(--med)}
+.mode.sel[data-m="hard"]{background:rgba(252,129,129,.14);border-color:var(--hard)}
+.sizes{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.size{padding:14px 8px;border-radius:14px;border:2px solid transparent;background:rgba(255,255,255,.5);cursor:pointer;text-align:center;transition:all .25s}
+.size b{display:block;font-size:1.15rem;font-weight:700;font-family:'JetBrains Mono'}
+.size span{font-size:.66rem;color:var(--ink-soft)}
+.size.sel{background:rgba(255,126,95,.14);border-color:var(--accent)}
+.size.sel b{color:var(--accent)}
+.sets{display:flex;flex-wrap:wrap;gap:8px}
+.set{width:42px;height:42px;border-radius:12px;border:2px solid transparent;background:rgba(255,255,255,.5);cursor:pointer;
+  font-weight:700;font-family:'JetBrains Mono';font-size:.9rem;color:var(--ink-soft);transition:all .25s}
+.set.sel{background:var(--grad);color:#fff;border-color:transparent;box-shadow:0 4px 12px rgba(255,126,95,.3)}
+.startbtn{margin-top:26px;width:100%;padding:16px;border:none;border-radius:16px;cursor:pointer;color:#fff;font-weight:700;font-size:1rem;
+  font-family:inherit;background:var(--grad);background-size:200% 100%;position:relative;overflow:hidden;
+  box-shadow:0 12px 28px rgba(255,126,95,.32);transition:background-position .6s,transform .3s,box-shadow .3s}
+.startbtn::before{content:"";position:absolute;top:0;left:-60%;width:50%;height:100%;background:linear-gradient(120deg,transparent,rgba(255,255,255,.5),transparent);transform:skewX(-20deg);transition:left .6s}
+.startbtn:hover{background-position:100% 0;transform:translateY(-2px);box-shadow:0 16px 36px rgba(255,126,95,.42)}
+.startbtn:hover::before{left:130%}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:600px){.grid{grid-template-columns:1fr}.mb-left b{display:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body data-lang="en">
+<div class="wall"></div><div class="grain"></div>
+<div class="menubar">
+  <div class="mb-left">
+    <div class="back" onclick="goTo('index.html')"><span>←</span><span data-en="Home" data-hi="होम">Home</span></div>
+    <b data-en="Employability Skills" data-hi="रोज़गार कौशल">Employability Skills</b>
+  </div>
+  <div class="mb-right">
+    <div class="langbtn" id="langBtn"><div class="pill"></div><span class="on" id="enL">EN</span><span id="hiL">हिं</span></div>
+  </div>
+</div>
+
+<div class="stage">
+  <div class="head">
+    <div class="eyebrow"><span class="dot"></span><span data-en="Subject 02 · 12 Chapters" data-hi="विषय 02 · 12 अध्याय">Subject 02 · 12 Chapters</span></div>
+    <h1 data-en="Choose a <span class='g'>chapter</span>" data-hi="एक <span class='g'>अध्याय</span> चुनें">Choose a <span class="g">chapter</span></h1>
+    <p class="headsub" data-en="Tap any chapter to pick your mode and start practicing." data-hi="किसी भी अध्याय पर टैप करें, मोड चुनें और अभ्यास शुरू करें।">Tap any chapter to pick your mode and start practicing.</p>
+  </div>
+  <div class="grid" id="grid"></div>
+</div>
+
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <div class="mtop">
+      <div><h2 id="mTitle">Chapter</h2><div class="mc" data-en="Employability Skills" data-hi="रोज़गार कौशल">Employability Skills</div></div>
+      <button class="xbtn" onclick="closeModal()">✕</button>
+    </div>
+    <div class="mlabel" data-en="Difficulty" data-hi="कठिनाई">Difficulty</div>
+    <div class="modes">
+      <div class="mode sel" data-m="easy" onclick="selMode(this)"><span class="em">🟢</span><span data-en="Easy" data-hi="आसान">Easy</span></div>
+      <div class="mode" data-m="medium" onclick="selMode(this)"><span class="em">🟡</span><span data-en="Medium" data-hi="मध्यम">Medium</span></div>
+      <div class="mode" data-m="hard" onclick="selMode(this)"><span class="em">🔴</span><span data-en="Hard" data-hi="कठिन">Hard</span></div>
+    </div>
+    <div class="mlabel" data-en="Number of Questions" data-hi="प्रश्नों की संख्या">Number of Questions</div>
+    <div class="sizes" id="sizes">
+      <div class="size sel" data-s="25" onclick="selSize(this)"><b>25</b><span data-en="25 min" data-hi="25 मिनट">25 min</span></div>
+      <div class="size" data-s="50" onclick="selSize(this)"><b>50</b><span data-en="60 min" data-hi="60 मिनट">60 min</span></div>
+    </div>
+    <div class="mlabel" data-en="Select Set" data-hi="सेट चुनें">Select Set</div>
+    <div class="sets" id="sets"></div>
+    <button class="startbtn" onclick="startQuiz()" data-en="Start Test →" data-hi="टेस्ट शुरू करें →">Start Test →</button>
+  </div>
+</div>
+
+<script>
+const CHAPTERS=[
+  {id:1,en:"Introduction to Employability Skills",hi:"रोज़गार कौशल का परिचय",dEn:"Why employability skills matter",dHi:"रोज़गार कौशल क्यों ज़रूरी"},
+  {id:2,en:"Constitutional Values & Citizenship",hi:"संवैधानिक मूल्य और नागरिकता",dEn:"Values, ethics, environment",dHi:"मूल्य, नैतिकता, पर्यावरण"},
+  {id:3,en:"Becoming a Professional in the 21st Century",hi:"21वीं सदी में प्रोफेशनल बनना",dEn:"Self-awareness, attitude, time mgmt",dHi:"आत्म-जागरूकता, रवैया, समय प्रबंधन"},
+  {id:4,en:"Basic English Skills",hi:"बेसिक अंग्रेज़ी कौशल",dEn:"Nouns, verbs, sentences, grammar",dHi:"संज्ञा, क्रिया, वाक्य, व्याकरण"},
+  {id:5,en:"Career Development & Goal Setting",hi:"करियर विकास और लक्ष्य निर्धारण",dEn:"Goals, planning, growth",dHi:"लक्ष्य, योजना, विकास"},
+  {id:6,en:"Communication Skills",hi:"संचार कौशल",dEn:"Verbal, non-verbal, teamwork",dHi:"मौखिक, गैर-मौखिक, टीमवर्क"},
+  {id:7,en:"Diversity & Inclusion",hi:"विविधता और समावेशन",dEn:"Respect, equality at workplace",dHi:"सम्मान, कार्यस्थल पर समानता"},
+  {id:8,en:"Financial & Legal Literacy",hi:"वित्तीय और कानूनी साक्षरता",dEn:"Banking, savings, legal rights",dHi:"बैंकिंग, बचत, कानूनी अधिकार"},
+  {id:9,en:"Essential Digital Skills",hi:"आवश्यक डिजिटल कौशल",dEn:"Computer, internet, email, safety",dHi:"कंप्यूटर, इंटरनेट, ईमेल, सुरक्षा"},
+  {id:10,en:"Entrepreneurship",hi:"उद्यमिता",dEn:"Business ideas, startups",dHi:"व्यापार विचार, स्टार्टअप"},
+  {id:11,en:"Customer Service",hi:"ग्राहक सेवा",dEn:"Handling customers, service quality",dHi:"ग्राहक संभालना, सेवा गुणवत्ता"},
+  {id:12,en:"Getting Ready for Apprenticeship & Jobs",hi:"अप्रेंटिसशिप और नौकरी की तैयारी",dEn:"Resume, interviews, job search",dHi:"रिज़्यूमे, इंटरव्यू, नौकरी खोज"}
+];
+const SETS_BY_SIZE={25:5,50:2};
+let cur={chapter:null,mode:'easy',size:25,set:1};
+
+const body=document.body,enL=document.getElementById('enL'),hiL=document.getElementById('hiL');
+function applyLang(l){
+  body.dataset.lang=l;enL.classList.toggle('on',l==='en');hiL.classList.toggle('on',l==='hi');
+  document.querySelectorAll('[data-en]').forEach(e=>e.innerHTML=l==='hi'?e.dataset.hi:e.dataset.en);
+  renderGrid();if(cur.chapter)document.getElementById('mTitle').textContent=l==='hi'?cur.chapter.hi:cur.chapter.en;
+  try{localStorage.setItem('copa_lang',l)}catch(e){}
+}
+document.getElementById('langBtn').onclick=()=>applyLang(body.dataset.lang==='en'?'hi':'en');
+let sv='en';try{sv=localStorage.getItem('copa_lang')||'en'}catch(e){}
+
+function renderGrid(){
+  const l=body.dataset.lang,g=document.getElementById('grid');g.innerHTML='';
+  CHAPTERS.forEach((c,i)=>{
+    const d=document.createElement('div');d.className='ch';d.style.animationDelay=(i*0.04)+'s';
+    d.onclick=()=>openModal(c);
+    d.innerHTML=`<div class="num">${String(c.id).padStart(2,'0')}</div>
+      <div class="info"><h3>${l==='hi'?c.hi:c.en}</h3><p>${l==='hi'?c.dHi:c.dEn}</p></div>
+      <div class="arrow">→</div>`;
+    g.appendChild(d);
+  });
+}
+function openModal(c){
+  cur={chapter:c,mode:'easy',size:25,set:1};
+  document.getElementById('mTitle').textContent=body.dataset.lang==='hi'?c.hi:c.en;
+  document.querySelectorAll('.mode').forEach(m=>m.classList.toggle('sel',m.dataset.m==='easy'));
+  document.querySelectorAll('.size').forEach(s=>s.classList.toggle('sel',s.dataset.s==='25'));
+  renderSets();
+  document.getElementById('overlay').classList.add('show');
+}
+function closeModal(){document.getElementById('overlay').classList.remove('show')}
+document.getElementById('overlay').onclick=e=>{if(e.target.id==='overlay')closeModal()};
+function selMode(el){cur.mode=el.dataset.m;document.querySelectorAll('.mode').forEach(m=>m.classList.remove('sel'));el.classList.add('sel')}
+function selSize(el){cur.size=+el.dataset.s;cur.set=1;document.querySelectorAll('.size').forEach(s=>s.classList.remove('sel'));el.classList.add('sel');renderSets()}
+function renderSets(){
+  const wrap=document.getElementById('sets');wrap.innerHTML='';
+  const n=SETS_BY_SIZE[cur.size];
+  for(let i=1;i<=n;i++){
+    const b=document.createElement('div');b.className='set'+(i===cur.set?' sel':'');b.textContent=i;
+    b.onclick=()=>{cur.set=i;document.querySelectorAll('.set').forEach(s=>s.classList.remove('sel'));b.classList.add('sel')};
+    wrap.appendChild(b);
+  }
+}
+function startQuiz(){
+  const cfg={subject:'employability',chapterId:cur.chapter.id,chapterEn:cur.chapter.en,chapterHi:cur.chapter.hi,
+    mode:cur.mode,size:cur.size,set:cur.set,lang:body.dataset.lang};
+  try{localStorage.setItem('copa_config',JSON.stringify(cfg))}catch(e){}
+  body.classList.add('exit');setTimeout(()=>location.href='quiz.html',400);
+}
+function goTo(u){body.classList.add('exit');setTimeout(()=>location.href=u,400)}
+applyLang(sv);
+</script>
+</body>
+</html>

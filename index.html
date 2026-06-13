@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>COPA Quiz — ITI NCVT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --pink:#FF6B9D;--sky:#4FC3F7;--purple:#C961DE;
+  --ink:#2D3748;--ink-soft:#6B7A99;
+  --glass:rgba(255,255,255,.45);
+  --glass-strong:rgba(255,255,255,.62);
+  --border:rgba(255,255,255,.7);
+  --grad:linear-gradient(120deg,#FF8FB1 0%,#C961DE 55%,#7C9DF5 100%);
+  --accent:#FF6B9D;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Poppins',sans-serif;color:var(--ink);min-height:100vh;overflow-x:hidden;position:relative;background:#EAF0FF}
+body[data-lang="hi"]{font-family:'Noto Sans Devanagari','Poppins',sans-serif}
+body.exit{animation:pageOut .45s ease forwards}
+@keyframes pageOut{to{opacity:0;transform:scale(.97)}}
+.wall{position:fixed;inset:0;z-index:-3;background:
+  radial-gradient(60% 50% at 15% 20%,#FFC2DC 0%,transparent 60%),
+  radial-gradient(55% 55% at 85% 25%,#B6E3FF 0%,transparent 60%),
+  radial-gradient(60% 60% at 50% 90%,#E5C8FF 0%,transparent 60%),
+  linear-gradient(160deg,#FFF0F5,#F0F8FF);
+  background-size:200% 200%;animation:wallShift 22s ease-in-out infinite}
+@keyframes wallShift{0%,100%{background-position:0% 0%}50%{background-position:100% 100%}}
+.grain{position:fixed;inset:0;z-index:-1;opacity:.04;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.menubar{position:fixed;top:0;left:0;right:0;z-index:60;height:46px;display:flex;align-items:center;justify-content:space-between;
+  padding:0 clamp(14px,4vw,32px);background:var(--glass-strong);backdrop-filter:blur(22px) saturate(160%);
+  border-bottom:1px solid var(--border);font-size:.82rem;font-weight:600;animation:slideDown .6s cubic-bezier(.2,.8,.2,1) both}
+@keyframes slideDown{from{transform:translateY(-100%)}to{transform:translateY(0)}}
+.mb-left{display:flex;align-items:center;gap:12px}
+.apple{width:26px;height:26px;border-radius:8px;background:var(--grad);display:grid;place-items:center;color:#fff;font-family:'JetBrains Mono';font-weight:700;font-size:.85rem;box-shadow:0 3px 10px rgba(255,107,157,.4)}
+.mb-left b{letter-spacing:-.3px;font-size:.95rem}
+.mb-right{display:flex;align-items:center;gap:14px;font-family:'JetBrains Mono';color:var(--ink-soft)}
+.langbtn{display:flex;background:rgba(255,255,255,.6);border:1px solid var(--border);border-radius:20px;padding:3px;cursor:pointer;position:relative;font-weight:700}
+.langbtn .pill{position:absolute;top:3px;bottom:3px;width:calc(50% - 3px);left:3px;background:var(--accent);border-radius:20px;transition:transform .35s cubic-bezier(.6,.2,.1,1);box-shadow:0 2px 8px rgba(255,107,157,.45)}
+body[data-lang="hi"] .langbtn .pill{transform:translateX(100%)}
+.langbtn span{position:relative;z-index:1;padding:4px 13px;font-size:.72rem;color:var(--ink-soft);transition:color .3s}
+.langbtn span.on{color:#fff}
+#clock{font-size:.78rem}
+.stage{max-width:1080px;margin:0 auto;padding:104px clamp(18px,5vw,40px) 40px;min-height:100vh;display:flex;flex-direction:column;justify-content:center}
+.boot{text-align:center;margin-bottom:44px}
+.term{display:inline-flex;align-items:center;gap:9px;font-size:.74rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--accent);background:rgba(255,107,157,.1);padding:8px 16px;border-radius:30px;margin-bottom:22px;animation:fadeUp .7s .1s both}
+.term .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);animation:pulse 1.8s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,107,157,.6)}50%{box-shadow:0 0 0 7px rgba(255,107,157,0)}}
+h1{font-size:clamp(2.3rem,6.5vw,4.2rem);font-weight:800;line-height:1.05;letter-spacing:-2px;animation:fadeUp .7s .2s both}
+h1 .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{max-width:520px;margin:18px auto 0;color:var(--ink-soft);font-size:clamp(.96rem,2vw,1.12rem);line-height:1.55;animation:fadeUp .7s .32s both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
+.dock{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+.win{position:relative;border-radius:24px;padding:0;cursor:pointer;overflow:hidden;background:var(--glass);
+  backdrop-filter:blur(26px) saturate(180%);border:1px solid var(--border);
+  box-shadow:0 20px 50px rgba(120,90,180,.14),inset 0 1px 0 rgba(255,255,255,.6);
+  transition:transform .5s cubic-bezier(.2,.8,.2,1),box-shadow .5s;animation:winIn .8s both}
+.win:nth-child(1){animation-delay:.4s}.win:nth-child(2){animation-delay:.5s}
+@keyframes winIn{from{opacity:0;transform:translateY(40px) scale(.95)}to{opacity:1;transform:none}}
+.win:hover{transform:translateY(-10px);box-shadow:0 32px 64px rgba(120,90,180,.22),inset 0 1px 0 rgba(255,255,255,.7)}
+.win .body{padding:36px 30px 34px}
+.win .icon{width:68px;height:68px;border-radius:19px;display:grid;place-items:center;font-size:2rem;margin-bottom:20px;transition:transform .5s}
+.win.theory .icon{background:linear-gradient(135deg,#FFE0EC,#FFC8DD)}
+.win.emp .icon{background:linear-gradient(135deg,#DCF1FF,#C4E6FF)}
+.win:hover .icon{transform:scale(1.1) rotate(-5deg)}
+.win h2{font-size:1.55rem;font-weight:700;letter-spacing:-.5px;margin-bottom:10px}
+.win p{color:var(--ink-soft);font-size:.92rem;line-height:1.55;margin-bottom:24px}
+.win .meta{display:flex;gap:26px;margin-bottom:28px}
+.win .meta b{display:block;font-size:1.55rem;font-weight:700;font-family:'JetBrains Mono';background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.win .meta span{font-size:.68rem;color:var(--ink-soft)}
+/* premium launch button */
+.launch{display:inline-flex;align-items:center;gap:10px;font-weight:600;font-size:.95rem;color:#fff;
+  background:var(--grad);background-size:200% 100%;background-position:0% 0;padding:14px 26px;border-radius:16px;position:relative;overflow:hidden;
+  box-shadow:0 10px 24px rgba(201,97,222,.28);transition:background-position .6s,box-shadow .4s,transform .3s}
+.launch::before{content:"";position:absolute;top:0;left:-60%;width:50%;height:100%;
+  background:linear-gradient(120deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);transition:left .6s}
+.win:hover .launch{background-position:100% 0;box-shadow:0 14px 32px rgba(201,97,222,.4);transform:translateY(-2px)}
+.win:hover .launch::before{left:130%}
+.launch .a{transition:transform .3s;position:relative}.win:hover .launch .a{transform:translateX(4px)}
+.launch span{position:relative}
+.fulltest{margin-top:22px;border-radius:20px;padding:26px clamp(22px,4vw,40px);position:relative;overflow:hidden;
+  background:var(--grad);color:#fff;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;cursor:pointer;
+  box-shadow:0 18px 44px rgba(201,97,222,.32);animation:winIn .8s .6s both;transition:transform .4s}
+.fulltest:hover{transform:translateY(-6px)}
+.fulltest::after{content:"";position:absolute;top:-60%;right:-5%;width:260px;height:260px;border-radius:50%;background:rgba(255,255,255,.13)}
+.fulltest h3{font-size:1.35rem;font-weight:700;position:relative}
+.fulltest p{opacity:.92;font-size:.88rem;position:relative;margin-top:3px}
+.ftbtn{background:#fff;color:var(--pink);font-weight:700;padding:13px 26px;border-radius:14px;font-size:.9rem;position:relative;white-space:nowrap;transition:transform .3s}
+.fulltest:hover .ftbtn{transform:scale(1.06)}
+footer{text-align:center;padding:24px;color:var(--ink-soft);font-size:.8rem}
+@media(max-width:700px){.dock{grid-template-columns:1fr}h1{letter-spacing:-1px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body data-lang="en">
+<div class="wall"></div><div class="grain"></div>
+<div class="menubar">
+  <div class="mb-left"><div class="apple">C</div><b>COPA Quiz</b></div>
+  <div class="mb-right">
+    <div class="langbtn" id="langBtn"><div class="pill"></div><span class="on" id="enL">EN</span><span id="hiL">हिं</span></div>
+    <span id="clock">--:--</span>
+  </div>
+</div>
+<div class="stage">
+  <div class="boot">
+    <div class="term"><span class="dot"></span><span data-en="Practice · Test · Improve" data-hi="अभ्यास · टेस्ट · सुधार">Practice · Test · Improve</span></div>
+    <h1 data-en="Welcome to your<br><span class='g'>COPA</span> workspace" data-hi="आपके <span class='g'>COPA</span><br>वर्कस्पेस में स्वागत है">Welcome to your<br><span class="g">COPA</span> workspace</h1>
+    <p class="sub" data-en="Open a subject, pick a chapter, choose your mode. Bilingual questions with instant explanations." data-hi="विषय खोलें, अध्याय चुनें, मोड चुनें। तुरंत व्याख्या के साथ द्विभाषी प्रश्न।">Open a subject, pick a chapter, choose your mode. Bilingual questions with instant explanations.</p>
+  </div>
+  <div class="dock">
+    <div class="win theory" onclick="goTo('copa.html')" data-tilt>
+      <div class="body">
+        <div class="icon">🖥️</div>
+        <h2 data-en="COPA Theory" data-hi="COPA थ्योरी">COPA Theory</h2>
+        <p data-en="Hardware, MS Office, networking, web design, databases, cyber security & more." data-hi="हार्डवेयर, एमएस ऑफिस, नेटवर्किंग, वेब डिज़ाइन, डेटाबेस, साइबर सुरक्षा और बहुत कुछ।">Hardware, MS Office, networking, web design, databases, cyber security & more.</p>
+        <div class="meta"><div><b>14</b><span data-en="Chapters" data-hi="अध्याय">Chapters</span></div><div><b>3</b><span data-en="Modes" data-hi="मोड">Modes</span></div></div>
+        <span class="launch"><span data-en="Open" data-hi="खोलें">Open</span><span class="a">→</span></span>
+      </div>
+    </div>
+    <div class="win emp" onclick="goTo('employability.html')" data-tilt>
+      <div class="body">
+        <div class="icon">💼</div>
+        <h2 data-en="Employability Skills" data-hi="रोज़गार कौशल">Employability Skills</h2>
+        <p data-en="Communication, English, digital skills, entrepreneurship & career readiness." data-hi="संचार, अंग्रेज़ी, डिजिटल कौशल, उद्यमिता और करियर तैयारी।">Communication, English, digital skills, entrepreneurship & career readiness.</p>
+        <div class="meta"><div><b>12</b><span data-en="Chapters" data-hi="अध्याय">Chapters</span></div><div><b>3</b><span data-en="Modes" data-hi="मोड">Modes</span></div></div>
+        <span class="launch"><span data-en="Open" data-hi="खोलें">Open</span><span class="a">→</span></span>
+      </div>
+    </div>
+  </div>
+  <div class="fulltest" onclick="goTo('copa.html')">
+    <div><h3 data-en="🏆 Full Syllabus Test" data-hi="🏆 पूर्ण पाठ्यक्रम टेस्ट">🏆 Full Syllabus Test</h3>
+    <p data-en="100 mixed questions from every chapter — feels like the real exam." data-hi="हर अध्याय से 100 मिश्रित प्रश्न — असली परीक्षा जैसा।">100 mixed questions from every chapter — feels like the real exam.</p></div>
+    <span class="ftbtn" data-en="Run Test →" data-hi="टेस्ट चलाएं →">Run Test →</span>
+  </div>
+</div>
+<footer><span data-en="Built for ITI students · UP NCVT COPA · 1st Year" data-hi="आईटीआई छात्रों के लिए · यूपी एनसीवीटी COPA · प्रथम वर्ष">Built for ITI students · UP NCVT COPA · 1st Year</span><br><span style="display:inline-block;margin-top:8px;font-weight:600;color:var(--ink)">By Suraj Tiwari</span></footer>
+<script>
+const body=document.body,enL=document.getElementById('enL'),hiL=document.getElementById('hiL');
+function applyLang(l){
+  body.dataset.lang=l;enL.classList.toggle('on',l==='en');hiL.classList.toggle('on',l==='hi');
+  document.querySelectorAll('[data-en]').forEach(e=>e.innerHTML=l==='hi'?e.dataset.hi:e.dataset.en);
+  try{localStorage.setItem('copa_lang',l)}catch(e){}
+}
+document.getElementById('langBtn').onclick=()=>applyLang(body.dataset.lang==='en'?'hi':'en');
+let sv='en';try{sv=localStorage.getItem('copa_lang')||'en'}catch(e){}applyLang(sv);
+function goTo(u){body.classList.add('exit');setTimeout(()=>location.href=u,400)}
+function tick(){const d=new Date();document.getElementById('clock').textContent=d.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'})}
+tick();setInterval(tick,1000);
+document.querySelectorAll('[data-tilt]').forEach(c=>{
+  c.addEventListener('mousemove',e=>{const r=c.getBoundingClientRect();
+    const rx=(((e.clientY-r.top)/r.height)-.5)*-5,ry=(((e.clientX-r.left)/r.width)-.5)*5;
+    c.style.transform=`translateY(-10px) perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg)`});
+  c.addEventListener('mouseleave',()=>c.style.transform='');
+});
+</script>
+</body>
+</html>
