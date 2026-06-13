@@ -84,16 +84,30 @@ h1 .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;c
   transform:scale(.9) translateY(20px);transition:transform .35s cubic-bezier(.2,.9,.3,1.2);max-height:90vh;overflow-y:auto}
 .overlay.show .modal{transform:none}
 .modal .mtop{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:22px}
-.modal .mtop h2{font-size:1.3rem;font-weight:700;letter-spacing:-.4px;line-height:1.25;padding-right:10px}
-.modal .mtop .mc{font-size:.74rem;color:var(--accent);font-weight:600;margin-top:4px}
+.modal .mtop h2{font-size:1.32rem;font-weight:700;letter-spacing:-.6px;line-height:1.22;padding-right:10px}
+.modal .mtop .mc{font-size:.74rem;color:var(--accent);font-weight:600;margin-top:5px;letter-spacing:.3px}
 .xbtn{flex-shrink:0;width:34px;height:34px;border-radius:50%;border:none;background:rgba(255,255,255,.6);cursor:pointer;
   font-size:1.1rem;color:var(--ink-soft);display:grid;place-items:center;transition:background .3s,transform .3s}
 .xbtn:hover{background:#fff;transform:rotate(90deg)}
-.mlabel{font-size:.72rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--ink-soft);margin:18px 0 10px}
+.mlabel{font-size:.7rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--ink-soft);margin:20px 0 11px;opacity:.85}
 .modes{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 .mode{padding:13px 8px;border-radius:14px;border:2px solid transparent;background:rgba(255,255,255,.5);cursor:pointer;
   text-align:center;font-weight:600;font-size:.88rem;transition:all .25s}
-.mode .em{display:block;font-size:1.1rem;margin-bottom:3px}
+.mode .em{display:flex;align-items:flex-end;justify-content:center;gap:3px;height:22px;margin:0 auto 9px}
+.mode .em i{width:5px;border-radius:3px;background:currentColor;opacity:.28;transition:opacity .25s,transform .25s}
+.mode .em i:nth-child(1){height:8px}
+.mode .em i:nth-child(2){height:14px}
+.mode .em i:nth-child(3){height:20px}
+.mode[data-m="easy"] .em i:nth-child(1){opacity:1}
+.mode[data-m="medium"] .em i:nth-child(1),.mode[data-m="medium"] .em i:nth-child(2){opacity:1}
+.mode[data-m="hard"] .em i{opacity:1}
+.mode.sel .em i{transform:translateY(0)}
+.mode:hover .em i{opacity:.9}
+.mode.sel[data-m="easy"] .em i:nth-child(1){opacity:1}
+.mode.sel .em i{opacity:.3}
+.mode.sel[data-m="easy"] .em i:nth-child(1){opacity:1}
+.mode.sel[data-m="medium"] .em i:nth-child(1),.mode.sel[data-m="medium"] .em i:nth-child(2){opacity:1}
+.mode.sel[data-m="hard"] .em i{opacity:1}
 .mode[data-m="easy"]{color:var(--easy)}.mode[data-m="medium"]{color:var(--med)}.mode[data-m="hard"]{color:var(--hard)}
 .mode.sel[data-m="easy"]{background:rgba(72,187,120,.14);border-color:var(--easy)}
 .mode.sel[data-m="medium"]{background:rgba(246,173,85,.14);border-color:var(--med)}
@@ -105,9 +119,10 @@ h1 .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;c
 .size.sel{background:rgba(43,196,180,.14);border-color:var(--accent)}
 .size.sel b{color:var(--accent)}
 .sets{display:flex;flex-wrap:wrap;gap:8px}
-.set{width:42px;height:42px;border-radius:12px;border:2px solid transparent;background:rgba(255,255,255,.5);cursor:pointer;
-  font-weight:700;font-family:'JetBrains Mono';font-size:.9rem;color:var(--ink-soft);transition:all .25s}
-.set.sel{background:var(--grad);color:#fff;border-color:transparent;box-shadow:0 4px 12px rgba(63,184,217,.32)}
+.set{width:46px;height:46px;border-radius:13px;border:2px solid transparent;background:rgba(255,255,255,.5);cursor:pointer;
+  font-weight:700;font-family:'JetBrains Mono';font-size:.95rem;color:var(--ink-soft);transition:all .25s;
+  display:flex;align-items:center;justify-content:center}
+.set.sel{background:var(--grad);background-size:300% 300%;background-position:center;color:#fff;border-color:transparent;box-shadow:0 6px 16px rgba(63,184,217,.4)}
 .startbtn{margin-top:26px;width:100%;padding:16px;border:none;border-radius:16px;cursor:pointer;color:#fff;font-weight:700;font-size:1rem;
   font-family:inherit;background:var(--grad);background-size:200% 100%;position:relative;overflow:hidden;
   box-shadow:0 12px 28px rgba(63,184,217,.32);transition:background-position .6s,transform .3s,box-shadow .3s}
@@ -148,9 +163,9 @@ h1 .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;c
     </div>
     <div class="mlabel" data-en="Difficulty" data-hi="कठिनाई">Difficulty</div>
     <div class="modes">
-      <div class="mode sel" data-m="easy" onclick="selMode(this)"><span class="em">🟢</span><span data-en="Easy" data-hi="आसान">Easy</span></div>
-      <div class="mode" data-m="medium" onclick="selMode(this)"><span class="em">🟡</span><span data-en="Medium" data-hi="मध्यम">Medium</span></div>
-      <div class="mode" data-m="hard" onclick="selMode(this)"><span class="em">🔴</span><span data-en="Hard" data-hi="कठिन">Hard</span></div>
+      <div class="mode sel" data-m="easy" onclick="selMode(this)"><span class="em"><i></i><i></i><i></i></span><span data-en="Easy" data-hi="आसान">Easy</span></div>
+      <div class="mode" data-m="medium" onclick="selMode(this)"><span class="em"><i></i><i></i><i></i></span><span data-en="Medium" data-hi="मध्यम">Medium</span></div>
+      <div class="mode" data-m="hard" onclick="selMode(this)"><span class="em"><i></i><i></i><i></i></span><span data-en="Hard" data-hi="कठिन">Hard</span></div>
     </div>
     <div class="mlabel" data-en="Number of Questions" data-hi="प्रश्नों की संख्या">Number of Questions</div>
     <div class="sizes" id="sizes">
