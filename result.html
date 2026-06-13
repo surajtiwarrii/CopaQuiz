@@ -33,7 +33,11 @@
 
   body {
     font-family: var(--font-en);
-    background: var(--bg);
+    background: #F2EEFF;
+    background-image:
+      radial-gradient(ellipse 60% 50% at 10% 10%, rgba(167,139,250,0.45) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 55% at 90% 90%, rgba(129,140,248,0.38) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 60% 40%, rgba(192,132,252,0.25) 0%, transparent 60%);
     color: var(--text);
     min-height: 100vh;
     overflow-x: hidden;
@@ -43,15 +47,15 @@
 
   /* ── MESH BACKGROUND ── */
   .mesh-bg {
-    position: fixed; inset: 0; z-index: 0; pointer-events: none;
-    overflow: hidden;
+    position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    overflow: hidden; min-height: 100vh;
   }
   .mesh-bg::before, .mesh-bg::after {
     content: '';
     position: absolute;
     border-radius: 50%;
     filter: blur(80px);
-    opacity: 0.38;
+    opacity: 0.5;
     animation: meshFloat 10s ease-in-out infinite alternate;
   }
   .mesh-bg::before {
@@ -67,7 +71,7 @@
     animation-duration: 9s; animation-direction: alternate-reverse;
   }
   .mesh-dot {
-    position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0.22;
+    position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0.3;
     animation: meshFloat 14s ease-in-out infinite alternate;
   }
   .mesh-dot:nth-child(1) { width:300px;height:300px;background:#C084FC;top:40%;left:60%;animation-duration:11s; }
@@ -150,60 +154,132 @@
   }
   .score-label { font-size: 12px; color: var(--text-muted); font-weight: 500; margin-top: 2px; }
 
+  /* ── PREMIUM GRADE BADGE ── */
   .grade-badge {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 10px 24px; border-radius: 999px;
+    display: inline-flex; align-items: center; gap: 14px;
+    padding: 14px 24px 14px 14px; border-radius: 20px;
     background: var(--grad);
-    color: #fff; font-size: 17px; font-weight: 700;
-    box-shadow: 0 4px 18px rgba(139,92,246,0.38);
-    margin-bottom: 8px;
+    color: #fff; font-size: 18px; font-weight: 800;
+    box-shadow: 0 8px 32px rgba(139,92,246,0.45), inset 0 1px 0 rgba(255,255,255,0.3);
+    margin-bottom: 10px; position: relative; overflow: hidden;
+    letter-spacing: -0.3px;
   }
-  .grade-emoji { font-size: 22px; }
+  .grade-badge::before {
+    content: '';
+    position: absolute; top: 0; left: -70%; width: 55%; height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.28), transparent);
+    transform: skewX(-18deg);
+    animation: badgeSheen 3s ease-in-out infinite;
+  }
+  @keyframes badgeSheen {
+    0%   { left: -70%; }
+    40%  { left: 130%; }
+    100% { left: 130%; }
+  }
+  .grade-icon-wrap {
+    width: 40px; height: 40px; border-radius: 13px;
+    background: rgba(255,255,255,0.22);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+    border: 1px solid rgba(255,255,255,0.3);
+  }
+  .grade-text-wrap { display: flex; flex-direction: column; align-items: flex-start; gap: 1px; }
+  .grade-sublabel { font-size: 10px; font-weight: 600; opacity: 0.75; letter-spacing: 0.08em; text-transform: uppercase; font-family: var(--font-mono); }
+  .grade-main { font-size: 19px; font-weight: 800; line-height: 1.1; }
+
   .score-fraction {
     font-size: 15px; color: var(--text-muted); font-family: var(--font-mono); font-weight: 600;
   }
 
-  /* ── STATS GRID ── */
+  /* ── PREMIUM STATS GRID ── */
   .stats-grid {
     display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px;
     margin-bottom: 20px;
   }
   @media (min-width: 500px) { .stats-grid { grid-template-columns: repeat(4, 1fr); } }
   .stat-card {
-    border-radius: var(--radius-sm);
-    padding: 18px 14px; text-align: center;
-    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    border-radius: 18px;
+    padding: 20px 14px 16px; text-align: center;
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    position: relative; overflow: hidden;
+    transition: transform 0.2s;
   }
-  .stat-card.green { background: var(--green-bg); border: 1.5px solid rgba(34,197,94,0.25); }
-  .stat-card.red   { background: var(--red-bg);   border: 1.5px solid rgba(239,68,68,0.25); }
-  .stat-card.amber { background: var(--amber-bg); border: 1.5px solid rgba(245,158,11,0.25); }
-  .stat-card.blue  { background: rgba(129,140,248,0.1); border: 1.5px solid rgba(129,140,248,0.25); }
-  .stat-icon { font-size: 24px; }
-  .stat-val { font-size: 26px; font-weight: 800; font-family: var(--font-mono); line-height: 1; }
-  .stat-card.green .stat-val { color: var(--green); }
-  .stat-card.red   .stat-val { color: var(--red); }
-  .stat-card.amber .stat-val { color: var(--amber); }
-  .stat-card.blue  .stat-val { color: var(--accent3); }
-  .stat-lbl { font-size: 11.5px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; }
+  .stat-card:hover { transform: translateY(-3px); }
+  .stat-card::before {
+    content: ''; position: absolute; inset: 0; border-radius: 18px;
+    opacity: 0.06; pointer-events: none;
+  }
+  .stat-card.green { background: linear-gradient(145deg, rgba(34,197,94,0.13), rgba(34,197,94,0.06)); border: 1.5px solid rgba(34,197,94,0.28); }
+  .stat-card.red   { background: linear-gradient(145deg, rgba(239,68,68,0.13), rgba(239,68,68,0.06));  border: 1.5px solid rgba(239,68,68,0.28); }
+  .stat-card.amber { background: linear-gradient(145deg, rgba(245,158,11,0.13), rgba(245,158,11,0.06)); border: 1.5px solid rgba(245,158,11,0.28); }
+  .stat-card.blue  { background: linear-gradient(145deg, rgba(129,140,248,0.13), rgba(129,140,248,0.06)); border: 1.5px solid rgba(129,140,248,0.28); }
 
-  /* ── ACTION BUTTONS ── */
-  .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 28px; }
-  .btn {
-    flex: 1; min-width: 120px; cursor: pointer; border: none;
-    padding: 13px 18px; border-radius: var(--radius-sm);
-    font-size: 14px; font-weight: 600; transition: all 0.22s;
-    font-family: inherit; display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+  /* SVG icon ring */
+  .stat-icon-ring {
+    width: 52px; height: 52px; border-radius: 16px;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
   }
+  .stat-card.green .stat-icon-ring { background: linear-gradient(135deg, rgba(34,197,94,0.22), rgba(74,222,128,0.15)); box-shadow: 0 4px 16px rgba(34,197,94,0.25); }
+  .stat-card.red   .stat-icon-ring { background: linear-gradient(135deg, rgba(239,68,68,0.22), rgba(252,165,165,0.15)); box-shadow: 0 4px 16px rgba(239,68,68,0.25); }
+  .stat-card.amber .stat-icon-ring { background: linear-gradient(135deg, rgba(245,158,11,0.22), rgba(253,211,77,0.15)); box-shadow: 0 4px 16px rgba(245,158,11,0.25); }
+  .stat-card.blue  .stat-icon-ring { background: linear-gradient(135deg, rgba(129,140,248,0.22), rgba(167,139,250,0.15)); box-shadow: 0 4px 16px rgba(129,140,248,0.25); }
+  .stat-icon-svg { width: 26px; height: 26px; }
+
+  .stat-val { font-size: 28px; font-weight: 900; font-family: var(--font-mono); line-height: 1; letter-spacing: -1px; }
+  .stat-card.green .stat-val { color: #16a34a; }
+  .stat-card.red   .stat-val { color: #dc2626; }
+  .stat-card.amber .stat-val { color: #d97706; }
+  .stat-card.blue  .stat-val { color: #6366f1; }
+  .stat-lbl { font-size: 10.5px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; }
+
+  /* ── PREMIUM ACTION BUTTONS ── */
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 28px; }
+  .btn {
+    flex: 1; min-width: 130px; cursor: pointer; border: none;
+    padding: 15px 20px; border-radius: 16px;
+    font-size: 14px; font-weight: 700; transition: all 0.25s cubic-bezier(.2,.9,.3,1.1);
+    font-family: inherit; display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    position: relative; overflow: hidden;
+  }
+  .btn::before {
+    content: ''; position: absolute; top: 0; left: -60%; width: 50%; height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.22), transparent);
+    transform: skewX(-20deg); transition: left 0.5s;
+  }
+  .btn:hover::before { left: 130%; }
+  .btn:hover { transform: translateY(-3px); }
+  .btn:active { transform: translateY(0) scale(0.97); }
+
+  /* Next Set button — primary gradient */
   .btn-primary {
     background: var(--grad); color: #fff;
-    box-shadow: 0 4px 16px rgba(139,92,246,0.35);
+    box-shadow: 0 6px 22px rgba(139,92,246,0.4), inset 0 1px 0 rgba(255,255,255,0.25);
   }
-  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 22px rgba(139,92,246,0.5); }
+  .btn-primary:hover { box-shadow: 0 10px 32px rgba(139,92,246,0.55), inset 0 1px 0 rgba(255,255,255,0.25); }
+
+  .btn-icon-box {
+    width: 32px; height: 32px; border-radius: 10px;
+    background: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.3);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .btn-icon-box svg { width: 17px; height: 17px; }
+  .btn-text-wrap { display: flex; flex-direction: column; align-items: flex-start; gap: 1px; }
+  .btn-sub { font-size: 9.5px; font-weight: 600; opacity: 0.75; letter-spacing: 0.07em; text-transform: uppercase; font-family: var(--font-mono); }
+  .btn-main { font-size: 14px; font-weight: 800; line-height: 1; }
+
+  /* Home button — glass outline */
   .btn-outline {
-    background: rgba(255,255,255,0.7); color: var(--accent);
-    border: 1.5px solid var(--glass-border); backdrop-filter: blur(8px);
+    background: rgba(255,255,255,0.72); color: var(--text);
+    border: 1.5px solid var(--glass-border); backdrop-filter: blur(12px);
+    box-shadow: 0 4px 16px rgba(139,92,246,0.1), inset 0 1px 0 rgba(255,255,255,0.9);
   }
-  .btn-outline:hover { background: rgba(255,255,255,0.9); transform: translateY(-2px); }
+  .btn-outline .btn-icon-box { background: rgba(155,126,222,0.12); border-color: rgba(155,126,222,0.2); }
+  .btn-outline .btn-main { color: var(--text); }
+  .btn-outline .btn-sub { color: var(--text-muted); }
+  .btn-outline:hover { background: rgba(255,255,255,0.92); box-shadow: 0 8px 24px rgba(139,92,246,0.18), inset 0 1px 0 rgba(255,255,255,0.9); }
 
   /* ── REVIEW SECTION ── */
   .review-header {
@@ -271,54 +347,12 @@
     padding: 4px 12px; border-radius: 999px; backdrop-filter: blur(8px);
   }
 
-  /* ── EMPTY STATE ── */
-  .empty-state {
-    text-align: center; padding: 52px 20px 44px; color: var(--text-muted);
-  }
-  .empty-state h2 { font-size: 22px; font-weight: 700; margin-bottom: 8px; color: var(--text); }
-  .empty-state p  { font-size: 15px; line-height: 1.6; }
-  .env-wrap {
-    display: inline-flex; align-items: center; justify-content: center;
-    width: 120px; height: 120px; border-radius: 36px; margin-bottom: 24px;
-    background: rgba(255,255,255,0.6);
-    border: 1.5px solid rgba(155,126,222,0.22);
-    box-shadow: 0 8px 32px rgba(139,92,246,0.18);
-    backdrop-filter: blur(14px);
-    animation: envFloat 3.6s ease-in-out infinite;
-    position: relative; overflow: visible;
-  }
-  .env-wrap::before {
-    content: '';
-    position: absolute; inset: -1px; border-radius: 37px;
-    background: linear-gradient(120deg,#A78BFA,#C084FC,#818CF8);
-    opacity: 0.14; z-index: 0; pointer-events: none;
-  }
-  .env-svg { position: relative; z-index: 1; }
-  @keyframes envFloat {
-    0%,100% { transform: translateY(0) rotate(-1.5deg); box-shadow: 0 8px 32px rgba(139,92,246,0.18); }
-    50%      { transform: translateY(-12px) rotate(1.5deg); box-shadow: 0 20px 48px rgba(139,92,246,0.28); }
-  }
-  @keyframes flapWave {
-    0%,100% { transform: rotateX(0deg); }
-    35%     { transform: rotateX(-32deg); }
-    65%     { transform: rotateX(-12deg); }
-  }
-  .env-flap { transform-origin: top center; animation: flapWave 3.6s ease-in-out infinite; perspective: 300px; }
-  @keyframes twinkle {
-    0%,100% { opacity: 0.18; transform: scale(0.75); }
-    50%     { opacity: 1;    transform: scale(1.25); }
-  }
-  .env-star1 { animation: twinkle 2.2s ease-in-out infinite; }
-  .env-star2 { animation: twinkle 2.2s ease-in-out infinite 0.75s; }
-  .env-star3 { animation: twinkle 2.2s ease-in-out infinite 1.4s; }
-  @keyframes letterBob {
-    0%,100% { transform: translateY(0); }
-    50%     { transform: translateY(-4px); }
-  }
-  .env-letter { animation: letterBob 3.6s ease-in-out infinite; }
-
   /* Divider */
   .divider { height: 1px; background: var(--glass-border); margin: 20px 0; }
+
+  /* Stagger reveal */
+  .q-card { opacity: 0; transform: translateY(18px); transition: opacity 0.4s, transform 0.4s; }
+  .q-card.visible { opacity: 1; transform: none; }
 
   @media (max-width: 480px) {
     .score-pct { font-size: 40px; }
@@ -326,19 +360,185 @@
     .hero-card { padding: 28px 18px 24px; }
   }
 
-  /* Stagger reveal */
-  .q-card { opacity: 0; transform: translateY(18px); transition: opacity 0.4s, transform 0.4s; }
-  .q-card.visible { opacity: 1; transform: none; }
+  /* ══════════════════════════════════════════
+     PREMIUM EMPTY STATE — Score-Adaptive
+  ══════════════════════════════════════════ */
+  .empty-state {
+    text-align: center; padding: 52px 20px 44px; color: var(--text-muted);
+  }
+  .empty-state h2 { font-size: 22px; font-weight: 700; margin-bottom: 8px; color: var(--text); }
+  .empty-state p  { font-size: 15px; line-height: 1.6; }
+
+  /* ── ANIMATION STAGE ── */
+  .anim-stage {
+    position: relative;
+    width: 160px; height: 160px;
+    margin: 0 auto 28px;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  /* ── PULSE RINGS (background) ── */
+  .pulse-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 2px solid var(--accent2);
+    opacity: 0;
+    animation: pulseRing 2.4s ease-out infinite;
+  }
+  .pulse-ring:nth-child(2) { animation-delay: 0.6s; }
+  .pulse-ring:nth-child(3) { animation-delay: 1.2s; }
+  @keyframes pulseRing {
+    0%   { width: 60px; height: 60px; opacity: 0.7; }
+    100% { width: 160px; height: 160px; opacity: 0; }
+  }
+
+  /* ── GLASS ORBS (orbiting) ── */
+  .orbit-wrap {
+    position: absolute;
+    width: 130px; height: 130px;
+    border-radius: 50%;
+    animation: orbitSpin 6s linear infinite;
+  }
+  .orbit-wrap.rev { animation-direction: reverse; animation-duration: 9s; }
+  @keyframes orbitSpin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    backdrop-filter: blur(6px);
+    border: 1.5px solid rgba(255,255,255,0.6);
+  }
+  .orb-a {
+    width: 18px; height: 18px;
+    background: linear-gradient(135deg, #A78BFA, #C084FC);
+    top: -9px; left: 50%; transform: translateX(-50%);
+    box-shadow: 0 0 12px rgba(167,139,250,0.7);
+  }
+  .orb-b {
+    width: 12px; height: 12px;
+    background: linear-gradient(135deg, #818CF8, #A78BFA);
+    bottom: -6px; left: 50%; transform: translateX(-50%);
+    box-shadow: 0 0 8px rgba(129,140,248,0.6);
+  }
+  .orb-c {
+    width: 10px; height: 10px;
+    background: linear-gradient(135deg, #C084FC, #F0ABFC);
+    top: 50%; right: -5px; transform: translateY(-50%);
+    box-shadow: 0 0 8px rgba(192,132,252,0.6);
+  }
+
+  /* ── CENTER ICON GLASS CARD ── */
+  .center-icon-wrap {
+    position: relative; z-index: 2;
+    width: 96px; height: 96px;
+    border-radius: 32px;
+    background: rgba(255,255,255,0.72);
+    border: 1.5px solid rgba(167,139,250,0.35);
+    box-shadow:
+      0 8px 32px rgba(139,92,246,0.22),
+      0 2px 8px rgba(167,139,250,0.15),
+      inset 0 1px 0 rgba(255,255,255,0.9);
+    backdrop-filter: blur(20px);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 44px;
+    animation: iconFloat 3.8s ease-in-out infinite;
+  }
+  @keyframes iconFloat {
+    0%,100% { transform: translateY(0) scale(1); box-shadow: 0 8px 32px rgba(139,92,246,0.22), 0 2px 8px rgba(167,139,250,0.15), inset 0 1px 0 rgba(255,255,255,0.9); }
+    50%      { transform: translateY(-10px) scale(1.04); box-shadow: 0 22px 48px rgba(139,92,246,0.32), 0 6px 16px rgba(167,139,250,0.2), inset 0 1px 0 rgba(255,255,255,0.9); }
+  }
+
+  /* ── SCORE-BASED VARIANTS ── */
+  /* Outstanding (≥90) — gold shimmer */
+  .anim-stage.outstanding .center-icon-wrap {
+    background: linear-gradient(135deg, rgba(255,247,205,0.9), rgba(255,255,255,0.8));
+    border-color: rgba(245,158,11,0.4);
+    box-shadow: 0 8px 32px rgba(245,158,11,0.28), 0 2px 8px rgba(251,191,36,0.2), inset 0 1px 0 rgba(255,255,255,0.95);
+    animation: iconFloatGold 3.8s ease-in-out infinite, shimmerGold 2.2s ease-in-out infinite alternate;
+  }
+  .anim-stage.outstanding .pulse-ring { border-color: #F59E0B; }
+  .anim-stage.outstanding .orb-a { background: linear-gradient(135deg,#FCD34D,#F59E0B); box-shadow: 0 0 12px rgba(245,158,11,0.8); }
+  .anim-stage.outstanding .orb-b { background: linear-gradient(135deg,#FDE68A,#FBBF24); box-shadow: 0 0 8px rgba(251,191,36,0.6); }
+  .anim-stage.outstanding .orb-c { background: linear-gradient(135deg,#F59E0B,#D97706); box-shadow: 0 0 8px rgba(217,119,6,0.6); }
+  @keyframes shimmerGold {
+    0%   { box-shadow: 0 8px 32px rgba(245,158,11,0.28), 0 2px 8px rgba(251,191,36,0.2), inset 0 1px 0 rgba(255,255,255,0.95); }
+    100% { box-shadow: 0 8px 42px rgba(245,158,11,0.55), 0 2px 18px rgba(251,191,36,0.4), inset 0 1px 0 rgba(255,255,255,0.95); }
+  }
+  @keyframes iconFloatGold {
+    0%,100% { transform: translateY(0) scale(1) rotate(-2deg); }
+    50%      { transform: translateY(-10px) scale(1.06) rotate(2deg); }
+  }
+
+  /* Good (≥60) — green glow */
+  .anim-stage.good .center-icon-wrap {
+    border-color: rgba(34,197,94,0.35);
+    box-shadow: 0 8px 32px rgba(34,197,94,0.2), 0 2px 8px rgba(34,197,94,0.15), inset 0 1px 0 rgba(255,255,255,0.9);
+  }
+  .anim-stage.good .pulse-ring { border-color: #22c55e; }
+  .anim-stage.good .orb-a { background: linear-gradient(135deg,#4ADE80,#22c55e); box-shadow: 0 0 12px rgba(34,197,94,0.7); }
+  .anim-stage.good .orb-b { background: linear-gradient(135deg,#86EFAC,#4ADE80); box-shadow: 0 0 8px rgba(74,222,128,0.6); }
+  .anim-stage.good .orb-c { background: linear-gradient(135deg,#22c55e,#16a34a); box-shadow: 0 0 8px rgba(22,163,74,0.6); }
+
+  /* Low (<40) — motivational red/orange pulse */
+  .anim-stage.low .center-icon-wrap {
+    border-color: rgba(239,68,68,0.3);
+    box-shadow: 0 8px 32px rgba(239,68,68,0.18), 0 2px 8px rgba(239,68,68,0.12), inset 0 1px 0 rgba(255,255,255,0.9);
+    animation: iconPulseMotivate 1.8s ease-in-out infinite;
+  }
+  .anim-stage.low .pulse-ring { border-color: #f97316; animation-duration: 1.8s; }
+  .anim-stage.low .orb-a { background: linear-gradient(135deg,#FB923C,#F97316); box-shadow: 0 0 12px rgba(249,115,22,0.7); }
+  .anim-stage.low .orb-b { background: linear-gradient(135deg,#FCA5A5,#EF4444); box-shadow: 0 0 8px rgba(239,68,68,0.6); }
+  .anim-stage.low .orb-c { background: linear-gradient(135deg,#F97316,#EA580C); box-shadow: 0 0 8px rgba(234,88,12,0.6); }
+  @keyframes iconPulseMotivate {
+    0%,100% { transform: scale(1); }
+    30%     { transform: scale(1.08); }
+    60%     { transform: scale(0.96); }
+  }
+
+  /* ── CONFETTI PARTICLES (for ≥75%) ── */
+  .confetti-wrap {
+    position: absolute; inset: 0; pointer-events: none; overflow: visible;
+  }
+  .conf-dot {
+    position: absolute;
+    width: 7px; height: 7px;
+    border-radius: 2px;
+    opacity: 0;
+    animation: confFly var(--dur,2.4s) ease-out var(--delay,0s) infinite;
+    left: 50%; top: 50%;
+    transform-origin: center;
+  }
+  @keyframes confFly {
+    0%   { transform: translate(-50%,-50%) rotate(0deg) scale(1); opacity: 1; }
+    80%  { opacity: 0.6; }
+    100% { transform: translate(calc(-50% + var(--tx,40px)), calc(-50% + var(--ty,-80px))) rotate(var(--rot,360deg)) scale(0.4); opacity: 0; }
+  }
+
+  /* ── SPARKLE STARS (for ≥60%) ── */
+  .sparkle {
+    position: absolute;
+    pointer-events: none;
+    animation: sparklePop var(--sdur,1.8s) ease-in-out var(--sdelay,0s) infinite;
+    font-size: var(--ssize,14px);
+    opacity: 0;
+  }
+  @keyframes sparklePop {
+    0%,100% { opacity: 0; transform: scale(0.3) rotate(0deg); }
+    40%     { opacity: 1; transform: scale(1.2) rotate(20deg); }
+    70%     { opacity: 0.6; transform: scale(0.9) rotate(-10deg); }
+  }
 </style>
 </head>
 <body>
+<div style="position:relative; min-height:100vh; overflow:hidden;">
 <div class="mesh-bg">
   <div class="mesh-dot"></div>
   <div class="mesh-dot"></div>
 </div>
 
 <div class="page">
-  <!-- Lang Toggle -->
   <div class="lang-toggle-wrap">
     <div class="lang-pill">
       <button class="lang-btn active" id="btnEn" onclick="setLang('en')">English</button>
@@ -350,9 +550,39 @@
 </div>
 
 <script>
-// ── DATA ──
+// ── LOAD RESULT FROM localStorage (saved by quiz page as 'copa_result') ──
 let DATA = null;
 let LANG = 'en';
+
+(function loadResult() {
+  try {
+    const raw = localStorage.getItem('copa_result');
+    if (!raw) return;
+    const r = JSON.parse(raw);
+
+    // Save lang preference
+    if (r.lang) LANG = r.lang;
+
+    // Map copa_result format → result page format
+    const correctCount = r.score || 0;
+    const answeredCount = (r.answered != null) ? r.answered : (r.total - (r.skipped || 0) - (r.left || 0));
+    const wrongCount = answeredCount - correctCount;
+
+    DATA = {
+      chapterName : r.chapterEn || r.chapterHi || 'Quiz Result',
+      subject     : r.subject || '',
+      mode        : r.mode    || '',
+      total       : r.total   || 0,
+      correct     : correctCount,
+      wrong       : Math.max(0, wrongCount),
+      skipped     : r.skipped || 0,
+      timeTaken   : r.timeUsed || 0,
+      questions   : r.review  || []
+    };
+  } catch(e) {
+    console.warn('copa_result parse error:', e);
+  }
+})();
 
 function setLang(l) {
   LANG = l;
@@ -388,7 +618,6 @@ function subjectUrl(d, type) {
   const home     = 'index.html';
   const theory   = 'copa.html';
   const emp      = 'employability.html';
-
   if (s.includes('full') || d.mode === 'full') return home;
   if (type === 'home')  return home;
   if (type === 'new')   return isEmp ? emp : isTheory ? theory : home;
@@ -413,8 +642,6 @@ function startCountUp(target, duration, callback) {
 // ── RING ──
 function ringHTML(pct) {
   const R = 70, C = 2 * Math.PI * R;
-  const offset = C - (pct / 100) * C;
-  // Gradient for stroke — we use a linearGradient trick
   return `
   <div class="score-ring-wrap">
     <svg class="score-ring-svg" width="170" height="170" viewBox="0 0 170 170">
@@ -452,12 +679,8 @@ function qCardHTML(q, idx) {
 
   const qText  = t(q.qEn  || '', q.qHi  || q.qEn  || '');
   const opts   = t(q.optsEn || [], q.optsHi || q.optsEn || []);
-  const ansVal = t(q.ansEn || '', q.ansHi || q.ansEn || '');
-  const expTxt = t(q.expEn || '', q.expHi || q.expEn || '');
-
-  // Find correct index
-  const optsEn = q.optsEn || [];
   const correctIdx = (LANG === 'hi') ? q.ansHi : q.ansEn;
+  const expTxt = t(q.expEn || '', q.expHi || q.expEn || '');
 
   const optsHTML = opts.map((opt, i) => {
     let cls = '';
@@ -489,199 +712,274 @@ function qCardHTML(q, idx) {
   </div>`;
 }
 
+// ══════════════════════════════════════════
+// PREMIUM EMPTY STATE — Score-Adaptive HTML
+// ══════════════════════════════════════════
+function premiumEmptyStateHTML(score) {
+  // score = 0–100 for demo; undefined = no data
+  const pct = (score !== undefined && score !== null) ? score : 50;
+
+  // Determine variant
+  let variant, icon, confettiColors, showConfetti, showSparkles;
+  if (pct >= 90) {
+    variant = 'outstanding';
+    icon = '🏆';
+    confettiColors = ['#FCD34D','#F59E0B','#A78BFA','#C084FC','#FDE68A','#FBBF24'];
+    showConfetti = true; showSparkles = true;
+  } else if (pct >= 75) {
+    variant = 'excellent';
+    icon = '🎉';
+    confettiColors = ['#A78BFA','#C084FC','#818CF8','#F0ABFC','#67E8F9','#6EE7B7'];
+    showConfetti = true; showSparkles = true;
+  } else if (pct >= 60) {
+    variant = 'good';
+    icon = '👍';
+    confettiColors = [];
+    showConfetti = false; showSparkles = true;
+  } else if (pct >= 40) {
+    variant = '';
+    icon = '📚';
+    confettiColors = [];
+    showConfetti = false; showSparkles = false;
+  } else {
+    variant = 'low';
+    icon = '💪';
+    confettiColors = [];
+    showConfetti = false; showSparkles = false;
+  }
+
+  // Confetti dots HTML
+  let confettiHTML = '';
+  if (showConfetti) {
+    const count = pct >= 90 ? 18 : 12;
+    for (let i = 0; i < count; i++) {
+      const angle = (i / count) * 360;
+      const rad = angle * Math.PI / 180;
+      const dist = 55 + Math.random() * 45;
+      const tx = Math.round(Math.cos(rad) * dist);
+      const ty = Math.round(Math.sin(rad) * dist) - 30;
+      const color = confettiColors[i % confettiColors.length];
+      const dur = (2.0 + Math.random() * 1.2).toFixed(2);
+      const delay = (Math.random() * 1.6).toFixed(2);
+      const rot = Math.random() > 0.5 ? 360 : -360;
+      confettiHTML += `<div class="conf-dot" style="background:${color};--tx:${tx}px;--ty:${ty}px;--dur:${dur}s;--delay:${delay}s;--rot:${rot}deg;border-radius:${Math.random()>0.5?'50%':'3px'}"></div>`;
+    }
+  }
+
+  // Sparkle stars HTML
+  let sparkleHTML = '';
+  if (showSparkles) {
+    const stars = ['✦','✧','⋆','✦','✧'];
+    const positions = [
+      {top:'-18px',left:'10px'},{top:'5px',right:'-20px'},{bottom:'10px',right:'-12px'},
+      {top:'-10px',right:'20px'},{bottom:'-12px',left:'20px'}
+    ];
+    stars.forEach((s, i) => {
+      const pos = positions[i];
+      const posStr = Object.entries(pos).map(([k,v])=>`${k}:${v}`).join(';');
+      const dur = (1.4 + Math.random() * 1.2).toFixed(2);
+      const delay = (i * 0.35).toFixed(2);
+      const size = (12 + Math.random() * 8).toFixed(0);
+      const colors = ['#C084FC','#A78BFA','#818CF8','#F59E0B','#22c55e'];
+      sparkleHTML += `<span class="sparkle" style="${posStr};--sdur:${dur}s;--sdelay:${delay}s;--ssize:${size}px;color:${colors[i%colors.length]}">${s}</span>`;
+    });
+  }
+
+  return `
+  <div class="card empty-state">
+    <div class="anim-stage ${variant}">
+      <!-- Pulse rings -->
+      <div class="pulse-ring"></div>
+      <div class="pulse-ring"></div>
+      <div class="pulse-ring"></div>
+
+      <!-- Confetti -->
+      <div class="confetti-wrap">${confettiHTML}</div>
+
+      <!-- Orbiting glass orbs -->
+      <div class="orbit-wrap">
+        <div class="orb orb-a"></div>
+        <div class="orb orb-b"></div>
+      </div>
+      <div class="orbit-wrap rev">
+        <div class="orb orb-c"></div>
+      </div>
+
+      <!-- Center glass card -->
+      <div class="center-icon-wrap">
+        ${sparkleHTML}
+        ${icon}
+      </div>
+    </div>
+
+    <h2>${t('No Result Found','कोई परिणाम नहीं मिला')}</h2>
+    <p>${t(
+      'Complete a quiz first, then come back here to see your detailed results and review.',
+      'पहले एक क्विज़ पूरा करें, फिर यहाँ आकर अपने विस्तृत परिणाम और समीक्षा देखें।'
+    )}</p>
+  </div>`;
+}
+
 // ── MAIN RENDER ──
 function render() {
   const root = document.getElementById('root');
 
   if (!DATA) {
-    root.innerHTML = `
-    <div class="card empty-state">
-      <div class="env-wrap">
-        <svg class="env-svg" width="68" height="56" viewBox="0 0 68 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="envGrad" x1="0" y1="0" x2="68" y2="56" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stop-color="#A78BFA"/>
-              <stop offset="100%" stop-color="#818CF8"/>
-            </linearGradient>
-            <linearGradient id="flapGrad" x1="0" y1="0" x2="68" y2="28" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stop-color="#C084FC"/>
-              <stop offset="100%" stop-color="#A78BFA"/>
-            </linearGradient>
-          </defs>
-          <!-- Envelope body -->
-          <rect x="1" y="14" width="66" height="41" rx="7" fill="url(#envGrad)" opacity="0.18"/>
-          <rect x="1" y="14" width="66" height="41" rx="7" fill="white" opacity="0.7"/>
-          <rect x="1" y="14" width="66" height="41" rx="7" stroke="url(#envGrad)" stroke-width="1.8"/>
-          <!-- Letter inside -->
-          <g class="env-letter">
-            <rect x="18" y="22" width="32" height="22" rx="3" fill="white" stroke="url(#envGrad)" stroke-width="1.2" opacity="0.9"/>
-            <line x1="23" y1="29" x2="45" y2="29" stroke="#C084FC" stroke-width="1.5" stroke-linecap="round"/>
-            <line x1="23" y1="34" x2="45" y2="34" stroke="#A78BFA" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
-            <line x1="23" y1="39" x2="36" y2="39" stroke="#818CF8" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
-          </g>
-          <!-- Envelope V-seam -->
-          <polyline points="1,14 34,38 67,14" stroke="url(#envGrad)" stroke-width="1.5" fill="none" opacity="0.5"/>
-          <!-- Flap (animated) -->
-          <g class="env-flap">
-            <path d="M1 14 L34 2 L67 14 Z" fill="url(#flapGrad)" opacity="0.85"/>
-            <path d="M1 14 L34 2 L67 14" stroke="url(#envGrad)" stroke-width="1.5" fill="none"/>
-          </g>
-          <!-- Stars -->
-          <circle class="env-star1" cx="8" cy="8" r="2.2" fill="#C084FC"/>
-          <circle class="env-star2" cx="60" cy="5" r="1.6" fill="#818CF8"/>
-          <circle class="env-star3" cx="56" cy="52" r="1.8" fill="#A78BFA"/>
-        </svg>
-      </div>
-      <h2>${t('No Result Found','कोई परिणाम नहीं')}</h2>
-      <p style="margin-top:6px">${t('Please complete a quiz first. Result data was not found in storage.','पहले कोई क्विज़ पूरा करें। परिणाम डेटा नहीं मिला।')}</p>
-      <br/>
-      <button class="btn btn-primary" style="margin:auto;max-width:200px" onclick="location.href='index.html'">
-        🏠 ${t('Go Home','होम जाएं')}
-      </button>
-    </div>`;
+    // Demo: cycle score on each render for showcase
+    const demoScore = window._demoScore !== undefined ? window._demoScore : 85;
+    root.innerHTML = premiumEmptyStateHTML(demoScore);
     return;
   }
 
+  // ── REAL RESULT RENDER ──
   const d = DATA;
-  const correct  = d.score  || 0;
-  const total    = d.total  || 0;
-  const wrong    = (d.answered || 0) - correct;
-  const skipped  = d.skipped || 0;
-  const pct      = total > 0 ? Math.round((correct / total) * 100) : 0;
-  const grade    = getGrade(pct);
-  const chapter  = t(d.chapterEn || '', d.chapterHi || d.chapterEn || '');
-  const review   = d.review || [];
-  const timeUsed = fmtTime(d.timeUsed);
-  const totalTime= fmtTime(d.totalTime);
-  const C        = 2 * Math.PI * 70;
-  const ringOffset = C - (pct / 100) * C;
+  const total   = d.questions ? d.questions.length : (d.total || 0);
+  const correct = d.correct ?? 0;
+  const wrong   = d.wrong   ?? 0;
+  const skipped = d.skipped ?? (total - correct - wrong);
+  const pct     = total > 0 ? Math.round((correct / total) * 100) : 0;
+  const grade   = getGrade(pct);
 
-  // Meta chips
-  const metaChips = [
-    d.subject  ? `<span class="meta-chip">📚 ${d.subject}</span>` : '',
-    d.mode     ? `<span class="meta-chip">🎯 ${t('Mode','मोड')}: ${d.mode}</span>` : '',
-    d.set      ? `<span class="meta-chip">📋 ${t('Set','सेट')}: ${d.set}</span>` : '',
-    d.lang     ? `<span class="meta-chip">🌐 ${d.lang}</span>` : '',
-    d.auto !== undefined ? `<span class="meta-chip">⏱ ${t('Auto-submit','ऑटो-सबमिट')}: ${d.auto ? t('Yes','हाँ') : t('No','नहीं')}</span>` : '',
-  ].filter(Boolean).join('');
-
-  // Retry: same config back to quiz.html
-  const retryUrl  = `quiz.html?subject=${encodeURIComponent(d.subject||'')}&mode=${encodeURIComponent(d.mode||'')}&set=${encodeURIComponent(d.set||'')}&lang=${encodeURIComponent(d.lang||'')}`;
-  const newSetUrl = subjectUrl(d, 'new');
-  const homeUrl   = subjectUrl(d, 'home');
-
-  // Review cards
-  const reviewHTML = review.length === 0
-    ? `<p style="color:var(--text-muted);font-size:14px">${t('No review data available.','कोई समीक्षा डेटा उपलब्ध नहीं।')}</p>`
-    : review.map((q, i) => qCardHTML(q, i)).join('');
+  const R = 70, C = 2 * Math.PI * R;
 
   root.innerHTML = `
-  <!-- HERO -->
-  <div class="card hero-card" style="margin-bottom:20px">
-    <div class="chapter-label">${t('Result','परिणाम')}</div>
-    <div class="chapter-name">${chapter || t('Quiz Complete','क्विज़ पूर्ण')}</div>
+  <div class="hero-card card" style="margin-bottom:20px">
+    <div class="chapter-label">${t('COPA — Chapter Result','COPA — अध्याय परिणाम')}</div>
+    <div class="chapter-name">${d.chapterName || d.chapter || t('Quiz Complete','क्विज़ समाप्त')}</div>
     ${ringHTML(pct)}
-    <div style="height:16px"></div>
-    <div class="grade-badge">
-      <span class="grade-emoji">${grade.emoji}</span>
-      <span>${grade.label}</span>
+    <div>
+      <div class="grade-badge">
+        <div class="grade-icon-wrap">${grade.emoji}</div>
+        <div class="grade-text-wrap">
+          <div class="grade-sublabel">${t('Your Grade','ग्रेड')}</div>
+          <div class="grade-main">${grade.label}</div>
+        </div>
+      </div>
     </div>
-    <div style="height:10px"></div>
-    <div class="score-fraction">${correct} / ${total} ${t('correct','सही')}</div>
+    <div class="score-fraction" style="margin-top:10px">${correct} / ${total} ${t('Correct','सही')}</div>
   </div>
 
-  <!-- META -->
-  ${metaChips ? `<div class="meta-row">${metaChips}</div>` : ''}
-
-  <!-- STATS -->
-  <div class="stats-grid" style="margin-bottom:20px">
-    <div class="stat-card card green">
-      <span class="stat-icon">✅</span>
-      <span class="stat-val">${correct}</span>
-      <span class="stat-lbl">${t('Correct','सही')}</span>
+  <div class="stats-grid">
+    <div class="stat-card green">
+      <div class="stat-icon-ring">
+        <svg class="stat-icon-svg" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="10" fill="rgba(34,197,94,0.15)"/>
+          <path d="M7 13l3.5 3.5L17 8" stroke="#16a34a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="stat-val">${correct}</div>
+      <div class="stat-lbl">${t('Correct','सही')}</div>
     </div>
-    <div class="stat-card card red">
-      <span class="stat-icon">❌</span>
-      <span class="stat-val">${wrong < 0 ? 0 : wrong}</span>
-      <span class="stat-lbl">${t('Wrong','गलत')}</span>
+    <div class="stat-card red">
+      <div class="stat-icon-ring">
+        <svg class="stat-icon-svg" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="10" fill="rgba(239,68,68,0.15)"/>
+          <path d="M8 8l8 8M16 8l-8 8" stroke="#dc2626" stroke-width="2.2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="stat-val">${wrong}</div>
+      <div class="stat-lbl">${t('Wrong','गलत')}</div>
     </div>
-    <div class="stat-card card amber">
-      <span class="stat-icon">⏭</span>
-      <span class="stat-val">${skipped}</span>
-      <span class="stat-lbl">${t('Skipped','छोड़ा')}</span>
+    <div class="stat-card amber">
+      <div class="stat-icon-ring">
+        <svg class="stat-icon-svg" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="10" fill="rgba(245,158,11,0.15)"/>
+          <path d="M12 7v5l3 3" stroke="#d97706" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M18.5 8.5l1.5-1.5M5.5 8.5L4 7" stroke="#d97706" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="stat-val">${skipped}</div>
+      <div class="stat-lbl">${t('Skipped','छोड़े')}</div>
     </div>
-    <div class="stat-card card blue">
-      <span class="stat-icon">⏱</span>
-      <span class="stat-val" style="font-size:18px">${timeUsed}</span>
-      <span class="stat-lbl">${t('Time Used','समय')}</span>
+    <div class="stat-card blue">
+      <div class="stat-icon-ring">
+        <svg class="stat-icon-svg" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="10" fill="rgba(129,140,248,0.15)"/>
+          <circle cx="12" cy="12" r="4" stroke="#6366f1" stroke-width="2"/>
+          <path d="M12 2v2M12 20v2M2 12h2M20 12h2" stroke="#6366f1" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="stat-val">${fmtTime(d.timeTaken)}</div>
+      <div class="stat-lbl">${t('Time','समय')}</div>
     </div>
   </div>
 
-  <!-- ACTIONS -->
-  <div class="actions" style="margin-bottom:28px">
-    <button class="btn btn-primary" onclick="location.href='${retryUrl}'">
-      🔄 ${t('Retry','फिर से')}</button>
-    <button class="btn btn-outline" onclick="location.href='${newSetUrl}'">
-      📋 ${t('New Set','नया सेट')}</button>
-    <button class="btn btn-outline" onclick="location.href='${homeUrl}'">
-      🏠 ${t('Home','होम')}</button>
+  <div class="actions">
+    <button class="btn btn-primary" onclick="location.href='${subjectUrl(d,'new')}'">
+      <div class="btn-icon-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M13 6l6 6-6 6"/>
+          <rect x="2" y="6" width="5" height="12" rx="2" fill="rgba(255,255,255,0.25)" stroke="none"/>
+        </svg>
+      </div>
+      <div class="btn-text-wrap">
+        <div class="btn-sub">${t('Continue','जारी रखें')}</div>
+        <div class="btn-main">${t('Next Set','अगला सेट')}</div>
+      </div>
+    </button>
+    <button class="btn btn-outline" onclick="location.href='${subjectUrl(d,'home')}'">
+      <div class="btn-icon-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 12L12 4l9 8" stroke="#9B7EDE"/>
+          <path d="M9 21V12h6v9" stroke="#9B7EDE"/>
+          <path d="M5 10v11h14V10" stroke="#9B7EDE" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <div class="btn-text-wrap">
+        <div class="btn-sub" style="color:var(--text-muted)">${t('Go to','वापस')}</div>
+        <div class="btn-main">${t('Home','होम')}</div>
+      </div>
+    </button>
   </div>
 
-  <!-- REVIEW -->
   <div class="review-header">
     ${t('Question Review','प्रश्न समीक्षा')}
-    <span class="pill">${review.length} ${t('Qs','प्रश्न')}</span>
+    <span class="pill">${total} ${t('Qs','प्रश्न')}</span>
   </div>
-  <div id="reviewList">${reviewHTML}</div>
+
+  <div id="qlist">
+    ${(d.questions || []).map((q, i) => qCardHTML(q, i)).join('')}
+  </div>
   `;
 
-  // Animate ring + count-up
+  // Animate ring
   setTimeout(() => {
-    const fill = document.getElementById('ringFill');
-    const pctEl = document.getElementById('scorePct');
-    if (fill) fill.style.strokeDashoffset = ringOffset;
-    if (pctEl) startCountUp(pct, 1400, v => { pctEl.textContent = v + '%'; });
-
-    // Stagger reveal q-cards
-    review.forEach((_, i) => {
-      setTimeout(() => {
-        const el = document.getElementById(`qcard-${i}`);
-        if (el) el.classList.add('visible');
-      }, 80 + i * 60);
+    const ring = document.getElementById('ringFill');
+    if (ring) {
+      const offset = C - (pct / 100) * C;
+      ring.style.strokeDashoffset = offset;
+    }
+    startCountUp(pct, 1400, (val) => {
+      const el = document.getElementById('scorePct');
+      if (el) el.textContent = val + '%';
     });
   }, 80);
+
+  // Stagger q-cards
+  setTimeout(() => {
+    document.querySelectorAll('.q-card').forEach((el, i) => {
+      setTimeout(() => el.classList.add('visible'), i * 60);
+    });
+  }, 200);
 }
 
-// ── LOAD DATA ──
-(function init() {
-  try {
-    const raw = localStorage.getItem('copa_result');
-    if (raw) DATA = JSON.parse(raw);
-  } catch(e) { DATA = null; }
+render();
 
-  // If lang saved in data, use it as default
-  if (DATA && DATA.lang && (DATA.lang === 'hi' || DATA.lang === 'en')) {
-    LANG = DATA.lang;
-    document.getElementById('btnEn').classList.toggle('active', LANG === 'en');
-    document.getElementById('btnHi').classList.toggle('active', LANG === 'hi');
-    document.body.classList.toggle('lang-hi', LANG === 'hi');
-  }
+// Sync lang buttons with loaded preference
+document.getElementById('btnEn').classList.toggle('active', LANG === 'en');
+document.getElementById('btnHi').classList.toggle('active', LANG === 'hi');
+document.body.classList.toggle('lang-hi', LANG === 'hi');
 
+// ── DEMO: Click empty state to cycle through score variants ──
+document.addEventListener('click', (e) => {
+  if (DATA) return;
+  const scores = [95, 80, 65, 45, 20];
+  const cur = window._demoScore !== undefined ? window._demoScore : 85;
+  const idx = scores.indexOf(cur);
+  window._demoScore = scores[(idx + 1) % scores.length];
   render();
-})();
-
-// ── INTERSECTION OBSERVER for scroll-reveal ──
-setTimeout(() => {
-  const cards = document.querySelectorAll('.q-card');
-  if ('IntersectionObserver' in window) {
-    const obs = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: 0.1 });
-    cards.forEach(c => obs.observe(c));
-  } else {
-    cards.forEach(c => c.classList.add('visible'));
-  }
-}, 500);
+});
 </script>
+</div>
 </body>
 </html>
