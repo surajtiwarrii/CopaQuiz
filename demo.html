@@ -38,24 +38,34 @@ body.emp .wall{background:
   linear-gradient(160deg,#FFF3EE,#FFF0F4);background-size:200% 200%}
 
 /* top bar */
-.topbar{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:10px;
-  padding:11px clamp(12px,4vw,28px);background:var(--glass-strong);backdrop-filter:blur(22px) saturate(160%);border-bottom:1px solid var(--border)}
-.tb-left{display:flex;align-items:center;gap:10px;min-width:0}
+.topbar{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;flex-direction:column;gap:8px;
+  padding:10px clamp(12px,4vw,28px) 11px;background:var(--glass-strong);backdrop-filter:blur(22px) saturate(160%);border-bottom:1px solid var(--border)}
+.tb-row1{display:flex;align-items:center;gap:9px}
+.tb-spacer{flex:1}
+.tb-row2{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;padding:0 2px}
+.tb-row2 b{font-size:1rem;font-weight:700;letter-spacing:-.3px;line-height:1.2}
+.tb-row2 span{font-size:.72rem;color:var(--accent);font-weight:600;white-space:nowrap}
 .quitbtn{flex-shrink:0;width:36px;height:36px;border-radius:11px;border:none;background:rgba(255,255,255,.6);cursor:pointer;font-size:1rem;color:var(--ink-soft);display:grid;place-items:center;transition:background .3s}
 .quitbtn:hover{background:#fff}
-.tb-title{min-width:0}
-.tb-title b{display:block;font-size:.92rem;font-weight:700;letter-spacing:-.3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:42vw}
-.tb-title span{font-size:.68rem;color:var(--accent);font-weight:600}
+.langbtn{display:flex;background:rgba(255,255,255,.6);border:1px solid var(--border);border-radius:20px;padding:3px;cursor:pointer;position:relative;font-weight:700;flex-shrink:0}
+.langbtn .pill{position:absolute;top:3px;bottom:3px;width:calc(50% - 3px);left:3px;background:var(--accent);border-radius:20px;transition:transform .35s cubic-bezier(.6,.2,.1,1)}
+body[data-lang="hi"] .langbtn .pill{transform:translateX(100%)}
+.langbtn span{position:relative;z-index:1;padding:4px 11px;font-size:.7rem;color:var(--ink-soft);transition:color .3s}
+.langbtn span.on{color:#fff}
+.nav-top{flex-shrink:0;width:42px;height:42px;border-radius:12px;border:1px solid var(--border);background:rgba(255,255,255,.6);cursor:pointer;font-size:1.15rem;color:var(--ink);display:grid;place-items:center;transition:background .3s}
+.nav-top:hover{background:#fff}
 .timer{display:flex;align-items:center;gap:7px;font-family:'JetBrains Mono';font-weight:700;font-size:.95rem;
   background:rgba(255,255,255,.6);border:1px solid var(--border);padding:8px 14px;border-radius:30px;transition:background .3s}
 .timer.warn{background:rgba(252,129,129,.18);color:var(--hard);animation:blinkT 1s steps(2) infinite}
 @keyframes blinkT{50%{opacity:.45}}
 .timer .clock{font-size:.9rem}
 /* progress strip */
-.pbar{position:fixed;top:59px;left:0;right:0;z-index:49;height:4px;background:rgba(255,255,255,.4)}
+
+.pbar{position:fixed;top:84px;left:0;right:0;z-index:49;height:4px;background:rgba(255,255,255,.4)}
 .pbar .fill{height:100%;background:var(--grad);width:0;transition:width .4s}
 
-.stage{max-width:760px;margin:0 auto;padding:96px clamp(14px,4vw,24px) 130px}
+
+.stage{max-width:760px;margin:0 auto;padding:118px clamp(14px,4vw,24px) 130px}
 /* question card */
 .qcard{background:var(--glass);backdrop-filter:blur(24px) saturate(180%);border:1px solid var(--border);border-radius:24px;
   padding:26px 24px;box-shadow:0 18px 44px rgba(120,90,180,.13),inset 0 1px 0 rgba(255,255,255,.6);animation:qin .4s ease both}
@@ -72,6 +82,18 @@ body.emp .wall{background:
   font-weight:700;font-family:'JetBrains Mono';font-size:.85rem;color:var(--ink-soft);transition:all .2s}
 .opt.sel{background:var(--accentglow);border-color:var(--accent)}
 .opt.sel .key{background:var(--accent);color:#fff}
+.opt.correct{background:rgba(72,187,120,.18);border-color:var(--green)}
+.opt.correct .key{background:var(--green);color:#fff}
+.opt.wrong{background:rgba(252,129,129,.18);border-color:var(--hard)}
+.opt.wrong .key{background:var(--hard);color:#fff}
+.opt.locked{pointer-events:none}
+.explain{margin-top:18px;border-radius:15px;padding:16px 16px 16px 18px;background:rgba(255,255,255,.55);border-left:4px solid var(--accent);
+  animation:expIn .35s ease both}
+@keyframes expIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.explain .et{display:flex;align-items:center;gap:8px;font-weight:700;font-size:.92rem;margin-bottom:6px}
+.explain.ok .et{color:var(--green)}
+.explain.no .et{color:var(--hard)}
+.explain p{font-size:.9rem;line-height:1.5;color:var(--ink)}
 /* footer controls */
 .controls{position:fixed;bottom:0;left:0;right:0;z-index:50;background:var(--glass-strong);backdrop-filter:blur(22px) saturate(160%);
   border-top:1px solid var(--border);padding:14px clamp(12px,4vw,28px);display:flex;align-items:center;gap:10px;max-width:100%}
@@ -81,7 +103,7 @@ body.emp .wall{background:
 .btn-ghost:hover{background:#fff}
 .btn-nav{width:48px;height:48px;font-size:1.2rem;display:grid;place-items:center;flex-shrink:0}
 .btn-skip{flex-shrink:0}
-.btn-next{flex:1;background:var(--grad);background-size:200% 100%;color:#fff;padding:14px;font-size:.98rem;font-weight:700;position:relative;overflow:hidden;box-shadow:0 10px 24px var(--accentglow)}
+.btn-next{flex:1;background:var(--accent);color:#fff;padding:14px;font-size:.98rem;font-weight:700;position:relative;overflow:hidden;box-shadow:0 10px 24px var(--accentglow)}
 .btn-next::before{content:"";position:absolute;top:0;left:-60%;width:50%;height:100%;background:linear-gradient(120deg,transparent,rgba(255,255,255,.5),transparent);transform:skewX(-20deg);transition:left .6s}
 .btn-next:hover{background-position:100% 0;transform:translateY(-2px)}
 .btn-next:hover::before{left:130%}
@@ -125,6 +147,10 @@ body.emp .wall{background:
 .cbtns .stay{background:rgba(255,255,255,.6);border:1px solid var(--border);color:var(--ink)}
 .cbtns .go{background:var(--grad);color:#fff;box-shadow:0 8px 20px var(--accentglow)}
 
+.toast{position:fixed;bottom:96px;left:50%;transform:translateX(-50%) translateY(20px);z-index:120;
+  background:rgba(252,129,129,.95);color:#fff;font-weight:600;font-size:.9rem;padding:13px 22px;border-radius:30px;
+  box-shadow:0 10px 28px rgba(252,129,129,.4);opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;white-space:nowrap}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .loading{position:fixed;inset:0;display:grid;place-items:center;z-index:200;background:#EAF0FF}
 .loading .ld{text-align:center}
 .loading .spin{width:48px;height:48px;border:4px solid rgba(43,196,180,.2);border-top-color:var(--accent);border-radius:50%;margin:0 auto 16px;animation:spin .8s linear infinite}
@@ -139,15 +165,21 @@ body.emp .wall{background:
 <div class="loading" id="loading"><div class="ld"><div class="spin"></div><p data-en="Loading your test…" data-hi="आपका टेस्ट लोड हो रहा है…">Loading your test…</p></div></div>
 
 <div class="topbar">
-  <div class="tb-left">
+  <div class="tb-row1">
     <button class="quitbtn" onclick="quitQuiz()">✕</button>
-    <div class="tb-title"><b id="qTitle">Chapter</b><span id="qSub">Easy · Set 1</span></div>
+    <div class="tb-spacer"></div>
+    <div class="langbtn" id="langBtn"><div class="pill"></div><span class="on" id="enL">EN</span><span id="hiL">हिं</span></div>
+    <div class="timer" id="timer"><span>⏱️</span><span class="clock" id="clock">00:00</span></div>
   </div>
-  <div class="timer" id="timer"><span>⏱️</span><span class="clock" id="clock">00:00</span></div>
+  <div class="tb-row2">
+    <b id="qTitle">Chapter</b>
+    <span id="qSub">Easy · Set 1</span>
+  </div>
 </div>
 <div class="pbar"><div class="fill" id="pfill"></div></div>
 
 <div class="stage" id="stage"></div>
+<div class="toast" id="toast"></div>
 
 <div class="controls">
   <div class="cwrap">
@@ -250,6 +282,8 @@ let visited=new Array(QS.length).fill(false);
 /* ===== lang ===== */
 function applyLang(l){
   lang=l;body.dataset.lang=l;
+  var en=document.getElementById('enL'),hi=document.getElementById('hiL');
+  if(en){en.classList.toggle('on',l==='en');hi.classList.toggle('on',l==='hi')}
   document.querySelectorAll('[data-en]').forEach(e=>{if(e.children.length===0)e.textContent=l==='hi'?e.dataset.hi:e.dataset.en;else e.innerHTML=l==='hi'?e.dataset.hi:e.dataset.en});
   renderQ();
 }
@@ -271,24 +305,54 @@ function renderQ(){
     <div class="qmeta"><span class="qnum">${idx+1} / ${QS.length}</span><span class="qtype">${typeLabel}</span></div>
     <div class="qtext">${L.q}</div>
     <div class="opts" id="opts"></div>
+    <div id="expBox"></div>
   </div>`;
   const ow=document.getElementById('opts');
+  const answered=answers[idx]!==null&&answers[idx]>=0;
   L.opts.forEach((o,i)=>{
-    const d=document.createElement('div');d.className='opt'+(answers[idx]===i?' sel':'');
+    const d=document.createElement('div');d.className='opt';
+    if(answered){
+      d.classList.add('locked');
+      if(i===L.ans)d.classList.add('correct');
+      else if(i===answers[idx])d.classList.add('wrong');
+    }
     d.onclick=()=>chooseOpt(i);
     d.innerHTML=`<span class="key">${String.fromCharCode(65+i)}</span><span>${o}</span>`;
     ow.appendChild(d);
   });
+  if(answered){
+    const ok=answers[idx]===L.ans;
+    const head=ok?(lang==='hi'?'✅ सही जवाब!':'✅ Correct!'):(lang==='hi'?'❌ गलत जवाब':'❌ Incorrect');
+    document.getElementById('expBox').innerHTML=`<div class="explain ${ok?'ok':'no'}"><div class="et">${head}</div><p>${L.exp}</p></div>`;
+  }
   document.getElementById('pfill').style.width=((idx+1)/QS.length*100)+'%';
   const nb=document.getElementById('nextBtn');
   const isLast=idx===QS.length-1;
   nb.innerHTML=isLast?(lang==='hi'?'अगला →':'Next →'):(lang==='hi'?'अगला →':'Next →');
 }
 function chooseOpt(i){
+  if(answers[idx]!==null&&answers[idx]>=0)return; // already answered, locked
   answers[idx]=i;
-  document.querySelectorAll('.opt').forEach((el,k)=>el.classList.toggle('sel',k===i));
+  const q=QS[idx],L=q[lang],correct=L.ans;
+  document.querySelectorAll('.opt').forEach((el,k)=>{
+    el.classList.add('locked');
+    if(k===correct)el.classList.add('correct');
+    else if(k===i)el.classList.add('wrong');
+  });
+  const ok=i===correct;
+  const box=document.getElementById('expBox');
+  const head=ok?(lang==='hi'?'✅ सही जवाब!':'✅ Correct!'):(lang==='hi'?'❌ गलत जवाब':'❌ Incorrect');
+  box.innerHTML=`<div class="explain ${ok?'ok':'no'}"><div class="et">${head}</div><p>${L.exp}</p></div>`;
+}
+function showToast(msg){
+  const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
+  clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),2200);
 }
 function nextQ(){
+  if(answers[idx]===null||answers[idx]<0){
+    showToast(lang==='hi'?'पहले उत्तर चुनें या Skip करें':'Answer first or tap Skip');
+    return;
+  }
   if(idx<QS.length-1){idx++;renderQ()}
   else{askSubmit()}
 }
@@ -374,6 +438,7 @@ function quitQuiz(){
 document.getElementById('confirm').onclick=e=>{if(e.target.id==='confirm')closeSubmit()};
 
 /* ===== init ===== */
+document.getElementById('langBtn').onclick=()=>{applyLang(lang==='en'?'hi':'en');try{localStorage.setItem('copa_lang',lang)}catch(e){}};
 window.addEventListener('load',()=>{
   renderHeader();
   applyLang(lang);
