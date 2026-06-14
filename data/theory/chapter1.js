@@ -1,59 +1,529 @@
-var QUESTIONS_THEORY_1 = [
-{type:"mcq",diff:"easy",en:{q:"What does PPE stand for?",opts:["Personal Protective Equipment","Personal Protection Element","Public Protection Equipment","Private Protective Equipment"],ans:0,exp:"PPE protects workers from workplace hazards."},hi:{q:"PPE का पूरा नाम क्या है?",opts:["Personal Protective Equipment","Personal Protection Element","Public Protection Equipment","Private Protective Equipment"],ans:0,exp:"PPE कार्यस्थल के खतरों से सुरक्षा प्रदान करता है।"}},
-{type:"mcq",diff:"easy",en:{q:"Which PPE protects the eyes?",opts:["Safety Goggles","Helmet","Gloves","Safety Shoes"],ans:0,exp:"Safety goggles protect eyes from dust and flying particles."},hi:{q:"आंखों की सुरक्षा के लिए कौन-सा PPE उपयोग किया जाता है?",opts:["Safety Goggles","Helmet","Gloves","Safety Shoes"],ans:0,exp:"सेफ्टी गॉगल्स आंखों को धूल और कणों से बचाते हैं।"}},
-{type:"mcq",diff:"easy",en:{q:"Which PPE is used to protect the head?",opts:["Helmet","Apron","Mask","Ear Plug"],ans:0,exp:"A helmet protects the head from falling objects and impacts."},hi:{q:"सिर की सुरक्षा के लिए कौन-सा PPE उपयोग किया जाता है?",opts:["Helmet","Apron","Mask","Ear Plug"],ans:0,exp:"हेलमेट सिर को चोट और गिरती वस्तुओं से बचाता है।"}},
-{type:"mcq",diff:"easy",en:{q:"Which PPE protects the feet?",opts:["Safety Shoes","Gloves","Helmet","Mask"],ans:0,exp:"Safety shoes protect feet from injury."},hi:{q:"पैरों की सुरक्षा के लिए कौन-सा PPE उपयोग किया जाता है?",opts:["Safety Shoes","Gloves","Helmet","Mask"],ans:0,exp:"सेफ्टी शूज़ पैरों को चोट से बचाते हैं।"}},
-{type:"tf",diff:"easy",en:{q:"Housekeeping helps prevent workplace accidents.",opts:["True","False"],ans:0,exp:"A clean workplace reduces hazards and accidents."},hi:{q:"हाउसकीपिंग कार्यस्थल दुर्घटनाओं को रोकने में मदद करती है।",opts:["सही","गलत"],ans:0,exp:"साफ-सुथरा कार्यस्थल दुर्घटनाओं को कम करता है।"}},
-{type:"mcq",diff:"easy",en:{q:"Which color is used for danger signs?",opts:["Red","Green","Blue","White"],ans:0,exp:"Red color is associated with danger and prohibition."},hi:{q:"खतरे के संकेतों के लिए कौन-सा रंग उपयोग किया जाता है?",opts:["लाल","हरा","नीला","सफेद"],ans:0,exp:"लाल रंग खतरे और निषेध को दर्शाता है।"}},
-{type:"mcq",diff:"easy",en:{q:"Which color indicates a safe condition sign?",opts:["Green","Red","Yellow","Black"],ans:0,exp:"Green signs indicate safety and emergency information."},hi:{q:"सुरक्षित स्थिति का संकेत कौन-सा रंग दर्शाता है?",opts:["हरा","लाल","पीला","काला"],ans:0,exp:"हरा रंग सुरक्षा और आपातकालीन जानकारी दर्शाता है।"}},
-{type:"mcq",diff:"easy",en:{q:"What is the fire emergency number in India?",opts:["101","100","108","112"],ans:0,exp:"101 is the fire service emergency number."},hi:{q:"भारत में अग्निशमन सेवा का आपातकालीन नंबर क्या है?",opts:["101","100","108","112"],ans:0,exp:"101 अग्निशमन सेवा का आपातकालीन नंबर है।"}},
-{type:"mcq",diff:"easy",en:{q:"Which item is used for immediate treatment of injuries?",opts:["First Aid Box","Printer","Monitor","Scanner"],ans:0,exp:"First aid boxes contain emergency treatment materials."},hi:{q:"चोट लगने पर तुरंत उपचार के लिए क्या उपयोग किया जाता है?",opts:["फर्स्ट एड बॉक्स","प्रिंटर","मॉनिटर","स्कैनर"],ans:0,exp:"फर्स्ट एड बॉक्स में प्राथमिक उपचार की सामग्री होती है।"}},
-{type:"tf",diff:"easy",en:{q:"Wet floors can cause slipping accidents.",opts:["True","False"],ans:0,exp:"Wet surfaces increase the chance of slips and falls."},hi:{q:"गीली फर्श फिसलने की दुर्घटनाओं का कारण बन सकती है।",opts:["सही","गलत"],ans:0,exp:"गीली सतह पर फिसलने का खतरा बढ़ जाता है।"}},
-{type:"mcq",diff:"easy",en:{q:"Which PPE protects hands?",opts:["Gloves","Helmet","Goggles","Shoes"],ans:0,exp:"Gloves protect hands from cuts and injuries."},hi:{q:"हाथों की सुरक्षा के लिए कौन-सा PPE उपयोग किया जाता है?",opts:["दस्ताने","हेलमेट","गॉगल्स","जूते"],ans:0,exp:"दस्ताने हाथों को चोट से बचाते हैं।"}},
-{type:"mcq",diff:"easy",en:{q:"Which sign shape is commonly used for warnings?",opts:["Triangle","Circle","Square","Oval"],ans:0,exp:"Warning signs are generally triangular."},hi:{q:"चेतावनी संकेत का सामान्य आकार क्या होता है?",opts:["त्रिभुज","वृत्त","वर्ग","अंडाकार"],ans:0,exp:"चेतावनी संकेत सामान्यतः त्रिभुजाकार होते हैं।"}},
-{type:"mcq",diff:"easy",en:{q:"Which PPE protects workers from dust entering the nose and mouth?",opts:["Dust Mask","Helmet","Gloves","Safety Shoes"],ans:0,exp:"Dust masks help prevent inhalation of harmful dust particles."},hi:{q:"नाक और मुंह में धूल जाने से बचाने के लिए कौन-सा PPE उपयोग किया जाता है?",opts:["डस्ट मास्क","हेलमेट","दस्ताने","सेफ्टी शूज़"],ans:0,exp:"डस्ट मास्क हानिकारक धूल कणों को अंदर जाने से रोकता है।"}},
-{type:"mcq",diff:"easy",en:{q:"Which safety sign color indicates mandatory action?",opts:["Blue","Red","Green","Yellow"],ans:0,exp:"Blue signs indicate actions that must be followed."},hi:{q:"अनिवार्य कार्यवाही दर्शाने वाले सुरक्षा संकेत का रंग कौन-सा होता है?",opts:["नीला","लाल","हरा","पीला"],ans:0,exp:"नीले संकेत अनिवार्य निर्देशों को दर्शाते हैं।"}},
-{type:"tf",diff:"easy",en:{q:"Keeping tools scattered on the floor is good housekeeping.",opts:["True","False"],ans:1,exp:"Tools should be stored properly to avoid accidents."},hi:{q:"उपकरणों को फर्श पर बिखरा छोड़ना अच्छी हाउसकीपिंग है।",opts:["सही","गलत"],ans:1,exp:"दुर्घटना रोकने के लिए उपकरण सही स्थान पर रखने चाहिए।"}},
-{type:"mcq",diff:"easy",en:{q:"What should you do before entering a workshop?",opts:["Follow safety rules","Run quickly","Ignore signs","Remove PPE"],ans:0,exp:"Safety rules help prevent workplace accidents."},hi:{q:"वर्कशॉप में प्रवेश करने से पहले क्या करना चाहिए?",opts:["सुरक्षा नियमों का पालन","तेजी से दौड़ना","संकेतों को अनदेखा करना","PPE हटाना"],ans:0,exp:"सुरक्षा नियम दुर्घटनाओं को रोकते हैं।"}},
-{type:"mcq",diff:"easy",en:{q:"Which item is commonly found in a first aid box?",opts:["Bandage","Printer Ink","Keyboard","Mouse"],ans:0,exp:"Bandages are used to cover and protect wounds."},hi:{q:"फर्स्ट एड बॉक्स में सामान्यतः क्या पाया जाता है?",opts:["बैंडेज","प्रिंटर इंक","कीबोर्ड","माउस"],ans:0,exp:"बैंडेज घाव को ढकने और सुरक्षित रखने के लिए उपयोग होता है।"}},
-{type:"tf",diff:"easy",en:{q:"Emergency exits should always be kept clear.",opts:["True","False"],ans:0,exp:"Blocked exits can delay evacuation during emergencies."},hi:{q:"आपातकालीन निकास मार्ग हमेशा खाली रखा जाना चाहिए।",opts:["सही","गलत"],ans:0,exp:"बंद निकास मार्ग आपातकाल में खतरा बढ़ा सकते हैं।"}},
-{type:"mcq",diff:"easy",en:{q:"Which PPE is used to protect the body from dirt and minor hazards?",opts:["Apron","Goggles","Helmet","Ear Plug"],ans:0,exp:"Aprons protect clothing and body from minor hazards."},hi:{q:"शरीर को गंदगी और छोटे खतरों से बचाने के लिए कौन-सा PPE उपयोग किया जाता है?",opts:["एप्रन","गॉगल्स","हेलमेट","ईयर प्लग"],ans:0,exp:"एप्रन शरीर और कपड़ों की सुरक्षा करता है।"}},
-{type:"mcq",diff:"easy",en:{q:"Which sign shape is generally used for mandatory instructions?",opts:["Circle","Triangle","Rectangle","Diamond"],ans:0,exp:"Mandatory signs are usually circular."},hi:{q:"अनिवार्य निर्देशों के लिए कौन-सा आकार उपयोग किया जाता है?",opts:["वृत्त","त्रिभुज","आयत","हीरा"],ans:0,exp:"अनिवार्य संकेत सामान्यतः वृत्ताकार होते हैं।"}},
-{type:"tf",diff:"easy",en:{q:"Using damaged PPE is safe if used carefully.",opts:["True","False"],ans:1,exp:"Damaged PPE should be replaced immediately."},hi:{q:"क्षतिग्रस्त PPE को सावधानी से उपयोग करना सुरक्षित है।",opts:["सही","गलत"],ans:1,exp:"क्षतिग्रस्त PPE को तुरंत बदलना चाहिए।"}},
-{type:"mcq",diff:"easy",en:{q:"What does a green safety sign normally indicate?",opts:["Safe Condition","Danger","Warning","Prohibition"],ans:0,exp:"Green signs provide safety information."},hi:{q:"हरा सुरक्षा संकेत सामान्यतः क्या दर्शाता है?",opts:["सुरक्षित स्थिति","खतरा","चेतावनी","निषेध"],ans:0,exp:"हरा संकेत सुरक्षा संबंधी जानकारी देता है।"}},
-{type:"mcq",diff:"easy",en:{q:"Which emergency service is reached by dialing 108?",opts:["Ambulance","Fire","Police","Electricity Board"],ans:0,exp:"108 is commonly used for ambulance services."},hi:{q:"108 नंबर डायल करने पर कौन-सी सेवा प्राप्त होती है?",opts:["एम्बुलेंस","अग्निशमन","पुलिस","बिजली विभाग"],ans:0,exp:"108 सामान्यतः एम्बुलेंस सेवा के लिए उपयोग होता है।"}},
-{type:"tf",diff:"easy",en:{q:"Safety awareness helps reduce accidents.",opts:["True","False"],ans:0,exp:"Awareness improves safe behavior at work."},hi:{q:"सुरक्षा जागरूकता दुर्घटनाओं को कम करने में मदद करती है।",opts:["सही","गलत"],ans:0,exp:"जागरूकता सुरक्षित व्यवहार को बढ़ावा देती है।"}},
-{type:"mcq",diff:"easy",en:{q:"Which PPE protects workers from flying metal particles?",opts:["Safety Goggles","Safety Shoes","Apron","Ear Plug"],ans:0,exp:"Safety goggles protect eyes from flying particles."},hi:{q:"उड़ते हुए धातु कणों से सुरक्षा के लिए कौन-सा PPE उपयोग किया जाता है?",opts:["सेफ्टी गॉगल्स","सेफ्टी शूज़","एप्रन","ईयर प्लग"],ans:0,exp:"सेफ्टी गॉगल्स आंखों को उड़ते कणों से बचाते हैं।"}},
-{type:"mcq",diff:"easy",en:{q:"What should be done with waste materials in a workshop?",opts:["Dispose properly","Leave on floor","Hide under table","Burn indoors"],ans:0,exp:"Proper disposal keeps the workplace safe and clean."},hi:{q:"वर्कशॉप में अपशिष्ट पदार्थों का क्या करना चाहिए?",opts:["उचित निपटान","फर्श पर छोड़ना","टेबल के नीचे छिपाना","अंदर जलाना"],ans:0,exp:"उचित निपटान कार्यस्थल को सुरक्षित और साफ रखता है।"}},
-{type:"tf",diff:"easy",en:{q:"Running inside a workshop is a safe practice.",opts:["True","False"],ans:1,exp:"Running increases the risk of accidents."},hi:{q:"वर्कशॉप के अंदर दौड़ना सुरक्षित अभ्यास है।",opts:["सही","गलत"],ans:1,exp:"दौड़ने से दुर्घटनाओं का खतरा बढ़ जाता है।"}},
-{type:"mcq",diff:"easy",en:{q:"Which sign indicates prohibition?",opts:["Red Circle","Green Square","Blue Circle","Yellow Triangle"],ans:0,exp:"Red prohibition signs indicate actions that are not allowed."},hi:{q:"निषेध (Prohibition) दर्शाने वाला संकेत कौन-सा है?",opts:["लाल वृत्त","हरा वर्ग","नीला वृत्त","पीला त्रिभुज"],ans:0,exp:"लाल निषेध संकेत प्रतिबंधित कार्यों को दर्शाते हैं।"}},
-{type:"mcq",diff:"easy",en:{q:"Which PPE protects against loud industrial noise?",opts:["Ear Muffs","Gloves","Mask","Helmet"],ans:0,exp:"Ear muffs reduce noise reaching the ears."},hi:{q:"औद्योगिक शोर से सुरक्षा के लिए कौन-सा PPE उपयोग किया जाता है?",opts:["ईयर मफ्स","दस्ताने","मास्क","हेलमेट"],ans:0,exp:"ईयर मफ्स कानों तक पहुंचने वाले शोर को कम करते हैं।"}},
-{type:"tf",diff:"easy",en:{q:"Emergency contact numbers should be displayed clearly.",opts:["True","False"],ans:0,exp:"Visible emergency numbers help in quick response."},hi:{q:"आपातकालीन संपर्क नंबर स्पष्ट रूप से प्रदर्शित होने चाहिए।",opts:["सही","गलत"],ans:0,exp:"स्पष्ट नंबर आपातकाल में त्वरित सहायता दिलाते हैं।"}},
-{type:"mcq",diff:"easy",en:{q:"Which PPE is commonly used while welding?",opts:["Welding Shield","Safety Shoes","Apron","Ear Plug"],ans:0,exp:"A welding shield protects eyes and face from sparks."},hi:{q:"वेल्डिंग करते समय सामान्यतः कौन-सा PPE उपयोग किया जाता है?",opts:["वेल्डिंग शील्ड","सेफ्टी शूज़","एप्रन","ईयर प्लग"],ans:0,exp:"वेल्डिंग शील्ड आंखों और चेहरे को चिंगारियों से बचाती है।"}},
-{type:"mcq",diff:"medium",en:{q:"What does P in PASS method stand for?",opts:["Pull","Push","Press","Point"],ans:0,exp:"Pull the safety pin before using the extinguisher."},hi:{q:"PASS विधि में P का क्या अर्थ है?",opts:["Pull","Push","Press","Point"],ans:0,exp:"अग्निशामक उपयोग करने से पहले पिन खींची जाती है।"}},
-{type:"mcq",diff:"medium",en:{q:"What does A in PASS method stand for?",opts:["Aim","Alert","Apply","Activate"],ans:0,exp:"Aim at the base of the fire."},hi:{q:"PASS विधि में A का क्या अर्थ है?",opts:["Aim","Alert","Apply","Activate"],ans:0,exp:"आग के आधार पर निशाना लगाएं।"}},
-{type:"mcq",diff:"medium",en:{q:"What does the first S in PASS mean?",opts:["Squeeze","Stop","Secure","Shift"],ans:0,exp:"Squeeze the handle to release extinguishing agent."},hi:{q:"PASS विधि में पहले S का क्या अर्थ है?",opts:["Squeeze","Stop","Secure","Shift"],ans:0,exp:"हैंडल दबाकर अग्निशामक चलाया जाता है।"}},
-{type:"mcq",diff:"medium",en:{q:"What does the second S in PASS mean?",opts:["Sweep","Stop","Secure","Signal"],ans:0,exp:"Sweep side to side across the fire base."},hi:{q:"PASS विधि में दूसरे S का क्या अर्थ है?",opts:["Sweep","Stop","Secure","Signal"],ans:0,exp:"नोजल को दाएं-बाएं घुमाते हुए चलाएं।"}},
-{type:"mcq",diff:"medium",en:{q:"Which fire class involves flammable liquids?",opts:["Class B","Class A","Class C","Class D"],ans:0,exp:"Petrol and diesel fires are Class B fires."},hi:{q:"ज्वलनशील द्रवों की आग किस वर्ग की होती है?",opts:["Class B","Class A","Class C","Class D"],ans:0,exp:"पेट्रोल और डीजल की आग Class B में आती है।"}},
-{type:"mcq",diff:"medium",en:{q:"Which fire class involves electrical equipment?",opts:["Class C","Class A","Class B","Class D"],ans:0,exp:"Electrical fires are classified as Class C."},hi:{q:"विद्युत उपकरणों की आग किस वर्ग की होती है?",opts:["Class C","Class A","Class B","Class D"],ans:0,exp:"विद्युत आग Class C श्रेणी में आती है।"}},
-{type:"mcq",diff:"medium",en:{q:"What is the purpose of earthing?",opts:["Prevent electric shock","Increase voltage","Store energy","Reduce light"],ans:0,exp:"Earthing safely carries fault current to ground."},hi:{q:"अर्थिंग का उद्देश्य क्या है?",opts:["करंट से सुरक्षा","वोल्टेज बढ़ाना","ऊर्जा संग्रहित करना","रोशनी कम करना"],ans:0,exp:"अर्थिंग फॉल्ट करंट को सुरक्षित रूप से जमीन तक पहुंचाती है।"}},
-{type:"mcq",diff:"medium",en:{q:"Which device protects against earth leakage?",opts:["ELCB","Fuse","Switch","Relay"],ans:0,exp:"ELCB disconnects supply during leakage current."},hi:{q:"अर्थ लीकेज से सुरक्षा कौन-सा उपकरण देता है?",opts:["ELCB","Fuse","Switch","Relay"],ans:0,exp:"ELCB लीकेज होने पर सप्लाई काट देता है।"}},
-{type:"tf",diff:"medium",en:{q:"A fuse protects circuits from excess current.",opts:["True","False"],ans:0,exp:"Fuse melts when current exceeds safe limits."},hi:{q:"फ्यूज अधिक धारा से सुरक्षा देता है।",opts:["सही","गलत"],ans:0,exp:"अधिक धारा पर फ्यूज पिघल जाता है।"}},
-{type:"mcq",diff:"medium",en:{q:"What should be done before repairing electrical equipment?",opts:["Disconnect power","Apply water","Wear apron","Open cover"],ans:0,exp:"Power should be isolated first."},hi:{q:"विद्युत उपकरण की मरम्मत से पहले क्या करना चाहिए?",opts:["बिजली सप्लाई बंद करना","पानी डालना","एप्रन पहनना","कवर खोलना"],ans:0,exp:"सबसे पहले बिजली सप्लाई बंद करनी चाहिए।"}},
-{type:"tf",diff:"medium",en:{q:"Fire extinguishers should be inspected regularly.",opts:["True","False"],ans:0,exp:"Regular inspection ensures readiness."},hi:{q:"अग्निशामकों का नियमित निरीक्षण किया जाना चाहिए।",opts:["सही","गलत"],ans:0,exp:"नियमित निरीक्षण उनकी कार्यक्षमता सुनिश्चित करता है।"}},
-{type:"mcq",diff:"medium",en:{q:"What is a hazard?",opts:["Potential source of harm","Safety rule","Tool","Emergency number"],ans:0,exp:"A hazard can cause injury or damage."},hi:{q:"Hazard (खतरा) क्या है?",opts:["हानि का संभावित स्रोत","सुरक्षा नियम","उपकरण","आपातकालीन नंबर"],ans:0,exp:"Hazard चोट या नुकसान का कारण बन सकता है।"}},
-{type:"mcq",diff:"medium",en:{q:"Which extinguisher is generally used for Class A fires?",opts:["Water","CO2","Dry Sand","Metal Powder"],ans:0,exp:"Water extinguishers are effective on paper and wood fires."},hi:{q:"Class A आग के लिए सामान्यतः कौन-सा अग्निशामक उपयोग किया जाता है?",opts:["पानी","CO2","सूखी रेत","धातु पाउडर"],ans:0,exp:"पानी लकड़ी और कागज की आग बुझाने में प्रभावी होता है।"}},
-{type:"mcq",diff:"medium",en:{q:"What is the main purpose of a fire extinguisher inspection?",opts:["Ensure readiness","Increase weight","Improve color","Reduce cost"],ans:0,exp:"Regular inspections ensure the extinguisher works properly."},hi:{q:"अग्निशामक के निरीक्षण का मुख्य उद्देश्य क्या है?",opts:["तत्परता सुनिश्चित करना","वजन बढ़ाना","रंग सुधारना","लागत कम करना"],ans:0,exp:"निरीक्षण से अग्निशामक की कार्यक्षमता सुनिश्चित होती है।"}},
-{type:"tf",diff:"medium",en:{q:"Earthing reduces the risk of electric shock.",opts:["True","False"],ans:0,exp:"Earthing safely directs fault current into the ground."},hi:{q:"अर्थिंग करंट लगने के खतरे को कम करती है।",opts:["सही","गलत"],ans:0,exp:"अर्थिंग फॉल्ट करंट को सुरक्षित रूप से जमीन तक पहुंचाती है।"}},
-{type:"mcq",diff:"medium",en:{q:"Which fire class involves combustible metals such as magnesium?",opts:["Class D","Class A","Class B","Class C"],ans:0,exp:"Class D fires involve combustible metals."},hi:{q:"मैग्नीशियम जैसी ज्वलनशील धातुओं की आग किस वर्ग की होती है?",opts:["Class D","Class A","Class B","Class C"],ans:0,exp:"Class D आग ज्वलनशील धातुओं से संबंधित होती है।"}},
-{type:"mcq",diff:"medium",en:{q:"What should be checked before using a fire extinguisher?",opts:["Pressure Gauge","Color Only","Weight Only","Handle Color"],ans:0,exp:"Pressure should be in the safe operating range."},hi:{q:"अग्निशामक उपयोग करने से पहले क्या जांचना चाहिए?",opts:["प्रेशर गेज","केवल रंग","केवल वजन","हैंडल का रंग"],ans:0,exp:"प्रेशर सुरक्षित सीमा में होना चाहिए।"}},
-{type:"tf",diff:"medium",en:{q:"Overloaded electrical sockets can cause fire hazards.",opts:["True","False"],ans:0,exp:"Overloading increases heat and fire risk."},hi:{q:"अधिक लोड वाले विद्युत सॉकेट आग का खतरा पैदा कर सकते हैं।",opts:["सही","गलत"],ans:0,exp:"अधिक लोड से गर्मी और आग का खतरा बढ़ जाता है।"}},
-{type:"mcq",diff:"medium",en:{q:"Which type of burn is caused by chemicals?",opts:["Chemical Burn","Electrical Burn","Thermal Burn","Radiation Burn"],ans:0,exp:"Chemical burns occur due to corrosive substances."},hi:{q:"रसायनों से होने वाली जलन को क्या कहते हैं?",opts:["Chemical Burn","Electrical Burn","Thermal Burn","Radiation Burn"],ans:0,exp:"संक्षारक रसायनों से Chemical Burn होती है।"}},
-{type:"mcq",diff:"medium",en:{q:"What is the safest way to unplug equipment?",opts:["Pull the plug","Pull the cable","Twist the wire","Kick the plug"],ans:0,exp:"Always hold the plug, not the cable."},hi:{q:"उपकरण का प्लग निकालने का सबसे सुरक्षित तरीका क्या है?",opts:["प्लग पकड़कर निकालना","तार खींचना","तार मोड़ना","प्लग को पैर से हटाना"],ans:0,exp:"हमेशा प्लग पकड़कर निकालना चाहिए।"}},
-{type:"tf",diff:"medium",en:{q:"Safety signs should be clearly visible.",opts:["True","False"],ans:0,exp:"Visible signs help prevent accidents."},hi:{q:"सुरक्षा संकेत स्पष्ट रूप से दिखाई देने चाहिए।",opts:["सही","गलत"],ans:0,exp:"दिखाई देने वाले संकेत दुर्घटनाओं को रोकने में मदद करते हैं।"}},
-{type:"mcq",diff:"medium",en:{q:"Which item should be used to treat a minor bleeding wound?",opts:["Sterile Bandage","Engine Oil","Grease","Paint"],ans:0,exp:"Sterile bandages help protect wounds from infection."},hi:{q:"हल्के रक्तस्राव वाले घाव पर क्या उपयोग करना चाहिए?",opts:["स्टेराइल बैंडेज","इंजन ऑयल","ग्रीस","पेंट"],ans:0,exp:"स्टेराइल बैंडेज घाव को संक्रमण से बचाता है।"}},
-{type:"mcq",diff:"medium",en:{q:"Why are emergency drills conducted?",opts:["Practice response","Increase production","Reduce staff","Check attendance"],ans:0,exp:"Drills improve emergency preparedness."},hi:{q:"आपातकालीन ड्रिल क्यों कराई जाती है?",opts:["प्रतिक्रिया का अभ्यास","उत्पादन बढ़ाना","स्टाफ कम करना","उपस्थिति जांचना"],ans:0,exp:"ड्रिल आपातकालीन तैयारी को बेहतर बनाती है।"}},
-{type:"tf",diff:"medium",en:{q:"Defective tools should be reported immediately.",opts:["True","False"],ans:0,exp:"Defective tools can cause accidents."},hi:{q:"खराब उपकरणों की तुरंत रिपोर्ट करनी चाहिए।",opts:["सही","गलत"],ans:0,exp:"खराब उपकरण दुर्घटना का कारण बन सकते हैं।"}},
-{type:"mcq",diff:"medium",en:{q:"What is the purpose of safety training?",opts:["Increase awareness","Reduce wages","Increase hazards","Delay work"],ans:0,exp:"Training improves safe work practices."},hi:{q:"सुरक्षा प्रशिक्षण का उद्देश्य क्या है?",opts:["जागरूकता बढ़ाना","वेतन कम करना","खतरे बढ़ाना","कार्य में देरी"],ans:0,exp:"प्रशिक्षण सुरक्षित कार्य व्यवहार विकसित करता है।"}},
-{type:"mcq",diff:"medium",en:{q:"Which fire extinguisher is commonly used for electrical equipment?",opts:["CO2","Water","Foam","Cloth"],ans:0,exp:"CO2 is suitable because it is non-conductive."},hi:{q:"विद्युत उपकरणों की आग के लिए कौन-सा अग्निशामक सामान्यतः उपयोग किया जाता है?",opts:["CO2","पानी","फोम","कपड़ा"],ans:0,exp:"CO2 बिजली का चालक नहीं होता।"}},
-{type:"tf",diff:"medium",en:{q:"Proper housekee
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz — COPA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#2D3748;--ink-soft:#6B7A99;
+  --glass:rgba(255,255,255,.5);
+  --glass-strong:rgba(255,255,255,.7);
+  --border:rgba(255,255,255,.75);
+  --grad:linear-gradient(120deg,#5FD6C4 0%,#3FB8D9 50%,#8B9CF0 100%);
+  --accent:#2BC4B4;--accentglow:rgba(63,184,217,.4);
+  --easy:#48BB78;--med:#F6AD55;--hard:#FC8181;
+  --green:#48BB78;--amber:#F6AD55;--gray:#CBD5E0;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Poppins',sans-serif;color:var(--ink);min-height:100vh;overflow-x:hidden;position:relative;background:#EAF0FF}
+body[data-lang="hi"]{font-family:'Noto Sans Devanagari','Poppins',sans-serif}
+body.exit{animation:pageOut .4s ease forwards}
+@keyframes pageOut{to{opacity:0;transform:scale(.98)}}
+.wall{position:fixed;inset:0;z-index:-3;background:
+  radial-gradient(60% 50% at 15% 20%,#BFF0E6 0%,transparent 60%),
+  radial-gradient(55% 55% at 85% 25%,#C5E8FF 0%,transparent 60%),
+  radial-gradient(60% 60% at 50% 90%,#D9DEFF 0%,transparent 60%),
+  linear-gradient(160deg,#EBFBF7,#EEF2FF);
+  background-size:200% 200%;animation:wallShift 24s ease-in-out infinite}
+@keyframes wallShift{0%,100%{background-position:0% 0%}50%{background-position:100% 100%}}
+body.emp{--grad:linear-gradient(120deg,#FF8A6B 0%,#FF9B7D 50%,#FF7BA8 100%);--accent:#FF7E5F;--accentglow:rgba(255,126,95,.4)}
+body.emp .wall{background:
+  radial-gradient(60% 50% at 15% 20%,#FFD9C2 0%,transparent 60%),
+  radial-gradient(55% 55% at 85% 25%,#FFD0DE 0%,transparent 60%),
+  radial-gradient(60% 60% at 50% 90%,#FFE5C2 0%,transparent 60%),
+  linear-gradient(160deg,#FFF3EE,#FFF0F4);background-size:200% 200%}
+
+/* top bar */
+.topbar{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;flex-direction:column;gap:8px;
+  padding:10px clamp(12px,4vw,28px) 11px;background:var(--glass-strong);backdrop-filter:blur(22px) saturate(160%);border-bottom:1px solid var(--border)}
+.tb-row1{display:flex;align-items:center;gap:9px}
+.tb-spacer{flex:1}
+.tb-row2{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;padding:0 2px}
+.tb-row2 b{font-size:1rem;font-weight:700;letter-spacing:-.3px;line-height:1.2}
+.tb-row2 span{font-size:.72rem;color:var(--accent);font-weight:600;white-space:nowrap}
+.quitbtn{flex-shrink:0;width:36px;height:36px;border-radius:11px;border:none;background:rgba(255,255,255,.6);cursor:pointer;font-size:1rem;color:var(--ink-soft);display:grid;place-items:center;transition:background .3s}
+.quitbtn:hover{background:#fff}
+.langbtn{display:flex;background:rgba(255,255,255,.6);border:1px solid var(--border);border-radius:20px;padding:3px;cursor:pointer;position:relative;font-weight:700;flex-shrink:0}
+.langbtn .pill{position:absolute;top:3px;bottom:3px;width:calc(50% - 3px);left:3px;background:var(--accent);border-radius:20px;transition:transform .35s cubic-bezier(.6,.2,.1,1)}
+body[data-lang="hi"] .langbtn .pill{transform:translateX(100%)}
+.langbtn span{position:relative;z-index:1;padding:4px 11px;font-size:.7rem;color:var(--ink-soft);transition:color .3s}
+.langbtn span.on{color:#fff}
+.nav-top{flex-shrink:0;width:42px;height:42px;border-radius:12px;border:1px solid var(--border);background:rgba(255,255,255,.6);cursor:pointer;font-size:1.15rem;color:var(--ink);display:grid;place-items:center;transition:background .3s}
+.nav-top:hover{background:#fff}
+.timer{display:flex;align-items:center;gap:7px;font-family:'JetBrains Mono';font-weight:700;font-size:.95rem;
+  background:rgba(255,255,255,.6);border:1px solid var(--border);padding:8px 14px;border-radius:30px;transition:background .3s}
+.timer.warn{background:rgba(252,129,129,.18);color:var(--hard);animation:blinkT 1s steps(2) infinite}
+@keyframes blinkT{50%{opacity:.45}}
+.timer .clock{font-size:.9rem}
+/* progress strip */
+
+.pbar{position:fixed;top:84px;left:0;right:0;z-index:49;height:4px;background:rgba(255,255,255,.4)}
+.pbar .fill{height:100%;background:var(--grad);width:0;transition:width .4s}
+
+
+.stage{max-width:760px;margin:0 auto;padding:118px clamp(14px,4vw,24px) 130px}
+/* question card */
+.qcard{background:var(--glass);backdrop-filter:blur(24px) saturate(180%);border:1px solid var(--border);border-radius:24px;
+  padding:26px 24px;box-shadow:0 18px 44px rgba(120,90,180,.13),inset 0 1px 0 rgba(255,255,255,.6);animation:qin .4s ease both}
+@keyframes qin{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.qmeta{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.qnum{font-family:'JetBrains Mono';font-weight:700;font-size:.82rem;color:var(--accent);background:var(--accentglow);padding:5px 12px;border-radius:20px;opacity:.95}
+.qtype{font-size:.66rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--ink-soft);background:rgba(255,255,255,.5);padding:5px 10px;border-radius:20px}
+.qtext{font-size:1.18rem;font-weight:600;line-height:1.45;letter-spacing:-.3px;margin-bottom:22px}
+.opts{display:flex;flex-direction:column;gap:11px}
+.opt{display:flex;align-items:center;gap:13px;padding:15px 16px;border-radius:15px;cursor:pointer;border:2px solid transparent;
+  background:rgba(255,255,255,.55);transition:all .2s;font-size:.98rem;font-weight:500;line-height:1.35}
+.opt:hover{background:rgba(255,255,255,.85);transform:translateX(3px)}
+.opt .key{flex-shrink:0;width:30px;height:30px;border-radius:9px;background:rgba(255,255,255,.7);display:grid;place-items:center;
+  font-weight:700;font-family:'JetBrains Mono';font-size:.85rem;color:var(--ink-soft);transition:all .2s}
+.opt.sel{background:var(--accentglow);border-color:var(--accent)}
+.opt.sel .key{background:var(--accent);color:#fff}
+.opt.correct{background:rgba(72,187,120,.18);border-color:var(--green)}
+.opt.correct .key{background:var(--green);color:#fff}
+.opt.wrong{background:rgba(252,129,129,.18);border-color:var(--hard)}
+.opt.wrong .key{background:var(--hard);color:#fff}
+.opt.locked{pointer-events:none}
+.explain{margin-top:18px;border-radius:15px;padding:16px 16px 16px 18px;background:rgba(255,255,255,.55);border-left:4px solid var(--accent);
+  animation:expIn .35s ease both}
+@keyframes expIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.explain .et{display:flex;align-items:center;gap:8px;font-weight:700;font-size:.92rem;margin-bottom:6px}
+.explain.ok .et{color:var(--green)}
+.explain.no .et{color:var(--hard)}
+.explain p{font-size:.9rem;line-height:1.5;color:var(--ink)}
+/* footer controls */
+.controls{position:fixed;bottom:0;left:0;right:0;z-index:50;background:var(--glass-strong);backdrop-filter:blur(22px) saturate(160%);
+  border-top:1px solid var(--border);padding:14px clamp(12px,4vw,28px);display:flex;align-items:center;gap:10px;max-width:100%}
+.cwrap{max-width:760px;margin:0 auto;width:100%;display:flex;align-items:center;gap:10px}
+.btn{border:none;cursor:pointer;font-family:inherit;font-weight:600;border-radius:14px;transition:all .25s}
+.btn-ghost{background:rgba(255,255,255,.6);border:1px solid var(--border);color:var(--ink);padding:13px 18px;font-size:.9rem}
+.btn-ghost:hover{background:#fff}
+.btn-nav{width:48px;height:48px;font-size:1.2rem;display:grid;place-items:center;flex-shrink:0}
+.btn-skip{flex-shrink:0}
+.btn-next{flex:1;background:var(--accent);color:#fff;padding:14px;font-size:.98rem;font-weight:700;position:relative;overflow:hidden;box-shadow:0 10px 24px var(--accentglow)}
+.btn-next::before{content:"";position:absolute;top:0;left:-60%;width:50%;height:100%;background:linear-gradient(120deg,transparent,rgba(255,255,255,.5),transparent);transform:skewX(-20deg);transition:left .6s}
+.btn-next:hover{background-position:100% 0;transform:translateY(-2px)}
+.btn-next:hover::before{left:130%}
+.btn-submit{flex-shrink:0;background:rgba(255,255,255,.6);border:1px solid var(--accent);color:var(--accent);padding:13px 18px;font-size:.9rem;font-weight:700}
+.btn-submit:hover{background:var(--accent);color:#fff}
+
+/* nav panel */
+.navpanel{position:fixed;inset:0;z-index:90;background:rgba(45,55,72,.4);backdrop-filter:blur(8px);display:none;align-items:flex-end;opacity:0;transition:opacity .3s}
+.navpanel.show{display:flex;opacity:1}
+.navsheet{width:100%;max-width:760px;margin:0 auto;background:var(--glass-strong);backdrop-filter:blur(30px);border-radius:26px 26px 0 0;
+  border:1px solid var(--border);padding:24px 22px calc(24px + env(safe-area-inset-bottom));transform:translateY(100%);transition:transform .4s cubic-bezier(.2,.9,.3,1.1);max-height:75vh;overflow-y:auto}
+.navpanel.show .navsheet{transform:none}
+.navhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.navhead h3{font-size:1.1rem;font-weight:700}
+.navlegend{display:flex;gap:14px;margin-bottom:16px;flex-wrap:wrap}
+.lg{display:flex;align-items:center;gap:6px;font-size:.74rem;color:var(--ink-soft)}
+.lg i{width:13px;height:13px;border-radius:5px;display:inline-block}
+.lg.a i{background:var(--green)}.lg.s i{background:var(--amber)}.lg.n i{background:var(--gray)}
+.navgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(46px,1fr));gap:9px}
+.nb{aspect-ratio:1;border-radius:11px;border:2px solid transparent;background:var(--gray);color:#fff;font-weight:700;font-family:'JetBrains Mono';
+  font-size:.92rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .2s}
+.nb:hover{transform:scale(1.08)}
+.nb.answered{background:var(--green)}.nb.skipped{background:var(--amber)}
+.nb.current{border-color:var(--ink);box-shadow:0 0 0 3px rgba(45,55,72,.15)}
+
+/* confirm modal */
+.confirm{position:fixed;inset:0;z-index:100;background:rgba(45,55,72,.42);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:20px;opacity:0;transition:opacity .3s}
+.confirm.show{display:flex;opacity:1}
+.cbox{width:100%;max-width:380px;background:var(--glass-strong);backdrop-filter:blur(30px);border:1px solid var(--border);border-radius:24px;padding:28px 24px;text-align:center;transform:scale(.9);transition:transform .35s cubic-bezier(.2,.9,.3,1.2)}
+.confirm.show .cbox{transform:none}
+.cbox .cic{font-size:2.2rem;margin-bottom:10px}
+.cbox h3{font-size:1.25rem;font-weight:700;margin-bottom:8px}
+.cbox p{color:var(--ink-soft);font-size:.92rem;line-height:1.5;margin-bottom:8px}
+.cstat{display:flex;justify-content:center;gap:18px;margin:16px 0 22px}
+.cstat div{display:flex;flex-direction:column}
+.cstat b{font-size:1.5rem;font-weight:700;font-family:'JetBrains Mono'}
+.cstat span{font-size:.7rem;color:var(--ink-soft)}
+.cstat .a b{color:var(--green)}.cstat .s b{color:var(--amber)}.cstat .n b{color:var(--ink-soft)}
+.cbtns{display:flex;gap:10px}
+.cbtns .btn{flex:1;padding:14px}
+.cbtns .stay{background:rgba(255,255,255,.6);border:1px solid var(--border);color:var(--ink)}
+.cbtns .go{background:var(--grad);color:#fff;box-shadow:0 8px 20px var(--accentglow)}
+
+.toast{position:fixed;bottom:96px;left:50%;transform:translateX(-50%) translateY(20px);z-index:120;
+  background:rgba(252,129,129,.95);color:#fff;font-weight:600;font-size:.9rem;padding:13px 22px;border-radius:30px;
+  box-shadow:0 10px 28px rgba(252,129,129,.4);opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;white-space:nowrap}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.loading{position:fixed;inset:0;display:grid;place-items:center;z-index:200;background:#EAF0FF}
+.loading .ld{text-align:center}
+.loading .spin{width:48px;height:48px;border:4px solid rgba(43,196,180,.2);border-top-color:var(--accent);border-radius:50%;margin:0 auto 16px;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading p{color:var(--ink-soft);font-weight:500}
+@media(max-width:560px){.tb-title b{max-width:34vw}.btn-ghost{padding:13px 14px}.btn-skip span,.btn-submit span{display:none}}
+</style>
+<script src="data/theory/chapter1.js"></script>
+<script src="data/theory/chapter2.js"></script>
+<script src="data/theory/chapter3.js"></script>
+<script src="data/theory/chapter4.js"></script>
+<script src="data/theory/chapter5.js"></script>
+<script src="data/theory/chapter6.js"></script>
+<script src="data/theory/chapter7.js"></script>
+<script src="data/theory/chapter8.js"></script>
+<script src="data/theory/chapter9.js"></script>
+<script src="data/theory/chapter10.js"></script>
+<script src="data/theory/chapter11.js"></script>
+<script src="data/theory/chapter12.js"></script>
+<script src="data/theory/chapter13.js"></script>
+<script src="data/theory/chapter14.js"></script>
+<script src="data/employability/chapter1.js"></script>
+<script src="data/employability/chapter2.js"></script>
+<script src="data/employability/chapter3.js"></script>
+<script src="data/employability/chapter4.js"></script>
+<script src="data/employability/chapter5.js"></script>
+<script src="data/employability/chapter6.js"></script>
+<script src="data/employability/chapter7.js"></script>
+<script src="data/employability/chapter8.js"></script>
+<script src="data/employability/chapter9.js"></script>
+<script src="data/employability/chapter10.js"></script>
+<script src="data/employability/chapter11.js"></script>
+<script src="data/employability/chapter12.js"></script>
+</head>
+<body data-lang="en">
+<div class="wall"></div>
+
+<div class="loading" id="loading"><div class="ld"><div class="spin"></div><p data-en="Loading your test…" data-hi="आपका टेस्ट लोड हो रहा है…">Loading your test…</p></div></div>
+
+<div class="topbar">
+  <div class="tb-row1">
+    <button class="quitbtn" onclick="quitQuiz()">✕</button>
+    <div class="tb-spacer"></div>
+    <div class="langbtn" id="langBtn"><div class="pill"></div><span class="on" id="enL">EN</span><span id="hiL">हिं</span></div>
+    <div class="timer" id="timer"><span>⏱️</span><span class="clock" id="clock">00:00</span></div>
+  </div>
+  <div class="tb-row2">
+    <b id="qTitle">Chapter</b>
+    <span id="qSub">Easy · Set 1</span>
+  </div>
+</div>
+<div class="pbar"><div class="fill" id="pfill"></div></div>
+
+<div class="stage" id="stage"></div>
+<div class="toast" id="toast"></div>
+
+<div class="controls">
+  <div class="cwrap">
+    <button class="btn btn-ghost btn-nav" onclick="openNav()" title="Navigator">▦</button>
+    <button class="btn btn-ghost btn-skip" onclick="skipQ()"><span data-en="Skip" data-hi="छोड़ें">Skip</span> ⏭</button>
+    <button class="btn btn-next" id="nextBtn" onclick="nextQ()" data-en="Next →" data-hi="अगला →">Next →</button>
+    <button class="btn btn-submit" onclick="askSubmit()"><span data-en="Submit" data-hi="जमा">Submit</span> ✓</button>
+  </div>
+</div>
+
+<!-- nav panel -->
+<div class="navpanel" id="navpanel">
+  <div class="navsheet">
+    <div class="navhead"><h3 data-en="Questions" data-hi="प्रश्न">Questions</h3><button class="quitbtn" onclick="closeNav()">✕</button></div>
+    <div class="navlegend">
+      <span class="lg a"><i></i><span data-en="Answered" data-hi="उत्तर दिया">Answered</span></span>
+      <span class="lg s"><i></i><span data-en="Skipped" data-hi="छोड़ा">Skipped</span></span>
+      <span class="lg n"><i></i><span data-en="Not visited" data-hi="नहीं देखा">Not visited</span></span>
+    </div>
+    <div class="navgrid" id="navgrid"></div>
+  </div>
+</div>
+
+<!-- confirm submit -->
+<div class="confirm" id="confirm">
+  <div class="cbox">
+    <div class="cic">📝</div>
+    <h3 data-en="Submit test?" data-hi="टेस्ट जमा करें?">Submit test?</h3>
+    <p data-en="You can't change answers after submitting." data-hi="जमा करने के बाद उत्तर नहीं बदल सकते।">You can't change answers after submitting.</p>
+    <div class="cstat">
+      <div class="a"><b id="csA">0</b><span data-en="Answered" data-hi="उत्तर">Answered</span></div>
+      <div class="s"><b id="csS">0</b><span data-en="Skipped" data-hi="छोड़ा">Skipped</span></div>
+      <div class="n"><b id="csN">0</b><span data-en="Left" data-hi="बाकी">Left</span></div>
+    </div>
+    <div class="cbtns">
+      <button class="btn stay" onclick="closeSubmit()" data-en="Keep going" data-hi="जारी रखें">Keep going</button>
+      <button class="btn go" onclick="doSubmit()" data-en="Submit ✓" data-hi="जमा करें ✓">Submit ✓</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ===== load config ===== */
+let cfg;try{cfg=JSON.parse(localStorage.getItem('copa_config'))}catch(e){}
+if(!cfg){cfg={subject:'theory',chapterId:1,chapterEn:'Demo',chapterHi:'डेमो',mode:'easy',size:30,set:1,lang:'en'}}
+const body=document.body;
+let lang=cfg.lang||'en';body.dataset.lang=lang;
+if(cfg.subject==='employability')body.classList.add('emp');
+
+const TIMER_MIN={20:25,25:25,30:35,50:60,75:75,100:90};
+const totalSec=(TIMER_MIN[cfg.size]||25)*60;
+let timeLeft=totalSec;
+
+/* ===== demo question generator (until real JSON added) ===== */
+/* NOTE: real questions will be loaded from data files later.
+   For now we generate placeholder bilingual questions so the engine works. */
+function makeDemoQuestions(n){
+  const arr=[];
+  for(let i=1;i<=n;i++){
+    const correct=Math.floor(Math.random()*4);
+    const opts_en=['Option A','Option B','Option C','Option D'].map((o,idx)=>o+' #'+i);
+    const opts_hi=['विकल्प A','विकल्प B','विकल्प C','विकल्प D'].map((o,idx)=>o+' #'+i);
+    arr.push({
+      type:i%10===0?'tf':(i%9===0?'both':'mcq'),
+      en:{q:`Sample question ${i}: This is a placeholder. Real questions will load here.`,opts:opts_en,ans:correct,
+        exp:`Explanation for question ${i}. The correct answer is option ${String.fromCharCode(65+correct)}.`},
+      hi:{q:`नमूना प्रश्न ${i}: यह एक प्लेसहोल्डर है। असली प्रश्न यहाँ आएंगे।`,opts:opts_hi,ans:correct,
+        exp:`प्रश्न ${i} की व्याख्या। सही उत्तर विकल्प ${String.fromCharCode(65+correct)} है।`}
+    });
+  }
+  return arr;
+}
+
+/* shuffle helper */
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function shuffleOpts(q){
+  // Don't shuffle True/False questions
+  if(q.type==='tf') return q;
+  const optCount=q.en.opts.length;
+  const idxArr=Array.from({length:optCount},(_,i)=>i);
+  const idx=shuffle(idxArr);
+  ['en','hi'].forEach(L=>{
+    const newOpts=idx.map(k=>q[L].opts[k]);
+    q[L]._ans=idx.indexOf(q[L].ans);
+    q[L].opts=newOpts;
+  });
+  q.en.ans=q.en._ans;q.hi.ans=q.hi._ans;
+  return q;
+}
+
+/* ===== load real questions ===== */
+function loadQuestions(){
+  const size=cfg.size||30;
+  const isEmp=cfg.subject==='employability';
+
+  // Full subject test - chapterId === 0
+  if(cfg.chapterId===0){
+    const totalChapters=isEmp?12:14;
+    let allPool=[];
+    for(let i=1;i<=totalChapters;i++){
+      const key=isEmp?'QUESTIONS_EMP_'+i:'QUESTIONS_THEORY_'+i;
+      const chQ=window[key];
+      if(chQ&&chQ.length) allPool=allPool.concat(chQ);
+    }
+    if(!allPool.length) return makeDemoQuestions(size);
+    // Each set uses different shuffled questions
+    const setIdx=(cfg.set||1)-1;
+    const shuffled=shuffle([...allPool]);
+    const start=setIdx*size;
+    let pool=shuffled.slice(start,start+size);
+    if(pool.length<size) pool=shuffled.slice(0,size);
+    return pool.map(q=>shuffleOpts(JSON.parse(JSON.stringify(q))));
+  }
+
+  // Single chapter
+  const key=isEmp?'QUESTIONS_EMP_'+cfg.chapterId:'QUESTIONS_THEORY_'+cfg.chapterId;
+  const allQ=window[key];
+  if(!allQ||!allQ.length) return makeDemoQuestions(size);
+  const diff=cfg.mode;
+  let pool=allQ.filter(q=>q.diff===diff);
+  if(pool.length<size) pool=allQ;
+  return shuffle([...pool]).slice(0,size).map(q=>shuffleOpts(JSON.parse(JSON.stringify(q))));
+}
+let QS=loadQuestions();
+
+/* state */
+let idx=0;
+let answers=new Array(QS.length).fill(null); // null=not visited, -1=skipped, 0-3=chosen
+let visited=new Array(QS.length).fill(false);
+
+/* ===== lang ===== */
+function applyLang(l){
+  lang=l;body.dataset.lang=l;
+  var en=document.getElementById('enL'),hi=document.getElementById('hiL');
+  if(en){en.classList.toggle('on',l==='en');hi.classList.toggle('on',l==='hi')}
+  document.querySelectorAll('[data-en]').forEach(e=>{if(e.children.length===0)e.textContent=l==='hi'?e.dataset.hi:e.dataset.en;else e.innerHTML=l==='hi'?e.dataset.hi:e.dataset.en});
+  renderQ();
+}
+
+/* ===== render ===== */
+const MODE_LABEL={easy:{en:'Easy',hi:'आसान'},medium:{en:'Medium',hi:'मध्यम'},hard:{en:'Hard',hi:'कठिन'}};
+function renderHeader(){
+  document.getElementById('qTitle').textContent=lang==='hi'?cfg.chapterHi:cfg.chapterEn;
+  const ml=MODE_LABEL[cfg.mode][lang];
+  const setTxt=lang==='hi'?('सेट '+cfg.set):('Set '+cfg.set);
+  document.getElementById('qSub').textContent=ml+' · '+setTxt;
+}
+function renderQ(){
+  visited[idx]=true;
+  const q=QS[idx],L=q[lang];
+  const typeLabel={mcq:'MCQ',tf:lang==='hi'?'सही/गलत':'True/False',both:lang==='hi'?'बहु':'Multi'}[q.type]||'MCQ';
+  const stage=document.getElementById('stage');
+  stage.innerHTML=`<div class="qcard">
+    <div class="qmeta"><span class="qnum">${idx+1} / ${QS.length}</span><span class="qtype">${typeLabel}</span></div>
+    <div class="qtext">${L.q}</div>
+    <div class="opts" id="opts"></div>
+    <div id="expBox"></div>
+  </div>`;
+  const ow=document.getElementById('opts');
+  const answered=answers[idx]!==null&&answers[idx]>=0;
+  L.opts.forEach((o,i)=>{
+    const d=document.createElement('div');d.className='opt';
+    if(answered){
+      d.classList.add('locked');
+      if(i===L.ans)d.classList.add('correct');
+      else if(i===answers[idx])d.classList.add('wrong');
+    }
+    d.onclick=()=>chooseOpt(i);
+    d.innerHTML=`<span class="key">${String.fromCharCode(65+i)}</span><span>${o}</span>`;
+    ow.appendChild(d);
+  });
+  if(answered){
+    const ok=answers[idx]===L.ans;
+    const head=ok?(lang==='hi'?'✅ सही जवाब!':'✅ Correct!'):(lang==='hi'?'❌ गलत जवाब':'❌ Incorrect');
+    document.getElementById('expBox').innerHTML=`<div class="explain ${ok?'ok':'no'}"><div class="et">${head}</div><p>${L.exp}</p></div>`;
+  }
+  document.getElementById('pfill').style.width=((idx+1)/QS.length*100)+'%';
+  const nb=document.getElementById('nextBtn');
+  const isLast=idx===QS.length-1;
+  nb.innerHTML=isLast?(lang==='hi'?'अगला →':'Next →'):(lang==='hi'?'अगला →':'Next →');
+}
+function chooseOpt(i){
+  if(answers[idx]!==null&&answers[idx]>=0)return; // already answered, locked
+  answers[idx]=i;
+  const q=QS[idx],L=q[lang],correct=L.ans;
+  document.querySelectorAll('.opt').forEach((el,k)=>{
+    el.classList.add('locked');
+    if(k===correct)el.classList.add('correct');
+    else if(k===i)el.classList.add('wrong');
+  });
+  const ok=i===correct;
+  const box=document.getElementById('expBox');
+  const head=ok?(lang==='hi'?'✅ सही जवाब!':'✅ Correct!'):(lang==='hi'?'❌ गलत जवाब':'❌ Incorrect');
+  box.innerHTML=`<div class="explain ${ok?'ok':'no'}"><div class="et">${head}</div><p>${L.exp}</p></div>`;
+}
+function showToast(msg){
+  const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
+  clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),2200);
+}
+function nextQ(){
+  if(answers[idx]===null||answers[idx]<0){
+    showToast(lang==='hi'?'पहले उत्तर चुनें या Skip करें':'Answer first or tap Skip');
+    return;
+  }
+  if(idx<QS.length-1){idx++;renderQ()}
+  else{askSubmit()}
+}
+function skipQ(){
+  if(answers[idx]===null)answers[idx]=-1;
+  if(idx<QS.length-1){idx++;renderQ()}
+  else{askSubmit()}
+}
+
+/* ===== timer ===== */
+function fmt(s){const m=Math.floor(s/60),x=s%60;return String(m).padStart(2,'0')+':'+String(x).padStart(2,'0')}
+function tickTimer(){
+  timeLeft--;
+  document.getElementById('clock').textContent=fmt(timeLeft);
+  if(timeLeft<=300)document.getElementById('timer').classList.add('warn');
+  if(timeLeft<=0){clearInterval(tInt);doSubmit(true)}
+}
+let tInt;
+
+/* ===== nav panel ===== */
+function openNav(){
+  const g=document.getElementById('navgrid');g.innerHTML='';
+  QS.forEach((q,i)=>{
+    const b=document.createElement('button');b.className='nb';
+    if(answers[i]!==null&&answers[i]>=0)b.classList.add('answered');
+    else if(answers[i]===-1)b.classList.add('skipped');
+    if(i===idx)b.classList.add('current');
+    b.textContent=i+1;
+    b.onclick=()=>{idx=i;renderQ();closeNav()};
+    g.appendChild(b);
+  });
+  document.getElementById('navpanel').classList.add('show');
+}
+function closeNav(){document.getElementById('navpanel').classList.remove('show')}
+document.getElementById('navpanel').onclick=e=>{if(e.target.id==='navpanel')closeNav()};
+
+/* ===== submit ===== */
+function askSubmit(){
+  const ans=answers.filter(a=>a!==null&&a>=0).length;
+  const skip=answers.filter(a=>a===-1).length;
+  const left=answers.filter(a=>a===null).length;
+  document.getElementById('csA').textContent=ans;
+  document.getElementById('csS').textContent=skip;
+  document.getElementById('csN').textContent=left;
+  document.getElementById('confirm').classList.add('show');
+}
+function closeSubmit(){document.getElementById('confirm').classList.remove('show')}
+function doSubmit(auto){
+  clearInterval(tInt);
+  let score=0;const review=[];
+  QS.forEach((q,i)=>{
+    const chosen=answers[i];
+    const correct=q[lang].ans;
+    const ok=chosen===correct;
+    if(ok)score++;
+    review.push({
+      qEn:q.en.q,qHi:q.hi.q,
+      optsEn:q.en.opts,optsHi:q.hi.opts,
+      ansEn:q.en.ans,ansHi:q.hi.ans,
+      chosen:(chosen===null?-1:chosen),
+      expEn:q.en.exp,expHi:q.hi.exp,
+      ok:ok&&chosen!==null&&chosen>=0
+    });
+  });
+  const result={
+    chapterEn:cfg.chapterEn,chapterHi:cfg.chapterHi,subject:cfg.subject,mode:cfg.mode,set:cfg.set,
+    score:score,total:QS.length,
+    answered:answers.filter(a=>a!==null&&a>=0).length,
+    skipped:answers.filter(a=>a===-1).length,
+    left:answers.filter(a=>a===null).length,
+    timeUsed:totalSec-timeLeft,totalTime:totalSec,
+    review:review,lang:lang,auto:!!auto
+  };
+  try{localStorage.setItem('copa_result',JSON.stringify(result))}catch(e){}
+  
+  // Save completed set progress
+  try{
+    const subj = cfg.subject || 'theory';
+    const chId = cfg.chapterId || 0;
+    const setId = cfg.set || 1;
+    const key = 'completed_'+subj+'_ch'+chId;
+    let done = JSON.parse(localStorage.getItem(key)||'[]');
+    if(!done.includes(setId)) done.push(setId);
+    localStorage.setItem(key, JSON.stringify(done));
+  }catch(e){}
+  
+  body.classList.add('exit');setTimeout(()=>location.href='result.html',400);
+}
+function quitQuiz(){
+  if(confirm(lang==='hi'?'टेस्ट छोड़ दें? प्रगति सेव नहीं होगी।':'Quit test? Progress will not be saved.')){
+    body.classList.add('exit');
+    setTimeout(()=>location.href=(cfg.subject==='employability'?'employability.html':(cfg.subject==='full'?'index.html':'copa.html')),400);
+  }
+}
+document.getElementById('confirm').onclick=e=>{if(e.target.id==='confirm')closeSubmit()};
+
+/* ===== init ===== */
+document.getElementById('langBtn').onclick=()=>{applyLang(lang==='en'?'hi':'en');try{localStorage.setItem('copa_lang',lang)}catch(e){}};
+window.addEventListener('load',()=>{
+  renderHeader();
+  applyLang(lang);
+  document.getElementById('clock').textContent=fmt(timeLeft);
+  setTimeout(()=>document.getElementById('loading').style.display='none',500);
+  tInt=setInterval(tickTimer,1000);
+});
+
+/* ===== Fix browser back button blank page ===== */
+window.addEventListener('pageshow', function(e){
+  if(e.persisted || performance.getEntriesByType('navigation')[0]?.type === 'back_forward'){
+    document.body.classList.remove('exit');
+    document.body.style.opacity = '1';
+    document.body.style.transform = 'none';
+  }
+});
+</script>
+</body>
+</html>
