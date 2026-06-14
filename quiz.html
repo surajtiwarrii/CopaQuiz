@@ -229,25 +229,57 @@ const body=document.body;
 let lang=cfg.lang||'en';body.dataset.lang=lang;
 if(cfg.subject==='employability')body.classList.add('emp');
 
-const TIMER_MIN={20:25,25:25,30:35,50:60,75:90,100:120};
+const TIMER_MIN={20:25,25:25,30:30,50:60,75:90,100:120};
 const totalSec=(TIMER_MIN[cfg.size]||25)*60;
 let timeLeft=totalSec;
 
-/* ===== demo question generator (until real JSON added) ===== */
-/* NOTE: real questions will be loaded from data files later.
-   For now we generate placeholder bilingual questions so the engine works. */
+/* ===== real question loader from GitHub data folder ===== */
+const CHAPTER_VAR_MAP = {
+  1:'QUESTIONS_THEORY_1',2:'QUESTIONS_THEORY_2',3:'QUESTIONS_THEORY_3',
+  4:'QUESTIONS_THEORY_4',5:'QUESTIONS_THEORY_5',6:'QUESTIONS_THEORY_6',
+  7:'QUESTIONS_THEORY_7',8:'QUESTIONS_THEORY_8',9:'QUESTIONS_THEORY_9',
+  10:'QUESTIONS_THEORY_10',11:'QUESTIONS_THEORY_11',12:'QUESTIONS_THEORY_12',
+  13:'QUESTIONS_THEORY_13',14:'QUESTIONS_THEORY_14'
+};
+
+async function loadChapterQuestions(chapterId){
+  // Try window variable first (if script already loaded)
+  const varName = CHAPTER_VAR_MAP[chapterId];
+  if(window[varName]) return window[varName];
+
+  // Load from GitHub data folder
+  const url = `data/chapter${chapterId}.js`;
+  return new Promise((resolve,reject)=>{
+    const s = document.createElement('script');
+    s.src = url;
+    s.onload = ()=>resolve(window[varName]||[]);
+    s.onerror = ()=>{
+      console.warn('Could not load '+url+', using fallback');
+      resolve([]);
+    };
+    document.head.appendChild(s);
+  });
+}
+
+function filterByDiff(questions, mode, n){
+  // filter by difficulty
+  let pool = questions.filter(q=>q.diff===mode);
+  // if not enough, fill from all
+  if(pool.length < n) pool = [...questions];
+  return shuffle([...pool]).slice(0,n);
+}
+
 function makeDemoQuestions(n){
+  // Fallback only if real data failed to load
   const arr=[];
   for(let i=1;i<=n;i++){
     const correct=Math.floor(Math.random()*4);
-    const opts_en=['Option A','Option B','Option C','Option D'].map((o,idx)=>o+' #'+i);
-    const opts_hi=['विकल्प A','विकल्प B','विकल्प C','विकल्प D'].map((o,idx)=>o+' #'+i);
+    const opts_en=['Option A','Option B','Option C','Option D'].map((o)=>o+' #'+i);
+    const opts_hi=['विकल्प A','विकल्प B','विकल्प C','विकल्प D'].map((o)=>o+' #'+i);
     arr.push({
-      type:i%10===0?'tf':(i%9===0?'both':'mcq'),
-      en:{q:`Sample question ${i}: This is a placeholder. Real questions will load here.`,opts:opts_en,ans:correct,
-        exp:`Explanation for question ${i}. The correct answer is option ${String.fromCharCode(65+correct)}.`},
-      hi:{q:`नमूना प्रश्न ${i}: यह एक प्लेसहोल्डर है। असली प्रश्न यहाँ आएंगे।`,opts:opts_hi,ans:correct,
-        exp:`प्रश्न ${i} की व्याख्या। सही उत्तर विकल्प ${String.fromCharCode(65+correct)} है।`}
+      type:'mcq',diff:'easy',
+      en:{q:`Sample question ${i}: Data file not found. Check data/chapter.js path.`,opts:opts_en,ans:correct,exp:`Fallback explanation ${i}.`},
+      hi:{q:`नमूना प्रश्न ${i}: डेटा फ़ाइल नहीं मिली।`,opts:opts_hi,ans:correct,exp:`फॉलबैक व्याख्या ${i}.`}
     });
   }
   return arr;
@@ -271,13 +303,26 @@ function shuffleOpts(q){
   return q;
 }
 
-let QS=makeDemoQuestions(cfg.size);
-QS=shuffle(QS).slice(0,cfg.size).map(shuffleOpts);
-
-/* state */
+let QS=[];
 let idx=0;
-let answers=new Array(QS.length).fill(null); // null=not visited, -1=skipped, 0-3=chosen
-let visited=new Array(QS.length).fill(false);
+let answers=[];
+let visited=[];
+
+async function initQuestions(){
+  const SIZE = cfg.size || 30;
+  let raw = await loadChapterQuestions(cfg.chapterId||1);
+  if(!raw || raw.length===0){
+    raw = makeDemoQuestions(SIZE);
+  }
+  QS = filterByDiff(raw, cfg.mode||'easy', SIZE).map(shuffleOpts);
+  if(QS.length < SIZE){
+    // if still not enough after filter, pad with shuffled all
+    const extra = shuffle(raw.filter(q=>!QS.includes(q))).slice(0, SIZE-QS.length).map(shuffleOpts);
+    QS = [...QS, ...extra];
+  }
+  answers = new Array(QS.length).fill(null);
+  visited = new Array(QS.length).fill(false);
+}
 
 /* ===== lang ===== */
 function applyLang(l){
@@ -285,7 +330,7 @@ function applyLang(l){
   var en=document.getElementById('enL'),hi=document.getElementById('hiL');
   if(en){en.classList.toggle('on',l==='en');hi.classList.toggle('on',l==='hi')}
   document.querySelectorAll('[data-en]').forEach(e=>{if(e.children.length===0)e.textContent=l==='hi'?e.dataset.hi:e.dataset.en;else e.innerHTML=l==='hi'?e.dataset.hi:e.dataset.en});
-  renderQ();
+  if(QS.length>0)renderQ();
 }
 
 /* ===== render ===== */
@@ -439,12 +484,14 @@ document.getElementById('confirm').onclick=e=>{if(e.target.id==='confirm')closeS
 
 /* ===== init ===== */
 document.getElementById('langBtn').onclick=()=>{applyLang(lang==='en'?'hi':'en');try{localStorage.setItem('copa_lang',lang)}catch(e){}};
-window.addEventListener('load',()=>{
+window.addEventListener('load',async ()=>{
   renderHeader();
   applyLang(lang);
   document.getElementById('clock').textContent=fmt(timeLeft);
-  setTimeout(()=>document.getElementById('loading').style.display='none',500);
+  await initQuestions();
+  document.getElementById('loading').style.display='none';
   tInt=setInterval(tickTimer,1000);
+  renderQ();
 });
 </script>
 </body>
