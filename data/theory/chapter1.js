@@ -1,529 +1,122 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Quiz — COPA</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
-<style>
-:root{
-  --ink:#2D3748;--ink-soft:#6B7A99;
-  --glass:rgba(255,255,255,.5);
-  --glass-strong:rgba(255,255,255,.7);
-  --border:rgba(255,255,255,.75);
-  --grad:linear-gradient(120deg,#5FD6C4 0%,#3FB8D9 50%,#8B9CF0 100%);
-  --accent:#2BC4B4;--accentglow:rgba(63,184,217,.4);
-  --easy:#48BB78;--med:#F6AD55;--hard:#FC8181;
-  --green:#48BB78;--amber:#F6AD55;--gray:#CBD5E0;
+var QUESTIONS_EMP_1 = [
+{type:"mcq",diff:"easy",
+en:{q:"What are Employability Skills?",opts:["Skills required to get and keep a job","Only technical skills","Sports skills","Entertainment skills"],ans:0,exp:"Employability skills help a person obtain, perform and retain a job."},
+hi:{q:"Employability Skills क्या हैं?",opts:["नौकरी पाने और बनाए रखने के लिए आवश्यक कौशल","केवल तकनीकी कौशल","खेल कौशल","मनोरंजन कौशल"],ans:0,exp:"Employability Skills व्यक्ति को नौकरी पाने और बनाए रखने में मदद करते हैं।"}
+},
+{type:"mcq",diff:"easy",
+en:{q:"Which of the following is an employability skill?",opts:["Communication","Sleeping","Watching TV","Gaming"],ans:0,exp:"Communication is one of the most important employability skills."},
+hi:{q:"निम्न में से कौन-सा Employability Skill है?",opts:["Communication","सोना","टीवी देखना","गेम खेलना"],ans:0,exp:"Communication एक महत्वपूर्ण Employability Skill है।"}
+},
+{type:"tf",diff:"easy",
+en:{q:"Employability skills are useful in every profession.",opts:["True","False"],ans:0,exp:"These skills are valuable in all jobs and careers."},
+hi:{q:"Employability Skills हर Profession में उपयोगी होती हैं।",opts:["सही","गलत"],ans:0,exp:"ये कौशल सभी नौकरियों और करियर में उपयोगी हैं।"}
+},
+{type:"mcq",diff:"easy",
+en:{q:"Which skill helps in sharing ideas clearly?",opts:["Communication Skill","Drawing Skill","Driving Skill","Cooking Skill"],ans:0,exp:"Communication helps express ideas effectively."},
+hi:{q:"विचारों को स्पष्ट रूप से साझा करने में कौन-सा कौशल मदद करता है?",opts:["Communication Skill","Drawing Skill","Driving Skill","Cooking Skill"],ans:0,exp:"Communication विचारों को प्रभावी ढंग से व्यक्त करने में मदद करता है।"}
+},
+{type:"mcq",diff:"easy",
+en:{q:"Which skill helps in working with others?",opts:["Teamwork","Sleeping","Gaming","Singing"],ans:0,exp:"Teamwork is essential in most workplaces."},
+hi:{q:"दूसरों के साथ काम करने में कौन-सा कौशल मदद करता है?",opts:["Teamwork","सोना","गेम खेलना","गाना"],ans:0,exp:"Teamwork अधिकांश कार्यस्थलों में आवश्यक है।"}
+},
+{type:"tf",diff:"easy",
+en:{q:"Learning employability skills improves career opportunities.",opts:["True","False"],ans:0,exp:"These skills improve employability and growth."},
+hi:{q:"Employability Skills सीखने से Career Opportunities बढ़ती हैं।",opts:["सही","गलत"],ans:0,exp:"ये कौशल रोजगार और विकास के अवसर बढ़ाते हैं।"}
+},
+{type:"mcq",diff:"easy",
+en:{q:"Which platform can be used for online learning?",opts:["Online Learning Portal","Calculator","Printer","Scanner"],ans:0,exp:"Online platforms help learn new skills."},
+hi:{q:"Online Learning के लिए किस Platform का उपयोग किया जा सकता है?",opts:["Online Learning Portal","Calculator","Printer","Scanner"],ans:0,exp:"Online Platforms नए कौशल सीखने में मदद करते हैं।"}
+},
+{type:"mcq",diff:"easy",
+en:{q:"Why are employability skills important?",opts:["For career success","For sleeping","For entertainment only","For holidays"],ans:0,exp:"They help in career growth and workplace success."},
+hi:{q:"Employability Skills क्यों महत्वपूर्ण हैं?",opts:["Career Success के लिए","सोने के लिए","केवल मनोरंजन के लिए","छुट्टियों के लिए"],ans:0,exp:"ये Career Growth और Workplace Success में मदद करती हैं।"}
+},
+{type:"tf",diff:"easy",
+en:{q:"Problem-solving is an employability skill.",opts:["True","False"],ans:0,exp:"Problem-solving is a key workplace skill."},
+hi:{q:"Problem-solving एक Employability Skill है।",opts:["सही","गलत"],ans:0,exp:"Problem-solving कार्यस्थल का महत्वपूर्ण कौशल है।"}
+},
+{type:"mcq",diff:"easy",
+en:{q:"Which skill helps manage time effectively?",opts:["Time Management","Painting","Swimming","Typing"],ans:0,exp:"Time management helps complete tasks efficiently."},
+hi:{q:"समय का प्रभावी प्रबंधन करने में कौन-सा कौशल मदद करता है?",opts:["Time Management","Painting","Swimming","Typing"],ans:0,exp:"Time Management कार्यों को समय पर पूरा करने में मदद करता है।"}
+},
+{type:"mcq",diff:"medium",
+en:{q:"What is the main goal of employability skills?",opts:["Improve workplace performance","Increase holidays","Reduce learning","Avoid teamwork"],ans:0,exp:"These skills improve work efficiency and professionalism."},
+hi:{q:"Employability Skills का मुख्य उद्देश्य क्या है?",opts:["Workplace Performance सुधारना","छुट्टियाँ बढ़ाना","सीखना कम करना","Teamwork से बचना"],ans:0,exp:"ये कौशल कार्य क्षमता और Professionalism बढ़ाते हैं।"}
+},
+{type:"mcq",diff:"medium",
+en:{q:"Which skill helps adapt to workplace changes?",opts:["Flexibility","Laziness","Ignoring tasks","Delay"],ans:0,exp:"Flexibility helps adjust to new situations."},
+hi:{q:"Workplace Changes के अनुसार ढलने में कौन-सा कौशल मदद करता है?",opts:["Flexibility","आलस्य","कार्य अनदेखा करना","देरी"],ans:0,exp:"Flexibility नई परिस्थितियों में समायोजन करने में मदद करती है।"}
+},
+{type:"tf",diff:"medium",
+en:{q:"Online learning can help develop employability skills.",opts:["True","False"],ans:0,exp:"Many employability skills can be learned online."},
+hi:{q:"Online Learning Employability Skills विकसित करने में मदद कर सकती है।",opts:["सही","गलत"],ans:0,exp:"कई Employability Skills ऑनलाइन सीखी जा सकती हैं।"}
+},
+{type:"mcq",diff:"medium",
+en:{q:"Which skill helps make better decisions?",opts:["Critical Thinking","Guessing","Ignoring facts","Copying"],ans:0,exp:"Critical thinking improves decision-making."},
+hi:{q:"बेहतर निर्णय लेने में कौन-सा कौशल मदद करता है?",opts:["Critical Thinking","अनुमान लगाना","तथ्य अनदेखा करना","नकल करना"],ans:0,exp:"Critical Thinking निर्णय क्षमता को बेहतर बनाती है।"}
+},
+{type:"mcq",diff:"medium",
+en:{q:"What does teamwork require?",opts:["Cooperation","Isolation","Competition only","Silence"],ans:0,exp:"Teamwork depends on cooperation among members."},
+hi:{q:"Teamwork के लिए क्या आवश्यक है?",opts:["Cooperation","अलगाव","केवल प्रतियोगिता","चुप्पी"],ans:0,exp:"Teamwork सहयोग पर आधारित होता है।"}
+},
+{type:"tf",diff:"medium",
+en:{q:"Communication skills help in workplace relationships.",opts:["True","False"],ans:0,exp:"Good communication improves professional relationships."},
+hi:{q:"Communication Skills Workplace Relationships में मदद करती हैं।",opts:["सही","गलत"],ans:0,exp:"अच्छा Communication पेशेवर संबंधों को बेहतर बनाता है।"}
+},
+{type:"mcq",diff:"medium",
+en:{q:"What is lifelong learning?",opts:["Continuous learning throughout life","Learning only in school","Learning only online","No learning"],ans:0,exp:"Lifelong learning means constantly improving skills."},
+hi:{q:"Lifelong Learning क्या है?",opts:["जीवनभर निरंतर सीखना","केवल स्कूल में सीखना","केवल ऑनलाइन सीखना","न सीखना"],ans:0,exp:"Lifelong Learning का अर्थ लगातार नए कौशल सीखना है।"}
+},
+{type:"mcq",diff:"medium",
+en:{q:"Which skill is important for handling workplace challenges?",opts:["Problem Solving","Sleeping","Avoiding work","Complaining"],ans:0,exp:"Problem solving helps overcome challenges."},
+hi:{q:"Workplace Challenges से निपटने के लिए कौन-सा कौशल महत्वपूर्ण है?",opts:["Problem Solving","सोना","काम से बचना","शिकायत करना"],ans:0,exp:"Problem Solving चुनौतियों का समाधान करने में मदद करता है।"}
+},
+{type:"tf",diff:"medium",
+en:{q:"Employability skills can be improved through practice.",opts:["True","False"],ans:0,exp:"Regular practice develops these skills."},
+hi:{q:"Employability Skills अभ्यास द्वारा सुधारी जा सकती हैं।",opts:["सही","गलत"],ans:0,exp:"नियमित अभ्यास से ये कौशल विकसित होते हैं।"}
+},
+{type:"mcq",diff:"medium",
+en:{q:"Which skill helps in setting priorities?",opts:["Time Management","Drawing","Running","Singing"],ans:0,exp:"Time management helps prioritize tasks."},
+hi:{q:"Priorities तय करने में कौन-सा कौशल मदद करता है?",opts:["Time Management","Drawing","Running","Singing"],ans:0,exp:"Time Management कार्यों की प्राथमिकता तय करने में मदद करता है।"}
+},
+{type:"mcq",diff:"hard",
+en:{q:"Why is adaptability important in the future workplace?",opts:["Work environments change rapidly","It reduces learning","It avoids teamwork","It replaces communication"],ans:0,exp:"Adaptability helps individuals respond to changing work demands."},
+hi:{q:"भविष्य के कार्यस्थल में Adaptability क्यों महत्वपूर्ण है?",opts:["कार्य वातावरण तेजी से बदलता है","यह सीखना कम करता है","यह Teamwork से बचाता है","यह Communication को बदल देता है"],ans:0,exp:"Adaptability बदलती कार्य आवश्यकताओं के अनुसार ढलने में मदद करती है।"}
+},
+{type:"mcq",diff:"hard",
+en:{q:"Which factor is most important for career growth?",opts:["Continuous skill development","Ignoring feedback","Avoiding change","Working alone"],ans:0,exp:"Continuous learning and skill development support career growth."},
+hi:{q:"Career Growth के लिए सबसे महत्वपूर्ण कारक कौन-सा है?",opts:["निरंतर Skill Development","Feedback को अनदेखा करना","परिवर्तन से बचना","अकेले काम करना"],ans:0,exp:"निरंतर सीखना और Skill Development Career Growth में मदद करते हैं।"}
+},
+{type:"tf",diff:"hard",
+en:{q:"Future jobs may require both technical and employability skills.",opts:["True","False"],ans:0,exp:"Employers value both technical and soft skills."},
+hi:{q:"भविष्य की नौकरियों में Technical और Employability Skills दोनों की आवश्यकता हो सकती है।",opts:["सही","गलत"],ans:0,exp:"Employers Technical और Soft Skills दोनों को महत्व देते हैं।"}
+},
+{type:"mcq",diff:"hard",
+en:{q:"Which skill helps evaluate information logically?",opts:["Critical Thinking","Memorization only","Guesswork","Imitation"],ans:0,exp:"Critical thinking involves analyzing information logically."},
+hi:{q:"जानकारी का तार्किक मूल्यांकन करने में कौन-सा कौशल मदद करता है?",opts:["Critical Thinking","केवल याद करना","अनुमान लगाना","नकल करना"],ans:0,exp:"Critical Thinking जानकारी का तार्किक विश्लेषण करती है।"}
+},
+{type:"mcq",diff:"hard",
+en:{q:"What is a benefit of online learning platforms?",opts:["Learning anytime and anywhere","No effort required","Guaranteed jobs","No assessments"],ans:0,exp:"Online learning offers flexibility and accessibility."},
+hi:{q:"Online Learning Platforms का एक लाभ क्या है?",opts:["कभी भी और कहीं भी सीखना","कोई प्रयास नहीं","नौकरी की गारंटी","कोई Assessment नहीं"],ans:0,exp:"Online Learning लचीलापन और आसान पहुँच प्रदान करता है।"}
+},
+{type:"tf",diff:"hard",
+en:{q:"Employability skills help individuals remain relevant in changing job markets.",opts:["True","False"],ans:0,exp:"These skills support adaptability and career growth."},
+hi:{q:"Employability Skills बदलते Job Market में प्रासंगिक बने रहने में मदद करती हैं।",opts:["सही","गलत"],ans:0,exp:"ये कौशल Adaptability और Career Growth को समर्थन देते हैं।"}
+},
+{type:"mcq",diff:"hard",
+en:{q:"Which workplace skill combines planning, organizing and monitoring tasks?",opts:["Time Management","Drawing","Typing","Painting"],ans:0,exp:"Time management involves planning and monitoring work."},
+hi:{q:"कौन-सा Workplace Skill Planning, Organizing और Monitoring को जोड़ता है?",opts:["Time Management","Drawing","Typing","Painting"],ans:0,exp:"Time Management में योजना बनाना और कार्यों की निगरानी शामिल है।"}
+},
+{type:"mcq",diff:"hard",
+en:{q:"Which employability skill is most useful for resolving conflicts?",opts:["Communication","Ignoring others","Avoidance","Silence"],ans:0,exp:"Effective communication helps resolve conflicts."},
+hi:{q:"Conflicts को सुलझाने में कौन-सा Employability Skill सबसे उपयोगी है?",opts:["Communication","दूसरों को अनदेखा करना","बचना","चुप्पी"],ans:0,exp:"Effective Communication विवाद समाधान में मदद करता है।"}
+},
+{type:"tf",diff:"hard",
+en:{q:"Learning new skills regularly is important for future career success.",opts:["True","False"],ans:0,exp:"Continuous learning supports long-term employability."},
+hi:{q:"भविष्य की Career Success के लिए नियमित रूप से नए कौशल सीखना महत्वपूर्ण है।",opts:["सही","गलत"],ans:0,exp:"निरंतर सीखना दीर्घकालिक Employability को मजबूत करता है।"}
+},
+{type:"mcq",diff:"hard",
+en:{q:"What is the future of work expected to emphasize?",opts:["Skills, adaptability and lifelong learning","Only physical work","No technology","Less learning"],ans:0,exp:"Future workplaces value adaptability, skills and continuous learning."},
+hi:{q:"भविष्य का कार्यक्षेत्र किस पर अधिक जोर देगा?",opts:["Skills, Adaptability और Lifelong Learning","केवल Physical Work","कोई Technology नहीं","कम सीखना"],ans:0,exp:"भविष्य के कार्यस्थल Adaptability, Skills और Continuous Learning को महत्व देंगे।"}
 }
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Poppins',sans-serif;color:var(--ink);min-height:100vh;overflow-x:hidden;position:relative;background:#EAF0FF}
-body[data-lang="hi"]{font-family:'Noto Sans Devanagari','Poppins',sans-serif}
-body.exit{animation:pageOut .4s ease forwards}
-@keyframes pageOut{to{opacity:0;transform:scale(.98)}}
-.wall{position:fixed;inset:0;z-index:-3;background:
-  radial-gradient(60% 50% at 15% 20%,#BFF0E6 0%,transparent 60%),
-  radial-gradient(55% 55% at 85% 25%,#C5E8FF 0%,transparent 60%),
-  radial-gradient(60% 60% at 50% 90%,#D9DEFF 0%,transparent 60%),
-  linear-gradient(160deg,#EBFBF7,#EEF2FF);
-  background-size:200% 200%;animation:wallShift 24s ease-in-out infinite}
-@keyframes wallShift{0%,100%{background-position:0% 0%}50%{background-position:100% 100%}}
-body.emp{--grad:linear-gradient(120deg,#FF8A6B 0%,#FF9B7D 50%,#FF7BA8 100%);--accent:#FF7E5F;--accentglow:rgba(255,126,95,.4)}
-body.emp .wall{background:
-  radial-gradient(60% 50% at 15% 20%,#FFD9C2 0%,transparent 60%),
-  radial-gradient(55% 55% at 85% 25%,#FFD0DE 0%,transparent 60%),
-  radial-gradient(60% 60% at 50% 90%,#FFE5C2 0%,transparent 60%),
-  linear-gradient(160deg,#FFF3EE,#FFF0F4);background-size:200% 200%}
-
-/* top bar */
-.topbar{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;flex-direction:column;gap:8px;
-  padding:10px clamp(12px,4vw,28px) 11px;background:var(--glass-strong);backdrop-filter:blur(22px) saturate(160%);border-bottom:1px solid var(--border)}
-.tb-row1{display:flex;align-items:center;gap:9px}
-.tb-spacer{flex:1}
-.tb-row2{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;padding:0 2px}
-.tb-row2 b{font-size:1rem;font-weight:700;letter-spacing:-.3px;line-height:1.2}
-.tb-row2 span{font-size:.72rem;color:var(--accent);font-weight:600;white-space:nowrap}
-.quitbtn{flex-shrink:0;width:36px;height:36px;border-radius:11px;border:none;background:rgba(255,255,255,.6);cursor:pointer;font-size:1rem;color:var(--ink-soft);display:grid;place-items:center;transition:background .3s}
-.quitbtn:hover{background:#fff}
-.langbtn{display:flex;background:rgba(255,255,255,.6);border:1px solid var(--border);border-radius:20px;padding:3px;cursor:pointer;position:relative;font-weight:700;flex-shrink:0}
-.langbtn .pill{position:absolute;top:3px;bottom:3px;width:calc(50% - 3px);left:3px;background:var(--accent);border-radius:20px;transition:transform .35s cubic-bezier(.6,.2,.1,1)}
-body[data-lang="hi"] .langbtn .pill{transform:translateX(100%)}
-.langbtn span{position:relative;z-index:1;padding:4px 11px;font-size:.7rem;color:var(--ink-soft);transition:color .3s}
-.langbtn span.on{color:#fff}
-.nav-top{flex-shrink:0;width:42px;height:42px;border-radius:12px;border:1px solid var(--border);background:rgba(255,255,255,.6);cursor:pointer;font-size:1.15rem;color:var(--ink);display:grid;place-items:center;transition:background .3s}
-.nav-top:hover{background:#fff}
-.timer{display:flex;align-items:center;gap:7px;font-family:'JetBrains Mono';font-weight:700;font-size:.95rem;
-  background:rgba(255,255,255,.6);border:1px solid var(--border);padding:8px 14px;border-radius:30px;transition:background .3s}
-.timer.warn{background:rgba(252,129,129,.18);color:var(--hard);animation:blinkT 1s steps(2) infinite}
-@keyframes blinkT{50%{opacity:.45}}
-.timer .clock{font-size:.9rem}
-/* progress strip */
-
-.pbar{position:fixed;top:84px;left:0;right:0;z-index:49;height:4px;background:rgba(255,255,255,.4)}
-.pbar .fill{height:100%;background:var(--grad);width:0;transition:width .4s}
-
-
-.stage{max-width:760px;margin:0 auto;padding:118px clamp(14px,4vw,24px) 130px}
-/* question card */
-.qcard{background:var(--glass);backdrop-filter:blur(24px) saturate(180%);border:1px solid var(--border);border-radius:24px;
-  padding:26px 24px;box-shadow:0 18px 44px rgba(120,90,180,.13),inset 0 1px 0 rgba(255,255,255,.6);animation:qin .4s ease both}
-@keyframes qin{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
-.qmeta{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
-.qnum{font-family:'JetBrains Mono';font-weight:700;font-size:.82rem;color:var(--accent);background:var(--accentglow);padding:5px 12px;border-radius:20px;opacity:.95}
-.qtype{font-size:.66rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--ink-soft);background:rgba(255,255,255,.5);padding:5px 10px;border-radius:20px}
-.qtext{font-size:1.18rem;font-weight:600;line-height:1.45;letter-spacing:-.3px;margin-bottom:22px}
-.opts{display:flex;flex-direction:column;gap:11px}
-.opt{display:flex;align-items:center;gap:13px;padding:15px 16px;border-radius:15px;cursor:pointer;border:2px solid transparent;
-  background:rgba(255,255,255,.55);transition:all .2s;font-size:.98rem;font-weight:500;line-height:1.35}
-.opt:hover{background:rgba(255,255,255,.85);transform:translateX(3px)}
-.opt .key{flex-shrink:0;width:30px;height:30px;border-radius:9px;background:rgba(255,255,255,.7);display:grid;place-items:center;
-  font-weight:700;font-family:'JetBrains Mono';font-size:.85rem;color:var(--ink-soft);transition:all .2s}
-.opt.sel{background:var(--accentglow);border-color:var(--accent)}
-.opt.sel .key{background:var(--accent);color:#fff}
-.opt.correct{background:rgba(72,187,120,.18);border-color:var(--green)}
-.opt.correct .key{background:var(--green);color:#fff}
-.opt.wrong{background:rgba(252,129,129,.18);border-color:var(--hard)}
-.opt.wrong .key{background:var(--hard);color:#fff}
-.opt.locked{pointer-events:none}
-.explain{margin-top:18px;border-radius:15px;padding:16px 16px 16px 18px;background:rgba(255,255,255,.55);border-left:4px solid var(--accent);
-  animation:expIn .35s ease both}
-@keyframes expIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.explain .et{display:flex;align-items:center;gap:8px;font-weight:700;font-size:.92rem;margin-bottom:6px}
-.explain.ok .et{color:var(--green)}
-.explain.no .et{color:var(--hard)}
-.explain p{font-size:.9rem;line-height:1.5;color:var(--ink)}
-/* footer controls */
-.controls{position:fixed;bottom:0;left:0;right:0;z-index:50;background:var(--glass-strong);backdrop-filter:blur(22px) saturate(160%);
-  border-top:1px solid var(--border);padding:14px clamp(12px,4vw,28px);display:flex;align-items:center;gap:10px;max-width:100%}
-.cwrap{max-width:760px;margin:0 auto;width:100%;display:flex;align-items:center;gap:10px}
-.btn{border:none;cursor:pointer;font-family:inherit;font-weight:600;border-radius:14px;transition:all .25s}
-.btn-ghost{background:rgba(255,255,255,.6);border:1px solid var(--border);color:var(--ink);padding:13px 18px;font-size:.9rem}
-.btn-ghost:hover{background:#fff}
-.btn-nav{width:48px;height:48px;font-size:1.2rem;display:grid;place-items:center;flex-shrink:0}
-.btn-skip{flex-shrink:0}
-.btn-next{flex:1;background:var(--accent);color:#fff;padding:14px;font-size:.98rem;font-weight:700;position:relative;overflow:hidden;box-shadow:0 10px 24px var(--accentglow)}
-.btn-next::before{content:"";position:absolute;top:0;left:-60%;width:50%;height:100%;background:linear-gradient(120deg,transparent,rgba(255,255,255,.5),transparent);transform:skewX(-20deg);transition:left .6s}
-.btn-next:hover{background-position:100% 0;transform:translateY(-2px)}
-.btn-next:hover::before{left:130%}
-.btn-submit{flex-shrink:0;background:rgba(255,255,255,.6);border:1px solid var(--accent);color:var(--accent);padding:13px 18px;font-size:.9rem;font-weight:700}
-.btn-submit:hover{background:var(--accent);color:#fff}
-
-/* nav panel */
-.navpanel{position:fixed;inset:0;z-index:90;background:rgba(45,55,72,.4);backdrop-filter:blur(8px);display:none;align-items:flex-end;opacity:0;transition:opacity .3s}
-.navpanel.show{display:flex;opacity:1}
-.navsheet{width:100%;max-width:760px;margin:0 auto;background:var(--glass-strong);backdrop-filter:blur(30px);border-radius:26px 26px 0 0;
-  border:1px solid var(--border);padding:24px 22px calc(24px + env(safe-area-inset-bottom));transform:translateY(100%);transition:transform .4s cubic-bezier(.2,.9,.3,1.1);max-height:75vh;overflow-y:auto}
-.navpanel.show .navsheet{transform:none}
-.navhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
-.navhead h3{font-size:1.1rem;font-weight:700}
-.navlegend{display:flex;gap:14px;margin-bottom:16px;flex-wrap:wrap}
-.lg{display:flex;align-items:center;gap:6px;font-size:.74rem;color:var(--ink-soft)}
-.lg i{width:13px;height:13px;border-radius:5px;display:inline-block}
-.lg.a i{background:var(--green)}.lg.s i{background:var(--amber)}.lg.n i{background:var(--gray)}
-.navgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(46px,1fr));gap:9px}
-.nb{aspect-ratio:1;border-radius:11px;border:2px solid transparent;background:var(--gray);color:#fff;font-weight:700;font-family:'JetBrains Mono';
-  font-size:.92rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .2s}
-.nb:hover{transform:scale(1.08)}
-.nb.answered{background:var(--green)}.nb.skipped{background:var(--amber)}
-.nb.current{border-color:var(--ink);box-shadow:0 0 0 3px rgba(45,55,72,.15)}
-
-/* confirm modal */
-.confirm{position:fixed;inset:0;z-index:100;background:rgba(45,55,72,.42);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:20px;opacity:0;transition:opacity .3s}
-.confirm.show{display:flex;opacity:1}
-.cbox{width:100%;max-width:380px;background:var(--glass-strong);backdrop-filter:blur(30px);border:1px solid var(--border);border-radius:24px;padding:28px 24px;text-align:center;transform:scale(.9);transition:transform .35s cubic-bezier(.2,.9,.3,1.2)}
-.confirm.show .cbox{transform:none}
-.cbox .cic{font-size:2.2rem;margin-bottom:10px}
-.cbox h3{font-size:1.25rem;font-weight:700;margin-bottom:8px}
-.cbox p{color:var(--ink-soft);font-size:.92rem;line-height:1.5;margin-bottom:8px}
-.cstat{display:flex;justify-content:center;gap:18px;margin:16px 0 22px}
-.cstat div{display:flex;flex-direction:column}
-.cstat b{font-size:1.5rem;font-weight:700;font-family:'JetBrains Mono'}
-.cstat span{font-size:.7rem;color:var(--ink-soft)}
-.cstat .a b{color:var(--green)}.cstat .s b{color:var(--amber)}.cstat .n b{color:var(--ink-soft)}
-.cbtns{display:flex;gap:10px}
-.cbtns .btn{flex:1;padding:14px}
-.cbtns .stay{background:rgba(255,255,255,.6);border:1px solid var(--border);color:var(--ink)}
-.cbtns .go{background:var(--grad);color:#fff;box-shadow:0 8px 20px var(--accentglow)}
-
-.toast{position:fixed;bottom:96px;left:50%;transform:translateX(-50%) translateY(20px);z-index:120;
-  background:rgba(252,129,129,.95);color:#fff;font-weight:600;font-size:.9rem;padding:13px 22px;border-radius:30px;
-  box-shadow:0 10px 28px rgba(252,129,129,.4);opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;white-space:nowrap}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-.loading{position:fixed;inset:0;display:grid;place-items:center;z-index:200;background:#EAF0FF}
-.loading .ld{text-align:center}
-.loading .spin{width:48px;height:48px;border:4px solid rgba(43,196,180,.2);border-top-color:var(--accent);border-radius:50%;margin:0 auto 16px;animation:spin .8s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-.loading p{color:var(--ink-soft);font-weight:500}
-@media(max-width:560px){.tb-title b{max-width:34vw}.btn-ghost{padding:13px 14px}.btn-skip span,.btn-submit span{display:none}}
-</style>
-<script src="data/theory/chapter1.js"></script>
-<script src="data/theory/chapter2.js"></script>
-<script src="data/theory/chapter3.js"></script>
-<script src="data/theory/chapter4.js"></script>
-<script src="data/theory/chapter5.js"></script>
-<script src="data/theory/chapter6.js"></script>
-<script src="data/theory/chapter7.js"></script>
-<script src="data/theory/chapter8.js"></script>
-<script src="data/theory/chapter9.js"></script>
-<script src="data/theory/chapter10.js"></script>
-<script src="data/theory/chapter11.js"></script>
-<script src="data/theory/chapter12.js"></script>
-<script src="data/theory/chapter13.js"></script>
-<script src="data/theory/chapter14.js"></script>
-<script src="data/employability/chapter1.js"></script>
-<script src="data/employability/chapter2.js"></script>
-<script src="data/employability/chapter3.js"></script>
-<script src="data/employability/chapter4.js"></script>
-<script src="data/employability/chapter5.js"></script>
-<script src="data/employability/chapter6.js"></script>
-<script src="data/employability/chapter7.js"></script>
-<script src="data/employability/chapter8.js"></script>
-<script src="data/employability/chapter9.js"></script>
-<script src="data/employability/chapter10.js"></script>
-<script src="data/employability/chapter11.js"></script>
-<script src="data/employability/chapter12.js"></script>
-</head>
-<body data-lang="en">
-<div class="wall"></div>
-
-<div class="loading" id="loading"><div class="ld"><div class="spin"></div><p data-en="Loading your test…" data-hi="आपका टेस्ट लोड हो रहा है…">Loading your test…</p></div></div>
-
-<div class="topbar">
-  <div class="tb-row1">
-    <button class="quitbtn" onclick="quitQuiz()">✕</button>
-    <div class="tb-spacer"></div>
-    <div class="langbtn" id="langBtn"><div class="pill"></div><span class="on" id="enL">EN</span><span id="hiL">हिं</span></div>
-    <div class="timer" id="timer"><span>⏱️</span><span class="clock" id="clock">00:00</span></div>
-  </div>
-  <div class="tb-row2">
-    <b id="qTitle">Chapter</b>
-    <span id="qSub">Easy · Set 1</span>
-  </div>
-</div>
-<div class="pbar"><div class="fill" id="pfill"></div></div>
-
-<div class="stage" id="stage"></div>
-<div class="toast" id="toast"></div>
-
-<div class="controls">
-  <div class="cwrap">
-    <button class="btn btn-ghost btn-nav" onclick="openNav()" title="Navigator">▦</button>
-    <button class="btn btn-ghost btn-skip" onclick="skipQ()"><span data-en="Skip" data-hi="छोड़ें">Skip</span> ⏭</button>
-    <button class="btn btn-next" id="nextBtn" onclick="nextQ()" data-en="Next →" data-hi="अगला →">Next →</button>
-    <button class="btn btn-submit" onclick="askSubmit()"><span data-en="Submit" data-hi="जमा">Submit</span> ✓</button>
-  </div>
-</div>
-
-<!-- nav panel -->
-<div class="navpanel" id="navpanel">
-  <div class="navsheet">
-    <div class="navhead"><h3 data-en="Questions" data-hi="प्रश्न">Questions</h3><button class="quitbtn" onclick="closeNav()">✕</button></div>
-    <div class="navlegend">
-      <span class="lg a"><i></i><span data-en="Answered" data-hi="उत्तर दिया">Answered</span></span>
-      <span class="lg s"><i></i><span data-en="Skipped" data-hi="छोड़ा">Skipped</span></span>
-      <span class="lg n"><i></i><span data-en="Not visited" data-hi="नहीं देखा">Not visited</span></span>
-    </div>
-    <div class="navgrid" id="navgrid"></div>
-  </div>
-</div>
-
-<!-- confirm submit -->
-<div class="confirm" id="confirm">
-  <div class="cbox">
-    <div class="cic">📝</div>
-    <h3 data-en="Submit test?" data-hi="टेस्ट जमा करें?">Submit test?</h3>
-    <p data-en="You can't change answers after submitting." data-hi="जमा करने के बाद उत्तर नहीं बदल सकते।">You can't change answers after submitting.</p>
-    <div class="cstat">
-      <div class="a"><b id="csA">0</b><span data-en="Answered" data-hi="उत्तर">Answered</span></div>
-      <div class="s"><b id="csS">0</b><span data-en="Skipped" data-hi="छोड़ा">Skipped</span></div>
-      <div class="n"><b id="csN">0</b><span data-en="Left" data-hi="बाकी">Left</span></div>
-    </div>
-    <div class="cbtns">
-      <button class="btn stay" onclick="closeSubmit()" data-en="Keep going" data-hi="जारी रखें">Keep going</button>
-      <button class="btn go" onclick="doSubmit()" data-en="Submit ✓" data-hi="जमा करें ✓">Submit ✓</button>
-    </div>
-  </div>
-</div>
-
-<script>
-/* ===== load config ===== */
-let cfg;try{cfg=JSON.parse(localStorage.getItem('copa_config'))}catch(e){}
-if(!cfg){cfg={subject:'theory',chapterId:1,chapterEn:'Demo',chapterHi:'डेमो',mode:'easy',size:30,set:1,lang:'en'}}
-const body=document.body;
-let lang=cfg.lang||'en';body.dataset.lang=lang;
-if(cfg.subject==='employability')body.classList.add('emp');
-
-const TIMER_MIN={20:25,25:25,30:35,50:60,75:75,100:90};
-const totalSec=(TIMER_MIN[cfg.size]||25)*60;
-let timeLeft=totalSec;
-
-/* ===== demo question generator (until real JSON added) ===== */
-/* NOTE: real questions will be loaded from data files later.
-   For now we generate placeholder bilingual questions so the engine works. */
-function makeDemoQuestions(n){
-  const arr=[];
-  for(let i=1;i<=n;i++){
-    const correct=Math.floor(Math.random()*4);
-    const opts_en=['Option A','Option B','Option C','Option D'].map((o,idx)=>o+' #'+i);
-    const opts_hi=['विकल्प A','विकल्प B','विकल्प C','विकल्प D'].map((o,idx)=>o+' #'+i);
-    arr.push({
-      type:i%10===0?'tf':(i%9===0?'both':'mcq'),
-      en:{q:`Sample question ${i}: This is a placeholder. Real questions will load here.`,opts:opts_en,ans:correct,
-        exp:`Explanation for question ${i}. The correct answer is option ${String.fromCharCode(65+correct)}.`},
-      hi:{q:`नमूना प्रश्न ${i}: यह एक प्लेसहोल्डर है। असली प्रश्न यहाँ आएंगे।`,opts:opts_hi,ans:correct,
-        exp:`प्रश्न ${i} की व्याख्या। सही उत्तर विकल्प ${String.fromCharCode(65+correct)} है।`}
-    });
-  }
-  return arr;
-}
-
-/* shuffle helper */
-function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
-function shuffleOpts(q){
-  // Don't shuffle True/False questions
-  if(q.type==='tf') return q;
-  const optCount=q.en.opts.length;
-  const idxArr=Array.from({length:optCount},(_,i)=>i);
-  const idx=shuffle(idxArr);
-  ['en','hi'].forEach(L=>{
-    const newOpts=idx.map(k=>q[L].opts[k]);
-    q[L]._ans=idx.indexOf(q[L].ans);
-    q[L].opts=newOpts;
-  });
-  q.en.ans=q.en._ans;q.hi.ans=q.hi._ans;
-  return q;
-}
-
-/* ===== load real questions ===== */
-function loadQuestions(){
-  const size=cfg.size||30;
-  const isEmp=cfg.subject==='employability';
-
-  // Full subject test - chapterId === 0
-  if(cfg.chapterId===0){
-    const totalChapters=isEmp?12:14;
-    let allPool=[];
-    for(let i=1;i<=totalChapters;i++){
-      const key=isEmp?'QUESTIONS_EMP_'+i:'QUESTIONS_THEORY_'+i;
-      const chQ=window[key];
-      if(chQ&&chQ.length) allPool=allPool.concat(chQ);
-    }
-    if(!allPool.length) return makeDemoQuestions(size);
-    // Each set uses different shuffled questions
-    const setIdx=(cfg.set||1)-1;
-    const shuffled=shuffle([...allPool]);
-    const start=setIdx*size;
-    let pool=shuffled.slice(start,start+size);
-    if(pool.length<size) pool=shuffled.slice(0,size);
-    return pool.map(q=>shuffleOpts(JSON.parse(JSON.stringify(q))));
-  }
-
-  // Single chapter
-  const key=isEmp?'QUESTIONS_EMP_'+cfg.chapterId:'QUESTIONS_THEORY_'+cfg.chapterId;
-  const allQ=window[key];
-  if(!allQ||!allQ.length) return makeDemoQuestions(size);
-  const diff=cfg.mode;
-  let pool=allQ.filter(q=>q.diff===diff);
-  if(pool.length<size) pool=allQ;
-  return shuffle([...pool]).slice(0,size).map(q=>shuffleOpts(JSON.parse(JSON.stringify(q))));
-}
-let QS=loadQuestions();
-
-/* state */
-let idx=0;
-let answers=new Array(QS.length).fill(null); // null=not visited, -1=skipped, 0-3=chosen
-let visited=new Array(QS.length).fill(false);
-
-/* ===== lang ===== */
-function applyLang(l){
-  lang=l;body.dataset.lang=l;
-  var en=document.getElementById('enL'),hi=document.getElementById('hiL');
-  if(en){en.classList.toggle('on',l==='en');hi.classList.toggle('on',l==='hi')}
-  document.querySelectorAll('[data-en]').forEach(e=>{if(e.children.length===0)e.textContent=l==='hi'?e.dataset.hi:e.dataset.en;else e.innerHTML=l==='hi'?e.dataset.hi:e.dataset.en});
-  renderQ();
-}
-
-/* ===== render ===== */
-const MODE_LABEL={easy:{en:'Easy',hi:'आसान'},medium:{en:'Medium',hi:'मध्यम'},hard:{en:'Hard',hi:'कठिन'}};
-function renderHeader(){
-  document.getElementById('qTitle').textContent=lang==='hi'?cfg.chapterHi:cfg.chapterEn;
-  const ml=MODE_LABEL[cfg.mode][lang];
-  const setTxt=lang==='hi'?('सेट '+cfg.set):('Set '+cfg.set);
-  document.getElementById('qSub').textContent=ml+' · '+setTxt;
-}
-function renderQ(){
-  visited[idx]=true;
-  const q=QS[idx],L=q[lang];
-  const typeLabel={mcq:'MCQ',tf:lang==='hi'?'सही/गलत':'True/False',both:lang==='hi'?'बहु':'Multi'}[q.type]||'MCQ';
-  const stage=document.getElementById('stage');
-  stage.innerHTML=`<div class="qcard">
-    <div class="qmeta"><span class="qnum">${idx+1} / ${QS.length}</span><span class="qtype">${typeLabel}</span></div>
-    <div class="qtext">${L.q}</div>
-    <div class="opts" id="opts"></div>
-    <div id="expBox"></div>
-  </div>`;
-  const ow=document.getElementById('opts');
-  const answered=answers[idx]!==null&&answers[idx]>=0;
-  L.opts.forEach((o,i)=>{
-    const d=document.createElement('div');d.className='opt';
-    if(answered){
-      d.classList.add('locked');
-      if(i===L.ans)d.classList.add('correct');
-      else if(i===answers[idx])d.classList.add('wrong');
-    }
-    d.onclick=()=>chooseOpt(i);
-    d.innerHTML=`<span class="key">${String.fromCharCode(65+i)}</span><span>${o}</span>`;
-    ow.appendChild(d);
-  });
-  if(answered){
-    const ok=answers[idx]===L.ans;
-    const head=ok?(lang==='hi'?'✅ सही जवाब!':'✅ Correct!'):(lang==='hi'?'❌ गलत जवाब':'❌ Incorrect');
-    document.getElementById('expBox').innerHTML=`<div class="explain ${ok?'ok':'no'}"><div class="et">${head}</div><p>${L.exp}</p></div>`;
-  }
-  document.getElementById('pfill').style.width=((idx+1)/QS.length*100)+'%';
-  const nb=document.getElementById('nextBtn');
-  const isLast=idx===QS.length-1;
-  nb.innerHTML=isLast?(lang==='hi'?'अगला →':'Next →'):(lang==='hi'?'अगला →':'Next →');
-}
-function chooseOpt(i){
-  if(answers[idx]!==null&&answers[idx]>=0)return; // already answered, locked
-  answers[idx]=i;
-  const q=QS[idx],L=q[lang],correct=L.ans;
-  document.querySelectorAll('.opt').forEach((el,k)=>{
-    el.classList.add('locked');
-    if(k===correct)el.classList.add('correct');
-    else if(k===i)el.classList.add('wrong');
-  });
-  const ok=i===correct;
-  const box=document.getElementById('expBox');
-  const head=ok?(lang==='hi'?'✅ सही जवाब!':'✅ Correct!'):(lang==='hi'?'❌ गलत जवाब':'❌ Incorrect');
-  box.innerHTML=`<div class="explain ${ok?'ok':'no'}"><div class="et">${head}</div><p>${L.exp}</p></div>`;
-}
-function showToast(msg){
-  const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
-  clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),2200);
-}
-function nextQ(){
-  if(answers[idx]===null||answers[idx]<0){
-    showToast(lang==='hi'?'पहले उत्तर चुनें या Skip करें':'Answer first or tap Skip');
-    return;
-  }
-  if(idx<QS.length-1){idx++;renderQ()}
-  else{askSubmit()}
-}
-function skipQ(){
-  if(answers[idx]===null)answers[idx]=-1;
-  if(idx<QS.length-1){idx++;renderQ()}
-  else{askSubmit()}
-}
-
-/* ===== timer ===== */
-function fmt(s){const m=Math.floor(s/60),x=s%60;return String(m).padStart(2,'0')+':'+String(x).padStart(2,'0')}
-function tickTimer(){
-  timeLeft--;
-  document.getElementById('clock').textContent=fmt(timeLeft);
-  if(timeLeft<=300)document.getElementById('timer').classList.add('warn');
-  if(timeLeft<=0){clearInterval(tInt);doSubmit(true)}
-}
-let tInt;
-
-/* ===== nav panel ===== */
-function openNav(){
-  const g=document.getElementById('navgrid');g.innerHTML='';
-  QS.forEach((q,i)=>{
-    const b=document.createElement('button');b.className='nb';
-    if(answers[i]!==null&&answers[i]>=0)b.classList.add('answered');
-    else if(answers[i]===-1)b.classList.add('skipped');
-    if(i===idx)b.classList.add('current');
-    b.textContent=i+1;
-    b.onclick=()=>{idx=i;renderQ();closeNav()};
-    g.appendChild(b);
-  });
-  document.getElementById('navpanel').classList.add('show');
-}
-function closeNav(){document.getElementById('navpanel').classList.remove('show')}
-document.getElementById('navpanel').onclick=e=>{if(e.target.id==='navpanel')closeNav()};
-
-/* ===== submit ===== */
-function askSubmit(){
-  const ans=answers.filter(a=>a!==null&&a>=0).length;
-  const skip=answers.filter(a=>a===-1).length;
-  const left=answers.filter(a=>a===null).length;
-  document.getElementById('csA').textContent=ans;
-  document.getElementById('csS').textContent=skip;
-  document.getElementById('csN').textContent=left;
-  document.getElementById('confirm').classList.add('show');
-}
-function closeSubmit(){document.getElementById('confirm').classList.remove('show')}
-function doSubmit(auto){
-  clearInterval(tInt);
-  let score=0;const review=[];
-  QS.forEach((q,i)=>{
-    const chosen=answers[i];
-    const correct=q[lang].ans;
-    const ok=chosen===correct;
-    if(ok)score++;
-    review.push({
-      qEn:q.en.q,qHi:q.hi.q,
-      optsEn:q.en.opts,optsHi:q.hi.opts,
-      ansEn:q.en.ans,ansHi:q.hi.ans,
-      chosen:(chosen===null?-1:chosen),
-      expEn:q.en.exp,expHi:q.hi.exp,
-      ok:ok&&chosen!==null&&chosen>=0
-    });
-  });
-  const result={
-    chapterEn:cfg.chapterEn,chapterHi:cfg.chapterHi,subject:cfg.subject,mode:cfg.mode,set:cfg.set,
-    score:score,total:QS.length,
-    answered:answers.filter(a=>a!==null&&a>=0).length,
-    skipped:answers.filter(a=>a===-1).length,
-    left:answers.filter(a=>a===null).length,
-    timeUsed:totalSec-timeLeft,totalTime:totalSec,
-    review:review,lang:lang,auto:!!auto
-  };
-  try{localStorage.setItem('copa_result',JSON.stringify(result))}catch(e){}
-  
-  // Save completed set progress
-  try{
-    const subj = cfg.subject || 'theory';
-    const chId = cfg.chapterId || 0;
-    const setId = cfg.set || 1;
-    const key = 'completed_'+subj+'_ch'+chId;
-    let done = JSON.parse(localStorage.getItem(key)||'[]');
-    if(!done.includes(setId)) done.push(setId);
-    localStorage.setItem(key, JSON.stringify(done));
-  }catch(e){}
-  
-  body.classList.add('exit');setTimeout(()=>location.href='result.html',400);
-}
-function quitQuiz(){
-  if(confirm(lang==='hi'?'टेस्ट छोड़ दें? प्रगति सेव नहीं होगी।':'Quit test? Progress will not be saved.')){
-    body.classList.add('exit');
-    setTimeout(()=>location.href=(cfg.subject==='employability'?'employability.html':(cfg.subject==='full'?'index.html':'copa.html')),400);
-  }
-}
-document.getElementById('confirm').onclick=e=>{if(e.target.id==='confirm')closeSubmit()};
-
-/* ===== init ===== */
-document.getElementById('langBtn').onclick=()=>{applyLang(lang==='en'?'hi':'en');try{localStorage.setItem('copa_lang',lang)}catch(e){}};
-window.addEventListener('load',()=>{
-  renderHeader();
-  applyLang(lang);
-  document.getElementById('clock').textContent=fmt(timeLeft);
-  setTimeout(()=>document.getElementById('loading').style.display='none',500);
-  tInt=setInterval(tickTimer,1000);
-});
-
-/* ===== Fix browser back button blank page ===== */
-window.addEventListener('pageshow', function(e){
-  if(e.persisted || performance.getEntriesByType('navigation')[0]?.type === 'back_forward'){
-    document.body.classList.remove('exit');
-    document.body.style.opacity = '1';
-    document.body.style.transform = 'none';
-  }
-});
-</script>
-</body>
-</html>
+];
