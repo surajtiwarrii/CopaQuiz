@@ -128,6 +128,16 @@ h1 .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;c
 .startbtn:hover{background-position:100% 0;transform:translateY(-2px);box-shadow:0 16px 36px rgba(255,126,95,.42)}
 .startbtn:hover::before{left:130%}
 @keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+
+.fulltest{margin-top:22px;border-radius:20px;padding:22px clamp(18px,4vw,36px);position:relative;overflow:hidden;
+  background:var(--grad);color:#fff;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;cursor:pointer;
+  box-shadow:0 16px 40px rgba(255,126,95,.32);transition:transform .4s}
+.fulltest:hover{transform:translateY(-5px)}
+.fulltest::after{content:"";position:absolute;top:-60%;right:-5%;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,.12)}
+.fulltest h3{font-size:1.2rem;font-weight:700;position:relative}
+.fulltest p{opacity:.92;font-size:.85rem;position:relative;margin-top:3px}
+.ftbtn{background:#fff;color:var(--accent);font-weight:700;padding:12px 22px;border-radius:12px;font-size:.9rem;position:relative;white-space:nowrap;transition:transform .3s}
+.fulltest:hover .ftbtn{transform:scale(1.05)}
 @media(max-width:600px){.grid{grid-template-columns:1fr}.mb-left b{display:none}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -151,6 +161,13 @@ h1 .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;c
     <p class="headsub" data-en="Tap any chapter to pick your mode and start practicing." data-hi="किसी भी अध्याय पर टैप करें, मोड चुनें और अभ्यास शुरू करें।">Tap any chapter to pick your mode and start practicing.</p>
   </div>
   <div class="grid" id="grid"></div>
+<div class="fulltest" onclick="startFullTest()">
+  <div>
+    <h3 data-en="🏆 Full Employability Test" data-hi="🏆 पूर्ण रोज़गार कौशल टेस्ट">🏆 Full Employability Test</h3>
+    <p data-en="75 questions from all 12 chapters — simulate real exam." data-hi="सभी 12 अध्यायों से 75 प्रश्न — असली परीक्षा जैसा।">75 questions from all 12 chapters — simulate real exam.</p>
+  </div>
+  <span class="ftbtn" data-en="Start →" data-hi="शुरू करें →">Start →</span>
+</div>
 </div>
 
 <div class="overlay" id="overlay">
@@ -239,6 +256,13 @@ function renderSets(){
 function startQuiz(){
   const cfg={subject:'employability',chapterId:cur.chapter.id,chapterEn:cur.chapter.en,chapterHi:cur.chapter.hi,
     mode:cur.mode,size:cur.size,set:cur.set,lang:body.dataset.lang};
+  try{localStorage.setItem('copa_config',JSON.stringify(cfg))}catch(e){}
+  body.classList.add('exit');setTimeout(()=>location.href='quiz.html',400);
+}
+
+function startFullTest(){
+  const cfg={subject:'employability',chapterId:0,chapterEn:'Full Employability Test',chapterHi:'पूर्ण रोज़गार कौशल टेस्ट',
+    mode:'medium',size:75,set:1,lang:body.dataset.lang};
   try{localStorage.setItem('copa_config',JSON.stringify(cfg))}catch(e){}
   body.classList.add('exit');setTimeout(()=>location.href='quiz.html',400);
 }
