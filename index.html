@@ -84,15 +84,12 @@ h1 .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;c
 .win:hover .launch::before{left:130%}
 .launch .a{transition:transform .3s;position:relative}.win:hover .launch .a{transform:translateX(4px)}
 .launch span{position:relative}
-.fulltest{margin-top:22px;border-radius:20px;padding:26px clamp(22px,4vw,40px);position:relative;overflow:hidden;
-  background:var(--grad);color:#fff;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;cursor:pointer;
-  box-shadow:0 18px 44px rgba(201,97,222,.32);animation:winIn .8s .6s both;transition:transform .4s}
-.fulltest:hover{transform:translateY(-6px)}
-.fulltest::after{content:"";position:absolute;top:-60%;right:-5%;width:260px;height:260px;border-radius:50%;background:rgba(255,255,255,.13)}
-.fulltest h3{font-size:1.35rem;font-weight:700;position:relative}
-.fulltest p{opacity:.92;font-size:.88rem;position:relative;margin-top:3px}
-.ftbtn{background:#fff;color:var(--pink);font-weight:700;padding:13px 26px;border-radius:14px;font-size:.9rem;position:relative;white-space:nowrap;transition:transform .3s}
-.fulltest:hover .ftbtn{transform:scale(1.06)}
+
+
+
+
+
+
 footer{text-align:center;padding:24px;color:var(--ink-soft);font-size:.8rem}
 @media(max-width:700px){.dock{grid-template-columns:1fr}h1{letter-spacing:-1px}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
@@ -133,10 +130,6 @@ footer{text-align:center;padding:24px;color:var(--ink-soft);font-size:.8rem}
       </div>
     </div>
   </div>
-  <div class="fulltest" onclick="startFullTest()">
-    <div><h3 data-en="🏆 Full Syllabus Test" data-hi="🏆 पूर्ण पाठ्यक्रम टेस्ट">🏆 Full Syllabus Test</h3>
-    <p data-en="100 mixed questions from every chapter — feels like the real exam." data-hi="हर अध्याय से 100 मिश्रित प्रश्न — असली परीक्षा जैसा।">100 mixed questions from every chapter — feels like the real exam.</p></div>
-    <span class="ftbtn" data-en="Run Test →" data-hi="टेस्ट चलाएं →">Run Test →</span>
   </div>
 </div>
 <footer><span data-en="Built for ITI students · UP NCVT COPA · 1st Year" data-hi="आईटीआई छात्रों के लिए · यूपी एनसीवीटी COPA · प्रथम वर्ष">Built for ITI students · UP NCVT COPA · 1st Year</span><br><span style="display:inline-block;margin-top:8px;font-weight:600;color:var(--ink)">By Suraj Tiwari</span></footer>
@@ -149,11 +142,7 @@ function applyLang(l){
 }
 document.getElementById('langBtn').onclick=()=>applyLang(body.dataset.lang==='en'?'hi':'en');
 let sv='en';try{sv=localStorage.getItem('copa_lang')||'en'}catch(e){}applyLang(sv);
-function startFullTest(){
-  const cfg={subject:'full',chapterId:0,chapterEn:'Full Syllabus Test',chapterHi:'पूर्ण पाठ्यक्रम टेस्ट',mode:'medium',size:100,set:1,lang:body.dataset.lang};
-  try{localStorage.setItem('copa_config',JSON.stringify(cfg))}catch(e){}
-  body.classList.add('exit');setTimeout(()=>location.href='quiz.html',400);
-}
+
 function goTo(u){body.classList.add('exit');setTimeout(()=>location.href=u,400)}
 function tick(){const d=new Date();document.getElementById('clock').textContent=d.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'})}
 tick();setInterval(tick,1000);
