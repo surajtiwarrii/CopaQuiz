@@ -299,11 +299,33 @@ function shuffleOpts(q){
 
 /* ===== load real questions ===== */
 function loadQuestions(){
-  const key=cfg.subject==='employability'?'QUESTIONS_EMP_'+cfg.chapterId:'QUESTIONS_THEORY_'+cfg.chapterId;
-  const allQ=window[key];
-  if(!allQ||!allQ.length) return makeDemoQuestions(cfg.size);
-  const diff=cfg.mode;
   const size=cfg.size||30;
+  const isEmp=cfg.subject==='employability';
+
+  // Full subject test - chapterId === 0
+  if(cfg.chapterId===0){
+    const totalChapters=isEmp?12:14;
+    let allPool=[];
+    for(let i=1;i<=totalChapters;i++){
+      const key=isEmp?'QUESTIONS_EMP_'+i:'QUESTIONS_THEORY_'+i;
+      const chQ=window[key];
+      if(chQ&&chQ.length) allPool=allPool.concat(chQ);
+    }
+    if(!allPool.length) return makeDemoQuestions(size);
+    // Each set uses different shuffled questions
+    const setIdx=(cfg.set||1)-1;
+    const shuffled=shuffle([...allPool]);
+    const start=setIdx*size;
+    let pool=shuffled.slice(start,start+size);
+    if(pool.length<size) pool=shuffled.slice(0,size);
+    return pool.map(q=>shuffleOpts(JSON.parse(JSON.stringify(q))));
+  }
+
+  // Single chapter
+  const key=isEmp?'QUESTIONS_EMP_'+cfg.chapterId:'QUESTIONS_THEORY_'+cfg.chapterId;
+  const allQ=window[key];
+  if(!allQ||!allQ.length) return makeDemoQuestions(size);
+  const diff=cfg.mode;
   let pool=allQ.filter(q=>q.diff===diff);
   if(pool.length<size) pool=allQ;
   return shuffle([...pool]).slice(0,size).map(q=>shuffleOpts(JSON.parse(JSON.stringify(q))));
