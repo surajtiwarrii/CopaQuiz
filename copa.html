@@ -112,7 +112,7 @@ h1 .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;c
 .mode.sel[data-m="easy"]{background:rgba(72,187,120,.14);border-color:var(--easy)}
 .mode.sel[data-m="medium"]{background:rgba(246,173,85,.14);border-color:var(--med)}
 .mode.sel[data-m="hard"]{background:rgba(252,129,129,.14);border-color:var(--hard)}
-.sizes{display:grid;grid-template-columns:1fr;gap:10px}
+.sizes{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 .size{padding:14px 8px;border-radius:14px;border:2px solid transparent;background:rgba(255,255,255,.5);cursor:pointer;text-align:center;transition:all .25s}
 .size b{display:block;font-size:1.15rem;font-weight:700;font-family:'JetBrains Mono'}
 .size span{font-size:.66rem;color:var(--ink-soft)}
@@ -123,6 +123,12 @@ h1 .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;c
   font-weight:700;font-family:'JetBrains Mono';font-size:.95rem;color:var(--ink-soft);transition:all .25s;
   display:flex;align-items:center;justify-content:center}
 .set.sel{background:var(--grad);background-size:300% 300%;background-position:center;color:#fff;border-color:transparent;box-shadow:0 6px 16px rgba(63,184,217,.4)}
+.qinfo-strip{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:22px;
+  padding:14px 20px;border-radius:14px;background:rgba(43,196,180,.1);border:1.5px solid rgba(43,196,180,.25)}
+.qi-icon{font-size:1.1rem}
+.qi-val{font-weight:700;font-size:1rem;color:var(--ink);font-family:'JetBrains Mono'}
+.qi-dot{color:var(--ink-soft);font-weight:300}
+.qi-time{font-size:.92rem;color:var(--accent);font-weight:600}
 .startbtn{margin-top:26px;width:100%;padding:16px;border:none;border-radius:16px;cursor:pointer;color:#fff;font-weight:700;font-size:1rem;
   font-family:inherit;background:var(--grad);background-size:200% 100%;position:relative;overflow:hidden;
   box-shadow:0 12px 28px rgba(63,184,217,.32);transition:background-position .6s,transform .3s,box-shadow .3s}
@@ -167,12 +173,12 @@ h1 .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;c
       <div class="mode" data-m="medium" onclick="selMode(this)"><span class="em"><i></i><i></i><i></i></span><span data-en="Medium" data-hi="मध्यम">Medium</span></div>
       <div class="mode" data-m="hard" onclick="selMode(this)"><span class="em"><i></i><i></i><i></i></span><span data-en="Hard" data-hi="कठिन">Hard</span></div>
     </div>
-    <div class="mlabel" data-en="Number of Questions" data-hi="प्रश्नों की संख्या">Number of Questions</div>
-    <div class="sizes" id="sizes">
-      <div class="size sel" data-s="30" onclick="selSize(this)"><b>30</b><span data-en="35 min" data-hi="35 मिनट">35 min</span></div>
+    <div class="qinfo-strip">
+      <span class="qi-icon">📝</span>
+      <span class="qi-val" data-en="30 Questions" data-hi="30 प्रश्न">30 Questions</span>
+      <span class="qi-dot">·</span>
+      <span class="qi-time" id="qiTime" data-en="30 min" data-hi="30 मिनट">30 min</span>
     </div>
-    <div class="mlabel" data-en="Select Set" data-hi="सेट चुनें">Select Set</div>
-    <div class="sets" id="sets"></div>
     <button class="startbtn" onclick="startQuiz()" data-en="Start Test →" data-hi="टेस्ट शुरू करें →">Start Test →</button>
   </div>
 </div>
@@ -194,8 +200,8 @@ const CHAPTERS=[
   {id:13,en:"Cloud Computing & Cyber Security",hi:"क्लाउड कंप्यूटिंग और साइबर सुरक्षा",dEn:"Cloud services, threats, IT Act",dHi:"क्लाउड सेवाएं, खतरे, IT एक्ट"},
   {id:14,en:"E-Commerce & Programming Concepts",hi:"ई-कॉमर्स और प्रोग्रामिंग",dEn:"E-commerce, Python basics",dHi:"ई-कॉमर्स, पाइथन बेसिक्स"}
 ];
-const SETS_BY_SIZE={30:3};
-let cur={chapter:null,mode:'easy',size:20,set:1};
+const FIXED_SIZE=30;
+let cur={chapter:null,mode:'easy',size:FIXED_SIZE,set:1};
 
 const body=document.body,enL=document.getElementById('enL'),hiL=document.getElementById('hiL');
 function applyLang(l){
@@ -219,26 +225,15 @@ function renderGrid(){
   });
 }
 function openModal(c){
-  cur={chapter:c,mode:'easy',size:30,set:1};
+  cur={chapter:c,mode:'easy',size:FIXED_SIZE,set:1};
   document.getElementById('mTitle').textContent=body.dataset.lang==='hi'?c.hi:c.en;
   document.querySelectorAll('.mode').forEach(m=>m.classList.toggle('sel',m.dataset.m==='easy'));
-  document.querySelectorAll('.size').forEach(s=>s.classList.toggle('sel',s.dataset.s==='30'));
-  renderSets();
   document.getElementById('overlay').classList.add('show');
 }
 function closeModal(){document.getElementById('overlay').classList.remove('show')}
 document.getElementById('overlay').onclick=e=>{if(e.target.id==='overlay')closeModal()};
 function selMode(el){cur.mode=el.dataset.m;document.querySelectorAll('.mode').forEach(m=>m.classList.remove('sel'));el.classList.add('sel')}
-function selSize(el){cur.size=+el.dataset.s;cur.set=1;document.querySelectorAll('.size').forEach(s=>s.classList.remove('sel'));el.classList.add('sel');renderSets()}
-function renderSets(){
-  const wrap=document.getElementById('sets');wrap.innerHTML='';
-  const n=SETS_BY_SIZE[cur.size];
-  for(let i=1;i<=n;i++){
-    const b=document.createElement('div');b.className='set'+(i===cur.set?' sel':'');b.textContent=i;
-    b.onclick=()=>{cur.set=i;document.querySelectorAll('.set').forEach(s=>s.classList.remove('sel'));b.classList.add('sel')};
-    wrap.appendChild(b);
-  }
-}
+
 function startQuiz(){
   const cfg={subject:'theory',chapterId:cur.chapter.id,chapterEn:cur.chapter.en,chapterHi:cur.chapter.hi,
     mode:cur.mode,size:cur.size,set:cur.set,lang:body.dataset.lang};
