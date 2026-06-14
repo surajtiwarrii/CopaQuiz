@@ -285,8 +285,18 @@ function shuffleOpts(q){
   return q;
 }
 
-let QS=makeDemoQuestions(cfg.size);
-QS=shuffle(QS).slice(0,cfg.size).map(shuffleOpts);
+/* ===== load real questions ===== */
+function loadQuestions(){
+  const key=cfg.subject==='employability'?'QUESTIONS_EMP_'+cfg.chapterId:'QUESTIONS_THEORY_'+cfg.chapterId;
+  const allQ=window[key];
+  if(!allQ||!allQ.length) return makeDemoQuestions(cfg.size);
+  const diff=cfg.mode;
+  const size=cfg.size||30;
+  let pool=allQ.filter(q=>q.diff===diff);
+  if(pool.length<size) pool=allQ;
+  return shuffle([...pool]).slice(0,size).map(q=>shuffleOpts(JSON.parse(JSON.stringify(q))));
+}
+let QS=loadQuestions();
 
 /* state */
 let idx=0;
