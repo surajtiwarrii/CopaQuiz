@@ -158,20 +158,20 @@ body[data-lang="hi"] .langbtn .pill{transform:translateX(100%)}
 .loading p{color:var(--ink-soft);font-weight:500}
 @media(max-width:560px){.tb-title b{max-width:34vw}.btn-ghost{padding:13px 14px}.btn-skip span,.btn-submit span{display:none}}
 </style>
-<script src="../data/theory/chapter1.js"></script>
-<script src="../data/theory/chapter2.js"></script>
-<script src="../data/theory/chapter3.js"></script>
-<script src="../data/theory/chapter4.js"></script>
-<script src="../data/theory/chapter5.js"></script>
-<script src="../data/theory/chapter6.js"></script>
-<script src="../data/theory/chapter7.js"></script>
-<script src="../data/theory/chapter8.js"></script>
-<script src="../data/theory/chapter9.js"></script>
-<script src="../data/theory/chapter10.js"></script>
-<script src="../data/theory/chapter11.js"></script>
-<script src="../data/theory/chapter12.js"></script>
-<script src="../data/theory/chapter13.js"></script>
-<script src="../data/theory/chapter14.js"></script>
+<script src="data/theory/chapter1.js"></script>
+<script src="data/theory/chapter2.js"></script>
+<script src="data/theory/chapter3.js"></script>
+<script src="data/theory/chapter4.js"></script>
+<script src="data/theory/chapter5.js"></script>
+<script src="data/theory/chapter6.js"></script>
+<script src="data/theory/chapter7.js"></script>
+<script src="data/theory/chapter8.js"></script>
+<script src="data/theory/chapter9.js"></script>
+<script src="data/theory/chapter10.js"></script>
+<script src="data/theory/chapter11.js"></script>
+<script src="data/theory/chapter12.js"></script>
+<script src="data/theory/chapter13.js"></script>
+<script src="data/theory/chapter14.js"></script>
 </head>
 <body data-lang="en">
 <div class="wall"></div>
@@ -238,49 +238,30 @@ body[data-lang="hi"] .langbtn .pill{transform:translateX(100%)}
 <script>
 /* ===== load config ===== */
 let cfg;try{cfg=JSON.parse(localStorage.getItem('copa_config'))}catch(e){}
-if(!cfg){cfg={subject:'theory',chapterId:1,chapterEn:'Demo',chapterHi:'डेमो',mode:'easy',size:20,set:1,lang:'en'}}
+if(!cfg){cfg={subject:'theory',chapterId:1,chapterEn:'Demo',chapterHi:'डेमो',mode:'easy',size:30,set:1,lang:'en'}}
 const body=document.body;
 let lang=cfg.lang||'en';body.dataset.lang=lang;
 if(cfg.subject==='employability')body.classList.add('emp');
 
-const TIMER_MIN={20:25,25:25,30:30,50:60,75:90,100:120};
+const TIMER_MIN={20:25,25:25,30:35,50:60,75:90,100:120};
 const totalSec=(TIMER_MIN[cfg.size]||25)*60;
 let timeLeft=totalSec;
 
-/* ===== real question loader from GitHub data folder ===== */
-const CHAPTER_VAR_MAP = {
-  1:'QUESTIONS_THEORY_1',2:'QUESTIONS_THEORY_2',3:'QUESTIONS_THEORY_3',
-  4:'QUESTIONS_THEORY_4',5:'QUESTIONS_THEORY_5',6:'QUESTIONS_THEORY_6',
-  7:'QUESTIONS_THEORY_7',8:'QUESTIONS_THEORY_8',9:'QUESTIONS_THEORY_9',
-  10:'QUESTIONS_THEORY_10',11:'QUESTIONS_THEORY_11',12:'QUESTIONS_THEORY_12',
-  13:'QUESTIONS_THEORY_13',14:'QUESTIONS_THEORY_14'
-};
-
-function loadChapterQuestions(chapterId){
-  // Scripts already loaded via <script src> tags in <head>
-  const varName = CHAPTER_VAR_MAP[chapterId];
-  return window[varName] || [];
-}
-
-function filterByDiff(questions, mode, n){
-  // filter by difficulty
-  let pool = questions.filter(q=>q.diff===mode);
-  // if not enough, fill from all
-  if(pool.length < n) pool = [...questions];
-  return shuffle([...pool]).slice(0,n);
-}
-
+/* ===== demo question generator (until real JSON added) ===== */
+/* NOTE: real questions will be loaded from data files later.
+   For now we generate placeholder bilingual questions so the engine works. */
 function makeDemoQuestions(n){
-  // Fallback only if real data failed to load
   const arr=[];
   for(let i=1;i<=n;i++){
     const correct=Math.floor(Math.random()*4);
-    const opts_en=['Option A','Option B','Option C','Option D'].map((o)=>o+' #'+i);
-    const opts_hi=['विकल्प A','विकल्प B','विकल्प C','विकल्प D'].map((o)=>o+' #'+i);
+    const opts_en=['Option A','Option B','Option C','Option D'].map((o,idx)=>o+' #'+i);
+    const opts_hi=['विकल्प A','विकल्प B','विकल्प C','विकल्प D'].map((o,idx)=>o+' #'+i);
     arr.push({
-      type:'mcq',diff:'easy',
-      en:{q:`Sample question ${i}: Data file not found. Check data/chapter.js path.`,opts:opts_en,ans:correct,exp:`Fallback explanation ${i}.`},
-      hi:{q:`नमूना प्रश्न ${i}: डेटा फ़ाइल नहीं मिली।`,opts:opts_hi,ans:correct,exp:`फॉलबैक व्याख्या ${i}.`}
+      type:i%10===0?'tf':(i%9===0?'both':'mcq'),
+      en:{q:`Sample question ${i}: This is a placeholder. Real questions will load here.`,opts:opts_en,ans:correct,
+        exp:`Explanation for question ${i}. The correct answer is option ${String.fromCharCode(65+correct)}.`},
+      hi:{q:`नमूना प्रश्न ${i}: यह एक प्लेसहोल्डर है। असली प्रश्न यहाँ आएंगे।`,opts:opts_hi,ans:correct,
+        exp:`प्रश्न ${i} की व्याख्या। सही उत्तर विकल्प ${String.fromCharCode(65+correct)} है।`}
     });
   }
   return arr;
@@ -304,25 +285,13 @@ function shuffleOpts(q){
   return q;
 }
 
-let QS=[];
-let idx=0;
-let answers=[];
-let visited=[];
+let QS=makeDemoQuestions(cfg.size);
+QS=shuffle(QS).slice(0,cfg.size).map(shuffleOpts);
 
-function initQuestions(){
-  const SIZE = cfg.size || 30;
-  let raw = loadChapterQuestions(cfg.chapterId||1);
-  if(!raw || raw.length===0){
-    raw = makeDemoQuestions(SIZE);
-  }
-  QS = filterByDiff(raw, cfg.mode||'easy', SIZE).map(shuffleOpts);
-  if(QS.length < SIZE){
-    const extra = shuffle(raw.filter(q=>!QS.includes(q))).slice(0, SIZE-QS.length).map(shuffleOpts);
-    QS = [...QS, ...extra];
-  }
-  answers = new Array(QS.length).fill(null);
-  visited = new Array(QS.length).fill(false);
-}
+/* state */
+let idx=0;
+let answers=new Array(QS.length).fill(null); // null=not visited, -1=skipped, 0-3=chosen
+let visited=new Array(QS.length).fill(false);
 
 /* ===== lang ===== */
 function applyLang(l){
@@ -330,7 +299,7 @@ function applyLang(l){
   var en=document.getElementById('enL'),hi=document.getElementById('hiL');
   if(en){en.classList.toggle('on',l==='en');hi.classList.toggle('on',l==='hi')}
   document.querySelectorAll('[data-en]').forEach(e=>{if(e.children.length===0)e.textContent=l==='hi'?e.dataset.hi:e.dataset.en;else e.innerHTML=l==='hi'?e.dataset.hi:e.dataset.en});
-  if(QS.length>0)renderQ();
+  renderQ();
 }
 
 /* ===== render ===== */
@@ -488,10 +457,8 @@ window.addEventListener('load',()=>{
   renderHeader();
   applyLang(lang);
   document.getElementById('clock').textContent=fmt(timeLeft);
-  initQuestions();
-  document.getElementById('loading').style.display='none';
+  setTimeout(()=>document.getElementById('loading').style.display='none',500);
   tInt=setInterval(tickTimer,1000);
-  renderQ();
 });
 </script>
 </body>
