@@ -74,14 +74,12 @@ h1 .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;c
 .ch .info p{font-size:.76rem;color:var(--ink-soft);margin-top:3px}
 .ch .arrow{flex-shrink:0;color:var(--accent);font-size:1.2rem;transition:transform .3s;opacity:.5}
 .ch:hover .arrow{transform:translateX(4px);opacity:1}
-
-/* ===== modal ===== */
 .overlay{position:fixed;inset:0;z-index:100;background:rgba(45,55,72,.35);backdrop-filter:blur(8px);
-  display:none;align-items:center;justify-content:center;padding:20px;opacity:0;transition:opacity .3s}
+  display:none;align-items:center;justify-content:center;padding:20px;opacity:0;transition:opacity .4s ease}
 .overlay.show{display:flex;opacity:1}
 .modal{width:100%;max-width:440px;border-radius:26px;background:var(--glass-strong);backdrop-filter:blur(30px) saturate(180%);
   border:1px solid var(--border);box-shadow:0 30px 70px rgba(120,90,180,.3);padding:30px 28px;
-  transform:scale(.9) translateY(20px);transition:transform .35s cubic-bezier(.2,.9,.3,1.2);max-height:90vh;overflow-y:auto}
+  transform:scale(.92) translateY(24px);transition:transform .45s cubic-bezier(.16,1,.3,1);max-height:90vh;overflow-y:auto}
 .overlay.show .modal{transform:none}
 .modal .mtop{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:22px}
 .modal .mtop h2{font-size:1.32rem;font-weight:700;letter-spacing:-.6px;line-height:1.22;padding-right:10px}
@@ -95,15 +93,11 @@ h1 .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;c
   text-align:center;font-weight:600;font-size:.88rem;transition:all .25s}
 .mode .em{display:flex;align-items:flex-end;justify-content:center;gap:3px;height:22px;margin:0 auto 9px}
 .mode .em i{width:5px;border-radius:3px;background:currentColor;opacity:.28;transition:opacity .25s,transform .25s}
-.mode .em i:nth-child(1){height:8px}
-.mode .em i:nth-child(2){height:14px}
-.mode .em i:nth-child(3){height:20px}
+.mode .em i:nth-child(1){height:8px}.mode .em i:nth-child(2){height:14px}.mode .em i:nth-child(3){height:20px}
 .mode[data-m="easy"] .em i:nth-child(1){opacity:1}
 .mode[data-m="medium"] .em i:nth-child(1),.mode[data-m="medium"] .em i:nth-child(2){opacity:1}
 .mode[data-m="hard"] .em i{opacity:1}
-.mode.sel .em i{transform:translateY(0)}
 .mode:hover .em i{opacity:.9}
-.mode.sel[data-m="easy"] .em i:nth-child(1){opacity:1}
 .mode.sel .em i{opacity:.3}
 .mode.sel[data-m="easy"] .em i:nth-child(1){opacity:1}
 .mode.sel[data-m="medium"] .em i:nth-child(1),.mode.sel[data-m="medium"] .em i:nth-child(2){opacity:1}
@@ -112,17 +106,15 @@ h1 .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;c
 .mode.sel[data-m="easy"]{background:rgba(72,187,120,.14);border-color:var(--easy)}
 .mode.sel[data-m="medium"]{background:rgba(246,173,85,.14);border-color:var(--med)}
 .mode.sel[data-m="hard"]{background:rgba(252,129,129,.14);border-color:var(--hard)}
-.sizes{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.size{padding:14px 8px;border-radius:14px;border:2px solid transparent;background:rgba(255,255,255,.5);cursor:pointer;text-align:center;transition:all .25s}
-.size b{display:block;font-size:1.15rem;font-weight:700;font-family:'JetBrains Mono'}
-.size span{font-size:.66rem;color:var(--ink-soft)}
-.size.sel{background:rgba(43,196,180,.14);border-color:var(--accent)}
-.size.sel b{color:var(--accent)}
 .sets{display:flex;flex-wrap:wrap;gap:8px}
 .set{width:46px;height:46px;border-radius:13px;border:2px solid transparent;background:rgba(255,255,255,.5);cursor:pointer;
   font-weight:700;font-family:'JetBrains Mono';font-size:.95rem;color:var(--ink-soft);transition:all .25s;
-  display:flex;align-items:center;justify-content:center}
+  display:flex;align-items:center;justify-content:center;position:relative}
 .set.sel{background:var(--grad);background-size:300% 300%;background-position:center;color:#fff;border-color:transparent;box-shadow:0 6px 16px rgba(63,184,217,.4)}
+.set.done{background:rgba(72,187,120,.2);border-color:#48BB78;color:#2F855A;}
+.set.done::after{content:"✓";position:absolute;top:-5px;right:-5px;width:14px;height:14px;background:#48BB78;color:#fff;border-radius:50%;font-size:.55rem;display:flex;align-items:center;justify-content:center;font-weight:700;}
+.set.done.sel{background:var(--grad);color:#fff;border-color:transparent;}
+.set.done.sel::after{background:rgba(255,255,255,.4);}
 .startbtn{margin-top:26px;width:100%;padding:16px;border:none;border-radius:16px;cursor:pointer;color:#fff;font-weight:700;font-size:1rem;
   font-family:inherit;background:var(--grad);background-size:200% 100%;position:relative;overflow:hidden;
   box-shadow:0 12px 28px rgba(63,184,217,.32);transition:background-position .6s,transform .3s,box-shadow .3s}
@@ -130,7 +122,6 @@ h1 .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;c
 .startbtn:hover{background-position:100% 0;transform:translateY(-2px);box-shadow:0 16px 36px rgba(63,184,217,.42)}
 .startbtn:hover::before{left:130%}
 @keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
-
 .fulltest{margin-top:22px;border-radius:20px;padding:22px clamp(18px,4vw,36px);position:relative;overflow:hidden;
   background:var(--grad);color:#fff;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;cursor:pointer;
   box-shadow:0 16px 40px rgba(63,184,217,.32);transition:transform .4s}
@@ -163,15 +154,18 @@ h1 .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;c
     <p class="headsub" data-en="Tap any chapter to pick your mode and start practicing." data-hi="किसी भी अध्याय पर टैप करें, मोड चुनें और अभ्यास शुरू करें।">Tap any chapter to pick your mode and start practicing.</p>
   </div>
   <div class="grid" id="grid"></div>
-<div class="fulltest" onclick="startFullTest()">
-  <div>
-    <h3 data-en="🏆 Full COPA Theory Test" data-hi="🏆 पूर्ण COPA थ्योरी टेस्ट">🏆 Full COPA Theory Test</h3>
-    <p data-en="100 questions from all 14 chapters — simulate real exam." data-hi="सभी 14 अध्यायों से 100 प्रश्न — असली परीक्षा जैसा।">100 questions from all 14 chapters — simulate real exam.</p>
+
+  <!-- Full Test Banner -->
+  <div class="fulltest" onclick="openFullModal()">
+    <div>
+      <h3 data-en="🏆 Full COPA Theory Test" data-hi="🏆 पूर्ण COPA थ्योरी टेस्ट">🏆 Full COPA Theory Test</h3>
+      <p data-en="100 questions · 90 min · 10 sets" data-hi="100 प्रश्न · 90 मिनट · 10 सेट">100 questions · 90 min · 10 sets</p>
+    </div>
+    <span class="ftbtn" data-en="Select Set →" data-hi="सेट चुनें →">Select Set →</span>
   </div>
-  <span class="ftbtn" data-en="Start →" data-hi="शुरू करें →">Start →</span>
-</div>
 </div>
 
+<!-- Chapter Modal -->
 <div class="overlay" id="overlay">
   <div class="modal">
     <div class="mtop">
@@ -184,15 +178,25 @@ h1 .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;c
       <div class="mode" data-m="medium" onclick="selMode(this)"><span class="em"><i></i><i></i><i></i></span><span data-en="Medium" data-hi="मध्यम">Medium</span></div>
       <div class="mode" data-m="hard" onclick="selMode(this)"><span class="em"><i></i><i></i><i></i></span><span data-en="Hard" data-hi="कठिन">Hard</span></div>
     </div>
-    <div class="mlabel" data-en="Number of Questions" data-hi="प्रश्नों की संख्या">Number of Questions</div>
-    <div class="sizes" id="sizes">
-      <div class="size sel" data-s="20" onclick="selSize(this)"><b>20</b><span data-en="25 min" data-hi="25 मिनट">25 min</span></div>
-      <div class="size" data-s="50" onclick="selSize(this)"><b>50</b><span data-en="60 min" data-hi="60 मिनट">60 min</span></div>
-      <div class="size" data-s="100" onclick="selSize(this)"><b>100</b><span data-en="120 min" data-hi="120 मिनट">120 min</span></div>
+    <div style="background:rgba(255,255,255,.5);border-radius:14px;padding:14px 16px;text-align:center;margin-top:20px">
+      <b style="font-family:'JetBrains Mono',monospace;font-size:1.1rem">30</b>
+      <span data-en=" Questions · 30 min" data-hi=" प्रश्न · 30 मिनट"> Questions · 30 min</span>
+    </div>
+    <button class="startbtn" onclick="startQuiz()" data-en="Start Test →" data-hi="टेस्ट शुरू करें →">Start Test →</button>
+  </div>
+</div>
+
+<!-- Full Test Modal -->
+<div class="overlay" id="fullOverlay">
+  <div class="modal">
+    <div class="mtop">
+      <div><h2 data-en="🏆 Full COPA Theory Test" data-hi="🏆 पूर्ण COPA थ्योरी टेस्ट">🏆 Full COPA Theory Test</h2>
+      <div class="mc" data-en="100 Questions · 90 Minutes" data-hi="100 प्रश्न · 90 मिनट">100 Questions · 90 Minutes</div></div>
+      <button class="xbtn" onclick="closeFullModal()">✕</button>
     </div>
     <div class="mlabel" data-en="Select Set" data-hi="सेट चुनें">Select Set</div>
-    <div class="sets" id="sets"></div>
-    <button class="startbtn" onclick="startQuiz()" data-en="Start Test →" data-hi="टेस्ट शुरू करें →">Start Test →</button>
+    <div class="sets" id="fullSets"></div>
+    <button class="startbtn" onclick="startFullTest()" data-en="Start Test →" data-hi="टेस्ट शुरू करें →">Start Test →</button>
   </div>
 </div>
 
@@ -213,10 +217,16 @@ const CHAPTERS=[
   {id:13,en:"Cloud Computing & Cyber Security",hi:"क्लाउड कंप्यूटिंग और साइबर सुरक्षा",dEn:"Cloud services, threats, IT Act",dHi:"क्लाउड सेवाएं, खतरे, IT एक्ट"},
   {id:14,en:"E-Commerce & Programming Concepts",hi:"ई-कॉमर्स और प्रोग्रामिंग",dEn:"E-commerce, Python basics",dHi:"ई-कॉमर्स, पाइथन बेसिक्स"}
 ];
-const SETS_BY_SIZE={20:6,50:4,100:3};
-let cur={chapter:null,mode:'easy',size:20,set:1};
+
+let cur={chapter:null,mode:'easy',size:30,set:1};
+let fullSet=1;
 
 const body=document.body,enL=document.getElementById('enL'),hiL=document.getElementById('hiL');
+
+function getCompleted(subj,chId){
+  try{return JSON.parse(localStorage.getItem('completed_'+subj+'_ch'+chId)||'[]')}catch(e){return []}
+}
+
 function applyLang(l){
   body.dataset.lang=l;enL.classList.toggle('on',l==='en');hiL.classList.toggle('on',l==='hi');
   document.querySelectorAll('[data-en]').forEach(e=>e.innerHTML=l==='hi'?e.dataset.hi:e.dataset.en);
@@ -237,40 +247,50 @@ function renderGrid(){
     g.appendChild(d);
   });
 }
+
 function openModal(c){
-  cur={chapter:c,mode:'easy',size:20,set:1};
+  cur={chapter:c,mode:'easy',size:30,set:1};
   document.getElementById('mTitle').textContent=body.dataset.lang==='hi'?c.hi:c.en;
   document.querySelectorAll('.mode').forEach(m=>m.classList.toggle('sel',m.dataset.m==='easy'));
-  document.querySelectorAll('.size').forEach(s=>s.classList.toggle('sel',s.dataset.s==='20'));
-  renderSets();
   document.getElementById('overlay').classList.add('show');
 }
 function closeModal(){document.getElementById('overlay').classList.remove('show')}
-document.getElementById('overlay').onclick=e=>{if(e.target.id==='overlay')closeModal()};
+document.getElementById('overlay').onclick=e=>{if(e.target.id==='overlay')closeModal()}
 function selMode(el){cur.mode=el.dataset.m;document.querySelectorAll('.mode').forEach(m=>m.classList.remove('sel'));el.classList.add('sel')}
-function selSize(el){cur.size=+el.dataset.s;cur.set=1;document.querySelectorAll('.size').forEach(s=>s.classList.remove('sel'));el.classList.add('sel');renderSets()}
-function renderSets(){
-  const wrap=document.getElementById('sets');wrap.innerHTML='';
-  const n=SETS_BY_SIZE[cur.size];
-  for(let i=1;i<=n;i++){
-    const b=document.createElement('div');b.className='set'+(i===cur.set?' sel':'');b.textContent=i;
-    b.onclick=()=>{cur.set=i;document.querySelectorAll('.set').forEach(s=>s.classList.remove('sel'));b.classList.add('sel')};
+
+function openFullModal(){
+  fullSet=1;renderFullSets();
+  document.getElementById('fullOverlay').classList.add('show');
+}
+function closeFullModal(){document.getElementById('fullOverlay').classList.remove('show')}
+document.getElementById('fullOverlay').onclick=e=>{if(e.target.id==='fullOverlay')closeFullModal()}
+
+function renderFullSets(){
+  const wrap=document.getElementById('fullSets');wrap.innerHTML='';
+  const done=getCompleted('theory',0);
+  for(let i=1;i<=10;i++){
+    const b=document.createElement('div');
+    b.className='set'+(i===fullSet?' sel':'')+(done.includes(i)?' done':'');
+    b.textContent=i;
+    b.onclick=()=>{fullSet=i;renderFullSets()};
     wrap.appendChild(b);
   }
 }
+
 function startQuiz(){
   const cfg={subject:'theory',chapterId:cur.chapter.id,chapterEn:cur.chapter.en,chapterHi:cur.chapter.hi,
-    mode:cur.mode,size:cur.size,set:cur.set,lang:body.dataset.lang};
+    mode:cur.mode,size:30,set:1,lang:body.dataset.lang};
   try{localStorage.setItem('copa_config',JSON.stringify(cfg))}catch(e){}
   body.classList.add('exit');setTimeout(()=>location.href='quiz.html',400);
 }
 
 function startFullTest(){
   const cfg={subject:'theory',chapterId:0,chapterEn:'Full COPA Theory Test',chapterHi:'पूर्ण COPA थ्योरी टेस्ट',
-    mode:'medium',size:100,set:1,lang:body.dataset.lang};
+    mode:'medium',size:100,set:fullSet,lang:body.dataset.lang};
   try{localStorage.setItem('copa_config',JSON.stringify(cfg))}catch(e){}
   body.classList.add('exit');setTimeout(()=>location.href='quiz.html',400);
 }
+
 function goTo(u){body.classList.add('exit');setTimeout(()=>location.href=u,400)}
 applyLang(sv);
 </script>
