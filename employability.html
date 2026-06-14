@@ -110,7 +110,7 @@ h1 .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;c
 .mode.sel[data-m="easy"]{background:rgba(72,187,120,.14);border-color:var(--easy)}
 .mode.sel[data-m="medium"]{background:rgba(246,173,85,.14);border-color:var(--med)}
 .mode.sel[data-m="hard"]{background:rgba(252,129,129,.14);border-color:var(--hard)}
-.sizes{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.sizes{display:grid;grid-template-columns:1fr;gap:10px}
 .size{padding:14px 8px;border-radius:14px;border:2px solid transparent;background:rgba(255,255,255,.5);cursor:pointer;text-align:center;transition:all .25s}
 .size b{display:block;font-size:1.15rem;font-weight:700;font-family:'JetBrains Mono'}
 .size span{font-size:.66rem;color:var(--ink-soft)}
@@ -121,6 +121,10 @@ h1 .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;c
   font-weight:700;font-family:'JetBrains Mono';font-size:.95rem;color:var(--ink-soft);transition:all .25s;
   display:flex;align-items:center;justify-content:center}
 .set.sel{background:var(--grad);background-size:300% 300%;background-position:center;color:#fff;border-color:transparent;box-shadow:0 6px 16px rgba(255,126,95,.4)}
+.set.done{background:rgba(72,187,120,.2);border-color:#48BB78;color:#2F855A;position:relative;}
+.set.done::after{content:"✓";position:absolute;top:-5px;right:-5px;width:14px;height:14px;background:#48BB78;color:#fff;border-radius:50%;font-size:.55rem;display:flex;align-items:center;justify-content:center;font-weight:700;}
+.set.done.sel{background:var(--grad);color:#fff;border-color:transparent;}
+.set.done.sel::after{background:rgba(255,255,255,.4);}
 .startbtn{margin-top:26px;width:100%;padding:16px;border:none;border-radius:16px;cursor:pointer;color:#fff;font-weight:700;font-size:1rem;
   font-family:inherit;background:var(--grad);background-size:200% 100%;position:relative;overflow:hidden;
   box-shadow:0 12px 28px rgba(255,126,95,.32);transition:background-position .6s,transform .3s,box-shadow .3s}
@@ -161,12 +165,26 @@ h1 .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;c
     <p class="headsub" data-en="Tap any chapter to pick your mode and start practicing." data-hi="किसी भी अध्याय पर टैप करें, मोड चुनें और अभ्यास शुरू करें।">Tap any chapter to pick your mode and start practicing.</p>
   </div>
   <div class="grid" id="grid"></div>
-<div class="fulltest" onclick="startFullTest()">
+<div class="fulltest" onclick="openFullModal()">
   <div>
     <h3 data-en="🏆 Full Employability Test" data-hi="🏆 पूर्ण रोज़गार कौशल टेस्ट">🏆 Full Employability Test</h3>
-    <p data-en="75 questions from all 12 chapters — simulate real exam." data-hi="सभी 12 अध्यायों से 75 प्रश्न — असली परीक्षा जैसा।">75 questions from all 12 chapters — simulate real exam.</p>
+    <p data-en="100 questions · 60 min · 10 sets" data-hi="100 प्रश्न · 60 मिनट · 10 सेट">100 questions · 60 min · 10 sets</p>
   </div>
-  <span class="ftbtn" data-en="Start →" data-hi="शुरू करें →">Start →</span>
+  <span class="ftbtn" data-en="Select Set →" data-hi="सेट चुनें →">Select Set →</span>
+</div>
+
+<!-- Full Test Modal -->
+<div class="overlay" id="fullOverlay">
+  <div class="modal">
+    <div class="mtop">
+      <div><h2 data-en="🏆 Full Employability Test" data-hi="🏆 पूर्ण रोज़गार कौशल टेस्ट">🏆 Full Employability Test</h2>
+      <div class="mc" data-en="100 Questions · 60 Minutes" data-hi="100 प्रश्न · 60 मिनट">100 Questions · 60 Minutes</div></div>
+      <button class="xbtn" onclick="closeFullModal()">✕</button>
+    </div>
+    <div class="mlabel" data-en="Select Set" data-hi="सेट चुनें">Select Set</div>
+    <div class="sets" id="fullSets"></div>
+    <button class="startbtn" onclick="startFullTest()" data-en="Start Test →" data-hi="टेस्ट शुरू करें →">Start Test →</button>
+  </div>
 </div>
 </div>
 
@@ -184,11 +202,9 @@ h1 .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;c
     </div>
     <div class="mlabel" data-en="Number of Questions" data-hi="प्रश्नों की संख्या">Number of Questions</div>
     <div class="sizes" id="sizes">
-      <div class="size sel" data-s="25" onclick="selSize(this)"><b>25</b><span data-en="25 min" data-hi="25 मिनट">25 min</span></div>
-      <div class="size" data-s="50" onclick="selSize(this)"><b>50</b><span data-en="60 min" data-hi="60 मिनट">60 min</span></div>
+      <div class="size sel" data-s="30" onclick="selSize(this)"><b>30</b><span data-en="30 min" data-hi="30 मिनट">30 min</span></div>
     </div>
-    <div class="mlabel" data-en="Select Set" data-hi="सेट चुनें">Select Set</div>
-    <div class="sets" id="sets"></div>
+
     <button class="startbtn" onclick="startQuiz()" data-en="Start Test →" data-hi="टेस्ट शुरू करें →">Start Test →</button>
   </div>
 </div>
@@ -208,8 +224,8 @@ const CHAPTERS=[
   {id:11,en:"Customer Service",hi:"ग्राहक सेवा",dEn:"Handling customers, service quality",dHi:"ग्राहक संभालना, सेवा गुणवत्ता"},
   {id:12,en:"Getting Ready for Apprenticeship & Jobs",hi:"अप्रेंटिसशिप और नौकरी की तैयारी",dEn:"Resume, interviews, job search",dHi:"रिज़्यूमे, इंटरव्यू, नौकरी खोज"}
 ];
-const SETS_BY_SIZE={25:5,50:2};
-let cur={chapter:null,mode:'easy',size:25,set:1};
+const SETS_BY_SIZE={30:1};
+let cur={chapter:null,mode:'easy',size:30,set:1};
 
 const body=document.body,enL=document.getElementById('enL'),hiL=document.getElementById('hiL');
 function applyLang(l){
@@ -233,23 +249,28 @@ function renderGrid(){
   });
 }
 function openModal(c){
-  cur={chapter:c,mode:'easy',size:25,set:1};
+  cur={chapter:c,mode:'easy',size:30,set:1};
   document.getElementById('mTitle').textContent=body.dataset.lang==='hi'?c.hi:c.en;
   document.querySelectorAll('.mode').forEach(m=>m.classList.toggle('sel',m.dataset.m==='easy'));
-  document.querySelectorAll('.size').forEach(s=>s.classList.toggle('sel',s.dataset.s==='25'));
-  renderSets();
-  document.getElementById('overlay').classList.add('show');
+  document.querySelectorAll('.size').forEach(s=>s.classList.toggle('sel',s.dataset.s==='30'));
+    document.getElementById('overlay').classList.add('show');
 }
 function closeModal(){document.getElementById('overlay').classList.remove('show')}
 document.getElementById('overlay').onclick=e=>{if(e.target.id==='overlay')closeModal()};
 function selMode(el){cur.mode=el.dataset.m;document.querySelectorAll('.mode').forEach(m=>m.classList.remove('sel'));el.classList.add('sel')}
 function selSize(el){cur.size=+el.dataset.s;cur.set=1;document.querySelectorAll('.size').forEach(s=>s.classList.remove('sel'));el.classList.add('sel');renderSets()}
+function getCompleted(subj, chId){
+  try{return JSON.parse(localStorage.getItem('completed_'+subj+'_ch'+chId)||'[]')}catch(e){return []}
+}
 function renderSets(){
   const wrap=document.getElementById('sets');wrap.innerHTML='';
   const n=SETS_BY_SIZE[cur.size];
+  const done=getCompleted('employability', cur.chapter.id);
   for(let i=1;i<=n;i++){
-    const b=document.createElement('div');b.className='set'+(i===cur.set?' sel':'');b.textContent=i;
-    b.onclick=()=>{cur.set=i;document.querySelectorAll('.set').forEach(s=>s.classList.remove('sel'));b.classList.add('sel')};
+    const b=document.createElement('div');
+    b.className='set'+(i===cur.set?' sel':'')+(done.includes(i)?' done':'');
+    b.textContent=i;
+    b.onclick=()=>{cur.set=i;document.querySelectorAll('#sets .set').forEach(s=>s.classList.remove('sel'));b.classList.add('sel')};
     wrap.appendChild(b);
   }
 }
@@ -260,9 +281,31 @@ function startQuiz(){
   body.classList.add('exit');setTimeout(()=>location.href='quiz.html',400);
 }
 
+let fullSet=1;
+function renderFullSets(){
+  const wrap=document.getElementById('fullSets');if(!wrap)return;wrap.innerHTML='';
+  const done=getCompleted('employability', 0);
+  for(let i=1;i<=10;i++){
+    const b=document.createElement('div');
+    b.className='set'+(i===fullSet?' sel':'')+(done.includes(i)?' done':'');
+    b.textContent=i;
+    b.onclick=()=>{fullSet=i;renderFullSets()};
+    wrap.appendChild(b);
+  }
+}
+function openFullModal(){
+  fullSet=1;renderFullSets();
+  const ol=document.getElementById('fullOverlay');
+  ol.classList.add('show');
+}
+function closeFullModal(){document.getElementById('fullOverlay').classList.remove('show')}
+document.addEventListener('DOMContentLoaded',()=>{
+  const ol=document.getElementById('fullOverlay');
+  if(ol)ol.onclick=e=>{if(e.target.id==='fullOverlay')closeFullModal()};
+});
 function startFullTest(){
   const cfg={subject:'employability',chapterId:0,chapterEn:'Full Employability Test',chapterHi:'पूर्ण रोज़गार कौशल टेस्ट',
-    mode:'medium',size:75,set:1,lang:body.dataset.lang};
+    mode:'medium',size:100,set:fullSet,lang:body.dataset.lang};
   try{localStorage.setItem('copa_config',JSON.stringify(cfg))}catch(e){}
   body.classList.add('exit');setTimeout(()=>location.href='quiz.html',400);
 }
