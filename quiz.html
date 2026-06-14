@@ -158,6 +158,20 @@ body[data-lang="hi"] .langbtn .pill{transform:translateX(100%)}
 .loading p{color:var(--ink-soft);font-weight:500}
 @media(max-width:560px){.tb-title b{max-width:34vw}.btn-ghost{padding:13px 14px}.btn-skip span,.btn-submit span{display:none}}
 </style>
+<script src="data/theory/chapter1.js"></script>
+<script src="data/theory/chapter2.js"></script>
+<script src="data/theory/chapter3.js"></script>
+<script src="data/theory/chapter4.js"></script>
+<script src="data/theory/chapter5.js"></script>
+<script src="data/theory/chapter6.js"></script>
+<script src="data/theory/chapter7.js"></script>
+<script src="data/theory/chapter8.js"></script>
+<script src="data/theory/chapter9.js"></script>
+<script src="data/theory/chapter10.js"></script>
+<script src="data/theory/chapter11.js"></script>
+<script src="data/theory/chapter12.js"></script>
+<script src="data/theory/chapter13.js"></script>
+<script src="data/theory/chapter14.js"></script>
 </head>
 <body data-lang="en">
 <div class="wall"></div>
@@ -242,23 +256,10 @@ const CHAPTER_VAR_MAP = {
   13:'QUESTIONS_THEORY_13',14:'QUESTIONS_THEORY_14'
 };
 
-async function loadChapterQuestions(chapterId){
-  // Try window variable first (if script already loaded)
+function loadChapterQuestions(chapterId){
+  // Scripts already loaded via <script src> tags in <head>
   const varName = CHAPTER_VAR_MAP[chapterId];
-  if(window[varName]) return window[varName];
-
-  // Load from GitHub data folder
-  const url = `data/theory/chapter${chapterId}.js`;
-  return new Promise((resolve,reject)=>{
-    const s = document.createElement('script');
-    s.src = url;
-    s.onload = ()=>resolve(window[varName]||[]);
-    s.onerror = ()=>{
-      console.warn('Could not load '+url+', using fallback');
-      resolve([]);
-    };
-    document.head.appendChild(s);
-  });
+  return window[varName] || [];
 }
 
 function filterByDiff(questions, mode, n){
@@ -308,15 +309,14 @@ let idx=0;
 let answers=[];
 let visited=[];
 
-async function initQuestions(){
+function initQuestions(){
   const SIZE = cfg.size || 30;
-  let raw = await loadChapterQuestions(cfg.chapterId||1);
+  let raw = loadChapterQuestions(cfg.chapterId||1);
   if(!raw || raw.length===0){
     raw = makeDemoQuestions(SIZE);
   }
   QS = filterByDiff(raw, cfg.mode||'easy', SIZE).map(shuffleOpts);
   if(QS.length < SIZE){
-    // if still not enough after filter, pad with shuffled all
     const extra = shuffle(raw.filter(q=>!QS.includes(q))).slice(0, SIZE-QS.length).map(shuffleOpts);
     QS = [...QS, ...extra];
   }
@@ -484,11 +484,11 @@ document.getElementById('confirm').onclick=e=>{if(e.target.id==='confirm')closeS
 
 /* ===== init ===== */
 document.getElementById('langBtn').onclick=()=>{applyLang(lang==='en'?'hi':'en');try{localStorage.setItem('copa_lang',lang)}catch(e){}};
-window.addEventListener('load',async ()=>{
+window.addEventListener('load',()=>{
   renderHeader();
   applyLang(lang);
   document.getElementById('clock').textContent=fmt(timeLeft);
-  await initQuestions();
+  initQuestions();
   document.getElementById('loading').style.display='none';
   tInt=setInterval(tickTimer,1000);
   renderQ();
