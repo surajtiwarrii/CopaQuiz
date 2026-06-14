@@ -112,7 +112,7 @@ h1 .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;c
 .mode.sel[data-m="easy"]{background:rgba(72,187,120,.14);border-color:var(--easy)}
 .mode.sel[data-m="medium"]{background:rgba(246,173,85,.14);border-color:var(--med)}
 .mode.sel[data-m="hard"]{background:rgba(252,129,129,.14);border-color:var(--hard)}
-.sizes{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.sizes{display:grid;grid-template-columns:1fr;gap:10px}
 .size{padding:14px 8px;border-radius:14px;border:2px solid transparent;background:rgba(255,255,255,.5);cursor:pointer;text-align:center;transition:all .25s}
 .size b{display:block;font-size:1.15rem;font-weight:700;font-family:'JetBrains Mono'}
 .size span{font-size:.66rem;color:var(--ink-soft)}
@@ -169,9 +169,7 @@ h1 .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;c
     </div>
     <div class="mlabel" data-en="Number of Questions" data-hi="प्रश्नों की संख्या">Number of Questions</div>
     <div class="sizes" id="sizes">
-      <div class="size sel" data-s="20" onclick="selSize(this)"><b>20</b><span data-en="25 min" data-hi="25 मिनट">25 min</span></div>
-      <div class="size" data-s="50" onclick="selSize(this)"><b>50</b><span data-en="60 min" data-hi="60 मिनट">60 min</span></div>
-      <div class="size" data-s="100" onclick="selSize(this)"><b>100</b><span data-en="120 min" data-hi="120 मिनट">120 min</span></div>
+      <div class="size sel" data-s="30" onclick="selSize(this)"><b>30</b><span data-en="35 min" data-hi="35 मिनट">35 min</span></div>
     </div>
     <div class="mlabel" data-en="Select Set" data-hi="सेट चुनें">Select Set</div>
     <div class="sets" id="sets"></div>
@@ -196,7 +194,7 @@ const CHAPTERS=[
   {id:13,en:"Cloud Computing & Cyber Security",hi:"क्लाउड कंप्यूटिंग और साइबर सुरक्षा",dEn:"Cloud services, threats, IT Act",dHi:"क्लाउड सेवाएं, खतरे, IT एक्ट"},
   {id:14,en:"E-Commerce & Programming Concepts",hi:"ई-कॉमर्स और प्रोग्रामिंग",dEn:"E-commerce, Python basics",dHi:"ई-कॉमर्स, पाइथन बेसिक्स"}
 ];
-const SETS_BY_SIZE={20:6,50:4,100:3};
+const SETS_BY_SIZE={30:3};
 let cur={chapter:null,mode:'easy',size:20,set:1};
 
 const body=document.body,enL=document.getElementById('enL'),hiL=document.getElementById('hiL');
@@ -221,10 +219,10 @@ function renderGrid(){
   });
 }
 function openModal(c){
-  cur={chapter:c,mode:'easy',size:20,set:1};
+  cur={chapter:c,mode:'easy',size:30,set:1};
   document.getElementById('mTitle').textContent=body.dataset.lang==='hi'?c.hi:c.en;
   document.querySelectorAll('.mode').forEach(m=>m.classList.toggle('sel',m.dataset.m==='easy'));
-  document.querySelectorAll('.size').forEach(s=>s.classList.toggle('sel',s.dataset.s==='20'));
+  document.querySelectorAll('.size').forEach(s=>s.classList.toggle('sel',s.dataset.s==='30'));
   renderSets();
   document.getElementById('overlay').classList.add('show');
 }
