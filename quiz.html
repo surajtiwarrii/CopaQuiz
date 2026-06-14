@@ -463,6 +463,18 @@ function doSubmit(auto){
     review:review,lang:lang,auto:!!auto
   };
   try{localStorage.setItem('copa_result',JSON.stringify(result))}catch(e){}
+  
+  // Save completed set progress
+  try{
+    const subj = cfg.subject || 'theory';
+    const chId = cfg.chapterId || 0;
+    const setId = cfg.set || 1;
+    const key = 'completed_'+subj+'_ch'+chId;
+    let done = JSON.parse(localStorage.getItem(key)||'[]');
+    if(!done.includes(setId)) done.push(setId);
+    localStorage.setItem(key, JSON.stringify(done));
+  }catch(e){}
+  
   body.classList.add('exit');setTimeout(()=>location.href='result.html',400);
 }
 function quitQuiz(){
