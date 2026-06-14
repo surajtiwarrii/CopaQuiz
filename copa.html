@@ -293,6 +293,15 @@ function startFullTest(){
 
 function goTo(u){body.classList.add('exit');setTimeout(()=>location.href=u,400)}
 applyLang(sv);
+
+/* ===== Fix browser back button blank page ===== */
+window.addEventListener('pageshow', function(e){
+  if(e.persisted || performance.getEntriesByType('navigation')[0]?.type === 'back_forward'){
+    document.body.classList.remove('exit');
+    document.body.style.opacity = '1';
+    document.body.style.transform = 'none';
+  }
+});
 </script>
 </body>
 </html>
