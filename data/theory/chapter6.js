@@ -1,4 +1,4 @@
-var QUESTIONS_THEORY_4 = [
+var QUESTIONS_THEORY_6 = [
 // Q1 - Easy MCQ
 {type:"mcq",diff:"easy",en:{q:"Which of the following is an example of Word Processing software?",opts:["MS Excel","MS Word","MS PowerPoint","MS Access"],ans:1,exp:"MS Word is a word processing program developed by Microsoft for creating text-based documents. It is widely used for drafting letters, reports, and essays with various formatting tools. Unlike Excel which is for spreadsheets, or PowerPoint for presentations, Word focuses purely on text manipulation. This software has become an industry standard in modern computing."},hi:{q:"निम्नलिखित में से कौन सा वर्ड प्रोसेसिंग सॉफ्टवेयर का एक उदाहरण है?",opts:["MS Excel","MS Word","MS PowerPoint","MS Access"],ans:1,exp:"MS Word माइक्रोसॉफ्ट द्वारा विकसित एक वर्ड प्रोसेसिंग प्रोग्राम है जिसका उपयोग टेक्स्ट-आधारित दस्तावेज़ बनाने के लिए किया जाता है। इसका उपयोग मुख्य रूप से पत्र, रिपोर्ट और निबंध तैयार करने के लिए किया जाता है। एक्सेल या पॉवरपॉइंट के विपरीत, वर्ड पूरी तरह से टेक्स्ट हेरफेर पर केंद्रित है। यह सॉफ्टवेयर आधुनिक कंप्यूटिंग में एक उद्योग मानक बन गया है।"}},
 // Q2 - Easy MCQ
