@@ -346,6 +346,7 @@ function applyLang(l){
   var en=document.getElementById('enL'),hi=document.getElementById('hiL');
   if(en){en.classList.toggle('on',l==='en');hi.classList.toggle('on',l==='hi')}
   document.querySelectorAll('[data-en]').forEach(e=>{if(e.children.length===0)e.textContent=l==='hi'?e.dataset.hi:e.dataset.en;else e.innerHTML=l==='hi'?e.dataset.hi:e.dataset.en});
+  renderHeader();
   renderQ();
 }
 
