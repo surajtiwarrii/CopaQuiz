@@ -268,7 +268,7 @@ document.getElementById('fullOverlay').onclick=e=>{if(e.target.id==='fullOverlay
 function renderFullSets(){
   const wrap=document.getElementById('fullSets');wrap.innerHTML='';
   const done=getCompleted('theory',0);
-  for(let i=1;i<=5;i++){
+  for(let i=1;i<=10;i++){
     const b=document.createElement('div');
     b.className='set'+(i===fullSet?' sel':'')+(done.includes(i)?' done':'');
     b.textContent=i;
