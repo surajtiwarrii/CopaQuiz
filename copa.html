@@ -149,7 +149,7 @@ h1 .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;c
 
 <div class="stage">
   <div class="head">
-    <div class="eyebrow"><span class="dot"></span><span data-en="Subject 01 · 14 Chapters" data-hi="विषय 01 · 14 अध्याय">Subject 01 · 14 Chapters</span></div>
+    <div class="eyebrow"><span class="dot"></span><span data-en="Subject 01 · 18 Chapters" data-hi="विषय 01 · 18 अध्याय">Subject 01 · 18 Chapters</span></div>
     <h1 data-en="Choose a <span class='g'>chapter</span>" data-hi="एक <span class='g'>अध्याय</span> चुनें">Choose a <span class="g">chapter</span></h1>
     <p class="headsub" data-en="Tap any chapter to pick your mode and start practicing." data-hi="किसी भी अध्याय पर टैप करें, मोड चुनें और अभ्यास शुरू करें।">Tap any chapter to pick your mode and start practicing.</p>
   </div>
@@ -203,19 +203,23 @@ h1 .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;c
 <script>
 const CHAPTERS=[
   {id:1,en:"Safe Working Practices",hi:"सुरक्षित कार्य प्रथाएं",dEn:"Safety rules, signs & fire fighting",dHi:"सुरक्षा नियम, संकेत और अग्निशमन"},
-  {id:2,en:"Computer Components & Hardware",hi:"कंप्यूटर घटक और हार्डवेयर",dEn:"CPU, motherboard, I/O devices",dHi:"सीपीयू, मदरबोर्ड, इनपुट/आउटपुट"},
-  {id:3,en:"Windows Operating System",hi:"विंडोज ऑपरेटिंग सिस्टम",dEn:"Windows features & navigation",dHi:"विंडोज फ़ीचर और नेविगेशन"},
-  {id:4,en:"Computer Basics & Software Installation",hi:"कंप्यूटर बेसिक्स और सॉफ्टवेयर इंस्टॉल",dEn:"BIOS, OS install, drivers",dHi:"BIOS, OS इंस्टॉल, ड्राइवर"},
-  {id:5,en:"DOS Command Line & Linux OS",hi:"DOS कमांड लाइन और लिनक्स",dEn:"DOS commands & Linux basics",dHi:"DOS कमांड और लिनक्स बेसिक्स"},
-  {id:6,en:"Word Processing (MS Word)",hi:"वर्ड प्रोसेसिंग (एमएस वर्ड)",dEn:"Documents, formatting, mail merge",dHi:"दस्तावेज़, फॉर्मेटिंग, मेल मर्ज"},
-  {id:7,en:"Spreadsheet Application (MS Excel)",hi:"स्प्रेडशीट (एमएस एक्सेल)",dEn:"Formulas, charts, pivot tables",dHi:"फॉर्मूला, चार्ट, पिवट टेबल"},
-  {id:8,en:"Image Editing & PowerPoint",hi:"इमेज एडिटिंग और पावरपॉइंट",dEn:"Slides, transitions, animations",dHi:"स्लाइड, ट्रांज़िशन, एनिमेशन"},
-  {id:9,en:"Database Management (MySQL)",hi:"डेटाबेस प्रबंधन (MySQL)",dEn:"Queries, DDL, DML, functions",dHi:"क्वेरी, DDL, DML, फंक्शन"},
-  {id:10,en:"Networking Concepts",hi:"नेटवर्किंग अवधारणाएं",dEn:"LAN, WAN, IP, sharing",dHi:"LAN, WAN, IP, शेयरिंग"},
-  {id:11,en:"Web Designing (HTML & CSS)",hi:"वेब डिज़ाइनिंग (HTML और CSS)",dEn:"Tags, CSS, static pages",dHi:"टैग, CSS, स्टैटिक पेज"},
-  {id:12,en:"JavaScript",hi:"जावास्क्रिप्ट",dEn:"Variables, loops, arrays, DOM",dHi:"वेरिएबल, लूप, ऐरे, DOM"},
-  {id:13,en:"Cloud Computing & Cyber Security",hi:"क्लाउड कंप्यूटिंग और साइबर सुरक्षा",dEn:"Cloud services, threats, IT Act",dHi:"क्लाउड सेवाएं, खतरे, IT एक्ट"},
-  {id:14,en:"E-Commerce & Programming Concepts",hi:"ई-कॉमर्स और प्रोग्रामिंग",dEn:"E-commerce, Python basics",dHi:"ई-कॉमर्स, पाइथन बेसिक्स"}
+  {id:2,en:"Introduction to Computers & Computer System",hi:"कंप्यूटर परिचय और कंप्यूटर सिस्टम",dEn:"Computer history, generations & classification",dHi:"कंप्यूटर इतिहास, पीढ़ियां और वर्गीकरण"},
+  {id:3,en:"Windows Operating System",hi:"विंडोज ऑपरेटिंग सिस्टम",dEn:"Windows features, settings & navigation",dHi:"विंडोज फ़ीचर, सेटिंग और नेविगेशन"},
+  {id:4,en:"Introduction to Booting Process",hi:"बूटिंग प्रक्रिया का परिचय",dEn:"BIOS, POST, boot sequence & OS loading",dHi:"BIOS, POST, बूट क्रम और OS लोडिंग"},
+  {id:5,en:"DOS Command Line & Linux OS",hi:"DOS कमांड लाइन और लिनक्स OS",dEn:"DOS commands, Linux basics & file system",dHi:"DOS कमांड, लिनक्स बेसिक्स और फाइल सिस्टम"},
+  {id:6,en:"Word Processing Software (MS Word)",hi:"वर्ड प्रोसेसिंग सॉफ्टवेयर (MS Word)",dEn:"Documents, formatting, tables & mail merge",dHi:"दस्तावेज़, फॉर्मेटिंग, टेबल और मेल मर्ज"},
+  {id:7,en:"Spreadsheet Application (MS Excel)",hi:"स्प्रेडशीट एप्लिकेशन (MS Excel)",dEn:"Formulas, functions, charts & pivot tables",dHi:"फॉर्मूला, फंक्शन, चार्ट और पिवट टेबल"},
+  {id:8,en:"PowerPoint Presentations",hi:"पावरपॉइंट प्रेजेंटेशन",dEn:"Slides, transitions, animations & themes",dHi:"स्लाइड, ट्रांज़िशन, एनिमेशन और थीम"},
+  {id:9,en:"Database Concepts, Queries & Functions",hi:"डेटाबेस अवधारणाएं, क्वेरी और फंक्शन",dEn:"MySQL, DDL, DML, joins & functions",dHi:"MySQL, DDL, DML, जॉइन और फंक्शन"},
+  {id:10,en:"Network Communicating & Internet Concepts",hi:"नेटवर्क और इंटरनेट अवधारणाएं",dEn:"LAN, WAN, IP, protocols & internet services",dHi:"LAN, WAN, IP, प्रोटोकॉल और इंटरनेट सेवाएं"},
+  {id:11,en:"Web Design Concepts (HTML & CSS)",hi:"वेब डिज़ाइन अवधारणाएं (HTML और CSS)",dEn:"HTML tags, CSS styling & static pages",dHi:"HTML टैग, CSS स्टाइलिंग और स्टैटिक पेज"},
+  {id:12,en:"Introduction to JavaScript",hi:"जावास्क्रिप्ट का परिचय",dEn:"Variables, loops, functions, arrays & DOM",dHi:"वेरिएबल, लूप, फंक्शन, ऐरे और DOM"},
+  {id:13,en:"Advanced Excel Concepts",hi:"एडवांस्ड एक्सेल अवधारणाएं",dEn:"Advanced formulas, macros & data analysis",dHi:"एडवांस्ड फॉर्मूला, मैक्रो और डेटा विश्लेषण"},
+  {id:14,en:"E-Commerce",hi:"ई-कॉमर्स",dEn:"Online business, payment & digital marketing",dHi:"ऑनलाइन व्यापार, भुगतान और डिजिटल मार्केटिंग"},
+  {id:15,en:"Cyber Security",hi:"साइबर सुरक्षा",dEn:"Threats, malware, IT Act & data protection",dHi:"खतरे, मैलवेयर, IT एक्ट और डेटा सुरक्षा"},
+  {id:16,en:"Cloud Computing & Application Development",hi:"क्लाउड कंप्यूटिंग और ऐप डेवलपमेंट",dEn:"Cloud services, SDLC & deployment models",dHi:"क्लाउड सेवाएं, SDLC और डिप्लॉयमेंट मॉडल"},
+  {id:17,en:"Programming Language (JAVA)",hi:"प्रोग्रामिंग भाषा (JAVA)",dEn:"OOP, classes, objects, inheritance & Java basics",dHi:"OOP, क्लास, ऑब्जेक्ट, इनहेरिटेंस और Java बेसिक्स"},
+  {id:18,en:"Programming Language (Python)",hi:"प्रोग्रामिंग भाषा (Python)",dEn:"Variables, loops, functions, lists & Python basics",dHi:"वेरिएबल, लूप, फंक्शन, लिस्ट और Python बेसिक्स"}
 ];
 
 let cur={chapter:null,mode:'easy',size:30,set:1};
