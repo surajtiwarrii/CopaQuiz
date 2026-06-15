@@ -171,7 +171,10 @@ body[data-lang="hi"] .langbtn .pill{transform:translateX(100%)}
 <script src="data/theory/chapter11.js"></script>
 <script src="data/theory/chapter12.js"></script>
 <script src="data/theory/chapter13.js"></script>
-<script src="data/theory/chapter14.js"></script>
+<script src="data/theory/chapter15.js"></script>
+<script src="data/theory/chapter16.js"></script>
+<script src="data/theory/chapter17.js"></script>
+<script src="data/theory/chapter18.js"></script>
 <script src="data/employability/chapter1.js"></script>
 <script src="data/employability/chapter2.js"></script>
 <script src="data/employability/chapter3.js"></script>
@@ -184,6 +187,7 @@ body[data-lang="hi"] .langbtn .pill{transform:translateX(100%)}
 <script src="data/employability/chapter10.js"></script>
 <script src="data/employability/chapter11.js"></script>
 <script src="data/employability/chapter12.js"></script>
+<script src="data/employability/chapter13.js"></script>
 </head>
 <body data-lang="en">
 <div class="wall"></div>
@@ -303,7 +307,7 @@ function loadQuestions(){
 
   // Full subject test - chapterId === 0
   if(cfg.chapterId===0){
-    const totalChapters=isEmp?12:14;
+    const totalChapters=isEmp?13:18;
     let allPool=[];
     for(let i=1;i<=totalChapters;i++){
       const key=isEmp?'QUESTIONS_EMP_'+i:'QUESTIONS_THEORY_'+i;
