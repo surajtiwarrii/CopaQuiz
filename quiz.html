@@ -171,6 +171,7 @@ body[data-lang="hi"] .langbtn .pill{transform:translateX(100%)}
 <script src="data/theory/chapter11.js"></script>
 <script src="data/theory/chapter12.js"></script>
 <script src="data/theory/chapter13.js"></script>
+<script src="data/theory/chapter14.js"></script>
 <script src="data/theory/chapter15.js"></script>
 <script src="data/theory/chapter16.js"></script>
 <script src="data/theory/chapter17.js"></script>
@@ -290,13 +291,12 @@ function shuffleOpts(q){
   if(q.type==='tf') return q;
   const optCount=q.en.opts.length;
   const idxArr=Array.from({length:optCount},(_,i)=>i);
-  const idx=shuffle(idxArr);
+  const perm=shuffle(idxArr);
   ['en','hi'].forEach(L=>{
-    const newOpts=idx.map(k=>q[L].opts[k]);
-    q[L]._ans=idx.indexOf(q[L].ans);
-    q[L].opts=newOpts;
+    const origAns=q[L].ans;
+    q[L].opts=perm.map(k=>q[L].opts[k]);
+    q[L].ans=perm.indexOf(origAns);
   });
-  q.en.ans=q.en._ans;q.hi.ans=q.hi._ans;
   return q;
 }
 
