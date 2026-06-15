@@ -1,542 +1,184 @@
 var QUESTIONS_THEORY_4 = [
-{
-type:"mcq",
-diff:"easy",
-en:{q:"What is a computer?",opts:["An electronic device","A mobile network","A printer","A scanner"],ans:0,exp:"A computer is an electronic device that processes data into useful information."},
-hi:{q:"कंप्यूटर क्या है?",opts:["एक इलेक्ट्रॉनिक उपकरण","एक मोबाइल नेटवर्क","एक प्रिंटर","एक स्कैनर"],ans:0,exp:"कंप्यूटर एक इलेक्ट्रॉनिक उपकरण है जो डेटा को उपयोगी जानकारी में बदलता है।"}
-},
-{
-type:"mcq",
-diff:"easy",
-en:{q:"What is the full form of CPU?",opts:["Central Processing Unit","Central Program Unit","Computer Processing Unit","Central Power Unit"],ans:0,exp:"CPU performs calculations and controls computer operations."},
-hi:{q:"CPU का पूरा नाम क्या है?",opts:["Central Processing Unit","Central Program Unit","Computer Processing Unit","Central Power Unit"],ans:0,exp:"CPU गणनाएँ करता है और कंप्यूटर संचालन नियंत्रित करता है।"}
-},
-{
-type:"tf",
-diff:"easy",
-en:{q:"Hardware refers to the physical parts of a computer.",opts:["True","False"],ans:0,exp:"Hardware includes monitor, keyboard, motherboard and other physical components."},
-hi:{q:"हार्डवेयर कंप्यूटर के भौतिक भागों को कहा जाता है।",opts:["सही","गलत"],ans:0,exp:"हार्डवेयर में मॉनिटर, कीबोर्ड, मदरबोर्ड आदि शामिल हैं।"}
-},
-{
-type:"mcq",
-diff:"easy",
-en:{q:"Which of the following is system software?",opts:["Operating System","MS Word","Paint","Calculator"],ans:0,exp:"Operating system manages hardware and software resources."},
-hi:{q:"निम्न में से कौन-सा सिस्टम सॉफ्टवेयर है?",opts:["Operating System","MS Word","Paint","Calculator"],ans:0,exp:"ऑपरेटिंग सिस्टम हार्डवेयर और सॉफ्टवेयर संसाधनों का प्रबंधन करता है।"}
-},
-{
-type:"mcq",
-diff:"easy",
-en:{q:"Which software is used for typing documents?",opts:["MS Word","Paint","VLC","Chrome"],ans:0,exp:"MS Word is a word processing application."},
-hi:{q:"दस्तावेज़ टाइप करने के लिए कौन-सा सॉफ्टवेयर उपयोग होता है?",opts:["MS Word","Paint","VLC","Chrome"],ans:0,exp:"MS Word एक वर्ड प्रोसेसिंग सॉफ्टवेयर है।"}
-},
-{
-type:"tf",
-diff:"easy",
-en:{q:"Software is a collection of programs.",opts:["True","False"],ans:0,exp:"Software consists of instructions that tell a computer what to do."},
-hi:{q:"सॉफ्टवेयर प्रोग्रामों का एक समूह होता है।",opts:["सही","गलत"],ans:0,exp:"सॉफ्टवेयर निर्देशों का समूह है जो कंप्यूटर को कार्य करने के लिए बताता है।"}
-},
-{
-type:"mcq",
-diff:"easy",
-en:{q:"Which software is commonly used for web browsing?",opts:["Google Chrome","Paint","Notepad","Calculator"],ans:0,exp:"Google Chrome is a web browser used to access websites."},
-hi:{q:"वेब ब्राउज़िंग के लिए सामान्यतः कौन-सा सॉफ्टवेयर उपयोग होता है?",opts:["Google Chrome","Paint","Notepad","Calculator"],ans:0,exp:"Google Chrome वेबसाइट खोलने के लिए उपयोग किया जाता है।"}
-},
-{
-type:"mcq",
-diff:"easy",
-en:{q:"Which storage unit is larger?",opts:["GB","MB","KB","Byte"],ans:0,exp:"Gigabyte (GB) is larger than MB, KB and Byte."},
-hi:{q:"कौन-सी स्टोरेज इकाई बड़ी है?",opts:["GB","MB","KB","Byte"],ans:0,exp:"GB, MB, KB और Byte से बड़ी इकाई है।"}
-},
-{
-type:"tf",
-diff:"easy",
-en:{q:"A computer can work without software.",opts:["True","False"],ans:1,exp:"Without software, computer hardware cannot perform useful tasks."},
-hi:{q:"कंप्यूटर बिना सॉफ्टवेयर के कार्य कर सकता है।",opts:["सही","गलत"],ans:1,exp:"सॉफ्टवेयर के बिना हार्डवेयर उपयोगी कार्य नहीं कर सकता।"}
-},
-{
-type:"mcq",
-diff:"easy",
-en:{q:"Which of the following is application software?",opts:["MS Excel","Windows","Linux","BIOS"],ans:0,exp:"MS Excel is application software used for spreadsheets."},
-hi:{q:"निम्न में से कौन-सा एप्लिकेशन सॉफ्टवेयर है?",opts:["MS Excel","Windows","Linux","BIOS"],ans:0,exp:"MS Excel स्प्रेडशीट बनाने के लिए उपयोग किया जाता है।"}
-},
-{
-type:"mcq",
-diff:"easy",
-en:{q:"What is the full form of USB?",opts:["Universal Serial Bus","Universal System Bus","United Serial Bus","Universal Storage Bus"],ans:0,exp:"USB is a standard interface used to connect devices."},
-hi:{q:"USB का पूरा नाम क्या है?",opts:["Universal Serial Bus","Universal System Bus","United Serial Bus","Universal Storage Bus"],ans:0,exp:"USB उपकरण जोड़ने के लिए मानक इंटरफेस है।"}
-},
-{
-type:"tf",
-diff:"easy",
-en:{q:"An operating system acts as an interface between user and computer.",opts:["True","False"],ans:0,exp:"The operating system allows users to interact with hardware."},
-hi:{q:"ऑपरेटिंग सिस्टम उपयोगकर्ता और कंप्यूटर के बीच इंटरफेस का कार्य करता है।",opts:["सही","गलत"],ans:0,exp:"ऑपरेटिंग सिस्टम उपयोगकर्ता को हार्डवेयर से जोड़ता है।"}
-},
-{
-type:"mcq",
-diff:"medium",
-en:{q:"Which type of software controls computer hardware?",opts:["System Software","Application Software","Utility Software","Browser"],ans:0,exp:"System software manages and controls hardware resources."},
-hi:{q:"कंप्यूटर हार्डवेयर को नियंत्रित करने वाला सॉफ्टवेयर कौन-सा है?",opts:["System Software","Application Software","Utility Software","Browser"],ans:0,exp:"सिस्टम सॉफ्टवेयर हार्डवेयर संसाधनों का नियंत्रण करता है।"}
-},
-{
-type:"mcq",
-diff:"medium",
-en:{q:"What is software installation?",opts:["Process of adding software to a computer","Deleting files","Formatting disk","Creating folders"],ans:0,exp:"Installation copies and configures software for use."},
-hi:{q:"सॉफ्टवेयर इंस्टॉलेशन क्या है?",opts:["कंप्यूटर में सॉफ्टवेयर जोड़ने की प्रक्रिया","फाइल हटाना","डिस्क फॉर्मेट करना","फोल्डर बनाना"],ans:0,exp:"इंस्टॉलेशन सॉफ्टवेयर को उपयोग के लिए तैयार करता है।"}
-},
-{
-type:"mcq",
-diff:"medium",
-en:{q:"Which file extension is commonly used for Windows executable setup files?",opts:[".exe",".txt",".jpg",".mp3"],ans:0,exp:"EXE files often contain executable installation programs."},
-hi:{q:"Windows इंस्टॉलेशन फाइलों के लिए सामान्य एक्सटेंशन कौन-सा है?",opts:[".exe",".txt",".jpg",".mp3"],ans:0,exp:"EXE फाइलें इंस्टॉलेशन प्रोग्राम चला सकती हैं।"}
-},
-{
-type:"mcq",
-diff:"medium",
-en:{q:"Which software is used to play audio and video files?",opts:["Media Player","Paint","WordPad","Calculator"],ans:0,exp:"Media Player is used to play multimedia content."},
-hi:{q:"ऑडियो और वीडियो फाइल चलाने के लिए कौन-सा सॉफ्टवेयर उपयोग होता है?",opts:["Media Player","Paint","WordPad","Calculator"],ans:0,exp:"Media Player मल्टीमीडिया सामग्री चलाने के लिए उपयोग होता है।"}
-},
-{
-type:"tf",
-diff:"medium",
-en:{q:"Before installing software, system requirements should be checked.",opts:["True","False"],ans:0,exp:"Checking requirements ensures compatibility with the computer."},
-hi:{q:"सॉफ्टवेयर इंस्टॉल करने से पहले सिस्टम आवश्यकताओं की जांच करनी चाहिए।",opts:["सही","गलत"],ans:0,exp:"आवश्यकताओं की जांच करने से संगतता सुनिश्चित होती है।"}
-},
-{
-type:"mcq",
-diff:"medium",
-en:{q:"Which option is commonly clicked to begin software installation?",opts:["Install","Delete","Refresh","Rename"],ans:0,exp:"The Install button starts the setup process."},
-hi:{q:"सॉफ्टवेयर इंस्टॉलेशन शुरू करने के लिए सामान्यतः किस विकल्प पर क्लिक किया जाता है?",opts:["Install","Delete","Refresh","Rename"],ans:0,exp:"Install बटन सेटअप प्रक्रिया शुरू करता है।"}
-},
-{
-type:"mcq",
-diff:"medium",
-en:{q:"What is the purpose of a software license?",opts:["Define usage rights","Increase RAM","Format disk","Delete files"],ans:0,exp:"A license specifies how software may be legally used."},
-hi:{q:"सॉफ्टवेयर लाइसेंस का उद्देश्य क्या है?",opts:["उपयोग अधिकार निर्धारित करना","RAM बढ़ाना","डिस्क फॉर्मेट करना","फाइल हटाना"],ans:0,exp:"लाइसेंस सॉफ्टवेयर के कानूनी उपयोग की शर्तें बताता है।"}
-},
-{
-type:"tf",
-diff:"medium",
-en:{q:"Freeware can generally be used without purchasing a license.",opts:["True","False"],ans:0,exp:"Freeware is available free of cost for users."},
-hi:{q:"Freeware का उपयोग सामान्यतः बिना लाइसेंस खरीदे किया जा सकता है।",opts:["सही","गलत"],ans:0,exp:"Freeware उपयोगकर्ताओं को निःशुल्क उपलब्ध होता है।"}
-},
-{
-type:"mcq",
-diff:"medium",
-en:{q:"Which software category includes antivirus programs?",opts:["Utility Software","Word Processor","Browser","Database"],ans:0,exp:"Antivirus software is classified as utility software."},
-hi:{q:"एंटीवायरस प्रोग्राम किस श्रेणी के सॉफ्टवेयर में आते हैं?",opts:["Utility Software","Word Processor","Browser","Database"],ans:0,exp:"एंटीवायरस एक यूटिलिटी सॉफ्टवेयर है।"}
-},
-{
-type:"mcq",
-diff:"medium",
-en:{q:"Which process removes software from a computer?",opts:["Uninstallation","Compilation","Booting","Scanning"],ans:0,exp:"Uninstallation removes installed software and related files."},
-hi:{q:"कंप्यूटर से सॉफ्टवेयर हटाने की प्रक्रिया क्या कहलाती है?",opts:["Uninstallation","Compilation","Booting","Scanning"],ans:0,exp:"Uninstallation इंस्टॉल सॉफ्टवेयर को हटाती है।"}
-},
-{
-type:"mcq",
-diff:"medium",
-en:{q:"Which file extension is commonly associated with compressed files?",opts:[".zip",".exe",".docx",".html"],ans:0,exp:"ZIP files store compressed data to save space."},
-hi:{q:"संपीड़ित फाइलों के साथ सामान्यतः कौन-सा एक्सटेंशन जुड़ा होता है?",opts:[".zip",".exe",".docx",".html"],ans:0,exp:"ZIP फाइलें डेटा को संपीड़ित रूप में संग्रहित करती हैं।"}
-},
-{
-type:"tf",
-diff:"medium",
-en:{q:"Software updates can improve security and performance.",opts:["True","False"],ans:0,exp:"Updates often fix bugs and vulnerabilities."},
-hi:{q:"सॉफ्टवेयर अपडेट सुरक्षा और प्रदर्शन में सुधार कर सकते हैं।",opts:["सही","गलत"],ans:0,exp:"अपडेट त्रुटियों और सुरक्षा कमजोरियों को ठीक करते हैं।"}
-},
-{
-type:"mcq",
-diff:"hard",
-en:{q:"Which type of software translates source code into machine code?",opts:["Compiler","Browser","Media Player","Spreadsheet"],ans:0,exp:"A compiler converts programming code into executable code."},
-hi:{q:"सोर्स कोड को मशीन कोड में बदलने वाला सॉफ्टवेयर कौन-सा है?",opts:["Compiler","Browser","Media Player","Spreadsheet"],ans:0,exp:"Compiler प्रोग्राम को मशीन द्वारा समझे जाने योग्य कोड में बदलता है।"}
-},
-{
-type:"mcq",
-diff:"hard",
-en:{q:"What is the purpose of a device driver?",opts:["Enable hardware communication","Edit documents","Play videos","Browse websites"],ans:0,exp:"Drivers allow the operating system to communicate with hardware."},
-hi:{q:"Device Driver का उद्देश्य क्या है?",opts:["हार्डवेयर संचार सक्षम करना","दस्तावेज़ संपादित करना","वीडियो चलाना","वेबसाइट देखना"],ans:0,exp:"ड्राइवर ऑपरेटिंग सिस्टम और हार्डवेयर के बीच संचार कराते हैं।"}
-},
-{
-type:"tf",
-diff:"hard",
-en:{q:"Open-source software allows users to view and modify source code.",opts:["True","False"],ans:0,exp:"Open-source licenses provide access to source code."},
-hi:{q:"Open Source Software में उपयोगकर्ता सोर्स कोड देख और संशोधित कर सकते हैं।",opts:["सही","गलत"],ans:0,exp:"ओपन सोर्स लाइसेंस सोर्स कोड तक पहुंच प्रदान करते हैं।"}
-},
-{
-type:"mcq",
-diff:"hard",
-en:{q:"Which installation type installs only selected components?",opts:["Custom Installation","Typical Installation","Express Installation","Default Installation"],ans:0,exp:"Custom installation allows users to choose components."},
-hi:{q:"केवल चुने हुए घटकों को इंस्टॉल करने वाला इंस्टॉलेशन प्रकार कौन-सा है?",opts:["Custom Installation","Typical Installation","Express Installation","Default Installation"],ans:0,exp:"Custom Installation उपयोगकर्ता को विकल्प चुनने देता है।"}
-},
-{
-type:"mcq",
-diff:"hard",
-en:{q:"What is virtualization software mainly used for?",opts:["Running multiple operating systems","Printing documents","Editing images","Playing music"],ans:0,exp:"Virtualization allows multiple OS environments on one machine."},
-hi:{q:"Virtualization Software का मुख्य उपयोग क्या है?",opts:["एक ही मशीन पर कई ऑपरेटिंग सिस्टम चलाना","दस्तावेज़ प्रिंट करना","चित्र संपादित करना","संगीत चलाना"],ans:0,exp:"Virtualization एक मशीन पर कई OS चलाने की सुविधा देता है।"}
-},
-{
-type:"mcq",
-diff:"hard",
-en:{q:"Which software distribution model provides source code freely to users?",opts:["Open Source","Proprietary","Commercial Only","Trialware"],ans:0,exp:"Open-source software makes source code available for study and modification."},
-hi:{q:"कौन-सा सॉफ्टवेयर वितरण मॉडल उपयोगकर्ताओं को सोर्स कोड उपलब्ध कराता है?",opts:["Open Source","Proprietary","Commercial Only","Trialware"],ans:0,exp:"Open Source सॉफ्टवेयर में सोर्स कोड उपलब्ध होता है।"}
-},
-{
-type:"mcq",
-diff:"easy",
-en:{q:"Which software is designed to perform a specific user task?",opts:["Application Software","System Software","Firmware","Driver"],ans:0,exp:"Application software helps users perform specific tasks like typing and calculations."},
-hi:{q:"उपयोगकर्ता के विशेष कार्य करने के लिए बनाया गया सॉफ्टवेयर कौन-सा है?",opts:["Application Software","System Software","Firmware","Driver"],ans:0,exp:"Application Software उपयोगकर्ता के विशेष कार्यों के लिए बनाया जाता है।"}
-},
-{
-type:"mcq",
-diff:"easy",
-en:{q:"Which application is commonly used to create presentations?",opts:["PowerPoint","Notepad","Paint","Calculator"],ans:0,exp:"PowerPoint is used for creating slide presentations."},
-hi:{q:"प्रेजेंटेशन बनाने के लिए सामान्यतः कौन-सा एप्लिकेशन उपयोग होता है?",opts:["PowerPoint","Notepad","Paint","Calculator"],ans:0,exp:"PowerPoint स्लाइड प्रस्तुति बनाने के लिए उपयोग होता है।"}
-},
-{
-type:"tf",
-diff:"easy",
-en:{q:"Software can be installed from a USB drive.",opts:["True","False"],ans:0,exp:"Many software packages can be installed from USB storage devices."},
-hi:{q:"सॉफ्टवेयर को USB ड्राइव से इंस्टॉल किया जा सकता है।",opts:["सही","गलत"],ans:0,exp:"कई सॉफ्टवेयर USB ड्राइव से इंस्टॉल किए जा सकते हैं।"}
-},
-{
-type:"mcq",
-diff:"easy",
-en:{q:"Which software is used for internet browsing?",opts:["Web Browser","Compiler","Driver","Antivirus"],ans:0,exp:"Web browsers allow users to access websites on the internet."},
-hi:{q:"इंटरनेट ब्राउज़िंग के लिए कौन-सा सॉफ्टवेयर उपयोग होता है?",opts:["Web Browser","Compiler","Driver","Antivirus"],ans:0,exp:"Web Browser इंटरनेट पर वेबसाइट खोलने के लिए उपयोग होता है।"}
-},
-{
-type:"mcq",
-diff:"easy",
-en:{q:"Which file extension is associated with PDF documents?",opts:[".pdf",".exe",".zip",".mp3"],ans:0,exp:"PDF files are commonly used for document sharing."},
-hi:{q:"PDF दस्तावेज़ों का सामान्य एक्सटेंशन कौन-सा है?",opts:[".pdf",".exe",".zip",".mp3"],ans:0,exp:"PDF दस्तावेज़ साझा करने के लिए व्यापक रूप से उपयोग होता है।"}
-},
-{
-type:"tf",
-diff:"easy",
-en:{q:"An antivirus program helps protect a computer from malware.",opts:["True","False"],ans:0,exp:"Antivirus software detects and removes malicious programs."},
-hi:{q:"एंटीवायरस प्रोग्राम कंप्यूटर को मैलवेयर से बचाने में मदद करता है।",opts:["सही","गलत"],ans:0,exp:"एंटीवायरस हानिकारक प्रोग्रामों का पता लगाकर उन्हें हटाता है।"}
-},
-{
-type:"mcq",
-diff:"easy",
-en:{q:"Which storage media is commonly used to distribute software?",opts:["DVD","Mouse","Monitor","Printer"],ans:0,exp:"Software can be distributed using optical media such as DVDs."},
-hi:{q:"सॉफ्टवेयर वितरण के लिए सामान्यतः कौन-सा माध्यम उपयोग होता है?",opts:["DVD","Mouse","Monitor","Printer"],ans:0,exp:"DVD जैसे ऑप्टिकल मीडिया का उपयोग सॉफ्टवेयर वितरण के लिए किया जाता है।"}
-},
-{
-type:"mcq",
-diff:"easy",
-en:{q:"Which software is used to create spreadsheets?",opts:["MS Excel","Paint","VLC","Notepad"],ans:0,exp:"MS Excel is used for spreadsheet calculations and data management."},
-hi:{q:"स्प्रेडशीट बनाने के लिए कौन-सा सॉफ्टवेयर उपयोग होता है?",opts:["MS Excel","Paint","VLC","Notepad"],ans:0,exp:"MS Excel स्प्रेडशीट और गणनाओं के लिए उपयोग होता है।"}
-},
-{
-type:"tf",
-diff:"easy",
-en:{q:"Installing software usually requires following setup instructions.",opts:["True","False"],ans:0,exp:"Most software installations use a setup wizard."},
-hi:{q:"सॉफ्टवेयर इंस्टॉल करने के लिए सामान्यतः सेटअप निर्देशों का पालन करना पड़ता है।",opts:["सही","गलत"],ans:0,exp:"अधिकांश इंस्टॉलेशन में Setup Wizard का उपयोग होता है।"}
-},
-{
-type:"mcq",
-diff:"easy",
-en:{q:"Which type of software is MS Word?",opts:["Word Processor","Operating System","Browser","Utility"],ans:0,exp:"MS Word is a word processing application."},
-hi:{q:"MS Word किस प्रकार का सॉफ्टवेयर है?",opts:["Word Processor","Operating System","Browser","Utility"],ans:0,exp:"MS Word एक Word Processing Application है।"}
-},
-{
-type:"mcq",
-diff:"easy",
-en:{q:"What is the first step before installing most software?",opts:["Run Setup File","Format Disk","Delete OS","Restart Router"],ans:0,exp:"Software installation generally begins by running the setup file."},
-hi:{q:"अधिकांश सॉफ्टवेयर इंस्टॉल करने से पहले पहला कदम क्या होता है?",opts:["Setup File चलाना","Disk Format करना","OS हटाना","Router Restart करना"],ans:0,exp:"इंस्टॉलेशन सामान्यतः Setup File चलाने से शुरू होती है।"}
-},
-{
-type:"tf",
-diff:"easy",
-en:{q:"Software can be downloaded from the internet.",opts:["True","False"],ans:0,exp:"Many software packages are distributed online."},
-hi:{q:"सॉफ्टवेयर इंटरनेट से डाउनलोड किया जा सकता है।",opts:["सही","गलत"],ans:0,exp:"आज अधिकांश सॉफ्टवेयर इंटरनेट से डाउनलोड किए जाते हैं।"}
-},
-{
-type:"mcq",
-diff:"medium",
-en:{q:"Which type of license allows software to be used for evaluation before purchase?",opts:["Trial License","Open Source","Freeware","OEM"],ans:0,exp:"Trial versions allow limited-time or limited-feature use."},
-hi:{q:"खरीदने से पहले परीक्षण हेतु उपयोग की अनुमति देने वाला लाइसेंस कौन-सा है?",opts:["Trial License","Open Source","Freeware","OEM"],ans:0,exp:"Trial Version सीमित समय या सुविधाओं के लिए उपयोग की अनुमति देता है।"}
-},
-{
-type:"mcq",
-diff:"medium",
-en:{q:"What is the purpose of an installation wizard?",opts:["Guide the installation process","Remove hardware","Format memory","Create viruses"],ans:0,exp:"An installation wizard helps users install software step by step."},
-hi:{q:"Installation Wizard का उद्देश्य क्या है?",opts:["इंस्टॉलेशन प्रक्रिया में मार्गदर्शन करना","हार्डवेयर हटाना","मेमोरी फॉर्मेट करना","वायरस बनाना"],ans:0,exp:"Installation Wizard उपयोगकर्ता को चरणबद्ध मार्गदर्शन देता है।"}
-},
-{
-type:"mcq",
-diff:"medium",
-en:{q:"Which type of software is designed to maintain and optimize a computer system?",opts:["Utility Software","Spreadsheet","Presentation Software","Browser"],ans:0,exp:"Utility software helps maintain and improve system performance."},
-hi:{q:"कंप्यूटर सिस्टम के रखरखाव और अनुकूलन के लिए बनाया गया सॉफ्टवेयर कौन-सा है?",opts:["Utility Software","Spreadsheet","Presentation Software","Browser"],ans:0,exp:"Utility Software सिस्टम के रखरखाव और प्रदर्शन सुधार में मदद करता है।"}
-},
-{
-type:"mcq",
-diff:"medium",
-en:{q:"Which utility software is used to compress files?",opts:["WinZip","MS Word","Paint","Calculator"],ans:0,exp:"Compression software reduces file size and saves storage space."},
-hi:{q:"फाइलों को संपीड़ित (Compress) करने के लिए कौन-सा यूटिलिटी सॉफ्टवेयर उपयोग होता है?",opts:["WinZip","MS Word","Paint","Calculator"],ans:0,exp:"Compression Software फाइल का आकार कम करता है।"}
-},
-{
-type:"mcq",
-diff:"medium",
-en:{q:"What is the purpose of software updates?",opts:["Fix bugs and improve security","Delete files","Increase monitor size","Format hard disk"],ans:0,exp:"Updates improve performance, security and stability."},
-hi:{q:"Software Update का मुख्य उद्देश्य क्या है?",opts:["त्रुटियाँ ठीक करना और सुरक्षा बढ़ाना","फाइल हटाना","मॉनिटर बड़ा करना","हार्ड डिस्क फॉर्मेट करना"],ans:0,exp:"Updates प्रदर्शन और सुरक्षा में सुधार करते हैं।"}
-},
-{
-type:"tf",
-diff:"medium",
-en:{q:"A software patch is used to fix problems in existing software.",opts:["True","False"],ans:0,exp:"Patches correct bugs and vulnerabilities."},
-hi:{q:"Software Patch का उपयोग मौजूदा सॉफ्टवेयर की समस्याएँ ठीक करने के लिए किया जाता है।",opts:["सही","गलत"],ans:0,exp:"Patch त्रुटियों और कमजोरियों को ठीक करता है।"}
-},
-{
-type:"mcq",
-diff:"medium",
-en:{q:"Which software category includes disk cleanup tools?",opts:["Utility Software","Browser","Operating System","Presentation Software"],ans:0,exp:"Disk Cleanup tools are utility programs."},
-hi:{q:"Disk Cleanup Tool किस सॉफ्टवेयर श्रेणी में आता है?",opts:["Utility Software","Browser","Operating System","Presentation Software"],ans:0,exp:"Disk Cleanup एक Utility Software है।"}
-},
-{
-type:"mcq",
-diff:"medium",
-en:{q:"Which file extension is commonly used for installer packages in Windows?",opts:[".msi",".png",".xlsx",".wav"],ans:0,exp:"MSI files are Windows Installer packages."},
-hi:{q:"Windows Installer Package के लिए सामान्यतः कौन-सा एक्सटेंशन उपयोग होता है?",opts:[".msi",".png",".xlsx",".wav"],ans:0,exp:"MSI फाइलें Windows Installer Package होती हैं।"}
-},
-{
-type:"tf",
-diff:"medium",
-en:{q:"Licensed software usually requires acceptance of terms and conditions.",opts:["True","False"],ans:0,exp:"Users must accept the license agreement before installation."},
-hi:{q:"Licensed Software में सामान्यतः Terms and Conditions स्वीकार करनी होती हैं।",opts:["सही","गलत"],ans:0,exp:"इंस्टॉलेशन से पहले लाइसेंस समझौता स्वीकार करना पड़ता है।"}
-},
-{
-type:"mcq",
-diff:"medium",
-en:{q:"Which type of software helps protect a system from unauthorized access?",opts:["Security Software","Spreadsheet","Media Player","Word Processor"],ans:0,exp:"Security software helps protect systems from threats."},
-hi:{q:"अनधिकृत पहुँच से सिस्टम की सुरक्षा करने वाला सॉफ्टवेयर कौन-सा है?",opts:["Security Software","Spreadsheet","Media Player","Word Processor"],ans:0,exp:"Security Software सिस्टम को खतरों से बचाता है।"}
-},
-{
-type:"mcq",
-diff:"medium",
-en:{q:"What should be checked before installing software from the internet?",opts:["Source authenticity","Wallpaper","Screen brightness","Mouse color"],ans:0,exp:"Software should be downloaded from trusted sources."},
-hi:{q:"इंटरनेट से सॉफ्टवेयर इंस्टॉल करने से पहले क्या जांचना चाहिए?",opts:["स्रोत की विश्वसनीयता","Wallpaper","Screen Brightness","Mouse Color"],ans:0,exp:"सॉफ्टवेयर हमेशा विश्वसनीय स्रोत से डाउनलोड करना चाहिए।"}
-},
-{
-type:"mcq",
-diff:"medium",
-en:{q:"Which software is used to view PDF documents?",opts:["Adobe Reader","Paint","Notepad","CMD"],ans:0,exp:"Adobe Reader is commonly used for viewing PDF files."},
-hi:{q:"PDF दस्तावेज़ देखने के लिए कौन-सा सॉफ्टवेयर उपयोग होता है?",opts:["Adobe Reader","Paint","Notepad","CMD"],ans:0,exp:"Adobe Reader PDF देखने के लिए उपयोग होता है।"}
-},
-{
-type:"mcq",
-diff:"hard",
-en:{q:"Which software license allows modification and redistribution of source code?",opts:["Open Source License","Trial License","Commercial License","OEM License"],ans:0,exp:"Open-source licenses allow code modification and sharing."},
-hi:{q:"सोर्स कोड में संशोधन और पुनर्वितरण की अनुमति देने वाला लाइसेंस कौन-सा है?",opts:["Open Source License","Trial License","Commercial License","OEM License"],ans:0,exp:"Open Source License कोड संशोधन और वितरण की अनुमति देता है।"}
-},
-{
-type:"mcq",
-diff:"hard",
-en:{q:"What is the main purpose of virtualization software?",opts:["Create virtual machines","Delete viruses","Compress files","Edit images"],ans:0,exp:"Virtualization software allows multiple operating systems on one computer."},
-hi:{q:"Virtualization Software का मुख्य उद्देश्य क्या है?",opts:["Virtual Machine बनाना","वायरस हटाना","फाइल संपीड़ित करना","चित्र संपादित करना"],ans:0,exp:"Virtualization Software एक कंप्यूटर पर कई OS चलाने देता है।"}
-},
-{
-type:"tf",
-diff:"hard",
-en:{q:"Firmware is stored in non-volatile memory.",opts:["True","False"],ans:0,exp:"Firmware remains stored even when power is removed."},
-hi:{q:"Firmware नॉन-वोलाटाइल मेमोरी में संग्रहित होता है।",opts:["सही","गलत"],ans:0,exp:"बिजली बंद होने पर भी Firmware सुरक्षित रहता है।"}
-},
-{
-type:"mcq",
-diff:"hard",
-en:{q:"Which installation method allows deployment of software over a network?",opts:["Network Installation","Manual Installation","Portable Installation","Local Setup"],ans:0,exp:"Network installation distributes software through a network."},
-hi:{q:"नेटवर्क के माध्यम से सॉफ्टवेयर स्थापित करने की विधि कौन-सी है?",opts:["Network Installation","Manual Installation","Portable Installation","Local Setup"],ans:0,exp:"Network Installation नेटवर्क द्वारा सॉफ्टवेयर वितरित करती है।"}
-},
-{
-type:"mcq",
-diff:"hard",
-en:{q:"Which utility can create a complete backup image of a system?",opts:["Backup Software","Paint","Browser","Calculator"],ans:0,exp:"Backup software creates a restorable copy of the system."},
-hi:{q:"पूरे सिस्टम का बैकअप इमेज बनाने के लिए कौन-सी यूटिलिटी उपयोग होती है?",opts:["Backup Software","Paint","Browser","Calculator"],ans:0,exp:"Backup Software सिस्टम की पुनर्स्थापित की जा सकने वाली कॉपी बनाता है।"}
-},
-{
-type:"mcq",
-diff:"hard",
-en:{q:"What is the advantage of portable software?",opts:["Runs without installation","Requires more RAM","Needs activation every time","Cannot be copied"],ans:0,exp:"Portable software can run directly from storage devices."},
-hi:{q:"Portable Software का मुख्य लाभ क्या है?",opts:["बिना इंस्टॉलेशन के चलता है","अधिक RAM की आवश्यकता होती है","हर बार Activation चाहिए","कॉपी नहीं किया जा सकता"],ans:0,exp:"Portable Software सीधे स्टोरेज डिवाइस से चल सकता है।"}
-},
-{
-type:"mcq",
-diff:"easy",
-en:{q:"Which software is commonly used for sending emails?",opts:["Email Client","Paint","Calculator","Media Player"],ans:0,exp:"Email clients help users send and receive emails."},
-hi:{q:"ईमेल भेजने के लिए सामान्यतः कौन-सा सॉफ्टवेयर उपयोग होता है?",opts:["Email Client","Paint","Calculator","Media Player"],ans:0,exp:"Email Client ईमेल भेजने और प्राप्त करने के लिए उपयोग होता है।"}
-},
-{
-type:"mcq",
-diff:"easy",
-en:{q:"Which software is used for creating databases?",opts:["MS Access","Paint","Notepad","VLC"],ans:0,exp:"MS Access is a database management application."},
-hi:{q:"डेटाबेस बनाने के लिए कौन-सा सॉफ्टवेयर उपयोग होता है?",opts:["MS Access","Paint","Notepad","VLC"],ans:0,exp:"MS Access डेटाबेस प्रबंधन के लिए उपयोग होता है।"}
-},
-{
-type:"tf",
-diff:"easy",
-en:{q:"Software can be copied from one storage device to another.",opts:["True","False"],ans:0,exp:"Software files can be transferred between storage devices."},
-hi:{q:"सॉफ्टवेयर को एक स्टोरेज डिवाइस से दूसरे में कॉपी किया जा सकता है।",opts:["सही","गलत"],ans:0,exp:"सॉफ्टवेयर फाइलों को विभिन्न स्टोरेज डिवाइसों में स्थानांतरित किया जा सकता है।"}
-},
-{
-type:"mcq",
-diff:"easy",
-en:{q:"Which type of software helps users create documents?",opts:["Word Processor","Operating System","Driver","Firmware"],ans:0,exp:"Word processors are used for creating and editing documents."},
-hi:{q:"दस्तावेज़ बनाने में मदद करने वाला सॉफ्टवेयर कौन-सा है?",opts:["Word Processor","Operating System","Driver","Firmware"],ans:0,exp:"Word Processor दस्तावेज़ बनाने और संपादित करने के लिए उपयोग होता है।"}
-},
-{
-type:"mcq",
-diff:"easy",
-en:{q:"Which file type is commonly used for music files?",opts:[".mp3",".exe",".pdf",".zip"],ans:0,exp:"MP3 is a popular audio file format."},
-hi:{q:"संगीत फाइलों के लिए सामान्यतः कौन-सा फाइल प्रकार उपयोग होता है?",opts:[".mp3",".exe",".pdf",".zip"],ans:0,exp:"MP3 एक लोकप्रिय ऑडियो फॉर्मेट है।"}
-},
-{
-type:"tf",
-diff:"easy",
-en:{q:"A browser is application software.",opts:["True","False"],ans:0,exp:"Browsers are applications used to access websites."},
-hi:{q:"Browser एक Application Software है।",opts:["सही","गलत"],ans:0,exp:"Browser वेबसाइट एक्सेस करने के लिए उपयोग होने वाला एप्लिकेशन है।"}
-},
-{
-type:"mcq",
-diff:"easy",
-en:{q:"Which software is commonly used for video conferencing?",opts:["Zoom","Paint","Notepad","Calculator"],ans:0,exp:"Zoom is widely used for online meetings and video calls."},
-hi:{q:"वीडियो कॉन्फ्रेंसिंग के लिए सामान्यतः कौन-सा सॉफ्टवेयर उपयोग होता है?",opts:["Zoom","Paint","Notepad","Calculator"],ans:0,exp:"Zoom ऑनलाइन मीटिंग और वीडियो कॉल के लिए उपयोग होता है।"}
-},
-{
-type:"mcq",
-diff:"easy",
-en:{q:"Which file extension is commonly used for image files?",opts:[".jpg",".exe",".pdf",".zip"],ans:0,exp:"JPG is a common image file format."},
-hi:{q:"चित्र फाइलों के लिए सामान्यतः कौन-सा एक्सटेंशन उपयोग होता है?",opts:[".jpg",".exe",".pdf",".zip"],ans:0,exp:"JPG एक सामान्य इमेज फॉर्मेट है।"}
-},
-{
-type:"tf",
-diff:"easy",
-en:{q:"Software documentation helps users understand software usage.",opts:["True","False"],ans:0,exp:"Documentation provides instructions and guidance."},
-hi:{q:"Software Documentation उपयोगकर्ताओं को सॉफ्टवेयर समझने में मदद करती है।",opts:["सही","गलत"],ans:0,exp:"Documentation निर्देश और मार्गदर्शन प्रदान करती है।"}
-},
-{
-type:"mcq",
-diff:"easy",
-en:{q:"Which software category includes Google Chrome?",opts:["Browser","Spreadsheet","Utility","Driver"],ans:0,exp:"Google Chrome is a web browser."},
-hi:{q:"Google Chrome किस सॉफ्टवेयर श्रेणी में आता है?",opts:["Browser","Spreadsheet","Utility","Driver"],ans:0,exp:"Google Chrome एक वेब ब्राउज़र है।"}
-},
-{
-type:"mcq",
-diff:"medium",
-en:{q:"What is the purpose of an antivirus scan?",opts:["Detect malicious software","Increase storage","Create documents","Format disk"],ans:0,exp:"Antivirus scans identify malware and security threats."},
-hi:{q:"Antivirus Scan का उद्देश्य क्या है?",opts:["हानिकारक सॉफ्टवेयर का पता लगाना","स्टोरेज बढ़ाना","दस्तावेज़ बनाना","डिस्क फॉर्मेट करना"],ans:0,exp:"Antivirus Scan मैलवेयर और सुरक्षा खतरों की पहचान करता है।"}
-},
-{
-type:"mcq",
-diff:"medium",
-en:{q:"Which software is used to manage databases?",opts:["DBMS","Media Player","Browser","Compiler"],ans:0,exp:"DBMS is designed for creating and managing databases."},
-hi:{q:"डेटाबेस प्रबंधन के लिए कौन-सा सॉफ्टवेयर उपयोग होता है?",opts:["DBMS","Media Player","Browser","Compiler"],ans:0,exp:"DBMS डेटाबेस बनाने और प्रबंधित करने के लिए उपयोग होता है।"}
-},
-{
-type:"tf",
-diff:"medium",
-en:{q:"Cloud-based software can be accessed through the internet.",opts:["True","False"],ans:0,exp:"Cloud software runs on remote servers and is accessed online."},
-hi:{q:"Cloud आधारित सॉफ्टवेयर को इंटरनेट के माध्यम से एक्सेस किया जा सकता है।",opts:["सही","गलत"],ans:0,exp:"Cloud Software दूरस्थ सर्वरों पर चलता है और ऑनलाइन उपयोग होता है।"}
-},
-{
-type:"mcq",
-diff:"medium",
-en:{q:"Which software model charges users periodically for access?",opts:["Subscription Software","Open Source","Freeware","Public Domain"],ans:0,exp:"Subscription software requires recurring payments."},
-hi:{q:"नियमित भुगतान लेकर उपयोग की अनुमति देने वाला सॉफ्टवेयर मॉडल कौन-सा है?",opts:["Subscription Software","Open Source","Freeware","Public Domain"],ans:0,exp:"Subscription Software के लिए समय-समय पर भुगतान करना पड़ता है।"}
-},
-{
-type:"mcq",
-diff:"medium",
-en:{q:"What is the purpose of software compatibility testing?",opts:["Verify software works correctly on a system","Increase RAM","Format storage","Create backups"],ans:0,exp:"Compatibility testing ensures software works on intended platforms."},
-hi:{q:"Software Compatibility Testing का उद्देश्य क्या है?",opts:["यह सुनिश्चित करना कि सॉफ्टवेयर सिस्टम पर सही चले","RAM बढ़ाना","स्टोरेज फॉर्मेट करना","बैकअप बनाना"],ans:0,exp:"Compatibility Testing यह सुनिश्चित करती है कि सॉफ्टवेयर सही ढंग से कार्य करे।"}
-},
-{
-type:"mcq",
-diff:"medium",
-en:{q:"Which software is commonly used for team communication and collaboration?",opts:["Microsoft Teams","Paint","Calculator","Notepad"],ans:0,exp:"Microsoft Teams supports chat, meetings and collaboration."},
-hi:{q:"टीम संचार और सहयोग के लिए सामान्यतः कौन-सा सॉफ्टवेयर उपयोग होता है?",opts:["Microsoft Teams","Paint","Calculator","Notepad"],ans:0,exp:"Microsoft Teams चैट, मीटिंग और सहयोग के लिए उपयोग होता है।"}
-},
-{
-type:"mcq",
-diff:"medium",
-en:{q:"Which type of software is distributed free of cost but source code is usually not available?",opts:["Freeware","Open Source","Compiler","Firmware"],ans:0,exp:"Freeware is free to use but source code is generally closed."},
-hi:{q:"कौन-सा सॉफ्टवेयर निःशुल्क वितरित किया जाता है लेकिन उसका सोर्स कोड सामान्यतः उपलब्ध नहीं होता?",opts:["Freeware","Open Source","Compiler","Firmware"],ans:0,exp:"Freeware उपयोग के लिए मुफ्त होता है लेकिन सोर्स कोड प्रायः बंद रहता है।"}
-},
-{
-type:"tf",
-diff:"medium",
-en:{q:"A software update may add new features in addition to fixing bugs.",opts:["True","False"],ans:0,exp:"Updates can include new functionality and improvements."},
-hi:{q:"Software Update त्रुटियाँ ठीक करने के साथ नए फीचर भी जोड़ सकता है।",opts:["सही","गलत"],ans:0,exp:"Updates में नए फीचर और सुधार शामिल हो सकते हैं।"}
-},
-{
-type:"mcq",
-diff:"medium",
-en:{q:"Which software is commonly used to create and edit images?",opts:["Image Editor","Compiler","Browser","Driver"],ans:0,exp:"Image editing software is used to modify graphics and photos."},
-hi:{q:"चित्र बनाने और संपादित करने के लिए सामान्यतः कौन-सा सॉफ्टवेयर उपयोग होता है?",opts:["Image Editor","Compiler","Browser","Driver"],ans:0,exp:"Image Editing Software चित्रों और फोटो को संपादित करता है।"}
-},
-{
-type:"mcq",
-diff:"medium",
-en:{q:"What is the purpose of a software repository?",opts:["Store and distribute software","Increase RAM","Print files","Scan documents"],ans:0,exp:"Repositories provide centralized software storage and distribution."},
-hi:{q:"Software Repository का उद्देश्य क्या है?",opts:["सॉफ्टवेयर संग्रहित और वितरित करना","RAM बढ़ाना","फाइल प्रिंट करना","दस्तावेज़ स्कैन करना"],ans:0,exp:"Repository सॉफ्टवेयर के संग्रहण और वितरण के लिए उपयोग होती है।"}
-},
-{
-type:"tf",
-diff:"medium",
-en:{q:"Portable software can often run directly from a USB drive.",opts:["True","False"],ans:0,exp:"Portable applications usually do not require installation."},
-hi:{q:"Portable Software अक्सर सीधे USB ड्राइव से चल सकता है।",opts:["सही","गलत"],ans:0,exp:"Portable Software को सामान्यतः इंस्टॉल करने की आवश्यकता नहीं होती।"}
-},
-{
-type:"mcq",
-diff:"medium",
-en:{q:"Which software is primarily used for creating animations?",opts:["Animation Software","Spreadsheet","Antivirus","Driver"],ans:0,exp:"Animation software is designed to create motion graphics and animations."},
-hi:{q:"Animation बनाने के लिए मुख्य रूप से कौन-सा सॉफ्टवेयर उपयोग होता है?",opts:["Animation Software","Spreadsheet","Antivirus","Driver"],ans:0,exp:"Animation Software चलायमान ग्राफिक्स बनाने के लिए उपयोग होता है।"}
-},
-{
-type:"mcq",
-diff:"medium",
-en:{q:"Which document format preserves layout across different devices?",opts:["PDF","TXT","LOG","BAT"],ans:0,exp:"PDF maintains formatting across platforms and devices."},
-hi:{q:"कौन-सा दस्तावेज़ प्रारूप विभिन्न उपकरणों पर लेआउट सुरक्षित रखता है?",opts:["PDF","TXT","LOG","BAT"],ans:0,exp:"PDF विभिन्न प्लेटफॉर्म पर समान स्वरूप बनाए रखता है।"}
-},
-{
-type:"mcq",
-diff:"medium",
-en:{q:"Which software category includes backup tools?",opts:["Utility Software","Presentation Software","Browser","Compiler"],ans:0,exp:"Backup tools are classified as utility software."},
-hi:{q:"Backup Tool किस सॉफ्टवेयर श्रेणी में आता है?",opts:["Utility Software","Presentation Software","Browser","Compiler"],ans:0,exp:"Backup Tool एक Utility Software है।"}
-},
-{
-type:"mcq",
-diff:"hard",
-en:{q:"Which type of software license restricts modification of source code?",opts:["Proprietary License","Open Source License","Public Domain","GPL"],ans:0,exp:"Proprietary software usually keeps source code private."},
-hi:{q:"कौन-सा सॉफ्टवेयर लाइसेंस सोर्स कोड में संशोधन को प्रतिबंधित करता है?",opts:["Proprietary License","Open Source License","Public Domain","GPL"],ans:0,exp:"Proprietary Software में सोर्स कोड सामान्यतः निजी रखा जाता है।"}
-},
-{
-type:"mcq",
-diff:"hard",
-en:{q:"What is the primary function of middleware software?",opts:["Connect different applications","Edit images","Compress files","Manage printers"],ans:0,exp:"Middleware enables communication between different software systems."},
-hi:{q:"Middleware Software का मुख्य कार्य क्या है?",opts:["विभिन्न एप्लिकेशन को जोड़ना","चित्र संपादित करना","फाइल संपीड़ित करना","प्रिंटर प्रबंधन"],ans:0,exp:"Middleware विभिन्न सॉफ्टवेयर सिस्टम के बीच संचार स्थापित करता है।"}
-},
-{
-type:"tf",
-diff:"hard",
-en:{q:"Firmware updates can improve hardware functionality.",opts:["True","False"],ans:0,exp:"Firmware updates may add features and fix hardware issues."},
-hi:{q:"Firmware Update हार्डवेयर की कार्यक्षमता में सुधार कर सकता है।",opts:["सही","गलत"],ans:0,exp:"Firmware Update नई सुविधाएँ और सुधार प्रदान कर सकता है।"}
-},
-{
-type:"mcq",
-diff:"hard",
-en:{q:"Which software deployment method installs software on many computers automatically?",opts:["Automated Deployment","Manual Setup","Portable Execution","Local Copy"],ans:0,exp:"Automated deployment is commonly used in organizations."},
-hi:{q:"कई कंप्यूटरों पर स्वचालित रूप से सॉफ्टवेयर स्थापित करने की विधि कौन-सी है?",opts:["Automated Deployment","Manual Setup","Portable Execution","Local Copy"],ans:0,exp:"Automated Deployment संगठनों में व्यापक रूप से उपयोग होती है।"}
-},
-{
-type:"mcq",
-diff:"hard",
-en:{q:"Which concept allows software to be used without installing it on the host operating system?",opts:["Virtualization","Formatting","Defragmentation","Compilation"],ans:0,exp:"Virtualization provides isolated software environments."},
-hi:{q:"बिना Host Operating System पर इंस्टॉल किए सॉफ्टवेयर चलाने की अवधारणा कौन-सी है?",opts:["Virtualization","Formatting","Defragmentation","Compilation"],ans:0,exp:"Virtualization अलग वातावरण में सॉफ्टवेयर चलाने की सुविधा देती है।"}
-},
-{
-type:"mcq",
-diff:"hard",
-en:{q:"What is the primary purpose of software version control?",opts:["Track and manage software changes","Increase storage","Remove malware","Print reports"],ans:0,exp:"Version control helps manage software development and revisions."},
-hi:{q:"Software Version Control का मुख्य उद्देश्य क्या है?",opts:["सॉफ्टवेयर परिवर्तनों का प्रबंधन और ट्रैक करना","स्टोरेज बढ़ाना","मैलवेयर हटाना","रिपोर्ट प्रिंट करना"],ans:0,exp:"Version Control सॉफ्टवेयर विकास और संशोधनों को प्रबंधित करता है।"}
-}
+// Q1 - Easy MCQ
+{type:"mcq",diff:"easy",en:{q:"Which of the following is an example of Word Processing software?",opts:["MS Excel","MS Word","MS PowerPoint","MS Access"],ans:1,exp:"MS Word is a word processing program developed by Microsoft for creating text-based documents. It is widely used for drafting letters, reports, and essays with various formatting tools. Unlike Excel which is for spreadsheets, or PowerPoint for presentations, Word focuses purely on text manipulation. This software has become an industry standard in modern computing."},hi:{q:"निम्नलिखित में से कौन सा वर्ड प्रोसेसिंग सॉफ्टवेयर का एक उदाहरण है?",opts:["MS Excel","MS Word","MS PowerPoint","MS Access"],ans:1,exp:"MS Word माइक्रोसॉफ्ट द्वारा विकसित एक वर्ड प्रोसेसिंग प्रोग्राम है जिसका उपयोग टेक्स्ट-आधारित दस्तावेज़ बनाने के लिए किया जाता है। इसका उपयोग मुख्य रूप से पत्र, रिपोर्ट और निबंध तैयार करने के लिए किया जाता है। एक्सेल या पॉवरपॉइंट के विपरीत, वर्ड पूरी तरह से टेक्स्ट हेरफेर पर केंद्रित है। यह सॉफ्टवेयर आधुनिक कंप्यूटिंग में एक उद्योग मानक बन गया है।"}},
+// Q2 - Easy MCQ
+{type:"mcq",diff:"easy",en:{q:"What is the default file extension for a document saved in MS Word 2010 and later versions?",opts:[".doc",".docx",".txt",".rtf"],ans:1,exp:"The default file extension for MS Word documents from version 2007 onwards is .docx. The 'x' stands for XML, which indicates an open XML-based format that creates smaller, more robust file sizes. Older versions of Word (97-2003) used the .doc extension. This new format helps in better data recovery and compatibility."},hi:{q:"MS Word 2010 और उसके बाद के संस्करणों में सहेजे गए दस्तावेज़ के लिए डिफ़ॉल्ट फ़ाइल एक्सटेंशन क्या है?",opts:[".doc",".docx",".txt",".rtf"],ans:1,exp:"संस्करण 2007 के बाद से MS Word दस्तावेज़ों के लिए डिफ़ॉल्ट फ़ाइल एक्सटेंशन .docx है। 'x' का अर्थ XML है, जो छोटे और अधिक मजबूत फ़ाइल आकार बनाता है। पुराने संस्करण .doc एक्सटेंशन का उपयोग करते थे। यह नया प्रारूप बेहतर डेटा रिकवरी और संगतता में मदद करता है।"}},
+// Q3 - Easy MCQ
+{type:"mcq",diff:"easy",en:{q:"Which bar is located at the very top of the MS Word window and displays the name of the document?",opts:["Status Bar","Menu Bar","Title Bar","Taskbar"],ans:2,exp:"The Title Bar is the horizontal strip located at the topmost section of the MS Word application window. It displays the name of the active document alongside the name of the application (e.g., 'Document1 - Word'). It also houses the Minimize, Maximize/Restore, and Close buttons on the right side. It helps users easily identify the file they are currently working on."},hi:{q:"MS Word विंडो के सबसे ऊपरी भाग में कौन सा बार स्थित होता है जो दस्तावेज़ का नाम प्रदर्शित करता है?",opts:["स्टेटस बार (Status Bar)","मेनू बार (Menu Bar)","टाइटल बार (Title Bar)","टास्कबार (Taskbar)"],ans:2,exp:"टाइटल बार MS Word एप्लिकेशन विंडो के सबसे ऊपरी भाग में स्थित एक क्षैतिज पट्टी है। यह सक्रिय दस्तावेज़ के नाम के साथ एप्लिकेशन का नाम प्रदर्शित करता है (जैसे, 'Document1 - Word')। इसमें दाईं ओर मिनिमाइज़, मैक्सिमाइज़ और क्लोज़ बटन भी होते हैं। यह उपयोगकर्ताओं को उस फ़ाइल की आसानी से पहचान करने में मदद करता है जिस पर वे काम कर रहे हैं।"}},
+// Q4 - Easy MCQ
+{type:"mcq",diff:"easy",en:{q:"Which area in MS Word contains multiple tabs like Home, Insert, Page Layout, etc., each holding a set of commands?",opts:["Scroll Bar","Ribbon","Status Bar","Title Bar"],ans:1,exp:"The Ribbon is a user interface element introduced in Office 2007 that replaced traditional drop-down menus. It consists of multiple tabs such as Home, Insert, and Design, each containing groups of related commands. This highly visual setup allows users to quickly find and use formatting and editing tools without navigating complex menus. The Ribbon can also be collapsed to save screen space."},hi:{q:"MS Word के किस क्षेत्र में होम, इंसर्ट, पेज लेआउट आदि जैसे कई टैब होते हैं, जिनमें से प्रत्येक में कमांड का एक सेट होता है?",opts:["स्क्रॉल बार (Scroll Bar)","रिबन (Ribbon)","स्टेटस बार (Status Bar)","टाइटल बार (Title Bar)"],ans:1,exp:"रिबन एक यूजर इंटरफेस तत्व है जिसे ऑफिस 2007 में पेश किया गया था जिसने पारंपरिक ड्रॉप-डाउन मेनू को बदल दिया। इसमें होम, इंसर्ट और डिज़ाइन जैसे कई टैब होते हैं, जिनमें से प्रत्येक में संबंधित कमांड के समूह होते हैं। यह दृश्य सेटअप उपयोगकर्ताओं को जटिल मेनू नेविगेट किए बिना फ़ॉर्मेटिंग टूल खोजने की अनुमति देता है।"}},
+// Q5 - Easy MCQ
+{type:"mcq",diff:"easy",en:{q:"What is the keyboard shortcut to 'Save' a document in MS Word?",opts:["Ctrl + S","Ctrl + P","Ctrl + N","Ctrl + O"],ans:0,exp:"The keyboard shortcut 'Ctrl + S' is universally used to save the current progress of a document in MS Word. If the document is being saved for the very first time, this command will open the 'Save As' dialog box to let the user specify a file name and location. Frequent use of this shortcut prevents data loss due to unexpected power failures or system crashes."},hi:{q:"MS Word में किसी दस्तावेज़ को 'सेव' (Save) करने के लिए कीबोर्ड शॉर्टकट क्या है?",opts:["Ctrl + S","Ctrl + P","Ctrl + N","Ctrl + O"],ans:0,exp:"MS Word में दस्तावेज़ की वर्तमान प्रगति को सहेजने के लिए 'Ctrl + S' कीबोर्ड शॉर्टकट का सार्वभौमिक रूप से उपयोग किया जाता है। यदि दस्तावेज़ पहली बार सहेजा जा रहा है, तो यह 'सेव एज़' (Save As) डायलॉग बॉक्स खोलेगा। इस शॉर्टकट का लगातार उपयोग डेटा हानि को रोकता है।"}},
+// Q6 - Easy MCQ
+{type:"mcq",diff:"easy",en:{q:"What is the keyboard shortcut to 'Print' a document in MS Word?",opts:["Ctrl + PrtScn","Ctrl + P","Alt + P","Shift + P"],ans:1,exp:"'Ctrl + P' is the standard keyboard shortcut to open the Print settings and preview pane in MS Word. Once pressed, it brings up the backstage view where you can select the printer, specify page ranges, number of copies, and view a preview of the document. This is one of the most frequently used shortcuts in administrative office tasks."},hi:{q:"MS Word में किसी दस्तावेज़ को 'प्रिंट' (Print) करने के लिए कीबोर्ड शॉर्टकट क्या है?",opts:["Ctrl + PrtScn","Ctrl + P","Alt + P","Shift + P"],ans:1,exp:"MS Word में प्रिंट सेटिंग्स और पूर्वावलोकन फलक को खोलने के लिए 'Ctrl + P' मानक कीबोर्ड शॉर्टकट है। इसे दबाने के बाद, आप प्रिंटर का चयन कर सकते हैं, पेज रेंज, प्रतियों की संख्या निर्दिष्ट कर सकते हैं और दस्तावेज़ का पूर्वावलोकन देख सकते हैं। यह बहुत उपयोगी है।"}},
+// Q7 - Easy MCQ
+{type:"mcq",diff:"easy",en:{q:"Which shortcut key is used to select all the text and objects in an MS Word document?",opts:["Ctrl + A","Ctrl + S","Ctrl + X","Ctrl + C"],ans:0,exp:"'Ctrl + A' stands for 'Select All'. It is an essential keyboard shortcut that instantly highlights every piece of text, images, and other objects present within the active document. This is highly useful when a user wants to apply a uniform font change, clear the entire document, or copy the entire content to the clipboard simultaneously."},hi:{q:"MS Word दस्तावेज़ में सभी टेक्स्ट और ऑब्जेक्ट का चयन (Select All) करने के लिए किस शॉर्टकट कुंजी का उपयोग किया जाता है?",opts:["Ctrl + A","Ctrl + S","Ctrl + X","Ctrl + C"],ans:0,exp:"'Ctrl + A' का अर्थ 'सिलेक्ट ऑल' है। यह एक आवश्यक शॉर्टकट है जो सक्रिय दस्तावेज़ में मौजूद हर टेक्स्ट, चित्र और अन्य ऑब्जेक्ट को तुरंत हाइलाइट करता है। यह तब बहुत उपयोगी होता है जब उपयोगकर्ता संपूर्ण दस्तावेज़ में एकसमान फ़ॉन्ट लागू करना चाहता है या सभी सामग्री को कॉपी करना चाहता है।"}},
+// Q8 - Easy MCQ
+{type:"mcq",diff:"easy",en:{q:"What is the keyboard shortcut to copy selected text in MS Word?",opts:["Ctrl + V","Ctrl + X","Ctrl + C","Ctrl + Z"],ans:2,exp:"'Ctrl + C' is the definitive shortcut for copying selected text or objects to the Windows Clipboard. Copying leaves the original text fully intact at its source location while holding a duplicate in memory. The user can then navigate to a different section or a completely different document and use the Paste command to insert the duplicated content."},hi:{q:"MS Word में चयनित टेक्स्ट को कॉपी करने के लिए कीबोर्ड शॉर्टकट क्या है?",opts:["Ctrl + V","Ctrl + X","Ctrl + C","Ctrl + Z"],ans:2,exp:"चयनित टेक्स्ट या ऑब्जेक्ट को क्लिपबोर्ड पर कॉपी करने के लिए 'Ctrl + C' निश्चित शॉर्टकट है। कॉपी करने से मूल टेक्स्ट अपने स्रोत स्थान पर बरकरार रहता है और मेमोरी में एक डुप्लिकेट सहेज लिया जाता है। इसके बाद उपयोगकर्ता 'पेस्ट' कमांड का उपयोग करके सामग्री को सम्मिलित कर सकता है।"}},
+// Q9 - Easy MCQ
+{type:"mcq",diff:"easy",en:{q:"Which keyboard shortcut is used to paste the text that has been cut or copied?",opts:["Ctrl + V","Ctrl + P","Ctrl + X","Ctrl + C"],ans:0,exp:"'Ctrl + V' is the shortcut used to paste content from the clipboard into the current cursor location in an MS Word document. The letter 'V' was chosen historically as it sits conveniently next to X and C on standard QWERTY keyboards, making one-handed editing extremely fast. It inserts whatever was last copied or cut into the active document."},hi:{q:"कट या कॉपी किए गए टेक्स्ट को पेस्ट (Paste) करने के लिए किस कीबोर्ड शॉर्टकट का उपयोग किया जाता है?",opts:["Ctrl + V","Ctrl + P","Ctrl + X","Ctrl + C"],ans:0,exp:"किसी MS Word दस्तावेज़ में कर्सर के वर्तमान स्थान पर क्लिपबोर्ड से सामग्री पेस्ट करने के लिए 'Ctrl + V' का उपयोग किया जाता है। 'V' अक्षर को इसलिए चुना गया क्योंकि यह QWERTY कीबोर्ड पर X और C के बगल में स्थित है, जिससे संपादन तेज हो जाता है।"}},
+// Q10 - Easy MCQ
+{type:"mcq",diff:"easy",en:{q:"What is the shortcut key to 'Cut' selected text, removing it from its original location?",opts:["Ctrl + C","Ctrl + X","Ctrl + V","Ctrl + Z"],ans:1,exp:"'Ctrl + X' performs the 'Cut' operation. Unlike copying, cutting actually removes the selected text or object from the document entirely and moves it into the system clipboard. The user can then paste the cut item into a different location. The 'X' is often associated with the shape of scissors, making it easy to remember."},hi:{q:"चयनित टेक्स्ट को 'कट' (Cut) करने, यानी उसे उसके मूल स्थान से हटाने के लिए शॉर्टकट कुंजी क्या है?",opts:["Ctrl + C","Ctrl + X","Ctrl + V","Ctrl + Z"],ans:1,exp:"'Ctrl + X' कट ऑपरेशन करता है। कॉपी करने के विपरीत, काटना (कट) वास्तव में चयनित टेक्स्ट या ऑब्जेक्ट को दस्तावेज़ से पूरी तरह हटा देता है और इसे सिस्टम क्लिपबोर्ड में ले जाता है। उपयोगकर्ता फिर कट किए गए आइटम को किसी भिन्न स्थान पर पेस्ट कर सकता है। 'X' कैंची के आकार जैसा दिखता है।"}},
+// Q11 - Easy MCQ
+{type:"mcq",diff:"easy",en:{q:"Which keyboard shortcut is used to make the selected text Bold?",opts:["Ctrl + B","Ctrl + U","Ctrl + I","Ctrl + D"],ans:0,exp:"'Ctrl + B' is the formatting shortcut to apply or remove the Bold effect on selected text. Bolding text makes the characters thicker and darker compared to the surrounding normal text, serving to emphasize important words or headings within the document. It is a fundamental text styling tool in MS Word."},hi:{q:"चयनित टेक्स्ट को बोल्ड (Bold) करने के लिए किस कीबोर्ड शॉर्टकट का उपयोग किया जाता है?",opts:["Ctrl + B","Ctrl + U","Ctrl + I","Ctrl + D"],ans:0,exp:"चयनित टेक्स्ट पर बोल्ड प्रभाव लागू करने या हटाने के लिए 'Ctrl + B' का उपयोग किया जाता है। टेक्स्ट को बोल्ड करने से अक्षर सामान्य टेक्स्ट की तुलना में मोटे और गहरे हो जाते हैं, जो दस्तावेज़ में महत्वपूर्ण शब्दों या शीर्षकों पर जोर देने के लिए कार्य करता है।"}},
+// Q12 - Easy MCQ
+{type:"mcq",diff:"easy",en:{q:"Which shortcut applies italic formatting to the selected text?",opts:["Ctrl + B","Ctrl + I","Ctrl + U","Ctrl + E"],ans:1,exp:"'Ctrl + I' applies italic formatting to the highlighted text, causing the characters to slant slightly to the right. Italics are traditionally used to denote titles of books, foreign words, or simply to add mild emphasis to a specific phrase within a paragraph. Pressing the shortcut again removes the formatting."},hi:{q:"कौन सा शॉर्टकट चयनित टेक्स्ट पर इटैलिक (Italic) फ़ॉर्मेटिंग लागू करता है?",opts:["Ctrl + B","Ctrl + I","Ctrl + U","Ctrl + E"],ans:1,exp:"'Ctrl + I' हाइलाइट किए गए टेक्स्ट पर इटैलिक फ़ॉर्मेटिंग लागू करता है, जिससे अक्षर थोड़े दाईं ओर झुक जाते हैं। इटैलिक का उपयोग पारंपरिक रूप से किताबों के शीर्षक, विदेशी शब्दों को दर्शाने या पैराग्राफ के भीतर किसी विशिष्ट वाक्यांश पर जोर देने के लिए किया जाता है।"}},
+// Q13 - Easy MCQ
+{type:"mcq",diff:"easy",en:{q:"What shortcut key applies an underline to the selected text?",opts:["Ctrl + U","Ctrl + L","Ctrl + Shift + U","Ctrl + D"],ans:0,exp:"'Ctrl + U' is the quick command for adding a single continuous line underneath the selected text. Underlining is a common formatting technique used to draw the reader's attention to hyperlinks, headings, or critical terms. Like other formatting shortcuts, it functions as a toggle switch."},hi:{q:"कौन सी शॉर्टकट कुंजी चयनित टेक्स्ट के नीचे एक लाइन (Underline) खींचती है?",opts:["Ctrl + U","Ctrl + L","Ctrl + Shift + U","Ctrl + D"],ans:0,exp:"'Ctrl + U' चयनित टेक्स्ट के नीचे एक निरंतर रेखा जोड़ने के लिए त्वरित कमांड है। अंडरलाइनिंग एक सामान्य फ़ॉर्मेटिंग तकनीक है जिसका उपयोग पाठक का ध्यान हाइपरलिंक, हेडिंग या महत्वपूर्ण शब्दों की ओर खींचने के लिए किया जाता है। यह एक टॉगल स्विच के रूप में कार्य करता है।"}},
+// Q14 - Easy MCQ
+{type:"mcq",diff:"easy",en:{q:"Which command allows you to reverse your last action in MS Word?",opts:["Redo","Undo","Refresh","Restore"],ans:1,exp:"The 'Undo' command, triggered by the 'Ctrl + Z' shortcut, reverses the most recent action performed by the user. Whether you accidentally deleted a paragraph, applied the wrong formatting, or typed a typo, Undo acts as a safety net allowing you to step back through your document's recent history seamlessly."},hi:{q:"कौन सा कमांड आपको MS Word में अपने अंतिम कार्य को उलटने (reverse) की अनुमति देता है?",opts:["Redo (रीडू)","Undo (अनडू)","Refresh (रिफ्रेश)","Restore (रिस्टोर)"],ans:1,exp:"'अनडू' (Undo) कमांड, जो 'Ctrl + Z' शॉर्टकट द्वारा ट्रिगर होता है, उपयोगकर्ता द्वारा किए गए सबसे हालिया कार्य को उलट देता है। चाहे आपने गलती से कोई पैराग्राफ हटा दिया हो, गलत फ़ॉर्मेटिंग लागू कर दी हो, या टाइपो कर दिया हो, अनडू आपको अपनी गलती सुधारने की अनुमति देता है।"}},
+// Q15 - Easy MCQ
+{type:"mcq",diff:"easy",en:{q:"If you 'Undo' an action by mistake, which command allows you to re-apply it?",opts:["Repeat","Reverse","Redo","Refresh"],ans:2,exp:"The 'Redo' command perfectly complements Undo. If a user utilizes Undo but realizes they actually wanted to keep that change, they can execute 'Redo' (usually via Ctrl + Y) to instantly re-apply the action. Redo is only available immediately after an Undo operation has been performed."},hi:{q:"यदि आप गलती से किसी कार्य को 'अनडू' (Undo) कर देते हैं, तो कौन सा कमांड आपको उसे फिर से लागू करने की अनुमति देता है?",opts:["Repeat (रिपीट)","Reverse (रिवर्स)","Redo (रीडू)","Refresh (रिफ्रेश)"],ans:2,exp:"'रीडू' (Redo) कमांड अनडू का पूरक है। यदि कोई उपयोगकर्ता अनडू का उपयोग करता है, लेकिन उसे लगता है कि वह वास्तव में उस बदलाव को रखना चाहता था, तो वह कार्रवाई को तुरंत फिर से लागू करने के लिए 'रीडू' (आमतौर पर Ctrl + Y के माध्यम से) निष्पादित कर सकता है।"}},
+// Q16 - Easy MCQ
+{type:"mcq",diff:"easy",en:{q:"What is the default font generally used in modern versions of MS Word (2007 and above)?",opts:["Times New Roman","Arial","Calibri","Courier New"],ans:2,exp:"Starting with MS Word 2007, Microsoft changed the default body font to Calibri (size 11). Calibri is a modern sans-serif typeface designed to be visually appealing and highly readable on digital computer screens. Prior to 2007, the traditional default font was Times New Roman (size 12)."},hi:{q:"MS Word के आधुनिक संस्करणों (2007 और उससे ऊपर) में आम तौर पर उपयोग किया जाने वाला डिफ़ॉल्ट फ़ॉन्ट कौन सा है?",opts:["Times New Roman","Arial","Calibri (कैलिब्री)","Courier New"],ans:2,exp:"MS Word 2007 से शुरू करते हुए, माइक्रोसॉफ्ट ने डिफ़ॉल्ट फ़ॉन्ट को कैलिब्री (आकार 11) में बदल दिया। कैलिब्री एक आधुनिक सैन-सेरिफ़ टाइपफेस है जिसे डिजिटल कंप्यूटर स्क्रीन पर आकर्षक और आसानी से पढ़ने योग्य बनाने के लिए डिज़ाइन किया गया है। 2007 से पहले, डिफ़ॉल्ट फ़ॉन्ट टाइम्स न्यू रोमन था।"}},
+// Q17 - Easy MCQ
+{type:"mcq",diff:"easy",en:{q:"Which shortcut key opens the 'Find' navigation pane to search for specific words in a document?",opts:["Ctrl + F","Ctrl + H","Ctrl + S","Ctrl + G"],ans:0,exp:"The 'Ctrl + F' shortcut opens the Find command or the Navigation pane on the left side of the screen in modern Word versions. This powerful feature allows users to quickly search for specific characters, words, or entire phrases within large documents, highlighting all matching results instantly."},hi:{q:"दस्तावेज़ में विशिष्ट शब्दों को खोजने के लिए 'फाइंड' (Find) नेविगेशन फलक खोलने के लिए कौन सी शॉर्टकट कुंजी है?",opts:["Ctrl + F","Ctrl + H","Ctrl + S","Ctrl + G"],ans:0,exp:"'Ctrl + F' शॉर्टकट आधुनिक वर्ड संस्करणों में स्क्रीन के बाईं ओर फाइंड कमांड या नेविगेशन फलक खोलता है। यह शक्तिशाली सुविधा उपयोगकर्ताओं को बड़े दस्तावेज़ों के भीतर विशिष्ट वर्णों, शब्दों या पूरे वाक्यांशों को जल्दी से खोजने की अनुमति देती है।"}},
+// Q18 - Easy MCQ
+{type:"mcq",diff:"easy",en:{q:"Which keyboard shortcut is used to open the 'Find and Replace' dialog box?",opts:["Ctrl + F","Ctrl + R","Ctrl + H","Ctrl + E"],ans:2,exp:"The 'Ctrl + H' shortcut directly opens the 'Find and Replace' dialog box focused on the Replace tab. This essential tool allows a user to locate a specific word and systematically replace it with another term throughout the entire document either one by one or all at once."},hi:{q:"'फाइंड एंड रिप्लेस' (Find and Replace) डायलॉग बॉक्स खोलने के लिए किस कीबोर्ड शॉर्टकट का उपयोग किया जाता है?",opts:["Ctrl + F","Ctrl + R","Ctrl + H","Ctrl + E"],ans:2,exp:"'Ctrl + H' शॉर्टकट सीधे रिप्लेस टैब पर केंद्रित 'फाइंड एंड रिप्लेस' डायलॉग बॉक्स खोलता है। यह आवश्यक उपकरण उपयोगकर्ता को एक विशिष्ट शब्द का पता लगाने और उसे पूरे दस्तावेज़ में किसी अन्य शब्द से बदलने की अनुमति देता है।"}},
+// Q19 - Easy MCQ
+{type:"mcq",diff:"easy",en:{q:"What is the minimum zoom percentage available in MS Word?",opts:["10%","20%","5%","25%"],ans:0,exp:"The minimum zoom percentage allowed in MS Word is 10%. Zooming out this far shrinks the document view drastically, which is highly useful for getting a broad, bird's-eye view of multiple pages layout simultaneously without scrolling, especially in large documents."},hi:{q:"MS Word में उपलब्ध न्यूनतम ज़ूम प्रतिशत क्या है?",opts:["10%","20%","5%","25%"],ans:0,exp:"MS Word में अनुमत न्यूनतम ज़ूम प्रतिशत 10% है। इतना ज़ूम आउट करने से दस्तावेज़ का दृश्य काफी सिकुड़ जाता है, जो विशेष रूप से बड़े दस्तावेज़ों में स्क्रॉल किए बिना एक साथ कई पेजों के लेआउट को देखने के लिए अत्यधिक उपयोगी है।"}},
+// Q20 - Easy MCQ
+{type:"mcq",diff:"easy",en:{q:"What is the maximum zoom percentage available in MS Word?",opts:["100%","200%","500%","400%"],ans:2,exp:"The maximum zoom limit in MS Word is 500%. Zooming in to this level enlarges the text and objects significantly, making it extremely helpful for visually impaired users or for performing precise, minute graphical alignments on shapes and images inserted into the text."},hi:{q:"MS Word में उपलब्ध अधिकतम ज़ूम प्रतिशत क्या है?",opts:["100%","200%","500%","400%"],ans:2,exp:"MS Word में अधिकतम ज़ूम सीमा 500% है। इस स्तर तक ज़ूम इन करने से टेक्स्ट और ऑब्जेक्ट काफी बड़े हो जाते हैं, जो दृष्टिबाधित उपयोगकर्ताओं के लिए या टेक्स्ट में सम्मिलित आकृतियों और छवियों पर सटीक संरेखण करने के लिए अत्यंत उपयोगी है।"}},
+// Q21 - Easy MCQ
+{type:"mcq",diff:"easy",en:{q:"Which page orientation prints the document vertically (taller than it is wide)?",opts:["Landscape","Portrait","Justified","Executive"],ans:1,exp:"'Portrait' orientation sets the page layout so that it is taller than it is wide. This is the universal default setting for standard text documents, letters, and reports. It reflects how a standard piece of A4 or Letter size paper is normally held and read."},hi:{q:"कौन सा पेज ओरिएंटेशन दस्तावेज़ को लंबवत रूप से (चौड़ाई से अधिक लंबा) प्रिंट करता है?",opts:["लैंडस्केप (Landscape)","पोर्ट्रेट (Portrait)","जस्टिफाइड (Justified)","एक्जीक्यूटिव (Executive)"],ans:1,exp:"'पोर्ट्रेट' ओरिएंटेशन पेज लेआउट को इस तरह सेट करता है कि यह चौड़ाई से अधिक लंबा हो। यह मानक टेक्स्ट दस्तावेज़ों, पत्रों और रिपोर्टों के लिए सार्वभौमिक डिफ़ॉल्ट सेटिंग है। यह दर्शाता है कि A4 या लेटर आकार के कागज को सामान्य रूप से कैसे पकड़ा और पढ़ा जाता है।"}},
+// Q22 - Easy MCQ
+{type:"mcq",diff:"easy",en:{q:"What is the default text alignment for paragraphs in an English version of MS Word?",opts:["Center","Right","Justify","Left"],ans:3,exp:"By default, MS Word aligns all typed text to the Left margin, creating a straight left edge and a ragged right edge. Left alignment ensures text flows naturally from left to right, which conforms to the standard reading direction for English and most western languages."},hi:{q:"MS Word के अंग्रेजी संस्करण में पैराग्राफ के लिए डिफ़ॉल्ट टेक्स्ट अलाइनमेंट क्या है?",opts:["केंद्र (Center)","दायां (Right)","जस्टिफाई (Justify)","बायां (Left)"],ans:3,exp:"डिफ़ॉल्ट रूप से, MS Word सभी टाइप किए गए टेक्स्ट को बाएं मार्जिन पर संरेखित करता है, जिससे एक सीधा बायां किनारा और एक दांतेदार दायां किनारा बनता है। बायां संरेखण सुनिश्चित करता है कि पाठ स्वाभाविक रूप से बाएं से दाएं प्रवाहित हो।"}},
+// Q23 - Easy MCQ
+{type:"mcq",diff:"easy",en:{q:"Which function key instantly runs the Spelling and Grammar check on the document?",opts:["F5","F7","F12","F1"],ans:1,exp:"Pressing the 'F7' function key immediately launches the Spelling and Grammar checking dialog box. MS Word scans the entire document, comparing words against its built-in dictionary and grammatical rules, flagging errors with red or blue squiggly underlines and suggesting corrections."},hi:{q:"कौन सी फ़ंक्शन कुंजी तुरंत दस्तावेज़ पर स्पेलिंग और ग्रामर चेक चलाती है?",opts:["F5","F7","F12","F1"],ans:1,exp:"'F7' फ़ंक्शन कुंजी दबाने से तुरंत स्पेलिंग और ग्रामर चेकिंग डायलॉग बॉक्स लॉन्च हो जाता है। MS Word पूरे दस्तावेज़ को स्कैन करता है, शब्दों की तुलना अपने अंतर्निहित शब्दकोश और व्याकरणिक नियमों से करता है, त्रुटियों को लाल या नीले रंग से रेखांकित करता है।"}},
+// Q24 - Easy MCQ
+{type:"mcq",diff:"easy",en:{q:"Which MS Word feature is used to find synonyms and antonyms for a selected word?",opts:["Translate","Spelling & Grammar","Thesaurus","Word Count"],ans:2,exp:"The Thesaurus is a powerful built-in reference tool in MS Word used to find synonyms (words with similar meanings) and antonyms (words with opposite meanings). This tool is invaluable for writers seeking to improve their vocabulary and avoid unwanted repetition in their documents."},hi:{q:"चयनित शब्द के लिए समानार्थी और विलोम शब्द खोजने के लिए MS Word की किस सुविधा का उपयोग किया जाता है?",opts:["ट्रांसलेट (Translate)","स्पेलिंग एंड ग्रामर (Spelling & Grammar)","थिसॉरस (Thesaurus)","वर्ड काउंट (Word Count)"],ans:2,exp:"थिसॉरस MS Word में एक शक्तिशाली इन-बिल्ट टूल है जिसका उपयोग समानार्थी (समान अर्थ वाले शब्द) और विलोम (विपरीत अर्थ वाले शब्द) खोजने के लिए किया जाता है। यह उन लेखकों के लिए अमूल्य है जो अपनी शब्दावली में सुधार करना चाहते हैं।"}},
+// Q25 - Easy MCQ
+{type:"mcq",diff:"easy",en:{q:"Which tab on the Ribbon contains the options to adjust Margins, Orientation, and Page Size?",opts:["Home Tab","Insert Tab","Page Layout / Layout Tab","View Tab"],ans:2,exp:"The 'Page Layout' (or simply 'Layout' in newer versions) tab is dedicated entirely to managing the physical and visual structure of the document's pages. It houses essential commands for setting page margins, changing orientation, modifying paper size, and managing columns and page breaks."},hi:{q:"रिबन के किस टैब में मार्जिन, ओरिएंटेशन और पेज साइज़ को समायोजित करने के विकल्प होते हैं?",opts:["होम टैब (Home Tab)","इंसर्ट टैब (Insert Tab)","पेज लेआउट / लेआउट टैब (Page Layout)","व्यू टैब (View Tab)"],ans:2,exp:"'पेज लेआउट' (या नए संस्करणों में केवल 'लेआउट') टैब पूरी तरह से दस्तावेज़ के पृष्ठों की भौतिक और दृश्य संरचना के प्रबंधन के लिए समर्पित है। इसमें पेज मार्जिन सेट करने, ओरिएंटेशन बदलने और पेपर आकार को संशोधित करने के लिए आवश्यक कमांड होते हैं।"}},
+// Q26 - Easy MCQ
+{type:"mcq",diff:"easy",en:{q:"What feature allows you to see exactly how your document will look before it is printed on paper?",opts:["Web Layout","Print Preview","Outline View","Draft View"],ans:1,exp:"'Print Preview' is a critical feature that displays the document on the screen exactly as it will appear when physically printed. It allows users to verify margins, page numbers, and overall layout, helping to prevent the wastage of paper and ink due to formatting errors."},hi:{q:"कौन सी सुविधा आपको कागज पर प्रिंट होने से पहले यह देखने की अनुमति देती है कि आपका दस्तावेज़ कैसा दिखेगा?",opts:["वेब लेआउट (Web Layout)","प्रिंट प्रीव्यू (Print Preview)","आउटलाइन व्यू (Outline View)","ड्राफ्ट व्यू (Draft View)"],ans:1,exp:"'प्रिंट प्रीव्यू' एक महत्वपूर्ण विशेषता है जो दस्तावेज़ को स्क्रीन पर बिल्कुल वैसा ही प्रदर्शित करती है जैसा वह भौतिक रूप से मुद्रित होने पर दिखाई देगा। यह उपयोगकर्ताओं को मार्जिन, पेज नंबर और समग्र लेआउट को सत्यापित करने की अनुमति देता है।"}},
+// Q27 - Easy MCQ
+{type:"mcq",diff:"easy",en:{q:"Which tool is used to copy the exact formatting of one piece of text and quickly apply it to another?",opts:["Copy and Paste","Format Painter","Style Copier","Font Editor"],ans:1,exp:"The 'Format Painter' tool (represented by a paintbrush icon) allows you to copy all the formatting attributes (font, size, color, bold, alignment) from one section of text and seamlessly 'paint' or apply those exact same formats to another section, saving immense time."},hi:{q:"टेक्स्ट के एक टुकड़े की सटीक फ़ॉर्मेटिंग को कॉपी करने और उसे तुरंत दूसरे पर लागू करने के लिए किस उपकरण का उपयोग किया जाता है?",opts:["कॉपी और पेस्ट (Copy and Paste)","फ़ॉर्मेट पेंटर (Format Painter)","स्टाइल कॉपियर (Style Copier)","फ़ॉन्ट एडिटर (Font Editor)"],ans:1,exp:"'फ़ॉर्मेट पेंटर' टूल आपको टेक्स्ट के एक खंड से सभी फ़ॉर्मेटिंग विशेषताओं (फ़ॉन्ट, आकार, रंग, बोल्ड, संरेखण) को कॉपी करने और उन समान प्रारूपों को दूसरे खंड पर लागू करने की अनुमति देता है, जिससे समय की भारी बचत होती है।"}},
+// Q28 - Easy MCQ
+{type:"mcq",diff:"easy",en:{q:"What is a 'Drop Cap' in MS Word?",opts:["A small capital letter used in titles","A large initial letter that drops below the first line of a paragraph","A shadow effect applied to text","A type of page border"],ans:1,exp:"A 'Drop Cap' is a large capital letter positioned at the very beginning of a text block or paragraph that has the depth of two or more lines of regular text. It is a traditional decorative element widely used in books, magazines, and newsletters to grab the reader's visual attention."},hi:{q:"MS Word में 'ड्रॉप कैप' (Drop Cap) क्या है?",opts:["शीर्षकों में उपयोग किया जाने वाला एक छोटा बड़ा अक्षर","एक बड़ा प्रारंभिक अक्षर जो पैराग्राफ की पहली पंक्ति के नीचे गिरता है","पाठ पर लागू छाया प्रभाव","एक प्रकार का पेज बॉर्डर"],ans:1,exp:"'ड्रॉप कैप' टेक्स्ट ब्लॉक या पैराग्राफ की शुरुआत में स्थित एक बड़ा कैपिटल अक्षर होता है जिसकी गहराई नियमित टेक्स्ट की दो या अधिक पंक्तियों की होती है। यह एक पारंपरिक सजावटी तत्व है जिसका व्यापक रूप से पुस्तकों, पत्रिकाओं में उपयोग किया जाता है।"}},
+// Q29 - Easy TF
+{type:"tf",diff:"easy",en:{q:"In modern versions of MS Word, the default file extension is .docx.",opts:["True","False"],ans:0,exp:"True. Starting with Microsoft Office 2007, the standard format for saving Word documents transitioned from the binary .doc to the XML-based .docx format, which ensures smaller file sizes and better data corruption recovery."},hi:{q:"MS Word के आधुनिक संस्करणों में, डिफ़ॉल्ट फ़ाइल एक्सटेंशन .docx है।",opts:["सही","गलत"],ans:0,exp:"यह सही है। Microsoft Office 2007 से शुरू होकर, Word दस्तावेज़ों को सहेजने का मानक स्वरूप बाइनरी .doc से XML-आधारित .docx स्वरूप में बदल गया, जो छोटे फ़ाइल आकार और बेहतर डेटा रिकवरी सुनिश्चित करता है।"}},
+// Q30 - Easy TF
+{type:"tf",diff:"easy",en:{q:"MS Word is strictly a text editor and cannot be used to insert pictures, charts, or tables.",opts:["True","False"],ans:1,exp:"False. While its primary purpose is text processing, MS Word is a highly versatile word processor. It contains robust tools in the 'Insert' tab specifically designed for adding rich multimedia elements like pictures, charts, complex tables, and shapes to documents."},hi:{q:"MS Word कड़ाई से एक टेक्स्ट एडिटर है और इसका उपयोग चित्र, चार्ट या टेबल डालने के लिए नहीं किया जा सकता है।",opts:["सही","गलत"],ans:1,exp:"यह गलत है। जबकि इसका प्राथमिक उद्देश्य टेक्स्ट प्रोसेसिंग है, MS Word एक बहुमुखी वर्ड प्रोसेसर है। इसमें चित्रों, चार्ट, जटिल तालिकाओं और आकृतियों जैसे मल्टीमीडिया तत्वों को जोड़ने के लिए 'इंसर्ट' टैब में मजबूत उपकरण हैं।"}},
+
+// Q31 - Medium MCQ
+{type:"mcq",diff:"medium",en:{q:"Which keyboard shortcut is used to apply Superscript formatting (e.g., the '2' in x²)?",opts:["Ctrl + =","Ctrl + Shift + +","Alt + S","Ctrl + Up Arrow"],ans:1,exp:"'Ctrl + Shift + +' (or Ctrl + Shift + = depending on the keyboard layout) is the shortcut to apply Superscript. Superscript formats the text so that it appears smaller and slightly above the normal line of text. It is predominantly used for mathematical exponents, ordinals like 1st, and trademark symbols."},hi:{q:"सुपरस्क्रिप्ट फ़ॉर्मेटिंग लागू करने के लिए किस कीबोर्ड शॉर्टकट का उपयोग किया जाता है (जैसे, x² में '2')?",opts:["Ctrl + =","Ctrl + Shift + +","Alt + S","Ctrl + Up Arrow"],ans:1,exp:"सुपरस्क्रिप्ट लागू करने का शॉर्टकट 'Ctrl + Shift + +' है। सुपरस्क्रिप्ट टेक्स्ट को इस तरह प्रारूपित करता है कि वह सामान्य रेखा से छोटा और थोड़ा ऊपर दिखाई देता है। इसका उपयोग मुख्य रूप से गणितीय घातांक (exponents) के लिए किया जाता है।"}},
+// Q32 - Medium MCQ
+{type:"mcq",diff:"medium",en:{q:"Which keyboard shortcut applies Subscript formatting (e.g., the '2' in H₂O)?",opts:["Ctrl + =","Ctrl + Shift + =","Ctrl + Down Arrow","Alt + D"],ans:0,exp:"'Ctrl + =' is the specific shortcut for applying Subscript formatting. Subscript makes the selected character smaller and places it slightly below the baseline of the regular text. It is absolutely essential for typing scientific chemical formulas and specific mathematical variables."},hi:{q:"कौन सा कीबोर्ड शॉर्टकट सबस्क्रिप्ट (Subscript) फ़ॉर्मेटिंग लागू करता है (जैसे, H₂O में '2')?",opts:["Ctrl + =","Ctrl + Shift + =","Ctrl + Down Arrow","Alt + D"],ans:0,exp:"'Ctrl + =' सबस्क्रिप्ट फ़ॉर्मेटिंग लागू करने के लिए विशिष्ट शॉर्टकट है। सबस्क्रिप्ट चयनित वर्ण को छोटा बनाता है और इसे नियमित टेक्स्ट की बेसलाइन के थोड़ा नीचे रखता है। यह वैज्ञानिक रासायनिक सूत्र टाइप करने के लिए आवश्यक है।"}},
+// Q33 - Medium MCQ
+{type:"mcq",diff:"medium",en:{q:"What keyboard shortcut is used to apply a Double Underline to text?",opts:["Ctrl + U","Ctrl + D","Ctrl + Shift + D","Alt + U"],ans:2,exp:"While Ctrl + U applies a standard single underline, pressing 'Ctrl + Shift + D' specifically applies a Double Underline to the selected text. This formatting is often utilized in legal and formal accounting documents to clearly distinguish grand totals or critical clauses from regular text."},hi:{q:"टेक्स्ट पर डबल अंडरलाइन (Double Underline) लगाने के लिए किस कीबोर्ड शॉर्टकट का उपयोग किया जाता है?",opts:["Ctrl + U","Ctrl + D","Ctrl + Shift + D","Alt + U"],ans:2,exp:"जबकि Ctrl + U एक मानक सिंगल अंडरलाइन लागू करता है, 'Ctrl + Shift + D' दबाने से चयनित टेक्स्ट पर डबल अंडरलाइन लागू होती है। इस फ़ॉर्मेटिंग का उपयोग अक्सर कानूनी और औपचारिक लेखांकन (accounting) दस्तावेज़ों में किया जाता है।"}},
+// Q34 - Medium MCQ
+{type:"mcq",diff:"medium",en:{q:"Which shortcut key allows you to quickly cycle through 'Change Case' options (uppercase, lowercase, sentence case)?",opts:["Shift + F3","Ctrl + F3","Alt + C","Ctrl + Shift + C"],ans:0,exp:"The 'Shift + F3' shortcut is an incredibly efficient toggle tool. By selecting text and pressing this combination, Word cycles the text through three distinct capitalization states: UPPERCASE, lowercase, and Sentence case (or Title Case), saving the user from manually retyping entire paragraphs."},hi:{q:"कौन सी शॉर्टकट कुंजी आपको 'चेंज केस' (Change Case) विकल्पों (अपरकेस, लोअरकेस, सेंटेंस केस) के बीच जल्दी से स्विच करने की अनुमति देती है?",opts:["Shift + F3","Ctrl + F3","Alt + C","Ctrl + Shift + C"],ans:0,exp:"'Shift + F3' शॉर्टकट एक बेहद कुशल टॉगल टूल है। टेक्स्ट का चयन करके और इसे दबाकर, वर्ड टेक्स्ट को तीन अलग-अलग कैपिटलाइज़ेशन अवस्थाओं में बदलता है: UPPERCASE, lowercase, और Sentence case, जिससे उपयोगकर्ता को मैन्युअल रूप से री-टाइप करने से बचाया जा सकता है।"}},
+// Q35 - Medium MCQ
+{type:"mcq",diff:"medium",en:{q:"What is the shortcut key to Center align a paragraph?",opts:["Ctrl + C","Ctrl + A","Ctrl + E","Ctrl + R"],ans:2,exp:"'Ctrl + E' is the shortcut used to Center align the selected paragraph(s) between the left and right margins. Because 'Ctrl + C' is universally reserved for Copying, the letter 'E' (the second letter in CEnter) is assigned to this crucial formatting function, widely used for document titles and headings."},hi:{q:"पैराग्राफ को केंद्र (Center align) में संरेखित करने के लिए शॉर्टकट कुंजी क्या है?",opts:["Ctrl + C","Ctrl + A","Ctrl + E","Ctrl + R"],ans:2,exp:"बाएं और दाएं मार्जिन के बीच चयनित पैराग्राफ को केंद्र में संरेखित करने के लिए 'Ctrl + E' का उपयोग किया जाता है। क्योंकि 'Ctrl + C' कॉपी करने के लिए आरक्षित है, इसलिए 'E' अक्षर को इस महत्वपूर्ण फ़ॉर्मेटिंग फ़ंक्शन के लिए सौंपा गया है।"}},
+// Q36 - Medium MCQ
+{type:"mcq",diff:"medium",en:{q:"Which text alignment setting aligns the text evenly along both the left and right margins?",opts:["Center","Left","Right","Justify"],ans:3,exp:"'Justify' alignment (shortcut Ctrl + J) distributes the text evenly between both the left and right margins by automatically adding extra spaces between words as needed. This creates a highly formal, clean, and rigid block of text, commonly seen in newspapers, textbooks, and professional reports."},hi:{q:"कौन सी टेक्स्ट अलाइनमेंट सेटिंग बाएं और दाएं दोनों मार्जिन के साथ टेक्स्ट को समान रूप से संरेखित करती है?",opts:["Center (केंद्र)","Left (बायां)","Right (दायां)","Justify (जस्टिफाई)"],ans:3,exp:"'जस्टिफाई' अलाइनमेंट (शॉर्टकट Ctrl + J) आवश्यकतानुसार शब्दों के बीच अतिरिक्त रिक्त स्थान जोड़कर टेक्स्ट को बाएं और दाएं दोनों मार्जिन के बीच समान रूप से वितरित करता है। यह आमतौर पर समाचार पत्रों और व्यावसायिक रिपोर्टों में देखा जाता है।"}},
+// Q37 - Medium MCQ
+{type:"mcq",diff:"medium",en:{q:"What is a faint image or text that appears behind the main text of a document called?",opts:["Background","Header","Watermark","Backdrop"],ans:2,exp:"A 'Watermark' is a faded or translucent image or text placed behind the primary document content. It is widely utilized to indicate document status (e.g., 'CONFIDENTIAL' or 'DRAFT'), assert copyright, or visually brand official company letterheads without obscuring the readability of the main text."},hi:{q:"किसी दस्तावेज़ के मुख्य पाठ के पीछे दिखाई देने वाली हल्की छवि या पाठ को क्या कहा जाता है?",opts:["Background (बैकग्राउंड)","Header (हेडर)","Watermark (वाटरमार्क)","Backdrop (बैकड्रॉप)"],ans:2,exp:"'वाटरमार्क' एक फीकी या पारभासी छवि या पाठ है जिसे प्राथमिक दस्तावेज़ सामग्री के पीछे रखा जाता है। इसका व्यापक रूप से दस्तावेज़ की स्थिति (जैसे, 'CONFIDENTIAL') को इंगित करने या आधिकारिक कंपनी लेटरहेड को ब्रांड करने के लिए किया जाता है।"}},
+// Q38 - Medium MCQ
+{type:"mcq",diff:"medium",en:{q:"Which MS Word feature allows you to send the same standard letter to multiple different recipients by merging it with a data source?",opts:["Macro","Mail Merge","Hyperlink","Cross-Reference"],ans:1,exp:"'Mail Merge' is a powerful mass-communication tool. It allows a user to create a single main document (like a form letter) and merge it systematically with a structured data source (like an Excel list of names and addresses) to automatically generate hundreds of personalized letters or mailing labels instantly."},hi:{q:"कौन सी MS Word सुविधा आपको एक ही मानक पत्र को डेटा स्रोत के साथ मर्ज करके कई अलग-अलग प्राप्तकर्ताओं को भेजने की अनुमति देती है?",opts:["मैक्रो (Macro)","मेल मर्ज (Mail Merge)","हाइपरलिंक (Hyperlink)","क्रॉस-रेफरेंस (Cross-Reference)"],ans:1,exp:"'मेल मर्ज' एक शक्तिशाली जन-संचार उपकरण है। यह उपयोगकर्ता को एक मुख्य दस्तावेज़ बनाने और इसे स्वचालित रूप से सैकड़ों व्यक्तिगत पत्र या मेलिंग लेबल उत्पन्न करने के लिए एक संरचित डेटा स्रोत (जैसे नाम और पते की एक्सेल सूची) के साथ व्यवस्थित रूप से मर्ज करने की अनुमति देता है।"}},
+// Q39 - Medium MCQ
+{type:"mcq",diff:"medium",en:{q:"What is the specific purpose of the 'Gutter' margin setting in Page Setup?",opts:["To add space for printing page numbers","To add extra space to the side or top margin strictly to accommodate physical binding","To create a decorative border","To reduce the overall page size"],ans:1,exp:"The 'Gutter' margin is an additional space specifically added to the standard page margins (usually Left or Top). Its sole architectural purpose is to ensure that when the physical document pages are bound together (via spirals or stitching), the text is not hidden or obscured by the binding mechanism."},hi:{q:"पेज सेटअप में 'गटर' (Gutter) मार्जिन सेटिंग का विशिष्ट उद्देश्य क्या है?",opts:["पेज नंबर प्रिंट करने के लिए जगह जोड़ना","भौतिक बाइंडिंग (binding) को समायोजित करने के लिए साइड या टॉप मार्जिन में अतिरिक्त जगह जोड़ना","एक सजावटी सीमा (border) बनाने के लिए","समग्र पृष्ठ का आकार कम करने के लिए"],ans:1,exp:"'गटर' मार्जिन एक अतिरिक्त स्थान है जिसे विशेष रूप से मानक पृष्ठ मार्जिन (आमतौर पर बाएँ या शीर्ष) में जोड़ा जाता है। इसका एकमात्र उद्देश्य यह सुनिश्चित करना है कि जब दस्तावेज़ के पृष्ठों को एक साथ बाउंड किया जाए, तो टेक्स्ट बाइंडिंग तंत्र द्वारा छिपा न जाए।"}},
+// Q40 - Medium MCQ
+{type:"mcq",diff:"medium",en:{q:"Text printed horizontally at the top margin of every page in a document is called a:",opts:["Footer","Header","Title","Heading"],ans:1,exp:"A 'Header' is a distinct section situated within the top margin of a document. Content placed inside a header—such as the document title, author name, company logo, or chapter name—automatically repeats itself at the top of every subsequent page, ensuring consistent professional formatting."},hi:{q:"दस्तावेज़ के प्रत्येक पृष्ठ के शीर्ष मार्जिन पर क्षैतिज रूप से छपे टेक्स्ट को क्या कहा जाता है?",opts:["फुटर (Footer)","हेडर (Header)","टाइटल (Title)","हेडिंग (Heading)"],ans:1,exp:"'हेडर' एक अलग खंड है जो किसी दस्तावेज़ के शीर्ष मार्जिन के भीतर स्थित होता है। हेडर के अंदर रखी गई सामग्री—जैसे कि दस्तावेज़ का शीर्षक, लेखक का नाम, या लोगो—स्वचालित रूप से प्रत्येक बाद के पृष्ठ के शीर्ष पर दोहराई जाती है।"}},
+// Q41 - Medium MCQ
+{type:"mcq",diff:"medium",en:{q:"What is a 'Hanging Indent'?",opts:["All lines of a paragraph are indented equally","The first line is flush left, and all subsequent lines are indented","Only the first line is indented","The entire paragraph is shifted to the right margin"],ans:1,exp:"In a 'Hanging Indent', the very first line of the paragraph begins at the normal left margin (flush left), while all subsequent lines of that specific paragraph are indented further to the right. This unique formatting is heavily required in academic bibliographies and formal reference lists."},hi:{q:"'हैंगिंग इंडेंट' (Hanging Indent) क्या है?",opts:["पैराग्राफ की सभी पंक्तियाँ समान रूप से इंडेंट की गई हैं","पहली पंक्ति बाएँ फ्लश होती है, और बाद की सभी पंक्तियाँ इंडेंट की जाती हैं","केवल पहली पंक्ति इंडेंट की गई है","संपूर्ण पैराग्राफ को दाएँ मार्जिन पर स्थानांतरित कर दिया गया है"],ans:1,exp:"'हैंगिंग इंडेंट' में, पैराग्राफ की पहली पंक्ति सामान्य बाएं मार्जिन से शुरू होती है, जबकि उस विशिष्ट पैराग्राफ की बाद की सभी पंक्तियां दाईं ओर इंडेंट होती हैं। शैक्षणिक संदर्भ सूचियों (bibliographies) में इस फ़ॉर्मेटिंग की भारी आवश्यकता होती है।"}},
+// Q42 - Medium MCQ
+{type:"mcq",diff:"medium",en:{q:"What is the function of a Macro in MS Word?",opts:["To check grammar automatically","To record a sequence of commands and keystrokes for automated playback","To calculate mathematical formulas","To apply a watermark"],ans:1,exp:"A 'Macro' is an advanced automation tool. It allows a user to literally record a repetitive series of mouse clicks, keystrokes, and formatting commands. Once recorded and saved, the entire sequence can be instantly played back at any time with a single click or custom shortcut, drastically saving time."},hi:{q:"MS Word में 'मैक्रो' (Macro) का क्या कार्य है?",opts:["व्याकरण की स्वचालित रूप से जाँच करना","स्वचालित प्लेबैक के लिए कमांड और कीस्ट्रोक के अनुक्रम को रिकॉर्ड करना","गणितीय सूत्रों की गणना करने के लिए","वाटरमार्क लागू करने के लिए"],ans:1,exp:"'मैक्रो' एक उन्नत स्वचालन (automation) उपकरण है। यह उपयोगकर्ता को माउस क्लिक, कीस्ट्रोक और फ़ॉर्मेटिंग कमांड की दोहराए जाने वाली श्रृंखला को सचमुच रिकॉर्ड करने की अनुमति देता है। रिकॉर्ड होने के बाद, पूरे क्रम को तुरंत चलाया जा सकता है।"}},
+// Q43 - Medium MCQ
+{type:"mcq",diff:"medium",en:{q:"What is the keyboard shortcut to insert a Hyperlink into a Word document?",opts:["Ctrl + H","Ctrl + L","Ctrl + K","Ctrl + I"],ans:2,exp:"'Ctrl + K' directly opens the 'Insert Hyperlink' dialog box. A hyperlink transforms selected text or images into a clickable link that can instantly direct the reader to a webpage, a different file on the computer, an email address, or even a specific bookmarked section within the same document."},hi:{q:"वर्ड डॉक्यूमेंट में हाइपरलिंक (Hyperlink) डालने के लिए कीबोर्ड शॉर्टकट क्या है?",opts:["Ctrl + H","Ctrl + L","Ctrl + K","Ctrl + I"],ans:2,exp:"'Ctrl + K' सीधे 'इंसर्ट हाइपरलिंक' डायलॉग बॉक्स खोलता है। एक हाइपरलिंक चयनित टेक्स्ट या छवियों को क्लिक करने योग्य लिंक में बदल देता है जो पाठक को तुरंत एक वेबपेज, कंप्यूटर पर एक अलग फ़ाइल, या उसी दस्तावेज़ के भीतर किसी विशिष्ट अनुभाग पर निर्देशित कर सकता है।"}},
+// Q44 - Medium MCQ
+{type:"mcq",diff:"medium",en:{q:"Which shortcut instantly forces the text to start on a brand new page (Page Break)?",opts:["Ctrl + Enter","Shift + Enter","Alt + Enter","Space + Enter"],ans:0,exp:"'Ctrl + Enter' is the absolute shortcut for inserting a hard Page Break. Instead of hitting the 'Enter' key repeatedly to push text downwards (which creates formatting nightmares), a hard page break instantly forces the cursor and all subsequent text to begin precisely at the top of the next page."},hi:{q:"कौन सा शॉर्टकट टेक्स्ट को तुरंत एक नए पेज (Page Break) से शुरू करने के लिए बाध्य करता है?",opts:["Ctrl + Enter","Shift + Enter","Alt + Enter","Space + Enter"],ans:0,exp:"'Ctrl + Enter' हार्ड पेज ब्रेक डालने का शॉर्टकट है। टेक्स्ट को नीचे धकेलने के लिए बार-बार 'Enter' कुंजी दबाने के बजाय, एक पेज ब्रेक तुरंत कर्सर और सभी बाद के टेक्स्ट को अगले पेज के शीर्ष पर शुरू करने के लिए मजबूर करता है।"}},
+// Q45 - Medium MCQ
+{type:"mcq",diff:"medium",en:{q:"In modern MS Word (2010+), what is the default Line Spacing applied to paragraphs?",opts:["1.0","1.15","1.5","2.0"],ans:1,exp:"In modern iterations of MS Word (starting from 2007/2010), the default line spacing was slightly increased from the traditional tight 1.0 to a more relaxed 1.15. This subtle increase improves visual readability on computer monitors and printed paper without excessively expanding the document length."},hi:{q:"आधुनिक MS Word (2010+) में, पैराग्राफ पर लागू डिफ़ॉल्ट लाइन स्पेसिंग (Line Spacing) क्या है?",opts:["1.0","1.15","1.5","2.0"],ans:1,exp:"MS Word के आधुनिक संस्करणों में, डिफ़ॉल्ट लाइन रिक्ति (लाइन स्पेसिंग) को पारंपरिक 1.0 से थोड़ा बढ़ाकर 1.15 कर दिया गया था। यह मामूली वृद्धि दस्तावेज़ की लंबाई को अत्यधिक विस्तारित किए बिना कंप्यूटर मॉनिटर और मुद्रित कागज पर दृश्य पठनीयता (readability) में सुधार करती है।"}},
+// Q46 - Medium MCQ
+{type:"mcq",diff:"medium",en:{q:"What is the primary purpose of the 'Track Changes' feature?",opts:["To count the total number of words typed","To visibly record and highlight all edits, additions, and deletions made to a document by multiple users","To automatically save versions of the file","To track the time spent editing"],ans:1,exp:"'Track Changes' is a vital collaborative review tool found under the Review tab. When activated, it meticulously records every single insertion, deletion, formatting change, and comment made by any user. It uses different colors to highlight these edits, allowing the primary author to selectively 'Accept' or 'Reject' them later."},hi:{q:"'ट्रैक चेंजेस' (Track Changes) सुविधा का प्राथमिक उद्देश्य क्या है?",opts:["टाइप किए गए शब्दों की कुल संख्या गिनने के लिए","कई उपयोगकर्ताओं द्वारा दस्तावेज़ में किए गए सभी संपादन, परिवर्धन और विलोपन को स्पष्ट रूप से रिकॉर्ड और हाइलाइट करने के लिए","फ़ाइल के संस्करणों को स्वचालित रूप से सहेजने के लिए","संपादन में बिताए गए समय को ट्रैक करने के लिए"],ans:1,exp:"'ट्रैक चेंजेस' एक महत्वपूर्ण सहयोगी समीक्षा उपकरण है। जब इसे सक्रिय किया जाता है, तो यह किसी भी उपयोगकर्ता द्वारा किए गए हर एक इंसर्शन, डिलीशन, फ़ॉर्मेटिंग परिवर्तन को रिकॉर्ड करता है। यह इन संपादनों को हाइलाइट करने के लिए अलग-अलग रंगों का उपयोग करता है।"}},
+// Q47 - Medium MCQ
+{type:"mcq",diff:"medium",en:{q:"What distinguishes an 'Endnote' from a 'Footnote' in MS Word?",opts:["Endnotes appear at the end of the entire document; Footnotes appear at the bottom of the specific page","Footnotes are used for images; Endnotes are for text","Endnotes appear at the end of every page; Footnotes appear at the end of the document","There is no difference"],ans:0,exp:"Both are used to provide citations or explanatory text without cluttering the main paragraph. The structural difference is placement: Footnotes are printed at the bottom margin of the exact page where the reference number appears. Endnotes are consolidated and printed together at the very end of the document or chapter."},hi:{q:"MS Word में 'एंडनोट' (Endnote) 'फ़ुटनोट' (Footnote) से कैसे अलग है?",opts:["एंडनोट पूरे दस्तावेज़ के अंत में दिखाई देते हैं; फुटनोट विशिष्ट पृष्ठ के निचले भाग में दिखाई देते हैं","फुटनोट छवियों के लिए उपयोग किए जाते हैं; एंडनोट टेक्स्ट के लिए हैं","एंडनोट हर पेज के अंत में दिखाई देते हैं; फुटनोट दस्तावेज़ के अंत में दिखाई देते हैं","कोई अंतर नहीं है"],ans:0,exp:"दोनों का उपयोग उद्धरण या व्याख्यात्मक पाठ प्रदान करने के लिए किया जाता है। संरचनात्मक अंतर प्लेसमेंट है: फ़ुटनोट ठीक उसी पृष्ठ के निचले मार्जिन पर मुद्रित होते हैं जहाँ संदर्भ संख्या दिखाई देती है। एंडनोट्स दस्तावेज़ या अध्याय के बिल्कुल अंत में मुद्रित होते हैं।"}},
+// Q48 - Medium MCQ
+{type:"mcq",diff:"medium",en:{q:"Which built-in tool simplifies the typing of complex mathematical formulas and fractions?",opts:["Symbol Library","Equation Editor","MathPad","Formula Wizard"],ans:1,exp:"The 'Equation Editor', accessible via the Insert tab, provides a specialized structural interface. It allows users to build complex mathematical formulas, integral calculus equations, matrix structures, and nested fractions easily, formatting them correctly according to standard mathematical typography."},hi:{q:"कौन सा इन-बिल्ट टूल जटिल गणितीय सूत्रों और भिन्नों (fractions) की टाइपिंग को सरल बनाता है?",opts:["सिंबल लाइब्रेरी (Symbol Library)","इक्वेशन एडिटर (Equation Editor)","मैथपैड (MathPad)","फॉर्मूला विजार्ड (Formula Wizard)"],ans:1,exp:"इंसर्ट टैब के माध्यम से सुलभ 'इक्वेशन एडिटर', एक विशेष संरचनात्मक इंटरफ़ेस प्रदान करता है। यह उपयोगकर्ताओं को जटिल गणितीय सूत्र, मैट्रिक्स संरचनाओं और नेस्टेड अंशों (fractions) को आसानी से बनाने की अनुमति देता है, उन्हें मानक टाइपोग्राफी के अनुसार सही ढंग से प्रारूपित करता है।"}},
+// Q49 - Medium MCQ
+{type:"mcq",diff:"medium",en:{q:"Which feature automatically corrects common spelling mistakes and typos as soon as you type them?",opts:["AutoFormat","AutoCorrect","SpellCheck","Grammar Check"],ans:1,exp:"'AutoCorrect' is a background feature that transparently fixes extremely common typos (like typing 'teh' instead of 'the') and incorrect capitalization immediately after the user presses the spacebar. It relies on a customizable dictionary of common errors mapped to their correct replacements."},hi:{q:"कौन सी सुविधा आपके टाइप करते ही सामान्य वर्तनी की गलतियों (spelling mistakes) और टाइपो को स्वचालित रूप से ठीक कर देती है?",opts:["ऑटोफॉर्मेट (AutoFormat)","ऑटोकरेक्ट (AutoCorrect)","स्पेलचेक (SpellCheck)","ग्रामर चेक (Grammar Check)"],ans:1,exp:"'ऑटोकरेक्ट' एक पृष्ठभूमि सुविधा है जो उपयोगकर्ता द्वारा स्पेसबार दबाने के तुरंत बाद अत्यंत सामान्य टाइपो (जैसे 'the' के बजाय 'teh' टाइप करना) और गलत कैपिटलाइज़ेशन को पारदर्शी रूप से ठीक करती है। यह सामान्य त्रुटियों के एक अनुकूलन योग्य शब्दकोश पर निर्भर करता है।"}},
+// Q50 - Medium MCQ
+{type:"mcq",diff:"medium",en:{q:"The shortcut 'Ctrl + *' (Ctrl + Shift + 8) is used to toggle the display of what?",opts:["Ruler","Hidden formatting symbols like paragraph marks and spaces","Gridlines","Navigation Pane"],ans:1,exp:"Pressing 'Ctrl + *' toggles the 'Show/Hide ¶' feature. This reveals non-printing formatting characters such as spaces (represented as dots), tab characters (arrows), and paragraph return marks (¶). This is an essential diagnostic tool for editors trying to fix stubborn alignment or spacing issues."},hi:{q:"शॉर्टकट 'Ctrl + *' (Ctrl + Shift + 8) का उपयोग क्या प्रदर्शित करने के लिए किया जाता है?",opts:["रूलर (Ruler)","छिपे हुए फ़ॉर्मेटिंग प्रतीक जैसे पैराग्राफ चिह्न और रिक्त स्थान","ग्रिडलाइन्स (Gridlines)","नेविगेशन फलक (Navigation Pane)"],ans:1,exp:"'Ctrl + *' दबाने से 'दिखाएँ/छिपाएँ ¶' सुविधा टॉगल हो जाती है। यह गैर-मुद्रण फ़ॉर्मेटिंग वर्णों जैसे रिक्त स्थान (बिंदुओं के रूप में दर्शाया गया), टैब वर्ण (तीर), और पैराग्राफ रिटर्न मार्क्स (¶) को प्रकट करता है। यह संरेखण समस्याओं को ठीक करने के लिए एक आवश्यक उपकरण है।"}},
+// Q51 - Medium MCQ
+{type:"mcq",diff:"medium",en:{q:"What visual tool located at the top and left edges helps you set indents, tabs, and page margins manually?",opts:["Gridlines","Status Bar","Ruler","Scroll Bar"],ans:2,exp:"The 'Ruler' consists of both a horizontal and vertical scale wrapping the document. It is indispensable for visually setting paragraph indents, creating custom Tab stops, and manually dragging the boundaries of page margins or table columns with precision."},hi:{q:"ऊपर और बाएँ किनारों पर स्थित कौन सा विज़ुअल टूल आपको इंडेंट, टैब और पेज मार्जिन मैन्युअल रूप से सेट करने में मदद करता है?",opts:["ग्रिडलाइन्स (Gridlines)","स्टेटस बार (Status Bar)","रूलर (Ruler)","स्क्रॉल बार (Scroll Bar)"],ans:2,exp:"'रूलर' में दस्तावेज़ को लपेटने वाले क्षैतिज (horizontal) और ऊर्ध्वाधर (vertical) दोनों पैमाने होते हैं। पैराग्राफ इंडेंट को दृष्टिगत रूप से सेट करने, कस्टम टैब स्टॉप बनाने और पेज मार्जिन या टेबल कॉलम की सीमाओं को मैन्युअल रूप से खींचने के लिए यह अपरिहार्य है।"}},
+// Q52 - Medium MCQ
+{type:"mcq",diff:"medium",en:{q:"In modern versions of MS Word (Office Clipboard), what is the maximum number of cut or copied items you can hold simultaneously?",opts:["1","12","24","36"],ans:2,exp:"Unlike the standard Windows OS clipboard which holds only the single most recent item, the enhanced Office Clipboard application can concurrently hold up to 24 distinct items (text, images, shapes) copied from anywhere in the Office suite, allowing the user to select and paste any of them at will."},hi:{q:"MS Word के आधुनिक संस्करणों (ऑफ़िस क्लिपबोर्ड) में, आप एक साथ अधिकतम कितने कट या कॉपी किए गए आइटम रख सकते हैं?",opts:["1","12","24","36"],ans:2,exp:"मानक विंडोज ओएस क्लिपबोर्ड के विपरीत, जो केवल एक सबसे हालिया आइटम रखता है, उन्नत कार्यालय क्लिपबोर्ड एप्लिकेशन एक साथ 24 अलग-अलग आइटम (टेक्स्ट, चित्र) रख सकता है। यह उपयोगकर्ता को अपनी इच्छानुसार किसी को भी चुनने और पेस्ट करने की अनुमति देता है।"}},
+// Q53 - Medium MCQ
+{type:"mcq",diff:"medium",en:{q:"The 'Word Count' feature provides statistics about the document. Which of the following does it NOT typically count?",opts:["Pages","Paragraphs","Lines","Number of inserted images"],ans:3,exp:"The 'Word Count' dialog provides a comprehensive statistical breakdown of textual elements, including Pages, Words, Characters (with and without spaces), Paragraphs, and Lines. However, it does not analyze or count graphical objects like inserted pictures, shapes, or SmartArt."},hi:{q:"'वर्ड काउंट' (Word Count) सुविधा दस्तावेज़ के बारे में आँकड़े प्रदान करती है। यह आमतौर पर निम्नलिखित में से किसकी गिनती नहीं करता है?",opts:["पृष्ठ (Pages)","पैराग्राफ (Paragraphs)","पंक्तियाँ (Lines)","डाली गई छवियों की संख्या"],ans:3,exp:"'वर्ड काउंट' डायलॉग पाठ्य तत्वों का एक व्यापक सांख्यिकीय ब्रेकडाउन प्रदान करता है, जिसमें पेज, शब्द, वर्ण, पैराग्राफ और लाइनें शामिल हैं। हालाँकि, यह सम्मिलित चित्रों या आकृतियों जैसी ग्राफिकल वस्तुओं का विश्लेषण या गणना नहीं करता है।"}},
+// Q54 - Medium MCQ
+{type:"mcq",diff:"medium",en:{q:"Which insertable element is used to visually communicate complex information through pre-designed workflow diagrams, lists, and hierarchical organization charts?",opts:["WordArt","SmartArt","ClipArt","Shapes"],ans:1,exp:"'SmartArt' is a robust graphical tool introduced in Office 2007. It provides highly polished, customizable vector graphic templates designed to represent lists, processes, cycles, hierarchies, and relationship diagrams instantly, bridging the gap between plain text and custom drawing."},hi:{q:"पूर्व-डिज़ाइन किए गए वर्कफ़्लो आरेख, सूचियों और पदानुक्रमित संगठन चार्ट के माध्यम से जटिल जानकारी को दृष्टिगत रूप से संप्रेषित करने के लिए किस तत्व का उपयोग किया जाता है?",opts:["वर्डआर्ट (WordArt)","स्मार्टआर्ट (SmartArt)","क्लिपआर्ट (ClipArt)","आकृतियाँ (Shapes)"],ans:1,exp:"'स्मार्टआर्ट' (SmartArt) ऑफिस 2007 में पेश किया गया एक मजबूत ग्राफिकल टूल है। यह सूचियों, प्रक्रियाओं, चक्रों, पदानुक्रमों और संबंध आरेखों का प्रतिनिधित्व करने के लिए डिज़ाइन किए गए अत्यधिक पॉलिश, अनुकूलन योग्य ग्राफिक टेम्पलेट प्रदान करता है।"}},
+// Q55 - Medium MCQ
+{type:"mcq",diff:"medium",en:{q:"What is the purpose of inserting a 'Bookmark' in a long Word document?",opts:["To save the document to the favorites bar","To create a named anchor point that you can quickly jump to later","To mark the page for deletion","To highlight text with a yellow marker color"],ans:1,exp:"A 'Bookmark' in MS Word functions similarly to a real-world bookmark. It assigns a specific, invisible name to a selected location, word, or section within a massive document. Users can then use the 'Go To' feature or create internal Hyperlinks to jump instantly back to that exact anchored location."},hi:{q:"लंबे वर्ड डॉक्यूमेंट में 'बुकमार्क' (Bookmark) डालने का क्या उद्देश्य है?",opts:["दस्तावेज़ को पसंदीदा बार में सहेजने के लिए","एक नामित एंकर बिंदु बनाने के लिए जिस पर आप बाद में जल्दी से जा सकते हैं","हटाने के लिए पृष्ठ को चिह्नित करने के लिए","पीले रंग के साथ पाठ को हाइलाइट करने के लिए"],ans:1,exp:"MS Word में 'बुकमार्क' एक वास्तविक दुनिया के बुकमार्क के समान कार्य करता है। यह एक विशाल दस्तावेज़ के भीतर किसी चयनित स्थान, शब्द या अनुभाग को एक विशिष्ट, अदृश्य नाम प्रदान करता है। उपयोगकर्ता फिर उस स्थान पर तुरंत वापस जाने के लिए इसका उपयोग कर सकते हैं।"}},
+// Q56 - Medium MCQ
+{type:"mcq",diff:"medium",en:{q:"Which feature allows you to refer readers to another specific location within the same document, such as 'See Table 3 on Page 12'?",opts:["Mail Merge","Hyperlink","Cross-reference","Citation"],ans:2,exp:"A 'Cross-reference' is a dynamic internal link. It allows a writer to automatically refer to items that are logically numbered or captioned within the document, like tables, figures, headings, or footnotes. If 'Table 3' is moved to a new page, the cross-reference automatically updates the page number, maintaining accuracy."},hi:{q:"कौन सी सुविधा आपको पाठकों को उसी दस्तावेज़ के भीतर किसी अन्य विशिष्ट स्थान पर संदर्भित करने की अनुमति देती है, जैसे 'पृष्ठ 12 पर तालिका 3 देखें'?",opts:["मेल मर्ज (Mail Merge)","हाइपरलिंक (Hyperlink)","क्रॉस-रेफरेंस (Cross-reference)","उद्धरण (Citation)"],ans:2,exp:"'क्रॉस-रेफरेंस' एक गतिशील आंतरिक लिंक है। यह लेखक को स्वचालित रूप से उन वस्तुओं को संदर्भित करने की अनुमति देता है जिन्हें दस्तावेज़ के भीतर क्रमांकित किया गया है, जैसे टेबल, चित्र या हेडिंग। यदि 'तालिका 3' को नए पृष्ठ पर ले जाया जाता है, तो क्रॉस-रेफरेंस स्वचालित रूप से पृष्ठ संख्या को अपडेट करता है।"}},
+// Q57 - Medium MCQ
+{type:"mcq",diff:"medium",en:{q:"In the 'Mail Merge' process, what is the file that contains the unique information (like names and addresses) to be merged called?",opts:["Main Document","Data Source","Form Letter","Merge Field"],ans:1,exp:"The 'Data Source' (or recipient list) is the structured database file component of a Mail Merge. It contains the variable, individualized records—such as a spreadsheet of names, email addresses, and zip codes—that will be systematically injected into the placeholder fields of the Main Document."},hi:{q:"'मेल मर्ज' प्रक्रिया में, वह फ़ाइल क्या कहलाती है जिसमें मर्ज की जाने वाली अनूठी जानकारी (जैसे नाम और पते) होती है?",opts:["मुख्य दस्तावेज़ (Main Document)","डेटा स्रोत (Data Source)","फॉर्म लेटर (Form Letter)","मर्ज फील्ड (Merge Field)"],ans:1,exp:"'डेटा स्रोत' (या प्राप्तकर्ता सूची) मेल मर्ज का संरचित डेटाबेस फ़ाइल घटक है। इसमें चर, व्यक्तिगत रिकॉर्ड होते हैं - जैसे नाम, ईमेल पते और ज़िप कोड की स्प्रेडशीट - जिन्हें मुख्य दस्तावेज़ के प्लेसहोल्डर फ़ील्ड में व्यवस्थित रूप से इंजेक्ट किया जाएगा।"}},
+// Q58 - Medium MCQ
+{type:"mcq",diff:"medium",en:{q:"Which feature is mathematically designed to automatically shrink a document's font size and spacing slightly to fit it onto one less printed page?",opts:["Format Painter","Shrink One Page","Zoom Out","AutoFit Window"],ans:1,exp:"The 'Shrink One Page' (or Shrink to Fit) command is an automated formatting utility. If a document spills over onto a final page containing only a few lines, clicking this command tells Word to mathematically reduce font sizes and margins across the entire document just enough to eliminate that trailing page."},hi:{q:"दस्तावेज़ के फ़ॉन्ट आकार और रिक्ति को स्वचालित रूप से थोड़ा कम करने के लिए कौन सी सुविधा डिज़ाइन की गई है ताकि इसे एक कम मुद्रित पृष्ठ पर फिट किया जा सके?",opts:["फ़ॉर्मेट पेंटर","श्रिंक वन पेज (Shrink One Page)","ज़ूम आउट","ऑटोफिट विंडो"],ans:1,exp:"'श्रिंक वन पेज' (Shrink One Page) कमांड एक स्वचालित फ़ॉर्मेटिंग उपयोगिता है। यदि कोई दस्तावेज़ एक अंतिम पृष्ठ पर फैल जाता है जिसमें केवल कुछ पंक्तियाँ होती हैं, तो यह कमांड संपूर्ण दस्तावेज़ में फ़ॉन्ट आकार और मार्जिन को कम कर देता है ताकि उस अतिरिक्त पृष्ठ को समाप्त किया जा सके।"}},
+// Q59 - Medium TF
+{type:"tf",diff:"medium",en:{q:"Once a Header is inserted, it fundamentally must appear on absolutely every single page of the document without exception.",opts:["True","False"],ans:1,exp:"False. MS Word provides granular control over Headers and Footers. Users can configure them to display differently on the 'First Page', or establish different headers for 'Odd & Even Pages'. Furthermore, using Section Breaks allows entirely unique headers for different chapters."},hi:{q:"एक बार हेडर डाले जाने के बाद, यह अनिवार्य रूप से बिना किसी अपवाद के दस्तावेज़ के हर एक पृष्ठ पर दिखाई देना चाहिए।",opts:["सही","गलत"],ans:1,exp:"गलत। MS Word हेडर और फुटर पर दानेदार नियंत्रण प्रदान करता है। उपयोगकर्ता उन्हें 'प्रथम पृष्ठ' पर अलग तरह से प्रदर्शित करने के लिए कॉन्फ़िगर कर सकते हैं, या 'विषम और सम पृष्ठों' के लिए अलग-अलग हेडर स्थापित कर सकते हैं। इसके अलावा, सेक्शन ब्रेक का उपयोग अध्यायों के लिए पूरी तरह से अद्वितीय हेडर की अनुमति देता है।"}},
+// Q60 - Medium TF
+{type:"tf",diff:"medium",en:{q:"Macros in MS Word can be used to maliciously run harmful executable code (viruses) on a computer.",opts:["True","False"],ans:0,exp:"True. Because Macros are built using Visual Basic for Applications (VBA), an incredibly powerful scripting language, they can be weaponized. Malicious macro-enabled documents (.docm) can execute harmful scripts upon opening. Consequently, modern Word disables macros by default for security."},hi:{q:"MS Word में मैक्रोज़ का उपयोग कंप्यूटर पर हानिकारक निष्पादन योग्य कोड (वायरस) को दुर्भावनापूर्ण रूप से चलाने के लिए किया जा सकता है।",opts:["सही","गलत"],ans:0,exp:"सही। चूंकि मैक्रोज़ विज़ुअल बेसिक फॉर एप्लीकेशन (VBA) का उपयोग करके बनाए गए हैं, जो एक अविश्वसनीय रूप से शक्तिशाली स्क्रिप्टिंग भाषा है, इसलिए उनका उपयोग हथियार के रूप में किया जा सकता है। दुर्भावनापूर्ण मैक्रो-सक्षम दस्तावेज़ हानिकारक स्क्रिप्ट निष्पादित कर सकते हैं।"}},
+
+// Q61 - Hard MCQ
+{type:"mcq",diff:"hard",en:{q:"In standard MS Word formatting, what is the default absolute distance for a standard Tab stop?",opts:["0.25 inch","0.5 inch","1.0 inch","0.75 inch"],ans:1,exp:"When the 'Tab' key is pressed, the cursor jumps across the page to visually align text. Unless manually overridden by the user setting custom tab stops on the ruler, the default absolute mathematical jump distance for a tab in Word is exactly 0.5 inches."},hi:{q:"मानक MS Word फ़ॉर्मेटिंग में, मानक टैब स्टॉप (Tab stop) के लिए डिफ़ॉल्ट पूर्ण दूरी क्या है?",opts:["0.25 इंच","0.5 इंच","1.0 इंच","0.75 इंच"],ans:1,exp:"जब 'टैब' (Tab) कुंजी दबाई जाती है, तो कर्सर टेक्स्ट को संरेखित करने के लिए पेज पर कूदता है। जब तक कि उपयोगकर्ता द्वारा रूलर पर कस्टम टैब स्टॉप सेट करके मैन्युअल रूप से ओवरराइड न किया जाए, वर्ड में टैब के लिए डिफ़ॉल्ट गणितीय कूद दूरी ठीक 0.5 इंच है।"}},
+// Q62 - Hard MCQ
+{type:"mcq",diff:"hard",en:{q:"Which of the following keyboard shortcuts strictly forces Single Line Spacing (1.0) on the selected paragraph?",opts:["Ctrl + 1","Ctrl + S","Ctrl + Shift + 1","Alt + 1"],ans:0,exp:"The shortcut 'Ctrl + 1' forces the selected paragraph to adopt exactly single-line spacing (1.0). This overrides the modern default of 1.15. These numeric keyboard shortcuts are highly favored by advanced typists to manipulate paragraph density without lifting their hands to touch the mouse."},hi:{q:"निम्नलिखित में से कौन सा कीबोर्ड शॉर्टकट चयनित पैराग्राफ पर सिंगल लाइन स्पेसिंग (1.0) लागू करने के लिए सख्ती से बाध्य करता है?",opts:["Ctrl + 1","Ctrl + S","Ctrl + Shift + 1","Alt + 1"],ans:0,exp:"शॉर्टकट 'Ctrl + 1' चयनित पैराग्राफ को बिल्कुल सिंगल-लाइन स्पेसिंग (1.0) अपनाने के लिए बाध्य करता है। यह 1.15 के आधुनिक डिफ़ॉल्ट को ओवरराइड करता है। पैराग्राफ घनत्व में हेरफेर करने के लिए उन्नत टाइपिस्टों द्वारा इन संख्यात्मक कीबोर्ड शॉर्टकट का अत्यधिक समर्थन किया जाता है।"}},
+// Q63 - Hard MCQ
+{type:"mcq",diff:"hard",en:{q:"Which keyboard shortcut instantly applies exactly Double Line Spacing (2.0) to a paragraph?",opts:["Ctrl + D","Ctrl + 2","Alt + 2","Ctrl + Shift + D"],ans:1,exp:"Pressing 'Ctrl + 2' applies mathematically exact double line spacing (2.0) to the current paragraph. This format is a strict requirement for almost all formal academic manuscripts and legal drafts, as it provides immense white space between lines for reviewers to physically write in corrections."},hi:{q:"कौन सा कीबोर्ड शॉर्टकट तुरंत पैराग्राफ पर डबल लाइन स्पेसिंग (2.0) लागू करता है?",opts:["Ctrl + D","Ctrl + 2","Alt + 2","Ctrl + Shift + D"],ans:1,exp:"'Ctrl + 2' दबाने से वर्तमान पैराग्राफ पर सटीक डबल लाइन स्पेसिंग (2.0) लागू होती है। यह प्रारूप लगभग सभी औपचारिक अकादमिक पांडुलिपियों और कानूनी ड्राफ्ट के लिए एक सख्त आवश्यकता है, क्योंकि यह समीक्षकों को सुधार लिखने के लिए पंक्तियों के बीच अत्यधिक सफेद स्थान प्रदान करता है।"}},
+// Q64 - Hard MCQ
+{type:"mcq",diff:"hard",en:{q:"Which specific keyboard shortcut forces the paragraph spacing to strictly 1.5 lines?",opts:["Ctrl + 1.5","Ctrl + 5","Alt + 5","Ctrl + Shift + 5"],ans:1,exp:"The 'Ctrl + 5' shortcut is the dedicated hotkey to change paragraph spacing to exactly 1.5 lines. It perfectly bridges the gap between the density of single spacing and the extreme openness of double spacing, making documents easily readable while conserving vertical paper real estate."},hi:{q:"कौन सा विशिष्ट कीबोर्ड शॉर्टकट पैराग्राफ स्पेसिंग को सख्ती से 1.5 लाइनों तक सीमित करता है?",opts:["Ctrl + 1.5","Ctrl + 5","Alt + 5","Ctrl + Shift + 5"],ans:1,exp:"'Ctrl + 5' शॉर्टकट पैराग्राफ स्पेसिंग को ठीक 1.5 लाइनों में बदलने के लिए समर्पित हॉटकी है। यह एकल रिक्ति (single spacing) के घनत्व और दोहरी रिक्ति (double spacing) के अत्यधिक खुलेपन के बीच की खाई को पाटता है, जिससे दस्तावेज़ आसानी से पढ़े जा सकते हैं।"}},
+// Q65 - Hard MCQ
+{type:"mcq",diff:"hard",en:{q:"What keyboard shortcut is used to incrementally increase the selected font size by exactly 1 point?",opts:["Ctrl + >","Ctrl + Shift + >","Ctrl + ]","Alt + +"],ans:2,exp:"While 'Ctrl + Shift + >' jumps the font size according to the predefined steps in the font drop-down menu (e.g., 12 to 14), pressing 'Ctrl + ]' (right bracket) increments the font mathematically by exactly 1 single point at a time (e.g., 12 to 13), allowing for extreme typographical precision."},hi:{q:"चयनित फ़ॉन्ट आकार को ठीक 1 पॉइंट तक बढ़ाने के लिए किस कीबोर्ड शॉर्टकट का उपयोग किया जाता है?",opts:["Ctrl + >","Ctrl + Shift + >","Ctrl + ]","Alt + +"],ans:2,exp:"जबकि 'Ctrl + Shift + >' फ़ॉन्ट ड्रॉप-डाउन मेनू (जैसे, 12 से 14) में पूर्वनिर्धारित चरणों के अनुसार फ़ॉन्ट आकार को बढ़ाता है, 'Ctrl + ]' (दायां कोष्ठक) दबाने से फ़ॉन्ट एक समय में ठीक 1 बिंदु (जैसे, 12 से 13) तक बढ़ जाता है।"}},
+// Q66 - Hard MCQ
+{type:"mcq",diff:"hard",en:{q:"Which shortcut decreases the font size by exactly 1 point?",opts:["Ctrl + <","Ctrl + [","Ctrl + Shift + <","Ctrl + -"],ans:1,exp:"Pressing 'Ctrl + [' (left bracket) systematically shrinks the selected text size by exactly 1 typographical point per keystroke. This is exceptionally useful when trying to squeeze a stubborn paragraph onto a single page without making a noticeable jump in text size."},hi:{q:"कौन सा शॉर्टकट फ़ॉन्ट आकार को ठीक 1 पॉइंट कम करता है?",opts:["Ctrl + <","Ctrl + [","Ctrl + Shift + <","Ctrl + -"],ans:1,exp:"'Ctrl + [' (बायां कोष्ठक) दबाने से चयनित टेक्स्ट का आकार प्रति कीस्ट्रोक ठीक 1 टाइपोग्राफ़िकल पॉइंट कम हो जाता है। यह असाधारण रूप से तब उपयोगी होता है जब टेक्स्ट आकार में ध्यान देने योग्य छलांग लगाए बिना एक जिद्दी पैराग्राफ को एक ही पृष्ठ पर निचोड़ने की कोशिश की जाती है।"}},
+// Q67 - Hard MCQ
+{type:"mcq",diff:"hard",en:{q:"What is the absolute maximum font size provided by default in the Font Size drop-down list on the Ribbon?",opts:["36","72","96","100"],ans:1,exp:"The visual Font Size drop-down menu situated on the Home tab provides a list of standard sizes for convenience. The lowest selectable value in this predefined list is 8, and the absolute highest value provided is 72. Values outside this range must be typed manually."},hi:{q:"रिबन पर फ़ॉन्ट आकार ड्रॉप-डाउन सूची में डिफ़ॉल्ट रूप से प्रदान किया गया अधिकतम फ़ॉन्ट आकार क्या है?",opts:["36","72","96","100"],ans:1,exp:"होम टैब पर स्थित दृश्य फ़ॉन्ट आकार ड्रॉप-डाउन मेनू सुविधा के लिए मानक आकारों की एक सूची प्रदान करता है। इस पूर्वनिर्धारित सूची में सबसे कम चयन योग्य मूल्य 8 है, और प्रदान किया गया पूर्ण उच्चतम मूल्य 72 है। इस सीमा के बाहर के मूल्यों को मैन्युअल रूप से टाइप किया जाना चाहिए।"}},
+// Q68 - Hard MCQ
+{type:"mcq",diff:"hard",en:{q:"What is the absolute maximum mathematical font size that MS Word fundamentally supports if typed manually?",opts:["72 points","1000 points","1638 points","Unlimited"],ans:2,exp:"While the drop-down stops at 72, the core rendering engine of MS Word mathematically caps the maximum valid font size at exactly 1638 points. Attempting to manually type a number higher than 1638 into the font box will trigger a strict software error prompt."},hi:{q:"मैन्युअल रूप से टाइप किए जाने पर MS Word मूल रूप से अधिकतम किस गणितीय फ़ॉन्ट आकार का समर्थन करता है?",opts:["72 अंक","1000 अंक","1638 अंक","असीमित"],ans:2,exp:"जबकि ड्रॉप-डाउन 72 पर रुकता है, MS Word का कोर रेंडरिंग इंजन गणितीय रूप से अधिकतम वैध फ़ॉन्ट आकार को ठीक 1638 बिंदुओं पर सीमित करता है। फ़ॉन्ट बॉक्स में मैन्युअल रूप से 1638 से अधिक संख्या टाइप करने का प्रयास करने पर सॉफ़्टवेयर त्रुटि उत्पन्न होगी।"}},
+// Q69 - Hard MCQ
+{type:"mcq",diff:"hard",en:{q:"Structurally, a completed Mail Merge operation strictly requires the synthesis of which two distinct components?",opts:["Header Document and Footer Document","Main Document and Data Source","Master Template and Excel Macro","Word Document and Access Query"],ans:1,exp:"The architecture of a Mail Merge relies entirely on combining two elements. The 'Main Document' contains the static text and merge fields (placeholders). The 'Data Source' is the structured database containing the variable records (names, addresses). Merging them produces the final batch of personalized documents."},hi:{q:"संरचनात्मक रूप से, पूर्ण मेल मर्ज (Mail Merge) संचालन के लिए किन दो अलग-अलग घटकों के संश्लेषण की सख्ती से आवश्यकता होती है?",opts:["हेडर दस्तावेज़ और पाद लेख (Footer) दस्तावेज़","मुख्य दस्तावेज़ (Main Document) और डेटा स्रोत (Data Source)","मास्टर टेम्पलेट और एक्सेल मैक्रो","वर्ड डॉक्यूमेंट और एक्सेस क्वेरी"],ans:1,exp:"मेल मर्ज की वास्तुकला पूरी तरह से दो तत्वों के संयोजन पर निर्भर करती है। 'मुख्य दस्तावेज़' में स्थिर टेक्स्ट और मर्ज फ़ील्ड होते हैं। 'डेटा स्रोत' एक संरचित डेटाबेस है जिसमें चर रिकॉर्ड (नाम, पते) होते हैं। उन्हें मिलाने से वैयक्तिकृत दस्तावेज़ों का अंतिम बैच तैयार होता है।"}},
+// Q70 - Hard MCQ
+{type:"mcq",diff:"hard",en:{q:"When a user physically 'records' a Macro in MS Word, what specific programming language does the software silently generate in the background?",opts:["Java","C++","HTML","VBA (Visual Basic for Applications)"],ans:3,exp:"The Macro recorder is essentially a code generator. As the user clicks buttons and types, Word silently translates those actions into VBA (Visual Basic for Applications) code. Advanced users can open the VBE (Visual Basic Editor) to manually edit this highly complex code to refine the automation."},hi:{q:"जब कोई उपयोगकर्ता MS Word में भौतिक रूप से 'मैक्रो' रिकॉर्ड करता है, तो सॉफ्टवेयर बैकग्राउंड में कौन सी विशिष्ट प्रोग्रामिंग भाषा चुपचाप उत्पन्न करता है?",opts:["जावा (Java)","सी++ (C++)","एचटीएमएल (HTML)","VBA (विज़ुअल बेसिक फॉर एप्लिकेशन)"],ans:3,exp:"मैक्रो रिकॉर्डर अनिवार्य रूप से एक कोड जनरेटर है। जैसे ही उपयोगकर्ता बटन क्लिक करता है और टाइप करता है, वर्ड चुपचाप उन कार्यों को VBA (विज़ुअल बेसिक फॉर एप्लीकेशन) कोड में बदल देता है। उन्नत उपयोगकर्ता इस कोड को मैन्युअल रूप से संपादित कर सकते हैं।"}},
+// Q71 - Hard MCQ
+{type:"mcq",diff:"hard",en:{q:"Which specific Function Key shortcut bypasses the ribbon entirely to open the Thesaurus pane directly?",opts:["F7","Shift + F7","Ctrl + F7","Alt + F7"],ans:1,exp:"While F7 alone executes the Spelling and Grammar check, pressing 'Shift + F7' on a selected word instantly bypasses all menus and opens the Thesaurus research pane. This allows writers to rapidly locate and substitute more eloquent synonyms without interrupting their typing flow."},hi:{q:"कौन सा विशिष्ट फ़ंक्शन कुंजी शॉर्टकट रिबन को पूरी तरह से बायपास करके सीधे थिसॉरस (Thesaurus) फलक खोलता है?",opts:["F7","Shift + F7","Ctrl + F7","Alt + F7"],ans:1,exp:"जबकि केवल F7 स्पेलिंग और ग्रामर चेक निष्पादित करता है, चयनित शब्द पर 'Shift + F7' दबाने से सभी मेनू तुरंत बायपास हो जाते हैं और थिसॉरस अनुसंधान फलक खुल जाता है। यह लेखकों को अपनी टाइपिंग प्रवाह को बाधित किए बिना समानार्थक शब्द खोजने और बदलने की अनुमति देता है।"}},
+// Q72 - Hard MCQ
+{type:"mcq",diff:"hard",en:{q:"Which shortcut key combination directly invokes the 'Go To' dialog, allowing rapid jumping to specific pages, lines, or bookmarks?",opts:["Ctrl + G","Ctrl + F","Alt + G","Shift + G"],ans:0,exp:"'Ctrl + G' (or pressing the F5 key) directly opens the 'Go To' tab within the Find and Replace dialog box. In massive documents containing hundreds of pages, this tool is mathematically essential, allowing users to jump instantly to absolute page numbers, specific lines, or hidden bookmarks."},hi:{q:"कौन सा शॉर्टकट कुंजी संयोजन सीधे 'गो टू' (Go To) डायलॉग का आह्वान करता है, जिससे विशिष्ट पृष्ठों, पंक्तियों या बुकमार्क पर तेजी से कूदने की अनुमति मिलती है?",opts:["Ctrl + G","Ctrl + F","Alt + G","Shift + G"],ans:0,exp:"'Ctrl + G' (या F5 कुंजी दबाना) फाइंड एंड रिप्लेस डायलॉग बॉक्स के भीतर 'गो टू' (Go To) टैब को सीधे खोलता है। सैकड़ों पृष्ठों वाले बड़े दस्तावेज़ों में, यह उपकरण गणितीय रूप से आवश्यक है, जिससे उपयोगकर्ता तुरंत पूर्ण पृष्ठ संख्याओं या छिपे हुए बुकमार्क पर जा सकते हैं।"}},
+// Q73 - Hard MCQ
+{type:"mcq",diff:"hard",en:{q:"If a mathematical formula or dynamic cross-reference field is inserted in Word, which Function Key forcibly updates its calculated value?",opts:["F5","F7","F9","F11"],ans:2,exp:"Dynamic fields in MS Word (like table formulas, Table of Contents, or Date fields) do not always calculate changes in real-time. Selecting the field and pressing 'F9' forces the system to re-evaluate the underlying data and graphically update the field to reflect the current, accurate value."},hi:{q:"यदि वर्ड में कोई गणितीय सूत्र या गतिशील क्रॉस-रेफरेंस फ़ील्ड डाला गया है, तो कौन सी फ़ंक्शन कुंजी इसके गणना किए गए मान को जबरन अपडेट करती है?",opts:["F5","F7","F9","F11"],ans:2,exp:"MS Word में डायनेमिक फ़ील्ड (जैसे टेबल फ़ार्मुलों, सामग्री तालिका, या दिनांक फ़ील्ड) हमेशा वास्तविक समय में परिवर्तनों की गणना नहीं करते हैं। फ़ील्ड का चयन करने और 'F9' दबाने से सिस्टम को अंतर्निहित डेटा का पुनर्मूल्यांकन करने और सटीक मान को अपडेट करने के लिए बाध्य किया जाता है।"}},
+// Q74 - Hard MCQ
+{type:"mcq",diff:"hard",en:{q:"Upon initial execution of the MS Word application, what is the default, unassigned system name given to the very first blank file generated?",opts:["Untitled1","Word1","Document1","NewFile"],ans:2,exp:"The MS Word framework fundamentally defaults to the naming convention 'Document[N]'. When the application is freshly booted, the first blank workspace generated is temporarily titled 'Document1'. This holds true in RAM until the user executes a Save operation and provides a permanent file string."},hi:{q:"MS Word एप्लिकेशन के प्रारंभिक निष्पादन पर, उत्पन्न होने वाली पहली खाली फ़ाइल को दिया जाने वाला डिफ़ॉल्ट सिस्टम नाम क्या है?",opts:["Untitled1","Word1","Document1","NewFile"],ans:2,exp:"MS Word ढांचा मूल रूप से नामकरण सम्मेलन 'Document[N]' के लिए डिफ़ॉल्ट है। जब एप्लिकेशन को नए सिरे से बूट किया जाता है, तो उत्पन्न पहले रिक्त कार्यक्षेत्र को अस्थायी रूप से 'Document1' शीर्षक दिया जाता है। यह RAM में तब तक सत्य रहता है जब तक कि उपयोगकर्ता इसे सहेज (save) नहीं लेता।"}},
+// Q75 - Hard MCQ
+{type:"mcq",diff:"hard",en:{q:"Which obscure keyboard shortcut violently strips away all applied paragraph formatting (like line spacing and indents), reverting the paragraph to the default 'Normal' style?",opts:["Ctrl + Spacebar","Ctrl + Q","Ctrl + Shift + N","Alt + Clear"],ans:1,exp:"While 'Ctrl + Spacebar' removes Character formatting (bold, fonts), 'Ctrl + Q' specifically strips away Paragraph-level formatting. If a user has ruined a paragraph with messy custom indents and extreme line spacing, Ctrl + Q instantly resets the block to the clean, base 'Normal' paragraph style."},hi:{q:"कौन सा कीबोर्ड शॉर्टकट सभी लागू पैराग्राफ फ़ॉर्मेटिंग (जैसे लाइन स्पेसिंग और इंडेंट) को हटा देता है, और पैराग्राफ को डिफ़ॉल्ट 'सामान्य' (Normal) शैली में वापस कर देता है?",opts:["Ctrl + Spacebar","Ctrl + Q","Ctrl + Shift + N","Alt + Clear"],ans:1,exp:"जबकि 'Ctrl + Spacebar' कैरेक्टर फ़ॉर्मेटिंग (बोल्ड, फ़ॉन्ट) को हटाता है, 'Ctrl + Q' विशेष रूप से पैराग्राफ-स्तरीय फ़ॉर्मेटिंग को हटा देता है। यदि किसी उपयोगकर्ता ने खराब कस्टम इंडेंट और अत्यधिक लाइन रिक्ति के साथ पैराग्राफ को बर्बाद कर दिया है, तो Ctrl + Q तुरंत ब्लॉक को रीसेट कर देता है।"}},
+// Q76 - Hard MCQ
+{type:"mcq",diff:"hard",en:{q:"When physically binding a document, the 'Gutter' margin can mathematically be placed in strictly which two positions in standard Word setups?",opts:["Left and Right","Top and Bottom","Left and Top","Right and Bottom"],ans:2,exp:"Standard bookbinding mechanisms (like spiraling or stitching) occur either on the side of a book or the top of a flip-pad. Consequently, the Page Setup architecture exclusively restricts the Gutter position drop-down to either the 'Left' side or the 'Top' edge of the paper."},hi:{q:"किसी दस्तावेज़ को भौतिक रूप से बाइंड करते समय, मानक वर्ड सेटअप में 'गटर' (Gutter) मार्जिन को गणितीय रूप से किन दो स्थितियों में रखा जा सकता है?",opts:["बाएँ और दाएँ","ऊपर और नीचे","बाएँ और ऊपर (Left and Top)","दाएँ और नीचे"],ans:2,exp:"मानक बुकबाइंडिंग तंत्र (जैसे सर्पिल या सिलाई) या तो किताब के किनारे पर या फ्लिप-पैड के शीर्ष पर होते हैं। इसके परिणामस्वरूप, पेज सेटअप आर्किटेक्चर विशेष रूप से गटर स्थिति ड्रॉप-डाउन को कागज के 'बाएं' (Left) तरफ या 'शीर्ष' (Top) किनारे तक सीमित करता है।"}},
+// Q77 - Hard MCQ
+{type:"mcq",diff:"hard",en:{q:"To invoke the 'Format Painter' purely via keyboard manipulation (copying format, not text), which complex shortcut must be utilized?",opts:["Ctrl + C","Ctrl + Shift + C","Alt + Shift + C","Ctrl + Alt + C"],ans:1,exp:"Using the mouse to click the Format Painter icon breaks typing flow. Advanced typists use 'Ctrl + Shift + C' to silently copy the complex formatting array of the selected text, and subsequently use 'Ctrl + Shift + V' to inject that copied formatting onto different text without altering the words."},hi:{q:"पूरी तरह से कीबोर्ड हेरफेर (टेक्स्ट नहीं, बल्कि प्रारूप की प्रतिलिपि बनाना) के माध्यम से 'फ़ॉर्मेट पेंटर' का उपयोग करने के लिए किस जटिल शॉर्टकट का उपयोग किया जाना चाहिए?",opts:["Ctrl + C","Ctrl + Shift + C","Alt + Shift + C","Ctrl + Alt + C"],ans:1,exp:"माउस का उपयोग करने से टाइपिंग प्रवाह टूट जाता है। उन्नत टाइपिस्ट चयनित टेक्स्ट के जटिल फ़ॉर्मेटिंग सरणी को चुपचाप कॉपी करने के लिए 'Ctrl + Shift + C' का उपयोग करते हैं, और शब्दों को बदले बिना उस कॉपी किए गए फ़ॉर्मेटिंग को अलग टेक्स्ट पर इंजेक्ट करने के लिए 'Ctrl + Shift + V' का उपयोग करते हैं।"}},
+// Q78 - Hard MCQ
+{type:"mcq",diff:"hard",en:{q:"Which shortcut key combination actively inserts a dynamic 'Date' field that automatically updates to the current system date upon document printing or opening?",opts:["Alt + D","Ctrl + D","Alt + Shift + D","Ctrl + Shift + D"],ans:2,exp:"Pressing 'Alt + Shift + D' inserts an auto-updating Date field (rather than plain static text). Mathematically, whenever the document is reopened or sent to the print spooler, this field reads the active motherboard system clock and alters its display to reflect the present day."},hi:{q:"कौन सा शॉर्टकट कुंजी संयोजन सक्रिय रूप से एक गतिशील 'दिनांक' (Date) फ़ील्ड सम्मिलित करता है जो दस्तावेज़ मुद्रण या खोलने पर स्वचालित रूप से वर्तमान सिस्टम तिथि में अपडेट हो जाता है?",opts:["Alt + D","Ctrl + D","Alt + Shift + D","Ctrl + Shift + D"],ans:2,exp:"'Alt + Shift + D' दबाने से एक ऑटो-अपडेटिंग डेट फ़ील्ड (सादे स्थिर टेक्स्ट के बजाय) सम्मिलित होता है। गणितीय रूप से, जब भी दस्तावेज़ को फिर से खोला जाता है या प्रिंटर पर भेजा जाता है, तो यह फ़ील्ड सक्रिय सिस्टम घड़ी को पढ़ता है और वर्तमान दिन को प्रतिबिंबित करने के लिए इसके प्रदर्शन को बदल देता है।"}},
+// Q79 - Hard MCQ
+{type:"mcq",diff:"hard",en:{q:"Which shortcut combination inserts a dynamic 'Time' field into the paragraph?",opts:["Alt + Shift + T","Ctrl + Shift + T","Alt + T","Ctrl + T"],ans:0,exp:"Similar to the Date field, pressing 'Alt + Shift + T' injects a live Time field. The underlying code polls the operating system environment for the exact hour and minute, automatically refreshing the printed or displayed time whenever the field is prompted to update (F9)."},hi:{q:"कौन सा शॉर्टकट संयोजन पैराग्राफ में एक गतिशील 'समय' (Time) फ़ील्ड सम्मिलित करता है?",opts:["Alt + Shift + T","Ctrl + Shift + T","Alt + T","Ctrl + T"],ans:0,exp:"दिनांक फ़ील्ड के समान, 'Alt + Shift + T' दबाने से लाइव टाइम फ़ील्ड इंजेक्ट होता है। अंतर्निहित कोड सटीक घंटे और मिनट के लिए ऑपरेटिंग सिस्टम वातावरण को पोल करता है, जब भी फ़ील्ड को अपडेट करने (F9) के लिए कहा जाता है, मुद्रित या प्रदर्शित समय को स्वचालित रूप से ताज़ा करता है।"}},
+// Q80 - Hard MCQ
+{type:"mcq",diff:"hard",en:{q:"To mathematically prevent two specific words from being split across a line break, what hidden formatting character must be inserted using 'Ctrl + Shift + Spacebar'?",opts:["Em Dash","En Dash","Non-breaking Space","Tab Character"],ans:2,exp:"The 'Non-breaking Space' is a critical typographical tool. Inserted via 'Ctrl + Shift + Spacebar', it acts as visual whitespace but mathematically binds the adjacent words together (like '100 kg' or 'Mr. Smith'). The text-wrapping engine will force both words to drop to the next line together rather than separating them."},hi:{q:"दो विशिष्ट शब्दों को लाइन ब्रेक में विभाजित होने से गणितीय रूप से रोकने के लिए, 'Ctrl + Shift + Spacebar' का उपयोग करके किस छिपे हुए फ़ॉर्मेटिंग वर्ण को सम्मिलित किया जाना चाहिए?",opts:["Em Dash (एम डैश)","En Dash (एन डैश)","Non-breaking Space (नॉन-ब्रेकिंग स्पेस)","Tab Character (टैब कैरेक्टर)"],ans:2,exp:"'नॉन-ब्रेकिंग स्पेस' एक महत्वपूर्ण टाइपोग्राफ़िकल टूल है। 'Ctrl + Shift + Spacebar' के माध्यम से डाला गया, यह दृश्य रिक्त स्थान के रूप में कार्य करता है लेकिन गणितीय रूप से आसन्न शब्दों को एक साथ बांधता है (जैसे '100 kg')। यह उन्हें अलग करने के बजाय दोनों शब्दों को एक साथ अगली पंक्ति में जाने के लिए मजबूर करेगा।"}},
+// Q81 - Hard MCQ
+{type:"mcq",diff:"hard",en:{q:"When architecting a Table in MS Word, what is the absolute mathematical limit on the maximum number of Columns you can define?",opts:["10","32","63","128"],ans:2,exp:"Due to rigid structural limitations within the Word document rendering engine, a single table cannot mathematically exceed 63 columns. Attempting to input a number like 64 into the 'Insert Table' dialog box will trigger an explicit system warning restricting the value to the 1-63 range. Rows, however, are virtually unlimited."},hi:{q:"MS Word में टेबल (Table) बनाते समय, आपके द्वारा परिभाषित किए जा सकने वाले कॉलम की अधिकतम संख्या की पूर्ण गणितीय सीमा क्या है?",opts:["10","32","63","128"],ans:2,exp:"वर्ड दस्तावेज़ रेंडरिंग इंजन के भीतर कठोर संरचनात्मक सीमाओं के कारण, एक एकल तालिका गणितीय रूप से 63 कॉलम से अधिक नहीं हो सकती है। 'इंसर्ट टेबल' डायलॉग बॉक्स में 64 जैसी संख्या इनपुट करने का प्रयास एक स्पष्ट सिस्टम चेतावनी को ट्रिगर करेगा जो मूल्य को 1-63 सीमा तक सीमित कर देगा।"}},
+// Q82 - Hard MCQ
+{type:"mcq",diff:"hard",en:{q:"Which specific Function Key directly intercepts the standard save protocol to force the 'Save As' dialog box to open?",opts:["F2","F5","F10","F12"],ans:3,exp:"While 'Ctrl + S' silently overwrites the existing file, pressing 'F12' explicitly commands the system to open the 'Save As' dialog box. This is vital when a user wants to mathematically fork a document—keeping the original intact while creating a distinct duplicate version under a new file path or format."},hi:{q:"कौन सी विशिष्ट फ़ंक्शन कुंजी मानक सेव प्रोटोकॉल को 'सेव एज़' (Save As) डायलॉग बॉक्स खोलने के लिए बाध्य करती है?",opts:["F2","F5","F10","F12"],ans:3,exp:"जबकि 'Ctrl + S' चुपचाप मौजूदा फ़ाइल को ओवरराइट करता है, 'F12' दबाना स्पष्ट रूप से सिस्टम को 'सेव एज़' डायलॉग बॉक्स खोलने का आदेश देता है। यह तब महत्वपूर्ण होता है जब उपयोगकर्ता दस्तावेज़ को एक नए फ़ाइल पथ या प्रारूप के तहत एक अलग डुप्लिकेट संस्करण बनाना चाहता है।"}},
+// Q83 - Hard MCQ
+{type:"mcq",diff:"hard",en:{q:"In standard US-localized distributions of MS Word, what are the precise physical dimensions (in inches) of the default 'Letter' paper size?",opts:["8.27 x 11.69","8.5 x 11","8.5 x 14","5.8 x 8.2"],ans:1,exp:"The geometric dimensions of standard US 'Letter' size paper are explicitly 8.5 inches in width by 11.0 inches in height. This differs fundamentally from the international ISO standard 'A4' size, which measures roughly 8.27 x 11.69 inches. Designing on the wrong default size ruins physical print alignment."},hi:{q:"MS Word के मानक वितरणों में, डिफ़ॉल्ट 'लेटर' (Letter) पेपर आकार के सटीक भौतिक आयाम (इंच में) क्या हैं?",opts:["8.27 x 11.69","8.5 x 11","8.5 x 14","5.8 x 8.2"],ans:1,exp:"मानक यूएस 'लेटर' आकार के कागज के ज्यामितीय आयाम स्पष्ट रूप से 8.5 इंच चौड़े और 11.0 इंच ऊंचे हैं। यह अंतरराष्ट्रीय आईएसओ मानक 'ए4' आकार से मौलिक रूप से भिन्न है, जो लगभग 8.27 x 11.69 इंच मापता है। गलत डिफ़ॉल्ट आकार पर डिजाइनिंग भौतिक प्रिंट संरेखण को बर्बाद कर देती है।"}},
+// Q84 - Hard MCQ
+{type:"mcq",diff:"hard",en:{q:"Which underlying view mode acts as the default graphical interface engine when creating a new document, specifically simulating the physical borders of printed paper?",opts:["Web Layout","Draft","Print Layout","Outline"],ans:2,exp:"The 'Print Layout' view is the default GUI rendering engine. It mathematically forces the screen to display virtual page margins, distinct page breaks, headers, footers, and floating objects precisely as they will physically map onto a hardcopy printout, unlike 'Draft' which strips away this spatial formatting."},hi:{q:"नया दस्तावेज़ बनाते समय कौन सा अंतर्निहित दृश्य मोड (view mode) डिफ़ॉल्ट ग्राफिकल इंटरफ़ेस इंजन के रूप में कार्य करता है, जो मुद्रित कागज की भौतिक सीमाओं का अनुकरण करता है?",opts:["वेब लेआउट (Web Layout)","ड्राफ्ट (Draft)","प्रिंट लेआउट (Print Layout)","आउटलाइन (Outline)"],ans:2,exp:"'प्रिंट लेआउट' दृश्य डिफ़ॉल्ट GUI रेंडरिंग इंजन है। यह स्क्रीन को वर्चुअल पेज मार्जिन, अलग पेज ब्रेक, हेडर, फुटर और फ्लोटिंग ऑब्जेक्ट्स को ठीक उसी तरह प्रदर्शित करने के लिए मजबूर करता है जैसे वे भौतिक रूप से हार्डकॉपी प्रिंटआउट पर मैप करेंगे।"}},
+// Q85 - Hard MCQ
+{type:"mcq",diff:"hard",en:{q:"Saving an architecture file with the specific extension '.dotx' indicates that the file functions fundamentally as a:",opts:["Standard Document","Macro-Enabled Document","Word Template","PDF Conversion"],ans:2,exp:"The '.dotx' extension strictly designates a 'Word Template'. Templates are read-only blueprints containing rigid pre-defined layouts, styles, and boilerplate text (like a standardized invoice). Double-clicking a .dotx file does not open the original; instead, it generates a brand new, unsaved '.docx' instance cloned from the blueprint."},hi:{q:"विशिष्ट एक्सटेंशन '.dotx' के साथ किसी फ़ाइल को सहेजना यह दर्शाता है कि फ़ाइल मौलिक रूप से किसके रूप में कार्य करती है:",opts:["मानक दस्तावेज़","मैक्रो-सक्षम दस्तावेज़","वर्ड टेम्पलेट (Word Template)","पीडीएफ रूपांतरण"],ans:2,exp:"'.dotx' एक्सटेंशन कड़ाई से 'वर्ड टेम्पलेट' को निर्दिष्ट करता है। टेम्प्लेट केवल-पढ़ने योग्य ब्लूप्रिंट होते हैं जिनमें कठोर पूर्व-परिभाषित लेआउट, शैलियाँ और बॉयलरप्लेट टेक्स्ट होते हैं। .dotx फ़ाइल पर डबल-क्लिक करने से मूल फ़ाइल नहीं खुलती है; इसके बजाय, यह एक नया '.docx' इंस्टेंस बनाता है।"}},
+// Q86 - Hard MCQ
+{type:"mcq",diff:"hard",en:{q:"Which discrete keyboard shortcut surgically closes the currently active document window without terminating the entire MS Word application shell?",opts:["Alt + F4","Ctrl + W","Ctrl + C","Shift + Esc"],ans:1,exp:"While 'Alt + F4' terminates the entire executable shell program (Word itself), pressing 'Ctrl + W' (or Ctrl + F4) surgically closes only the specific document currently active in the workspace, leaving the blank MS Word framework running in RAM to open other files."},hi:{q:"कौन सा कीबोर्ड शॉर्टकट संपूर्ण MS Word एप्लिकेशन शेल को समाप्त किए बिना केवल वर्तमान में सक्रिय दस्तावेज़ विंडो को बंद करता है?",opts:["Alt + F4","Ctrl + W","Ctrl + C","Shift + Esc"],ans:1,exp:"जबकि 'Alt + F4' संपूर्ण निष्पादन योग्य प्रोग्राम (वर्ड को ही) समाप्त कर देता है, 'Ctrl + W' (या Ctrl + F4) दबाने से केवल कार्यक्षेत्र में वर्तमान में सक्रिय विशिष्ट दस्तावेज़ बंद हो जाता है, अन्य फ़ाइलों को खोलने के लिए खाली MS Word ढांचा RAM में चलता रहता है।"}},
+// Q87 - Hard MCQ
+{type:"mcq",diff:"hard",en:{q:"Universally across the Microsoft ecosystem, which Function Key actively intercepts the user session to summon the embedded Help and Support directory?",opts:["F1","F3","F10","F12"],ans:0,exp:"The 'F1' key is hardcoded across almost all graphical Windows applications as the universal SOS button. Pressing it inside MS Word halts the current process and opens the comprehensive Help viewer (or a web portal) contextually linked to the software, allowing users to search for complex instructional documentation."},hi:{q:"संपूर्ण Microsoft पारिस्थितिकी तंत्र में, कौन सी फ़ंक्शन कुंजी (Function Key) एम्बेडेड हेल्प एंड सपोर्ट (Help and Support) निर्देशिका को बुलाने के लिए उपयोगकर्ता सत्र को सक्रिय रूप से रोकती है?",opts:["F1","F3","F10","F12"],ans:0,exp:"'F1' कुंजी को लगभग सभी ग्राफिकल विंडोज़ एप्लिकेशन में यूनिवर्सल हेल्प बटन के रूप में हार्डकोड किया गया है। MS Word के अंदर इसे दबाने से वर्तमान प्रक्रिया रुक जाती है और सॉफ़्टवेयर से जुड़ा व्यापक सहायता दर्शक खुल जाता है, जिससे उपयोगकर्ता निर्देशात्मक दस्तावेज़ खोज सकते हैं।"}},
+// Q88 - Hard MCQ
+{type:"mcq",diff:"hard",en:{q:"Which obscure keyboard combination mathematically splits the active document window into two distinct, independently scrollable vertical panes?",opts:["Ctrl + Shift + S","Ctrl + Alt + S","Alt + Window + S","Ctrl + PageDown"],ans:1,exp:"The 'Ctrl + Alt + S' command triggers the 'Split' interface feature. This structurally divides the GUI viewport horizontally into two independent panes viewing the exact same file. This is immensely vital for academics who must constantly reference page 100 while actively typing new content on page 10."},hi:{q:"कौन सा कीबोर्ड संयोजन सक्रिय दस्तावेज़ विंडो को गणितीय रूप से दो अलग-अलग, स्वतंत्र रूप से स्क्रॉल करने योग्य पैन (panes) में विभाजित (Split) करता है?",opts:["Ctrl + Shift + S","Ctrl + Alt + S","Alt + Window + S","Ctrl + PageDown"],ans:1,exp:"'Ctrl + Alt + S' कमांड 'स्प्लिट' (Split) इंटरफ़ेस सुविधा को ट्रिगर करता है। यह संरचनात्मक रूप से GUI व्यूपोर्ट को क्षैतिज रूप से दो स्वतंत्र पैन में विभाजित करता है जो एक ही फ़ाइल को देख रहे हैं। यह उन लोगों के लिए बहुत महत्वपूर्ण है जिन्हें पृष्ठ 10 पर नया सामग्री टाइप करते समय लगातार पृष्ठ 100 का संदर्भ देना होता है।"}},
+// Q89 - Hard TF
+{type:"tf",diff:"hard",en:{q:"The fundamental rendering architecture of MS Word permits a maximum visual Zoom limit of exactly 1000%.",opts:["True","False"],ans:1,exp:"False. The mathematical ceiling for the zoom algorithm within the MS Word rendering engine is strictly locked at 500%. Attempting to bypass this limit via the slider or manual input dialog will simply default back to the absolute 500% threshold to preserve vector stability."},hi:{q:"MS Word की मूलभूत रेंडरिंग वास्तुकला ठीक 1000% की अधिकतम दृश्य ज़ूम सीमा की अनुमति देती है।",opts:["सही","गलत"],ans:1,exp:"गलत। MS Word रेंडरिंग इंजन के भीतर ज़ूम एल्गोरिदम के लिए गणितीय सीमा 500% पर सख्ती से लॉक है। स्लाइडर या मैन्युअल इनपुट संवाद के माध्यम से इस सीमा को बायपास करने का प्रयास वेक्टर स्थिरता को संरक्षित करने के लिए केवल पूर्ण 500% सीमा पर वापस आ जाएगा।"}},
+// Q90 - Hard TF
+{type:"tf",diff:"hard",en:{q:"When configuring the typographic 'Drop Cap' element, the software dictates an unchangeable absolute default of dropping exactly 3 lines of text.",opts:["True","False"],ans:0,exp:"True. By default, when a Drop Cap is inserted via the graphical menu, it mathematically spans exactly 3 lines of regular text height. While this is the strict default parameter, advanced users can enter the Drop Cap Options dialog to manually override this variable anywhere from 1 to 10 lines."},hi:{q:"टाइपोग्राफ़िक 'ड्रॉप कैप' (Drop Cap) तत्व को कॉन्फ़िगर करते समय, सॉफ़्टवेयर ठीक 3 पंक्तियों के टेक्स्ट को छोड़ने का एक अपरिवर्तनीय पूर्ण डिफ़ॉल्ट निर्धारित करता है।",opts:["सही","गलत"],ans:0,exp:"सही। डिफ़ॉल्ट रूप से, जब ग्राफ़िकल मेनू के माध्यम से ड्रॉप कैप डाला जाता है, तो यह गणितीय रूप से नियमित टेक्स्ट ऊंचाई की ठीक 3 पंक्तियों तक फैला होता है। जबकि यह सख्त डिफ़ॉल्ट पैरामीटर है, उन्नत उपयोगकर्ता इस चर को 1 से 10 पंक्तियों तक मैन्युअल रूप से ओवरराइड करने के लिए ड्रॉप कैप विकल्प डायलॉग दर्ज कर सकते हैं।"}}
 ];
