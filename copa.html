@@ -304,6 +304,17 @@ window.addEventListener('pageshow', function(e){
     document.body.classList.remove('exit');
     document.body.style.opacity = '1';
     document.body.style.transform = 'none';
+    // Scroll to last visited chapter
+    try{
+      const cfg=JSON.parse(localStorage.getItem('copa_config')||'{}');
+      if(cfg.chapterId && cfg.subject==='theory'){
+        setTimeout(()=>{
+          const cards=document.querySelectorAll('.ch');
+          const target=cards[cfg.chapterId-1];
+          if(target) target.scrollIntoView({behavior:'smooth',block:'center'});
+        },300);
+      }
+    }catch(e){}
   }
 });
 </script>
