@@ -292,6 +292,28 @@
     padding: 3px 10px; border-radius: 999px;
   }
 
+  /* ── FILTER TABS ── */
+  .filter-tabs {
+    display: flex; gap: 8px; margin-bottom: 18px;
+    background: rgba(255,255,255,0.4); padding: 5px; border-radius: 16px;
+    backdrop-filter: blur(12px); border: 1.5px solid var(--glass-border);
+  }
+  .filter-tab {
+    flex: 1; padding: 11px 8px; border: none; cursor: pointer;
+    border-radius: 12px; font-family: inherit; font-weight: 700; font-size: 13px;
+    background: transparent; color: var(--text-muted); transition: all 0.25s;
+    display: flex; align-items: center; justify-content: center; gap: 5px;
+  }
+  .filter-tab .cnt {
+    font-size: 11px; font-weight: 700; padding: 1px 7px; border-radius: 999px;
+    background: rgba(0,0,0,0.06);
+  }
+  .filter-tab.active.all { background: var(--accent); color: #fff; box-shadow: 0 4px 12px rgba(155,126,222,0.4); }
+  .filter-tab.active.correct { background: var(--green); color: #fff; box-shadow: 0 4px 12px rgba(34,197,94,0.4); }
+  .filter-tab.active.wrong { background: var(--red); color: #fff; box-shadow: 0 4px 12px rgba(239,68,68,0.4); }
+  .filter-tab.active .cnt { background: rgba(255,255,255,0.28); color: #fff; }
+  .q-card.hidden { display: none; }
+
   .q-card {
     margin-bottom: 16px; padding: 22px 22px 18px;
     border-radius: var(--radius);
@@ -701,7 +723,7 @@ function qCardHTML(q, idx) {
     </div>` : '';
 
   return `
-  <div class="q-card card" id="qcard-${idx}">
+  <div class="q-card card" id="qcard-${idx}" data-status="${q.ok ? 'correct' : 'wrong'}">
     <div class="q-num">
       Q${idx + 1}
       <span class="q-status-badge ${statusClass}">${statusLabel}</span>
@@ -937,6 +959,12 @@ function render() {
     <span class="pill">${total} ${t('Qs','प्रश्न')}</span>
   </div>
 
+  <div class="filter-tabs">
+    <button class="filter-tab all active" onclick="filterReview('all',this)">${t('All','सभी')} <span class="cnt">${total}</span></button>
+    <button class="filter-tab correct" onclick="filterReview('correct',this)">✓ ${t('Correct','सही')} <span class="cnt">${d.correct||0}</span></button>
+    <button class="filter-tab wrong" onclick="filterReview('wrong',this)">✗ ${t('Wrong','गलत')} <span class="cnt">${(d.wrong||0)+(d.skipped||0)}</span></button>
+  </div>
+
   <div id="qlist">
     ${(d.questions || []).map((q, i) => qCardHTML(q, i)).join('')}
   </div>
@@ -961,6 +989,21 @@ function render() {
       setTimeout(() => el.classList.add('visible'), i * 60);
     });
   }, 200);
+}
+
+// ══════════════════════════════════════════
+// FILTER REVIEW — All / Correct / Wrong
+// ══════════════════════════════════════════
+function filterReview(mode, btn) {
+  document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.q-card').forEach(card => {
+    const status = card.getAttribute('data-status');
+    let show = true;
+    if (mode === 'correct') show = (status === 'correct');
+    else if (mode === 'wrong') show = (status === 'wrong');
+    card.classList.toggle('hidden', !show);
+  });
 }
 
 render();
