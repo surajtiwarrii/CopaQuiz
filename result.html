@@ -636,11 +636,19 @@ function t(en, hi) { return LANG === 'hi' ? hi : en; }
 
 // ── GRADE ──
 function getGrade(pct) {
-  if (pct >= 90) return { label: t('Outstanding','शानदार'), emoji: '🏆', color: '#7C3AED' };
-  if (pct >= 75) return { label: t('Excellent','उत्कृष्ट'),  emoji: '🎉', color: '#6D28D9' };
-  if (pct >= 60) return { label: t('Good','अच्छा'),          emoji: '👍', color: '#2563EB' };
-  if (pct >= 40) return { label: t('Average','औसत'),         emoji: '📚', color: '#D97706' };
-  return             { label: t('Keep Trying','प्रयास जारी रखें'), emoji: '💪', color: '#DC2626' };
+  // SVG icons (white stroke for badge)
+  const icons = {
+    trophy: '<svg viewBox="0 0 24 24" width="22" height="22" fill="none"><path d="M6 4h12v3a6 6 0 0 1-12 0V4z" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"/><path d="M6 5H4a2 2 0 0 0 0 4h2M18 5h2a2 2 0 0 1 0 4h-2M9 13.5V17M15 13.5V17M8 20h8M9 17h6" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    star: '<svg viewBox="0 0 24 24" width="22" height="22" fill="none"><path d="M12 3l2.5 5.6 6.1.7-4.5 4.2 1.2 6L12 16.8 6.7 19.5l1.2-6L3.4 9.3l6.1-.7L12 3z" stroke="#fff" stroke-width="1.7" stroke-linejoin="round" fill="rgba(255,255,255,0.18)"/></svg>',
+    thumb: '<svg viewBox="0 0 24 24" width="22" height="22" fill="none"><path d="M7 10v10H4V10h3zm0 0l4-7a2 2 0 0 1 2 2v3h5a2 2 0 0 1 2 2.3l-1.2 6A2 2 0 0 1 16.8 20H7" stroke="#fff" stroke-width="1.7" stroke-linejoin="round"/></svg>',
+    book: '<svg viewBox="0 0 24 24" width="22" height="22" fill="none"><path d="M4 5a2 2 0 0 1 2-2h6v16H6a2 2 0 0 0-2 2V5zM20 5a2 2 0 0 0-2-2h-6v16h6a2 2 0 0 1 2 2V5z" stroke="#fff" stroke-width="1.7" stroke-linejoin="round"/></svg>',
+    rocket: '<svg viewBox="0 0 24 24" width="22" height="22" fill="none"><path d="M12 2c3 1.5 5 4.5 5 8 0 2-1 4-2 5l-3 2-3-2c-1-1-2-3-2-5 0-3.5 2-6.5 5-8z" stroke="#fff" stroke-width="1.7" stroke-linejoin="round"/><circle cx="12" cy="9" r="1.6" stroke="#fff" stroke-width="1.6"/><path d="M9 17l-2 4M15 17l2 4M12 19v3" stroke="#fff" stroke-width="1.7" stroke-linecap="round"/></svg>'
+  };
+  if (pct >= 90) return { label: t('Outstanding','शानदार'), icon: icons.trophy, color: '#7C3AED' };
+  if (pct >= 75) return { label: t('Excellent','उत्कृष्ट'),  icon: icons.star, color: '#6D28D9' };
+  if (pct >= 60) return { label: t('Good','अच्छा'),          icon: icons.thumb, color: '#2563EB' };
+  if (pct >= 40) return { label: t('Average','औसत'),         icon: icons.book, color: '#D97706' };
+  return             { label: t('Keep Trying','प्रयास जारी रखें'), icon: icons.rocket, color: '#DC2626' };
 }
 
 // ── TIME FORMAT ──
@@ -761,29 +769,36 @@ function premiumEmptyStateHTML(score) {
 
   // Determine variant
   let variant, icon, confettiColors, showConfetti, showSparkles;
+  const svgIcons = {
+    trophy: '<svg viewBox="0 0 48 48" width="52" height="52" fill="none"><path d="M14 8h20v6a10 10 0 0 1-20 0V8z" stroke="url(#eg)" stroke-width="2.6" stroke-linejoin="round"/><path d="M14 10h-4a3 3 0 0 0 0 7h4M34 10h4a3 3 0 0 1 0 7h-4M19 25v6M29 25v6M16 39h16M19 31h10" stroke="url(#eg)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><defs><linearGradient id="eg" x1="0" y1="0" x2="48" y2="48"><stop stop-color="#8B5CF6"/><stop offset="0.5" stop-color="#EC4899"/><stop offset="1" stop-color="#F59E0B"/></linearGradient></defs></svg>',
+    star: '<svg viewBox="0 0 48 48" width="52" height="52" fill="none"><path d="M24 6l5.3 11.5L42 19l-9.5 8.8L35 41 24 34.5 13 41l2.5-13.2L6 19l12.7-1.5L24 6z" stroke="url(#eg)" stroke-width="2.6" stroke-linejoin="round" fill="rgba(236,72,153,0.08)"/><defs><linearGradient id="eg" x1="0" y1="0" x2="48" y2="48"><stop stop-color="#8B5CF6"/><stop offset="0.5" stop-color="#EC4899"/><stop offset="1" stop-color="#F59E0B"/></linearGradient></defs></svg>',
+    thumb: '<svg viewBox="0 0 48 48" width="52" height="52" fill="none"><path d="M14 20v20H8V20h6zm0 0l8-14a4 4 0 0 1 4 4v6h10a4 4 0 0 1 4 4.6l-2.4 12A4 4 0 0 1 33.6 40H14" stroke="url(#eg)" stroke-width="2.6" stroke-linejoin="round"/><defs><linearGradient id="eg" x1="0" y1="0" x2="48" y2="48"><stop stop-color="#8B5CF6"/><stop offset="0.5" stop-color="#EC4899"/><stop offset="1" stop-color="#F59E0B"/></linearGradient></defs></svg>',
+    book: '<svg viewBox="0 0 48 48" width="52" height="52" fill="none"><path d="M8 10a4 4 0 0 1 4-4h12v32H12a4 4 0 0 0-4 4V10zM40 10a4 4 0 0 0-4-4H24v32h12a4 4 0 0 1 4 4V10z" stroke="url(#eg)" stroke-width="2.6" stroke-linejoin="round"/><defs><linearGradient id="eg" x1="0" y1="0" x2="48" y2="48"><stop stop-color="#8B5CF6"/><stop offset="0.5" stop-color="#EC4899"/><stop offset="1" stop-color="#F59E0B"/></linearGradient></defs></svg>',
+    rocket: '<svg viewBox="0 0 48 48" width="52" height="52" fill="none"><path d="M24 4c6 3 10 9 10 16 0 4-2 8-4 10l-6 4-6-4c-2-2-4-6-4-10 0-7 4-13 10-16z" stroke="url(#eg)" stroke-width="2.6" stroke-linejoin="round"/><circle cx="24" cy="18" r="3.2" stroke="url(#eg)" stroke-width="2.4"/><path d="M18 34l-4 8M30 34l4 8M24 38v6" stroke="url(#eg)" stroke-width="2.6" stroke-linecap="round"/><defs><linearGradient id="eg" x1="0" y1="0" x2="48" y2="48"><stop stop-color="#8B5CF6"/><stop offset="0.5" stop-color="#EC4899"/><stop offset="1" stop-color="#F59E0B"/></linearGradient></defs></svg>'
+  };
   if (pct >= 90) {
     variant = 'outstanding';
-    icon = '🏆';
+    icon = svgIcons.trophy;
     confettiColors = ['#FCD34D','#F59E0B','#A78BFA','#C084FC','#FDE68A','#FBBF24'];
     showConfetti = true; showSparkles = true;
   } else if (pct >= 75) {
     variant = 'excellent';
-    icon = '🎉';
+    icon = svgIcons.star;
     confettiColors = ['#A78BFA','#C084FC','#818CF8','#F0ABFC','#67E8F9','#6EE7B7'];
     showConfetti = true; showSparkles = true;
   } else if (pct >= 60) {
     variant = 'good';
-    icon = '👍';
+    icon = svgIcons.thumb;
     confettiColors = [];
     showConfetti = false; showSparkles = true;
   } else if (pct >= 40) {
     variant = '';
-    icon = '📚';
+    icon = svgIcons.book;
     confettiColors = [];
     showConfetti = false; showSparkles = false;
   } else {
     variant = 'low';
-    icon = '💪';
+    icon = svgIcons.rocket;
     confettiColors = [];
     showConfetti = false; showSparkles = false;
   }
@@ -889,7 +904,7 @@ function render() {
     ${ringHTML(pct)}
     <div>
       <div class="grade-badge">
-        <div class="grade-icon-wrap">${grade.emoji}</div>
+        <div class="grade-icon-wrap">${grade.icon}</div>
         <div class="grade-text-wrap">
           <div class="grade-sublabel">${t('Your Grade','ग्रेड')}</div>
           <div class="grade-main">${grade.label}</div>
