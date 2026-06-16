@@ -47,6 +47,14 @@ body.emp .wall{background:
 .tb-row2 span{font-size:.72rem;color:var(--accent);font-weight:600;white-space:nowrap}
 .quitbtn{flex-shrink:0;width:36px;height:36px;border-radius:11px;border:none;background:rgba(255,255,255,.6);cursor:pointer;font-size:1rem;color:var(--ink-soft);display:grid;place-items:center;transition:background .3s}
 .quitbtn:hover{background:#fff}
+.topbtn{flex-shrink:0;display:flex;align-items:center;gap:5px;border:none;cursor:pointer;font-weight:600;border-radius:20px;padding:6px 12px;font-size:.78rem;transition:all .25s;font-family:inherit}
+.btnlbl{font-size:.72rem;font-weight:600}
+.homebtn{background:rgba(255,255,255,.6);color:var(--ink);border:1px solid rgba(255,255,255,.8);padding:6px 10px;font-size:1.1rem}
+.homebtn:hover{background:#fff;transform:translateY(-1px)}
+.restartbtn{background:rgba(43,196,180,.15);color:var(--accent);border:1px solid rgba(43,196,180,.35);font-size:.85rem}
+.restartbtn:hover{background:rgba(43,196,180,.28);transform:translateY(-1px)}
+body.emp .restartbtn{background:rgba(255,126,95,.15);color:var(--accent);border-color:rgba(255,126,95,.35)}
+body.emp .restartbtn:hover{background:rgba(255,126,95,.28)}
 .langbtn{display:flex;background:rgba(255,255,255,.6);border:1px solid var(--border);border-radius:20px;padding:3px;cursor:pointer;position:relative;font-weight:700;flex-shrink:0}
 .langbtn .pill{position:absolute;top:3px;bottom:3px;width:calc(50% - 3px);left:3px;background:var(--accent);border-radius:20px;transition:transform .35s cubic-bezier(.6,.2,.1,1)}
 body[data-lang="hi"] .langbtn .pill{transform:translateX(100%)}
@@ -54,7 +62,7 @@ body[data-lang="hi"] .langbtn .pill{transform:translateX(100%)}
 .langbtn span.on{color:#fff}
 .nav-top{flex-shrink:0;width:42px;height:42px;border-radius:12px;border:1px solid var(--border);background:rgba(255,255,255,.6);cursor:pointer;font-size:1.15rem;color:var(--ink);display:grid;place-items:center;transition:background .3s}
 .nav-top:hover{background:#fff}
-.timer{display:flex;align-items:center;gap:7px;font-family:'JetBrains Mono';font-weight:700;font-size:.95rem;
+.timer{flex-shrink:0;display:flex;align-items:center;gap:5px;font-family:'JetBrains Mono';font-weight:700;font-size:.9rem;white-space:nowrap;
   background:rgba(255,255,255,.6);border:1px solid var(--border);padding:8px 14px;border-radius:30px;transition:background .3s}
 .timer.warn{background:rgba(252,129,129,.18);color:var(--hard);animation:blinkT 1s steps(2) infinite}
 @keyframes blinkT{50%{opacity:.45}}
@@ -197,8 +205,8 @@ body[data-lang="hi"] .langbtn .pill{transform:translateX(100%)}
 
 <div class="topbar">
   <div class="tb-row1">
-    <button class="quitbtn" onclick="quitQuiz()">✕</button>
-    <button class="quitbtn" onclick="restartQuiz()" title="Restart" style="font-size:.85rem" data-en="↺" data-hi="↺">↺</button>
+    <button class="topbtn homebtn" onclick="quitQuiz()" title="Home">🏠</button>
+    <button class="topbtn restartbtn" onclick="restartQuiz()" title="Restart">↺ <span class="btnlbl" data-en="Restart" data-hi="फिर से">Restart</span></button>
     <div class="tb-spacer"></div>
     <div class="langbtn" id="langBtn"><div class="pill"></div><span class="on" id="enL">EN</span><span id="hiL">हिं</span></div>
     <div class="timer" id="timer"><span>⏱️</span><span class="clock" id="clock">00:00</span></div>
@@ -550,9 +558,14 @@ function doSubmit(auto){
   body.classList.add('exit');setTimeout(()=>location.href='result.html',400);
 }
 function quitQuiz(){
-  if(confirm(lang==='hi'?'टेस्ट छोड़ दें? प्रगति सेव नहीं होगी।':'Quit test? Progress will not be saved.')){
+  const answered=answers.filter(a=>a!==null&&a>=0).length;
+  const msg=answered>0
+    ?(lang==='hi'?`आपने ${answered} प्रश्नों के उत्तर दिए हैं। क्या आप सच में होम पर जाना चाहते हैं? प्रगति सेव नहीं होगी।`:`You have answered ${answered} questions. Go to Home? Progress will not be saved.`)
+    :(lang==='hi'?'क्या आप होम पर जाना चाहते हैं?':'Go to Home?');
+  if(confirm(msg)){
+    clearState();
     body.classList.add('exit');
-    setTimeout(()=>location.href=(cfg.subject==='employability'?'employability.html':(cfg.subject==='full'?'index.html':'copa.html')),400);
+    setTimeout(()=>location.href=(cfg.subject==='employability'?'employability.html':'copa.html'),400);
   }
 }
 document.getElementById('confirm').onclick=e=>{if(e.target.id==='confirm')closeSubmit()};
