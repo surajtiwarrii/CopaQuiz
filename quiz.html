@@ -49,10 +49,12 @@ body.emp .wall{background:
 .quitbtn:hover{background:#fff}
 .topbtn{flex-shrink:0;display:flex;align-items:center;gap:5px;border:none;cursor:pointer;font-weight:600;border-radius:20px;padding:6px 12px;font-size:.78rem;transition:all .25s;font-family:inherit}
 .btnlbl{font-size:.72rem;font-weight:600}
-.homebtn{background:rgba(255,255,255,.6);color:var(--ink);border:1px solid rgba(255,255,255,.8);padding:6px 10px;font-size:1.1rem}
-.homebtn:hover{background:#fff;transform:translateY(-1px)}
+
+
 .restartbtn{background:rgba(43,196,180,.15);color:var(--accent);border:1px solid rgba(43,196,180,.35);font-size:.85rem}
 .restartbtn:hover{background:rgba(43,196,180,.28);transform:translateY(-1px)}
+.exitbtn{background:rgba(255,255,255,.6);color:var(--ink);border:1px solid rgba(255,255,255,.8);font-size:.85rem}
+.exitbtn:hover{background:#fff;transform:translateY(-1px)}
 body.emp .restartbtn{background:rgba(255,126,95,.15);color:var(--accent);border-color:rgba(255,126,95,.35)}
 body.emp .restartbtn:hover{background:rgba(255,126,95,.28)}
 .langbtn{display:flex;background:rgba(255,255,255,.6);border:1px solid var(--border);border-radius:20px;padding:3px;cursor:pointer;position:relative;font-weight:700;flex-shrink:0}
@@ -205,7 +207,7 @@ body[data-lang="hi"] .langbtn .pill{transform:translateX(100%)}
 
 <div class="topbar">
   <div class="tb-row1">
-    <button class="topbtn homebtn" onclick="quitQuiz()" title="Home">🏠</button>
+    <button class="topbtn exitbtn" onclick="exitQuiz()" title="Exit">✕ <span class="btnlbl" data-en="Exit" data-hi="बाहर">Exit</span></button>
     <button class="topbtn restartbtn" onclick="restartQuiz()" title="Restart">↺ <span class="btnlbl" data-en="Restart" data-hi="फिर से">Restart</span></button>
     <div class="tb-spacer"></div>
     <div class="langbtn" id="langBtn"><div class="pill"></div><span class="on" id="enL">EN</span><span id="hiL">हिं</span></div>
@@ -378,6 +380,18 @@ function restoreState(){
 function clearState(){try{localStorage.removeItem(STATE_KEY)}catch(e){}}
 
 /* ===== Restart quiz ===== */
+function exitQuiz(){
+  const answered=answers.filter(a=>a!==null&&a>=0).length;
+  const msg=answered>0
+    ?(lang==='hi'?`आपने ${answered} प्रश्नों के उत्तर दिए हैं। क्या आप सच में बाहर जाना चाहते हैं?`:`You've answered ${answered} questions. Sure you want to exit?`)
+    :(lang==='hi'?'क्या आप सच में बाहर जाना चाहते हैं?':'Are you sure you want to exit?');
+  if(confirm(msg)){
+    clearState();
+    clearInterval(tInt);
+    body.classList.add('exit');
+    setTimeout(()=>location.href=(cfg.subject==='employability'?'employability.html':'copa.html'),400);
+  }
+}
 function restartQuiz(){
   const answered=answers.filter(a=>a!==null&&a>=0).length;
   const msg=answered>0
@@ -557,22 +571,12 @@ function doSubmit(auto){
   clearState();
   body.classList.add('exit');setTimeout(()=>location.href='result.html',400);
 }
-function quitQuiz(){
-  const answered=answers.filter(a=>a!==null&&a>=0).length;
-  const msg=answered>0
-    ?(lang==='hi'?`आपने ${answered} प्रश्नों के उत्तर दिए हैं। क्या आप सच में होम पर जाना चाहते हैं? प्रगति सेव नहीं होगी।`:`You have answered ${answered} questions. Go to Home? Progress will not be saved.`)
-    :(lang==='hi'?'क्या आप होम पर जाना चाहते हैं?':'Go to Home?');
-  if(confirm(msg)){
-    clearState();
-    body.classList.add('exit');
-    setTimeout(()=>location.href=(cfg.subject==='employability'?'employability.html':'copa.html'),400);
-  }
-}
 document.getElementById('confirm').onclick=e=>{if(e.target.id==='confirm')closeSubmit()};
 
 /* ===== init ===== */
 document.getElementById('langBtn').onclick=()=>{applyLang(lang==='en'?'hi':'en');try{localStorage.setItem('copa_lang',lang)}catch(e){}};
 window.addEventListener('load',()=>{
+  history.pushState({quiz:true},'','');
   restoreState();
   renderHeader();
   applyLang(lang);
@@ -582,6 +586,22 @@ window.addEventListener('load',()=>{
 });
 
 /* ===== Fix browser back button blank page ===== */
+/* ===== Back button interception ===== */
+function handleBackBtn(){
+  const answered=answers.filter(a=>a!==null&&a>=0).length;
+  const msg=answered>0
+    ?(lang==='hi'?`आपने ${answered} प्रश्नों के उत्तर दिए हैं। क्या आप सच में वापस जाना चाहते हैं? प्रगति सेव नहीं होगी।`:`You have answered ${answered} questions. Go back? Progress will not be saved.`)
+    :(lang==='hi'?'क्या आप सच में वापस जाना चाहते हैं?':'Are you sure you want to go back?');
+  if(confirm(msg)){
+    clearState();
+    clearInterval(tInt);
+    history.back();
+  } else {
+    history.pushState({quiz:true},'','');
+  }
+}
+window.addEventListener('popstate',handleBackBtn);
+
 window.addEventListener('pageshow', function(e){
   if(e.persisted || performance.getEntriesByType('navigation')[0]?.type === 'back_forward'){
     document.body.classList.remove('exit');
