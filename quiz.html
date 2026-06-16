@@ -198,6 +198,7 @@ body[data-lang="hi"] .langbtn .pill{transform:translateX(100%)}
 <div class="topbar">
   <div class="tb-row1">
     <button class="quitbtn" onclick="quitQuiz()">✕</button>
+    <button class="quitbtn" onclick="restartQuiz()" title="Restart" style="font-size:.85rem" data-en="↺" data-hi="↺">↺</button>
     <div class="tb-spacer"></div>
     <div class="langbtn" id="langBtn"><div class="pill"></div><span class="on" id="enL">EN</span><span id="hiL">हिं</span></div>
     <div class="timer" id="timer"><span>⏱️</span><span class="clock" id="clock">00:00</span></div>
@@ -340,6 +341,48 @@ let idx=0;
 let answers=new Array(QS.length).fill(null); // null=not visited, -1=skipped, 0-3=chosen
 let visited=new Array(QS.length).fill(false);
 
+/* ===== Save & Restore state (refresh fix) ===== */
+const STATE_KEY='copa_quiz_state';
+function saveState(){
+  try{
+    localStorage.setItem(STATE_KEY,JSON.stringify({
+      cfgKey:cfg.chapterId+'_'+cfg.mode+'_'+cfg.set+'_'+cfg.subject,
+      idx,answers,visited,timeLeft
+    }));
+  }catch(e){}
+}
+function restoreState(){
+  try{
+    const s=JSON.parse(localStorage.getItem(STATE_KEY)||'null');
+    if(!s) return false;
+    const myKey=cfg.chapterId+'_'+cfg.mode+'_'+cfg.set+'_'+cfg.subject;
+    if(s.cfgKey!==myKey) return false;
+    if(s.answers&&s.answers.length===QS.length){
+      idx=s.idx||0;
+      answers=s.answers;
+      visited=s.visited||visited;
+      timeLeft=s.timeLeft||totalSec;
+      return true;
+    }
+  }catch(e){}
+  return false;
+}
+function clearState(){try{localStorage.removeItem(STATE_KEY)}catch(e){}}
+
+/* ===== Restart quiz ===== */
+function restartQuiz(){
+  const answered=answers.filter(a=>a!==null&&a>=0).length;
+  const msg=answered>0
+    ?(lang==='hi'?`आपने ${answered} प्रश्नों के उत्तर दिए हैं। क्या आप सच में शुरू से शुरू करना चाहते हैं?`:`You have answered ${answered} questions. Are you sure you want to restart from the beginning?`)
+    :(lang==='hi'?'क्या आप टेस्ट शुरू से शुरू करना चाहते हैं?':'Restart the test from the beginning?');
+  if(confirm(msg)){
+    clearState();
+    clearInterval(tInt);
+    body.classList.add('exit');
+    setTimeout(()=>location.reload(),400);
+  }
+}
+
 /* ===== lang ===== */
 function applyLang(l){
   lang=l;body.dataset.lang=l;
@@ -395,6 +438,7 @@ function renderQ(){
 function chooseOpt(i){
   if(answers[idx]!==null&&answers[idx]>=0)return; // already answered, locked
   answers[idx]=i;
+  saveState();
   const q=QS[idx],L=q[lang],correct=L.ans;
   document.querySelectorAll('.opt').forEach((el,k)=>{
     el.classList.add('locked');
@@ -420,6 +464,7 @@ function nextQ(){
 }
 function skipQ(){
   if(answers[idx]===null)answers[idx]=-1;
+  saveState();
   if(idx<QS.length-1){idx++;renderQ()}
   else{askSubmit()}
 }
@@ -443,7 +488,7 @@ function openNav(){
     else if(answers[i]===-1)b.classList.add('skipped');
     if(i===idx)b.classList.add('current');
     b.textContent=i+1;
-    b.onclick=()=>{idx=i;renderQ();closeNav()};
+    b.onclick=()=>{idx=i;saveState();renderQ();closeNav()};
     g.appendChild(b);
   });
   document.getElementById('navpanel').classList.add('show');
@@ -501,6 +546,7 @@ function doSubmit(auto){
     localStorage.setItem(key, JSON.stringify(done));
   }catch(e){}
   
+  clearState();
   body.classList.add('exit');setTimeout(()=>location.href='result.html',400);
 }
 function quitQuiz(){
@@ -514,6 +560,7 @@ document.getElementById('confirm').onclick=e=>{if(e.target.id==='confirm')closeS
 /* ===== init ===== */
 document.getElementById('langBtn').onclick=()=>{applyLang(lang==='en'?'hi':'en');try{localStorage.setItem('copa_lang',lang)}catch(e){}};
 window.addEventListener('load',()=>{
+  restoreState();
   renderHeader();
   applyLang(lang);
   document.getElementById('clock').textContent=fmt(timeLeft);
