@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Employability Notes — Chapters</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F4F1EA;--panel:rgba(255,255,255,.62);
+  --panel-h:rgba(255,255,255,.85);--border:rgba(180,160,120,.28);
+  --border-h:rgba(190,160,100,.5);
+  --ink:#2A2620;--ink-soft:#736A58;--ink-dim:#A79C86;
+  --gold:#B8862F;--gold-d:#9A6E22;
+  --grad:linear-gradient(120deg,#E8C06A 0%,#C79432 100%);
+  --teal:#3FB5A4;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Poppins',sans-serif;color:var(--ink);min-height:100vh;overflow-x:hidden;position:relative;background:var(--bg)}
+body[data-lang="hi"]{font-family:'Noto Sans Devanagari','Poppins',sans-serif}
+body.exit{animation:pageOut .45s ease forwards}
+@keyframes pageOut{to{opacity:0;transform:scale(.97)}}
+.wall{position:fixed;inset:0;z-index:-3;background:
+  radial-gradient(65% 55% at 15% 8%,rgba(232,192,106,.28) 0%,transparent 55%),
+  radial-gradient(60% 50% at 90% 15%,rgba(63,181,164,.16) 0%,transparent 55%),
+  radial-gradient(70% 60% at 50% 100%,rgba(123,111,224,.1) 0%,transparent 60%),
+  linear-gradient(165deg,#FAF7EF,#F1ECE0)}
+.orbs{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
+.orb{position:absolute;border-radius:50%;filter:blur(58px);opacity:.32;mix-blend-mode:multiply;animation:float 20s ease-in-out infinite}
+.orb.o1{width:280px;height:280px;background:radial-gradient(circle,#F0CE7E,transparent 70%);top:-70px;left:-50px}
+.orb.o2{width:320px;height:320px;background:radial-gradient(circle,#8AD9CC,transparent 70%);bottom:-90px;right:-70px;animation-delay:-7s}
+@keyframes float{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(24px,-26px) scale(1.06)}}
+.grain{position:fixed;inset:0;z-index:-1;opacity:.04;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.menubar{position:fixed;top:0;left:0;right:0;z-index:60;height:54px;display:flex;align-items:center;justify-content:space-between;
+  padding:0 clamp(14px,4vw,32px);background:rgba(250,247,239,.72);backdrop-filter:blur(22px) saturate(150%);
+  border-bottom:1px solid var(--border);font-size:.82rem;font-weight:600;animation:slideDown .6s cubic-bezier(.2,.8,.2,1) both}
+@keyframes slideDown{from{transform:translateY(-100%)}to{transform:translateY(0)}}
+.mb-left{display:flex;align-items:center;gap:12px}
+.back{display:flex;align-items:center;gap:7px;cursor:pointer;color:var(--ink);font-weight:600;font-size:.85rem;
+  background:var(--panel);border:1px solid var(--border);padding:7px 14px;border-radius:20px;transition:gap .3s,transform .3s,background .3s}
+.back:hover{gap:11px;transform:translateX(-2px);background:var(--panel-h)}
+.back svg{width:14px;height:14px}
+.mb-left b{letter-spacing:-.3px;font-size:.95rem;margin-left:2px;color:var(--ink)}
+.mb-right{display:flex;align-items:center;gap:14px}
+.langbtn{display:flex;background:var(--panel);border:1px solid var(--border);border-radius:20px;padding:3px;cursor:pointer;position:relative;font-weight:700}
+.langbtn .pill{position:absolute;top:3px;bottom:3px;width:calc(50% - 3px);left:3px;background:var(--grad);border-radius:20px;transition:transform .35s cubic-bezier(.6,.2,.1,1);box-shadow:0 2px 10px rgba(199,148,50,.4)}
+body[data-lang="hi"] .langbtn .pill{transform:translateX(100%)}
+.langbtn span{position:relative;z-index:1;padding:4px 13px;font-size:.72rem;color:var(--ink-soft);transition:color .3s}
+.langbtn span.on{color:#3A2A08}
+.stage{max-width:1080px;margin:0 auto;padding:88px clamp(18px,5vw,40px) 60px}
+.head{text-align:center;margin-bottom:40px}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:.72rem;font-weight:600;letter-spacing:1.4px;text-transform:uppercase;
+  color:var(--gold-d);background:rgba(184,134,47,.09);padding:8px 16px;border-radius:30px;margin-bottom:18px;border:1px solid rgba(184,134,47,.2);animation:fadeUp .6s .05s both}
+.eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pulse 1.8s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(184,134,47,.5)}50%{box-shadow:0 0 0 7px rgba(184,134,47,0)}}
+h1{font-size:clamp(2rem,5vw,3.2rem);font-weight:700;letter-spacing:-1.5px;animation:fadeUp .6s .12s both;color:var(--ink)}
+h1 .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.headsub{color:var(--ink-soft);margin-top:12px;font-size:1rem;animation:fadeUp .6s .2s both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-top:10px}
+.ch{position:relative;border-radius:20px;cursor:pointer;overflow:hidden;background:var(--panel);
+  backdrop-filter:blur(22px) saturate(150%);border:1px solid var(--border);
+  box-shadow:0 12px 30px rgba(120,95,40,.09),inset 0 1px 0 rgba(255,255,255,.7);
+  transition:transform .4s cubic-bezier(.2,.8,.2,1),box-shadow .4s,background .4s,border-color .4s;
+  padding:20px;display:flex;align-items:center;gap:16px;animation:chIn .6s both}
+@keyframes chIn{from{opacity:0;transform:translateY(24px) scale(.97)}to{opacity:1;transform:none}}
+.ch:hover{transform:translateY(-6px);box-shadow:0 22px 46px rgba(120,95,40,.16),inset 0 1px 0 rgba(255,255,255,.8);background:var(--panel-h);border-color:var(--border-h)}
+.ch .num{flex-shrink:0;width:46px;height:46px;border-radius:14px;display:grid;place-items:center;
+  font-family:'JetBrains Mono';font-weight:700;font-size:1rem;color:#3A2A08;background:var(--grad);
+  box-shadow:0 6px 16px rgba(199,148,50,.3);transition:transform .4s}
+.ch:hover .num{transform:scale(1.06) rotate(-3deg)}
+.ch .info{flex:1;min-width:0}
+.ch .info h3{font-size:1rem;font-weight:600;letter-spacing:-.3px;line-height:1.25;color:var(--ink)}
+.ch .info p{font-size:.75rem;color:var(--ink-soft);margin-top:3px}
+.ch .arrow{flex-shrink:0;color:var(--gold-d);transition:transform .3s;opacity:.6}
+.ch .arrow svg{width:16px;height:16px}
+.ch:hover .arrow{transform:translateX(4px);opacity:1}
+.ch.soon{cursor:default;opacity:.5}
+.ch.soon:hover{transform:none;box-shadow:0 12px 30px rgba(120,95,40,.09),inset 0 1px 0 rgba(255,255,255,.7);background:var(--panel);border-color:var(--border)}
+.ch.soon .arrow{display:none}
+@media(max-width:600px){.grid{grid-template-columns:1fr}.mb-left b{display:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body data-lang="en">
+<div class="wall"></div><div class="orbs"><span class="orb o1"></span><span class="orb o2"></span></div><div class="grain"></div>
+<div class="menubar">
+  <div class="mb-left">
+    <div class="back" onclick="goTo('index.html')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg><span data-en="Home" data-hi="होम">Home</span></div>
+    <b data-en="Employability Notes" data-hi="रोज़गार कौशल नोट्स">Employability Notes</b>
+  </div>
+  <div class="mb-right">
+    <div class="langbtn" id="langBtn"><div class="pill"></div><span class="on" id="enL">EN</span><span id="hiL">हिं</span></div>
+  </div>
+</div>
+
+<div class="stage">
+  <div class="head">
+    <div class="eyebrow"><span class="dot"></span><span data-en="Subject 02 · 13 Chapters" data-hi="विषय 02 · 13 अध्याय">Subject 02 · 13 Chapters</span></div>
+    <h1 data-en="Choose a <span class='g'>chapter</span>" data-hi="एक <span class='g'>अध्याय</span> चुनें">Choose a <span class="g">chapter</span></h1>
+    <p class="headsub" data-en="Tap any chapter to open its short notes." data-hi="किसी भी अध्याय पर टैप करें और उसके नोट्स खोलें।">Tap any chapter to open its short notes.</p>
+  </div>
+  <div class="grid" id="grid"></div>
+</div>
+
+<script>
+/* Jab tum 13 notes files bhejoge, 'file' key mein exact filename daal dunga. notes/employability/ folder ke andar rakhna GitHub par. */
+const CHAPTERS=[
+  {id:1,en:"Introduction to Employability Skills",hi:"रोज़गार कौशल का परिचय",dEn:"Why employability skills matter",dHi:"रोज़गार कौशल क्यों ज़रूरी",file:null},
+  {id:2,en:"Constitutional Values & Citizenship",hi:"संवैधानिक मूल्य और नागरिकता",dEn:"Values, ethics, environment",dHi:"मूल्य, नैतिकता, पर्यावरण",file:null},
+  {id:3,en:"Becoming a Professional in the 21st Century",hi:"21वीं सदी में प्रोफेशनल बनना",dEn:"Self-awareness, attitude, time mgmt",dHi:"आत्म-जागरूकता, रवैया, समय प्रबंधन",file:null},
+  {id:4,en:"Basic English Skills",hi:"बेसिक अंग्रेज़ी कौशल",dEn:"Nouns, verbs, sentences, grammar",dHi:"संज्ञा, क्रिया, वाक्य, व्याकरण",file:null},
+  {id:5,en:"Career Development & Goal Setting",hi:"करियर विकास और लक्ष्य निर्धारण",dEn:"Goals, planning, growth",dHi:"लक्ष्य, योजना, विकास",file:null},
+  {id:6,en:"Communication Skills",hi:"संचार कौशल",dEn:"Verbal, non-verbal, teamwork",dHi:"मौखिक, गैर-मौखिक, टीमवर्क",file:null},
+  {id:7,en:"Diversity & Inclusion",hi:"विविधता और समावेशन",dEn:"Respect, equality at workplace",dHi:"सम्मान, कार्यस्थल पर समानता",file:null},
+  {id:8,en:"Financial & Legal Literacy",hi:"वित्तीय और कानूनी साक्षरता",dEn:"Banking, savings, legal rights",dHi:"बैंकिंग, बचत, कानूनी अधिकार",file:null},
+  {id:9,en:"Essential Digital Skills",hi:"आवश्यक डिजिटल कौशल",dEn:"Computer, internet, email, safety",dHi:"कंप्यूटर, इंटरनेट, ईमेल, सुरक्षा",file:null},
+  {id:10,en:"Entrepreneurship",hi:"उद्यमिता",dEn:"Business ideas, startups",dHi:"व्यापार विचार, स्टार्टअप",file:null},
+  {id:11,en:"Customer Service",hi:"ग्राहक सेवा",dEn:"Handling customers, service quality",dHi:"ग्राहक संभालना, सेवा गुणवत्ता",file:null},
+  {id:12,en:"Getting Ready for Apprenticeship & Jobs",hi:"अप्रेंटिसशिप और नौकरी की तैयारी",dEn:"Resume, interviews, job search",dHi:"रिज़्यूमे, इंटरव्यू, नौकरी खोज",file:null},
+  {id:13,en:"Artificial Intelligence",hi:"आर्टिफिशियल इंटेलिजेंस",dEn:"AI basics, ML, chatbots & applications",dHi:"AI बेसिक्स, ML, चैटबॉट और अनुप्रयोग",file:null}
+];
+const NOTES_FOLDER="notes/employability/";
+
+const body=document.body,enL=document.getElementById('enL'),hiL=document.getElementById('hiL');
+const ARROW='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+
+function applyLang(l){
+  body.dataset.lang=l;enL.classList.toggle('on',l==='en');hiL.classList.toggle('on',l==='hi');
+  document.querySelectorAll('[data-en]').forEach(e=>e.innerHTML=l==='hi'?e.dataset.hi:e.dataset.en);
+  renderGrid();
+  try{localStorage.setItem('copa_lang',l)}catch(e){}
+}
+document.getElementById('langBtn').onclick=()=>applyLang(body.dataset.lang==='en'?'hi':'en');
+let sv='en';try{sv=localStorage.getItem('copa_lang')||'en'}catch(e){}
+
+function renderGrid(){
+  const l=body.dataset.lang,g=document.getElementById('grid');g.innerHTML='';
+  CHAPTERS.forEach((c,i)=>{
+    const d=document.createElement('div');d.className='ch'+(c.file?'':' soon');d.style.animationDelay=(i*0.04)+'s';
+    d.onclick=()=>openNotes(c);
+    d.innerHTML=`<div class="num">${String(c.id).padStart(2,'0')}</div>
+      <div class="info"><h3>${l==='hi'?c.hi:c.en}</h3><p>${c.file?(l==='hi'?c.dHi:c.dEn):(l==='hi'?'जल्द आ रहा है':'Coming soon')}</p></div>
+      <div class="arrow">${ARROW}</div>`;
+    g.appendChild(d);
+  });
+}
+
+function openNotes(c){
+  if(!c.file)return;
+  body.classList.add('exit');setTimeout(()=>location.href=NOTES_FOLDER+c.file,400);
+}
+
+function goTo(u){body.classList.add('exit');setTimeout(()=>location.href=u,400)}
+applyLang(sv);
+
+window.addEventListener('pageshow', function(e){
+  if(e.persisted || performance.getEntriesByType('navigation')[0]?.type === 'back_forward'){
+    document.body.classList.remove('exit');
+    document.body.style.opacity = '1';
+    document.body.style.transform = 'none';
+  }
+});
+</script>
+</body>
+</html>
