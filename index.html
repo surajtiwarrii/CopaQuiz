@@ -3,177 +3,266 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>COPA Quiz — ITI NCVT</title>
+<title>COPA Workspace — ITI NCVT</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --pink:#FF6B9D;--sky:#4FC3F7;--purple:#C961DE;
-  --ink:#2D3748;--ink-soft:#6B7A99;
-  --glass:rgba(255,255,255,.45);
-  --glass-strong:rgba(255,255,255,.62);
-  --border:rgba(255,255,255,.7);
-  --grad:linear-gradient(120deg,#FF8FB1 0%,#C961DE 55%,#7C9DF5 100%);
-  --accent:#FF6B9D;
+  --bg:#F4F1EA;--panel:rgba(255,255,255,.62);
+  --panel-h:rgba(255,255,255,.85);--border:rgba(180,160,120,.28);
+  --border-h:rgba(190,160,100,.5);
+  --ink:#2A2620;--ink-soft:#736A58;--ink-dim:#A79C86;
+  --gold:#B8862F;--gold-d:#9A6E22;
+  --grad:linear-gradient(120deg,#E8C06A 0%,#C79432 100%);
+  --violet:#7B6FE0;--teal:#3FB5A4;--rose:#DB6E97;--sky:#5B9BE6;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:'Poppins',sans-serif;color:var(--ink);min-height:100vh;overflow-x:hidden;position:relative;background:#EAF0FF}
+body{font-family:'Poppins',sans-serif;color:var(--ink);min-height:100vh;overflow-x:hidden;position:relative;background:var(--bg)}
 body[data-lang="hi"]{font-family:'Noto Sans Devanagari','Poppins',sans-serif}
 body.exit{animation:pageOut .45s ease forwards}
 @keyframes pageOut{to{opacity:0;transform:scale(.97)}}
+
 .wall{position:fixed;inset:0;z-index:-3;background:
-  radial-gradient(60% 50% at 15% 20%,#FFC2DC 0%,transparent 60%),
-  radial-gradient(55% 55% at 85% 25%,#B6E3FF 0%,transparent 60%),
-  radial-gradient(60% 60% at 50% 90%,#E5C8FF 0%,transparent 60%),
-  linear-gradient(160deg,#FFF0F5,#F0F8FF);
-  background-size:200% 200%;animation:wallShift 22s ease-in-out infinite}
-@keyframes wallShift{0%,100%{background-position:0% 0%}50%{background-position:100% 100%}}
+  radial-gradient(65% 55% at 15% 8%,rgba(232,192,106,.28) 0%,transparent 55%),
+  radial-gradient(60% 50% at 90% 15%,rgba(123,111,224,.14) 0%,transparent 55%),
+  radial-gradient(70% 60% at 50% 100%,rgba(63,181,164,.13) 0%,transparent 60%),
+  linear-gradient(165deg,#FAF7EF,#F1ECE0)}
+.orbs{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
+.orb{position:absolute;border-radius:50%;filter:blur(58px);opacity:.35;mix-blend-mode:multiply;animation:float 20s ease-in-out infinite}
+.orb.o1{width:300px;height:300px;background:radial-gradient(circle,#F0CE7E,transparent 70%);top:-70px;left:-50px}
+.orb.o2{width:340px;height:340px;background:radial-gradient(circle,#A99FF0,transparent 70%);bottom:-90px;right:-70px;animation-delay:-7s}
+.orb.o3{width:240px;height:240px;background:radial-gradient(circle,#8AD9CC,transparent 70%);top:44%;left:62%;animation-delay:-13s}
+@keyframes float{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(28px,-32px) scale(1.08)}66%{transform:translate(-22px,20px) scale(.93)}}
 .grain{position:fixed;inset:0;z-index:-1;opacity:.04;pointer-events:none;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
-.menubar{position:fixed;top:0;left:0;right:0;z-index:60;height:46px;display:flex;align-items:center;justify-content:space-between;
-  padding:0 clamp(14px,4vw,32px);background:var(--glass-strong);backdrop-filter:blur(22px) saturate(160%);
-  border-bottom:1px solid var(--border);font-size:.82rem;font-weight:600;animation:slideDown .6s cubic-bezier(.2,.8,.2,1) both}
+
+.menubar{position:fixed;top:0;left:0;right:0;z-index:60;height:54px;display:flex;align-items:center;justify-content:space-between;
+  padding:0 clamp(14px,4vw,32px);background:rgba(250,247,239,.72);backdrop-filter:blur(22px) saturate(150%);
+  border-bottom:1px solid var(--border);animation:slideDown .6s cubic-bezier(.2,.8,.2,1) both}
 @keyframes slideDown{from{transform:translateY(-100%)}to{transform:translateY(0)}}
-.mb-left{display:flex;align-items:center;gap:12px}
-.apple{width:26px;height:26px;border-radius:8px;background:var(--grad);display:grid;place-items:center;color:#fff;font-family:'JetBrains Mono';font-weight:700;font-size:.85rem;box-shadow:0 3px 10px rgba(255,107,157,.4)}
-.mb-left b{letter-spacing:-.3px;font-size:.95rem}
-.mb-right{display:flex;align-items:center;gap:14px;font-family:'JetBrains Mono';color:var(--ink-soft)}
-.langbtn{display:flex;background:rgba(255,255,255,.6);border:1px solid var(--border);border-radius:20px;padding:3px;cursor:pointer;position:relative;font-weight:700}
-.langbtn .pill{position:absolute;top:3px;bottom:3px;width:calc(50% - 3px);left:3px;background:var(--accent);border-radius:20px;transition:transform .35s cubic-bezier(.6,.2,.1,1);box-shadow:0 2px 8px rgba(255,107,157,.45)}
+.mb-left{display:flex;align-items:center;gap:11px}
+.logo{width:32px;height:32px;border-radius:10px;background:var(--grad);display:grid;place-items:center;
+  box-shadow:0 4px 14px rgba(199,148,50,.35)}
+.logo svg{width:17px;height:17px;color:#3A2A08}
+.mb-left b{letter-spacing:.5px;font-size:1rem;font-weight:700;color:var(--ink)}
+.mb-left .tag{font-size:.6rem;font-weight:600;letter-spacing:1px;color:var(--gold-d);background:rgba(184,134,47,.1);
+  padding:4px 9px;border-radius:20px;text-transform:uppercase;border:1px solid rgba(184,134,47,.24)}
+.mb-right{display:flex;align-items:center;gap:12px;font-family:'JetBrains Mono';color:var(--ink-soft)}
+.langbtn{display:flex;background:var(--panel);border:1px solid var(--border);border-radius:20px;padding:3px;cursor:pointer;position:relative;font-weight:700}
+.langbtn .pill{position:absolute;top:3px;bottom:3px;width:calc(50% - 3px);left:3px;background:var(--grad);border-radius:20px;transition:transform .35s cubic-bezier(.6,.2,.1,1);box-shadow:0 2px 10px rgba(199,148,50,.4)}
 body[data-lang="hi"] .langbtn .pill{transform:translateX(100%)}
 .langbtn span{position:relative;z-index:1;padding:4px 13px;font-size:.72rem;color:var(--ink-soft);transition:color .3s}
-.langbtn span.on{color:#fff}
-#clock{font-size:.78rem}
-.stage{max-width:1080px;margin:0 auto;padding:104px clamp(18px,5vw,40px) 40px;min-height:100vh;display:flex;flex-direction:column;justify-content:center}
-.boot{text-align:center;margin-bottom:44px}
-.term{display:inline-flex;align-items:center;gap:9px;font-size:.74rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;
-  color:var(--accent);background:rgba(255,107,157,.1);padding:8px 16px;border-radius:30px;margin-bottom:22px;animation:fadeUp .7s .1s both}
-.term .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);animation:pulse 1.8s infinite}
-@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,107,157,.6)}50%{box-shadow:0 0 0 7px rgba(255,107,157,0)}}
-h1{font-size:clamp(2.3rem,6.5vw,4.2rem);font-weight:800;line-height:1.05;letter-spacing:-2px;animation:fadeUp .7s .2s both}
-h1 .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
-.sub{max-width:520px;margin:18px auto 0;color:var(--ink-soft);font-size:clamp(.96rem,2vw,1.12rem);line-height:1.55;animation:fadeUp .7s .32s both}
-@keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
-.dock{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
-.win{position:relative;border-radius:24px;padding:0;cursor:pointer;overflow:hidden;background:var(--glass);
-  backdrop-filter:blur(26px) saturate(180%);border:1px solid var(--border);
-  box-shadow:0 20px 50px rgba(120,90,180,.14),inset 0 1px 0 rgba(255,255,255,.6);
-  transition:transform .5s cubic-bezier(.2,.8,.2,1),box-shadow .5s;animation:winIn .8s both}
-.win:nth-child(1){animation-delay:.4s}.win:nth-child(2){animation-delay:.5s}.win:nth-child(3){animation-delay:.6s}.win:nth-child(4){animation-delay:.7s}
-@keyframes winIn{from{opacity:0;transform:translateY(40px) scale(.95)}to{opacity:1;transform:none}}
-.win:hover{transform:translateY(-10px);box-shadow:0 32px 64px rgba(120,90,180,.22),inset 0 1px 0 rgba(255,255,255,.7)}
-.win .body{padding:36px 30px 34px}
-.win .icon{width:68px;height:68px;border-radius:19px;display:grid;place-items:center;font-size:2rem;margin-bottom:20px;transition:transform .5s}
-.win.theory .icon{background:linear-gradient(135deg,#FFE0EC,#FFC8DD)}
-.win.emp .icon{background:linear-gradient(135deg,#DCF1FF,#C4E6FF)}
-.win.notes1 .icon{background:linear-gradient(135deg,#FFF3CF,#FFE39A)}
-.win.notes2 .icon{background:linear-gradient(135deg,#D8F5E3,#B8ECC9)}
-.win:hover .icon{transform:scale(1.1) rotate(-5deg)}
-.win h2{font-size:1.55rem;font-weight:700;letter-spacing:-.5px;margin-bottom:10px}
-.win p{color:var(--ink-soft);font-size:.92rem;line-height:1.55;margin-bottom:24px}
-.win .meta{display:flex;gap:26px;margin-bottom:28px}
-.win .meta b{display:block;font-size:1.55rem;font-weight:700;font-family:'JetBrains Mono';background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
-.win .meta span{font-size:.68rem;color:var(--ink-soft)}
-/* premium launch button */
-.launch{display:inline-flex;align-items:center;gap:10px;font-weight:600;font-size:.95rem;color:#fff;
-  background:var(--grad);background-size:200% 100%;background-position:0% 0;padding:14px 26px;border-radius:16px;position:relative;overflow:hidden;
-  box-shadow:0 10px 24px rgba(201,97,222,.28);transition:background-position .6s,box-shadow .4s,transform .3s}
-.launch::before{content:"";position:absolute;top:0;left:-60%;width:50%;height:100%;
-  background:linear-gradient(120deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);transition:left .6s}
-.win:hover .launch{background-position:100% 0;box-shadow:0 14px 32px rgba(201,97,222,.4);transform:translateY(-2px)}
-.win:hover .launch::before{left:130%}
-.launch .a{transition:transform .3s;position:relative}.win:hover .launch .a{transform:translateX(4px)}
-.launch span{position:relative}
+.langbtn span.on{color:#3A2A08}
+#clock{font-size:.78rem;background:var(--panel);padding:5px 11px;border-radius:20px;border:1px solid var(--border)}
 
-footer{text-align:center;padding:24px;color:var(--ink-soft);font-size:.8rem}
-@media(max-width:700px){.dock{grid-template-columns:1fr}h1{letter-spacing:-1px}}
+.stage{max-width:1080px;margin:0 auto;padding:88px clamp(18px,5vw,40px) 30px}
+
+.hero{margin-bottom:40px;animation:fadeUp .7s .15s both}
+.greet{display:inline-flex;align-items:center;gap:9px;font-size:.72rem;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;
+  color:var(--gold-d);background:rgba(184,134,47,.09);padding:8px 16px;border-radius:30px;margin-bottom:20px;border:1px solid rgba(184,134,47,.2)}
+.greet .dot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pulse 1.8s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(184,134,47,.5)}50%{box-shadow:0 0 0 7px rgba(184,134,47,0)}}
+h1{font-size:clamp(2.1rem,6vw,3.7rem);font-weight:700;line-height:1.08;letter-spacing:-1.4px;color:var(--ink)}
+h1 .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{max-width:560px;margin:18px 0 0;color:var(--ink-soft);font-size:clamp(.95rem,2vw,1.06rem);line-height:1.6}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+.seclabel{display:flex;align-items:center;gap:13px;margin:36px 0 16px;animation:fadeUp .6s both}
+.seclabel .ico{width:28px;height:28px;border-radius:9px;display:grid;place-items:center;flex-shrink:0;
+  background:var(--panel);border:1px solid var(--border)}
+.seclabel .ico svg{width:15px;height:15px;color:var(--gold-d)}
+.seclabel .txt{font-size:.76rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-soft);white-space:nowrap}
+.seclabel .line{flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent)}
+
+.dock{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.win{position:relative;border-radius:22px;cursor:pointer;overflow:hidden;background:var(--panel);
+  backdrop-filter:blur(24px) saturate(150%);border:1px solid var(--border);
+  box-shadow:0 16px 40px rgba(120,95,40,.1),inset 0 1px 0 rgba(255,255,255,.7);
+  transition:transform .5s cubic-bezier(.2,.8,.2,1),box-shadow .5s,border-color .5s,background .5s;animation:winIn .7s both}
+@keyframes winIn{from{opacity:0;transform:translateY(32px) scale(.96)}to{opacity:1;transform:none}}
+.win:hover{transform:translateY(-8px);box-shadow:0 28px 56px rgba(120,95,40,.18),inset 0 1px 0 rgba(255,255,255,.8);border-color:var(--border-h);background:var(--panel-h)}
+.win .body{padding:26px 26px 24px}
+.win .top{display:flex;align-items:center;gap:15px;margin-bottom:16px}
+.win .icon{width:56px;height:56px;flex-shrink:0;border-radius:16px;display:grid;place-items:center;
+  transition:transform .5s;border:1px solid var(--border)}
+.win .icon svg{width:26px;height:26px}
+.win.theory .icon{background:rgba(123,111,224,.13);color:var(--violet)}
+.win.emp .icon{background:rgba(63,181,164,.13);color:var(--teal)}
+.win.notes1 .icon{background:rgba(184,134,47,.14);color:var(--gold)}
+.win.notes2 .icon{background:rgba(219,110,151,.13);color:var(--rose)}
+.win:hover .icon{transform:scale(1.08) rotate(-4deg)}
+.win h2{font-size:1.26rem;font-weight:600;letter-spacing:-.3px;line-height:1.2;color:var(--ink)}
+.win .tagline{font-size:.7rem;font-weight:500;color:var(--ink-dim);margin-top:4px;font-family:'JetBrains Mono'}
+.win p{color:var(--ink-soft);font-size:.85rem;line-height:1.6;margin-bottom:20px}
+.win .foot{display:flex;align-items:center;justify-content:space-between}
+.win .meta{display:flex;gap:22px}
+.win .meta b{display:block;font-size:1.2rem;font-weight:700;font-family:'JetBrains Mono';color:var(--ink);line-height:1}
+.win .meta span{font-size:.62rem;color:var(--ink-dim);margin-top:3px;display:block;letter-spacing:.3px}
+.win .go{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;
+  background:var(--grad);box-shadow:0 8px 18px rgba(199,148,50,.32);
+  transition:transform .3s;position:relative;overflow:hidden}
+.win .go svg{width:16px;height:16px;color:#3A2A08;position:relative}
+.win .go::before{content:"";position:absolute;inset:0;left:-60%;width:50%;background:linear-gradient(120deg,transparent,rgba(255,255,255,.7),transparent);transform:skewX(-20deg);transition:left .6s}
+.win:hover .go{transform:translateX(3px)}
+.win:hover .go::before{left:130%}
+
+.foots{margin-top:38px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;
+  padding:18px 22px;border-radius:18px;background:var(--panel);backdrop-filter:blur(20px);border:1px solid var(--border);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.7);animation:fadeUp .6s .5s both}
+.foots .who{font-size:.82rem;color:var(--ink-soft)}
+.foots .who b{color:var(--ink);font-weight:600}
+.foots .chips{display:flex;gap:8px;flex-wrap:wrap}
+.foots .chip{font-size:.68rem;font-weight:500;color:var(--ink-soft);background:rgba(255,255,255,.55);padding:6px 12px;border-radius:20px;font-family:'JetBrains Mono';border:1px solid var(--border)}
+footer{text-align:center;padding:24px;color:var(--ink-dim);font-size:.76rem}
+footer b{color:var(--ink-soft);font-weight:600}
+
+@media(max-width:700px){.dock{grid-template-columns:1fr}h1{letter-spacing:-.8px}.mb-left .tag{display:none}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body data-lang="en">
-<div class="wall"></div><div class="grain"></div>
+<div class="wall"></div>
+<div class="orbs"><span class="orb o1"></span><span class="orb o2"></span><span class="orb o3"></span></div>
+<div class="grain"></div>
+
 <div class="menubar">
-  <div class="mb-left"><div class="apple">C</div><b>COPA Quiz</b></div>
+  <div class="mb-left">
+    <div class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 6.5v11L12 22l9-4.5v-11L12 2z"/><path d="M12 22V12M3 6.5 12 12l9-5.5"/></svg></div>
+    <b>COPA</b>
+    <span class="tag" data-en="Workspace" data-hi="वर्कस्पेस">Workspace</span>
+  </div>
   <div class="mb-right">
     <div class="langbtn" id="langBtn"><div class="pill"></div><span class="on" id="enL">EN</span><span id="hiL">हिं</span></div>
     <span id="clock">--:--</span>
   </div>
 </div>
+
 <div class="stage">
-  <div class="boot">
-    <div class="term"><span class="dot"></span><span data-en="Practice · Test · Improve" data-hi="अभ्यास · टेस्ट · सुधार">Practice · Test · Improve</span></div>
-    <h1 data-en="Welcome to your<br><span class='g'>COPA</span> workspace" data-hi="आपके <span class='g'>COPA</span><br>वर्कस्पेस में स्वागत है">Welcome to your<br><span class="g">COPA</span> workspace</h1>
-    <p class="sub" data-en="Open a subject, pick a chapter, choose your mode. Bilingual questions with instant explanations." data-hi="विषय खोलें, अध्याय चुनें, मोड चुनें। तुरंत व्याख्या के साथ द्विभाषी प्रश्न।">Open a subject, pick a chapter, choose your mode. Bilingual questions with instant explanations.</p>
+  <div class="hero">
+    <div class="greet"><span class="dot"></span><span id="greetTxt" data-en="Ready to study" data-hi="पढ़ाई के लिए तैयार">Ready to study</span></div>
+    <h1 data-en="Your <span class='g'>COPA</span> exam,<br>all in one place" data-hi="आपकी <span class='g'>COPA</span> परीक्षा,<br>एक ही जगह">Your <span class="g">COPA</span> exam,<br>all in one place</h1>
+    <p class="sub" data-en="Practice chapter-wise tests and revise with bilingual notes — built to match the real NCVT paper." data-hi="अध्यायवार टेस्ट का अभ्यास करें और द्विभाषी नोट्स से रिवीजन करें — असली NCVT पेपर के अनुसार।">Practice chapter-wise tests and revise with bilingual notes — built to match the real NCVT paper.</p>
+  </div>
+
+  <div class="seclabel practice">
+    <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+    <span class="txt" data-en="Practice Tests" data-hi="प्रैक्टिस टेस्ट">Practice Tests</span>
+    <span class="line"></span>
   </div>
   <div class="dock">
-    <div class="win theory" onclick="goTo('copa.html')" data-tilt>
+    <div class="win theory" style="animation-delay:.3s" onclick="goTo('copa.html')">
       <div class="body">
-        <div class="icon">🖥️</div>
-        <h2 data-en="COPA Theory" data-hi="COPA थ्योरी">COPA Theory</h2>
-        <p data-en="Chapter-wise practice tests &amp; full subject mock tests based on NCVT exam pattern. Multiple sets — just like the real paper." data-hi="NCVT परीक्षा पैटर्न पर आधारित अध्यायवार प्रश्न और पूर्ण विषय मॉक टेस्ट। बिल्कुल असली पेपर जैसा।">Chapter-wise practice tests &amp; full subject mock tests based on NCVT exam pattern. Multiple sets — just like the real paper.</p>
-        <div class="meta"><div><b>18</b><span data-en="Chapters" data-hi="अध्याय">Chapters</span></div><div><b>3</b><span data-en="Modes" data-hi="मोड">Modes</span></div></div>
-        <span class="launch"><span data-en="Open" data-hi="खोलें">Open</span><span class="a">→</span></span>
+        <div class="top">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+          <div>
+            <h2 data-en="COPA Theory" data-hi="COPA थ्योरी">COPA Theory</h2>
+            <div class="tagline" data-en="18 chapters · 3 modes" data-hi="18 अध्याय · 3 मोड">18 chapters · 3 modes</div>
+          </div>
+        </div>
+        <p data-en="Chapter-wise practice and full mock tests on the NCVT pattern, with multiple sets like the real paper." data-hi="NCVT पैटर्न पर अध्यायवार अभ्यास और पूर्ण मॉक टेस्ट, असली पेपर जैसे कई सेट के साथ।">Chapter-wise practice and full mock tests on the NCVT pattern, with multiple sets like the real paper.</p>
+        <div class="foot">
+          <div class="meta"><div><b>100</b><span data-en="Questions" data-hi="प्रश्न">Questions</span></div><div><b>10</b><span data-en="Sets" data-hi="सेट">Sets</span></div></div>
+          <div class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        </div>
       </div>
     </div>
-    <div class="win emp" onclick="goTo('employability.html')" data-tilt>
+    <div class="win emp" style="animation-delay:.4s" onclick="goTo('employability.html')">
       <div class="body">
-        <div class="icon">💼</div>
-        <h2 data-en="Employability Skills" data-hi="रोज़गार कौशल">Employability Skills</h2>
-        <p data-en="Subject-wise practice &amp; full mock tests as per NCVT syllabus. Multiple sets to simulate real exam experience." data-hi="NCVT पाठ्यक्रम के अनुसार विषयवार अभ्यास और पूर्ण मॉक टेस्ट। वास्तविक परीक्षा अनुभव के लिए एकाधिक सेट।">Subject-wise practice &amp; full mock tests as per NCVT syllabus. Multiple sets to simulate real exam experience.</p>
-        <div class="meta"><div><b>13</b><span data-en="Chapters" data-hi="अध्याय">Chapters</span></div><div><b>3</b><span data-en="Modes" data-hi="मोड">Modes</span></div></div>
-        <span class="launch"><span data-en="Open" data-hi="खोलें">Open</span><span class="a">→</span></span>
-      </div>
-    </div>
-    <div class="win notes1" onclick="goTo('notes-theory.html')" data-tilt>
-      <div class="body">
-        <div class="icon">📘</div>
-        <h2 data-en="Theory Notes" data-hi="थ्योरी नोट्स">Theory Notes</h2>
-        <p data-en="Concise chapter-wise notes covering every COPA topic — quick revision before your exam." data-hi="हर COPA विषय के संक्षिप्त अध्यायवार नोट्स — परीक्षा से पहले तुरंत रिवीजन के लिए।">Concise chapter-wise notes covering every COPA topic — quick revision before your exam.</p>
-        <div class="meta"><div><b>18</b><span data-en="Chapters" data-hi="अध्याय">Chapters</span></div><div><b>EN/HI</b><span data-en="Language" data-hi="भाषा">Language</span></div></div>
-        <span class="launch"><span data-en="Open" data-hi="खोलें">Open</span><span class="a">→</span></span>
-      </div>
-    </div>
-    <div class="win notes2" onclick="goTo('notes-employability.html')" data-tilt>
-      <div class="body">
-        <div class="icon">📗</div>
-        <h2 data-en="Employability Notes" data-hi="रोज़गार कौशल नोट्स">Employability Notes</h2>
-        <p data-en="Short, to-the-point notes on every Employability Skills concept — everything summarized for fast revision." data-hi="सभी रोज़गार कौशल कॉन्सेप्ट्स के छोटे, सीधे नोट्स — तेज़ रिवीजन के लिए सब कुछ संक्षेप में।">Short, to-the-point notes on every Employability Skills concept — everything summarized for fast revision.</p>
-        <div class="meta"><div><b>13</b><span data-en="Chapters" data-hi="अध्याय">Chapters</span></div><div><b>EN/HI</b><span data-en="Language" data-hi="भाषा">Language</span></div></div>
-        <span class="launch"><span data-en="Open" data-hi="खोलें">Open</span><span class="a">→</span></span>
+        <div class="top">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
+          <div>
+            <h2 data-en="Employability Skills" data-hi="रोज़गार कौशल">Employability Skills</h2>
+            <div class="tagline" data-en="13 chapters · 3 modes" data-hi="13 अध्याय · 3 मोड">13 chapters · 3 modes</div>
+          </div>
+        </div>
+        <p data-en="Subject-wise practice and full mock tests per the NCVT syllabus, with multiple sets for real exam feel." data-hi="NCVT पाठ्यक्रम के अनुसार विषयवार अभ्यास और पूर्ण मॉक टेस्ट, वास्तविक परीक्षा अनुभव के लिए कई सेट।">Subject-wise practice and full mock tests per the NCVT syllabus, with multiple sets for real exam feel.</p>
+        <div class="foot">
+          <div class="meta"><div><b>75</b><span data-en="Questions" data-hi="प्रश्न">Questions</span></div><div><b>10</b><span data-en="Sets" data-hi="सेट">Sets</span></div></div>
+          <div class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        </div>
       </div>
     </div>
   </div>
+
+  <div class="seclabel notes">
+    <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+    <span class="txt" data-en="Revision Notes" data-hi="रिवीजन नोट्स">Revision Notes</span>
+    <span class="line"></span>
+  </div>
+  <div class="dock">
+    <div class="win notes1" style="animation-delay:.5s" onclick="goTo('notes-theory.html')">
+      <div class="body">
+        <div class="top">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+          <div>
+            <h2 data-en="Theory Notes" data-hi="थ्योरी नोट्स">Theory Notes</h2>
+            <div class="tagline" data-en="18 chapters · EN / हिं" data-hi="18 अध्याय · EN / हिं">18 chapters · EN / हिं</div>
+          </div>
+        </div>
+        <p data-en="Concise, exam-focused notes for every COPA topic — quick to revise before the paper." data-hi="हर COPA विषय के लिए संक्षिप्त, परीक्षा-केंद्रित नोट्स — पेपर से पहले तुरंत रिवीजन।">Concise, exam-focused notes for every COPA topic — quick to revise before the paper.</p>
+        <div class="foot">
+          <div class="meta"><div><b>18</b><span data-en="Chapters" data-hi="अध्याय">Chapters</span></div><div><b>2</b><span data-en="Languages" data-hi="भाषाएं">Languages</span></div></div>
+          <div class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        </div>
+      </div>
+    </div>
+    <div class="win notes2" style="animation-delay:.6s" onclick="goTo('notes-employability.html')">
+      <div class="body">
+        <div class="top">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h4"/></svg></div>
+          <div>
+            <h2 data-en="Employability Notes" data-hi="रोज़गार कौशल नोट्स">Employability Notes</h2>
+            <div class="tagline" data-en="13 chapters · EN / हिं" data-hi="13 अध्याय · EN / हिं">13 chapters · EN / हिं</div>
+          </div>
+        </div>
+        <p data-en="Short, to-the-point notes on every Employability Skills concept — everything summed up for fast revision." data-hi="हर रोज़गार कौशल कॉन्सेप्ट के छोटे, सीधे नोट्स — तेज़ रिवीजन के लिए सब कुछ संक्षेप में।">Short, to-the-point notes on every Employability Skills concept — everything summed up for fast revision.</p>
+        <div class="foot">
+          <div class="meta"><div><b>13</b><span data-en="Chapters" data-hi="अध्याय">Chapters</span></div><div><b>2</b><span data-en="Languages" data-hi="भाषाएं">Languages</span></div></div>
+          <div class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="foots">
+    <div class="who" data-en="Built for ITI students · <b>UP NCVT COPA</b> · 1st Year" data-hi="आईटीआई छात्रों के लिए · <b>यूपी एनसीवीटी COPA</b> · प्रथम वर्ष">Built for ITI students · <b>UP NCVT COPA</b> · 1st Year</div>
+    <div class="chips">
+      <span class="chip" data-en="31 Chapters" data-hi="31 अध्याय">31 Chapters</span>
+      <span class="chip" data-en="Bilingual" data-hi="द्विभाषी">Bilingual</span>
+      <span class="chip">Offline</span>
+    </div>
   </div>
 </div>
-<footer><span data-en="Built for ITI students · UP NCVT COPA · 1st Year" data-hi="आईटीआई छात्रों के लिए · यूपी एनसीवीटी COPA · प्रथम वर्ष">Built for ITI students · UP NCVT COPA · 1st Year</span><br><span style="display:inline-block;margin-top:8px;font-weight:600;color:var(--ink)">By Suraj Tiwari</span></footer>
+
+<footer><span>By <b>Suraj Tiwari</b></span></footer>
+
 <script>
 const body=document.body,enL=document.getElementById('enL'),hiL=document.getElementById('hiL');
+function greetKey(){
+  const h=new Date().getHours();
+  if(h<12)return{en:"Good morning",hi:"सुप्रभात"};
+  if(h<17)return{en:"Good afternoon",hi:"नमस्ते"};
+  return{en:"Good evening",hi:"शुभ संध्या"};
+}
 function applyLang(l){
   body.dataset.lang=l;enL.classList.toggle('on',l==='en');hiL.classList.toggle('on',l==='hi');
+  const g=greetKey();
+  document.getElementById('greetTxt').dataset.en=g.en;
+  document.getElementById('greetTxt').dataset.hi=g.hi;
   document.querySelectorAll('[data-en]').forEach(e=>e.innerHTML=l==='hi'?e.dataset.hi:e.dataset.en);
   try{localStorage.setItem('copa_lang',l)}catch(e){}
 }
 document.getElementById('langBtn').onclick=()=>applyLang(body.dataset.lang==='en'?'hi':'en');
 let sv='en';try{sv=localStorage.getItem('copa_lang')||'en'}catch(e){}applyLang(sv);
-
 function goTo(u){body.classList.add('exit');setTimeout(()=>location.href=u,400)}
 function tick(){const d=new Date();document.getElementById('clock').textContent=d.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'})}
 tick();setInterval(tick,1000);
-document.querySelectorAll('[data-tilt]').forEach(c=>{
-  c.addEventListener('mousemove',e=>{const r=c.getBoundingClientRect();
-    const rx=(((e.clientY-r.top)/r.height)-.5)*-5,ry=(((e.clientX-r.left)/r.width)-.5)*5;
-    c.style.transform=`translateY(-10px) perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg)`});
-  c.addEventListener('mouseleave',()=>c.style.transform='');
-});
-
-/* ===== Fix browser back button blank page ===== */
 window.addEventListener('pageshow', function(e){
   if(e.persisted || performance.getEntriesByType('navigation')[0]?.type === 'back_forward'){
     document.body.classList.remove('exit');
-    document.body.style.opacity = '1';
-    document.body.style.transform = 'none';
+    document.body.style.opacity='1';document.body.style.transform='none';
   }
 });
 </script>
