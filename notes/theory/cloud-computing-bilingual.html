@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cloud Computing & Application Development — Hindi/English | ITI COPA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Hind:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #f6f1ff;
+    --bg-soft: #e6d9ff;
+    --panel: rgba(255,255,255,0.45);
+    --panel-solid: rgba(255,255,255,0.78);
+    --panel-glass: rgba(255,255,255,0.35);
+    --lav-deep: #6d28d9;
+    --lav: #a78bfa;
+    --lav-soft: #ddd6fe;
+    --lav-light: #f3eeff;
+    --lav-mist: rgba(167,139,250,0.20);
+    --teal: #8b5cf6;
+    --teal-mist: rgba(139,92,246,0.10);
+    --ink: #261c3d;
+    --ink-soft: #6a5d8a;
+    --line: rgba(109,40,217,0.22);
+    --radius: 18px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Hind',sans-serif;
+    background:
+      radial-gradient(1200px 600px at 10% -10%, var(--lav-mist), transparent 60%),
+      radial-gradient(1000px 700px at 110% 10%, var(--teal-mist), transparent 55%),
+      var(--bg);
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.brand{font-family:'Fraunces',serif;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+
+  .topbar{
+    position:sticky;top:0;z-index:50;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px 20px;
+    background:rgba(246,241,255,0.6);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);
+    gap:10px;
+  }
+  .brand{font-size:1.05rem;font-weight:700;color:var(--lav-deep);display:flex;align-items:center;gap:8px;}
+  .brand .dot{width:9px;height:9px;border-radius:50%;background:linear-gradient(135deg,var(--lav),var(--teal));flex-shrink:0;}
+  .topbar-actions{display:flex;align-items:center;gap:8px;}
+  .menu-btn{
+    background:rgba(167,139,250,0.18);
+    backdrop-filter:blur(6px);
+    color:var(--lav-light);
+    border:1px solid rgba(167,139,250,0.55);
+    padding:9px 16px;border-radius:30px;
+    font-family:'Hind';font-weight:600;font-size:0.9rem;cursor:pointer;
+    text-shadow:0 1px 3px rgba(109,40,217,0.4);
+    background-image:linear-gradient(135deg, rgba(167,139,250,0.55), rgba(109,40,217,0.55));
+    box-shadow:0 6px 16px rgba(109,40,217,0.2);
+  }
+  .lang-toggle{
+    display:flex;align-items:center;background:var(--panel-glass);border:1px solid var(--line);
+    backdrop-filter:blur(8px);
+    border-radius:30px;padding:3px;position:relative;cursor:pointer;
+  }
+  .lang-toggle button{
+    border:none;background:transparent;padding:7px 13px;border-radius:24px;
+    font-family:'Hind';font-weight:700;font-size:0.8rem;cursor:pointer;color:var(--ink-soft);
+    position:relative;z-index:2;transition:color 0.25s;
+  }
+  .lang-toggle button.active{color:var(--lav-light);}
+  .lang-pill{
+    position:absolute;top:3px;bottom:3px;left:3px;width:calc(50% - 3px);
+    background:linear-gradient(135deg,var(--lav),var(--lav-deep));
+    border-radius:24px;transition:transform 0.25s ease;z-index:1;
+  }
+  .lang-toggle[data-lang="en"] .lang-pill{transform:translateX(100%);}
+
+  .hero{padding:64px 20px 40px;text-align:center;position:relative;}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'JetBrains Mono';font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;
+    color:var(--lav-deep);
+    background:var(--panel-glass);
+    backdrop-filter:blur(8px);
+    border:1px solid var(--lav-soft);
+    padding:6px 14px;border-radius:30px;
+    margin-bottom:18px;
+  }
+  .hero h1{font-size:clamp(1.7rem,5.5vw,3.1rem);line-height:1.15;margin:0 0 14px;color:var(--ink);font-weight:700;}
+  .hero h1 .grad{
+    background:linear-gradient(100deg,var(--lav-deep),var(--lav) 45%,var(--teal) 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero p{max-width:620px;margin:0 auto 28px;color:var(--ink-soft);font-size:1.05rem;line-height:1.65;}
+  .hero-stats{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:10px;}
+  .stat-chip{
+    background:var(--panel);border:1px solid var(--line);border-radius:14px;
+    backdrop-filter:blur(8px);
+    padding:12px 18px;min-width:108px;box-shadow:0 4px 14px rgba(109,40,217,0.08);
+  }
+  .stat-chip b{display:block;font-family:'Fraunces';font-size:1.3rem;color:var(--lav-deep);}
+  .stat-chip span{font-size:0.74rem;color:var(--ink-soft);}
+
+  .toolbar{max-width:900px;margin:24px auto 0;padding:0 20px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:center;}
+  .search-wrap{flex:1;min-width:220px;position:relative;}
+  #searchInput{
+    width:100%;padding:13px 16px 13px 42px;border-radius:30px;border:1px solid var(--line);
+    background:var(--panel);backdrop-filter:blur(8px);
+    font-family:'Hind';font-size:0.95rem;color:var(--ink);outline:none;
+  }
+  #searchInput:focus{border-color:var(--lav);}
+  .search-wrap::before{content:"⌕";position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--lav-deep);font-size:1.1rem;}
+
+  .layout{max-width:1180px;margin:14px auto 80px;padding:0 20px;display:grid;grid-template-columns:260px 1fr;gap:26px;}
+  .sidebar{
+    background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    backdrop-filter:blur(10px);
+    padding:18px 14px;height:fit-content;position:sticky;top:78px;max-height:calc(100vh - 100px);overflow-y:auto;
+  }
+  .sidebar h4{font-family:'JetBrains Mono';font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-soft);margin:14px 6px 8px;}
+  .sidebar h4:first-child{margin-top:2px;}
+  .nav-link{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:10px;color:var(--ink);text-decoration:none;font-size:0.88rem;font-weight:500;transition:background 0.15s;}
+  .nav-link:hover{background:var(--lav-mist);}
+  .nav-link.active{background:linear-gradient(120deg,var(--lav-mist),var(--teal-mist));color:var(--lav-deep);font-weight:700;}
+  .nav-link .num{font-family:'JetBrains Mono';font-size:0.68rem;color:var(--teal);min-width:20px;}
+  .close-sidebar{display:none;}
+
+  @media(max-width:880px){
+    .layout{grid-template-columns:1fr;display:block;}
+    .sidebar{position:fixed !important;inset:0 18% 0 0;z-index:60;transform:translateX(-105%);transition:transform 0.3s ease;overflow-y:auto;top:0;height:100vh;max-height:100vh;}
+    .sidebar.open{transform:translateX(0);}
+    .sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(30,15,60,0.4);z-index:55;}
+    .sidebar-overlay.open{display:block;}
+    .close-sidebar{display:block;margin-left:auto;background:none;border:1px solid var(--line);border-radius:50%;width:34px;height:34px;font-size:1rem;color:var(--ink);cursor:pointer;}
+    .brand span.brand-text{display:none;}
+    .menu-btn span.menu-text{display:none;}
+  }
+
+  .content{min-width:0;}
+  .unit-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:22px;overflow:hidden;scroll-margin-top:80px;box-shadow:0 6px 24px rgba(109,40,217,0.08);backdrop-filter:blur(10px);}
+  .unit-head{padding:22px 24px 18px;background:linear-gradient(120deg, rgba(167,139,250,0.20), rgba(109,40,217,0.10));border-bottom:1px solid var(--line);}
+  .unit-tag{font-family:'JetBrains Mono';font-size:0.7rem;color:var(--teal);letter-spacing:0.08em;text-transform:uppercase;display:block;margin-bottom:6px;}
+  .unit-head h2{margin:0;font-size:1.4rem;color:var(--lav-deep);}
+  .unit-body{padding:20px 24px 26px;}
+  .unit-body h3{font-size:1.05rem;color:var(--ink);margin:22px 0 8px;display:flex;align-items:center;gap:8px;}
+  .unit-body h3::before{content:"";width:5px;height:18px;border-radius:3px;background:linear-gradient(180deg,var(--lav),var(--teal));}
+  .unit-body h3:first-child{margin-top:2px;}
+  .unit-body p{line-height:1.75;color:var(--ink);margin:6px 0 10px;font-size:0.97rem;}
+  .unit-body ul, .unit-body ol{margin:6px 0 14px;padding-left:22px;line-height:1.75;}
+  .unit-body li{margin-bottom:6px;font-size:0.95rem;}
+  .unit-body strong{color:var(--lav-deep);}
+
+  .note-box{background:var(--lav-mist);border-left:3px solid var(--lav);border-radius:10px;padding:12px 16px;margin:14px 0;font-size:0.9rem;}
+  .note-box b{color:var(--lav-deep);}
+  .imp-box{background:var(--teal-mist);border-left:3px solid var(--teal);border-radius:10px;padding:12px 16px;margin:14px 0;font-size:0.9rem;}
+  .imp-box b{color:var(--teal);}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0 18px;font-size:0.88rem;border-radius:10px;overflow:hidden;}
+  th{background:linear-gradient(120deg,var(--lav),var(--lav-deep));color:var(--lav-light);text-align:left;padding:10px 12px;font-weight:600;}
+  td{padding:9px 12px;border-bottom:1px solid var(--line);background:var(--panel-solid);}
+  tr:last-child td{border-bottom:none;}
+  tr:nth-child(even) td{background:var(--bg-soft);}
+
+  code, .code-block{font-family:'JetBrains Mono';}
+  .code-block{background:#1f1235;color:#e3d6ff;padding:14px 16px;border-radius:12px;font-size:0.82rem;line-height:1.6;overflow-x:auto;margin:12px 0;border:1px solid rgba(167,139,250,0.3);}
+  .code-block .cmt{color:#9fd9ef;}
+  code{background:var(--bg-soft);padding:2px 6px;border-radius:5px;font-size:0.85em;color:var(--lav-deep);}
+
+  .qbox{background:var(--bg-soft);border:1px dashed var(--lav-soft);border-radius:12px;padding:14px 16px;margin:16px 0;}
+  .qbox b{color:var(--teal);display:block;margin-bottom:6px;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em;}
+
+  #toTop{
+    position:fixed;bottom:22px;right:22px;z-index:40;width:46px;height:46px;border-radius:50%;
+    background:linear-gradient(135deg,var(--lav),var(--teal));color:var(--lav-light);border:none;font-size:1.2rem;cursor:pointer;
+    box-shadow:0 8px 20px rgba(109,40,217,0.3);display:none;align-items:center;justify-content:center;
+  }
+
+  footer{text-align:center;padding:30px 20px 50px;color:var(--ink-soft);font-size:0.85rem;}
+  footer a{color:var(--lav-deep);text-decoration:none;font-weight:600;}
+
+  mark{background:var(--lav-soft);color:var(--ink);padding:0 2px;border-radius:3px;}
+  .hide{display:none !important;}
+
+  [data-hi], [data-en]{display:none;}
+  html[lang="hi"] [data-hi].inline, html[lang="hi"] span[data-hi]{display:inline;}
+  html[lang="hi"] [data-hi].block{display:block;}
+  html[lang="hi"] [data-hi].flex{display:flex;}
+  html[lang="hi"] th[data-hi], html[lang="hi"] td[data-hi]{display:table-cell;}
+  html[lang="en"] [data-en].inline, html[lang="en"] span[data-en]{display:inline;}
+  html[lang="en"] [data-en].block{display:block;}
+  html[lang="en"] [data-en].flex{display:flex;}
+  html[lang="en"] th[data-en], html[lang="en"] td[data-en]{display:table-cell;}
+</style>
+</head>
+<body>
+<div id="__backNotesBtn" style="position:fixed;top:14px;left:14px;z-index:9999;">
+<a href="../../notes-theory.html" style="display:flex;align-items:center;gap:7px;text-decoration:none;
+background:rgba(255,255,255,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+border:1px solid rgba(0,0,0,.08);color:#2A2620;font-family:'Poppins',Arial,sans-serif;
+font-size:.82rem;font-weight:600;padding:9px 16px 9px 12px;border-radius:30px;
+box-shadow:0 6px 18px rgba(0,0,0,.14);transition:transform .25s,box-shadow .25s;">
+<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+<span>Notes</span></a></div>
+<style>
+#__backNotesBtn a:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,0,0,.2)}
+@media(max-width:600px){#__backNotesBtn{top:10px;left:10px}#__backNotesBtn a{padding:8px 14px 8px 10px;font-size:.78rem}}
+</style>
+
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span><span class="brand-text">Cloud Computing & App Dev</span></div>
+  <div class="topbar-actions">
+    <div class="lang-toggle" id="langToggle" data-lang="hi" onclick="setLang(this.dataset.lang==='hi'?'en':'hi')">
+      <div class="lang-pill"></div>
+      <button type="button" id="btnHi">हिं</button>
+      <button type="button" id="btnEn">EN</button>
+    </div>
+    <button class="menu-btn" onclick="toggleSidebar(event)">🌐 <span class="menu-text" data-hi="inline">विषय सूची</span><span class="menu-text" data-en="inline">Topics</span></button>
+  </div>
+</div>
+
+<div class="hero">
+  <span class="eyebrow">● ITI · COPA · UP Board Pattern</span>
+  <h1>
+    <span data-hi="block" class="block">Cloud Computing &<br>App Development<br><span class="grad">सम्पूर्ण नोट्स</span></span>
+    <span data-en="block" class="block">Cloud Computing &<br>App Development<br><span class="grad">Complete Notes</span></span>
+  </h1>
+  <p data-hi="block" class="block">Cloud Models से लेकर App Development Process तक — हिंदी और इंग्लिश दोनों में, परीक्षा के हिसाब से तैयार।</p>
+  <p data-en="block" class="block">From Cloud Models to the App Development Process — available in both Hindi and English, exam-ready.</p>
+  <div class="hero-stats">
+    <div class="stat-chip"><b>10</b><span data-hi="inline">Units</span><span data-en="inline">Units</span></div>
+    <div class="stat-chip"><b>55+</b><span data-hi="inline">Topics</span><span data-en="inline">Topics</span></div>
+    <div class="stat-chip"><b>2</b><span data-hi="inline">भाषाएं</span><span data-en="inline">Languages</span></div>
+  </div>
+</div>
+
+<div class="toolbar">
+  <div class="search-wrap">
+    <input type="text" id="searchInput" data-hi-placeholder="कोई भी टॉपिक खोजें... जैसे: SaaS, Virtualization, SDLC" data-en-placeholder="Search any topic... e.g. SaaS, Virtualization, SDLC" placeholder="कोई भी टॉपिक खोजें... जैसे: SaaS, Virtualization, SDLC" oninput="liveSearch()">
+  </div>
+</div>
+
+<div class="sidebar-overlay" id="overlay" onclick="toggleSidebar(event)"></div>
+
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <button class="close-sidebar" onclick="toggleSidebar(event)">✕</button>
+    <h4 data-hi="block" class="block">क्लाउड कंप्यूटिंग बेसिक्स</h4>
+    <h4 data-en="block" class="block">Cloud Computing Basics</h4>
+    <a class="nav-link" href="#unit1"><span class="num">01</span><span data-hi="inline">Cloud Computing का परिचय</span><span data-en="inline">Introduction to Cloud Computing</span></a>
+    <a class="nav-link" href="#unit2"><span class="num">02</span><span data-hi="inline">Service Models (IaaS, PaaS, SaaS)</span><span data-en="inline">Service Models (IaaS, PaaS, SaaS)</span></a>
+    <a class="nav-link" href="#unit3"><span class="num">03</span><span data-hi="inline">Deployment Models</span><span data-en="inline">Deployment Models</span></a>
+    <a class="nav-link" href="#unit4"><span class="num">04</span><span data-hi="inline">Cloud Providers & Virtualization</span><span data-en="inline">Cloud Providers & Virtualization</span></a>
+    <a class="nav-link" href="#unit5"><span class="num">05</span><span data-hi="inline">Cloud Storage & Database</span><span data-en="inline">Cloud Storage & Database</span></a>
+    <a class="nav-link" href="#unit6"><span class="num">06</span><span data-hi="inline">Cloud Security</span><span data-en="inline">Cloud Security</span></a>
+    <h4 data-hi="block" class="block">एप्लीकेशन डेवलपमेंट</h4>
+    <h4 data-en="block" class="block">Application Development</h4>
+    <a class="nav-link" href="#unit7"><span class="num">07</span><span data-hi="inline">SDLC (Software Development Life Cycle)</span><span data-en="inline">SDLC (Software Development Life Cycle)</span></a>
+    <a class="nav-link" href="#unit8"><span class="num">08</span><span data-hi="inline">Mobile App Development बेसिक्स</span><span data-en="inline">Mobile App Development Basics</span></a>
+    <a class="nav-link" href="#unit9"><span class="num">09</span><span data-hi="inline">Advantages & Challenges</span><span data-en="inline">Advantages & Challenges</span></a>
+    <h4 data-hi="block" class="block">रिवीज़न</h4>
+    <h4 data-en="block" class="block">Revision</h4>
+    <a class="nav-link" href="#unit10"><span class="num">10</span><span data-hi="inline">Important Q&A</span><span data-en="inline">Important Q&A</span></a>
+  </aside>
+
+  <main class="content" id="content">
+    <!-- UNIT 1 -->
+    <section class="unit-card" id="unit1">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 01 · क्लाउड कंप्यूटिंग बेसिक्स</span><span data-en="inline">Unit 01 · Cloud Computing Basics</span></span>
+        <h2><span data-hi="inline">Cloud Computing का परिचय</span><span data-en="inline">Introduction to Cloud Computing</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Cloud Computing क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is Cloud Computing?</h3>
+        <p data-hi="block" class="block"><strong>Cloud Computing</strong> Internet के through computing services (storage, servers, software, processing power) को on-demand access करने का तरीका है — बिना खुद hardware खरीदे।</p>
+        <p data-en="block" class="block"><strong>Cloud Computing</strong> is the delivery of computing services (storage, servers, software, processing power) over the Internet on-demand — without owning physical hardware.</p>
+
+        <h3 data-hi="flex" class="flex">Cloud Computing से पहले vs अब</h3>
+        <h3 data-en="flex" class="flex">Before Cloud Computing vs Now</h3>
+        <table>
+          <tr><th data-hi="inline">पहले (On-Premise)</th><th data-en="inline">Before (On-Premise)</th><th data-hi="inline">अब (Cloud)</th><th data-en="inline">Now (Cloud)</th></tr>
+          <tr><td colspan="2"><span data-hi="inline">अपना hardware खरीदना और maintain करना पड़ता था</span><span data-en="inline">Had to buy and maintain own hardware</span></td><td colspan="2"><span data-hi="inline">सिर्फ रेंट पर ज़रूरत भर resources लेना</span><span data-en="inline">Rent only the resources you need</span></td></tr>
+          <tr><td colspan="2"><span data-hi="inline">High upfront cost</span><span data-en="inline">High upfront cost</span></td><td colspan="2"><span data-hi="inline">Pay-as-you-go pricing</span><span data-en="inline">Pay-as-you-go pricing</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Cloud Computing की Key Characteristics</h3>
+        <h3 data-en="flex" class="flex">Key Characteristics of Cloud Computing</h3>
+        <table>
+          <tr><th>Characteristic</th><th data-hi="inline">मतलब</th><th data-en="inline">Meaning</th></tr>
+          <tr><td>On-Demand Self-Service</td><td><span data-hi="inline">User बिना किसी provider से बात किए खुद resources ले सकता है</span><span data-en="inline">Users can provision resources themselves without contacting the provider</span></td></tr>
+          <tr><td>Broad Network Access</td><td><span data-hi="inline">Internet से किसी भी device से access</span><span data-en="inline">Accessible from any device over the Internet</span></td></tr>
+          <tr><td>Resource Pooling</td><td><span data-hi="inline">कई users के बीच resources share होते हैं</span><span data-en="inline">Resources are shared among multiple users</span></td></tr>
+          <tr><td>Rapid Elasticity</td><td><span data-hi="inline">ज़रूरत के हिसाब से resources तुरंत बढ़ाए/घटाए जा सकते हैं</span><span data-en="inline">Resources can be quickly scaled up/down as needed</span></td></tr>
+          <tr><td>Measured Service</td><td><span data-hi="inline">सिर्फ use किए गए resources का payment (pay-per-use)</span><span data-en="inline">Pay only for the resources used (pay-per-use)</span></td></tr>
+        </table>
+
+        <div class="note-box">
+          <span data-hi="inline"><b>याद रखें:</b> Cloud Computing के 5 essential characteristics (On-Demand, Broad Access, Pooling, Elasticity, Measured Service) NIST definition के according हैं — exam में अक्सर पूछे जाते हैं।</span>
+          <span data-en="inline"><b>Remember:</b> the 5 essential characteristics of Cloud Computing (On-Demand, Broad Access, Pooling, Elasticity, Measured Service) follow the NIST definition — often asked in exams.</span>
+        </div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">Cloud Computing किसे कहते हैं? इसकी 5 key characteristics लिखिए। On-Premise और Cloud में अंतर बताइए।</span>
+          <span data-en="inline">What is Cloud Computing? Write its 5 key characteristics. Differentiate between On-Premise and Cloud.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 2 -->
+    <section class="unit-card" id="unit2">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 02 · क्लाउड कंप्यूटिंग बेसिक्स</span><span data-en="inline">Unit 02 · Cloud Computing Basics</span></span>
+        <h2><span data-hi="inline">Service Models (IaaS, PaaS, SaaS)</span><span data-en="inline">Service Models (IaaS, PaaS, SaaS)</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">तीन मुख्य Service Models</h3>
+        <h3 data-en="flex" class="flex">Three Main Service Models</h3>
+        <table>
+          <tr><th>Model</th><th data-hi="inline">मतलब</th><th data-en="inline">Meaning</th><th data-hi="inline">उदाहरण</th><th data-en="inline">Example</th></tr>
+          <tr><td>IaaS<br><span data-hi="inline">(Infrastructure as a Service)</span><span data-en="inline">(Infrastructure as a Service)</span></td><td><span data-hi="inline">Virtual servers, storage, networking rent पर मिलता है</span><span data-en="inline">Provides virtual servers, storage, networking on rent</span></td><td colspan="2">AWS EC2, Azure VM</td></tr>
+          <tr><td>PaaS<br><span data-hi="inline">(Platform as a Service)</span><span data-en="inline">(Platform as a Service)</span></td><td><span data-hi="inline">App बनाने/run करने का पूरा platform मिलता है (infrastructure manage नहीं करना पड़ता)</span><span data-en="inline">Provides a complete platform to build/run apps (no need to manage infrastructure)</span></td><td colspan="2">Google App Engine, Heroku</td></tr>
+          <tr><td>SaaS<br><span data-hi="inline">(Software as a Service)</span><span data-en="inline">(Software as a Service)</span></td><td><span data-hi="inline">Ready-to-use software browser से directly use करते हैं</span><span data-en="inline">Ready-to-use software accessed directly via browser</span></td><td colspan="2">Gmail, Google Docs, Netflix</td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Responsibility Comparison</h3>
+        <h3 data-en="flex" class="flex">Responsibility Comparison</h3>
+        <p data-hi="block" class="block">IaaS में user को सबसे ज़्यादा control और responsibility (OS, apps खुद manage करनी पड़ती है) मिलती है। SaaS में सबसे कम — user सिर्फ software use करता है, बाकी सब provider manage करता है।</p>
+        <p data-en="block" class="block">IaaS gives the user the most control and responsibility (managing OS, apps themselves). SaaS gives the least — the user only uses the software while the provider manages everything else.</p>
+
+        <h3 data-hi="flex" class="flex">"As a Service" का Pizza Analogy</h3>
+        <h3 data-en="flex" class="flex">The "As a Service" Pizza Analogy</h3>
+        <table>
+          <tr><th>Model</th><th data-hi="inline">Pizza Analogy</th><th data-en="inline">Pizza Analogy</th></tr>
+          <tr><td>On-Premise</td><td colspan="2"><span data-hi="inline">घर पर pizza बनाना (सब कुछ खुद)</span><span data-en="inline">Making pizza at home (everything yourself)</span></td></tr>
+          <tr><td>IaaS</td><td colspan="2"><span data-hi="inline">Kitchen rent पर लेना (ingredients खुद लाने पड़ते हैं)</span><span data-en="inline">Renting a kitchen (still bring your own ingredients)</span></td></tr>
+          <tr><td>PaaS</td><td colspan="2"><span data-hi="inline">Pizza takeaway-and-bake (आधा बना मिलता है)</span><span data-en="inline">Take-and-bake pizza (half-prepared for you)</span></td></tr>
+          <tr><td>SaaS</td><td colspan="2"><span data-hi="inline">Restaurant में pizza order करना (पूरी तरह ready-made)</span><span data-en="inline">Ordering pizza at a restaurant (fully ready-made)</span></td></tr>
+        </table>
+
+        <div class="note-box">
+          <span data-hi="inline"><b>याद रखें:</b> IaaS &lt; PaaS &lt; SaaS के क्रम में user की responsibility कम होती जाती है और provider की responsibility बढ़ती जाती है।</span>
+          <span data-en="inline"><b>Remember:</b> going from IaaS → PaaS → SaaS, the user's responsibility decreases while the provider's responsibility increases.</span>
+        </div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">IaaS, PaaS, SaaS में अंतर बताइए, उदाहरण सहित। SaaS किसे कहते हैं? Cloud Service Models की responsibility समझाइए।</span>
+          <span data-en="inline">Differentiate between IaaS, PaaS, SaaS with examples. What is SaaS? Explain the responsibility split across Cloud Service Models.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 3 -->
+    <section class="unit-card" id="unit3">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 03 · क्लाउड कंप्यूटिंग बेसिक्स</span><span data-en="inline">Unit 03 · Cloud Computing Basics</span></span>
+        <h2><span data-hi="inline">Deployment Models</span><span data-en="inline">Deployment Models</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Cloud Deployment Models</h3>
+        <h3 data-en="flex" class="flex">Cloud Deployment Models</h3>
+        <table>
+          <tr><th>Model</th><th data-hi="inline">मतलब</th><th data-en="inline">Meaning</th></tr>
+          <tr><td>Public Cloud</td><td><span data-hi="inline">Third-party provider द्वारा सभी के लिए open, shared infrastructure</span><span data-en="inline">Shared infrastructure operated by a third-party provider, open to everyone</span></td></tr>
+          <tr><td>Private Cloud</td><td><span data-hi="inline">सिर्फ एक organization के लिए dedicated infrastructure</span><span data-en="inline">Dedicated infrastructure used by a single organization</span></td></tr>
+          <tr><td>Hybrid Cloud</td><td><span data-hi="inline">Public और Private दोनों का combination</span><span data-en="inline">A combination of both Public and Private cloud</span></td></tr>
+          <tr><td>Community Cloud</td><td><span data-hi="inline">Same interests वाली कई organizations द्वारा shared infrastructure</span><span data-en="inline">Infrastructure shared by multiple organizations with similar interests</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Public vs Private Cloud Comparison</h3>
+        <h3 data-en="flex" class="flex">Public vs Private Cloud Comparison</h3>
+        <table>
+          <tr><th>Public Cloud</th><th>Private Cloud</th></tr>
+          <tr><td><span data-hi="inline">Low cost, scalable, कम control</span><span data-en="inline">Low cost, scalable, less control</span></td><td><span data-hi="inline">High cost, ज़्यादा security और control</span><span data-en="inline">High cost, more security and control</span></td></tr>
+          <tr><td><span data-hi="inline">Multiple organizations share करते हैं</span><span data-en="inline">Shared by multiple organizations</span></td><td><span data-hi="inline">सिर्फ एक organization use करता है</span><span data-en="inline">Used by only one organization</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Hybrid Cloud का उपयोग</h3>
+        <h3 data-en="flex" class="flex">Use of Hybrid Cloud</h3>
+        <p data-hi="block" class="block">Companies sensitive data को Private Cloud में रखती हैं और बाकी workload को Public Cloud पर — यह flexibility और security दोनों का बेहतरीन balance देता है।</p>
+        <p data-en="block" class="block">Companies keep sensitive data in a Private Cloud and run the rest of the workload on a Public Cloud — giving the best balance of flexibility and security.</p>
+
+        <div class="note-box">
+          <span data-hi="inline"><b>याद रखें:</b> Public Cloud सबसे सस्ता और flexible है, पर Private Cloud सबसे secure है — Hybrid Cloud दोनों के फायदे combine करता है।</span>
+          <span data-en="inline"><b>Remember:</b> Public Cloud is the cheapest and most flexible, but Private Cloud is the most secure — Hybrid Cloud combines benefits of both.</span>
+        </div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">Public Cloud और Private Cloud में अंतर बताइए। Hybrid Cloud किसे कहते हैं? Community Cloud का उदाहरण लिखिए।</span>
+          <span data-en="inline">Differentiate between Public Cloud and Private Cloud. What is Hybrid Cloud? Write an example of Community Cloud.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 4 -->
+    <section class="unit-card" id="unit4">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 04 · क्लाउड कंप्यूटिंग बेसिक्स</span><span data-en="inline">Unit 04 · Cloud Computing Basics</span></span>
+        <h2><span data-hi="inline">Cloud Providers & Virtualization</span><span data-en="inline">Cloud Providers & Virtualization</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Major Cloud Providers</h3>
+        <h3 data-en="flex" class="flex">Major Cloud Providers</h3>
+        <table>
+          <tr><th>Provider</th><th data-hi="inline">Company</th><th data-en="inline">Company</th></tr>
+          <tr><td>AWS</td><td colspan="2">Amazon Web Services</td></tr>
+          <tr><td>Azure</td><td colspan="2">Microsoft</td></tr>
+          <tr><td>GCP</td><td colspan="2">Google Cloud Platform</td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Virtualization क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is Virtualization?</h3>
+        <p data-hi="block" class="block"><strong>Virtualization</strong> एक physical computer पर कई virtual machines (VMs) बनाने की technology है — Cloud Computing इसी पर based है, जिससे एक hardware के resources कई users में share होते हैं।</p>
+        <p data-en="block" class="block"><strong>Virtualization</strong> is the technology of creating multiple virtual machines (VMs) on one physical computer — Cloud Computing is built on this, allowing one hardware's resources to be shared among many users.</p>
+
+        <h3 data-hi="flex" class="flex">Virtual Machine vs Physical Machine</h3>
+        <h3 data-en="flex" class="flex">Virtual Machine vs Physical Machine</h3>
+        <table>
+          <tr><th>Virtual Machine</th><th>Physical Machine</th></tr>
+          <tr><td><span data-hi="inline">Software-based, एक physical machine पर कई VMs चल सकती हैं</span><span data-en="inline">Software-based, multiple VMs can run on one physical machine</span></td><td><span data-hi="inline">Actual hardware, एक OS एक समय पर</span><span data-en="inline">Actual hardware, one OS at a time</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Hypervisor</h3>
+        <h3 data-en="flex" class="flex">Hypervisor</h3>
+        <p data-hi="block" class="block"><strong>Hypervisor</strong> वो software layer है जो physical hardware पर virtual machines को create और manage करता है — VMware, VirtualBox, Hyper-V इसके उदाहरण हैं।</p>
+        <p data-en="block" class="block">A <strong>Hypervisor</strong> is the software layer that creates and manages virtual machines on physical hardware — VMware, VirtualBox, Hyper-V are examples.</p>
+
+        <div class="note-box">
+          <span data-hi="inline"><b>याद रखें:</b> Virtualization के बिना modern Cloud Computing possible नहीं होता — यही technology resource pooling और elasticity को मुमकिन बनाती है।</span>
+          <span data-en="inline"><b>Remember:</b> modern Cloud Computing wouldn't be possible without Virtualization — this technology enables resource pooling and elasticity.</span>
+        </div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">Virtualization किसे कहते हैं? Hypervisor का क्या काम है? कोई 3 major Cloud Providers लिखिए।</span>
+          <span data-en="inline">What is Virtualization? What is the function of a Hypervisor? Write any 3 major Cloud Providers.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 5 -->
+    <section class="unit-card" id="unit5">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 05 · क्लाउड कंप्यूटिंग बेसिक्स</span><span data-en="inline">Unit 05 · Cloud Computing Basics</span></span>
+        <h2><span data-hi="inline">Cloud Storage & Database</span><span data-en="inline">Cloud Storage & Database</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Cloud Storage क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is Cloud Storage?</h3>
+        <p data-hi="block" class="block"><strong>Cloud Storage</strong> data को Internet के through remote servers पर store करने की service है, जिसे कहीं से भी access किया जा सकता है — जैसे Google Drive, Dropbox, OneDrive।</p>
+        <p data-en="block" class="block"><strong>Cloud Storage</strong> is a service that stores data on remote servers over the Internet, accessible from anywhere — like Google Drive, Dropbox, OneDrive.</p>
+
+        <h3 data-hi="flex" class="flex">Cloud Storage के फायदे</h3>
+        <h3 data-en="flex" class="flex">Advantages of Cloud Storage</h3>
+        <ul data-hi="block" class="block">
+          <li>कहीं से भी, किसी भी device से access</li>
+          <li>Automatic backup, data loss का कम risk</li>
+          <li>Easy file sharing और collaboration</li>
+          <li>Scalable — ज़रूरत के हिसाब से storage बढ़ा सकते हैं</li>
+        </ul>
+        <ul data-en="block" class="block">
+          <li>Access from anywhere, any device</li>
+          <li>Automatic backup, lower risk of data loss</li>
+          <li>Easy file sharing and collaboration</li>
+          <li>Scalable — increase storage as needed</li>
+        </ul>
+
+        <h3 data-hi="flex" class="flex">Cloud Database</h3>
+        <h3 data-en="flex" class="flex">Cloud Database</h3>
+        <p data-hi="block" class="block"><strong>Cloud Database</strong> एक database है जो cloud platform पर run होता है, बिना खुद server manage किए — जैसे Amazon RDS, Google Cloud SQL, Firebase।</p>
+        <p data-en="block" class="block">A <strong>Cloud Database</strong> is a database that runs on a cloud platform without needing to manage the server yourself — like Amazon RDS, Google Cloud SQL, Firebase.</p>
+
+        <h3 data-hi="flex" class="flex">DBaaS (Database as a Service)</h3>
+        <h3 data-en="flex" class="flex">DBaaS (Database as a Service)</h3>
+        <p data-hi="block" class="block"><strong>DBaaS</strong> Cloud Provider द्वारा managed database service है — provisioning, scaling, backup सब automatically handle होता है।</p>
+        <p data-en="block" class="block"><strong>DBaaS</strong> is a database service managed by the Cloud Provider — provisioning, scaling, backup are all handled automatically.</p>
+
+        <div class="note-box">
+          <span data-hi="inline"><b>याद रखें:</b> Cloud Storage files के लिए होता है (Google Drive), जबकि Cloud Database structured data के लिए (rows/columns) — दोनों अलग use cases हैं।</span>
+          <span data-en="inline"><b>Remember:</b> Cloud Storage is for files (Google Drive), while a Cloud Database is for structured data (rows/columns) — both serve different use cases.</span>
+        </div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">Cloud Storage किसे कहते हैं? इसके फायदे लिखिए। DBaaS क्या है, उदाहरण सहित समझाइए।</span>
+          <span data-en="inline">What is Cloud Storage? Write its advantages. What is DBaaS, explain with an example.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 6 -->
+    <section class="unit-card" id="unit6">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 06 · क्लाउड कंप्यूटिंग बेसिक्स</span><span data-en="inline">Unit 06 · Cloud Computing Basics</span></span>
+        <h2><span data-hi="inline">Cloud Security</span><span data-en="inline">Cloud Security</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Cloud Security क्यों ज़रूरी है?</h3>
+        <h3 data-en="flex" class="flex">Why is Cloud Security Important?</h3>
+        <p data-hi="block" class="block">Cloud पर data third-party servers पर store होता है, इसलिए unauthorized access, data breach, और loss से बचाने के लिए strong security measures ज़रूरी हैं।</p>
+        <p data-en="block" class="block">Since data is stored on third-party servers in the cloud, strong security measures are essential to prevent unauthorized access, data breaches, and loss.</p>
+
+        <h3 data-hi="flex" class="flex">Shared Responsibility Model</h3>
+        <h3 data-en="flex" class="flex">Shared Responsibility Model</h3>
+        <table>
+          <tr><th>Responsibility</th><th data-hi="inline">किसकी ज़िम्मेदारी</th><th data-en="inline">Whose responsibility</th></tr>
+          <tr><td><span data-hi="inline">Infrastructure की Security</span><span data-en="inline">Security of Infrastructure</span></td><td colspan="2"><span data-hi="inline">Cloud Provider</span><span data-en="inline">Cloud Provider</span></td></tr>
+          <tr><td><span data-hi="inline">Data, Access Control की Security</span><span data-en="inline">Security of Data, Access Control</span></td><td colspan="2"><span data-hi="inline">Customer (User)</span><span data-en="inline">Customer (User)</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Cloud Security के मुख्य Concerns</h3>
+        <h3 data-en="flex" class="flex">Main Cloud Security Concerns</h3>
+        <table>
+          <tr><th>Concern</th><th data-hi="inline">मतलब</th><th data-en="inline">Meaning</th></tr>
+          <tr><td>Data Breach</td><td><span data-hi="inline">Unauthorized access से sensitive data leak होना</span><span data-en="inline">Sensitive data leaking due to unauthorized access</span></td></tr>
+          <tr><td>Data Loss</td><td><span data-hi="inline">Accidental deletion या corruption से data खो जाना</span><span data-en="inline">Data lost due to accidental deletion or corruption</span></td></tr>
+          <tr><td>Account Hijacking</td><td><span data-hi="inline">Login credentials चुराकर account misuse करना</span><span data-en="inline">Stealing login credentials to misuse an account</span></td></tr>
+          <tr><td>Insecure APIs</td><td><span data-hi="inline">कमजोर APIs के through unauthorized access</span><span data-en="inline">Unauthorized access through weak APIs</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Best Practices</h3>
+        <h3 data-en="flex" class="flex">Best Practices</h3>
+        <ul data-hi="block" class="block">
+          <li>Strong authentication (2FA) use करें</li>
+          <li>Data को encrypt करके store करें</li>
+          <li>Access permissions को regularly review करें</li>
+          <li>Regular backups लें</li>
+        </ul>
+        <ul data-en="block" class="block">
+          <li>Use strong authentication (2FA)</li>
+          <li>Store data encrypted</li>
+          <li>Regularly review access permissions</li>
+          <li>Take regular backups</li>
+        </ul>
+
+        <div class="imp-box">
+          <span data-hi="inline"><b>Exam Tip:</b> Shared Responsibility Model exam में अक्सर पूछा जाता है — याद रखें Provider infrastructure secure करता है, Customer data/access secure करता है।</span>
+          <span data-en="inline"><b>Exam Tip:</b> the Shared Responsibility Model is often asked in exams — remember the Provider secures infrastructure, the Customer secures data/access.</span>
+        </div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">Cloud Security क्यों ज़रूरी है? Shared Responsibility Model समझाइए। Cloud Security के कोई 3 concerns लिखिए।</span>
+          <span data-en="inline">Why is Cloud Security important? Explain the Shared Responsibility Model. Write any 3 Cloud Security concerns.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 7 -->
+    <section class="unit-card" id="unit7">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 07 · एप्लीकेशन डेवलपमेंट</span><span data-en="inline">Unit 07 · Application Development</span></span>
+        <h2><span data-hi="inline">SDLC (Software Development Life Cycle)</span><span data-en="inline">SDLC (Software Development Life Cycle)</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">SDLC क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is SDLC?</h3>
+        <p data-hi="block" class="block"><strong>SDLC</strong> software/app बनाने का एक structured process है, जो planning से लेकर maintenance तक के सभी phases को cover करता है।</p>
+        <p data-en="block" class="block"><strong>SDLC</strong> is a structured process for building software/apps, covering all phases from planning to maintenance.</p>
+
+        <h3 data-hi="flex" class="flex">SDLC के Phases</h3>
+        <h3 data-en="flex" class="flex">Phases of SDLC</h3>
+        <table>
+          <tr><th>Phase</th><th data-hi="inline">काम</th><th data-en="inline">Description</th></tr>
+          <tr><td>Requirement Analysis</td><td><span data-hi="inline">App में क्या चाहिए, यह समझना</span><span data-en="inline">Understanding what's needed in the app</span></td></tr>
+          <tr><td>Design</td><td><span data-hi="inline">App की architecture और UI/UX plan करना</span><span data-en="inline">Planning the app's architecture and UI/UX</span></td></tr>
+          <tr><td>Development (Coding)</td><td><span data-hi="inline">Actual code लिखना</span><span data-en="inline">Writing the actual code</span></td></tr>
+          <tr><td>Testing</td><td><span data-hi="inline">Bugs/errors ढूंढना और fix करना</span><span data-en="inline">Finding and fixing bugs/errors</span></td></tr>
+          <tr><td>Deployment</td><td><span data-hi="inline">App को users के लिए live/launch करना</span><span data-en="inline">Launching the app live for users</span></td></tr>
+          <tr><td>Maintenance</td><td><span data-hi="inline">Launch के बाद updates और bug fixes देना</span><span data-en="inline">Providing updates and bug fixes after launch</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">SDLC Models</h3>
+        <h3 data-en="flex" class="flex">SDLC Models</h3>
+        <table>
+          <tr><th>Model</th><th data-hi="inline">विशेषता</th><th data-en="inline">Feature</th></tr>
+          <tr><td>Waterfall Model</td><td><span data-hi="inline">हर phase sequentially पूरा होता है, पीछे जाना मुश्किल</span><span data-en="inline">Each phase completes sequentially, hard to go back</span></td></tr>
+          <tr><td>Agile Model</td><td><span data-hi="inline">छोटे-छोटे iterations (Sprints) में काम होता है, flexible</span><span data-en="inline">Work happens in small iterations (Sprints), flexible</span></td></tr>
+        </table>
+
+        <div class="note-box">
+          <span data-hi="inline"><b>याद रखें:</b> Waterfall एक linear process है (एक phase के बाद ही दूसरा शुरू होता है), जबकि Agile में continuous feedback और changes accommodate किए जाते हैं।</span>
+          <span data-en="inline"><b>Remember:</b> Waterfall is a linear process (one phase starts only after another ends), while Agile accommodates continuous feedback and changes.</span>
+        </div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">SDLC किसे कहते हैं? इसके phases लिखिए। Waterfall और Agile model में अंतर बताइए।</span>
+          <span data-en="inline">What is SDLC? Write its phases. Differentiate between the Waterfall and Agile model.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 8 -->
+    <section class="unit-card" id="unit8">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 08 · एप्लीकेशन डेवलपमेंट</span><span data-en="inline">Unit 08 · Application Development</span></span>
+        <h2><span data-hi="inline">Mobile App Development बेसिक्स</span><span data-en="inline">Mobile App Development Basics</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">App Types</h3>
+        <h3 data-en="flex" class="flex">App Types</h3>
+        <table>
+          <tr><th>Type</th><th data-hi="inline">मतलब</th><th data-en="inline">Meaning</th></tr>
+          <tr><td>Native App</td><td><span data-hi="inline">एक specific platform (Android/iOS) के लिए बनाई गई app</span><span data-en="inline">An app built for one specific platform (Android/iOS)</span></td></tr>
+          <tr><td>Hybrid App</td><td><span data-hi="inline">Web technologies से बनी, सभी platforms पर चलने वाली app</span><span data-en="inline">Built with web technologies, runs on multiple platforms</span></td></tr>
+          <tr><td>Web App</td><td><span data-hi="inline">Browser में चलने वाली app, install करने की ज़रूरत नहीं</span><span data-en="inline">Runs in a browser, doesn't need installation</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Native vs Hybrid App</h3>
+        <h3 data-en="flex" class="flex">Native vs Hybrid App</h3>
+        <table>
+          <tr><th>Native</th><th>Hybrid</th></tr>
+          <tr><td><span data-hi="inline">Best performance, पर अलग-अलग platform के लिए अलग code</span><span data-en="inline">Best performance, but separate code per platform</span></td><td><span data-hi="inline">एक ही code सभी platforms पर, थोड़ी कम performance</span><span data-en="inline">One codebase for all platforms, slightly lower performance</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Common Development Tools/Languages</h3>
+        <h3 data-en="flex" class="flex">Common Development Tools/Languages</h3>
+        <table>
+          <tr><th>Platform</th><th data-hi="inline">Language/Tool</th><th data-en="inline">Language/Tool</th></tr>
+          <tr><td>Android (Native)</td><td colspan="2">Java, Kotlin</td></tr>
+          <tr><td>iOS (Native)</td><td colspan="2">Swift, Objective-C</td></tr>
+          <tr><td>Hybrid/Cross-Platform</td><td colspan="2">React Native, Flutter</td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">App Store Deployment</h3>
+        <h3 data-en="flex" class="flex">App Store Deployment</h3>
+        <p data-hi="block" class="block">Android apps Google Play Store पर और iOS apps Apple App Store पर publish की जाती हैं — दोनों के review और publishing process अलग-अलग होते हैं।</p>
+        <p data-en="block" class="block">Android apps are published on Google Play Store and iOS apps on Apple App Store — both have different review and publishing processes.</p>
+
+        <div class="note-box">
+          <span data-hi="inline"><b>याद रखें:</b> Native app हर platform के लिए अलग बनती है (best performance), Hybrid app एक बार बनाकर सभी platforms पर deploy होती है (faster development)।</span>
+          <span data-en="inline"><b>Remember:</b> a Native app is built separately for each platform (best performance), a Hybrid app is built once and deployed on all platforms (faster development).</span>
+        </div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">Native App और Hybrid App में अंतर बताइए। Android और iOS app development में कौन सी languages use होती हैं?</span>
+          <span data-en="inline">Differentiate between Native App and Hybrid App. Which languages are used for Android and iOS app development?</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 9 -->
+    <section class="unit-card" id="unit9">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 09 · एप्लीकेशन डेवलपमेंट</span><span data-en="inline">Unit 09 · Application Development</span></span>
+        <h2><span data-hi="inline">Advantages & Challenges</span><span data-en="inline">Advantages & Challenges</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Cloud Computing के Advantages</h3>
+        <h3 data-en="flex" class="flex">Advantages of Cloud Computing</h3>
+        <ul data-hi="block" class="block">
+          <li>Cost-effective — hardware खरीदने की ज़रूरत नहीं</li>
+          <li>Scalability — ज़रूरत के हिसाब से resources बढ़ाना/घटाना</li>
+          <li>कहीं से भी access</li>
+          <li>Automatic updates और maintenance</li>
+          <li>Disaster recovery आसान</li>
+        </ul>
+        <ul data-en="block" class="block">
+          <li>Cost-effective — no need to buy hardware</li>
+          <li>Scalability — increase/decrease resources as needed</li>
+          <li>Access from anywhere</li>
+          <li>Automatic updates and maintenance</li>
+          <li>Easier disaster recovery</li>
+        </ul>
+
+        <h3 data-hi="flex" class="flex">Cloud Computing के Challenges</h3>
+        <h3 data-en="flex" class="flex">Challenges of Cloud Computing</h3>
+        <ul data-hi="block" class="block">
+          <li>Internet पर dependency — बिना internet काम नहीं करता</li>
+          <li>Data security और privacy की चिंता</li>
+          <li>Provider पर dependency (Vendor Lock-in)</li>
+          <li>Downtime का risk</li>
+        </ul>
+        <ul data-en="block" class="block">
+          <li>Dependency on Internet — doesn't work without it</li>
+          <li>Concerns about data security and privacy</li>
+          <li>Dependency on the provider (Vendor Lock-in)</li>
+          <li>Risk of downtime</li>
+        </ul>
+
+        <h3 data-hi="flex" class="flex">App Development के Challenges</h3>
+        <h3 data-en="flex" class="flex">Challenges in App Development</h3>
+        <table>
+          <tr><th>Challenge</th><th data-hi="inline">विवरण</th><th data-en="inline">Description</th></tr>
+          <tr><td>Device Fragmentation</td><td><span data-hi="inline">अलग-अलग screen sizes/OS versions पर compatibility</span><span data-en="inline">Compatibility across different screen sizes/OS versions</span></td></tr>
+          <tr><td>Performance Optimization</td><td><span data-hi="inline">कम resources वाले devices पर भी अच्छी performance</span><span data-en="inline">Maintaining good performance even on low-resource devices</span></td></tr>
+          <tr><td>Security</td><td><span data-hi="inline">User data को app के अंदर secure रखना</span><span data-en="inline">Keeping user data secure within the app</span></td></tr>
+        </table>
+
+        <div class="imp-box">
+          <span data-hi="inline"><b>Exam Tip:</b> Vendor Lock-in का मतलब है किसी एक cloud provider पर इतना dependent हो जाना कि दूसरे provider में switch करना मुश्किल/costly हो जाए।</span>
+          <span data-en="inline"><b>Exam Tip:</b> Vendor Lock-in means becoming so dependent on one cloud provider that switching to another becomes difficult/costly.</span>
+        </div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">Cloud Computing के Advantages और Challenges लिखिए। Vendor Lock-in किसे कहते हैं? Device Fragmentation क्या है?</span>
+          <span data-en="inline">Write the Advantages and Challenges of Cloud Computing. What is Vendor Lock-in? What is Device Fragmentation?</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 10 -->
+    <section class="unit-card" id="unit10">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 10 · रिवीज़न</span><span data-en="inline">Unit 10 · Revision</span></span>
+        <h2><span data-hi="inline">Important Q&A — फटाफट रिवीज़न</span><span data-en="inline">Important Q&A — Quick Revision</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">1-line Definitions (रटने के लिए)</h3>
+        <h3 data-en="flex" class="flex">1-line Definitions (to memorize)</h3>
+        <ul data-hi="block" class="block">
+          <li><strong>Cloud Computing</strong> — Internet के through on-demand computing services</li>
+          <li><strong>IaaS</strong> — Virtual servers/storage rent पर देने वाला service model</li>
+          <li><strong>PaaS</strong> — App बनाने का पूरा platform देने वाला service model</li>
+          <li><strong>SaaS</strong> — Ready-to-use software browser से देने वाला service model</li>
+          <li><strong>Public Cloud</strong> — सभी के लिए open, shared cloud infrastructure</li>
+          <li><strong>Virtualization</strong> — एक physical machine पर कई virtual machines बनाना</li>
+          <li><strong>SDLC</strong> — Software बनाने का structured process</li>
+          <li><strong>Native App</strong> — एक specific platform के लिए बनी app</li>
+          <li><strong>Hybrid App</strong> — सभी platforms पर चलने वाली, web tech से बनी app</li>
+          <li><strong>Hypervisor</strong> — Virtual machines बनाने/manage करने वाला software</li>
+        </ul>
+        <ul data-en="block" class="block">
+          <li><strong>Cloud Computing</strong> — on-demand computing services delivered over the Internet</li>
+          <li><strong>IaaS</strong> — a service model that rents out virtual servers/storage</li>
+          <li><strong>PaaS</strong> — a service model providing a complete platform to build apps</li>
+          <li><strong>SaaS</strong> — a service model providing ready-to-use software via browser</li>
+          <li><strong>Public Cloud</strong> — shared cloud infrastructure open to everyone</li>
+          <li><strong>Virtualization</strong> — creating multiple virtual machines on one physical machine</li>
+          <li><strong>SDLC</strong> — a structured process for building software</li>
+          <li><strong>Native App</strong> — an app built for one specific platform</li>
+          <li><strong>Hybrid App</strong> — an app built with web tech that runs on all platforms</li>
+          <li><strong>Hypervisor</strong> — software that creates/manages virtual machines</li>
+        </ul>
+
+        <h3 data-hi="flex" class="flex">महत्वपूर्ण Full Forms</h3>
+        <h3 data-en="flex" class="flex">Important Full Forms</h3>
+        <table>
+          <tr><th>Short</th><th>Full Form</th></tr>
+          <tr><td>IaaS</td><td>Infrastructure as a Service</td></tr>
+          <tr><td>PaaS</td><td>Platform as a Service</td></tr>
+          <tr><td>SaaS</td><td>Software as a Service</td></tr>
+          <tr><td>DBaaS</td><td>Database as a Service</td></tr>
+          <tr><td>SDLC</td><td>Software Development Life Cycle</td></tr>
+          <tr><td>AWS</td><td>Amazon Web Services</td></tr>
+          <tr><td>GCP</td><td>Google Cloud Platform</td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Frequently Asked Long Questions</h3>
+        <h3 data-en="flex" class="flex">Frequently Asked Long Questions</h3>
+        <ol data-hi="block" class="block">
+          <li>Cloud Computing किसे कहते हैं? इसकी characteristics लिखिए।</li>
+          <li>IaaS, PaaS, SaaS में अंतर बताइए, उदाहरण सहित।</li>
+          <li>Public, Private और Hybrid Cloud में अंतर बताइए।</li>
+          <li>Virtualization किसे कहते हैं? Hypervisor का काम समझाइए।</li>
+          <li>Cloud Security के concerns और best practices लिखिए।</li>
+          <li>SDLC के phases उदाहरण सहित समझाइए।</li>
+          <li>Native App और Hybrid App में अंतर बताइए।</li>
+        </ol>
+        <ol data-en="block" class="block">
+          <li>What is Cloud Computing? Write its characteristics.</li>
+          <li>Differentiate between IaaS, PaaS, SaaS with examples.</li>
+          <li>Differentiate between Public, Private and Hybrid Cloud.</li>
+          <li>What is Virtualization? Explain the function of a Hypervisor.</li>
+          <li>Write the concerns and best practices of Cloud Security.</li>
+          <li>Explain the phases of SDLC with examples.</li>
+          <li>Differentiate between Native App and Hybrid App.</li>
+        </ol>
+
+        <div class="imp-box">
+          <span data-hi="inline"><b>आखिरी टिप:</b> पेपर से पहले सभी "संभावित परीक्षा प्रश्न" बॉक्स को एक बार ज़रूर पढ़ लें — यही सबसे common questions हैं।</span>
+          <span data-en="inline"><b>Final Tip:</b> Before the exam, make sure to read through all the "Likely Exam Questions" boxes once — these are the most common questions.</span>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<button id="toTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<footer>
+  <span data-hi="inline">Made with 💜 for ITI-COPA students</span>
+  <span data-en="inline">Made with 💜 for ITI-COPA students</span>
+  &nbsp;·&nbsp; by <a href="https://surajtiwarrii.github.io/Portfolio/" target="_blank">Suraj Tiwari</a>
+</footer>
+
+<script>
+function setLang(lang){
+  document.documentElement.lang = lang;
+  document.getElementById('langToggle').dataset.lang = lang;
+  document.getElementById('btnHi').classList.toggle('active', lang==='hi');
+  document.getElementById('btnEn').classList.toggle('active', lang==='en');
+  const input = document.getElementById('searchInput');
+  input.placeholder = lang==='en' ? input.dataset.enPlaceholder : input.dataset.hiPlaceholder;
+  localStorage.setItem('cloudNotesLang', lang);
+}
+document.addEventListener('DOMContentLoaded', ()=>{
+  const saved = localStorage.getItem('cloudNotesLang') || 'hi';
+  setLang(saved);
+});
+
+function toggleSidebar(e){
+  if(e) e.stopPropagation();
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('open');
+}
+window.addEventListener('scroll',()=>{
+  document.getElementById('toTop').style.display = window.scrollY>400 ? 'flex':'none';
+});
+function liveSearch(){
+  const q = document.getElementById('searchInput').value.trim().toLowerCase();
+  const cards = document.querySelectorAll('.unit-card');
+  if(!q){ cards.forEach(c=>c.classList.remove('hide')); return; }
+  cards.forEach(card=>{
+    const text = card.innerText.toLowerCase();
+    card.classList.toggle('hide', !text.includes(q));
+  });
+}
+const links = document.querySelectorAll('.nav-link');
+const sections = document.querySelectorAll('.unit-card');
+window.addEventListener('scroll',()=>{
+  let current='';
+  sections.forEach(sec=>{ if(window.scrollY >= sec.offsetTop - 100) current = sec.id; });
+  links.forEach(l=>{ l.classList.toggle('active', l.getAttribute('href')==='#'+current); });
+});
+document.querySelectorAll('.nav-link').forEach(l=>{
+  l.addEventListener('click',()=>{ if(window.innerWidth<=880) toggleSidebar(); });
+});
+</script>
+
+</body>
+</html>

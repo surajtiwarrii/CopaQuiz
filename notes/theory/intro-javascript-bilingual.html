@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Introduction to JavaScript — Hindi/English | ITI COPA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Hind:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #fff3f3;
+    --bg-soft: #ffdede;
+    --panel: rgba(255,255,255,0.45);
+    --panel-solid: rgba(255,255,255,0.78);
+    --panel-glass: rgba(255,255,255,0.35);
+    --red-deep: #b91c1c;
+    --red: #ef4444;
+    --red-soft: #fecaca;
+    --red-light: #ffe4e4;
+    --red-mist: rgba(239,68,68,0.18);
+    --teal: #f43f5e;
+    --teal-mist: rgba(244,63,94,0.10);
+    --ink: #3a1212;
+    --ink-soft: #8a5a5a;
+    --line: rgba(200,30,30,0.22);
+    --radius: 18px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Hind',sans-serif;
+    background:
+      radial-gradient(1200px 600px at 10% -10%, var(--red-mist), transparent 60%),
+      radial-gradient(1000px 700px at 110% 10%, var(--teal-mist), transparent 55%),
+      var(--bg);
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.brand{font-family:'Fraunces',serif;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+
+  .topbar{
+    position:sticky;top:0;z-index:50;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px 20px;
+    background:rgba(255,243,243,0.6);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);
+    gap:10px;
+  }
+  .brand{font-size:1.05rem;font-weight:700;color:var(--red-deep);display:flex;align-items:center;gap:8px;}
+  .brand .dot{width:9px;height:9px;border-radius:50%;background:linear-gradient(135deg,var(--red),var(--teal));flex-shrink:0;}
+  .topbar-actions{display:flex;align-items:center;gap:8px;}
+  .menu-btn{
+    background:rgba(239,68,68,0.16);
+    backdrop-filter:blur(6px);
+    color:var(--red-light);
+    border:1px solid rgba(239,68,68,0.55);
+    padding:9px 16px;border-radius:30px;
+    font-family:'Hind';font-weight:600;font-size:0.9rem;cursor:pointer;
+    text-shadow:0 1px 3px rgba(185,28,28,0.4);
+    background-image:linear-gradient(135deg, rgba(239,68,68,0.55), rgba(185,28,28,0.55));
+    box-shadow:0 6px 16px rgba(200,30,30,0.2);
+  }
+  .lang-toggle{
+    display:flex;align-items:center;background:var(--panel-glass);border:1px solid var(--line);
+    backdrop-filter:blur(8px);
+    border-radius:30px;padding:3px;position:relative;cursor:pointer;
+  }
+  .lang-toggle button{
+    border:none;background:transparent;padding:7px 13px;border-radius:24px;
+    font-family:'Hind';font-weight:700;font-size:0.8rem;cursor:pointer;color:var(--ink-soft);
+    position:relative;z-index:2;transition:color 0.25s;
+  }
+  .lang-toggle button.active{color:var(--red-light);}
+  .lang-pill{
+    position:absolute;top:3px;bottom:3px;left:3px;width:calc(50% - 3px);
+    background:linear-gradient(135deg,var(--red),var(--red-deep));
+    border-radius:24px;transition:transform 0.25s ease;z-index:1;
+  }
+  .lang-toggle[data-lang="en"] .lang-pill{transform:translateX(100%);}
+
+  .hero{padding:64px 20px 40px;text-align:center;position:relative;}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'JetBrains Mono';font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;
+    color:var(--red-deep);
+    background:var(--panel-glass);
+    backdrop-filter:blur(8px);
+    border:1px solid var(--red-soft);
+    padding:6px 14px;border-radius:30px;
+    margin-bottom:18px;
+  }
+  .hero h1{font-size:clamp(1.7rem,5.5vw,3.1rem);line-height:1.15;margin:0 0 14px;color:var(--ink);font-weight:700;}
+  .hero h1 .grad{
+    background:linear-gradient(100deg,var(--red-deep),var(--red) 45%,var(--teal) 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero p{max-width:620px;margin:0 auto 28px;color:var(--ink-soft);font-size:1.05rem;line-height:1.65;}
+  .hero-stats{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:10px;}
+  .stat-chip{
+    background:var(--panel);border:1px solid var(--line);border-radius:14px;
+    backdrop-filter:blur(8px);
+    padding:12px 18px;min-width:108px;box-shadow:0 4px 14px rgba(200,30,30,0.08);
+  }
+  .stat-chip b{display:block;font-family:'Fraunces';font-size:1.3rem;color:var(--red-deep);}
+  .stat-chip span{font-size:0.74rem;color:var(--ink-soft);}
+
+  .toolbar{max-width:900px;margin:24px auto 0;padding:0 20px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:center;}
+  .search-wrap{flex:1;min-width:220px;position:relative;}
+  #searchInput{
+    width:100%;padding:13px 16px 13px 42px;border-radius:30px;border:1px solid var(--line);
+    background:var(--panel);backdrop-filter:blur(8px);
+    font-family:'Hind';font-size:0.95rem;color:var(--ink);outline:none;
+  }
+  #searchInput:focus{border-color:var(--red);}
+  .search-wrap::before{content:"⌕";position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--red-deep);font-size:1.1rem;}
+
+  .layout{max-width:1180px;margin:14px auto 80px;padding:0 20px;display:grid;grid-template-columns:260px 1fr;gap:26px;}
+  .sidebar{
+    background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    backdrop-filter:blur(10px);
+    padding:18px 14px;height:fit-content;position:sticky;top:78px;max-height:calc(100vh - 100px);overflow-y:auto;
+  }
+  .sidebar h4{font-family:'JetBrains Mono';font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-soft);margin:14px 6px 8px;}
+  .sidebar h4:first-child{margin-top:2px;}
+  .nav-link{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:10px;color:var(--ink);text-decoration:none;font-size:0.88rem;font-weight:500;transition:background 0.15s;}
+  .nav-link:hover{background:var(--red-mist);}
+  .nav-link.active{background:linear-gradient(120deg,var(--red-mist),var(--teal-mist));color:var(--red-deep);font-weight:700;}
+  .nav-link .num{font-family:'JetBrains Mono';font-size:0.68rem;color:var(--teal);min-width:20px;}
+  .close-sidebar{display:none;}
+
+  @media(max-width:880px){
+    .layout{grid-template-columns:1fr;display:block;}
+    .sidebar{position:fixed !important;inset:0 18% 0 0;z-index:60;transform:translateX(-105%);transition:transform 0.3s ease;overflow-y:auto;top:0;height:100vh;max-height:100vh;}
+    .sidebar.open{transform:translateX(0);}
+    .sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(60,8,8,0.4);z-index:55;}
+    .sidebar-overlay.open{display:block;}
+    .close-sidebar{display:block;margin-left:auto;background:none;border:1px solid var(--line);border-radius:50%;width:34px;height:34px;font-size:1rem;color:var(--ink);cursor:pointer;}
+    .brand span.brand-text{display:none;}
+    .menu-btn span.menu-text{display:none;}
+  }
+
+  .content{min-width:0;}
+  .unit-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:22px;overflow:hidden;scroll-margin-top:80px;box-shadow:0 6px 24px rgba(200,30,30,0.08);backdrop-filter:blur(10px);}
+  .unit-head{padding:22px 24px 18px;background:linear-gradient(120deg, rgba(239,68,68,0.18), rgba(185,28,28,0.10));border-bottom:1px solid var(--line);}
+  .unit-tag{font-family:'JetBrains Mono';font-size:0.7rem;color:var(--teal);letter-spacing:0.08em;text-transform:uppercase;display:block;margin-bottom:6px;}
+  .unit-head h2{margin:0;font-size:1.4rem;color:var(--red-deep);}
+  .unit-body{padding:20px 24px 26px;}
+  .unit-body h3{font-size:1.05rem;color:var(--ink);margin:22px 0 8px;display:flex;align-items:center;gap:8px;}
+  .unit-body h3::before{content:"";width:5px;height:18px;border-radius:3px;background:linear-gradient(180deg,var(--red),var(--teal));}
+  .unit-body h3:first-child{margin-top:2px;}
+  .unit-body p{line-height:1.75;color:var(--ink);margin:6px 0 10px;font-size:0.97rem;}
+  .unit-body ul, .unit-body ol{margin:6px 0 14px;padding-left:22px;line-height:1.75;}
+  .unit-body li{margin-bottom:6px;font-size:0.95rem;}
+  .unit-body strong{color:var(--red-deep);}
+
+  .note-box{background:var(--red-mist);border-left:3px solid var(--red);border-radius:10px;padding:12px 16px;margin:14px 0;font-size:0.9rem;}
+  .note-box b{color:var(--red-deep);}
+  .imp-box{background:var(--teal-mist);border-left:3px solid var(--teal);border-radius:10px;padding:12px 16px;margin:14px 0;font-size:0.9rem;}
+  .imp-box b{color:var(--teal);}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0 18px;font-size:0.88rem;border-radius:10px;overflow:hidden;}
+  th{background:linear-gradient(120deg,var(--red),var(--red-deep));color:var(--red-light);text-align:left;padding:10px 12px;font-weight:600;}
+  td{padding:9px 12px;border-bottom:1px solid var(--line);background:var(--panel-solid);}
+  tr:last-child td{border-bottom:none;}
+  tr:nth-child(even) td{background:var(--bg-soft);}
+
+  code, .code-block{font-family:'JetBrains Mono';}
+  .code-block{background:#3a0c0c;color:#ffd6d6;padding:14px 16px;border-radius:12px;font-size:0.82rem;line-height:1.6;overflow-x:auto;margin:12px 0;border:1px solid rgba(239,68,68,0.3);}
+  .code-block .cmt{color:#7fe0a0;}
+  .code-block .kw{color:#fda4af;}
+  .code-block .str{color:#fcd34d;}
+  .code-block .fn{color:#7dd3fc;}
+  code{background:var(--bg-soft);padding:2px 6px;border-radius:5px;font-size:0.85em;color:var(--red-deep);}
+
+  .key-table-wrap{overflow-x:auto;}
+
+  .qbox{background:var(--bg-soft);border:1px dashed var(--red-soft);border-radius:12px;padding:14px 16px;margin:16px 0;}
+  .qbox b{color:var(--teal);display:block;margin-bottom:6px;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em;}
+
+  #toTop{
+    position:fixed;bottom:22px;right:22px;z-index:40;width:46px;height:46px;border-radius:50%;
+    background:linear-gradient(135deg,var(--red),var(--teal));color:var(--red-light);border:none;font-size:1.2rem;cursor:pointer;
+    box-shadow:0 8px 20px rgba(200,30,30,0.3);display:none;align-items:center;justify-content:center;
+  }
+
+  footer{text-align:center;padding:30px 20px 50px;color:var(--ink-soft);font-size:0.85rem;}
+  footer a{color:var(--red-deep);text-decoration:none;font-weight:600;}
+
+  mark{background:var(--red-soft);color:var(--ink);padding:0 2px;border-radius:3px;}
+  .hide{display:none !important;}
+
+  /* Language switching */
+  [data-hi], [data-en]{display:none;}
+  html[lang="hi"] [data-hi].inline, html[lang="hi"] span[data-hi]{display:inline;}
+  html[lang="hi"] [data-hi].block{display:block;}
+  html[lang="hi"] [data-hi].flex{display:flex;}
+  html[lang="hi"] th[data-hi], html[lang="hi"] td[data-hi]{display:table-cell;}
+  html[lang="en"] [data-en].inline, html[lang="en"] span[data-en]{display:inline;}
+  html[lang="en"] [data-en].block{display:block;}
+  html[lang="en"] [data-en].flex{display:flex;}
+  html[lang="en"] th[data-en], html[lang="en"] td[data-en]{display:table-cell;}
+</style>
+</head>
+<body>
+<div id="__backNotesBtn" style="position:fixed;top:14px;left:14px;z-index:9999;">
+<a href="../../notes-theory.html" style="display:flex;align-items:center;gap:7px;text-decoration:none;
+background:rgba(255,255,255,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+border:1px solid rgba(0,0,0,.08);color:#2A2620;font-family:'Poppins',Arial,sans-serif;
+font-size:.82rem;font-weight:600;padding:9px 16px 9px 12px;border-radius:30px;
+box-shadow:0 6px 18px rgba(0,0,0,.14);transition:transform .25s,box-shadow .25s;">
+<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+<span>Notes</span></a></div>
+<style>
+#__backNotesBtn a:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,0,0,.2)}
+@media(max-width:600px){#__backNotesBtn{top:10px;left:10px}#__backNotesBtn a{padding:8px 14px 8px 10px;font-size:.78rem}}
+</style>
+
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span><span class="brand-text">Introduction to JavaScript</span></div>
+  <div class="topbar-actions">
+    <div class="lang-toggle" id="langToggle" data-lang="hi" onclick="setLang(this.dataset.lang==='hi'?'en':'hi')">
+      <div class="lang-pill"></div>
+      <button type="button" id="btnHi">हिं</button>
+      <button type="button" id="btnEn">EN</button>
+    </div>
+    <button class="menu-btn" onclick="toggleSidebar(event)">🌐 <span class="menu-text" data-hi="inline">विषय सूची</span><span class="menu-text" data-en="inline">Topics</span></button>
+  </div>
+</div>
+
+<div class="hero">
+  <span class="eyebrow">● ITI · COPA · UP Board Pattern</span>
+  <h1>
+    <span data-hi="block" class="block">Introduction to<br>JavaScript<br><span class="grad">सम्पूर्ण नोट्स</span></span>
+    <span data-en="block" class="block">Introduction to<br>JavaScript<br><span class="grad">Complete Notes</span></span>
+  </h1>
+  <p data-hi="block" class="block">JavaScript की बुनियाद से लेकर Functions और Events तक — हिंदी और इंग्लिश दोनों में, परीक्षा के हिसाब से तैयार।</p>
+  <p data-en="block" class="block">From the basics of JavaScript to Functions and Events — available in both Hindi and English, exam-ready.</p>
+  <div class="hero-stats">
+    <div class="stat-chip"><b>10</b><span data-hi="inline">Units</span><span data-en="inline">Units</span></div>
+    <div class="stat-chip"><b>60+</b><span data-hi="inline">Topics</span><span data-en="inline">Topics</span></div>
+    <div class="stat-chip"><b>2</b><span data-hi="inline">भाषाएं</span><span data-en="inline">Languages</span></div>
+  </div>
+</div>
+
+<div class="toolbar">
+  <div class="search-wrap">
+    <input type="text" id="searchInput" data-hi-placeholder="कोई भी टॉपिक खोजें... जैसे: Variable, Loop, Function" data-en-placeholder="Search any topic... e.g. Variable, Loop, Function" placeholder="कोई भी टॉपिक खोजें... जैसे: Variable, Loop, Function" oninput="liveSearch()">
+  </div>
+</div>
+
+<div class="sidebar-overlay" id="overlay" onclick="toggleSidebar(event)"></div>
+
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <button class="close-sidebar" onclick="toggleSidebar(event)">✕</button>
+    <h4 data-hi="block" class="block">जावास्क्रिप्ट बेसिक्स</h4>
+    <h4 data-en="block" class="block">JavaScript Basics</h4>
+    <a class="nav-link" href="#unit1"><span class="num">01</span><span data-hi="inline">JavaScript का परिचय</span><span data-en="inline">Introduction to JavaScript</span></a>
+    <a class="nav-link" href="#unit2"><span class="num">02</span><span data-hi="inline">Syntax & How to Use</span><span data-en="inline">Syntax & How to Use</span></a>
+    <a class="nav-link" href="#unit3"><span class="num">03</span><span data-hi="inline">Variables & Data Types</span><span data-en="inline">Variables & Data Types</span></a>
+    <a class="nav-link" href="#unit4"><span class="num">04</span><span data-hi="inline">Operators</span><span data-en="inline">Operators</span></a>
+    <h4 data-hi="block" class="block">कंट्रोल फ्लो</h4>
+    <h4 data-en="block" class="block">Control Flow</h4>
+    <a class="nav-link" href="#unit5"><span class="num">05</span><span data-hi="inline">Conditional Statements</span><span data-en="inline">Conditional Statements</span></a>
+    <a class="nav-link" href="#unit6"><span class="num">06</span><span data-hi="inline">Loops</span><span data-en="inline">Loops</span></a>
+    <h4 data-hi="block" class="block">फंक्शन्स & ऑब्जेक्ट्स</h4>
+    <h4 data-en="block" class="block">Functions & Objects</h4>
+    <a class="nav-link" href="#unit7"><span class="num">07</span><span data-hi="inline">Functions</span><span data-en="inline">Functions</span></a>
+    <a class="nav-link" href="#unit8"><span class="num">08</span><span data-hi="inline">Arrays & Objects</span><span data-en="inline">Arrays & Objects</span></a>
+    <a class="nav-link" href="#unit9"><span class="num">09</span><span data-hi="inline">Events & DOM बेसिक्स</span><span data-en="inline">Events & DOM Basics</span></a>
+    <h4 data-hi="block" class="block">रिवीज़न</h4>
+    <h4 data-en="block" class="block">Revision</h4>
+    <a class="nav-link" href="#unit10"><span class="num">10</span><span data-hi="inline">Important Q&A</span><span data-en="inline">Important Q&A</span></a>
+  </aside>
+
+  <main class="content" id="content">
+    <!-- UNIT 1 -->
+    <section class="unit-card" id="unit1">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 01 · जावास्क्रिप्ट बेसिक्स</span><span data-en="inline">Unit 01 · JavaScript Basics</span></span>
+        <h2><span data-hi="inline">JavaScript का परिचय</span><span data-en="inline">Introduction to JavaScript</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">JavaScript क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is JavaScript?</h3>
+        <p data-hi="block" class="block"><strong>JavaScript (JS)</strong> एक lightweight, interpreted programming language है जो webpages को interactive और dynamic बनाने के लिए use होती है। यह client-side (browser में) और server-side (Node.js से) दोनों जगह चल सकती है।</p>
+        <p data-en="block" class="block"><strong>JavaScript (JS)</strong> is a lightweight, interpreted programming language used to make webpages interactive and dynamic. It can run both client-side (in the browser) and server-side (via Node.js).</p>
+
+        <h3 data-hi="flex" class="flex">HTML, CSS, JS का Role (Recap)</h3>
+        <h3 data-en="flex" class="flex">Role of HTML, CSS, JS (Recap)</h3>
+        <table>
+          <tr><th>Technology</th><th data-hi="inline">काम</th><th data-en="inline">Job</th></tr>
+          <tr><td>HTML</td><td><span data-hi="inline">Structure/Content (Skeleton)</span><span data-en="inline">Structure/Content (Skeleton)</span></td></tr>
+          <tr><td>CSS</td><td><span data-hi="inline">Style/Design (रंग, फॉन्ट, layout)</span><span data-en="inline">Style/Design (colors, fonts, layout)</span></td></tr>
+          <tr><td>JavaScript</td><td><span data-hi="inline">Behavior/Interactivity (clicks, validation, animation)</span><span data-en="inline">Behavior/Interactivity (clicks, validation, animation)</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">JavaScript के उपयोग</h3>
+        <h3 data-en="flex" class="flex">Uses of JavaScript</h3>
+        <ul data-hi="block" class="block">
+          <li>Form validation (बिना page reload किए)</li>
+          <li>Buttons पर click events handle करना</li>
+          <li>Images/sliders animate करना</li>
+          <li>Web pages को बिना reload data update करना (AJAX)</li>
+          <li>Web apps, games, mobile apps बनाना</li>
+        </ul>
+        <ul data-en="block" class="block">
+          <li>Form validation (without reloading the page)</li>
+          <li>Handling click events on buttons</li>
+          <li>Animating images/sliders</li>
+          <li>Updating page data without reload (AJAX)</li>
+          <li>Building web apps, games, mobile apps</li>
+        </ul>
+
+        <h3 data-hi="flex" class="flex">Client-Side vs Server-Side JavaScript</h3>
+        <h3 data-en="flex" class="flex">Client-Side vs Server-Side JavaScript</h3>
+        <table>
+          <tr><th>Client-Side</th><th>Server-Side</th></tr>
+          <tr><td><span data-hi="inline">Browser में चलता है (jैसे form validation)</span><span data-en="inline">Runs in the browser (e.g. form validation)</span></td><td><span data-hi="inline">Server पर चलता है (जैसे Node.js)</span><span data-en="inline">Runs on the server (e.g. Node.js)</span></td></tr>
+        </table>
+
+        <div class="note-box">
+          <span data-hi="inline"><b>याद रखें:</b> JavaScript और Java दो अलग languages हैं — नाम में similarity होने के अलावा इनमें कोई direct connection नहीं है।</span>
+          <span data-en="inline"><b>Remember:</b> JavaScript and Java are two different languages — apart from the name similarity, there's no direct connection between them.</span>
+        </div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">JavaScript क्या है? HTML, CSS, JS के role में अंतर बताइए। JavaScript के कोई 4 उपयोग लिखिए।</span>
+          <span data-en="inline">What is JavaScript? Differentiate the roles of HTML, CSS, JS. Write any 4 uses of JavaScript.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 2 -->
+    <section class="unit-card" id="unit2">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 02 · जावास्क्रिप्ट बेसिक्स</span><span data-en="inline">Unit 02 · JavaScript Basics</span></span>
+        <h2><span data-hi="inline">Syntax & How to Use</span><span data-en="inline">Syntax & How to Use</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">&lt;script&gt; Tag</h3>
+        <h3 data-en="flex" class="flex">The &lt;script&gt; Tag</h3>
+        <p data-hi="block" class="block">JavaScript code को HTML में &lt;script&gt; tag के अंदर लिखा जाता है, या अलग .js file में रखकर link किया जाता है।</p>
+        <p data-en="block" class="block">JavaScript code is written inside the &lt;script&gt; tag in HTML, or kept in a separate .js file and linked.</p>
+        <div class="code-block"><span class="cmt">&lt;!-- Internal --&gt;</span>
+&lt;script&gt;
+  <span class="kw">alert</span>(<span class="str">"Hello!"</span>);
+&lt;/script&gt;
+
+<span class="cmt">&lt;!-- External --&gt;</span>
+&lt;script src="script.js"&gt;&lt;/script&gt;</div>
+
+        <table>
+          <tr><th>Placement</th><th data-hi="inline">काम</th><th data-en="inline">Description</th></tr>
+          <tr><td>&lt;head&gt; में</td><td><span data-hi="inline">Page load होने से पहले script चलती है</span><span data-en="inline">Script runs before the page loads</span></td></tr>
+          <tr><td>&lt;body&gt; के end में</td><td><span data-hi="inline">Page पूरा load होने के बाद script चलती है (recommended)</span><span data-en="inline">Script runs after the page has fully loaded (recommended)</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Output देने के तरीके</h3>
+        <h3 data-en="flex" class="flex">Ways to Show Output</h3>
+        <table>
+          <tr><th>Method</th><th data-hi="inline">काम</th><th data-en="inline">Purpose</th></tr>
+          <tr><td>console.log()</td><td><span data-hi="inline">Browser console में output दिखाता है (developer के लिए)</span><span data-en="inline">Shows output in the browser console (for developers)</span></td></tr>
+          <tr><td>alert()</td><td><span data-hi="inline">Popup box में message दिखाता है</span><span data-en="inline">Shows a message in a popup box</span></td></tr>
+          <tr><td>document.write()</td><td><span data-hi="inline">सीधे webpage में content लिखता है</span><span data-en="inline">Writes content directly into the webpage</span></td></tr>
+          <tr><td>innerHTML</td><td><span data-hi="inline">किसी element का HTML content बदलता है</span><span data-en="inline">Changes the HTML content of an element</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Comments</h3>
+        <h3 data-en="flex" class="flex">Comments</h3>
+        <div class="code-block"><span class="cmt">// Single-line comment</span>
+<span class="cmt">/* Multi-line
+   comment */</span></div>
+
+        <div class="note-box">
+          <span data-hi="inline"><b>याद रखें:</b> हर JS statement के अंत में semicolon (;) लगाना अच्छी practice है, हालांकि कुछ cases में optional होता है।</span>
+          <span data-en="inline"><b>Remember:</b> ending each JS statement with a semicolon (;) is good practice, though it's optional in some cases.</span>
+        </div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">JS को HTML में add करने के तरीके लिखिए। console.log और alert में अंतर बताइए। JS में comments कैसे लिखे जाते हैं?</span>
+          <span data-en="inline">Write the ways to add JS in HTML. Differentiate between console.log and alert. How are comments written in JS?</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 3 -->
+    <section class="unit-card" id="unit3">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 03 · जावास्क्रिप्ट बेसिक्स</span><span data-en="inline">Unit 03 · JavaScript Basics</span></span>
+        <h2><span data-hi="inline">Variables & Data Types</span><span data-en="inline">Variables & Data Types</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Variable क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is a Variable?</h3>
+        <p data-hi="block" class="block"><strong>Variable</strong> एक named container है जो data को store करता है, जिसे बाद में use या change किया जा सकता है।</p>
+        <p data-en="block" class="block">A <strong>Variable</strong> is a named container that stores data, which can be used or changed later.</p>
+
+        <h3 data-hi="flex" class="flex">var, let, const में अंतर</h3>
+        <h3 data-en="flex" class="flex">Difference between var, let, const</h3>
+        <table>
+          <tr><th>Keyword</th><th data-hi="inline">विशेषता</th><th data-en="inline">Feature</th></tr>
+          <tr><td>var</td><td><span data-hi="inline">पुराना तरीका, function-scoped, re-declare हो सकता है</span><span data-en="inline">Old way, function-scoped, can be re-declared</span></td></tr>
+          <tr><td>let</td><td><span data-hi="inline">Block-scoped, value change हो सकती है पर re-declare नहीं</span><span data-en="inline">Block-scoped, value can change but can't be re-declared</span></td></tr>
+          <tr><td>const</td><td><span data-hi="inline">Block-scoped, value fix रहती है (constant)</span><span data-en="inline">Block-scoped, value stays fixed (constant)</span></td></tr>
+        </table>
+        <div class="code-block">let name = <span class="str">"Suraj"</span>;
+const pi = 3.14;
+var age = 21;</div>
+
+        <h3 data-hi="flex" class="flex">Data Types</h3>
+        <h3 data-en="flex" class="flex">Data Types</h3>
+        <table>
+          <tr><th>Type</th><th data-hi="inline">उदाहरण</th><th data-en="inline">Example</th></tr>
+          <tr><td>Number</td><td colspan="2">10, 3.14, -5</td></tr>
+          <tr><td>String</td><td colspan="2">"Hello", 'JS'</td></tr>
+          <tr><td>Boolean</td><td colspan="2">true, false</td></tr>
+          <tr><td>Undefined</td><td colspan="2"><span data-hi="inline">Variable declare हुआ पर value नहीं दी गई</span><span data-en="inline">Variable declared but no value assigned</span></td></tr>
+          <tr><td>Null</td><td colspan="2"><span data-hi="inline">जानबूझकर "कोई value नहीं" set करना</span><span data-en="inline">Intentionally set as "no value"</span></td></tr>
+          <tr><td>Object</td><td colspan="2">{name: "Suraj", age: 21}</td></tr>
+          <tr><td>Array</td><td colspan="2">[1, 2, 3]</td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Variable Naming Rules</h3>
+        <h3 data-en="flex" class="flex">Variable Naming Rules</h3>
+        <ul data-hi="block" class="block">
+          <li>Letter, underscore (_) या $ से शुरू हो सकता है, number से नहीं</li>
+          <li>Spaces allowed नहीं हैं</li>
+          <li>Reserved keywords (जैसे let, function) use नहीं कर सकते</li>
+          <li>Case-sensitive होता है (age और Age अलग हैं)</li>
+        </ul>
+        <ul data-en="block" class="block">
+          <li>Must start with a letter, underscore (_), or $, not a number</li>
+          <li>Spaces are not allowed</li>
+          <li>Cannot use reserved keywords (like let, function)</li>
+          <li>Case-sensitive (age and Age are different)</li>
+        </ul>
+
+        <div class="note-box">
+          <span data-hi="inline"><b>याद रखें:</b> Modern JS में हमेशा let/const use करना चाहिए, var को avoid करना best practice है।</span>
+          <span data-en="inline"><b>Remember:</b> in modern JS, always prefer let/const; avoiding var is best practice.</span>
+        </div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">Variable किसे कहते हैं? var, let, const में अंतर बताइए। JavaScript के Data Types उदाहरण सहित लिखिए।</span>
+          <span data-en="inline">What is a Variable? Differentiate between var, let, const. Write JavaScript Data Types with examples.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 4 -->
+    <section class="unit-card" id="unit4">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 04 · जावास्क्रिप्ट बेसिक्स</span><span data-en="inline">Unit 04 · JavaScript Basics</span></span>
+        <h2><span data-hi="inline">Operators</span><span data-en="inline">Operators</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Arithmetic Operators</h3>
+        <h3 data-en="flex" class="flex">Arithmetic Operators</h3>
+        <table>
+          <tr><th>Operator</th><th data-hi="inline">काम</th><th data-en="inline">Purpose</th></tr>
+          <tr><td>+</td><td><span data-hi="inline">जोड़ना (Addition)</span><span data-en="inline">Addition</span></td></tr>
+          <tr><td>-</td><td><span data-hi="inline">घटाना (Subtraction)</span><span data-en="inline">Subtraction</span></td></tr>
+          <tr><td>*</td><td><span data-hi="inline">गुणा (Multiplication)</span><span data-en="inline">Multiplication</span></td></tr>
+          <tr><td>/</td><td><span data-hi="inline">भाग (Division)</span><span data-en="inline">Division</span></td></tr>
+          <tr><td>%</td><td><span data-hi="inline">शेषफल (Modulus/Remainder)</span><span data-en="inline">Modulus/Remainder</span></td></tr>
+          <tr><td>++ / --</td><td><span data-hi="inline">Increment / Decrement</span><span data-en="inline">Increment / Decrement</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Comparison Operators</h3>
+        <h3 data-en="flex" class="flex">Comparison Operators</h3>
+        <table>
+          <tr><th>Operator</th><th data-hi="inline">काम</th><th data-en="inline">Purpose</th></tr>
+          <tr><td>==</td><td><span data-hi="inline">Value compare करता है (type नहीं देखता)</span><span data-en="inline">Compares value (doesn't check type)</span></td></tr>
+          <tr><td>===</td><td><span data-hi="inline">Value और type दोनों compare करता है (strict equality)</span><span data-en="inline">Compares both value and type (strict equality)</span></td></tr>
+          <tr><td>!=  / !==</td><td><span data-hi="inline">Not equal / Strict not equal</span><span data-en="inline">Not equal / Strict not equal</span></td></tr>
+          <tr><td>&gt; &lt; &gt;= &lt;=</td><td><span data-hi="inline">Greater/Less than (या equal to)</span><span data-en="inline">Greater/Less than (or equal to)</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Logical Operators</h3>
+        <h3 data-en="flex" class="flex">Logical Operators</h3>
+        <table>
+          <tr><th>Operator</th><th data-hi="inline">काम</th><th data-en="inline">Purpose</th></tr>
+          <tr><td>&& (AND)</td><td><span data-hi="inline">दोनों conditions true हों तभी true</span><span data-en="inline">True only if both conditions are true</span></td></tr>
+          <tr><td>|| (OR)</td><td><span data-hi="inline">कोई एक condition true हो तो true</span><span data-en="inline">True if any one condition is true</span></td></tr>
+          <tr><td>! (NOT)</td><td><span data-hi="inline">Condition को उल्टा कर देता है</span><span data-en="inline">Reverses the condition</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Assignment Operators</h3>
+        <h3 data-en="flex" class="flex">Assignment Operators</h3>
+        <div class="code-block">let x = 10;
+x += 5;  <span class="cmt">// x = x + 5</span>
+x -= 2;  <span class="cmt">// x = x - 2</span></div>
+
+        <div class="note-box">
+          <span data-hi="inline"><b>याद रखें:</b> === हमेशा == से ज़्यादा safe होता है, क्योंकि यह type mismatch से बचाता है (जैसे "5" == 5 true है पर "5" === 5 false है)।</span>
+          <span data-en="inline"><b>Remember:</b> === is always safer than ==, as it avoids type mismatch (e.g. "5" == 5 is true but "5" === 5 is false).</span>
+        </div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">== और === में अंतर बताइए। Logical operators उदाहरण सहित समझाइए। Arithmetic operators की list लिखिए।</span>
+          <span data-en="inline">Differentiate between == and ===. Explain Logical operators with examples. List the Arithmetic operators.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 5 -->
+    <section class="unit-card" id="unit5">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 05 · कंट्रोल फ्लो</span><span data-en="inline">Unit 05 · Control Flow</span></span>
+        <h2><span data-hi="inline">Conditional Statements</span><span data-en="inline">Conditional Statements</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">if, else if, else</h3>
+        <h3 data-en="flex" class="flex">if, else if, else</h3>
+        <p data-hi="block" class="block">Conditional statements code को decide करने देते हैं कि किस condition पर कौन सा block चलाना है।</p>
+        <p data-en="block" class="block">Conditional statements let the code decide which block to run based on a condition.</p>
+        <div class="code-block">let marks = 75;
+
+if (marks &gt;= 90) {
+  console.log(<span class="str">"Grade A"</span>);
+} else if (marks &gt;= 60) {
+  console.log(<span class="str">"Grade B"</span>);
+} else {
+  console.log(<span class="str">"Grade C"</span>);
+}</div>
+
+        <h3 data-hi="flex" class="flex">switch Statement</h3>
+        <h3 data-en="flex" class="flex">switch Statement</h3>
+        <p data-hi="block" class="block">जब एक variable की कई fixed values के against checking करनी हो, तब <code>switch</code> if-else की chain से ज़्यादा clean तरीका है।</p>
+        <p data-en="block" class="block">When checking one variable against many fixed values, <code>switch</code> is a cleaner approach than a chain of if-else.</p>
+        <div class="code-block">switch (day) {
+  case 1:
+    console.log(<span class="str">"Monday"</span>);
+    break;
+  case 2:
+    console.log(<span class="str">"Tuesday"</span>);
+    break;
+  default:
+    console.log(<span class="str">"Other day"</span>);
+}</div>
+
+        <h3 data-hi="flex" class="flex">Ternary Operator</h3>
+        <h3 data-en="flex" class="flex">Ternary Operator</h3>
+        <p data-hi="block" class="block">यह if-else का shorthand है — single line में condition check करता है।</p>
+        <p data-en="block" class="block">This is a shorthand for if-else — checks a condition in a single line.</p>
+        <div class="code-block">let result = (age &gt;= 18) ? <span class="str">"Adult"</span> : <span class="str">"Minor"</span>;</div>
+
+        <div class="note-box">
+          <span data-hi="inline"><b>याद रखें:</b> switch में हर case के बाद <code>break</code> लगाना ज़रूरी है, वरना अगला case भी चल जाएगा (fall-through)।</span>
+          <span data-en="inline"><b>Remember:</b> a <code>break</code> is required after each case in switch, otherwise the next case will also execute (fall-through).</span>
+        </div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">if-else statement का syntax उदाहरण सहित लिखिए। switch statement कैसे काम करता है? Ternary operator क्या है?</span>
+          <span data-en="inline">Write the syntax of if-else with an example. How does the switch statement work? What is the Ternary operator?</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 6 -->
+    <section class="unit-card" id="unit6">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 06 · कंट्रोल फ्लो</span><span data-en="inline">Unit 06 · Control Flow</span></span>
+        <h2><span data-hi="inline">Loops</span><span data-en="inline">Loops</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Loop क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is a Loop?</h3>
+        <p data-hi="block" class="block"><strong>Loop</strong> किसी code block को बार-बार (repeatedly) चलाने के लिए use होता है, जब तक condition true रहती है।</p>
+        <p data-en="block" class="block">A <strong>Loop</strong> is used to run a code block repeatedly, as long as a condition stays true.</p>
+
+        <h3 data-hi="flex" class="flex">for Loop</h3>
+        <h3 data-en="flex" class="flex">for Loop</h3>
+        <div class="code-block">for (let i = 1; i &lt;= 5; i++) {
+  console.log(i);
+}</div>
+        <p data-hi="block" class="block">for loop में 3 parts होते हैं: initialization, condition, increment/decrement — जब iterations की संख्या पहले से पता हो तब best है।</p>
+        <p data-en="block" class="block">A for loop has 3 parts: initialization, condition, increment/decrement — best when the number of iterations is known beforehand.</p>
+
+        <h3 data-hi="flex" class="flex">while Loop</h3>
+        <h3 data-en="flex" class="flex">while Loop</h3>
+        <div class="code-block">let i = 1;
+while (i &lt;= 5) {
+  console.log(i);
+  i++;
+}</div>
+        <p data-hi="block" class="block">while loop condition को पहले check करता है, फिर body run करता है — जब iterations की संख्या पहले से पता न हो तब useful है।</p>
+        <p data-en="block" class="block">A while loop checks the condition first, then runs the body — useful when the number of iterations isn't known in advance.</p>
+
+        <h3 data-hi="flex" class="flex">do...while Loop</h3>
+        <h3 data-en="flex" class="flex">do...while Loop</h3>
+        <div class="code-block">let i = 1;
+do {
+  console.log(i);
+  i++;
+} while (i &lt;= 5);</div>
+        <p data-hi="block" class="block">do...while body को पहले एक बार चलाता है, फिर condition check करता है — इसलिए body कम से कम एक बार ज़रूर चलती है।</p>
+        <p data-en="block" class="block">do...while runs the body once first, then checks the condition — so the body always runs at least once.</p>
+
+        <h3 data-hi="flex" class="flex">break & continue</h3>
+        <h3 data-en="flex" class="flex">break & continue</h3>
+        <table>
+          <tr><th>Keyword</th><th data-hi="inline">काम</th><th data-en="inline">Purpose</th></tr>
+          <tr><td>break</td><td><span data-hi="inline">Loop को पूरी तरह रोक देता है</span><span data-en="inline">Stops the loop completely</span></td></tr>
+          <tr><td>continue</td><td><span data-hi="inline">Current iteration skip करके अगली पर जाता है</span><span data-en="inline">Skips the current iteration and moves to the next</span></td></tr>
+        </table>
+
+        <div class="note-box">
+          <span data-hi="inline"><b>याद रखें:</b> while loop में condition पहले check होती है (body 0 बार भी चल सकती है), do...while में body पहले run होती है (कम से कम 1 बार ज़रूर)।</span>
+          <span data-en="inline"><b>Remember:</b> while checks the condition first (body may run 0 times), do...while runs the body first (always at least once).</span>
+        </div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">for loop का syntax उदाहरण सहित लिखिए। while और do...while में अंतर बताइए। break और continue में अंतर लिखिए।</span>
+          <span data-en="inline">Write the syntax of a for loop with an example. Differentiate between while and do...while. Write the difference between break and continue.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 7 -->
+    <section class="unit-card" id="unit7">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 07 · फंक्शन्स & ऑब्जेक्ट्स</span><span data-en="inline">Unit 07 · Functions & Objects</span></span>
+        <h2><span data-hi="inline">Functions</span><span data-en="inline">Functions</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Function क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is a Function?</h3>
+        <p data-hi="block" class="block"><strong>Function</strong> code का एक reusable block है जो एक specific task perform करता है। इसे एक बार define करके कई बार call किया जा सकता है।</p>
+        <p data-en="block" class="block">A <strong>Function</strong> is a reusable block of code that performs a specific task. It's defined once and can be called multiple times.</p>
+
+        <h3 data-hi="flex" class="flex">Function Declaration & Calling</h3>
+        <h3 data-en="flex" class="flex">Function Declaration & Calling</h3>
+        <div class="code-block"><span class="kw">function</span> greet(name) {
+  return <span class="str">"Hello, "</span> + name;
+}
+
+console.log(greet(<span class="str">"Suraj"</span>)); <span class="cmt">// calling the function</span></div>
+
+        <h3 data-hi="flex" class="flex">Parameters vs Arguments</h3>
+        <h3 data-en="flex" class="flex">Parameters vs Arguments</h3>
+        <table>
+          <tr><th>Parameter</th><th>Argument</th></tr>
+          <tr><td><span data-hi="inline">Function define करते समय दिए गए variables</span><span data-en="inline">Variables given when defining the function</span></td><td><span data-hi="inline">Function call करते समय दी गई actual values</span><span data-en="inline">Actual values given when calling the function</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Function Expression & Arrow Function</h3>
+        <h3 data-en="flex" class="flex">Function Expression & Arrow Function</h3>
+        <div class="code-block"><span class="cmt">// Function Expression</span>
+const add = <span class="kw">function</span>(a, b) {
+  return a + b;
+};
+
+<span class="cmt">// Arrow Function</span>
+const add2 = (a, b) =&gt; a + b;</div>
+
+        <h3 data-hi="flex" class="flex">return Statement</h3>
+        <h3 data-en="flex" class="flex">return Statement</h3>
+        <p data-hi="block" class="block"><code>return</code> function से एक value वापस भेजता है और function का execution वहीं रोक देता है। बिना return वाला function undefined return करता है।</p>
+        <p data-en="block" class="block"><code>return</code> sends a value back from the function and stops the function's execution there. A function with no return statement returns undefined.</p>
+
+        <div class="note-box">
+          <span data-hi="inline"><b>याद रखें:</b> Function declaration hoisting के कारण file में कहीं भी define किया हो, ऊपर भी call हो सकता है — पर Arrow function/expression को define करने के बाद ही call करना पड़ता है।</span>
+          <span data-en="inline"><b>Remember:</b> due to hoisting, a function declaration can be called even before it appears in the file — but arrow functions/expressions must be called only after they're defined.</span>
+        </div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">Function किसे कहते हैं? एक function define और call करने का उदाहरण लिखिए। Parameter और Argument में अंतर बताइए।</span>
+          <span data-en="inline">What is a Function? Write an example of defining and calling a function. Differentiate between Parameter and Argument.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 8 -->
+    <section class="unit-card" id="unit8">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 08 · फंक्शन्स & ऑब्जेक्ट्स</span><span data-en="inline">Unit 08 · Functions & Objects</span></span>
+        <h2><span data-hi="inline">Arrays & Objects</span><span data-en="inline">Arrays & Objects</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Array क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is an Array?</h3>
+        <p data-hi="block" class="block"><strong>Array</strong> कई values को एक single variable में, ordered तरीके से store करता है। हर value का एक index होता है, जो 0 से शुरू होता है।</p>
+        <p data-en="block" class="block">An <strong>Array</strong> stores multiple values in a single variable, in an ordered way. Each value has an index, starting from 0.</p>
+        <div class="code-block">let fruits = [<span class="str">"Apple"</span>, <span class="str">"Banana"</span>, <span class="str">"Mango"</span>];
+console.log(fruits[0]); <span class="cmt">// "Apple"</span>
+console.log(fruits.length); <span class="cmt">// 3</span></div>
+
+        <h3 data-hi="flex" class="flex">Common Array Methods</h3>
+        <h3 data-en="flex" class="flex">Common Array Methods</h3>
+        <table>
+          <tr><th>Method</th><th data-hi="inline">काम</th><th data-en="inline">Purpose</th></tr>
+          <tr><td>push()</td><td><span data-hi="inline">Array के end में नया element add करता है</span><span data-en="inline">Adds a new element to the end of the array</span></td></tr>
+          <tr><td>pop()</td><td><span data-hi="inline">Array के last element को remove करता है</span><span data-en="inline">Removes the last element of the array</span></td></tr>
+          <tr><td>length</td><td><span data-hi="inline">Array में elements की संख्या बताता है</span><span data-en="inline">Gives the number of elements in the array</span></td></tr>
+          <tr><td>indexOf()</td><td><span data-hi="inline">किसी value की index position ढूँढता है</span><span data-en="inline">Finds the index position of a value</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Object क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is an Object?</h3>
+        <p data-hi="block" class="block"><strong>Object</strong> data को <code>key: value</code> pairs के रूप में store करता है — किसी real-world entity की properties को represent करने का natural तरीका है।</p>
+        <p data-en="block" class="block">An <strong>Object</strong> stores data as <code>key: value</code> pairs — a natural way to represent properties of a real-world entity.</p>
+        <div class="code-block">let student = {
+  name: <span class="str">"Suraj"</span>,
+  age: 21,
+  course: <span class="str">"ITI-COPA"</span>
+};
+console.log(student.name); <span class="cmt">// "Suraj"</span></div>
+
+        <h3 data-hi="flex" class="flex">Array vs Object</h3>
+        <h3 data-en="flex" class="flex">Array vs Object</h3>
+        <table>
+          <tr><th>Array</th><th>Object</th></tr>
+          <tr><td><span data-hi="inline">Ordered list, index number से access</span><span data-en="inline">Ordered list, accessed via index number</span></td><td><span data-hi="inline">Key-value pairs, key name से access</span><span data-en="inline">Key-value pairs, accessed via key name</span></td></tr>
+          <tr><td>[1, 2, 3]</td><td>{a: 1, b: 2}</td></tr>
+        </table>
+
+        <div class="note-box">
+          <span data-hi="inline"><b>याद रखें:</b> Array की indexing हमेशा 0 से शुरू होती है — पहला element index 0 पर होता है, दूसरा index 1 पर।</span>
+          <span data-en="inline"><b>Remember:</b> Array indexing always starts at 0 — the first element is at index 0, the second at index 1.</span>
+        </div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">Array किसे कहते हैं, उदाहरण सहित समझाइए। Array और Object में अंतर बताइए। कोई 3 Array methods लिखिए।</span>
+          <span data-en="inline">What is an Array, explain with an example. Differentiate between Array and Object. Write any 3 Array methods.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 9 -->
+    <section class="unit-card" id="unit9">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 09 · फंक्शन्स & ऑब्जेक्ट्स</span><span data-en="inline">Unit 09 · Functions & Objects</span></span>
+        <h2><span data-hi="inline">Events & DOM बेसिक्स</span><span data-en="inline">Events & DOM Basics</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">DOM क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is the DOM?</h3>
+        <p data-hi="block" class="block"><strong>DOM (Document Object Model)</strong> HTML page को एक tree-structure की तरह represent करता है, जिससे JavaScript page के elements को access और change कर सकती है।</p>
+        <p data-en="block" class="block">The <strong>DOM (Document Object Model)</strong> represents an HTML page as a tree structure, allowing JavaScript to access and change page elements.</p>
+
+        <h3 data-hi="flex" class="flex">DOM Methods</h3>
+        <h3 data-en="flex" class="flex">DOM Methods</h3>
+        <table>
+          <tr><th>Method</th><th data-hi="inline">काम</th><th data-en="inline">Purpose</th></tr>
+          <tr><td>getElementById()</td><td><span data-hi="inline">id से किसी element को select करता है</span><span data-en="inline">Selects an element by its id</span></td></tr>
+          <tr><td>querySelector()</td><td><span data-hi="inline">CSS selector से पहला matching element ढूँढता है</span><span data-en="inline">Finds the first matching element using a CSS selector</span></td></tr>
+          <tr><td>innerHTML</td><td><span data-hi="inline">Element का content पढ़ता/बदलता है</span><span data-en="inline">Reads/changes an element's content</span></td></tr>
+        </table>
+        <div class="code-block">document.getElementById(<span class="str">"title"</span>).innerHTML = <span class="str">"New Title"</span>;</div>
+
+        <h3 data-hi="flex" class="flex">Event क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is an Event?</h3>
+        <p data-hi="block" class="block"><strong>Event</strong> कोई action है जो browser में होता है — जैसे click, mouse hover, key press, form submit। JS इन events को "listen" करके response दे सकती है।</p>
+        <p data-en="block" class="block">An <strong>Event</strong> is an action that happens in the browser — like a click, mouse hover, key press, or form submit. JS can "listen" for these events and respond.</p>
+
+        <h3 data-hi="flex" class="flex">Common Event Types</h3>
+        <h3 data-en="flex" class="flex">Common Event Types</h3>
+        <table>
+          <tr><th>Event</th><th data-hi="inline">कब trigger होता है</th><th data-en="inline">When it triggers</th></tr>
+          <tr><td>onclick</td><td><span data-hi="inline">Element पर click होने पर</span><span data-en="inline">When the element is clicked</span></td></tr>
+          <tr><td>onchange</td><td><span data-hi="inline">Input value बदलने पर</span><span data-en="inline">When input value changes</span></td></tr>
+          <tr><td>onmouseover</td><td><span data-hi="inline">Mouse element के ऊपर आने पर</span><span data-en="inline">When mouse hovers over the element</span></td></tr>
+          <tr><td>onload</td><td><span data-hi="inline">Page पूरा load होने पर</span><span data-en="inline">When the page finishes loading</span></td></tr>
+        </table>
+        <div class="code-block">&lt;button onclick="sayHi()"&gt;Click Me&lt;/button&gt;
+
+&lt;script&gt;
+  <span class="kw">function</span> sayHi() {
+    alert(<span class="str">"Hi there!"</span>);
+  }
+&lt;/script&gt;</div>
+
+        <div class="imp-box">
+          <span data-hi="inline"><b>Exam Tip:</b> DOM Manipulation का मतलब है JS के through HTML elements को add/remove/change करना — यह interactivity का core concept है।</span>
+          <span data-en="inline"><b>Exam Tip:</b> DOM Manipulation means adding/removing/changing HTML elements via JS — it's the core concept behind interactivity.</span>
+        </div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">DOM किसे कहते हैं? Event क्या है, उदाहरण सहित समझाइए। onclick event का उपयोग दिखाइए।</span>
+          <span data-en="inline">What is the DOM? What is an Event, explain with an example. Show the use of the onclick event.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 10 -->
+    <section class="unit-card" id="unit10">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 10 · रिवीज़न</span><span data-en="inline">Unit 10 · Revision</span></span>
+        <h2><span data-hi="inline">Important Q&A — फटाफट रिवीज़न</span><span data-en="inline">Important Q&A — Quick Revision</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">1-line Definitions (रटने के लिए)</h3>
+        <h3 data-en="flex" class="flex">1-line Definitions (to memorize)</h3>
+        <ul data-hi="block" class="block">
+          <li><strong>JavaScript</strong> — webpages को interactive बनाने वाली client-side scripting language</li>
+          <li><strong>Variable</strong> — data store करने वाला named container</li>
+          <li><strong>Function</strong> — एक specific task perform करने वाला reusable code block</li>
+          <li><strong>Loop</strong> — code को बार-बार चलाने वाला structure</li>
+          <li><strong>Array</strong> — कई values को order में store करने वाला structure</li>
+          <li><strong>Object</strong> — key-value pairs में data store करने वाला structure</li>
+          <li><strong>DOM</strong> — HTML page का tree-structure representation</li>
+          <li><strong>Event</strong> — browser में होने वाला कोई action जैसे click</li>
+          <li><strong>Operator</strong> — values पर operation perform करने वाला symbol</li>
+          <li><strong>Conditional Statement</strong> — condition के आधार पर decision लेने वाला structure</li>
+        </ul>
+        <ul data-en="block" class="block">
+          <li><strong>JavaScript</strong> — a client-side scripting language that makes webpages interactive</li>
+          <li><strong>Variable</strong> — a named container that stores data</li>
+          <li><strong>Function</strong> — a reusable code block that performs a specific task</li>
+          <li><strong>Loop</strong> — a structure that runs code repeatedly</li>
+          <li><strong>Array</strong> — a structure that stores multiple values in order</li>
+          <li><strong>Object</strong> — a structure that stores data as key-value pairs</li>
+          <li><strong>DOM</strong> — the tree-structure representation of an HTML page</li>
+          <li><strong>Event</strong> — an action that happens in the browser, like a click</li>
+          <li><strong>Operator</strong> — a symbol that performs an operation on values</li>
+          <li><strong>Conditional Statement</strong> — a structure that makes decisions based on a condition</li>
+        </ul>
+
+        <h3 data-hi="flex" class="flex">महत्वपूर्ण Full Forms / Terms</h3>
+        <h3 data-en="flex" class="flex">Important Full Forms / Terms</h3>
+        <table>
+          <tr><th>Short</th><th>Full Form / Meaning</th></tr>
+          <tr><td>JS</td><td>JavaScript</td></tr>
+          <tr><td>DOM</td><td>Document Object Model</td></tr>
+          <tr><td>BOM</td><td>Browser Object Model</td></tr>
+          <tr><td>JSON</td><td>JavaScript Object Notation</td></tr>
+          <tr><td>AJAX</td><td>Asynchronous JavaScript and XML</td></tr>
+          <tr><td>ES6</td><td>ECMAScript 6 (modern JS version)</td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Frequently Asked Long Questions</h3>
+        <h3 data-en="flex" class="flex">Frequently Asked Long Questions</h3>
+        <ol data-hi="block" class="block">
+          <li>JavaScript किसे कहते हैं? इसके उपयोग लिखिए।</li>
+          <li>var, let और const में अंतर समझाइए।</li>
+          <li>JavaScript के Data Types उदाहरण सहित लिखिए।</li>
+          <li>for, while और do...while loop में अंतर बताइए।</li>
+          <li>Function किसे कहते हैं? Parameter और Argument में अंतर लिखिए।</li>
+          <li>Array और Object में अंतर समझाइए, उदाहरण सहित।</li>
+          <li>DOM और Event किसे कहते हैं? उदाहरण सहित समझाइए।</li>
+        </ol>
+        <ol data-en="block" class="block">
+          <li>What is JavaScript? Write its uses.</li>
+          <li>Explain the difference between var, let and const.</li>
+          <li>Write JavaScript Data Types with examples.</li>
+          <li>Differentiate between for, while and do...while loop.</li>
+          <li>What is a Function? Write the difference between Parameter and Argument.</li>
+          <li>Explain the difference between Array and Object, with examples.</li>
+          <li>What are DOM and Event? Explain with examples.</li>
+        </ol>
+
+        <div class="imp-box">
+          <span data-hi="inline"><b>आखिरी टिप:</b> पेपर से पहले सभी "संभावित परीक्षा प्रश्न" बॉक्स को एक बार ज़रूर पढ़ लें — यही सबसे common questions हैं।</span>
+          <span data-en="inline"><b>Final Tip:</b> Before the exam, make sure to read through all the "Likely Exam Questions" boxes once — these are the most common questions.</span>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<button id="toTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<footer>
+  <span data-hi="inline">Made with ❤️ for ITI-COPA students</span>
+  <span data-en="inline">Made with ❤️ for ITI-COPA students</span>
+  &nbsp;·&nbsp; by <a href="https://surajtiwarrii.github.io/Portfolio/" target="_blank">Suraj Tiwari</a>
+</footer>
+
+<script>
+function setLang(lang){
+  document.documentElement.lang = lang;
+  document.getElementById('langToggle').dataset.lang = lang;
+  document.getElementById('btnHi').classList.toggle('active', lang==='hi');
+  document.getElementById('btnEn').classList.toggle('active', lang==='en');
+  const input = document.getElementById('searchInput');
+  input.placeholder = lang==='en' ? input.dataset.enPlaceholder : input.dataset.hiPlaceholder;
+  localStorage.setItem('jsNotesLang', lang);
+}
+document.addEventListener('DOMContentLoaded', ()=>{
+  const saved = localStorage.getItem('jsNotesLang') || 'hi';
+  setLang(saved);
+});
+
+function toggleSidebar(e){
+  if(e) e.stopPropagation();
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('open');
+}
+window.addEventListener('scroll',()=>{
+  document.getElementById('toTop').style.display = window.scrollY>400 ? 'flex':'none';
+});
+function liveSearch(){
+  const q = document.getElementById('searchInput').value.trim().toLowerCase();
+  const cards = document.querySelectorAll('.unit-card');
+  if(!q){ cards.forEach(c=>c.classList.remove('hide')); return; }
+  cards.forEach(card=>{
+    const text = card.innerText.toLowerCase();
+    card.classList.toggle('hide', !text.includes(q));
+  });
+}
+const links = document.querySelectorAll('.nav-link');
+const sections = document.querySelectorAll('.unit-card');
+window.addEventListener('scroll',()=>{
+  let current='';
+  sections.forEach(sec=>{ if(window.scrollY >= sec.offsetTop - 100) current = sec.id; });
+  links.forEach(l=>{ l.classList.toggle('active', l.getAttribute('href')==='#'+current); });
+});
+document.querySelectorAll('.nav-link').forEach(l=>{
+  l.addEventListener('click',()=>{ if(window.innerWidth<=880) toggleSidebar(); });
+});
+</script>
+
+</body>
+</html>

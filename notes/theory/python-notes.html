@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Python Programming — Hindi/English | ITI COPA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Hind:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f4f8ff;--bs:#c8dff0;--p:rgba(255,255,255,0.45);--ps:rgba(255,255,255,0.82);--pg:rgba(255,255,255,0.35);
+  --d:#306998;--m:#4b8bbf;--s:#c8dff0;--l:#e8f2ff;
+  --y:#ffd43b;--yd:#f0a500;--ys:rgba(255,212,59,0.22);
+  --ms:rgba(75,139,191,0.18);--t:#2b5c8a;--ts:rgba(43,92,138,0.10);
+  --ink:#0d2340;--is:#4a6a8a;--ln:rgba(48,105,152,0.22);--r:18px;
+}
+*{box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{margin:0;font-family:'Hind',sans-serif;background:radial-gradient(1200px 600px at 10% -10%,var(--ms),transparent 60%),radial-gradient(1000px 700px at 110% 10%,var(--ts),transparent 55%),var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;}
+h1,h2,h3{font-family:'Fraunces',serif;}
+.tb{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:rgba(244,248,255,0.65);backdrop-filter:blur(12px);border-bottom:1px solid var(--ln);gap:10px;}
+.brand{font-size:1rem;font-weight:700;color:var(--d);display:flex;align-items:center;gap:8px;font-family:'Fraunces',serif;}
+.brand .dot{width:9px;height:9px;border-radius:50%;background:linear-gradient(135deg,var(--y),var(--d));}
+.ta{display:flex;gap:8px;align-items:center;}
+.mb{background:rgba(48,105,152,0.18);color:var(--l);border:1px solid rgba(48,105,152,0.55);padding:9px 16px;border-radius:30px;font-family:'Hind';font-weight:700;font-size:0.9rem;cursor:pointer;background-image:linear-gradient(135deg,rgba(75,139,191,0.55),rgba(48,105,152,0.55));box-shadow:0 6px 16px rgba(48,105,152,0.2);}
+.lt{display:flex;align-items:center;background:var(--pg);border:1px solid var(--ln);backdrop-filter:blur(8px);border-radius:30px;padding:3px;position:relative;cursor:pointer;}
+.lt button{border:none;background:transparent;padding:7px 13px;border-radius:24px;font-family:'Hind';font-weight:700;font-size:0.8rem;cursor:pointer;color:var(--is);position:relative;z-index:2;transition:color 0.25s;}
+.lt button.active{color:var(--l);}
+.lp{position:absolute;top:3px;bottom:3px;left:3px;width:calc(50% - 3px);background:linear-gradient(135deg,var(--m),var(--d));border-radius:24px;transition:transform 0.25s ease;z-index:1;}
+.lt[data-lang="en"] .lp{transform:translateX(100%);}
+.hero{padding:60px 20px 36px;text-align:center;}
+.ey{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono';font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--d);background:var(--pg);backdrop-filter:blur(8px);border:1px solid var(--s);padding:6px 14px;border-radius:30px;margin-bottom:18px;}
+.hero h1{font-size:clamp(1.7rem,5.5vw,2.8rem);line-height:1.15;margin:0 0 14px;color:var(--ink);font-weight:700;}
+.grad{background:linear-gradient(100deg,var(--d),var(--m) 45%,var(--yd) 100%);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.hero p{max-width:600px;margin:0 auto 24px;color:var(--is);font-size:1rem;line-height:1.65;}
+.hs{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+.sc{background:var(--p);border:1px solid var(--ln);border-radius:14px;backdrop-filter:blur(8px);padding:12px 18px;min-width:108px;}
+.sc b{display:block;font-family:'Fraunces',serif;font-size:1.3rem;color:var(--d);}
+.sc span{font-size:0.74rem;color:var(--is);}
+.tw{max-width:900px;margin:22px auto 0;padding:0 20px;}
+.sw{position:relative;}
+#si{width:100%;padding:13px 16px 13px 42px;border-radius:30px;border:1px solid var(--ln);background:var(--p);backdrop-filter:blur(8px);font-family:'Hind';font-size:0.95rem;color:var(--ink);outline:none;}
+#si:focus{border-color:var(--m);}
+.sw::before{content:"⌕";position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--d);font-size:1.1rem;}
+.layout{max-width:1180px;margin:14px auto 80px;padding:0 20px;display:grid;grid-template-columns:255px 1fr;gap:26px;}
+.sidebar{background:var(--p);border:1px solid var(--ln);border-radius:var(--r);backdrop-filter:blur(10px);padding:18px 14px;height:fit-content;position:sticky;top:78px;max-height:calc(100vh - 100px);overflow-y:auto;}
+.sidebar h4{font-family:'JetBrains Mono';font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--is);margin:14px 6px 8px;}
+.sidebar h4:first-child{margin-top:2px;}
+.nl{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:10px;color:var(--ink);text-decoration:none;font-size:0.88rem;font-weight:500;transition:background 0.15s;}
+.nl:hover{background:var(--ms);}
+.nl.active{background:linear-gradient(120deg,var(--ms),var(--ts));color:var(--d);font-weight:700;}
+.nl .nm{font-family:'JetBrains Mono';font-size:0.68rem;color:var(--t);min-width:20px;}
+.cs{display:none;}
+@media(max-width:880px){.layout{display:block;}.sidebar{position:fixed !important;inset:0 18% 0 0;z-index:60;transform:translateX(-105%);transition:transform 0.3s ease;overflow-y:auto;top:0;height:100vh;max-height:100vh;}.sidebar.open{transform:translateX(0);}.ov{display:none;position:fixed;inset:0;background:rgba(5,15,35,0.4);z-index:55;}.ov.open{display:block;}.cs{display:block;margin-left:auto;background:none;border:1px solid var(--ln);border-radius:50%;width:34px;height:34px;font-size:1rem;color:var(--ink);cursor:pointer;}.brand span.bt{display:none;}.mb span.mt{display:none;}}
+.content{min-width:0;}
+.uc{background:var(--p);border:1px solid var(--ln);border-radius:var(--r);margin-bottom:22px;overflow:hidden;scroll-margin-top:80px;box-shadow:0 6px 24px rgba(48,105,152,0.08);backdrop-filter:blur(10px);}
+.uh{padding:22px 24px 18px;background:linear-gradient(120deg,rgba(75,139,191,0.18),rgba(48,105,152,0.10));border-bottom:1px solid var(--ln);}
+.ut{font-family:'JetBrains Mono';font-size:0.7rem;color:var(--t);letter-spacing:0.08em;text-transform:uppercase;display:block;margin-bottom:6px;}
+.uh h2{margin:0;font-size:1.4rem;color:var(--d);}
+.ub{padding:20px 24px 26px;}
+.ub h3{font-size:1.05rem;color:var(--ink);margin:22px 0 8px;display:flex;align-items:center;gap:8px;}
+.ub h3::before{content:"";width:5px;height:18px;border-radius:3px;background:linear-gradient(180deg,var(--y),var(--d));}
+.ub h3:first-child{margin-top:2px;}
+.ub p,.ub ul,.ub ol{line-height:1.75;color:var(--ink);margin:6px 0 12px;font-size:0.97rem;}
+.ub ul,.ub ol{padding-left:22px;}
+.ub li{margin-bottom:6px;font-size:0.95rem;}
+.ub strong{color:var(--d);}
+.nb{background:var(--ms);border-left:3px solid var(--m);border-radius:10px;padding:12px 16px;margin:14px 0;font-size:0.9rem;}
+.nb b{color:var(--d);}
+.ib{background:var(--ys);border-left:3px solid var(--y);border-radius:10px;padding:12px 16px;margin:14px 0;font-size:0.9rem;}
+.ib b{color:var(--yd);}
+table{width:100%;border-collapse:collapse;margin:14px 0 18px;font-size:0.88rem;border-radius:10px;overflow:hidden;}
+th{background:linear-gradient(120deg,var(--m),var(--d));color:var(--l);text-align:left;padding:10px 12px;font-weight:600;}
+td{padding:9px 12px;border-bottom:1px solid var(--ln);background:var(--ps);}
+tr:last-child td{border-bottom:none;}
+tr:nth-child(even) td{background:var(--bs);}
+code{font-family:'JetBrains Mono';background:var(--bs);padding:2px 6px;border-radius:5px;font-size:0.85em;color:var(--d);}
+.cb{font-family:'JetBrains Mono';background:#0d1b2e;color:#cce5ff;padding:14px 16px;border-radius:12px;font-size:0.82rem;line-height:1.65;overflow-x:auto;margin:12px 0;border:1px solid rgba(75,139,191,0.3);white-space:pre;}
+.cb .kw{color:#ffd43b;}
+.cb .st{color:#98e07a;}
+.cb .cm{color:#5c8aaa;}
+.cb .fn{color:#79c8e8;}
+.cb .nu{color:#f9a03f;}
+.qb{background:var(--bs);border:1px dashed var(--s);border-radius:12px;padding:14px 16px;margin:16px 0;}
+.qb b{color:var(--t);display:block;margin-bottom:6px;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em;}
+#tt{position:fixed;bottom:22px;right:22px;z-index:40;width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--y),var(--d));color:var(--l);border:none;font-size:1.2rem;cursor:pointer;box-shadow:0 8px 20px rgba(48,105,152,0.3);display:none;align-items:center;justify-content:center;}
+footer{text-align:center;padding:30px 20px 50px;color:var(--is);font-size:0.85rem;}
+footer a{color:var(--d);text-decoration:none;font-weight:600;}
+.hide{display:none !important;}
+[data-hi],[data-en]{display:none;}
+html[lang="hi"] [data-hi].i,html[lang="hi"] span[data-hi]{display:inline;}
+html[lang="hi"] [data-hi].b{display:block;}
+html[lang="hi"] [data-hi].f{display:flex;}
+html[lang="hi"] th[data-hi],html[lang="hi"] td[data-hi]{display:table-cell;}
+html[lang="en"] [data-en].i,html[lang="en"] span[data-en]{display:inline;}
+html[lang="en"] [data-en].b{display:block;}
+html[lang="en"] [data-en].f{display:flex;}
+html[lang="en"] th[data-en],html[lang="en"] td[data-en]{display:table-cell;}
+</style>
+</head>
+<body>
+<div id="__backNotesBtn" style="position:fixed;top:14px;left:14px;z-index:9999;">
+<a href="../../notes-theory.html" style="display:flex;align-items:center;gap:7px;text-decoration:none;
+background:rgba(255,255,255,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+border:1px solid rgba(0,0,0,.08);color:#2A2620;font-family:'Poppins',Arial,sans-serif;
+font-size:.82rem;font-weight:600;padding:9px 16px 9px 12px;border-radius:30px;
+box-shadow:0 6px 18px rgba(0,0,0,.14);transition:transform .25s,box-shadow .25s;">
+<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+<span>Notes</span></a></div>
+<style>
+#__backNotesBtn a:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,0,0,.2)}
+@media(max-width:600px){#__backNotesBtn{top:10px;left:10px}#__backNotesBtn a{padding:8px 14px 8px 10px;font-size:.78rem}}
+</style>
+
+<div class="tb">
+  <div class="brand"><span class="dot"></span><span class="bt">Python Programming</span></div>
+  <div class="ta">
+    <div class="lt" id="lt" data-lang="hi" onclick="sL(this.dataset.lang==='hi'?'en':'hi')"><div class="lp"></div><button type="button" id="bh">हिं</button><button type="button" id="be">EN</button></div>
+    <button class="mb" onclick="tS(event)">🐍 <span class="mt" data-hi="i">विषय सूची</span><span class="mt" data-en="i">Topics</span></button>
+  </div>
+</div>
+<div class="hero">
+  <span class="ey">● ITI · COPA · UP Board Pattern</span>
+  <h1><span data-hi="b" class="b">Python Programming<br><span class="grad">सम्पूर्ण नोट्स</span></span><span data-en="b" class="b">Python Programming<br><span class="grad">Complete Notes</span></span></h1>
+  <p data-hi="b" class="b">Python basics से लेकर Lists, Functions, File Handling, और Exception Handling तक — हिंदी और इंग्लिश, परीक्षा के हिसाब से।</p>
+  <p data-en="b" class="b">From Python basics to Lists, Functions, File Handling, and Exception Handling — Hindi & English, exam-ready.</p>
+  <div class="hs">
+    <div class="sc"><b>13</b><span>Units</span></div>
+    <div class="sc"><b>80+</b><span>Topics</span></div>
+    <div class="sc"><b>2</b><span data-hi="i">भाषाएं</span><span data-en="i">Languages</span></div>
+  </div>
+</div>
+<div class="tw"><div class="sw"><input type="text" id="si" placeholder="खोजें... list, function, loop, exception..." oninput="lS()"></div></div>
+<div class="ov" id="ov" onclick="tS(event)"></div>
+<div class="layout">
+  <aside class="sidebar" id="sb">
+    <button class="cs" onclick="tS(event)">✕</button>
+    <h4 data-hi="b" class="b">Python बेसिक्स</h4><h4 data-en="b" class="b">Python Basics</h4>
+    <a class="nl" href="#u1"><span class="nm">01</span><span data-hi="i">Python का परिचय</span><span data-en="i">Introduction to Python</span></a>
+    <a class="nl" href="#u2"><span class="nm">02</span><span data-hi="i">Basic Syntax & पहला Program</span><span data-en="i">Basic Syntax & First Program</span></a>
+    <a class="nl" href="#u3"><span class="nm">03</span><span data-hi="i">Variables & Data Types</span><span data-en="i">Variables & Data Types</span></a>
+    <a class="nl" href="#u4"><span class="nm">04</span><span data-hi="i">Operators</span><span data-en="i">Operators</span></a>
+    <a class="nl" href="#u5"><span class="nm">05</span><span data-hi="i">Strings & String Methods</span><span data-en="i">Strings & String Methods</span></a>
+    <h4 data-hi="b" class="b">कंट्रोल फ्लो</h4><h4 data-en="b" class="b">Control Flow</h4>
+    <a class="nl" href="#u6"><span class="nm">06</span><span data-hi="i">Conditional Statements</span><span data-en="i">Conditional Statements</span></a>
+    <a class="nl" href="#u7"><span class="nm">07</span><span data-hi="i">Loops (for, while)</span><span data-en="i">Loops (for, while)</span></a>
+    <h4 data-hi="b" class="b">Data Structures</h4><h4 data-en="b" class="b">Data Structures</h4>
+    <a class="nl" href="#u8"><span class="nm">08</span><span data-hi="i">Lists</span><span data-en="i">Lists</span></a>
+    <a class="nl" href="#u9"><span class="nm">09</span><span data-hi="i">Tuples, Dictionaries & Sets</span><span data-en="i">Tuples, Dictionaries & Sets</span></a>
+    <h4 data-hi="b" class="b">Functions & Advanced</h4><h4 data-en="b" class="b">Functions & Advanced</h4>
+    <a class="nl" href="#u10"><span class="nm">10</span><span data-hi="i">Functions</span><span data-en="i">Functions</span></a>
+    <a class="nl" href="#u11"><span class="nm">11</span><span data-hi="i">File Handling</span><span data-en="i">File Handling</span></a>
+    <a class="nl" href="#u12"><span class="nm">12</span><span data-hi="i">Exception Handling & Modules</span><span data-en="i">Exception Handling & Modules</span></a>
+    <h4 data-hi="b" class="b">रिवीज़न</h4><h4 data-en="b" class="b">Revision</h4>
+    <a class="nl" href="#u13"><span class="nm">13</span><span data-hi="i">Important Q&A</span><span data-en="i">Important Q&A</span></a>
+  </aside>
+  <main class="content" id="cn">
+
+<!-- UNIT 1 -->
+<section class="uc" id="u1"><div class="uh"><span class="ut"><span data-hi="i">Unit 01 · Python बेसिक्स</span><span data-en="i">Unit 01 · Python Basics</span></span><h2><span data-hi="i">Python का परिचय</span><span data-en="i">Introduction to Python</span></h2></div>
+<div class="ub">
+<h3 data-hi="f" class="f">Python क्या है?</h3><h3 data-en="f" class="f">What is Python?</h3>
+<p data-hi="b" class="b"><strong>Python</strong> एक high-level, interpreted, general-purpose programming language है जिसे <strong>Guido van Rossum</strong> ने 1991 में develop किया था। यह अपनी simple, readable syntax के लिए जाना जाता है — beginners के लिए best language मानी जाती है।</p>
+<p data-en="b" class="b"><strong>Python</strong> is a high-level, interpreted, general-purpose programming language developed by <strong>Guido van Rossum</strong> in 1991. Known for its simple, readable syntax — considered the best language for beginners.</p>
+<h3 data-hi="f" class="f">Python की Features</h3><h3 data-en="f" class="f">Features of Python</h3>
+<table><tr><th>Feature</th><th data-hi="i">मतलब</th><th data-en="i">Meaning</th></tr>
+<tr><td>Simple & Readable</td><td><span data-hi="i">English जैसी syntax, कम code में ज़्यादा काम</span><span data-en="i">English-like syntax, does more with less code</span></td></tr>
+<tr><td>Interpreted</td><td><span data-hi="i">Code line by line execute होता है — compile नहीं करना पड़ता</span><span data-en="i">Code executes line by line — no compilation needed</span></td></tr>
+<tr><td>Platform Independent</td><td><span data-hi="i">Windows, Mac, Linux — सभी पर चलता है</span><span data-en="i">Runs on Windows, Mac, Linux</span></td></tr>
+<tr><td>Object-Oriented</td><td><span data-hi="i">Classes और Objects support करता है</span><span data-en="i">Supports Classes and Objects</span></td></tr>
+<tr><td>Free & Open Source</td><td><span data-hi="i">Free में available, source code modify कर सकते हैं</span><span data-en="i">Available for free, source code can be modified</span></td></tr>
+<tr><td>Large Standard Library</td><td><span data-hi="i">Inbuilt modules और libraries की भरमार</span><span data-en="i">Abundance of inbuilt modules and libraries</span></td></tr>
+<tr><td>Dynamically Typed</td><td><span data-hi="i">Variable का type declare करने की ज़रूरत नहीं</span><span data-en="i">No need to declare a variable's type</span></td></tr></table>
+<h3 data-hi="f" class="f">Python के उपयोग</h3><h3 data-en="f" class="f">Uses of Python</h3>
+<ul data-hi="b" class="b">
+<li>Web Development (Django, Flask)</li>
+<li>Data Science & Machine Learning</li>
+<li>Artificial Intelligence</li>
+<li>Automation & Scripting</li>
+<li>Desktop Applications</li>
+<li>Game Development</li>
+</ul>
+<ul data-en="b" class="b">
+<li>Web Development (Django, Flask)</li>
+<li>Data Science & Machine Learning</li>
+<li>Artificial Intelligence</li>
+<li>Automation & Scripting</li>
+<li>Desktop Applications</li>
+<li>Game Development</li>
+</ul>
+<div class="nb"><span data-hi="i"><b>याद रखें:</b> Python का नाम "Monty Python's Flying Circus" (British comedy show) से आया है, न कि snake से।</span><span data-en="i"><b>Remember:</b> Python was named after "Monty Python's Flying Circus" (a British comedy show), not the snake.</span></div>
+<div class="qb"><b data-hi="b" class="b">संभावित परीक्षा प्रश्न</b><b data-en="b" class="b">Likely Exam Questions</b><span data-hi="i">Python किसे कहते हैं? इसकी features और उपयोग लिखिए। Python को Interpreted language क्यों कहते हैं?</span><span data-en="i">What is Python? Write its features and uses. Why is Python called an Interpreted language?</span></div>
+</div></section>
+
+<!-- UNIT 2 -->
+<section class="uc" id="u2"><div class="uh"><span class="ut"><span data-hi="i">Unit 02 · Python बेसिक्स</span><span data-en="i">Unit 02 · Python Basics</span></span><h2><span data-hi="i">Basic Syntax & पहला Program</span><span data-en="i">Basic Syntax & First Program</span></h2></div>
+<div class="ub">
+<h3 data-hi="f" class="f">Python Install करना & IDLE</h3><h3 data-en="f" class="f">Installing Python & IDLE</h3>
+<p data-hi="b" class="b">Python python.org से free में download होता है। <strong>IDLE (Integrated Development and Learning Environment)</strong> Python के साथ आने वाला default editor है जिसमें code लिखकर run कर सकते हैं।</p>
+<p data-en="b" class="b">Python is downloaded free from python.org. <strong>IDLE (Integrated Development and Learning Environment)</strong> is the default editor that comes with Python, used to write and run code.</p>
+<h3 data-hi="f" class="f">पहला Python Program</h3><h3 data-en="f" class="f">First Python Program</h3>
+<div class="cb"><span class="fn">print</span>(<span class="st">"Hello, World!"</span>)
+<span class="cm"># Output: Hello, World!</span></div>
+<h3 data-hi="f" class="f">Basic Syntax Rules</h3><h3 data-en="f" class="f">Basic Syntax Rules</h3>
+<table><tr><th>Rule</th><th data-hi="i">मतलब</th><th data-en="i">Meaning</th></tr>
+<tr><td>Indentation</td><td><span data-hi="i">Curly braces की जगह spaces/tabs से blocks define होते हैं — Python में indent ज़रूरी है</span><span data-en="i">Blocks are defined by spaces/tabs instead of curly braces — indentation is mandatory in Python</span></td></tr>
+<tr><td>Case Sensitive</td><td><span data-hi="i"><code>Name</code> और <code>name</code> अलग हैं</span><span data-en="i"><code>Name</code> and <code>name</code> are different</span></td></tr>
+<tr><td>No Semicolon</td><td><span data-hi="i">Statement के end में ; नहीं लगाना पड़ता</span><span data-en="i">No ; needed at the end of a statement</span></td></tr>
+<tr><td>Comments</td><td><span data-hi="i"># से single-line comment, ''' ''' से multi-line</span><span data-en="i"># for single-line comment, ''' ''' for multi-line</span></td></tr></table>
+<div class="cb"><span class="cm"># This is a single-line comment</span>
+
+<span class="cm">'''
+This is a
+multi-line comment
+'''</span>
+
+<span class="kw">name</span> = <span class="st">"Suraj"</span>
+<span class="fn">print</span>(<span class="st">"Hello,"</span>, name)</div>
+<h3 data-hi="f" class="f">Input लेना</h3><h3 data-en="f" class="f">Taking Input</h3>
+<div class="cb"><span class="kw">name</span> = <span class="fn">input</span>(<span class="st">"Enter your name: "</span>)
+<span class="fn">print</span>(<span class="st">"Welcome,"</span>, name)</div>
+<div class="nb"><span data-hi="i"><b>याद रखें:</b> Python में indentation (4 spaces या 1 tab) mandatory है — wrong indent = IndentationError।</span><span data-en="i"><b>Remember:</b> indentation (4 spaces or 1 tab) is mandatory in Python — wrong indent = IndentationError.</span></div>
+<div class="qb"><b data-hi="b" class="b">संभावित परीक्षा प्रश्न</b><b data-en="b" class="b">Likely Exam Questions</b><span data-hi="i">Python में print() और input() का उपयोग समझाइए। Indentation क्यों ज़रूरी है? Comments कैसे लिखते हैं?</span><span data-en="i">Explain the use of print() and input() in Python. Why is indentation mandatory? How to write comments?</span></div>
+</div></section>
+
+<!-- UNIT 3 -->
+<section class="uc" id="u3"><div class="uh"><span class="ut"><span data-hi="i">Unit 03 · Python बेसिक्स</span><span data-en="i">Unit 03 · Python Basics</span></span><h2>Variables & Data Types</h2></div>
+<div class="ub">
+<h3 data-hi="f" class="f">Variable क्या है?</h3><h3 data-en="f" class="f">What is a Variable?</h3>
+<p data-hi="b" class="b">Python में variable declare करने की ज़रूरत नहीं — सिर्फ value assign करो, automatically variable create हो जाता है। Type भी automatically decide होता है (Dynamic Typing)।</p>
+<p data-en="b" class="b">No need to declare a variable in Python — just assign a value and it is automatically created. The type is also decided automatically (Dynamic Typing).</p>
+<div class="cb">x = <span class="nu">10</span>          <span class="cm"># int</span>
+y = <span class="nu">3.14</span>       <span class="cm"># float</span>
+name = <span class="st">"Suraj"</span>  <span class="cm"># str</span>
+flag = <span class="kw">True</span>     <span class="cm"># bool</span></div>
+<h3 data-hi="f" class="f">Python Data Types</h3><h3 data-en="f" class="f">Python Data Types</h3>
+<table><tr><th>Type</th><th data-hi="i">Example</th><th data-en="i">Example</th></tr>
+<tr><td>int</td><td colspan="2">10, -5, 0</td></tr>
+<tr><td>float</td><td colspan="2">3.14, -2.5, 10.0</td></tr>
+<tr><td>str (String)</td><td colspan="2">"Hello", 'Python'</td></tr>
+<tr><td>bool</td><td colspan="2">True, False</td></tr>
+<tr><td>list</td><td colspan="2">[1, 2, 3]</td></tr>
+<tr><td>tuple</td><td colspan="2">(1, 2, 3)</td></tr>
+<tr><td>dict</td><td colspan="2">{"name": "Suraj"}</td></tr>
+<tr><td>set</td><td colspan="2">{1, 2, 3}</td></tr>
+<tr><td>NoneType</td><td colspan="2">None</td></tr></table>
+<h3 data-hi="f" class="f">Type Checking & Conversion</h3><h3 data-en="f" class="f">Type Checking & Conversion</h3>
+<div class="cb">x = <span class="nu">10</span>
+<span class="fn">print</span>(<span class="fn">type</span>(x))        <span class="cm"># &lt;class 'int'&gt;</span>
+
+<span class="cm"># Type Conversion</span>
+<span class="fn">int</span>(<span class="st">"5"</span>)           <span class="cm"># "5" → 5</span>
+<span class="fn">float</span>(<span class="nu">5</span>)           <span class="cm"># 5 → 5.0</span>
+<span class="fn">str</span>(<span class="nu">100</span>)           <span class="cm"># 100 → "100"</span>
+<span class="fn">bool</span>(<span class="nu">0</span>)            <span class="cm"># 0 → False</span></div>
+<div class="nb"><span data-hi="i"><b>याद रखें:</b> Python dynamically typed है — एक ही variable को पहले int, फिर string assign कर सकते हैं।</span><span data-en="i"><b>Remember:</b> Python is dynamically typed — the same variable can be assigned an int first, then a string.</span></div>
+<div class="qb"><b data-hi="b" class="b">संभावित परीक्षा प्रश्न</b><b data-en="b" class="b">Likely Exam Questions</b><span data-hi="i">Python के Data Types उदाहरण सहित लिखिए। type() function का क्या काम है? Type conversion उदाहरण सहित।</span><span data-en="i">Write Python Data Types with examples. What is the use of type()? Type conversion with examples.</span></div>
+</div></section>
+
+<!-- UNIT 4 -->
+<section class="uc" id="u4"><div class="uh"><span class="ut"><span data-hi="i">Unit 04 · Python बेसिक्स</span><span data-en="i">Unit 04 · Python Basics</span></span><h2>Operators</h2></div>
+<div class="ub">
+<h3 data-hi="f" class="f">Arithmetic Operators</h3><h3 data-en="f" class="f">Arithmetic Operators</h3>
+<table><tr><th>Operator</th><th data-hi="i">काम</th><th data-en="i">Purpose</th><th>Example</th></tr>
+<tr><td>+ - * /</td><td><span data-hi="i">जोड़, घटाव, गुणा, भाग</span><span data-en="i">Add, subtract, multiply, divide</span></td><td>5+3=8, 10/4=2.5</td></tr>
+<tr><td>// (Floor Division)</td><td><span data-hi="i">Integer भाग (decimal cut)</span><span data-en="i">Integer division (decimal cut)</span></td><td>10//3 = 3</td></tr>
+<tr><td>% (Modulus)</td><td><span data-hi="i">Remainder/शेषफल</span><span data-en="i">Remainder</span></td><td>10%3 = 1</td></tr>
+<tr><td>** (Exponent)</td><td><span data-hi="i">Power/घात</span><span data-en="i">Power</span></td><td>2**3 = 8</td></tr></table>
+<h3 data-hi="f" class="f">Comparison & Logical Operators</h3><h3 data-en="f" class="f">Comparison & Logical Operators</h3>
+<table><tr><th>Operator</th><th data-hi="i">काम</th><th data-en="i">Purpose</th></tr>
+<tr><td>== != &gt; &lt; &gt;= &lt;=</td><td><span data-hi="i">Comparison — True/False return करता है</span><span data-en="i">Comparison — returns True/False</span></td></tr>
+<tr><td>and</td><td><span data-hi="i">दोनों conditions True हों तभी True</span><span data-en="i">True only if both conditions are True</span></td></tr>
+<tr><td>or</td><td><span data-hi="i">कोई एक True हो तो True</span><span data-en="i">True if any one is True</span></td></tr>
+<tr><td>not</td><td><span data-hi="i">Condition को reverse करता है</span><span data-en="i">Reverses the condition</span></td></tr></table>
+<h3 data-hi="f" class="f">Identity & Membership Operators</h3><h3 data-en="f" class="f">Identity & Membership Operators</h3>
+<div class="cb">x = [<span class="nu">1</span>, <span class="nu">2</span>, <span class="nu">3</span>]
+<span class="fn">print</span>(<span class="nu">1</span> <span class="kw">in</span> x)      <span class="cm"># True  (membership)</span>
+<span class="fn">print</span>(<span class="nu">5</span> <span class="kw">not in</span> x) <span class="cm"># True</span>
+
+a = b = [<span class="nu">1</span>,<span class="nu">2</span>]
+<span class="fn">print</span>(a <span class="kw">is</span> b)      <span class="cm"># True  (identity)</span></div>
+<div class="ib"><span data-hi="i"><b>Python Special:</b> Python में <code>//</code> floor division और <code>**</code> exponent operator होते हैं जो C/Java में नहीं होते।</span><span data-en="i"><b>Python Special:</b> Python has <code>//</code> floor division and <code>**</code> exponent operators not found in C/Java.</span></div>
+<div class="qb"><b data-hi="b" class="b">संभावित परीक्षा प्रश्न</b><b data-en="b" class="b">Likely Exam Questions</b><span data-hi="i">Python के operators के types उदाहरण सहित। // और / में अंतर। in और is operators का उपयोग।</span><span data-en="i">Types of Python operators with examples. Difference between // and /. Use of in and is operators.</span></div>
+</div></section>
+
+<!-- UNIT 5 -->
+<section class="uc" id="u5"><div class="uh"><span class="ut"><span data-hi="i">Unit 05 · Python बेसिक्स</span><span data-en="i">Unit 05 · Python Basics</span></span><h2>Strings & String Methods</h2></div>
+<div class="ub">
+<h3 data-hi="f" class="f">String क्या है?</h3><h3 data-en="f" class="f">What is a String?</h3>
+<p data-hi="b" class="b">String characters का sequence है, single (<code>'</code>) या double (<code>"</code>) quotes में लिखी जाती है। Python में String immutable है — create होने के बाद change नहीं होती।</p>
+<p data-en="b" class="b">A String is a sequence of characters, written in single (<code>'</code>) or double (<code>"</code>) quotes. Strings in Python are immutable — they cannot be changed after creation.</p>
+<div class="cb">s = <span class="st">"Hello Python"</span>
+<span class="fn">print</span>(s[<span class="nu">0</span>])      <span class="cm"># 'H'   (indexing)</span>
+<span class="fn">print</span>(s[<span class="nu">6</span>:])     <span class="cm"># 'Python' (slicing)</span>
+<span class="fn">print</span>(s[:<span class="nu">5</span>])     <span class="cm"># 'Hello'</span>
+<span class="fn">print</span>(s[::<span class="nu">-1</span>])   <span class="cm"># Reverse string</span>
+<span class="fn">print</span>(<span class="fn">len</span>(s))     <span class="cm"># 12</span></div>
+<h3 data-hi="f" class="f">Important String Methods</h3><h3 data-en="f" class="f">Important String Methods</h3>
+<table><tr><th>Method</th><th data-hi="i">काम</th><th data-en="i">Purpose</th></tr>
+<tr><td>.upper() / .lower()</td><td><span data-hi="i">UPPERCASE / lowercase में convert</span><span data-en="i">Convert to UPPERCASE / lowercase</span></td></tr>
+<tr><td>.strip()</td><td><span data-hi="i">Leading/trailing spaces remove</span><span data-en="i">Remove leading/trailing spaces</span></td></tr>
+<tr><td>.replace(a, b)</td><td><span data-hi="i">a को b से replace करना</span><span data-en="i">Replace a with b</span></td></tr>
+<tr><td>.split(sep)</td><td><span data-hi="i">String को list में split करना</span><span data-en="i">Split string into a list</span></td></tr>
+<tr><td>.find(sub)</td><td><span data-hi="i">Substring की position ढूँढना</span><span data-en="i">Find the position of a substring</span></td></tr>
+<tr><td>.count(sub)</td><td><span data-hi="i">Substring कितनी बार आती है</span><span data-en="i">How many times a substring appears</span></td></tr>
+<tr><td>.startswith() / .endswith()</td><td><span data-hi="i">String किससे शुरू/खत्म होती है</span><span data-en="i">What the string starts/ends with</span></td></tr>
+<tr><td>.join(list)</td><td><span data-hi="i">List elements को string में join करना</span><span data-en="i">Join list elements into a string</span></td></tr></table>
+<h3 data-hi="f" class="f">f-String (Formatted String)</h3><h3 data-en="f" class="f">f-String (Formatted String)</h3>
+<div class="cb">name = <span class="st">"Suraj"</span>
+age = <span class="nu">21</span>
+<span class="fn">print</span>(<span class="st">f"My name is {name} and I am {age} years old."</span>)</div>
+<div class="qb"><b data-hi="b" class="b">संभावित परीक्षा प्रश्न</b><b data-en="b" class="b">Likely Exam Questions</b><span data-hi="i">String indexing और slicing उदाहरण सहित। String methods उदाहरण सहित लिखिए। f-String क्या है?</span><span data-en="i">String indexing and slicing with examples. Write String methods with examples. What is f-String?</span></div>
+</div></section>
+
+<!-- UNIT 6 -->
+<section class="uc" id="u6"><div class="uh"><span class="ut"><span data-hi="i">Unit 06 · कंट्रोल फ्लो</span><span data-en="i">Unit 06 · Control Flow</span></span><h2>Conditional Statements</h2></div>
+<div class="ub">
+<h3 data-hi="f" class="f">if, elif, else</h3><h3 data-en="f" class="f">if, elif, else</h3>
+<div class="cb">marks = <span class="nu">75</span>
+
+<span class="kw">if</span> marks >= <span class="nu">90</span>:
+    <span class="fn">print</span>(<span class="st">"Grade A"</span>)
+<span class="kw">elif</span> marks >= <span class="nu">75</span>:
+    <span class="fn">print</span>(<span class="st">"Grade B"</span>)
+<span class="kw">elif</span> marks >= <span class="nu">60</span>:
+    <span class="fn">print</span>(<span class="st">"Grade C"</span>)
+<span class="kw">else</span>:
+    <span class="fn">print</span>(<span class="st">"Fail"</span>)</div>
+<h3 data-hi="f" class="f">Nested if</h3><h3 data-en="f" class="f">Nested if</h3>
+<div class="cb">age = <span class="nu">20</span>
+<span class="kw">if</span> age >= <span class="nu">18</span>:
+    <span class="kw">if</span> age >= <span class="nu">60</span>:
+        <span class="fn">print</span>(<span class="st">"Senior citizen"</span>)
+    <span class="kw">else</span>:
+        <span class="fn">print</span>(<span class="st">"Adult"</span>)
+<span class="kw">else</span>:
+    <span class="fn">print</span>(<span class="st">"Minor"</span>)</div>
+<h3 data-hi="f" class="f">Ternary Operator (One-liner if)</h3><h3 data-en="f" class="f">Ternary Operator (One-liner if)</h3>
+<div class="cb">result = <span class="st">"Pass"</span> <span class="kw">if</span> marks >= <span class="nu">40</span> <span class="kw">else</span> <span class="st">"Fail"</span>
+<span class="fn">print</span>(result)</div>
+<div class="nb"><span data-hi="i"><b>याद रखें:</b> Python में <code>elif</code> use होता है (C/Java की तरह <code>else if</code> नहीं), और colon (:) और indentation mandatory है।</span><span data-en="i"><b>Remember:</b> Python uses <code>elif</code> (not <code>else if</code> like C/Java), and colon (:) with indentation is mandatory.</span></div>
+<div class="qb"><b data-hi="b" class="b">संभावित परीक्षा प्रश्न</b><b data-en="b" class="b">Likely Exam Questions</b><span data-hi="i">if-elif-else statement उदाहरण सहित। Nested if क्या है? Python का ternary operator उदाहरण सहित।</span><span data-en="i">if-elif-else statement with example. What is Nested if? Python ternary operator with example.</span></div>
+</div></section>
+
+<!-- UNIT 7 -->
+<section class="uc" id="u7"><div class="uh"><span class="ut"><span data-hi="i">Unit 07 · कंट्रोल फ्लो</span><span data-en="i">Unit 07 · Control Flow</span></span><h2>Loops (for, while)</h2></div>
+<div class="ub">
+<h3 data-hi="f" class="f">for Loop</h3><h3 data-en="f" class="f">for Loop</h3>
+<div class="cb"><span class="cm"># range() के साथ</span>
+<span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="nu">1</span>, <span class="nu">6</span>):
+    <span class="fn">print</span>(i)   <span class="cm"># 1 2 3 4 5</span>
+
+<span class="cm"># List iterate करना</span>
+fruits = [<span class="st">"Apple"</span>, <span class="st">"Banana"</span>, <span class="st">"Mango"</span>]
+<span class="kw">for</span> fruit <span class="kw">in</span> fruits:
+    <span class="fn">print</span>(fruit)</div>
+<h3 data-hi="f" class="f">while Loop</h3><h3 data-en="f" class="f">while Loop</h3>
+<div class="cb">i = <span class="nu">1</span>
+<span class="kw">while</span> i <= <span class="nu">5</span>:
+    <span class="fn">print</span>(i)
+    i += <span class="nu">1</span></div>
+<h3 data-hi="f" class="f">break, continue, pass</h3><h3 data-en="f" class="f">break, continue, pass</h3>
+<table><tr><th>Keyword</th><th data-hi="i">काम</th><th data-en="i">Purpose</th></tr>
+<tr><td>break</td><td><span data-hi="i">Loop को पूरी तरह रोक देता है</span><span data-en="i">Stops the loop completely</span></td></tr>
+<tr><td>continue</td><td><span data-hi="i">Current iteration skip करके अगली पर जाता है</span><span data-en="i">Skips the current iteration</span></td></tr>
+<tr><td>pass</td><td><span data-hi="i">Empty block के लिए placeholder — कुछ नहीं करता</span><span data-en="i">Placeholder for an empty block — does nothing</span></td></tr></table>
+<div class="cb"><span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="nu">10</span>):
+    <span class="kw">if</span> i == <span class="nu">5</span>:
+        <span class="kw">break</span>      <span class="cm"># 5 पर loop रुक जाएगी</span>
+    <span class="kw">if</span> i % <span class="nu">2</span> == <span class="nu">0</span>:
+        <span class="kw">continue</span>   <span class="cm"># even numbers skip</span>
+    <span class="fn">print</span>(i)   <span class="cm"># 1 3</span></div>
+<h3 data-hi="f" class="f">range() Function</h3><h3 data-en="f" class="f">range() Function</h3>
+<div class="cb"><span class="fn">range</span>(<span class="nu">5</span>)        <span class="cm"># 0,1,2,3,4</span>
+<span class="fn">range</span>(<span class="nu">1</span>,<span class="nu">6</span>)      <span class="cm"># 1,2,3,4,5</span>
+<span class="fn">range</span>(<span class="nu">0</span>,<span class="nu">10</span>,<span class="nu">2</span>)   <span class="cm"># 0,2,4,6,8 (step=2)</span></div>
+<div class="qb"><b data-hi="b" class="b">संभावित परीक्षा प्रश्न</b><b data-en="b" class="b">Likely Exam Questions</b><span data-hi="i">for और while loop में अंतर। break और continue में अंतर। range() function उदाहरण सहित।</span><span data-en="i">Difference between for and while loop. Difference between break and continue. range() function with examples.</span></div>
+</div></section>
+
+<!-- UNIT 8 -->
+<section class="uc" id="u8"><div class="uh"><span class="ut"><span data-hi="i">Unit 08 · Data Structures</span><span data-en="i">Unit 08 · Data Structures</span></span><h2>Lists</h2></div>
+<div class="ub">
+<h3 data-hi="f" class="f">List क्या है?</h3><h3 data-en="f" class="f">What is a List?</h3>
+<p data-hi="b" class="b"><strong>List</strong> ordered, mutable collection है जो अलग-अलग data types की values store कर सकती है। Square brackets [ ] में लिखी जाती है। Index 0 से शुरू होती है।</p>
+<p data-en="b" class="b">A <strong>List</strong> is an ordered, mutable collection that can store values of different data types. Written in square brackets [ ]. Indexing starts from 0.</p>
+<div class="cb">fruits = [<span class="st">"Apple"</span>, <span class="st">"Banana"</span>, <span class="st">"Mango"</span>]
+nums = [<span class="nu">1</span>, <span class="nu">2</span>, <span class="nu">3</span>, <span class="nu">4</span>, <span class="nu">5</span>]
+mixed = [<span class="nu">1</span>, <span class="st">"hello"</span>, <span class="nu">3.14</span>, <span class="kw">True</span>]
+
+<span class="fn">print</span>(fruits[<span class="nu">0</span>])     <span class="cm"># Apple</span>
+<span class="fn">print</span>(fruits[-<span class="nu">1</span>])    <span class="cm"># Mango (negative index)</span>
+<span class="fn">print</span>(fruits[<span class="nu">1</span>:<span class="nu">3</span>])   <span class="cm"># ['Banana', 'Mango']</span></div>
+<h3 data-hi="f" class="f">List Methods</h3><h3 data-en="f" class="f">List Methods</h3>
+<table><tr><th>Method</th><th data-hi="i">काम</th><th data-en="i">Purpose</th></tr>
+<tr><td>.append(x)</td><td><span data-hi="i">End में element add करना</span><span data-en="i">Add element at the end</span></td></tr>
+<tr><td>.insert(i, x)</td><td><span data-hi="i">Index i पर element insert करना</span><span data-en="i">Insert element at index i</span></td></tr>
+<tr><td>.remove(x)</td><td><span data-hi="i">First occurrence of x remove करना</span><span data-en="i">Remove the first occurrence of x</span></td></tr>
+<tr><td>.pop(i)</td><td><span data-hi="i">Index i पर element remove और return करना</span><span data-en="i">Remove and return element at index i</span></td></tr>
+<tr><td>.sort()</td><td><span data-hi="i">List को ascending order में sort करना</span><span data-en="i">Sort the list in ascending order</span></td></tr>
+<tr><td>.reverse()</td><td><span data-hi="i">List को reverse करना</span><span data-en="i">Reverse the list</span></td></tr>
+<tr><td>.len()</td><td><span data-hi="i">len(list) — list की length</span><span data-en="i">len(list) — length of the list</span></td></tr>
+<tr><td>.count(x)</td><td><span data-hi="i">x कितनी बार है</span><span data-en="i">How many times x appears</span></td></tr>
+<tr><td>.index(x)</td><td><span data-hi="i">x का index position</span><span data-en="i">Index position of x</span></td></tr>
+<tr><td>.clear()</td><td><span data-hi="i">List को empty करना</span><span data-en="i">Empty the list</span></td></tr></table>
+<div class="cb">nums = [<span class="nu">3</span>, <span class="nu">1</span>, <span class="nu">4</span>, <span class="nu">1</span>, <span class="nu">5</span>]
+nums.append(<span class="nu">9</span>)
+nums.sort()
+<span class="fn">print</span>(nums)   <span class="cm"># [1, 1, 3, 4, 5, 9]</span></div>
+<div class="qb"><b data-hi="b" class="b">संभावित परीक्षा प्रश्न</b><b data-en="b" class="b">Likely Exam Questions</b><span data-hi="i">List किसे कहते हैं? List methods उदाहरण सहित। append() और insert() में अंतर।</span><span data-en="i">What is a List? List methods with examples. Difference between append() and insert().</span></div>
+</div></section>
+
+<!-- UNIT 9 -->
+<section class="uc" id="u9"><div class="uh"><span class="ut"><span data-hi="i">Unit 09 · Data Structures</span><span data-en="i">Unit 09 · Data Structures</span></span><h2>Tuples, Dictionaries & Sets</h2></div>
+<div class="ub">
+<h3 data-hi="f" class="f">Tuple</h3><h3 data-en="f" class="f">Tuple</h3>
+<p data-hi="b" class="b"><strong>Tuple</strong> ordered, <strong>immutable</strong> collection है — एक बार create होने के बाद change नहीं हो सकती। Parentheses () में लिखी जाती है।</p>
+<p data-en="b" class="b">A <strong>Tuple</strong> is an ordered, <strong>immutable</strong> collection — cannot be changed after creation. Written in parentheses ().</p>
+<div class="cb">t = (<span class="nu">1</span>, <span class="nu">2</span>, <span class="nu">3</span>, <span class="st">"hello"</span>)
+<span class="fn">print</span>(t[<span class="nu">0</span>])   <span class="cm"># 1</span>
+<span class="fn">print</span>(<span class="fn">len</span>(t))  <span class="cm"># 4</span>
+<span class="cm"># t[0] = 5  → Error! (immutable)</span></div>
+<h3 data-hi="f" class="f">Dictionary</h3><h3 data-en="f" class="f">Dictionary</h3>
+<p data-hi="b" class="b"><strong>Dictionary</strong> key-value pairs में data store करता है। Curly braces {} में, colon से key और value separate। Keys unique होती हैं।</p>
+<p data-en="b" class="b">A <strong>Dictionary</strong> stores data in key-value pairs. Written in curly braces {} with a colon separating key and value. Keys must be unique.</p>
+<div class="cb">student = {
+    <span class="st">"name"</span>: <span class="st">"Suraj"</span>,
+    <span class="st">"age"</span>: <span class="nu">21</span>,
+    <span class="st">"course"</span>: <span class="st">"ITI-COPA"</span>
+}
+<span class="fn">print</span>(student[<span class="st">"name"</span>])     <span class="cm"># Suraj</span>
+<span class="fn">print</span>(student.get(<span class="st">"age"</span>)) <span class="cm"># 21</span>
+student[<span class="st">"city"</span>] = <span class="st">"Gonda"</span>  <span class="cm"># New key add</span>
+<span class="fn">print</span>(student.keys())      <span class="cm"># all keys</span>
+<span class="fn">print</span>(student.values())    <span class="cm"># all values</span></div>
+<h3 data-hi="f" class="f">Set</h3><h3 data-en="f" class="f">Set</h3>
+<p data-hi="b" class="b"><strong>Set</strong> unordered collection है जिसमें <strong>duplicate values allowed नहीं</strong> हैं। Curly braces {} में लिखा जाता है।</p>
+<p data-en="b" class="b">A <strong>Set</strong> is an unordered collection in which <strong>duplicate values are not allowed</strong>. Written in curly braces {}.</p>
+<div class="cb">s = {<span class="nu">1</span>, <span class="nu">2</span>, <span class="nu">3</span>, <span class="nu">2</span>, <span class="nu">1</span>}
+<span class="fn">print</span>(s)   <span class="cm"># {1, 2, 3}  (duplicates removed)</span></div>
+<h3 data-hi="f" class="f">List vs Tuple vs Dict vs Set</h3><h3 data-en="f" class="f">List vs Tuple vs Dict vs Set</h3>
+<table><tr><th>Type</th><th data-hi="i">Ordered</th><th data-en="i">Ordered</th><th data-hi="i">Mutable</th><th data-en="i">Mutable</th><th data-hi="i">Duplicates</th><th data-en="i">Duplicates</th></tr>
+<tr><td>List []</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td></tr>
+<tr><td>Tuple ()</td><td>✅</td><td>✅</td><td>❌</td><td>❌</td><td>✅</td><td>✅</td></tr>
+<tr><td>Dict {}</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td><span data-hi="i">Keys ❌</span><span data-en="i">Keys ❌</span></td><td><span data-hi="i">Keys ❌</span><span data-en="i">Keys ❌</span></td></tr>
+<tr><td>Set {}</td><td>❌</td><td>❌</td><td>✅</td><td>✅</td><td>❌</td><td>❌</td></tr></table>
+<div class="qb"><b data-hi="b" class="b">संभावित परीक्षा प्रश्न</b><b data-en="b" class="b">Likely Exam Questions</b><span data-hi="i">List और Tuple में अंतर। Dictionary किसे कहते हैं? Set की विशेषताएं। List vs Tuple vs Dict vs Set comparison।</span><span data-en="i">Difference between List and Tuple. What is a Dictionary? Features of Set. List vs Tuple vs Dict vs Set comparison.</span></div>
+</div></section>
+
+<!-- UNIT 10 -->
+<section class="uc" id="u10"><div class="uh"><span class="ut"><span data-hi="i">Unit 10 · Functions & Advanced</span><span data-en="i">Unit 10 · Functions & Advanced</span></span><h2>Functions</h2></div>
+<div class="ub">
+<h3 data-hi="f" class="f">Function क्या है?</h3><h3 data-en="f" class="f">What is a Function?</h3>
+<p data-hi="b" class="b"><strong>Function</strong> code का reusable block है — <code>def</code> keyword से define होती है।</p>
+<p data-en="b" class="b">A <strong>Function</strong> is a reusable block of code — defined using the <code>def</code> keyword.</p>
+<div class="cb"><span class="kw">def</span> <span class="fn">greet</span>(name):
+    <span class="fn">print</span>(<span class="st">f"Hello, {name}!"</span>)
+
+<span class="fn">greet</span>(<span class="st">"Suraj"</span>)   <span class="cm"># Hello, Suraj!</span>
+
+<span class="kw">def</span> <span class="fn">add</span>(a, b):
+    <span class="kw">return</span> a + b
+
+result = <span class="fn">add</span>(<span class="nu">5</span>, <span class="nu">3</span>)
+<span class="fn">print</span>(result)   <span class="cm"># 8</span></div>
+<h3 data-hi="f" class="f">Default Arguments</h3><h3 data-en="f" class="f">Default Arguments</h3>
+<div class="cb"><span class="kw">def</span> <span class="fn">greet</span>(name, msg=<span class="st">"Hello"</span>):  <span class="cm"># default value</span>
+    <span class="fn">print</span>(msg, name)
+
+<span class="fn">greet</span>(<span class="st">"Suraj"</span>)           <span class="cm"># Hello Suraj</span>
+<span class="fn">greet</span>(<span class="st">"Suraj"</span>, <span class="st">"Hi"</span>)    <span class="cm"># Hi Suraj</span></div>
+<h3 data-hi="f" class="f">Lambda Function</h3><h3 data-en="f" class="f">Lambda Function</h3>
+<p data-hi="b" class="b"><strong>Lambda</strong> anonymous (nameless) function है — single line में लिखी जाती है।</p>
+<p data-en="b" class="b">A <strong>Lambda</strong> is an anonymous (nameless) function — written in a single line.</p>
+<div class="cb">square = <span class="kw">lambda</span> x: x * x
+<span class="fn">print</span>(<span class="fn">square</span>(<span class="nu">5</span>))  <span class="cm"># 25</span>
+
+add = <span class="kw">lambda</span> a, b: a + b
+<span class="fn">print</span>(<span class="fn">add</span>(<span class="nu">3</span>, <span class="nu">4</span>))   <span class="cm"># 7</span></div>
+<h3 data-hi="f" class="f">*args & **kwargs</h3><h3 data-en="f" class="f">*args & **kwargs</h3>
+<div class="cb"><span class="kw">def</span> <span class="fn">total</span>(*args):    <span class="cm"># multiple positional args</span>
+    <span class="kw">return</span> <span class="fn">sum</span>(args)
+<span class="fn">print</span>(<span class="fn">total</span>(<span class="nu">1</span>,<span class="nu">2</span>,<span class="nu">3</span>,<span class="nu">4</span>))  <span class="cm"># 10</span></div>
+<div class="qb"><b data-hi="b" class="b">संभावित परीक्षा प्रश्न</b><b data-en="b" class="b">Likely Exam Questions</b><span data-hi="i">Function किसे कहते हैं? def और return keywords समझाइए। Lambda function क्या है?</span><span data-en="i">What is a Function? Explain def and return keywords. What is a Lambda function?</span></div>
+</div></section>
+
+<!-- UNIT 11 -->
+<section class="uc" id="u11"><div class="uh"><span class="ut"><span data-hi="i">Unit 11 · Functions & Advanced</span><span data-en="i">Unit 11 · Functions & Advanced</span></span><h2>File Handling</h2></div>
+<div class="ub">
+<h3 data-hi="f" class="f">File Handling क्यों?</h3><h3 data-en="f" class="f">Why File Handling?</h3>
+<p data-hi="b" class="b">File Handling से Python program data को files में store (write) करके दोबारा read कर सकता है — permanent data storage के लिए।</p>
+<p data-en="b" class="b">File Handling allows a Python program to store (write) data in files and read it again — for permanent data storage.</p>
+<h3 data-hi="f" class="f">File Open Modes</h3><h3 data-en="f" class="f">File Open Modes</h3>
+<table><tr><th>Mode</th><th data-hi="i">मतलब</th><th data-en="i">Meaning</th></tr>
+<tr><td>'r'</td><td><span data-hi="i">Read — file पढ़ना (default), file exist करनी चाहिए</span><span data-en="i">Read — reading a file (default), file must exist</span></td></tr>
+<tr><td>'w'</td><td><span data-hi="i">Write — नई file बनाना या existing को overwrite</span><span data-en="i">Write — creates new file or overwrites existing</span></td></tr>
+<tr><td>'a'</td><td><span data-hi="i">Append — file के end में content add करना</span><span data-en="i">Append — adds content at the end of the file</span></td></tr>
+<tr><td>'r+'</td><td><span data-hi="i">Read + Write दोनों</span><span data-en="i">Both Read + Write</span></td></tr>
+<tr><td>'rb' / 'wb'</td><td><span data-hi="i">Binary mode — images, PDFs जैसी files के लिए</span><span data-en="i">Binary mode — for files like images, PDFs</span></td></tr></table>
+<h3 data-hi="f" class="f">Reading & Writing Files</h3><h3 data-en="f" class="f">Reading & Writing Files</h3>
+<div class="cb"><span class="cm"># Writing to a file</span>
+<span class="kw">with</span> <span class="fn">open</span>(<span class="st">"test.txt"</span>, <span class="st">"w"</span>) <span class="kw">as</span> f:
+    f.write(<span class="st">"Hello, Python!\n"</span>)
+    f.write(<span class="st">"File Handling is easy."</span>)
+
+<span class="cm"># Reading a file</span>
+<span class="kw">with</span> <span class="fn">open</span>(<span class="st">"test.txt"</span>, <span class="st">"r"</span>) <span class="kw">as</span> f:
+    content = f.read()
+    <span class="fn">print</span>(content)
+
+<span class="cm"># Reading line by line</span>
+<span class="kw">with</span> <span class="fn">open</span>(<span class="st">"test.txt"</span>, <span class="st">"r"</span>) <span class="kw">as</span> f:
+    <span class="kw">for</span> line <span class="kw">in</span> f:
+        <span class="fn">print</span>(line.strip())</div>
+<h3 data-hi="f" class="f">File Methods</h3><h3 data-en="f" class="f">File Methods</h3>
+<table><tr><th>Method</th><th data-hi="i">काम</th><th data-en="i">Purpose</th></tr>
+<tr><td>.read()</td><td><span data-hi="i">पूरी file एक string में read</span><span data-en="i">Read entire file as a string</span></td></tr>
+<tr><td>.readline()</td><td><span data-hi="i">एक line read करना</span><span data-en="i">Read one line</span></td></tr>
+<tr><td>.readlines()</td><td><span data-hi="i">सभी lines की list return</span><span data-en="i">Return a list of all lines</span></td></tr>
+<tr><td>.write(str)</td><td><span data-hi="i">String file में write करना</span><span data-en="i">Write a string to the file</span></td></tr>
+<tr><td>.close()</td><td><span data-hi="i">File close करना (with के साथ auto close)</span><span data-en="i">Close the file (auto-closed with 'with')</span></td></tr></table>
+<div class="nb"><span data-hi="i"><b>याद रखें:</b> <code>with</code> statement use करना best practice है — file automatically close हो जाती है, manually close करने की ज़रूरत नहीं।</span><span data-en="i"><b>Remember:</b> using the <code>with</code> statement is best practice — the file closes automatically, no need to close it manually.</span></div>
+<div class="qb"><b data-hi="b" class="b">संभावित परीक्षा प्रश्न</b><b data-en="b" class="b">Likely Exam Questions</b><span data-hi="i">File Handling क्यों ज़रूरी है? File modes (r, w, a) समझाइए। File read और write का उदाहरण लिखिए।</span><span data-en="i">Why is File Handling important? Explain file modes (r, w, a). Write an example of reading and writing a file.</span></div>
+</div></section>
+
+<!-- UNIT 12 -->
+<section class="uc" id="u12"><div class="uh"><span class="ut"><span data-hi="i">Unit 12 · Functions & Advanced</span><span data-en="i">Unit 12 · Functions & Advanced</span></span><h2>Exception Handling & Modules</h2></div>
+<div class="ub">
+<h3 data-hi="f" class="f">Exception क्या है?</h3><h3 data-en="f" class="f">What is an Exception?</h3>
+<p data-hi="b" class="b"><strong>Exception</strong> program execution के दौरान होने वाली error है जो program को crash कर देती है। <strong>Exception Handling</strong> से program gracefully error handle करता है।</p>
+<p data-en="b" class="b">An <strong>Exception</strong> is an error during program execution that causes the program to crash. <strong>Exception Handling</strong> allows the program to handle errors gracefully.</p>
+<div class="cb"><span class="kw">try</span>:
+    x = <span class="fn">int</span>(<span class="fn">input</span>(<span class="st">"Enter number: "</span>))
+    result = <span class="nu">10</span> / x
+    <span class="fn">print</span>(result)
+<span class="kw">except</span> ZeroDivisionError:
+    <span class="fn">print</span>(<span class="st">"Cannot divide by zero!"</span>)
+<span class="kw">except</span> ValueError:
+    <span class="fn">print</span>(<span class="st">"Please enter a valid number!"</span>)
+<span class="kw">finally</span>:
+    <span class="fn">print</span>(<span class="st">"This always runs."</span>)</div>
+<h3 data-hi="f" class="f">Common Exceptions</h3><h3 data-en="f" class="f">Common Exceptions</h3>
+<table><tr><th>Exception</th><th data-hi="i">कब आता है</th><th data-en="i">When it occurs</th></tr>
+<tr><td>ZeroDivisionError</td><td><span data-hi="i">Zero से divide करने पर</span><span data-en="i">When dividing by zero</span></td></tr>
+<tr><td>ValueError</td><td><span data-hi="i">Wrong type की value — int("abc")</span><span data-en="i">Wrong type of value — int("abc")</span></td></tr>
+<tr><td>NameError</td><td><span data-hi="i">Undefined variable use करने पर</span><span data-en="i">When using an undefined variable</span></td></tr>
+<tr><td>IndexError</td><td><span data-hi="i">List की invalid index access</span><span data-en="i">Accessing an invalid list index</span></td></tr>
+<tr><td>KeyError</td><td><span data-hi="i">Dictionary में non-existent key access</span><span data-en="i">Accessing a non-existent key in a dictionary</span></td></tr>
+<tr><td>FileNotFoundError</td><td><span data-hi="i">Non-existent file open करने पर</span><span data-en="i">Opening a non-existent file</span></td></tr>
+<tr><td>TypeError</td><td><span data-hi="i">Wrong type का operation — "5" + 5</span><span data-en="i">Wrong type operation — "5" + 5</span></td></tr></table>
+<h3 data-hi="f" class="f">Modules</h3><h3 data-en="f" class="f">Modules</h3>
+<p data-hi="b" class="b"><strong>Module</strong> Python code का एक reusable file है। <code>import</code> keyword से module को use किया जाता है।</p>
+<p data-en="b" class="b">A <strong>Module</strong> is a reusable Python code file. The <code>import</code> keyword is used to use a module.</p>
+<div class="cb"><span class="kw">import</span> math
+<span class="fn">print</span>(math.sqrt(<span class="nu">25</span>))   <span class="cm"># 5.0</span>
+<span class="fn">print</span>(math.pi)          <span class="cm"># 3.14159...</span>
+
+<span class="kw">import</span> random
+<span class="fn">print</span>(random.randint(<span class="nu">1</span>, <span class="nu">10</span>))  <span class="cm"># Random number 1-10</span>
+
+<span class="kw">from</span> datetime <span class="kw">import</span> date
+<span class="fn">print</span>(date.today())     <span class="cm"># Today's date</span></div>
+<h3 data-hi="f" class="f">Important Built-in Modules</h3><h3 data-en="f" class="f">Important Built-in Modules</h3>
+<table><tr><th>Module</th><th data-hi="i">काम</th><th data-en="i">Purpose</th></tr>
+<tr><td>math</td><td><span data-hi="i">Mathematical functions — sqrt, floor, ceil, pi</span><span data-en="i">Mathematical functions — sqrt, floor, ceil, pi</span></td></tr>
+<tr><td>random</td><td><span data-hi="i">Random numbers generate करना</span><span data-en="i">Generating random numbers</span></td></tr>
+<tr><td>datetime</td><td><span data-hi="i">Date और time work</span><span data-en="i">Working with date and time</span></td></tr>
+<tr><td>os</td><td><span data-hi="i">Operating system functions — files, directories</span><span data-en="i">OS functions — files, directories</span></td></tr>
+<tr><td>sys</td><td><span data-hi="i">Python interpreter settings</span><span data-en="i">Python interpreter settings</span></td></tr></table>
+<div class="qb"><b data-hi="b" class="b">संभावित परीक्षा प्रश्न</b><b data-en="b" class="b">Likely Exam Questions</b><span data-hi="i">Exception Handling क्यों ज़रूरी है? try-except-finally उदाहरण। Common exceptions लिखिए। Module किसे कहते हैं?</span><span data-en="i">Why is Exception Handling important? try-except-finally with example. Write common exceptions. What is a Module?</span></div>
+</div></section>
+
+<!-- UNIT 13 -->
+<section class="uc" id="u13"><div class="uh"><span class="ut"><span data-hi="i">Unit 13 · रिवीज़न</span><span data-en="i">Unit 13 · Revision</span></span><h2><span data-hi="i">Important Q&A — फटाफट रिवीज़न</span><span data-en="i">Important Q&A — Quick Revision</span></h2></div>
+<div class="ub">
+<h3 data-hi="f" class="f">1-line Definitions</h3><h3 data-en="f" class="f">1-line Definitions</h3>
+<ul data-hi="b" class="b">
+<li><strong>Python</strong> — High-level, interpreted, dynamically typed programming language</li>
+<li><strong>Indentation</strong> — Python में code blocks define करने का तरीका (spaces/tabs)</li>
+<li><strong>List</strong> — Ordered, mutable, duplicates allowed collection — [ ]</li>
+<li><strong>Tuple</strong> — Ordered, immutable collection — ( )</li>
+<li><strong>Dictionary</strong> — Key-value pairs में data — { }</li>
+<li><strong>Set</strong> — Unordered, no duplicates collection — { }</li>
+<li><strong>Function</strong> — Reusable code block जो def से define होती है</li>
+<li><strong>Lambda</strong> — Anonymous single-line function</li>
+<li><strong>Exception</strong> — Runtime error जो program crash कर देती है</li>
+<li><strong>Module</strong> — Reusable Python code file जिसे import से use करते हैं</li>
+</ul>
+<ul data-en="b" class="b">
+<li><strong>Python</strong> — High-level, interpreted, dynamically typed programming language</li>
+<li><strong>Indentation</strong> — The way code blocks are defined in Python (spaces/tabs)</li>
+<li><strong>List</strong> — Ordered, mutable, allows duplicates — [ ]</li>
+<li><strong>Tuple</strong> — Ordered, immutable collection — ( )</li>
+<li><strong>Dictionary</strong> — Data in key-value pairs — { }</li>
+<li><strong>Set</strong> — Unordered, no duplicates — { }</li>
+<li><strong>Function</strong> — Reusable code block defined with def</li>
+<li><strong>Lambda</strong> — Anonymous single-line function</li>
+<li><strong>Exception</strong> — Runtime error that crashes the program</li>
+<li><strong>Module</strong> — Reusable Python code file used with import</li>
+</ul>
+<h3 data-hi="f" class="f">Quick Syntax Reference</h3><h3 data-en="f" class="f">Quick Syntax Reference</h3>
+<div class="cb"><span class="cm"># Variables</span>
+x = <span class="nu">10</span>; name = <span class="st">"Suraj"</span>
+
+<span class="cm"># if-elif-else</span>
+<span class="kw">if</span> x > <span class="nu">5</span>: <span class="fn">print</span>(<span class="st">"Big"</span>)
+<span class="kw">elif</span> x == <span class="nu">5</span>: <span class="fn">print</span>(<span class="st">"Equal"</span>)
+<span class="kw">else</span>: <span class="fn">print</span>(<span class="st">"Small"</span>)
+
+<span class="cm"># for loop</span>
+<span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="nu">5</span>): <span class="fn">print</span>(i)
+
+<span class="cm"># function</span>
+<span class="kw">def</span> <span class="fn">add</span>(a,b): <span class="kw">return</span> a+b
+
+<span class="cm"># list</span>
+lst = [<span class="nu">1</span>,<span class="nu">2</span>,<span class="nu">3</span>]; lst.append(<span class="nu">4</span>)
+
+<span class="cm"># dict</span>
+d = {<span class="st">"name"</span>:<span class="st">"Suraj"</span>}; d[<span class="st">"age"</span>]=<span class="nu">21</span>
+
+<span class="cm"># file</span>
+<span class="kw">with</span> <span class="fn">open</span>(<span class="st">"f.txt"</span>,<span class="st">"w"</span>) <span class="kw">as</span> f: f.write(<span class="st">"Hi"</span>)
+
+<span class="cm"># exception</span>
+<span class="kw">try</span>: x=<span class="nu">10</span>/<span class="nu">0</span>
+<span class="kw">except</span> ZeroDivisionError: <span class="fn">print</span>(<span class="st">"Error!"</span>)</div>
+<h3 data-hi="f" class="f">Full Forms</h3><h3 data-en="f" class="f">Full Forms</h3>
+<table><tr><th>Short</th><th>Full Form</th></tr>
+<tr><td>IDLE</td><td>Integrated Development and Learning Environment</td></tr>
+<tr><td>OOP</td><td>Object Oriented Programming</td></tr>
+<tr><td>PEP</td><td>Python Enhancement Proposal</td></tr>
+<tr><td>pip</td><td>Package Installer for Python</td></tr></table>
+<h3 data-hi="f" class="f">Frequently Asked Long Questions</h3><h3 data-en="f" class="f">Frequently Asked Long Questions</h3>
+<ol data-hi="b" class="b">
+<li>Python किसे कहते हैं? इसकी features और उपयोग।</li>
+<li>Python के Data Types उदाहरण सहित।</li>
+<li>if-elif-else statement उदाहरण सहित।</li>
+<li>for और while loop में अंतर, उदाहरण सहित।</li>
+<li>List किसे कहते हैं? इसके methods उदाहरण सहित।</li>
+<li>List, Tuple, Dictionary और Set में अंतर।</li>
+<li>Function किसे कहते हैं? def, return, lambda उदाहरण।</li>
+<li>File Handling — file modes, read/write उदाहरण।</li>
+<li>Exception Handling — try-except-finally उदाहरण।</li>
+</ol>
+<ol data-en="b" class="b">
+<li>What is Python? Its features and uses.</li>
+<li>Python Data Types with examples.</li>
+<li>if-elif-else statement with example.</li>
+<li>Difference between for and while loop with examples.</li>
+<li>What is a List? Its methods with examples.</li>
+<li>Difference between List, Tuple, Dictionary and Set.</li>
+<li>What is a Function? def, return, lambda with examples.</li>
+<li>File Handling — file modes, read/write example.</li>
+<li>Exception Handling — try-except-finally with example.</li>
+</ol>
+<div class="ib"><span data-hi="i"><b>आखिरी टिप:</b> Python के code examples को IDLE में type करके ज़रूर चलाएं — practice से concepts crystal clear हो जाते हैं।</span><span data-en="i"><b>Final Tip:</b> Definitely type and run Python code examples in IDLE — practice makes the concepts crystal clear.</span></div>
+</div></section>
+
+  </main>
+</div>
+<button id="tt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<footer>Made with 🐍 for ITI-COPA students &nbsp;·&nbsp; by <a href="https://surajtiwarrii.github.io/Portfolio/" target="_blank">Suraj Tiwari</a></footer>
+<script>
+function sL(l){document.documentElement.lang=l;document.getElementById('lt').dataset.lang=l;document.getElementById('bh').classList.toggle('active',l==='hi');document.getElementById('be').classList.toggle('active',l==='en');localStorage.setItem('pyL',l);}
+document.addEventListener('DOMContentLoaded',()=>{sL(localStorage.getItem('pyL')||'hi');});
+function tS(e){if(e)e.stopPropagation();document.getElementById('sb').classList.toggle('open');document.getElementById('ov').classList.toggle('open');}
+window.addEventListener('scroll',()=>{document.getElementById('tt').style.display=window.scrollY>400?'flex':'none';});
+function lS(){const q=document.getElementById('si').value.trim().toLowerCase();document.querySelectorAll('.uc').forEach(c=>c.classList.toggle('hide',q&&!c.innerText.toLowerCase().includes(q)));}
+const nls=document.querySelectorAll('.nl');const secs=document.querySelectorAll('.uc');
+window.addEventListener('scroll',()=>{let cur='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-100)cur=s.id;});nls.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+cur));});
+document.querySelectorAll('.nl').forEach(l=>l.addEventListener('click',()=>{if(window.innerWidth<=880)tS();}));
+</script>
+</body>
+</html>

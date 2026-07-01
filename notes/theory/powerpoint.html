@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PowerPoint Presentations — Hindi/English | ITI COPA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Hind:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff5ee;--bs:#fed7aa;--p:rgba(255,255,255,0.45);--ps:rgba(255,255,255,0.82);--pg:rgba(255,255,255,0.35);--d:#c2410c;--m:#f97316;--s:#fed7aa;--l:#fff5ee;--ms:rgba(249,115,22,0.18);--t:#ea580c;--ts:rgba(234,88,12,0.10);--ink:#3a1a08;--is:#8a5a38;--ln:rgba(194,65,12,0.22);--r:18px;}
+*{box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{margin:0;font-family:'Hind',sans-serif;background:radial-gradient(1200px 600px at 10% -10%,var(--ms),transparent 60%),radial-gradient(1000px 700px at 110% 10%,var(--ts),transparent 55%),var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;}
+h1,h2,h3{font-family:'Fraunces',serif;}
+.tb{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:rgba(255,245,238,0.6);backdrop-filter:blur(12px);border-bottom:1px solid var(--ln);gap:10px;}
+.brand{font-size:1rem;font-weight:700;color:var(--d);display:flex;align-items:center;gap:8px;font-family:'Fraunces',serif;}
+.brand .dot{width:9px;height:9px;border-radius:50%;background:linear-gradient(135deg,var(--m),var(--t));}
+.ta{display:flex;gap:8px;align-items:center;}
+.mb{background:rgba(249,115,22,0.18);color:var(--l);border:1px solid rgba(249,115,22,0.55);padding:9px 16px;border-radius:30px;font-family:'Hind';font-weight:700;font-size:0.9rem;cursor:pointer;background-image:linear-gradient(135deg,rgba(249,115,22,0.6),rgba(194,65,12,0.55));box-shadow:0 6px 16px rgba(194,65,12,0.2);}
+.lt{display:flex;align-items:center;background:var(--pg);border:1px solid var(--ln);backdrop-filter:blur(8px);border-radius:30px;padding:3px;position:relative;cursor:pointer;}
+.lt button{border:none;background:transparent;padding:7px 13px;border-radius:24px;font-family:'Hind';font-weight:700;font-size:0.8rem;cursor:pointer;color:var(--is);position:relative;z-index:2;transition:color 0.25s;}
+.lt button.active{color:var(--l);}
+.lp{position:absolute;top:3px;bottom:3px;left:3px;width:calc(50% - 3px);background:linear-gradient(135deg,var(--m),var(--d));border-radius:24px;transition:transform 0.25s ease;z-index:1;}
+.lt[data-lang="en"] .lp{transform:translateX(100%);}
+.hero{padding:60px 20px 36px;text-align:center;}
+.ey{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono';font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--d);background:var(--pg);backdrop-filter:blur(8px);border:1px solid var(--s);padding:6px 14px;border-radius:30px;margin-bottom:18px;}
+.hero h1{font-size:clamp(1.7rem,5.5vw,2.8rem);line-height:1.15;margin:0 0 14px;color:var(--ink);font-weight:700;}
+.grad{background:linear-gradient(100deg,var(--d),var(--m) 50%,var(--t));-webkit-background-clip:text;background-clip:text;color:transparent;}
+.hero p{max-width:600px;margin:0 auto 24px;color:var(--is);font-size:1rem;line-height:1.65;}
+.hs{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+.sc{background:var(--p);border:1px solid var(--ln);border-radius:14px;backdrop-filter:blur(8px);padding:12px 18px;min-width:108px;}
+.sc b{display:block;font-family:'Fraunces',serif;font-size:1.3rem;color:var(--d);}
+.sc span{font-size:0.74rem;color:var(--is);}
+.tw{max-width:900px;margin:22px auto 0;padding:0 20px;}
+.sw{position:relative;}
+#si{width:100%;padding:13px 16px 13px 42px;border-radius:30px;border:1px solid var(--ln);background:var(--p);backdrop-filter:blur(8px);font-family:'Hind';font-size:0.95rem;color:var(--ink);outline:none;}
+#si:focus{border-color:var(--m);}
+.sw::before{content:"⌕";position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--d);font-size:1.1rem;}
+.layout{max-width:1180px;margin:14px auto 80px;padding:0 20px;display:grid;grid-template-columns:255px 1fr;gap:26px;}
+.sidebar{background:var(--p);border:1px solid var(--ln);border-radius:var(--r);backdrop-filter:blur(10px);padding:18px 14px;height:fit-content;position:sticky;top:78px;max-height:calc(100vh - 100px);overflow-y:auto;}
+.sidebar h4{font-family:'JetBrains Mono';font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--is);margin:14px 6px 8px;}
+.sidebar h4:first-child{margin-top:2px;}
+.nl{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:10px;color:var(--ink);text-decoration:none;font-size:0.88rem;font-weight:500;transition:background 0.15s;}
+.nl:hover{background:var(--ms);}
+.nl.active{background:linear-gradient(120deg,var(--ms),var(--ts));color:var(--d);font-weight:700;}
+.nl .nm{font-family:'JetBrains Mono';font-size:0.68rem;color:var(--t);min-width:20px;}
+.cs{display:none;}
+@media(max-width:880px){.layout{display:block;}.sidebar{position:fixed !important;inset:0 18% 0 0;z-index:60;transform:translateX(-105%);transition:transform 0.3s ease;overflow-y:auto;top:0;height:100vh;max-height:100vh;}.sidebar.open{transform:translateX(0);}.ov{display:none;position:fixed;inset:0;background:rgba(40,10,2,0.4);z-index:55;}.ov.open{display:block;}.cs{display:block;margin-left:auto;background:none;border:1px solid var(--ln);border-radius:50%;width:34px;height:34px;font-size:1rem;color:var(--ink);cursor:pointer;}.brand span.bt{display:none;}.mb span.mt{display:none;}}
+.content{min-width:0;}
+.uc{background:var(--p);border:1px solid var(--ln);border-radius:var(--r);margin-bottom:22px;overflow:hidden;scroll-margin-top:80px;box-shadow:0 6px 24px rgba(194,65,12,0.08);backdrop-filter:blur(10px);}
+.uh{padding:22px 24px 18px;background:linear-gradient(120deg,rgba(249,115,22,0.18),rgba(194,65,12,0.10));border-bottom:1px solid var(--ln);}
+.ut{font-family:'JetBrains Mono';font-size:0.7rem;color:var(--t);letter-spacing:0.08em;text-transform:uppercase;display:block;margin-bottom:6px;}
+.uh h2{margin:0;font-size:1.4rem;color:var(--d);}
+.ub{padding:20px 24px 26px;}
+.ub h3{font-size:1.05rem;color:var(--ink);margin:22px 0 8px;display:flex;align-items:center;gap:8px;}
+.ub h3::before{content:"";width:5px;height:18px;border-radius:3px;background:linear-gradient(180deg,var(--m),var(--t));}
+.ub h3:first-child{margin-top:2px;}
+.ub p,.ub ul,.ub ol{line-height:1.75;color:var(--ink);margin:6px 0 12px;font-size:0.97rem;}
+.ub ul,.ub ol{padding-left:22px;}
+.ub li{margin-bottom:6px;font-size:0.95rem;}
+.ub strong{color:var(--d);}
+.nb{background:var(--ms);border-left:3px solid var(--m);border-radius:10px;padding:12px 16px;margin:14px 0;font-size:0.9rem;}
+.nb b{color:var(--d);}
+.ib{background:var(--ts);border-left:3px solid var(--t);border-radius:10px;padding:12px 16px;margin:14px 0;font-size:0.9rem;}
+.ib b{color:var(--t);}
+table{width:100%;border-collapse:collapse;margin:14px 0 18px;font-size:0.88rem;border-radius:10px;overflow:hidden;}
+th{background:linear-gradient(120deg,var(--m),var(--d));color:var(--l);text-align:left;padding:10px 12px;font-weight:600;}
+td{padding:9px 12px;border-bottom:1px solid var(--ln);background:var(--ps);}
+tr:last-child td{border-bottom:none;}
+tr:nth-child(even) td{background:var(--bs);}
+code{font-family:'JetBrains Mono';background:var(--bs);padding:2px 6px;border-radius:5px;font-size:0.85em;color:var(--d);}
+.qb{background:var(--bs);border:1px dashed var(--s);border-radius:12px;padding:14px 16px;margin:16px 0;}
+.qb b{color:var(--t);display:block;margin-bottom:6px;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em;}
+#tt{position:fixed;bottom:22px;right:22px;z-index:40;width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--m),var(--d));color:var(--l);border:none;font-size:1.2rem;cursor:pointer;box-shadow:0 8px 20px rgba(194,65,12,0.3);display:none;align-items:center;justify-content:center;}
+footer{text-align:center;padding:30px 20px 50px;color:var(--is);font-size:0.85rem;}
+footer a{color:var(--d);text-decoration:none;font-weight:600;}
+.hide{display:none !important;}
+[data-hi],[data-en]{display:none;}
+html[lang="hi"] [data-hi].i,html[lang="hi"] span[data-hi]{display:inline;}
+html[lang="hi"] [data-hi].b{display:block;}
+html[lang="hi"] [data-hi].f{display:flex;}
+html[lang="hi"] th[data-hi],html[lang="hi"] td[data-hi]{display:table-cell;}
+html[lang="en"] [data-en].i,html[lang="en"] span[data-en]{display:inline;}
+html[lang="en"] [data-en].b{display:block;}
+html[lang="en"] [data-en].f{display:flex;}
+html[lang="en"] th[data-en],html[lang="en"] td[data-en]{display:table-cell;}
+</style>
+</head>
+<body>
+<div id="__backNotesBtn" style="position:fixed;top:14px;left:14px;z-index:9999;">
+<a href="../../notes-theory.html" style="display:flex;align-items:center;gap:7px;text-decoration:none;
+background:rgba(255,255,255,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+border:1px solid rgba(0,0,0,.08);color:#2A2620;font-family:'Poppins',Arial,sans-serif;
+font-size:.82rem;font-weight:600;padding:9px 16px 9px 12px;border-radius:30px;
+box-shadow:0 6px 18px rgba(0,0,0,.14);transition:transform .25s,box-shadow .25s;">
+<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+<span>Notes</span></a></div>
+<style>
+#__backNotesBtn a:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,0,0,.2)}
+@media(max-width:600px){#__backNotesBtn{top:10px;left:10px}#__backNotesBtn a{padding:8px 14px 8px 10px;font-size:.78rem}}
+</style>
+
+<div class="tb">
+  <div class="brand"><span class="dot"></span><span class="bt">PowerPoint Presentations</span></div>
+  <div class="ta">
+    <div class="lt" id="lt" data-lang="hi" onclick="sL(this.dataset.lang==='hi'?'en':'hi')"><div class="lp"></div><button type="button" id="bh">हिं</button><button type="button" id="be">EN</button></div>
+    <button class="mb" onclick="tS(event)">🎯 <span class="mt" data-hi="i">विषय सूची</span><span class="mt" data-en="i">Topics</span></button>
+  </div>
+</div>
+<div class="hero">
+  <span class="ey">● ITI · COPA · UP Board Pattern</span>
+  <h1><span data-hi="b" class="b">PowerPoint Presentations<br>(MS PowerPoint)<br><span class="grad">सम्पूर्ण नोट्स</span></span><span data-en="b" class="b">PowerPoint Presentations<br>(MS PowerPoint)<br><span class="grad">Complete Notes</span></span></h1>
+  <p data-hi="b" class="b">Interface से लेकर Animations, Transitions, Slide Show, और Printing तक — हिंदी और इंग्लिश, परीक्षा के हिसाब से।</p>
+  <p data-en="b" class="b">From Interface to Animations, Transitions, Slide Show, and Printing — Hindi & English, exam-ready.</p>
+  <div class="hs"><div class="sc"><b>10</b><span>Units</span></div><div class="sc"><b>60+</b><span>Topics</span></div><div class="sc"><b>2</b><span data-hi="i">भाषाएं</span><span data-en="i">Languages</span></div></div>
+</div>
+<div class="tw"><div class="sw"><input type="text" id="si" placeholder="खोजें... Slide, Animation, Transition..." oninput="lS()"></div></div>
+<div class="ov" id="ov" onclick="tS(event)"></div>
+<div class="layout">
+  <aside class="sidebar" id="sb">
+    <button class="cs" onclick="tS(event)">✕</button>
+    <h4 data-hi="b" class="b">PPT बेसिक्स</h4><h4 data-en="b" class="b">PPT Basics</h4>
+    <a class="nl" href="#u1"><span class="nm">01</span><span data-hi="i">PPT परिचय & Interface</span><span data-en="i">PPT Intro & Interface</span></a>
+    <a class="nl" href="#u2"><span class="nm">02</span><span data-hi="i">Presentation बनाना & File Formats</span><span data-en="i">Creating Presentations & Formats</span></a>
+    <a class="nl" href="#u3"><span class="nm">03</span><span data-hi="i">Slide Layouts & Themes/Design</span><span data-en="i">Slide Layouts & Themes/Design</span></a>
+    <h4 data-hi="b" class="b">Content Insert</h4><h4 data-en="b" class="b">Content Insert</h4>
+    <a class="nl" href="#u4"><span class="nm">04</span><span data-hi="i">Text, Bullet Points & WordArt</span><span data-en="i">Text, Bullet Points & WordArt</span></a>
+    <a class="nl" href="#u5"><span class="nm">05</span><span data-hi="i">Images, Shapes & SmartArt</span><span data-en="i">Images, Shapes & SmartArt</span></a>
+    <a class="nl" href="#u6"><span class="nm">06</span><span data-hi="i">Charts, Tables & Media</span><span data-en="i">Charts, Tables & Media</span></a>
+    <h4 data-hi="b" class="b">Animations & Show</h4><h4 data-en="b" class="b">Animations & Show</h4>
+    <a class="nl" href="#u7"><span class="nm">07</span><span data-hi="i">Animations</span><span data-en="i">Animations</span></a>
+    <a class="nl" href="#u8"><span class="nm">08</span><span data-hi="i">Transitions & Slide Show</span><span data-en="i">Transitions & Slide Show</span></a>
+    <a class="nl" href="#u9"><span class="nm">09</span><span data-hi="i">Slide Master, Printing & Handouts</span><span data-en="i">Slide Master, Printing & Handouts</span></a>
+    <h4 data-hi="b" class="b">रिवीज़न</h4><h4 data-en="b" class="b">Revision</h4>
+    <a class="nl" href="#u10"><span class="nm">10</span><span data-hi="i">Important Q&A</span><span data-en="i">Important Q&A</span></a>
+  </aside>
+  <main class="content" id="cn">
+
+<section class="uc" id="u1"><div class="uh"><span class="ut"><span data-hi="i">Unit 01 · PPT बेसिक्स</span><span data-en="i">Unit 01 · PPT Basics</span></span><h2><span data-hi="i">MS PowerPoint परिचय & Interface</span><span data-en="i">MS PowerPoint Introduction & Interface</span></h2></div>
+<div class="ub">
+<p data-hi="b" class="b"><strong>Microsoft PowerPoint</strong> Microsoft Office का Presentation software है जो visual slides-based presentations बनाने के लिए use होता है — meetings, lectures, seminars, और demos के लिए।</p>
+<p data-en="b" class="b"><strong>Microsoft PowerPoint</strong> is the Presentation software in Microsoft Office, used to create visual slides-based presentations — for meetings, lectures, seminars, and demos.</p>
+<h3 data-hi="f" class="f">PowerPoint Interface Parts</h3><h3 data-en="f" class="f">PowerPoint Interface Parts</h3>
+<table><tr><th>Part</th><th data-hi="i">काम</th><th data-en="i">Purpose</th></tr>
+<tr><td>Title Bar</td><td><span data-hi="i">Presentation का नाम और application</span><span data-en="i">Presentation name and application</span></td></tr>
+<tr><td>Ribbon</td><td><span data-hi="i">Home, Insert, Design, Transitions, Animations, Slide Show tabs</span><span data-en="i">Home, Insert, Design, Transitions, Animations, Slide Show tabs</span></td></tr>
+<tr><td>Slides Panel</td><td><span data-hi="i">Left side में सभी slides की thumbnail preview</span><span data-en="i">Thumbnail preview of all slides on the left side</span></td></tr>
+<tr><td>Slide Area</td><td><span data-hi="i">Current slide का editing area</span><span data-en="i">Editing area for the current slide</span></td></tr>
+<tr><td>Notes Pane</td><td><span data-hi="i">Slide के नीचे speaker notes type करने की जगह</span><span data-en="i">Space below the slide to type speaker notes</span></td></tr>
+<tr><td>Status Bar</td><td><span data-hi="i">Slide number, language, view buttons, zoom</span><span data-en="i">Slide number, language, view buttons, zoom</span></td></tr>
+<tr><td>View Buttons</td><td><span data-hi="i">Normal, Slide Sorter, Reading View, Slide Show</span><span data-en="i">Normal, Slide Sorter, Reading View, Slide Show</span></td></tr></table>
+<div class="qb"><b data-hi="b" class="b">संभावित परीक्षा प्रश्न</b><b data-en="b" class="b">Likely Exam Questions</b><span data-hi="i">MS PowerPoint किसे कहते हैं? Interface के parts समझाइए। Slides Panel का क्या काम है?</span><span data-en="i">What is MS PowerPoint? Explain the Interface parts. What is the purpose of the Slides Panel?</span></div>
+</div></section>
+
+<section class="uc" id="u2"><div class="uh"><span class="ut"><span data-hi="i">Unit 02 · PPT बेसिक्स</span><span data-en="i">Unit 02 · PPT Basics</span></span><h2><span data-hi="i">Presentation बनाना, Save करना & File Formats</span><span data-en="i">Creating, Saving Presentations & File Formats</span></h2></div>
+<div class="ub">
+<h3 data-hi="f" class="f">Basic File Operations</h3><h3 data-en="f" class="f">Basic File Operations</h3>
+<table><tr><th>Operation</th><th>Shortcut</th><th data-hi="i">विवरण</th><th data-en="i">Description</th></tr>
+<tr><td>New Presentation</td><td>Ctrl+N</td><td><span data-hi="i">नई blank presentation</span><span data-en="i">New blank presentation</span></td></tr>
+<tr><td>Open</td><td>Ctrl+O</td><td><span data-hi="i">Saved presentation खोलना</span><span data-en="i">Opening a saved presentation</span></td></tr>
+<tr><td>Save</td><td>Ctrl+S</td><td><span data-hi="i">Current file save</span><span data-en="i">Save current file</span></td></tr>
+<tr><td>Save As</td><td>F12</td><td><span data-hi="i">New name/format/location में save</span><span data-en="i">Save with new name/format/location</span></td></tr>
+<tr><td>Print</td><td>Ctrl+P</td><td><span data-hi="i">Slides print करना</span><span data-en="i">Print slides</span></td></tr></table>
+<h3 data-hi="f" class="f">Slide Operations</h3><h3 data-en="f" class="f">Slide Operations</h3>
+<table><tr><th>Operation</th><th data-hi="i">कैसे करें</th><th data-en="i">How to Do</th></tr>
+<tr><td>New Slide</td><td colspan="2">Home Tab → New Slide (Ctrl+M)</td></tr>
+<tr><td>Duplicate Slide</td><td><span data-hi="i">Slide right-click → Duplicate Slide</span><span data-en="i">Right-click slide → Duplicate Slide</span></td></tr>
+<tr><td>Delete Slide</td><td colspan="2">Slide select → Delete key</td></tr>
+<tr><td>Move Slide</td><td><span data-hi="i">Slides panel में drag-and-drop</span><span data-en="i">Drag-and-drop in Slides panel</span></td></tr></table>
+<h3 data-hi="f" class="f">File Formats</h3><h3 data-en="f" class="f">File Formats</h3>
+<table><tr><th>Format</th><th data-hi="i">मतलब</th><th data-en="i">Meaning</th></tr>
+<tr><td>.pptx</td><td><span data-hi="i">Default PowerPoint format (2007+)</span><span data-en="i">Default PowerPoint format (2007+)</span></td></tr>
+<tr><td>.ppt</td><td><span data-hi="i">Older PowerPoint format (97-2003)</span><span data-en="i">Older PowerPoint format (97-2003)</span></td></tr>
+<tr><td>.pdf</td><td><span data-hi="i">Slides को PDF में export</span><span data-en="i">Export slides as PDF</span></td></tr>
+<tr><td>.ppsx</td><td><span data-hi="i">PowerPoint Show — directly Slide Show mode में खुलता है</span><span data-en="i">PowerPoint Show — opens directly in Slide Show mode</span></td></tr>
+<tr><td>.odp</td><td><span data-hi="i">Open Document Presentation (LibreOffice Impress)</span><span data-en="i">Open Document Presentation (LibreOffice Impress)</span></td></tr></table>
+<div class="qb"><b data-hi="b" class="b">संभावित परीक्षा प्रश्न</b><b data-en="b" class="b">Likely Exam Questions</b><span data-hi="i">PowerPoint के file formats लिखिए। .pptx और .ppsx में क्या अंतर है? New Slide कैसे add करें?</span><span data-en="i">Write PowerPoint file formats. What is the difference between .pptx and .ppsx? How to add a New Slide?</span></div>
+</div></section>
+
+<section class="uc" id="u3"><div class="uh"><span class="ut"><span data-hi="i">Unit 03 · PPT बेसिक्स</span><span data-en="i">Unit 03 · PPT Basics</span></span><h2><span data-hi="i">Slide Layouts & Themes/Design</span><span data-en="i">Slide Layouts & Themes/Design</span></h2></div>
+<div class="ub">
+<h3 data-hi="f" class="f">Slide Layout क्या है?</h3><h3 data-en="f" class="f">What is Slide Layout?</h3>
+<p data-hi="b" class="b"><strong>Slide Layout</strong> slide पर content (title, text, images) की pre-arranged structure है — Title Slide, Title and Content, Blank, Two Content जैसे layouts होते हैं।</p>
+<p data-en="b" class="b">A <strong>Slide Layout</strong> is a pre-arranged structure for content (title, text, images) on a slide — layouts include Title Slide, Title and Content, Blank, Two Content etc.</p>
+<table><tr><th>Layout</th><th data-hi="i">मतलब</th><th data-en="i">Meaning</th></tr>
+<tr><td>Title Slide</td><td><span data-hi="i">Presentation का first slide — big title + subtitle</span><span data-en="i">First slide of presentation — big title + subtitle</span></td></tr>
+<tr><td>Title and Content</td><td><span data-hi="i">Title + content area (text, image, chart)</span><span data-en="i">Title + content area (text, image, chart)</span></td></tr>
+<tr><td>Two Content</td><td><span data-hi="i">Title + दो side-by-side content areas</span><span data-en="i">Title + two side-by-side content areas</span></td></tr>
+<tr><td>Blank</td><td><span data-hi="i">Empty slide — manually सब add करना</span><span data-en="i">Empty slide — add everything manually</span></td></tr></table>
+<h3 data-hi="f" class="f">Themes & Design</h3><h3 data-en="f" class="f">Themes & Design</h3>
+<p data-hi="b" class="b"><strong>Theme</strong> colors, fonts, और effects का एक pre-designed combination है जो पूरी presentation पर apply होता है — Design Tab → Themes।</p>
+<p data-en="b" class="b">A <strong>Theme</strong> is a pre-designed combination of colours, fonts, and effects applied to the entire presentation — Design Tab → Themes.</p>
+<table><tr><th>Option</th><th data-hi="i">काम</th><th data-en="i">Purpose</th></tr>
+<tr><td>Themes</td><td><span data-hi="i">Pre-built professional color + font combinations</span><span data-en="i">Pre-built professional colour + font combinations</span></td></tr>
+<tr><td>Variants</td><td><span data-hi="i">Same theme के different color variations</span><span data-en="i">Different colour variations of the same theme</span></td></tr>
+<tr><td>Background Styles</td><td><span data-hi="i">Slide background को solid, gradient, texture से change करना</span><span data-en="i">Changing slide background to solid, gradient, texture</span></td></tr>
+<tr><td>Slide Size</td><td><span data-hi="i">Standard (4:3) या Widescreen (16:9) set करना</span><span data-en="i">Setting Standard (4:3) or Widescreen (16:9)</span></td></tr></table>
+<div class="nb"><span data-hi="i"><b>याद रखें:</b> Theme पूरी presentation पर लागू होती है, जबकि Layout सिर्फ एक slide का structure define करता है।</span><span data-en="i"><b>Remember:</b> a Theme applies to the entire presentation, while a Layout defines the structure of just one slide.</span></div>
+<div class="qb"><b data-hi="b" class="b">संभावित परीक्षा प्रश्न</b><b data-en="b" class="b">Likely Exam Questions</b><span data-hi="i">Slide Layout किसे कहते हैं? Theme और Layout में अंतर। Widescreen और Standard slide size क्या होते हैं?</span><span data-en="i">What is a Slide Layout? Difference between Theme and Layout. What are Widescreen and Standard slide sizes?</span></div>
+</div></section>
+
+<section class="uc" id="u4"><div class="uh"><span class="ut"><span data-hi="i">Unit 04 · Content Insert</span><span data-en="i">Unit 04 · Content Insert</span></span><h2><span data-hi="i">Text, Bullet Points & WordArt</span><span data-en="i">Text, Bullet Points & WordArt</span></h2></div>
+<div class="ub">
+<h3 data-hi="f" class="f">Text Boxes & Placeholders</h3><h3 data-en="f" class="f">Text Boxes & Placeholders</h3>
+<p data-hi="b" class="b">Slide पर text add करने के दो तरीके: (1) Placeholder में click करके type करें, (2) Insert Tab → Text Box draw करके type करें।</p>
+<p data-en="b" class="b">Two ways to add text to a slide: (1) Click inside a Placeholder and type, (2) Insert Tab → draw a Text Box and type.</p>
+<h3 data-hi="f" class="f">Bullet Points & Numbered Lists</h3><h3 data-en="f" class="f">Bullet Points & Numbered Lists</h3>
+<p data-hi="b" class="b">Home Tab → Bullets (Ctrl+Shift+L) या Numbering से list format apply करें। Tab key से indent/level बढ़ाया जाता है, Shift+Tab से घटाया जाता है।</p>
+<p data-en="b" class="b">Apply list format via Home Tab → Bullets (Ctrl+Shift+L) or Numbering. Use the Tab key to increase indent/level, Shift+Tab to decrease it.</p>
+<h3 data-hi="f" class="f">Font Formatting</h3><h3 data-en="f" class="f">Font Formatting</h3>
+<table><tr><th>Option</th><th>Shortcut</th><th data-hi="i">काम</th><th data-en="i">Purpose</th></tr>
+<tr><td>Bold</td><td>Ctrl+B</td><td><span data-hi="i">Text bold</span><span data-en="i">Bold text</span></td></tr>
+<tr><td>Italic</td><td>Ctrl+I</td><td><span data-hi="i">Text italic</span><span data-en="i">Italic text</span></td></tr>
+<tr><td>Underline</td><td>Ctrl+U</td><td><span data-hi="i">Text underline</span><span data-en="i">Underline text</span></td></tr>
+<tr><td>Font Size Increase</td><td>Ctrl+Shift+&gt;</td><td><span data-hi="i">Font size बढ़ाना</span><span data-en="i">Increase font size</span></td></tr>
+<tr><td>Change Case</td><td>Shift+F3</td><td><span data-hi="i">UPPER/lower/Title Case toggle</span><span data-en="i">Toggle UPPER/lower/Title Case</span></td></tr></table>
+<h3 data-hi="f" class="f">WordArt</h3><h3 data-en="f" class="f">WordArt</h3>
+<p data-hi="b" class="b"><strong>WordArt</strong> decorative text styles के साथ eye-catching text create करता है — Insert Tab → WordArt। Shadow, reflection, glow, 3D effects available हैं।</p>
+<p data-en="b" class="b"><strong>WordArt</strong> creates eye-catching text with decorative styles — Insert Tab → WordArt. Shadow, reflection, glow, 3D effects are available.</p>
+<div class="qb"><b data-hi="b" class="b">संभावित परीक्षा प्रश्न</b><b data-en="b" class="b">Likely Exam Questions</b><span data-hi="i">Slide पर text कैसे add करें? Placeholder और Text Box में अंतर। WordArt किसे कहते हैं?</span><span data-en="i">How to add text to a slide? Difference between Placeholder and Text Box. What is WordArt?</span></div>
+</div></section>
+
+<section class="uc" id="u5"><div class="uh"><span class="ut"><span data-hi="i">Unit 05 · Content Insert</span><span data-en="i">Unit 05 · Content Insert</span></span><h2><span data-hi="i">Images, Shapes & SmartArt</span><span data-en="i">Images, Shapes & SmartArt</span></h2></div>
+<div class="ub">
+<table><tr><th>Insert Option</th><th data-hi="i">काम</th><th data-en="i">Purpose</th></tr>
+<tr><td>Pictures</td><td><span data-hi="i">Computer से image insert — resize, crop, effects apply</span><span data-en="i">Insert image from computer — resize, crop, apply effects</span></td></tr>
+<tr><td>Online Pictures</td><td><span data-hi="i">Bing/Internet से images search करके insert</span><span data-en="i">Search and insert images from Bing/Internet</span></td></tr>
+<tr><td>Screenshot</td><td><span data-hi="i">Open window का screenshot directly insert</span><span data-en="i">Directly insert screenshot of an open window</span></td></tr>
+<tr><td>Shapes</td><td><span data-hi="i">Lines, rectangles, circles, arrows, stars, callouts</span><span data-en="i">Lines, rectangles, circles, arrows, stars, callouts</span></td></tr>
+<tr><td>SmartArt</td><td><span data-hi="i">Pre-designed diagrams — List, Process, Cycle, Hierarchy, Relationship</span><span data-en="i">Pre-designed diagrams — List, Process, Cycle, Hierarchy, Relationship</span></td></tr>
+<tr><td>Icons</td><td><span data-hi="i">Built-in icons library से icons insert</span><span data-en="i">Insert icons from the built-in library</span></td></tr>
+<tr><td>3D Models</td><td><span data-hi="i">3D objects insert करके rotate करना</span><span data-en="i">Insert and rotate 3D objects</span></td></tr></table>
+<h3 data-hi="f" class="f">SmartArt Types</h3><h3 data-en="f" class="f">SmartArt Types</h3>
+<table><tr><th>Type</th><th data-hi="i">उपयोग</th><th data-en="i">Use</th></tr>
+<tr><td>List</td><td><span data-hi="i">Non-sequential items की list</span><span data-en="i">List of non-sequential items</span></td></tr>
+<tr><td>Process</td><td><span data-hi="i">Step-by-step process दिखाना</span><span data-en="i">Showing a step-by-step process</span></td></tr>
+<tr><td>Cycle</td><td><span data-hi="i">Repeating/circular process</span><span data-en="i">Repeating/circular process</span></td></tr>
+<tr><td>Hierarchy</td><td><span data-hi="i">Organization chart, hierarchy structure</span><span data-en="i">Organisation chart, hierarchy structure</span></td></tr></table>
+<div class="qb"><b data-hi="b" class="b">संभावित परीक्षा प्रश्न</b><b data-en="b" class="b">Likely Exam Questions</b><span data-hi="i">SmartArt किसे कहते हैं? इसके types उदाहरण सहित। Shapes और SmartArt में अंतर।</span><span data-en="i">What is SmartArt? Write its types with examples. Difference between Shapes and SmartArt.</span></div>
+</div></section>
+
+<section class="uc" id="u6"><div class="uh"><span class="ut"><span data-hi="i">Unit 06 · Content Insert</span><span data-en="i">Unit 06 · Content Insert</span></span><h2><span data-hi="i">Charts, Tables & Media</span><span data-en="i">Charts, Tables & Media</span></h2></div>
+<div class="ub">
+<h3 data-hi="f" class="f">Charts Insert करना</h3><h3 data-en="f" class="f">Inserting Charts</h3>
+<p data-hi="b" class="b">Insert Tab → Chart → type select करें → Excel mini-window खुलती है जहाँ data enter होता है → OK। Chart automatically slide पर insert हो जाता है।</p>
+<p data-en="b" class="b">Insert Tab → Chart → select type → a mini Excel window opens to enter data → OK. The chart is automatically inserted on the slide.</p>
+<h3 data-hi="f" class="f">Tables</h3><h3 data-en="f" class="f">Tables</h3>
+<p data-hi="b" class="b">Insert Tab → Table → Grid से rows×columns select करें। Table Design और Layout tabs से formatting, merge cells, borders set होती हैं।</p>
+<p data-en="b" class="b">Insert Tab → Table → Select rows×columns from the grid. Use Table Design and Layout tabs to set formatting, merge cells, borders.</p>
+<h3 data-hi="f" class="f">Audio & Video</h3><h3 data-en="f" class="f">Audio & Video</h3>
+<table><tr><th>Option</th><th data-hi="i">काम</th><th data-en="i">Purpose</th></tr>
+<tr><td>Audio</td><td><span data-hi="i">Computer से audio file insert — background music या narration</span><span data-en="i">Insert audio from computer — background music or narration</span></td></tr>
+<tr><td>Video</td><td><span data-hi="i">Computer से video insert या online video embed</span><span data-en="i">Insert video from computer or embed online video</span></td></tr>
+<tr><td>Record Audio</td><td><span data-hi="i">Directly microphone से narration record करके add</span><span data-en="i">Directly record narration from microphone and add</span></td></tr></table>
+<h3 data-hi="f" class="f">Hyperlinks</h3><h3 data-en="f" class="f">Hyperlinks</h3>
+<p data-hi="b" class="b">Text या object को website, email, या किसी दूसरी slide से link करना — Insert Tab → Link (Ctrl+K)।</p>
+<p data-en="b" class="b">Linking text or objects to a website, email, or another slide — Insert Tab → Link (Ctrl+K).</p>
+<div class="qb"><b data-hi="b" class="b">संभावित परीक्षा प्रश्न</b><b data-en="b" class="b">Likely Exam Questions</b><span data-hi="i">PowerPoint में chart कैसे insert करें? Audio और Video slide में कैसे add करें? Table insert करने के steps।</span><span data-en="i">How to insert a chart in PowerPoint? How to add Audio and Video to a slide? Steps to insert a Table.</span></div>
+</div></section>
+
+<section class="uc" id="u7"><div class="uh"><span class="ut"><span data-hi="i">Unit 07 · Animations & Show</span><span data-en="i">Unit 07 · Animations & Show</span></span><h2>Animations</h2></div>
+<div class="ub">
+<h3 data-hi="f" class="f">Animation क्या है?</h3><h3 data-en="f" class="f">What is Animation?</h3>
+<p data-hi="b" class="b"><strong>Animation</strong> slide पर किसी object (text, image, shape) के appear होने, disappear होने, या move होने का visual effect है — Animations Tab से apply होता है।</p>
+<p data-en="b" class="b"><strong>Animation</strong> is a visual effect for how an object (text, image, shape) appears, disappears, or moves on a slide — applied from the Animations Tab.</p>
+<h3 data-hi="f" class="f">Animation Categories</h3><h3 data-en="f" class="f">Animation Categories</h3>
+<table><tr><th>Category</th><th data-hi="i">काम</th><th data-en="i">Purpose</th></tr>
+<tr><td>Entrance</td><td><span data-hi="i">Object slide पर कैसे appear होगा — Appear, Fade, Fly In, Bounce</span><span data-en="i">How the object appears on the slide — Appear, Fade, Fly In, Bounce</span></td></tr>
+<tr><td>Emphasis</td><td><span data-hi="i">Object already visible है, उसे highlight करना — Pulse, Spin, Grow/Shrink</span><span data-en="i">Highlighting an already visible object — Pulse, Spin, Grow/Shrink</span></td></tr>
+<tr><td>Exit</td><td><span data-hi="i">Object slide से कैसे disappear होगा — Fade, Fly Out, Shrink</span><span data-en="i">How the object disappears from the slide — Fade, Fly Out, Shrink</span></td></tr>
+<tr><td>Motion Paths</td><td><span data-hi="i">Object एक specific path पर move करेगा</span><span data-en="i">The object moves along a specific path</span></td></tr></table>
+<h3 data-hi="f" class="f">Animation Timing Options</h3><h3 data-en="f" class="f">Animation Timing Options</h3>
+<table><tr><th>Option</th><th data-hi="i">मतलब</th><th data-en="i">Meaning</th></tr>
+<tr><td>On Click</td><td><span data-hi="i">Mouse click पर animation start होगी</span><span data-en="i">Animation starts on mouse click</span></td></tr>
+<tr><td>With Previous</td><td><span data-hi="i">पिछली animation के साथ simultaneously start</span><span data-en="i">Starts simultaneously with the previous animation</span></td></tr>
+<tr><td>After Previous</td><td><span data-hi="i">पिछली animation खत्म होने के बाद automatically start</span><span data-en="i">Starts automatically after the previous animation ends</span></td></tr></table>
+<div class="nb"><span data-hi="i"><b>याद रखें:</b> Animation किसी एक slide पर objects के effects हैं, Transition दो slides के बीच का effect है — दोनों अलग concepts हैं।</span><span data-en="i"><b>Remember:</b> Animation is an effect on objects within one slide, Transition is an effect between two slides — they are different concepts.</span></div>
+<div class="qb"><b data-hi="b" class="b">संभावित परीक्षा प्रश्न</b><b data-en="b" class="b">Likely Exam Questions</b><span data-hi="i">Animation किसे कहते हैं? Animation के categories (Entrance, Exit, Emphasis) समझाइए। Animation और Transition में अंतर।</span><span data-en="i">What is Animation? Explain Animation categories (Entrance, Exit, Emphasis). Difference between Animation and Transition.</span></div>
+</div></section>
+
+<section class="uc" id="u8"><div class="uh"><span class="ut"><span data-hi="i">Unit 08 · Animations & Show</span><span data-en="i">Unit 08 · Animations & Show</span></span><h2>Transitions & Slide Show</h2></div>
+<div class="ub">
+<h3 data-hi="f" class="f">Transition क्या है?</h3><h3 data-en="f" class="f">What is a Transition?</h3>
+<p data-hi="b" class="b"><strong>Transition</strong> एक slide से दूसरी slide पर switch होने का visual effect है — Transitions Tab से apply होता है।</p>
+<p data-en="b" class="b">A <strong>Transition</strong> is the visual effect when switching from one slide to another — applied from the Transitions Tab.</p>
+<table><tr><th>Transition Type</th><th data-hi="i">Examples</th><th data-en="i">Examples</th></tr>
+<tr><td>Subtle</td><td colspan="2">Fade, Push, Wipe, Split</td></tr>
+<tr><td>Exciting</td><td colspan="2">Flip, Cube, Gallery, Dissolve</td></tr>
+<tr><td>Dynamic Content</td><td colspan="2">Pan, Ferris Wheel, Conveyor</td></tr></table>
+<h3 data-hi="f" class="f">Transition Settings</h3><h3 data-en="f" class="f">Transition Settings</h3>
+<ul data-hi="b" class="b">
+<li>Duration — Transition कितनी slow/fast हो</li>
+<li>Sound — Transition पर sound effect</li>
+<li>Advance Slide: On Mouse Click या Automatically After X seconds</li>
+<li>"Apply to All" — सभी slides पर same transition</li>
+</ul>
+<ul data-en="b" class="b">
+<li>Duration — how slow/fast the transition is</li>
+<li>Sound — sound effect on transition</li>
+<li>Advance Slide: On Mouse Click or Automatically After X seconds</li>
+<li>"Apply to All" — same transition on all slides</li>
+</ul>
+<h3 data-hi="f" class="f">Slide Show</h3><h3 data-en="f" class="f">Slide Show</h3>
+<table><tr><th>Option</th><th>Shortcut</th><th data-hi="i">काम</th><th data-en="i">Purpose</th></tr>
+<tr><td>From Beginning</td><td>F5</td><td><span data-hi="i">पहली slide से Slide Show start</span><span data-en="i">Start Slide Show from first slide</span></td></tr>
+<tr><td>From Current Slide</td><td>Shift+F5</td><td><span data-hi="i">Current slide से start</span><span data-en="i">Start from current slide</span></td></tr>
+<tr><td>Next Slide</td><td>Space/Enter/→</td><td><span data-hi="i">अगली slide पर जाना</span><span data-en="i">Go to next slide</span></td></tr>
+<tr><td>Previous Slide</td><td>Backspace/←</td><td><span data-hi="i">पिछली slide पर जाना</span><span data-en="i">Go to previous slide</span></td></tr>
+<tr><td>End Show</td><td>Esc</td><td><span data-hi="i">Slide Show बंद करना</span><span data-en="i">End the Slide Show</span></td></tr>
+<tr><td>Presenter View</td><td>-</td><td><span data-hi="i">Speaker को notes दिखाई दें, audience को slides — dual monitor</span><span data-en="i">Speaker sees notes, audience sees slides — dual monitor</span></td></tr></table>
+<div class="qb"><b data-hi="b" class="b">संभावित परीक्षा प्रश्न</b><b data-en="b" class="b">Likely Exam Questions</b><span data-hi="i">Transition किसे कहते हैं? Slide Show shortcuts लिखिए। Presenter View क्या है?</span><span data-en="i">What is a Transition? Write Slide Show shortcuts. What is Presenter View?</span></div>
+</div></section>
+
+<section class="uc" id="u9"><div class="uh"><span class="ut"><span data-hi="i">Unit 09 · Animations & Show</span><span data-en="i">Unit 09 · Animations & Show</span></span><h2><span data-hi="i">Slide Master, Printing & Handouts</span><span data-en="i">Slide Master, Printing & Handouts</span></h2></div>
+<div class="ub">
+<h3 data-hi="f" class="f">Slide Master</h3><h3 data-en="f" class="f">Slide Master</h3>
+<p data-hi="b" class="b"><strong>Slide Master</strong> एक master template है जहाँ logo, font style, background जैसी चीज़ें एक बार set करने पर पूरी presentation के सभी slides पर automatically apply हो जाती हैं।</p>
+<p data-en="b" class="b">A <strong>Slide Master</strong> is a master template where setting things like logo, font style, background once automatically applies them to all slides in the presentation.</p>
+<p data-hi="b" class="b">View Tab → Slide Master — यहाँ editing करने के बाद "Close Master View" से normal mode में वापस जाएं।</p>
+<p data-en="b" class="b">View Tab → Slide Master — after editing here, click "Close Master View" to return to normal mode.</p>
+<h3 data-hi="f" class="f">Printing Options</h3><h3 data-en="f" class="f">Printing Options</h3>
+<table><tr><th>Print Layout</th><th data-hi="i">मतलब</th><th data-en="i">Meaning</th></tr>
+<tr><td>Full Page Slides</td><td><span data-hi="i">एक page पर एक slide</span><span data-en="i">One slide per page</span></td></tr>
+<tr><td>Notes Pages</td><td><span data-hi="i">Slide + Speaker notes साथ में print</span><span data-en="i">Slide + Speaker notes printed together</span></td></tr>
+<tr><td>Outline</td><td><span data-hi="i">सिर्फ text content print</span><span data-en="i">Print text content only</span></td></tr>
+<tr><td>Handouts (1,2,3,4,6,9 slides/page)</td><td><span data-hi="i">एक page पर multiple slides — audience को देने के लिए</span><span data-en="i">Multiple slides per page — to give to audience</span></td></tr></table>
+<h3 data-hi="f" class="f">Speaker Notes</h3><h3 data-en="f" class="f">Speaker Notes</h3>
+<p data-hi="b" class="b"><strong>Speaker Notes</strong> slide के नीचे presenter के personal notes हैं — audience को नहीं दिखते, presenter को Presenter View में दिखते हैं।</p>
+<p data-en="b" class="b"><strong>Speaker Notes</strong> are the presenter's personal notes below the slide — not visible to the audience, visible to the presenter in Presenter View.</p>
+<div class="nb"><span data-hi="i"><b>याद रखें:</b> Handouts audience को distribute किए जाते हैं ताकि वे notes ले सकें, जबकि Speaker Notes सिर्फ presenter के लिए होते हैं।</span><span data-en="i"><b>Remember:</b> Handouts are distributed to the audience for note-taking, while Speaker Notes are only for the presenter.</span></div>
+<div class="qb"><b data-hi="b" class="b">संभावित परीक्षा प्रश्न</b><b data-en="b" class="b">Likely Exam Questions</b><span data-hi="i">Slide Master क्या है, इसका उपयोग समझाइए। PowerPoint में printing options क्या-क्या हैं? Handouts किसे कहते हैं?</span><span data-en="i">What is Slide Master, explain its use. What are the printing options in PowerPoint? What are Handouts?</span></div>
+</div></section>
+
+<section class="uc" id="u10"><div class="uh"><span class="ut"><span data-hi="i">Unit 10 · रिवीज़न</span><span data-en="i">Unit 10 · Revision</span></span><h2><span data-hi="i">Important Q&A — फटाफट रिवीज़न</span><span data-en="i">Important Q&A — Quick Revision</span></h2></div>
+<div class="ub">
+<h3 data-hi="f" class="f">1-line Definitions</h3><h3 data-en="f" class="f">1-line Definitions</h3>
+<ul data-hi="b" class="b">
+<li><strong>MS PowerPoint</strong> — slides-based visual presentations बनाने का Microsoft application</li>
+<li><strong>Slide Layout</strong> — slide पर content का pre-arranged structure</li>
+<li><strong>Theme</strong> — colors, fonts, effects का combination जो पूरी presentation पर apply होता है</li>
+<li><strong>Animation</strong> — slide पर objects के appear/disappear/move होने का visual effect</li>
+<li><strong>Transition</strong> — एक slide से दूसरी slide जाने का visual effect</li>
+<li><strong>Slide Master</strong> — सभी slides पर common formatting एक बार set करने का master template</li>
+<li><strong>SmartArt</strong> — pre-designed professional diagrams (Process, Hierarchy, Cycle)</li>
+<li><strong>Handouts</strong> — audience को distribute करने के लिए multiple slides per page printout</li>
+<li><strong>Speaker Notes</strong> — slide के नीचे presenter के personal notes (audience को नहीं दिखते)</li>
+<li><strong>Presenter View</strong> — presenter को notes और next slide दिखाने वाला dual-screen mode</li>
+</ul>
+<ul data-en="b" class="b">
+<li><strong>MS PowerPoint</strong> — Microsoft application for creating slides-based visual presentations</li>
+<li><strong>Slide Layout</strong> — pre-arranged structure for content on a slide</li>
+<li><strong>Theme</strong> — a combination of colours, fonts, effects applied to the entire presentation</li>
+<li><strong>Animation</strong> — visual effect for objects appearing/disappearing/moving on a slide</li>
+<li><strong>Transition</strong> — visual effect when moving from one slide to another</li>
+<li><strong>Slide Master</strong> — master template for setting common formatting on all slides at once</li>
+<li><strong>SmartArt</strong> — pre-designed professional diagrams (Process, Hierarchy, Cycle)</li>
+<li><strong>Handouts</strong> — printouts of multiple slides per page distributed to the audience</li>
+<li><strong>Speaker Notes</strong> — presenter's personal notes below the slide (not visible to audience)</li>
+<li><strong>Presenter View</strong> — dual-screen mode showing notes and next slide to the presenter</li>
+</ul>
+<h3 data-hi="f" class="f">Must-Know Shortcuts</h3><h3 data-en="f" class="f">Must-Know Shortcuts</h3>
+<table><tr><th>Shortcut</th><th data-hi="i">काम</th><th data-en="i">Purpose</th></tr>
+<tr><td>Ctrl+M</td><td><span data-hi="i">New Slide</span><span data-en="i">New Slide</span></td></tr>
+<tr><td>F5</td><td><span data-hi="i">Slide Show from beginning</span><span data-en="i">Slide Show from beginning</span></td></tr>
+<tr><td>Shift+F5</td><td><span data-hi="i">Slide Show from current slide</span><span data-en="i">Slide Show from current slide</span></td></tr>
+<tr><td>Esc</td><td><span data-hi="i">End Slide Show</span><span data-en="i">End Slide Show</span></td></tr>
+<tr><td>Ctrl+D</td><td><span data-hi="i">Duplicate selected object/slide</span><span data-en="i">Duplicate selected object/slide</span></td></tr>
+<tr><td>Ctrl+K</td><td><span data-hi="i">Insert Hyperlink</span><span data-en="i">Insert Hyperlink</span></td></tr>
+<tr><td>Ctrl+G</td><td><span data-hi="i">Group selected objects</span><span data-en="i">Group selected objects</span></td></tr></table>
+<h3 data-hi="f" class="f">Frequently Asked Long Questions</h3><h3 data-en="f" class="f">Frequently Asked Long Questions</h3>
+<ol data-hi="b" class="b">
+<li>MS PowerPoint किसे कहते हैं? Interface के parts समझाइए।</li>
+<li>Slide Layout और Theme में अंतर। Layouts के types।</li>
+<li>Animation और Transition में अंतर। Animation categories (Entrance, Exit, Emphasis)।</li>
+<li>Slide Master क्या है? इसका उपयोग।</li>
+<li>SmartArt किसे कहते हैं? इसके types।</li>
+<li>Slide Show keyboard shortcuts लिखिए।</li>
+<li>Handouts और Speaker Notes में अंतर।</li>
+</ol>
+<ol data-en="b" class="b">
+<li>What is MS PowerPoint? Explain the Interface parts.</li>
+<li>Difference between Slide Layout and Theme. Types of Layouts.</li>
+<li>Difference between Animation and Transition. Animation categories (Entrance, Exit, Emphasis).</li>
+<li>What is Slide Master? Its use.</li>
+<li>What is SmartArt? Its types.</li>
+<li>Write Slide Show keyboard shortcuts.</li>
+<li>Difference between Handouts and Speaker Notes.</li>
+</ol>
+<div class="ib"><span data-hi="i"><b>आखिरी टिप:</b> पेपर से पहले सभी "संभावित परीक्षा प्रश्न" बॉक्स ज़रूर पढ़ें।</span><span data-en="i"><b>Final Tip:</b> Read all "Likely Exam Questions" boxes before the exam.</span></div>
+</div></section>
+
+  </main>
+</div>
+<button id="tt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<footer>Made with 🎯 for ITI-COPA students &nbsp;·&nbsp; by <a href="https://surajtiwarrii.github.io/Portfolio/" target="_blank">Suraj Tiwari</a></footer>
+<script>
+function sL(l){document.documentElement.lang=l;document.getElementById('lt').dataset.lang=l;document.getElementById('bh').classList.toggle('active',l==='hi');document.getElementById('be').classList.toggle('active',l==='en');localStorage.setItem('ppL',l);}
+document.addEventListener('DOMContentLoaded',()=>{sL(localStorage.getItem('ppL')||'hi');});
+function tS(e){if(e)e.stopPropagation();document.getElementById('sb').classList.toggle('open');document.getElementById('ov').classList.toggle('open');}
+window.addEventListener('scroll',()=>{document.getElementById('tt').style.display=window.scrollY>400?'flex':'none';});
+function lS(){const q=document.getElementById('si').value.trim().toLowerCase();document.querySelectorAll('.uc').forEach(c=>c.classList.toggle('hide',q&&!c.innerText.toLowerCase().includes(q)));}
+const nls=document.querySelectorAll('.nl');const secs=document.querySelectorAll('.uc');
+window.addEventListener('scroll',()=>{let cur='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-100)cur=s.id;});nls.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+cur));});
+document.querySelectorAll('.nl').forEach(l=>l.addEventListener('click',()=>{if(window.innerWidth<=880)tS();}));
+</script>
+</body>
+</html>

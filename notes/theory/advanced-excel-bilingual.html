@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Advanced Excel Concepts — Hindi/English | ITI COPA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Hind:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #f0fbf4;
+    --bg-soft: #d8f3e2;
+    --panel: rgba(255,255,255,0.45);
+    --panel-solid: rgba(255,255,255,0.78);
+    --panel-glass: rgba(255,255,255,0.35);
+    --green-deep: #0f7a3d;
+    --green: #16a34a;
+    --green-soft: #bbf0d0;
+    --green-light: #e3fcec;
+    --green-mist: rgba(22,163,74,0.18);
+    --teal: #059669;
+    --teal-mist: rgba(5,150,105,0.10);
+    --ink: #0c2c1a;
+    --ink-soft: #4f7a64;
+    --line: rgba(15,122,61,0.22);
+    --radius: 18px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Hind',sans-serif;
+    background:
+      radial-gradient(1200px 600px at 10% -10%, var(--green-mist), transparent 60%),
+      radial-gradient(1000px 700px at 110% 10%, var(--teal-mist), transparent 55%),
+      var(--bg);
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.brand{font-family:'Fraunces',serif;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+
+  .topbar{
+    position:sticky;top:0;z-index:50;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px 20px;
+    background:rgba(240,251,244,0.6);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);
+    gap:10px;
+  }
+  .brand{font-size:1.05rem;font-weight:700;color:var(--green-deep);display:flex;align-items:center;gap:8px;}
+  .brand .dot{width:9px;height:9px;border-radius:50%;background:linear-gradient(135deg,var(--green),var(--teal));flex-shrink:0;}
+  .topbar-actions{display:flex;align-items:center;gap:8px;}
+  .menu-btn{
+    background:rgba(22,163,74,0.16);
+    backdrop-filter:blur(6px);
+    color:var(--green-light);
+    border:1px solid rgba(22,163,74,0.55);
+    padding:9px 16px;border-radius:30px;
+    font-family:'Hind';font-weight:600;font-size:0.9rem;cursor:pointer;
+    text-shadow:0 1px 3px rgba(15,122,61,0.4);
+    background-image:linear-gradient(135deg, rgba(22,163,74,0.55), rgba(15,122,61,0.55));
+    box-shadow:0 6px 16px rgba(15,122,61,0.2);
+  }
+  .lang-toggle{
+    display:flex;align-items:center;background:var(--panel-glass);border:1px solid var(--line);
+    backdrop-filter:blur(8px);
+    border-radius:30px;padding:3px;position:relative;cursor:pointer;
+  }
+  .lang-toggle button{
+    border:none;background:transparent;padding:7px 13px;border-radius:24px;
+    font-family:'Hind';font-weight:700;font-size:0.8rem;cursor:pointer;color:var(--ink-soft);
+    position:relative;z-index:2;transition:color 0.25s;
+  }
+  .lang-toggle button.active{color:var(--green-light);}
+  .lang-pill{
+    position:absolute;top:3px;bottom:3px;left:3px;width:calc(50% - 3px);
+    background:linear-gradient(135deg,var(--green),var(--green-deep));
+    border-radius:24px;transition:transform 0.25s ease;z-index:1;
+  }
+  .lang-toggle[data-lang="en"] .lang-pill{transform:translateX(100%);}
+
+  .hero{padding:64px 20px 40px;text-align:center;position:relative;}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'JetBrains Mono';font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;
+    color:var(--green-deep);
+    background:var(--panel-glass);
+    backdrop-filter:blur(8px);
+    border:1px solid var(--green-soft);
+    padding:6px 14px;border-radius:30px;
+    margin-bottom:18px;
+  }
+  .hero h1{font-size:clamp(1.7rem,5.5vw,3.1rem);line-height:1.15;margin:0 0 14px;color:var(--ink);font-weight:700;}
+  .hero h1 .grad{
+    background:linear-gradient(100deg,var(--green-deep),var(--green) 45%,var(--teal) 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero p{max-width:620px;margin:0 auto 28px;color:var(--ink-soft);font-size:1.05rem;line-height:1.65;}
+  .hero-stats{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:10px;}
+  .stat-chip{
+    background:var(--panel);border:1px solid var(--line);border-radius:14px;
+    backdrop-filter:blur(8px);
+    padding:12px 18px;min-width:108px;box-shadow:0 4px 14px rgba(15,122,61,0.08);
+  }
+  .stat-chip b{display:block;font-family:'Fraunces';font-size:1.3rem;color:var(--green-deep);}
+  .stat-chip span{font-size:0.74rem;color:var(--ink-soft);}
+
+  .toolbar{max-width:900px;margin:24px auto 0;padding:0 20px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:center;}
+  .search-wrap{flex:1;min-width:220px;position:relative;}
+  #searchInput{
+    width:100%;padding:13px 16px 13px 42px;border-radius:30px;border:1px solid var(--line);
+    background:var(--panel);backdrop-filter:blur(8px);
+    font-family:'Hind';font-size:0.95rem;color:var(--ink);outline:none;
+  }
+  #searchInput:focus{border-color:var(--green);}
+  .search-wrap::before{content:"⌕";position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--green-deep);font-size:1.1rem;}
+
+  .layout{max-width:1180px;margin:14px auto 80px;padding:0 20px;display:grid;grid-template-columns:260px 1fr;gap:26px;}
+  .sidebar{
+    background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    backdrop-filter:blur(10px);
+    padding:18px 14px;height:fit-content;position:sticky;top:78px;max-height:calc(100vh - 100px);overflow-y:auto;
+  }
+  .sidebar h4{font-family:'JetBrains Mono';font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-soft);margin:14px 6px 8px;}
+  .sidebar h4:first-child{margin-top:2px;}
+  .nav-link{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:10px;color:var(--ink);text-decoration:none;font-size:0.88rem;font-weight:500;transition:background 0.15s;}
+  .nav-link:hover{background:var(--green-mist);}
+  .nav-link.active{background:linear-gradient(120deg,var(--green-mist),var(--teal-mist));color:var(--green-deep);font-weight:700;}
+  .nav-link .num{font-family:'JetBrains Mono';font-size:0.68rem;color:var(--teal);min-width:20px;}
+  .close-sidebar{display:none;}
+
+  @media(max-width:880px){
+    .layout{grid-template-columns:1fr;display:block;}
+    .sidebar{position:fixed !important;inset:0 18% 0 0;z-index:60;transform:translateX(-105%);transition:transform 0.3s ease;overflow-y:auto;top:0;height:100vh;max-height:100vh;}
+    .sidebar.open{transform:translateX(0);}
+    .sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(8,40,20,0.4);z-index:55;}
+    .sidebar-overlay.open{display:block;}
+    .close-sidebar{display:block;margin-left:auto;background:none;border:1px solid var(--line);border-radius:50%;width:34px;height:34px;font-size:1rem;color:var(--ink);cursor:pointer;}
+    .brand span.brand-text{display:none;}
+    .menu-btn span.menu-text{display:none;}
+  }
+
+  .content{min-width:0;}
+  .unit-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:22px;overflow:hidden;scroll-margin-top:80px;box-shadow:0 6px 24px rgba(15,122,61,0.08);backdrop-filter:blur(10px);}
+  .unit-head{padding:22px 24px 18px;background:linear-gradient(120deg, rgba(22,163,74,0.18), rgba(15,122,61,0.10));border-bottom:1px solid var(--line);}
+  .unit-tag{font-family:'JetBrains Mono';font-size:0.7rem;color:var(--teal);letter-spacing:0.08em;text-transform:uppercase;display:block;margin-bottom:6px;}
+  .unit-head h2{margin:0;font-size:1.4rem;color:var(--green-deep);}
+  .unit-body{padding:20px 24px 26px;}
+  .unit-body h3{font-size:1.05rem;color:var(--ink);margin:22px 0 8px;display:flex;align-items:center;gap:8px;}
+  .unit-body h3::before{content:"";width:5px;height:18px;border-radius:3px;background:linear-gradient(180deg,var(--green),var(--teal));}
+  .unit-body h3:first-child{margin-top:2px;}
+  .unit-body p{line-height:1.75;color:var(--ink);margin:6px 0 10px;font-size:0.97rem;}
+  .unit-body ul, .unit-body ol{margin:6px 0 14px;padding-left:22px;line-height:1.75;}
+  .unit-body li{margin-bottom:6px;font-size:0.95rem;}
+  .unit-body strong{color:var(--green-deep);}
+
+  .note-box{background:var(--green-mist);border-left:3px solid var(--green);border-radius:10px;padding:12px 16px;margin:14px 0;font-size:0.9rem;}
+  .note-box b{color:var(--green-deep);}
+  .imp-box{background:var(--teal-mist);border-left:3px solid var(--teal);border-radius:10px;padding:12px 16px;margin:14px 0;font-size:0.9rem;}
+  .imp-box b{color:var(--teal);}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0 18px;font-size:0.88rem;border-radius:10px;overflow:hidden;}
+  th{background:linear-gradient(120deg,var(--green),var(--green-deep));color:var(--green-light);text-align:left;padding:10px 12px;font-weight:600;}
+  td{padding:9px 12px;border-bottom:1px solid var(--line);background:var(--panel-solid);}
+  tr:last-child td{border-bottom:none;}
+  tr:nth-child(even) td{background:var(--bg-soft);}
+
+  code, .code-block{font-family:'JetBrains Mono';}
+  .code-block{background:#062418;color:#c8f5da;padding:14px 16px;border-radius:12px;font-size:0.82rem;line-height:1.6;overflow-x:auto;margin:12px 0;border:1px solid rgba(22,163,74,0.3);}
+  .code-block .cmt{color:#9fd9ef;}
+  .code-block .fn{color:#7dd3fc;}
+  code{background:var(--bg-soft);padding:2px 6px;border-radius:5px;font-size:0.85em;color:var(--green-deep);}
+
+  .key-table-wrap{overflow-x:auto;}
+
+  .qbox{background:var(--bg-soft);border:1px dashed var(--green-soft);border-radius:12px;padding:14px 16px;margin:16px 0;}
+  .qbox b{color:var(--teal);display:block;margin-bottom:6px;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em;}
+
+  #toTop{
+    position:fixed;bottom:22px;right:22px;z-index:40;width:46px;height:46px;border-radius:50%;
+    background:linear-gradient(135deg,var(--green),var(--teal));color:var(--green-light);border:none;font-size:1.2rem;cursor:pointer;
+    box-shadow:0 8px 20px rgba(15,122,61,0.3);display:none;align-items:center;justify-content:center;
+  }
+
+  footer{text-align:center;padding:30px 20px 50px;color:var(--ink-soft);font-size:0.85rem;}
+  footer a{color:var(--green-deep);text-decoration:none;font-weight:600;}
+
+  mark{background:var(--green-soft);color:var(--ink);padding:0 2px;border-radius:3px;}
+  .hide{display:none !important;}
+
+  /* Language switching */
+  [data-hi], [data-en]{display:none;}
+  html[lang="hi"] [data-hi].inline, html[lang="hi"] span[data-hi]{display:inline;}
+  html[lang="hi"] [data-hi].block{display:block;}
+  html[lang="hi"] [data-hi].flex{display:flex;}
+  html[lang="hi"] th[data-hi], html[lang="hi"] td[data-hi]{display:table-cell;}
+  html[lang="en"] [data-en].inline, html[lang="en"] span[data-en]{display:inline;}
+  html[lang="en"] [data-en].block{display:block;}
+  html[lang="en"] [data-en].flex{display:flex;}
+  html[lang="en"] th[data-en], html[lang="en"] td[data-en]{display:table-cell;}
+</style>
+</head>
+<body>
+<div id="__backNotesBtn" style="position:fixed;top:14px;left:14px;z-index:9999;">
+<a href="../../notes-theory.html" style="display:flex;align-items:center;gap:7px;text-decoration:none;
+background:rgba(255,255,255,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+border:1px solid rgba(0,0,0,.08);color:#2A2620;font-family:'Poppins',Arial,sans-serif;
+font-size:.82rem;font-weight:600;padding:9px 16px 9px 12px;border-radius:30px;
+box-shadow:0 6px 18px rgba(0,0,0,.14);transition:transform .25s,box-shadow .25s;">
+<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+<span>Notes</span></a></div>
+<style>
+#__backNotesBtn a:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,0,0,.2)}
+@media(max-width:600px){#__backNotesBtn{top:10px;left:10px}#__backNotesBtn a{padding:8px 14px 8px 10px;font-size:.78rem}}
+</style>
+
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span><span class="brand-text">Advanced Excel Concepts</span></div>
+  <div class="topbar-actions">
+    <div class="lang-toggle" id="langToggle" data-lang="hi" onclick="setLang(this.dataset.lang==='hi'?'en':'hi')">
+      <div class="lang-pill"></div>
+      <button type="button" id="btnHi">हिं</button>
+      <button type="button" id="btnEn">EN</button>
+    </div>
+    <button class="menu-btn" onclick="toggleSidebar(event)">🌐 <span class="menu-text" data-hi="inline">विषय सूची</span><span class="menu-text" data-en="inline">Topics</span></button>
+  </div>
+</div>
+
+<div class="hero">
+  <span class="eyebrow">● ITI · COPA · UP Board Pattern</span>
+  <h1>
+    <span data-hi="block" class="block">Advanced Excel<br>Concepts<br><span class="grad">सम्पूर्ण नोट्स</span></span>
+    <span data-en="block" class="block">Advanced Excel<br>Concepts<br><span class="grad">Complete Notes</span></span>
+  </h1>
+  <p data-hi="block" class="block">Formulas की बुनियाद से लेकर PivotTable और Macros तक — हिंदी और इंग्लिश दोनों में, परीक्षा के हिसाब से तैयार।</p>
+  <p data-en="block" class="block">From the basics of Formulas to PivotTables and Macros — available in both Hindi and English, exam-ready.</p>
+  <div class="hero-stats">
+    <div class="stat-chip"><b>14</b><span data-hi="inline">Units</span><span data-en="inline">Units</span></div>
+    <div class="stat-chip"><b>85+</b><span data-hi="inline">Topics</span><span data-en="inline">Topics</span></div>
+    <div class="stat-chip"><b>2</b><span data-hi="inline">भाषाएं</span><span data-en="inline">Languages</span></div>
+  </div>
+</div>
+
+<div class="toolbar">
+  <div class="search-wrap">
+    <input type="text" id="searchInput" data-hi-placeholder="कोई भी टॉपिक खोजें... जैसे: VLOOKUP, PivotTable, Macro" data-en-placeholder="Search any topic... e.g. VLOOKUP, PivotTable, Macro" placeholder="कोई भी टॉपिक खोजें... जैसे: VLOOKUP, PivotTable, Macro" oninput="liveSearch()">
+  </div>
+</div>
+
+<div class="sidebar-overlay" id="overlay" onclick="toggleSidebar(event)"></div>
+
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <button class="close-sidebar" onclick="toggleSidebar(event)">✕</button>
+    <h4 data-hi="block" class="block">एक्सेल बेसिक्स</h4>
+    <h4 data-en="block" class="block">Excel Basics</h4>
+    <a class="nav-link" href="#unit1"><span class="num">01</span><span data-hi="inline">Excel का परिचय (Recap)</span><span data-en="inline">Introduction to Excel (Recap)</span></a>
+    <a class="nav-link" href="#unit2"><span class="num">02</span><span data-hi="inline">Cell Referencing</span><span data-en="inline">Cell Referencing</span></a>
+    <h4 data-hi="block" class="block">फॉर्मूला & फंक्शन्स</h4>
+    <h4 data-en="block" class="block">Formulas & Functions</h4>
+    <a class="nav-link" href="#unit3"><span class="num">03</span><span data-hi="inline">Basic Functions</span><span data-en="inline">Basic Functions</span></a>
+    <a class="nav-link" href="#unit4"><span class="num">04</span><span data-hi="inline">Logical Functions</span><span data-en="inline">Logical Functions</span></a>
+    <a class="nav-link" href="#unit5"><span class="num">05</span><span data-hi="inline">Text Functions</span><span data-en="inline">Text Functions</span></a>
+    <a class="nav-link" href="#unit6"><span class="num">06</span><span data-hi="inline">Date & Time Functions</span><span data-en="inline">Date & Time Functions</span></a>
+    <a class="nav-link" href="#unit7"><span class="num">07</span><span data-hi="inline">Lookup Functions</span><span data-en="inline">Lookup Functions</span></a>
+    <h4 data-hi="block" class="block">डेटा मैनेजमेंट</h4>
+    <h4 data-en="block" class="block">Data Management</h4>
+    <a class="nav-link" href="#unit8"><span class="num">08</span><span data-hi="inline">Sorting & Filtering</span><span data-en="inline">Sorting & Filtering</span></a>
+    <a class="nav-link" href="#unit9"><span class="num">09</span><span data-hi="inline">Conditional Formatting & Validation</span><span data-en="inline">Conditional Formatting & Validation</span></a>
+    <h4 data-hi="block" class="block">एनालिसिस & ऑटोमेशन</h4>
+    <h4 data-en="block" class="block">Analysis & Automation</h4>
+    <a class="nav-link" href="#unit10"><span class="num">10</span><span data-hi="inline">Charts & Graphs</span><span data-en="inline">Charts & Graphs</span></a>
+    <a class="nav-link" href="#unit11"><span class="num">11</span><span data-hi="inline">PivotTable & PivotChart</span><span data-en="inline">PivotTable & PivotChart</span></a>
+    <a class="nav-link" href="#unit12"><span class="num">12</span><span data-hi="inline">What-If Analysis</span><span data-en="inline">What-If Analysis</span></a>
+    <a class="nav-link" href="#unit13"><span class="num">13</span><span data-hi="inline">Macros & Protection</span><span data-en="inline">Macros & Protection</span></a>
+    <h4 data-hi="block" class="block">रिवीज़न</h4>
+    <h4 data-en="block" class="block">Revision</h4>
+    <a class="nav-link" href="#unit14"><span class="num">14</span><span data-hi="inline">Important Q&A</span><span data-en="inline">Important Q&A</span></a>
+  </aside>
+
+  <main class="content" id="content">
+    <!-- UNIT 1 -->
+    <section class="unit-card" id="unit1">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 01 · एक्सेल बेसिक्स</span><span data-en="inline">Unit 01 · Excel Basics</span></span>
+        <h2><span data-hi="inline">Excel का परिचय (Recap)</span><span data-en="inline">Introduction to Excel (Recap)</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">MS Excel क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is MS Excel?</h3>
+        <p data-hi="block" class="block"><strong>MS Excel</strong> Microsoft का एक spreadsheet software है, जिसमें data को rows और columns की grid में organize, calculate, और analyze किया जाता है।</p>
+        <p data-en="block" class="block"><strong>MS Excel</strong> is a spreadsheet software by Microsoft, used to organize, calculate, and analyze data in a grid of rows and columns.</p>
+
+        <h3 data-hi="flex" class="flex">Workbook, Worksheet, Cell</h3>
+        <h3 data-en="flex" class="flex">Workbook, Worksheet, Cell</h3>
+        <table>
+          <tr><th>Term</th><th data-hi="inline">मतलब</th><th data-en="inline">Meaning</th></tr>
+          <tr><td>Workbook</td><td><span data-hi="inline">पूरी Excel file, जिसमें कई sheets हो सकती हैं</span><span data-en="inline">The entire Excel file, which can contain multiple sheets</span></td></tr>
+          <tr><td>Worksheet</td><td><span data-hi="inline">एक single sheet, rows और columns से बनी (tab में दिखती है)</span><span data-en="inline">A single sheet made of rows and columns (shown as a tab)</span></td></tr>
+          <tr><td>Cell</td><td><span data-hi="inline">Row और Column के intersection से बना box, जैसे A1, B2</span><span data-en="inline">The box formed by a row-column intersection, like A1, B2</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Ribbon & Important Tabs</h3>
+        <h3 data-en="flex" class="flex">Ribbon & Important Tabs</h3>
+        <table>
+          <tr><th>Tab</th><th data-hi="inline">काम</th><th data-en="inline">Purpose</th></tr>
+          <tr><td>Home</td><td><span data-hi="inline">Font, alignment, formatting, basic editing</span><span data-en="inline">Font, alignment, formatting, basic editing</span></td></tr>
+          <tr><td>Insert</td><td><span data-hi="inline">Charts, Tables, PivotTable, Images insert करना</span><span data-en="inline">Inserting Charts, Tables, PivotTable, Images</span></td></tr>
+          <tr><td>Formulas</td><td><span data-hi="inline">सभी functions और formula auditing tools</span><span data-en="inline">All functions and formula auditing tools</span></td></tr>
+          <tr><td>Data</td><td><span data-hi="inline">Sort, Filter, Data Validation, What-If Analysis</span><span data-en="inline">Sort, Filter, Data Validation, What-If Analysis</span></td></tr>
+          <tr><td>Review</td><td><span data-hi="inline">Spell check, Protect Sheet/Workbook, Comments</span><span data-en="inline">Spell check, Protect Sheet/Workbook, Comments</span></td></tr>
+          <tr><td>View</td><td><span data-hi="inline">Freeze panes, Zoom, Gridlines on/off</span><span data-en="inline">Freeze panes, Zoom, Gridlines on/off</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Cell Address व Name Box</h3>
+        <h3 data-en="flex" class="flex">Cell Address & Name Box</h3>
+        <p data-hi="block" class="block">हर cell का एक unique address होता है — Column letter + Row number (जैसे B5)। Name Box में address type करके सीधे उस cell पर जा सकते हैं।</p>
+        <p data-en="block" class="block">Every cell has a unique address — Column letter + Row number (like B5). Typing an address in the Name Box jumps directly to that cell.</p>
+
+        <div class="note-box">
+          <span data-hi="inline"><b>याद रखें:</b> एक Workbook में by default कई Worksheets हो सकती हैं, और हर worksheet में 16,384 columns (A to XFD) और 1,048,576 rows होती हैं (Excel 2016+ में)।</span>
+          <span data-en="inline"><b>Remember:</b> a Workbook can contain multiple Worksheets, and each worksheet has 16,384 columns (A to XFD) and 1,048,576 rows (in Excel 2016+).</span>
+        </div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">Workbook और Worksheet में अंतर बताइए। Ribbon के मुख्य tabs और उनके काम लिखिए। Cell किसे कहते हैं?</span>
+          <span data-en="inline">Differentiate between Workbook and Worksheet. Write the main Ribbon tabs and their purpose. What is a Cell?</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 2 -->
+    <section class="unit-card" id="unit2">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 02 · एक्सेल बेसिक्स</span><span data-en="inline">Unit 02 · Excel Basics</span></span>
+        <h2><span data-hi="inline">Cell Referencing</span><span data-en="inline">Cell Referencing</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Cell Reference क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is a Cell Reference?</h3>
+        <p data-hi="block" class="block"><strong>Cell Reference</strong> किसी formula में किसी cell का address use करना है, ताकि उस cell की value formula में automatically आ जाए — manual typing की ज़रूरत नहीं पड़ती।</p>
+        <p data-en="block" class="block">A <strong>Cell Reference</strong> means using a cell's address in a formula so its value is pulled in automatically — no need to type it manually.</p>
+
+        <h3 data-hi="flex" class="flex">Relative, Absolute & Mixed Reference</h3>
+        <h3 data-en="flex" class="flex">Relative, Absolute & Mixed Reference</h3>
+        <table>
+          <tr><th>Type</th><th data-hi="inline">Example</th><th data-hi="inline">विशेषता</th><th data-en="inline">Feature</th></tr>
+          <tr><td>Relative</td><td>A1</td><td><span data-hi="inline">Copy करने पर row/column के हिसाब से बदल जाता है</span><span data-en="inline">Changes based on row/column when copied</span></td></tr>
+          <tr><td>Absolute</td><td>$A$1</td><td><span data-hi="inline">Copy करने पर भी fix रहता है, $ sign लगाया जाता है</span><span data-en="inline">Stays fixed when copied, marked with $ sign</span></td></tr>
+          <tr><td>Mixed</td><td>$A1 या A$1</td><td><span data-hi="inline">सिर्फ column या सिर्फ row fix रहता है</span><span data-en="inline">Only the column or only the row stays fixed</span></td></tr>
+        </table>
+        <div class="code-block">=A1*$B$1   <span class="cmt">// A1 relative, $B$1 absolute</span></div>
+
+        <h3 data-hi="flex" class="flex">F4 Key Shortcut</h3>
+        <h3 data-en="flex" class="flex">F4 Key Shortcut</h3>
+        <p data-hi="block" class="block">Formula में किसी cell reference को select करके <code>F4</code> press करने से Relative → Absolute → Mixed → वापस Relative cycle में बदलता है।</p>
+        <p data-en="block" class="block">Selecting a cell reference in a formula and pressing <code>F4</code> cycles it through Relative → Absolute → Mixed → back to Relative.</p>
+
+        <h3 data-hi="flex" class="flex">3D Reference</h3>
+        <h3 data-en="flex" class="flex">3D Reference</h3>
+        <p data-hi="block" class="block">3D Reference कई worksheets की same cell range को एक formula में एक साथ refer करता है, जैसे <code>=SUM(Sheet1:Sheet3!A1)</code>।</p>
+        <p data-en="block" class="block">A 3D Reference refers to the same cell range across multiple worksheets in one formula, like <code>=SUM(Sheet1:Sheet3!A1)</code>.</p>
+
+        <div class="note-box">
+          <span data-hi="inline"><b>याद रखें:</b> Absolute reference में $ row और column दोनों के पहले लगता है (जैसे $A$1) ताकि copy/fill करने पर भी value fix रहे।</span>
+          <span data-en="inline"><b>Remember:</b> in an absolute reference, $ appears before both the column and row (like $A$1) so the value stays fixed even when copied/filled.</span>
+        </div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">Relative और Absolute Reference में अंतर बताइए, उदाहरण सहित। Mixed Reference क्या है? F4 key का क्या काम है?</span>
+          <span data-en="inline">Differentiate between Relative and Absolute Reference with examples. What is a Mixed Reference? What is the use of the F4 key?</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 3 -->
+    <section class="unit-card" id="unit3">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 03 · फॉर्मूला & फंक्शन्स</span><span data-en="inline">Unit 03 · Formulas & Functions</span></span>
+        <h2><span data-hi="inline">Basic Functions</span><span data-en="inline">Basic Functions</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Formula vs Function</h3>
+        <h3 data-en="flex" class="flex">Formula vs Function</h3>
+        <table>
+          <tr><th>Formula</th><th>Function</th></tr>
+          <tr><td><span data-hi="inline">User द्वारा खुद बनाई गई calculation, = से शुरू होती है</span><span data-en="inline">A calculation built by the user, starts with =</span></td><td><span data-hi="inline">Excel में पहले से बना हुआ predefined formula</span><span data-en="inline">A predefined formula built into Excel</span></td></tr>
+          <tr><td>=A1+B1</td><td>=SUM(A1:B1)</td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Common Basic Functions</h3>
+        <h3 data-en="flex" class="flex">Common Basic Functions</h3>
+        <table>
+          <tr><th>Function</th><th data-hi="inline">काम</th><th data-en="inline">Purpose</th></tr>
+          <tr><td>SUM()</td><td><span data-hi="inline">Range के numbers का जोड़ निकालता है</span><span data-en="inline">Adds up numbers in a range</span></td></tr>
+          <tr><td>AVERAGE()</td><td><span data-hi="inline">Numbers का average निकालता है</span><span data-en="inline">Finds the average of numbers</span></td></tr>
+          <tr><td>COUNT()</td><td><span data-hi="inline">Numbers वाले cells गिनता है</span><span data-en="inline">Counts cells containing numbers</span></td></tr>
+          <tr><td>COUNTA()</td><td><span data-hi="inline">Non-empty cells गिनता है (text भी)</span><span data-en="inline">Counts non-empty cells (including text)</span></td></tr>
+          <tr><td>MAX() / MIN()</td><td><span data-hi="inline">सबसे बड़ी / सबसे छोटी value निकालता है</span><span data-en="inline">Finds the largest / smallest value</span></td></tr>
+          <tr><td>COUNTIF()</td><td><span data-hi="inline">किसी condition को match करने वाले cells गिनता है</span><span data-en="inline">Counts cells matching a condition</span></td></tr>
+          <tr><td>SUMIF()</td><td><span data-hi="inline">किसी condition के according numbers का जोड़ निकालता है</span><span data-en="inline">Adds numbers matching a condition</span></td></tr>
+        </table>
+        <div class="code-block">=SUM(A1:A10)
+=AVERAGE(B1:B10)
+=COUNTIF(A1:A10,"&gt;50")
+=SUMIF(A1:A10,"&gt;50",B1:B10)</div>
+
+        <h3 data-hi="flex" class="flex">AutoSum & Fill Handle</h3>
+        <h3 data-en="flex" class="flex">AutoSum & Fill Handle</h3>
+        <p data-hi="block" class="block"><strong>AutoSum</strong> (Σ button) automatically SUM formula डाल देता है। <strong>Fill Handle</strong> (cell के corner पर छोटा square) drag करके formula/series को आगे copy किया जा सकता है।</p>
+        <p data-en="block" class="block"><strong>AutoSum</strong> (Σ button) automatically inserts a SUM formula. The <strong>Fill Handle</strong> (small square at the cell's corner) can be dragged to copy a formula/series forward.</p>
+
+        <div class="note-box">
+          <span data-hi="inline"><b>याद रखें:</b> हर formula = sign से शुरू होता है, और function के arguments हमेशा () के अंदर, comma से separated होते हैं।</span>
+          <span data-en="inline"><b>Remember:</b> every formula starts with =, and a function's arguments always go inside (), separated by commas.</span>
+        </div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">Formula और Function में अंतर बताइए। SUM, AVERAGE, COUNT, COUNTIF, SUMIF के syntax उदाहरण सहित लिखिए।</span>
+          <span data-en="inline">Differentiate between Formula and Function. Write the syntax of SUM, AVERAGE, COUNT, COUNTIF, SUMIF with examples.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 4 -->
+    <section class="unit-card" id="unit4">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 04 · फॉर्मूला & फंक्शन्स</span><span data-en="inline">Unit 04 · Formulas & Functions</span></span>
+        <h2><span data-hi="inline">Logical Functions</span><span data-en="inline">Logical Functions</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">IF Function</h3>
+        <h3 data-en="flex" class="flex">IF Function</h3>
+        <p data-hi="block" class="block"><strong>IF</strong> किसी condition को check करके दो में से एक result देता है — true होने पर एक value, false होने पर दूसरी।</p>
+        <p data-en="block" class="block"><strong>IF</strong> checks a condition and returns one of two results — one value if true, another if false.</p>
+        <div class="code-block">=IF(A1&gt;=40,"Pass","Fail")</div>
+
+        <h3 data-hi="flex" class="flex">Nested IF</h3>
+        <h3 data-en="flex" class="flex">Nested IF</h3>
+        <p data-hi="block" class="block">जब एक से ज़्यादा conditions check करनी हों, तब एक IF के अंदर दूसरा IF लगाया जाता है (Nested IF)।</p>
+        <p data-en="block" class="block">When multiple conditions need checking, an IF is placed inside another IF (Nested IF).</p>
+        <div class="code-block">=IF(A1&gt;=90,"A",IF(A1&gt;=75,"B",IF(A1&gt;=60,"C","D")))</div>
+
+        <h3 data-hi="flex" class="flex">AND, OR, NOT Functions</h3>
+        <h3 data-en="flex" class="flex">AND, OR, NOT Functions</h3>
+        <table>
+          <tr><th>Function</th><th data-hi="inline">काम</th><th data-en="inline">Purpose</th></tr>
+          <tr><td>AND()</td><td><span data-hi="inline">सभी conditions true हों तभी TRUE देता है</span><span data-en="inline">Returns TRUE only if all conditions are true</span></td></tr>
+          <tr><td>OR()</td><td><span data-hi="inline">कोई एक भी condition true हो तो TRUE देता है</span><span data-en="inline">Returns TRUE if any one condition is true</span></td></tr>
+          <tr><td>NOT()</td><td><span data-hi="inline">Condition को उल्टा कर देता है</span><span data-en="inline">Reverses the condition</span></td></tr>
+        </table>
+        <div class="code-block">=IF(AND(A1&gt;=40,B1&gt;=40),"Pass","Fail")</div>
+
+        <h3 data-hi="flex" class="flex">IFERROR Function</h3>
+        <h3 data-en="flex" class="flex">IFERROR Function</h3>
+        <p data-hi="block" class="block"><code>IFERROR</code> किसी formula में error आने पर एक custom message/value दिखाता है, ताकि #DIV/0! जैसी ugly errors छुप जाएं।</p>
+        <p data-en="block" class="block"><code>IFERROR</code> shows a custom message/value when a formula returns an error, hiding ugly errors like #DIV/0!.</p>
+        <div class="code-block">=IFERROR(A1/B1,"Error")</div>
+
+        <div class="note-box">
+          <span data-hi="inline"><b>याद रखें:</b> IF function के 3 arguments होते हैं — condition, value_if_true, value_if_false।</span>
+          <span data-en="inline"><b>Remember:</b> the IF function has 3 arguments — condition, value_if_true, value_if_false.</span>
+        </div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">IF function का syntax उदाहरण सहित लिखिए। Nested IF क्या है? AND और OR function में अंतर बताइए।</span>
+          <span data-en="inline">Write the syntax of the IF function with an example. What is Nested IF? Differentiate between AND and OR function.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 5 -->
+    <section class="unit-card" id="unit5">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 05 · फॉर्मूला & फंक्शन्स</span><span data-en="inline">Unit 05 · Formulas & Functions</span></span>
+        <h2><span data-hi="inline">Text Functions</span><span data-en="inline">Text Functions</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Common Text Functions</h3>
+        <h3 data-en="flex" class="flex">Common Text Functions</h3>
+        <table>
+          <tr><th>Function</th><th data-hi="inline">काम</th><th data-en="inline">Purpose</th></tr>
+          <tr><td>LEFT()</td><td><span data-hi="inline">Text के left से दिए गए characters निकालता है</span><span data-en="inline">Extracts characters from the left of text</span></td></tr>
+          <tr><td>RIGHT()</td><td><span data-hi="inline">Text के right से दिए गए characters निकालता है</span><span data-en="inline">Extracts characters from the right of text</span></td></tr>
+          <tr><td>MID()</td><td><span data-hi="inline">Text के बीच से characters निकालता है</span><span data-en="inline">Extracts characters from the middle of text</span></td></tr>
+          <tr><td>LEN()</td><td><span data-hi="inline">Text की length (characters की संख्या) बताता है</span><span data-en="inline">Returns the length (number of characters) of text</span></td></tr>
+          <tr><td>CONCATENATE() / &</td><td><span data-hi="inline">कई text strings को जोड़ता है</span><span data-en="inline">Joins multiple text strings</span></td></tr>
+          <tr><td>UPPER() / LOWER()</td><td><span data-hi="inline">Text को uppercase / lowercase में बदलता है</span><span data-en="inline">Converts text to uppercase / lowercase</span></td></tr>
+          <tr><td>PROPER()</td><td><span data-hi="inline">हर word का पहला letter capital करता है</span><span data-en="inline">Capitalizes the first letter of each word</span></td></tr>
+          <tr><td>TRIM()</td><td><span data-hi="inline">Text से extra spaces हटाता है</span><span data-en="inline">Removes extra spaces from text</span></td></tr>
+        </table>
+        <div class="code-block">=LEFT(A1,3)
+=MID(A1,2,4)
+=A1 & " " & B1
+=PROPER(A1)
+=TRIM(A1)</div>
+
+        <h3 data-hi="flex" class="flex">FIND() vs SEARCH()</h3>
+        <h3 data-en="flex" class="flex">FIND() vs SEARCH()</h3>
+        <table>
+          <tr><th>FIND</th><th>SEARCH</th></tr>
+          <tr><td><span data-hi="inline">Case-sensitive होता है</span><span data-en="inline">Case-sensitive</span></td><td><span data-hi="inline">Case-insensitive होता है</span><span data-en="inline">Case-insensitive</span></td></tr>
+          <tr><td><span data-hi="inline">Wildcards support नहीं करता</span><span data-en="inline">Does not support wildcards</span></td><td><span data-hi="inline">Wildcards (* , ?) support करता है</span><span data-en="inline">Supports wildcards (*, ?)</span></td></tr>
+        </table>
+
+        <div class="note-box">
+          <span data-hi="inline"><b>याद रखें:</b> & operator और CONCATENATE() दोनों text जोड़ने के लिए use होते हैं — & ज़्यादा short और common तरीका है।</span>
+          <span data-en="inline"><b>Remember:</b> both the & operator and CONCATENATE() are used to join text — & is the shorter, more common method.</span>
+        </div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">LEFT, RIGHT, MID functions उदाहरण सहित समझाइए। UPPER और PROPER में अंतर बताइए। दो text strings कैसे जोड़ें?</span>
+          <span data-en="inline">Explain LEFT, RIGHT, MID functions with examples. Differentiate between UPPER and PROPER. How do you join two text strings?</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 6 -->
+    <section class="unit-card" id="unit6">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 06 · फॉर्मूला & फंक्शन्स</span><span data-en="inline">Unit 06 · Formulas & Functions</span></span>
+        <h2><span data-hi="inline">Date & Time Functions</span><span data-en="inline">Date & Time Functions</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Common Date Functions</h3>
+        <h3 data-en="flex" class="flex">Common Date Functions</h3>
+        <table>
+          <tr><th>Function</th><th data-hi="inline">काम</th><th data-en="inline">Purpose</th></tr>
+          <tr><td>TODAY()</td><td><span data-hi="inline">आज की date देता है (current date)</span><span data-en="inline">Returns today's date (current date)</span></td></tr>
+          <tr><td>NOW()</td><td><span data-hi="inline">आज की date और time दोनों देता है</span><span data-en="inline">Returns both today's date and time</span></td></tr>
+          <tr><td>DATE()</td><td><span data-hi="inline">Year, Month, Day से date बनाता है</span><span data-en="inline">Builds a date from Year, Month, Day</span></td></tr>
+          <tr><td>DAY() / MONTH() / YEAR()</td><td><span data-hi="inline">किसी date से day/month/year निकालता है</span><span data-en="inline">Extracts day/month/year from a date</span></td></tr>
+          <tr><td>DATEDIF()</td><td><span data-hi="inline">दो dates के बीच का अंतर निकालता है (days/months/years)</span><span data-en="inline">Finds the difference between two dates (days/months/years)</span></td></tr>
+        </table>
+        <div class="code-block">=TODAY()
+=YEAR(A1)
+=DATEDIF(A1,B1,"D")</div>
+
+        <h3 data-hi="flex" class="flex">Time Functions</h3>
+        <h3 data-en="flex" class="flex">Time Functions</h3>
+        <table>
+          <tr><th>Function</th><th data-hi="inline">काम</th><th data-en="inline">Purpose</th></tr>
+          <tr><td>TIME()</td><td><span data-hi="inline">Hour, Minute, Second से time बनाता है</span><span data-en="inline">Builds a time from Hour, Minute, Second</span></td></tr>
+          <tr><td>HOUR() / MINUTE() / SECOND()</td><td><span data-hi="inline">Time value से hour/minute/second निकालता है</span><span data-en="inline">Extracts hour/minute/second from a time value</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Date Arithmetic</h3>
+        <h3 data-en="flex" class="flex">Date Arithmetic</h3>
+        <p data-hi="block" class="block">Excel में dates को internally serial numbers की तरह store किया जाता है, इसलिए dates पर सीधे addition/subtraction किया जा सकता है — जैसे <code>=A1+30</code> 30 दिन बाद की date देगा।</p>
+        <p data-en="block" class="block">Excel internally stores dates as serial numbers, so dates can be added/subtracted directly — e.g. <code>=A1+30</code> gives the date 30 days later.</p>
+
+        <div class="note-box">
+          <span data-hi="inline"><b>याद रखें:</b> TODAY() और NOW() dynamic functions हैं — हर बार sheet open/calculate होने पर current date/time से update हो जाते हैं।</span>
+          <span data-en="inline"><b>Remember:</b> TODAY() and NOW() are dynamic functions — they update to the current date/time every time the sheet opens/recalculates.</span>
+        </div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">TODAY() और NOW() में अंतर बताइए। DATEDIF function का उपयोग उदाहरण सहित लिखिए। YEAR, MONTH, DAY functions समझाइए।</span>
+          <span data-en="inline">Differentiate between TODAY() and NOW(). Write the use of DATEDIF function with an example. Explain YEAR, MONTH, DAY functions.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 7 -->
+    <section class="unit-card" id="unit7">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 07 · फॉर्मूला & फंक्शन्स</span><span data-en="inline">Unit 07 · Formulas & Functions</span></span>
+        <h2><span data-hi="inline">Lookup Functions</span><span data-en="inline">Lookup Functions</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">VLOOKUP Function</h3>
+        <h3 data-en="flex" class="flex">VLOOKUP Function</h3>
+        <p data-hi="block" class="block"><strong>VLOOKUP</strong> (Vertical Lookup) किसी value को table के पहले column में ढूँढता है, और उसी row से किसी और column की value return करता है।</p>
+        <p data-en="block" class="block"><strong>VLOOKUP</strong> (Vertical Lookup) searches for a value in the first column of a table and returns a value from another column in the same row.</p>
+        <div class="code-block">=VLOOKUP(lookup_value, table_array, col_index_num, [range_lookup])
+=VLOOKUP(A2,Sheet2!A:C,3,FALSE)</div>
+
+        <table>
+          <tr><th>Argument</th><th data-hi="inline">मतलब</th><th data-en="inline">Meaning</th></tr>
+          <tr><td>lookup_value</td><td><span data-hi="inline">जो value ढूँढनी है</span><span data-en="inline">The value to search for</span></td></tr>
+          <tr><td>table_array</td><td><span data-hi="inline">जिस range में ढूँढना है</span><span data-en="inline">The range to search within</span></td></tr>
+          <tr><td>col_index_num</td><td><span data-hi="inline">किस column से value लानी है</span><span data-en="inline">Which column to return the value from</span></td></tr>
+          <tr><td>range_lookup</td><td><span data-hi="inline">FALSE = exact match, TRUE = approximate match</span><span data-en="inline">FALSE = exact match, TRUE = approximate match</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">HLOOKUP Function</h3>
+        <h3 data-en="flex" class="flex">HLOOKUP Function</h3>
+        <p data-hi="block" class="block"><strong>HLOOKUP</strong> (Horizontal Lookup) VLOOKUP जैसा ही है, पर data को rows में horizontally search करता है, columns में नहीं।</p>
+        <p data-en="block" class="block"><strong>HLOOKUP</strong> (Horizontal Lookup) works like VLOOKUP but searches data horizontally across rows instead of columns.</p>
+
+        <h3 data-hi="flex" class="flex">INDEX & MATCH</h3>
+        <h3 data-en="flex" class="flex">INDEX & MATCH</h3>
+        <p data-hi="block" class="block"><strong>INDEX-MATCH</strong> combination VLOOKUP से ज़्यादा flexible है — left की तरफ भी lookup कर सकता है और column add/remove होने पर भी सही काम करता है।</p>
+        <p data-en="block" class="block">The <strong>INDEX-MATCH</strong> combination is more flexible than VLOOKUP — it can look up to the left and keeps working correctly even if columns are added/removed.</p>
+        <div class="code-block">=INDEX(C:C,MATCH(A2,A:A,0))</div>
+
+        <div class="imp-box">
+          <span data-hi="inline"><b>Exam Tip:</b> VLOOKUP में lookup column हमेशा table_array के सबसे left column में होना चाहिए — यही इसकी सबसे बड़ी limitation है।</span>
+          <span data-en="inline"><b>Exam Tip:</b> in VLOOKUP, the lookup column must always be the leftmost column of the table_array — this is its biggest limitation.</span>
+        </div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">VLOOKUP function का syntax उदाहरण सहित लिखिए। VLOOKUP और HLOOKUP में अंतर बताइए। range_lookup argument का क्या काम है?</span>
+          <span data-en="inline">Write the syntax of VLOOKUP with an example. Differentiate between VLOOKUP and HLOOKUP. What is the use of the range_lookup argument?</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 8 -->
+    <section class="unit-card" id="unit8">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 08 · डेटा मैनेजमेंट</span><span data-en="inline">Unit 08 · Data Management</span></span>
+        <h2><span data-hi="inline">Sorting & Filtering</span><span data-en="inline">Sorting & Filtering</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Sorting क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is Sorting?</h3>
+        <p data-hi="block" class="block"><strong>Sorting</strong> data को एक particular order (Ascending/Descending) में arrange करता है — Numbers, Text, या Dates के according।</p>
+        <p data-en="block" class="block"><strong>Sorting</strong> arranges data in a particular order (Ascending/Descending) — by Numbers, Text, or Dates.</p>
+        <table>
+          <tr><th>Type</th><th data-hi="inline">मतलब</th><th data-en="inline">Meaning</th></tr>
+          <tr><td>Ascending (A-Z)</td><td><span data-hi="inline">छोटे से बड़े / A से Z order में</span><span data-en="inline">Smallest to largest / A to Z order</span></td></tr>
+          <tr><td>Descending (Z-A)</td><td><span data-hi="inline">बड़े से छोटे / Z से A order में</span><span data-en="inline">Largest to smallest / Z to A order</span></td></tr>
+          <tr><td>Custom Sort</td><td><span data-hi="inline">Multiple columns/criteria के according sort</span><span data-en="inline">Sort by multiple columns/criteria</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Filtering क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is Filtering?</h3>
+        <p data-hi="block" class="block"><strong>Filter</strong> data में से सिर्फ वही rows दिखाता है जो किसी condition को match करती हैं, बाकी temporarily hide हो जाती हैं।</p>
+        <p data-en="block" class="block">A <strong>Filter</strong> shows only the rows matching a condition, hiding the rest temporarily.</p>
+
+        <h3 data-hi="flex" class="flex">AutoFilter vs Advanced Filter</h3>
+        <h3 data-en="flex" class="flex">AutoFilter vs Advanced Filter</h3>
+        <table>
+          <tr><th>AutoFilter</th><th>Advanced Filter</th></tr>
+          <tr><td><span data-hi="inline">Column header में dropdown arrows से basic filtering</span><span data-en="inline">Basic filtering via dropdown arrows in column headers</span></td><td><span data-hi="inline">Complex multiple-condition filtering, अलग criteria range के साथ</span><span data-en="inline">Complex multiple-condition filtering, with a separate criteria range</span></td></tr>
+        </table>
+
+        <div class="note-box">
+          <span data-hi="inline"><b>याद रखें:</b> Sort permanently data का order बदल देता है, जबकि Filter सिर्फ rows को temporarily hide करता है — data delete नहीं होता।</span>
+          <span data-en="inline"><b>Remember:</b> Sort permanently changes the order of data, while Filter only hides rows temporarily — no data is deleted.</span>
+        </div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">Sorting और Filtering में अंतर बताइए। Ascending और Descending sort किसे कहते हैं? AutoFilter कैसे apply करते हैं?</span>
+          <span data-en="inline">Differentiate between Sorting and Filtering. What are Ascending and Descending sort? How do you apply AutoFilter?</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 9 -->
+    <section class="unit-card" id="unit9">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 09 · डेटा मैनेजमेंट</span><span data-en="inline">Unit 09 · Data Management</span></span>
+        <h2><span data-hi="inline">Conditional Formatting & Data Validation</span><span data-en="inline">Conditional Formatting & Data Validation</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Conditional Formatting क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is Conditional Formatting?</h3>
+        <p data-hi="block" class="block"><strong>Conditional Formatting</strong> cells को उनकी value के according automatically format (रंग, icon, data bar) करता है — पैटर्न और trends को visually highlight करने के लिए।</p>
+        <p data-en="block" class="block"><strong>Conditional Formatting</strong> automatically formats cells (color, icon, data bar) based on their value — useful for visually highlighting patterns and trends.</p>
+
+        <table>
+          <tr><th>Type</th><th data-hi="inline">काम</th><th data-en="inline">Purpose</th></tr>
+          <tr><td>Highlight Cell Rules</td><td><span data-hi="inline">Greater Than, Less Than, Equal To जैसी rules पर रंग देना</span><span data-en="inline">Coloring based on rules like Greater Than, Less Than, Equal To</span></td></tr>
+          <tr><td>Data Bars</td><td><span data-hi="inline">Cell के अंदर value के according bar दिखाना</span><span data-en="inline">Shows a bar inside the cell based on the value</span></td></tr>
+          <tr><td>Color Scales</td><td><span data-hi="inline">Value range के according रंग gradient देना</span><span data-en="inline">Applies a color gradient based on the value range</span></td></tr>
+          <tr><td>Icon Sets</td><td><span data-hi="inline">Arrows/symbols से value को represent करना</span><span data-en="inline">Represents values using arrows/symbols</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Data Validation क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is Data Validation?</h3>
+        <p data-hi="block" class="block"><strong>Data Validation</strong> control करता है कि किसी cell में कौन सा data enter किया जा सकता है — गलत/invalid entries रोकने के लिए (जैसे dropdown list, number range)।</p>
+        <p data-en="block" class="block"><strong>Data Validation</strong> controls what data can be entered in a cell — preventing incorrect/invalid entries (like a dropdown list, number range).</p>
+
+        <table>
+          <tr><th>Validation Type</th><th data-hi="inline">काम</th><th data-en="inline">Purpose</th></tr>
+          <tr><td>List</td><td><span data-hi="inline">सिर्फ given options में से choose करने देता है (dropdown)</span><span data-en="inline">Allows choosing only from given options (dropdown)</span></td></tr>
+          <tr><td>Whole Number / Decimal</td><td><span data-hi="inline">सिर्फ एक range के numbers allow करता है</span><span data-en="inline">Allows only numbers within a range</span></td></tr>
+          <tr><td>Date</td><td><span data-hi="inline">सिर्फ एक specific date range allow करता है</span><span data-en="inline">Allows only a specific date range</span></td></tr>
+        </table>
+
+        <div class="note-box">
+          <span data-hi="inline"><b>याद रखें:</b> Data Validation Data tab में मिलता है, और invalid entry पर एक custom Error Alert message भी set किया जा सकता है।</span>
+          <span data-en="inline"><b>Remember:</b> Data Validation is found in the Data tab, and a custom Error Alert message can be set for invalid entries.</span>
+        </div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">Conditional Formatting किसे कहते हैं, उदाहरण सहित समझाइए। Data Validation का क्या उपयोग है? Dropdown list कैसे बनाई जाती है?</span>
+          <span data-en="inline">What is Conditional Formatting, explain with an example. What is the use of Data Validation? How is a dropdown list created?</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 10 -->
+    <section class="unit-card" id="unit10">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 10 · एनालिसिस & ऑटोमेशन</span><span data-en="inline">Unit 10 · Analysis & Automation</span></span>
+        <h2><span data-hi="inline">Charts & Graphs</span><span data-en="inline">Charts & Graphs</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Chart क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is a Chart?</h3>
+        <p data-hi="block" class="block"><strong>Chart</strong> numeric data को visual (graphical) रूप में represent करता है, जिससे trends और comparisons आसानी से समझ आते हैं।</p>
+        <p data-en="block" class="block">A <strong>Chart</strong> represents numeric data visually (graphically), making trends and comparisons easier to understand.</p>
+
+        <h3 data-hi="flex" class="flex">Common Chart Types</h3>
+        <h3 data-en="flex" class="flex">Common Chart Types</h3>
+        <table>
+          <tr><th>Chart Type</th><th data-hi="inline">कब use करें</th><th data-en="inline">When to use</th></tr>
+          <tr><td>Column/Bar Chart</td><td><span data-hi="inline">Categories के बीच values compare करने के लिए</span><span data-en="inline">For comparing values across categories</span></td></tr>
+          <tr><td>Line Chart</td><td><span data-hi="inline">Time के साथ trend दिखाने के लिए</span><span data-en="inline">For showing trends over time</span></td></tr>
+          <tr><td>Pie Chart</td><td><span data-hi="inline">Whole में से हर part का percentage दिखाने के लिए</span><span data-en="inline">For showing each part's percentage of a whole</span></td></tr>
+          <tr><td>Scatter Chart</td><td><span data-hi="inline">दो variables के बीच relationship दिखाने के लिए</span><span data-en="inline">For showing the relationship between two variables</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Chart Elements</h3>
+        <h3 data-en="flex" class="flex">Chart Elements</h3>
+        <table>
+          <tr><th>Element</th><th data-hi="inline">मतलब</th><th data-en="inline">Meaning</th></tr>
+          <tr><td>Chart Title</td><td><span data-hi="inline">Chart का नाम/heading</span><span data-en="inline">The name/heading of the chart</span></td></tr>
+          <tr><td>Legend</td><td><span data-hi="inline">हर color/series का meaning बताता है</span><span data-en="inline">Explains what each color/series means</span></td></tr>
+          <tr><td>Axis (X & Y)</td><td><span data-hi="inline">Horizontal (categories) और Vertical (values) axis</span><span data-en="inline">Horizontal (categories) and Vertical (values) axis</span></td></tr>
+          <tr><td>Data Labels</td><td><span data-hi="inline">हर data point की actual value दिखाते हैं</span><span data-en="inline">Show the actual value of each data point</span></td></tr>
+        </table>
+
+        <div class="note-box">
+          <span data-hi="inline"><b>याद रखें:</b> Chart बनाने के लिए पहले data select करें, फिर Insert tab से चाहा गया chart type चुनें (या shortcut F11 से default chart बनता है)।</span>
+          <span data-en="inline"><b>Remember:</b> to create a chart, first select the data, then pick the chart type from the Insert tab (or use F11 for a default chart).</span>
+        </div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">Chart किसे कहते हैं? कोई 4 chart types उदाहरण सहित लिखिए। Chart Title और Legend में अंतर बताइए।</span>
+          <span data-en="inline">What is a Chart? Write any 4 chart types with examples. Differentiate between Chart Title and Legend.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 11 -->
+    <section class="unit-card" id="unit11">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 11 · एनालिसिस & ऑटोमेशन</span><span data-en="inline">Unit 11 · Analysis & Automation</span></span>
+        <h2><span data-hi="inline">PivotTable & PivotChart</span><span data-en="inline">PivotTable & PivotChart</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">PivotTable क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is a PivotTable?</h3>
+        <p data-hi="block" class="block"><strong>PivotTable</strong> बड़े data को quickly summarize, group, और analyze करने का powerful tool है — बिना कोई formula लिखे, drag-and-drop से।</p>
+        <p data-en="block" class="block">A <strong>PivotTable</strong> is a powerful tool to quickly summarize, group, and analyze large data — without writing any formula, just by drag-and-drop.</p>
+
+        <h3 data-hi="flex" class="flex">PivotTable के मुख्य Areas</h3>
+        <h3 data-en="flex" class="flex">Main Areas of a PivotTable</h3>
+        <table>
+          <tr><th>Area</th><th data-hi="inline">काम</th><th data-en="inline">Purpose</th></tr>
+          <tr><td>Filters</td><td><span data-hi="inline">पूरे report को किसी field से filter करता है</span><span data-en="inline">Filters the entire report by a field</span></td></tr>
+          <tr><td>Rows</td><td><span data-hi="inline">Data को rows में group करता है</span><span data-en="inline">Groups data into rows</span></td></tr>
+          <tr><td>Columns</td><td><span data-hi="inline">Data को columns में group करता है</span><span data-en="inline">Groups data into columns</span></td></tr>
+          <tr><td>Values</td><td><span data-hi="inline">Actual calculations (Sum, Count, Average) दिखाता है</span><span data-en="inline">Shows actual calculations (Sum, Count, Average)</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">PivotTable बनाने के Steps</h3>
+        <h3 data-en="flex" class="flex">Steps to Create a PivotTable</h3>
+        <ol data-hi="block" class="block">
+          <li>Data range select करें (headers सहित)</li>
+          <li>Insert tab → PivotTable पर click करें</li>
+          <li>New Worksheet या Existing Worksheet चुनें</li>
+          <li>Field List से fields को Rows, Columns, Values, Filters में drag करें</li>
+        </ol>
+        <ol data-en="block" class="block">
+          <li>Select the data range (including headers)</li>
+          <li>Go to Insert tab → click PivotTable</li>
+          <li>Choose New Worksheet or Existing Worksheet</li>
+          <li>Drag fields from the Field List into Rows, Columns, Values, Filters</li>
+        </ol>
+
+        <h3 data-hi="flex" class="flex">PivotChart</h3>
+        <h3 data-en="flex" class="flex">PivotChart</h3>
+        <p data-hi="block" class="block"><strong>PivotChart</strong> PivotTable के data को visual chart के रूप में दिखाता है — PivotTable change होने पर automatically update हो जाता है।</p>
+        <p data-en="block" class="block">A <strong>PivotChart</strong> displays PivotTable data as a visual chart — it updates automatically when the PivotTable changes.</p>
+
+        <div class="imp-box">
+          <span data-hi="inline"><b>Exam Tip:</b> PivotTable का सबसे बड़ा फायदा यह है कि बड़े data में से quick summary बिना formula लिखे मिल जाती है, और fields को drag करके instantly layout बदल सकते हैं।</span>
+          <span data-en="inline"><b>Exam Tip:</b> the biggest advantage of a PivotTable is getting a quick summary from large data without writing formulas, and instantly changing the layout by dragging fields.</span>
+        </div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">PivotTable किसे कहते हैं? इसके मुख्य areas समझाइए। PivotTable बनाने के steps लिखिए।</span>
+          <span data-en="inline">What is a PivotTable? Explain its main areas. Write the steps to create a PivotTable.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 12 -->
+    <section class="unit-card" id="unit12">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 12 · एनालिसिस & ऑटोमेशन</span><span data-en="inline">Unit 12 · Analysis & Automation</span></span>
+        <h2><span data-hi="inline">What-If Analysis</span><span data-en="inline">What-If Analysis</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">What-If Analysis क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is What-If Analysis?</h3>
+        <p data-hi="block" class="block"><strong>What-If Analysis</strong> tools की मदद से अलग-अलग values डालकर देखा जाता है कि formula के results कैसे बदलते हैं — बिना actual data permanently change किए।</p>
+        <p data-en="block" class="block"><strong>What-If Analysis</strong> tools let you test different values to see how formula results change — without permanently altering the actual data.</p>
+
+        <h3 data-hi="flex" class="flex">Goal Seek</h3>
+        <h3 data-en="flex" class="flex">Goal Seek</h3>
+        <p data-hi="block" class="block"><strong>Goal Seek</strong> उल्टा तरीके से काम करता है — आप desired result बताते हैं, और Excel calculate करता है कि input value क्या होनी चाहिए।</p>
+        <p data-en="block" class="block"><strong>Goal Seek</strong> works backwards — you specify the desired result, and Excel calculates what the input value should be.</p>
+        <table>
+          <tr><th data-hi="inline">Field</th><th data-en="inline">Field</th><th data-hi="inline">मतलब</th><th data-en="inline">Meaning</th></tr>
+          <tr><td colspan="2">Set Cell</td><td><span data-hi="inline">वो formula cell जिसका result चाहिए</span><span data-en="inline">The formula cell whose result you want</span></td></tr>
+          <tr><td colspan="2">To Value</td><td><span data-hi="inline">वो target value जो चाहिए</span><span data-en="inline">The target value you want</span></td></tr>
+          <tr><td colspan="2">By Changing Cell</td><td><span data-hi="inline">वो input cell जो adjust होगी</span><span data-en="inline">The input cell that will be adjusted</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Data Table</h3>
+        <h3 data-en="flex" class="flex">Data Table</h3>
+        <p data-hi="block" class="block"><strong>Data Table</strong> एक formula पर कई अलग-अलग input values का effect एक साथ table में देखने देता है (One-Variable या Two-Variable Data Table)।</p>
+        <p data-en="block" class="block">A <strong>Data Table</strong> shows the effect of multiple different input values on a formula at once, in a table (One-Variable or Two-Variable Data Table).</p>
+
+        <h3 data-hi="flex" class="flex">Scenario Manager</h3>
+        <h3 data-en="flex" class="flex">Scenario Manager</h3>
+        <p data-hi="block" class="block"><strong>Scenario Manager</strong> कई अलग-अलग input combinations ("scenarios") को save करके, switch करके compare करने देता है — जैसे Best Case, Worst Case, Average Case।</p>
+        <p data-en="block" class="block"><strong>Scenario Manager</strong> lets you save multiple different input combinations ("scenarios") and switch between them to compare — like Best Case, Worst Case, Average Case.</p>
+
+        <div class="note-box">
+          <span data-hi="inline"><b>याद रखें:</b> Goal Seek सिर्फ एक input variable adjust करता है, जबकि Scenario Manager कई variables के combination save कर सकता है।</span>
+          <span data-en="inline"><b>Remember:</b> Goal Seek adjusts only one input variable, while Scenario Manager can save combinations of multiple variables.</span>
+        </div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">What-If Analysis किसे कहते हैं? Goal Seek के तीन fields समझाइए। Scenario Manager का क्या उपयोग है?</span>
+          <span data-en="inline">What is What-If Analysis? Explain the three fields of Goal Seek. What is the use of Scenario Manager?</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 13 -->
+    <section class="unit-card" id="unit13">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 13 · एनालिसिस & ऑटोमेशन</span><span data-en="inline">Unit 13 · Analysis & Automation</span></span>
+        <h2><span data-hi="inline">Macros & Protection</span><span data-en="inline">Macros & Protection</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Macro क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is a Macro?</h3>
+        <p data-hi="block" class="block"><strong>Macro</strong> actions की एक recorded series है जिसे एक click में बार-बार चलाया जा सकता है — repetitive tasks को automate करने के लिए use होता है।</p>
+        <p data-en="block" class="block">A <strong>Macro</strong> is a recorded series of actions that can be replayed with a single click — used to automate repetitive tasks.</p>
+
+        <h3 data-hi="flex" class="flex">Macro Record करना</h3>
+        <h3 data-en="flex" class="flex">Recording a Macro</h3>
+        <ol data-hi="block" class="block">
+          <li>View tab → Macros → Record Macro</li>
+          <li>Macro को नाम दें और shortcut key (optional) set करें</li>
+          <li>जो actions automate करनी हैं वो perform करें</li>
+          <li>View tab → Macros → Stop Recording</li>
+        </ol>
+        <ol data-en="block" class="block">
+          <li>View tab → Macros → Record Macro</li>
+          <li>Give the macro a name and an optional shortcut key</li>
+          <li>Perform the actions you want to automate</li>
+          <li>View tab → Macros → Stop Recording</li>
+        </ol>
+
+        <h3 data-hi="flex" class="flex">VBA (Visual Basic for Applications)</h3>
+        <h3 data-en="flex" class="flex">VBA (Visual Basic for Applications)</h3>
+        <p data-hi="block" class="block"><strong>VBA</strong> वो programming language है जिसमें Excel macros internally लिखे जाते हैं — Developer tab → Visual Basic से VBA editor खोला जा सकता है।</p>
+        <p data-en="block" class="block"><strong>VBA</strong> is the programming language in which Excel macros are written internally — the VBA editor can be opened via Developer tab → Visual Basic.</p>
+
+        <h3 data-hi="flex" class="flex">Protecting Worksheet & Workbook</h3>
+        <h3 data-en="flex" class="flex">Protecting Worksheet & Workbook</h3>
+        <table>
+          <tr><th>Protection Type</th><th data-hi="inline">काम</th><th data-en="inline">Purpose</th></tr>
+          <tr><td>Protect Sheet</td><td><span data-hi="inline">Cells को edit होने से रोकता है (password optional)</span><span data-en="inline">Prevents cells from being edited (password optional)</span></td></tr>
+          <tr><td>Protect Workbook</td><td><span data-hi="inline">Sheets को add/delete/rename होने से रोकता है</span><span data-en="inline">Prevents sheets from being added/deleted/renamed</span></td></tr>
+          <tr><td>Encrypt with Password</td><td><span data-hi="inline">पूरी file को खोलने के लिए password ज़रूरी कर देता है</span><span data-en="inline">Requires a password to open the entire file</span></td></tr>
+        </table>
+
+        <div class="note-box">
+          <span data-hi="inline"><b>याद रखें:</b> Macros .xlsx file में save नहीं होते — Macro-enabled file को .xlsm format में save करना ज़रूरी है।</span>
+          <span data-en="inline"><b>Remember:</b> macros don't save in a .xlsx file — a macro-enabled file must be saved in .xlsm format.</span>
+        </div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">Macro किसे कहते हैं? Macro record करने के steps लिखिए। Protect Sheet और Protect Workbook में अंतर बताइए।</span>
+          <span data-en="inline">What is a Macro? Write the steps to record a macro. Differentiate between Protect Sheet and Protect Workbook.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 14 -->
+    <section class="unit-card" id="unit14">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 14 · रिवीज़न</span><span data-en="inline">Unit 14 · Revision</span></span>
+        <h2><span data-hi="inline">Important Q&A — फटाफट रिवीज़न</span><span data-en="inline">Important Q&A — Quick Revision</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">1-line Definitions (रटने के लिए)</h3>
+        <h3 data-en="flex" class="flex">1-line Definitions (to memorize)</h3>
+        <ul data-hi="block" class="block">
+          <li><strong>Cell Reference</strong> — formula में किसी cell का address use करना</li>
+          <li><strong>Absolute Reference</strong> — copy करने पर भी fix रहने वाला reference ($A$1)</li>
+          <li><strong>VLOOKUP</strong> — table के पहले column में value ढूँढने वाला function</li>
+          <li><strong>PivotTable</strong> — बड़े data को drag-and-drop से summarize करने वाला tool</li>
+          <li><strong>Conditional Formatting</strong> — value के according cell को automatically format करना</li>
+          <li><strong>Data Validation</strong> — cell में valid data ही enter होने देने वाला feature</li>
+          <li><strong>Goal Seek</strong> — desired result से input value calculate करने वाला tool</li>
+          <li><strong>Macro</strong> — actions की recorded series जो automate होती है</li>
+          <li><strong>Chart</strong> — data को visual रूप में represent करना</li>
+          <li><strong>Nested IF</strong> — एक IF function के अंदर दूसरा IF function</li>
+        </ul>
+        <ul data-en="block" class="block">
+          <li><strong>Cell Reference</strong> — using a cell's address in a formula</li>
+          <li><strong>Absolute Reference</strong> — a reference that stays fixed when copied ($A$1)</li>
+          <li><strong>VLOOKUP</strong> — a function that searches for a value in the first column of a table</li>
+          <li><strong>PivotTable</strong> — a tool that summarizes large data via drag-and-drop</li>
+          <li><strong>Conditional Formatting</strong> — automatically formatting a cell based on its value</li>
+          <li><strong>Data Validation</strong> — a feature that ensures only valid data is entered in a cell</li>
+          <li><strong>Goal Seek</strong> — a tool that calculates the input value needed for a desired result</li>
+          <li><strong>Macro</strong> — a recorded series of actions that gets automated</li>
+          <li><strong>Chart</strong> — representing data visually</li>
+          <li><strong>Nested IF</strong> — an IF function placed inside another IF function</li>
+        </ul>
+
+        <h3 data-hi="flex" class="flex">महत्वपूर्ण Function Syntax Quick Table</h3>
+        <h3 data-en="flex" class="flex">Important Function Syntax Quick Table</h3>
+        <table>
+          <tr><th>Function</th><th>Syntax</th></tr>
+          <tr><td>SUM</td><td>=SUM(range)</td></tr>
+          <tr><td>IF</td><td>=IF(condition,true_val,false_val)</td></tr>
+          <tr><td>VLOOKUP</td><td>=VLOOKUP(value,table,col_index,FALSE)</td></tr>
+          <tr><td>COUNTIF</td><td>=COUNTIF(range,criteria)</td></tr>
+          <tr><td>CONCATENATE</td><td>=A1&" "&B1</td></tr>
+          <tr><td>DATEDIF</td><td>=DATEDIF(start,end,"D")</td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Frequently Asked Long Questions</h3>
+        <h3 data-en="flex" class="flex">Frequently Asked Long Questions</h3>
+        <ol data-hi="block" class="block">
+          <li>Cell Referencing किसे कहते हैं? Relative, Absolute और Mixed Reference में अंतर बताइए।</li>
+          <li>IF function क्या है? Nested IF का उदाहरण देकर समझाइए।</li>
+          <li>VLOOKUP function का syntax और उपयोग उदाहरण सहित लिखिए।</li>
+          <li>Conditional Formatting और Data Validation में अंतर बताइए।</li>
+          <li>PivotTable किसे कहते हैं? इसे बनाने के steps लिखिए।</li>
+          <li>What-If Analysis के तीन tools (Goal Seek, Data Table, Scenario Manager) समझाइए।</li>
+          <li>Macro किसे कहते हैं? इसे record करने के steps लिखिए।</li>
+        </ol>
+        <ol data-en="block" class="block">
+          <li>What is Cell Referencing? Differentiate between Relative, Absolute and Mixed Reference.</li>
+          <li>What is the IF function? Explain Nested IF with an example.</li>
+          <li>Write the syntax and use of the VLOOKUP function with an example.</li>
+          <li>Differentiate between Conditional Formatting and Data Validation.</li>
+          <li>What is a PivotTable? Write the steps to create it.</li>
+          <li>Explain the three What-If Analysis tools (Goal Seek, Data Table, Scenario Manager).</li>
+          <li>What is a Macro? Write the steps to record one.</li>
+        </ol>
+
+        <div class="imp-box">
+          <span data-hi="inline"><b>आखिरी टिप:</b> पेपर से पहले सभी "संभावित परीक्षा प्रश्न" बॉक्स को एक बार ज़रूर पढ़ लें — यही सबसे common questions हैं।</span>
+          <span data-en="inline"><b>Final Tip:</b> Before the exam, make sure to read through all the "Likely Exam Questions" boxes once — these are the most common questions.</span>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<button id="toTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<footer>
+  <span data-hi="inline">Made with 💚 for ITI-COPA students</span>
+  <span data-en="inline">Made with 💚 for ITI-COPA students</span>
+  &nbsp;·&nbsp; by <a href="https://surajtiwarrii.github.io/Portfolio/" target="_blank">Suraj Tiwari</a>
+</footer>
+
+<script>
+function setLang(lang){
+  document.documentElement.lang = lang;
+  document.getElementById('langToggle').dataset.lang = lang;
+  document.getElementById('btnHi').classList.toggle('active', lang==='hi');
+  document.getElementById('btnEn').classList.toggle('active', lang==='en');
+  const input = document.getElementById('searchInput');
+  input.placeholder = lang==='en' ? input.dataset.enPlaceholder : input.dataset.hiPlaceholder;
+  localStorage.setItem('excelNotesLang', lang);
+}
+document.addEventListener('DOMContentLoaded', ()=>{
+  const saved = localStorage.getItem('excelNotesLang') || 'hi';
+  setLang(saved);
+});
+
+function toggleSidebar(e){
+  if(e) e.stopPropagation();
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('open');
+}
+window.addEventListener('scroll',()=>{
+  document.getElementById('toTop').style.display = window.scrollY>400 ? 'flex':'none';
+});
+function liveSearch(){
+  const q = document.getElementById('searchInput').value.trim().toLowerCase();
+  const cards = document.querySelectorAll('.unit-card');
+  if(!q){ cards.forEach(c=>c.classList.remove('hide')); return; }
+  cards.forEach(card=>{
+    const text = card.innerText.toLowerCase();
+    card.classList.toggle('hide', !text.includes(q));
+  });
+}
+const links = document.querySelectorAll('.nav-link');
+const sections = document.querySelectorAll('.unit-card');
+window.addEventListener('scroll',()=>{
+  let current='';
+  sections.forEach(sec=>{ if(window.scrollY >= sec.offsetTop - 100) current = sec.id; });
+  links.forEach(l=>{ l.classList.toggle('active', l.getAttribute('href')==='#'+current); });
+});
+document.querySelectorAll('.nav-link').forEach(l=>{
+  l.addEventListener('click',()=>{ if(window.innerWidth<=880) toggleSidebar(); });
+});
+</script>
+
+</body>
+</html>

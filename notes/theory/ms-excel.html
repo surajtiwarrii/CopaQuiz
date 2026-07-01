@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spreadsheet Application (MS Excel) — Hindi/English | ITI COPA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Hind:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f5f5ea;--bs:#d8d97e;--p:rgba(255,255,255,0.45);--ps:rgba(255,255,255,0.82);--pg:rgba(255,255,255,0.35);--d:#4a5c14;--m:#7c8c2a;--s:#c8cc7a;--l:#f5f5e0;--ms:rgba(124,140,42,0.18);--t:#5a6e18;--ts:rgba(90,110,24,0.10);--ink:#252810;--is:#6a7845;--ln:rgba(74,92,20,0.22);--r:18px;}
+*{box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{margin:0;font-family:'Hind',sans-serif;background:radial-gradient(1200px 600px at 10% -10%,var(--ms),transparent 60%),radial-gradient(1000px 700px at 110% 10%,var(--ts),transparent 55%),var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;}
+h1,h2,h3{font-family:'Fraunces',serif;}
+.tb{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:rgba(245,245,234,0.6);backdrop-filter:blur(12px);border-bottom:1px solid var(--ln);gap:10px;}
+.brand{font-size:1rem;font-weight:700;color:var(--d);display:flex;align-items:center;gap:8px;font-family:'Fraunces',serif;}
+.brand .dot{width:9px;height:9px;border-radius:50%;background:linear-gradient(135deg,var(--m),var(--t));}
+.ta{display:flex;gap:8px;align-items:center;}
+.mb{background:rgba(124,140,42,0.18);color:var(--d);border:1px solid rgba(124,140,42,0.55);padding:9px 16px;border-radius:30px;font-family:'Hind';font-weight:700;font-size:0.9rem;cursor:pointer;background-image:linear-gradient(135deg,rgba(200,204,122,0.6),rgba(124,140,42,0.4));box-shadow:0 6px 16px rgba(74,92,20,0.15);}
+.lt{display:flex;align-items:center;background:var(--pg);border:1px solid var(--ln);backdrop-filter:blur(8px);border-radius:30px;padding:3px;position:relative;cursor:pointer;}
+.lt button{border:none;background:transparent;padding:7px 13px;border-radius:24px;font-family:'Hind';font-weight:700;font-size:0.8rem;cursor:pointer;color:var(--is);position:relative;z-index:2;transition:color 0.25s;}
+.lt button.active{color:var(--d);}
+.lp{position:absolute;top:3px;bottom:3px;left:3px;width:calc(50% - 3px);background:linear-gradient(135deg,var(--s),var(--m));border-radius:24px;transition:transform 0.25s ease;z-index:1;}
+.lt[data-lang="en"] .lp{transform:translateX(100%);}
+.hero{padding:60px 20px 36px;text-align:center;}
+.ey{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono';font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--d);background:var(--pg);backdrop-filter:blur(8px);border:1px solid var(--s);padding:6px 14px;border-radius:30px;margin-bottom:18px;}
+.hero h1{font-size:clamp(1.7rem,5.5vw,2.8rem);line-height:1.15;margin:0 0 14px;color:var(--ink);font-weight:700;}
+.grad{background:linear-gradient(100deg,var(--d),var(--m) 50%,var(--t));-webkit-background-clip:text;background-clip:text;color:transparent;}
+.hero p{max-width:600px;margin:0 auto 24px;color:var(--is);font-size:1rem;line-height:1.65;}
+.hs{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+.sc{background:var(--p);border:1px solid var(--ln);border-radius:14px;backdrop-filter:blur(8px);padding:12px 18px;min-width:108px;}
+.sc b{display:block;font-family:'Fraunces',serif;font-size:1.3rem;color:var(--d);}
+.sc span{font-size:0.74rem;color:var(--is);}
+.tw{max-width:900px;margin:22px auto 0;padding:0 20px;}
+.sw{position:relative;}
+#si{width:100%;padding:13px 16px 13px 42px;border-radius:30px;border:1px solid var(--ln);background:var(--p);backdrop-filter:blur(8px);font-family:'Hind';font-size:0.95rem;color:var(--ink);outline:none;}
+#si:focus{border-color:var(--m);}
+.sw::before{content:"⌕";position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--d);font-size:1.1rem;}
+.layout{max-width:1180px;margin:14px auto 80px;padding:0 20px;display:grid;grid-template-columns:255px 1fr;gap:26px;}
+.sidebar{background:var(--p);border:1px solid var(--ln);border-radius:var(--r);backdrop-filter:blur(10px);padding:18px 14px;height:fit-content;position:sticky;top:78px;max-height:calc(100vh - 100px);overflow-y:auto;}
+.sidebar h4{font-family:'JetBrains Mono';font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--is);margin:14px 6px 8px;}
+.sidebar h4:first-child{margin-top:2px;}
+.nl{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:10px;color:var(--ink);text-decoration:none;font-size:0.88rem;font-weight:500;transition:background 0.15s;}
+.nl:hover{background:var(--ms);}
+.nl.active{background:linear-gradient(120deg,var(--ms),var(--ts));color:var(--d);font-weight:700;}
+.nl .nm{font-family:'JetBrains Mono';font-size:0.68rem;color:var(--t);min-width:20px;}
+.cs{display:none;}
+@media(max-width:880px){.layout{display:block;}.sidebar{position:fixed !important;inset:0 18% 0 0;z-index:60;transform:translateX(-105%);transition:transform 0.3s ease;overflow-y:auto;top:0;height:100vh;max-height:100vh;}.sidebar.open{transform:translateX(0);}.ov{display:none;position:fixed;inset:0;background:rgba(10,15,2,0.4);z-index:55;}.ov.open{display:block;}.cs{display:block;margin-left:auto;background:none;border:1px solid var(--ln);border-radius:50%;width:34px;height:34px;font-size:1rem;color:var(--ink);cursor:pointer;}.brand span.bt{display:none;}.mb span.mt{display:none;}}
+.content{min-width:0;}
+.uc{background:var(--p);border:1px solid var(--ln);border-radius:var(--r);margin-bottom:22px;overflow:hidden;scroll-margin-top:80px;box-shadow:0 6px 24px rgba(74,92,20,0.08);backdrop-filter:blur(10px);}
+.uh{padding:22px 24px 18px;background:linear-gradient(120deg,rgba(124,140,42,0.18),rgba(74,92,20,0.10));border-bottom:1px solid var(--ln);}
+.ut{font-family:'JetBrains Mono';font-size:0.7rem;color:var(--t);letter-spacing:0.08em;text-transform:uppercase;display:block;margin-bottom:6px;}
+.uh h2{margin:0;font-size:1.4rem;color:var(--d);}
+.ub{padding:20px 24px 26px;}
+.ub h3{font-size:1.05rem;color:var(--ink);margin:22px 0 8px;display:flex;align-items:center;gap:8px;}
+.ub h3::before{content:"";width:5px;height:18px;border-radius:3px;background:linear-gradient(180deg,var(--m),var(--t));}
+.ub h3:first-child{margin-top:2px;}
+.ub p,.ub ul,.ub ol{line-height:1.75;color:var(--ink);margin:6px 0 12px;font-size:0.97rem;}
+.ub ul,.ub ol{padding-left:22px;}
+.ub li{margin-bottom:6px;font-size:0.95rem;}
+.ub strong{color:var(--d);}
+.nb{background:var(--ms);border-left:3px solid var(--m);border-radius:10px;padding:12px 16px;margin:14px 0;font-size:0.9rem;}
+.nb b{color:var(--d);}
+.ib{background:var(--ts);border-left:3px solid var(--t);border-radius:10px;padding:12px 16px;margin:14px 0;font-size:0.9rem;}
+.ib b{color:var(--t);}
+table{width:100%;border-collapse:collapse;margin:14px 0 18px;font-size:0.88rem;border-radius:10px;overflow:hidden;}
+th{background:linear-gradient(120deg,var(--m),var(--d));color:var(--l);text-align:left;padding:10px 12px;font-weight:600;}
+td{padding:9px 12px;border-bottom:1px solid var(--ln);background:var(--ps);}
+tr:last-child td{border-bottom:none;}
+tr:nth-child(even) td{background:var(--bs);}
+code{font-family:'JetBrains Mono';background:var(--bs);padding:2px 6px;border-radius:5px;font-size:0.85em;color:var(--d);}
+.qb{background:var(--bs);border:1px dashed var(--s);border-radius:12px;padding:14px 16px;margin:16px 0;}
+.qb b{color:var(--t);display:block;margin-bottom:6px;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em;}
+#tt{position:fixed;bottom:22px;right:22px;z-index:40;width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--m),var(--d));color:var(--l);border:none;font-size:1.2rem;cursor:pointer;box-shadow:0 8px 20px rgba(74,92,20,0.3);display:none;align-items:center;justify-content:center;}
+footer{text-align:center;padding:30px 20px 50px;color:var(--is);font-size:0.85rem;}
+footer a{color:var(--d);text-decoration:none;font-weight:600;}
+.hide{display:none !important;}
+[data-hi],[data-en]{display:none;}
+html[lang="hi"] [data-hi].i,html[lang="hi"] span[data-hi]{display:inline;}
+html[lang="hi"] [data-hi].b{display:block;}
+html[lang="hi"] [data-hi].f{display:flex;}
+html[lang="hi"] th[data-hi],html[lang="hi"] td[data-hi]{display:table-cell;}
+html[lang="en"] [data-en].i,html[lang="en"] span[data-en]{display:inline;}
+html[lang="en"] [data-en].b{display:block;}
+html[lang="en"] [data-en].f{display:flex;}
+html[lang="en"] th[data-en],html[lang="en"] td[data-en]{display:table-cell;}
+</style>
+</head>
+<body>
+<div id="__backNotesBtn" style="position:fixed;top:14px;left:14px;z-index:9999;">
+<a href="../../notes-theory.html" style="display:flex;align-items:center;gap:7px;text-decoration:none;
+background:rgba(255,255,255,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+border:1px solid rgba(0,0,0,.08);color:#2A2620;font-family:'Poppins',Arial,sans-serif;
+font-size:.82rem;font-weight:600;padding:9px 16px 9px 12px;border-radius:30px;
+box-shadow:0 6px 18px rgba(0,0,0,.14);transition:transform .25s,box-shadow .25s;">
+<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+<span>Notes</span></a></div>
+<style>
+#__backNotesBtn a:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,0,0,.2)}
+@media(max-width:600px){#__backNotesBtn{top:10px;left:10px}#__backNotesBtn a{padding:8px 14px 8px 10px;font-size:.78rem}}
+</style>
+
+<div class="tb">
+  <div class="brand"><span class="dot"></span><span class="bt">Spreadsheet (MS Excel)</span></div>
+  <div class="ta">
+    <div class="lt" id="lt" data-lang="hi" onclick="sL(this.dataset.lang==='hi'?'en':'hi')"><div class="lp"></div><button type="button" id="bh">हिं</button><button type="button" id="be">EN</button></div>
+    <button class="mb" onclick="tS(event)">📊 <span class="mt" data-hi="i">विषय सूची</span><span class="mt" data-en="i">Topics</span></button>
+  </div>
+</div>
+<div class="hero">
+  <span class="ey">● ITI · COPA · UP Board Pattern</span>
+  <h1><span data-hi="b" class="b">Spreadsheet Application<br>(MS Excel)<br><span class="grad">सम्पूर्ण नोट्स</span></span><span data-en="b" class="b">Spreadsheet Application<br>(MS Excel)<br><span class="grad">Complete Notes</span></span></h1>
+  <p data-hi="b" class="b">Cell Referencing से लेकर VLOOKUP, PivotTable, Charts, और What-If Analysis तक — हिंदी और इंग्लिश।</p>
+  <p data-en="b" class="b">From Cell Referencing to VLOOKUP, PivotTable, Charts, and What-If Analysis — Hindi & English.</p>
+  <div class="hs"><div class="sc"><b>12</b><span>Units</span></div><div class="sc"><b>80+</b><span>Topics</span></div><div class="sc"><b>2</b><span data-hi="i">भाषाएं</span><span data-en="i">Languages</span></div></div>
+</div>
+<div class="tw"><div class="sw"><input type="text" id="si" placeholder="खोजें... VLOOKUP, IF, PivotTable..." oninput="lS()"></div></div>
+<div class="ov" id="ov" onclick="tS(event)"></div>
+<div class="layout">
+  <aside class="sidebar" id="sb">
+    <button class="cs" onclick="tS(event)">✕</button>
+    <h4 data-hi="b" class="b">एक्सेल बेसिक्स</h4><h4 data-en="b" class="b">Excel Basics</h4>
+    <a class="nl" href="#u1"><span class="nm">01</span><span data-hi="i">Excel परिचय & Interface</span><span data-en="i">Excel Intro & Interface</span></a>
+    <a class="nl" href="#u2"><span class="nm">02</span><span data-hi="i">Workbook, Worksheet, Cell</span><span data-en="i">Workbook, Worksheet, Cell</span></a>
+    <a class="nl" href="#u3"><span class="nm">03</span><span data-hi="i">Cell Formatting & Data Entry</span><span data-en="i">Cell Formatting & Data Entry</span></a>
+    <a class="nl" href="#u4"><span class="nm">04</span><span data-hi="i">Cell Referencing</span><span data-en="i">Cell Referencing</span></a>
+    <h4 data-hi="b" class="b">Functions</h4><h4 data-en="b" class="b">Functions</h4>
+    <a class="nl" href="#u5"><span class="nm">05</span><span data-hi="i">Basic Functions</span><span data-en="i">Basic Functions</span></a>
+    <a class="nl" href="#u6"><span class="nm">06</span><span data-hi="i">Logical Functions (IF, AND, OR)</span><span data-en="i">Logical Functions (IF, AND, OR)</span></a>
+    <a class="nl" href="#u7"><span class="nm">07</span><span data-hi="i">Text & Date Functions</span><span data-en="i">Text & Date Functions</span></a>
+    <a class="nl" href="#u8"><span class="nm">08</span><span data-hi="i">Lookup Functions (VLOOKUP)</span><span data-en="i">Lookup Functions (VLOOKUP)</span></a>
+    <h4 data-hi="b" class="b">Data Management</h4><h4 data-en="b" class="b">Data Management</h4>
+    <a class="nl" href="#u9"><span class="nm">09</span><span data-hi="i">Sorting, Filtering & Validation</span><span data-en="i">Sorting, Filtering & Validation</span></a>
+    <a class="nl" href="#u10"><span class="nm">10</span><span data-hi="i">Conditional Formatting & Charts</span><span data-en="i">Conditional Formatting & Charts</span></a>
+    <a class="nl" href="#u11"><span class="nm">11</span><span data-hi="i">PivotTable & What-If Analysis</span><span data-en="i">PivotTable & What-If Analysis</span></a>
+    <h4 data-hi="b" class="b">रिवीज़न</h4><h4 data-en="b" class="b">Revision</h4>
+    <a class="nl" href="#u12"><span class="nm">12</span><span data-hi="i">Important Q&A</span><span data-en="i">Important Q&A</span></a>
+  </aside>
+  <main class="content" id="cn">
+
+<section class="uc" id="u1"><div class="uh"><span class="ut"><span data-hi="i">Unit 01 · एक्सेल बेसिक्स</span><span data-en="i">Unit 01 · Excel Basics</span></span><h2><span data-hi="i">MS Excel परिचय & Interface</span><span data-en="i">MS Excel Introduction & Interface</span></h2></div>
+<div class="ub">
+<p data-hi="b" class="b"><strong>MS Excel</strong> Microsoft का Spreadsheet application है — data को rows और columns की grid में organize, calculate, analyze, और chart करने के लिए।</p>
+<p data-en="b" class="b"><strong>MS Excel</strong> is Microsoft's Spreadsheet application — for organising, calculating, analysing, and charting data in a grid of rows and columns.</p>
+<h3 data-hi="f" class="f">Excel Interface Parts</h3><h3 data-en="f" class="f">Excel Interface Parts</h3>
+<table><tr><th>Part</th><th data-hi="i">काम</th><th data-en="i">Purpose</th></tr>
+<tr><td>Name Box</td><td><span data-hi="i">Current cell का address दिखाता है (जैसे A1), किसी cell पर directly navigate</span><span data-en="i">Shows the current cell's address (like A1); navigate directly to any cell</span></td></tr>
+<tr><td>Formula Bar</td><td><span data-hi="i">Selected cell का content/formula दिखाता और edit करता है</span><span data-en="i">Shows and edits the content/formula of the selected cell</span></td></tr>
+<tr><td>Column Headers</td><td><span data-hi="i">A, B, C... — columns identify करते हैं</span><span data-en="i">A, B, C... — identify columns</span></td></tr>
+<tr><td>Row Headers</td><td><span data-hi="i">1, 2, 3... — rows identify करते हैं</span><span data-en="i">1, 2, 3... — identify rows</span></td></tr>
+<tr><td>Sheet Tabs</td><td><span data-hi="i">Workbook में different worksheets के tabs</span><span data-en="i">Tabs for different worksheets in the workbook</span></td></tr>
+<tr><td>Fill Handle</td><td><span data-hi="i">Cell के bottom-right corner का small square — series fill, formula copy</span><span data-en="i">Small square at bottom-right of cell — fill series, copy formula</span></td></tr></table>
+<div class="qb"><b data-hi="b" class="b">संभावित परीक्षा प्रश्न</b><b data-en="b" class="b">Likely Exam Questions</b><span data-hi="i">MS Excel किसे कहते हैं? इसके Interface के मुख्य parts समझाइए। Name Box और Formula Bar में अंतर।</span><span data-en="i">What is MS Excel? Explain the main parts of its Interface. Difference between Name Box and Formula Bar.</span></div>
+</div></section>
+
+<section class="uc" id="u2"><div class="uh"><span class="ut"><span data-hi="i">Unit 02 · एक्सेल बेसिक्स</span><span data-en="i">Unit 02 · Excel Basics</span></span><h2><span data-hi="i">Workbook, Worksheet & Cell</span><span data-en="i">Workbook, Worksheet & Cell</span></h2></div>
+<div class="ub">
+<table><tr><th>Term</th><th data-hi="i">मतलब</th><th data-en="i">Meaning</th></tr>
+<tr><td>Workbook</td><td><span data-hi="i">पूरी Excel file (.xlsx) जिसमें कई worksheets हो सकती हैं</span><span data-en="i">The entire Excel file (.xlsx) which can contain multiple worksheets</span></td></tr>
+<tr><td>Worksheet</td><td><span data-hi="i">Individual sheet (tab), rows और columns की grid</span><span data-en="i">Individual sheet (tab), a grid of rows and columns</span></td></tr>
+<tr><td>Cell</td><td><span data-hi="i">Row और Column का intersection — data enter होती है यहाँ</span><span data-en="i">The intersection of a row and column — where data is entered</span></td></tr>
+<tr><td>Cell Address</td><td><span data-hi="i">Column letter + Row number — जैसे B5, A1</span><span data-en="i">Column letter + Row number — like B5, A1</span></td></tr>
+<tr><td>Cell Range</td><td><span data-hi="i">Multiple cells का group — जैसे A1:C5 (colon से denote)</span><span data-en="i">A group of multiple cells — like A1:C5 (denoted with a colon)</span></td></tr>
+<tr><td>Active Cell</td><td><span data-hi="i">Currently selected cell जो highlighted border से show होती है</span><span data-en="i">The currently selected cell shown with a highlighted border</span></td></tr></table>
+<h3 data-hi="f" class="f">Worksheet Operations</h3><h3 data-en="f" class="f">Worksheet Operations</h3>
+<table><tr><th>Operation</th><th data-hi="i">कैसे करें</th><th data-en="i">How to Do</th></tr>
+<tr><td>New Sheet</td><td colspan="2">Sheet tab के + button पर click</td></tr>
+<tr><td>Rename Sheet</td><td><span data-hi="i">Tab पर double-click → new name type</span><span data-en="i">Double-click the tab → type new name</span></td></tr>
+<tr><td>Delete Sheet</td><td><span data-hi="i">Tab पर right-click → Delete</span><span data-en="i">Right-click the tab → Delete</span></td></tr>
+<tr><td>Move/Copy Sheet</td><td><span data-hi="i">Tab पर right-click → Move or Copy</span><span data-en="i">Right-click the tab → Move or Copy</span></td></tr></table>
+<div class="nb"><span data-hi="i"><b>याद रखें:</b> Excel 2016+ में एक worksheet में 1,048,576 rows (1 million+) और 16,384 columns (A to XFD) होते हैं।</span><span data-en="i"><b>Remember:</b> Excel 2016+ has 1,048,576 rows (1 million+) and 16,384 columns (A to XFD) per worksheet.</span></div>
+<div class="qb"><b data-hi="b" class="b">संभावित परीक्षा प्रश्न</b><b data-en="b" class="b">Likely Exam Questions</b><span data-hi="i">Workbook और Worksheet में अंतर बताइए। Cell Address और Cell Range में अंतर। Worksheet कैसे add/rename/delete करें?</span><span data-en="i">Differentiate Workbook and Worksheet. Difference between Cell Address and Cell Range. How to add/rename/delete a Worksheet?</span></div>
+</div></section>
+
+<section class="uc" id="u3"><div class="uh"><span class="ut"><span data-hi="i">Unit 03 · एक्सेल बेसिक्स</span><span data-en="i">Unit 03 · Excel Basics</span></span><h2><span data-hi="i">Cell Formatting & Data Entry</span><span data-en="i">Cell Formatting & Data Entry</span></h2></div>
+<div class="ub">
+<h3 data-hi="f" class="f">Data Types in Excel</h3><h3 data-en="f" class="f">Data Types in Excel</h3>
+<table><tr><th>Type</th><th data-hi="i">मतलब</th><th data-en="i">Meaning</th></tr>
+<tr><td>Number</td><td><span data-hi="i">Numeric data — calculations में use (right aligned by default)</span><span data-en="i">Numeric data — used in calculations (right aligned by default)</span></td></tr>
+<tr><td>Text/Label</td><td><span data-hi="i">Alphabetic data — calculations में use नहीं (left aligned by default)</span><span data-en="i">Alphabetic data — not used in calculations (left aligned by default)</span></td></tr>
+<tr><td>Date/Time</td><td><span data-hi="i">Date और time values — internally numbers</span><span data-en="i">Date and time values — internally stored as numbers</span></td></tr>
+<tr><td>Formula</td><td><span data-hi="i">= से शुरू होने वाला expression जो calculate करता है</span><span data-en="i">An expression starting with = that calculates</span></td></tr></table>
+<h3 data-hi="f" class="f">Cell Formatting Options</h3><h3 data-en="f" class="f">Cell Formatting Options</h3>
+<table><tr><th>Option</th><th data-hi="i">काम</th><th data-en="i">Purpose</th></tr>
+<tr><td>Number Format</td><td><span data-hi="i">Currency, Percentage, Date, Decimal places set करना</span><span data-en="i">Setting Currency, Percentage, Date, Decimal places</span></td></tr>
+<tr><td>Font Formatting</td><td><span data-hi="i">Bold, Italic, Color, Size — same as Word</span><span data-en="i">Bold, Italic, Color, Size — same as Word</span></td></tr>
+<tr><td>Cell Alignment</td><td><span data-hi="i">Left, Center, Right, Top, Middle, Bottom</span><span data-en="i">Left, Center, Right, Top, Middle, Bottom</span></td></tr>
+<tr><td>Borders</td><td><span data-hi="i">Cell के चारों ओर borders add करना</span><span data-en="i">Adding borders around cells</span></td></tr>
+<tr><td>Fill Color</td><td><span data-hi="i">Cell background color set करना</span><span data-en="i">Setting cell background colour</span></td></tr>
+<tr><td>Wrap Text</td><td><span data-hi="i">Long text को cell में multiple lines में wrap करना</span><span data-en="i">Wrapping long text into multiple lines within the cell</span></td></tr>
+<tr><td>Merge & Center</td><td><span data-hi="i">Multiple cells को एक में merge करके center align</span><span data-en="i">Merging multiple cells into one and centre-aligning</span></td></tr></table>
+<div class="qb"><b data-hi="b" class="b">संभावित परीक्षा प्रश्न</b><b data-en="b" class="b">Likely Exam Questions</b><span data-hi="i">Excel में data types कौन-कौन से हैं? Merge & Center का क्या उपयोग है? Wrap Text क्या करता है?</span><span data-en="i">What are the data types in Excel? What is the use of Merge & Center? What does Wrap Text do?</span></div>
+</div></section>
+
+<section class="uc" id="u4"><div class="uh"><span class="ut"><span data-hi="i">Unit 04 · एक्सेल बेसिक्स</span><span data-en="i">Unit 04 · Excel Basics</span></span><h2>Cell Referencing</h2></div>
+<div class="ub">
+<table><tr><th>Type</th><th>Example</th><th data-hi="i">विशेषता</th><th data-en="i">Feature</th></tr>
+<tr><td>Relative Reference</td><td>A1</td><td><span data-hi="i">Copy करने पर row/column automatically adjust होता है</span><span data-en="i">Row/column automatically adjusts when copied</span></td></tr>
+<tr><td>Absolute Reference</td><td>$A$1</td><td><span data-hi="i">Copy करने पर भी fix रहता है — $ दोनों से पहले</span><span data-en="i">Stays fixed when copied — $ before both</span></td></tr>
+<tr><td>Mixed Reference</td><td>$A1 या A$1</td><td><span data-hi="i">सिर्फ column ($A1) या सिर्फ row (A$1) fix</span><span data-en="i">Only column ($A1) or only row (A$1) fixed</span></td></tr></table>
+<p data-hi="b" class="b">Formula में cell reference select करके <code>F4</code> press करने से Relative → Absolute → Mixed cycle में बदलता है।</p>
+<p data-en="b" class="b">In a formula, select the cell reference and press <code>F4</code> to cycle through Relative → Absolute → Mixed.</p>
+<div class="nb"><span data-hi="i"><b>याद रखें:</b> Absolute reference ($A$1) तब ज़रूरी होता है जब formula copy करते समय एक specific cell (जैसे tax rate) को fix रखना हो।</span><span data-en="i"><b>Remember:</b> Absolute reference ($A$1) is needed when a specific cell (like tax rate) must stay fixed while copying a formula.</span></div>
+<div class="qb"><b data-hi="b" class="b">संभावित परीक्षा प्रश्न</b><b data-en="b" class="b">Likely Exam Questions</b><span data-hi="i">Relative और Absolute Reference में अंतर उदाहरण सहित। Mixed Reference क्या है? F4 key का क्या काम है?</span><span data-en="i">Difference between Relative and Absolute Reference with examples. What is Mixed Reference? What is the use of F4?</span></div>
+</div></section>
+
+<section class="uc" id="u5"><div class="uh"><span class="ut"><span data-hi="i">Unit 05 · Functions</span><span data-en="i">Unit 05 · Functions</span></span><h2>Basic Functions</h2></div>
+<div class="ub">
+<table><tr><th>Function</th><th>Syntax</th><th data-hi="i">काम</th><th data-en="i">Purpose</th></tr>
+<tr><td>SUM</td><td>=SUM(A1:A10)</td><td><span data-hi="i">Numbers का जोड़</span><span data-en="i">Sum of numbers</span></td></tr>
+<tr><td>AVERAGE</td><td>=AVERAGE(A1:A10)</td><td><span data-hi="i">Average/Mean</span><span data-en="i">Average/Mean</span></td></tr>
+<tr><td>COUNT</td><td>=COUNT(A1:A10)</td><td><span data-hi="i">Numbers वाले cells की count</span><span data-en="i">Count of cells containing numbers</span></td></tr>
+<tr><td>COUNTA</td><td>=COUNTA(A1:A10)</td><td><span data-hi="i">Non-empty cells की count (text भी)</span><span data-en="i">Count of non-empty cells (including text)</span></td></tr>
+<tr><td>MAX</td><td>=MAX(A1:A10)</td><td><span data-hi="i">Maximum/Largest value</span><span data-en="i">Maximum/Largest value</span></td></tr>
+<tr><td>MIN</td><td>=MIN(A1:A10)</td><td><span data-hi="i">Minimum/Smallest value</span><span data-en="i">Minimum/Smallest value</span></td></tr>
+<tr><td>COUNTIF</td><td>=COUNTIF(A1:A10,"&gt;50")</td><td><span data-hi="i">Condition match करने वाले cells count</span><span data-en="i">Count of cells matching a condition</span></td></tr>
+<tr><td>SUMIF</td><td>=SUMIF(A1:A10,"&gt;50",B1:B10)</td><td><span data-hi="i">Condition के अनुसार values का जोड़</span><span data-en="i">Sum of values based on a condition</span></td></tr>
+<tr><td>ROUND</td><td>=ROUND(A1,2)</td><td><span data-hi="i">Specified decimal places तक round करना</span><span data-en="i">Rounding to specified decimal places</span></td></tr></table>
+<div class="qb"><b data-hi="b" class="b">संभावित परीक्षा प्रश्न</b><b data-en="b" class="b">Likely Exam Questions</b><span data-hi="i">SUM, AVERAGE, COUNT, MAX, MIN functions syntax सहित लिखिए। COUNTIF और SUMIF में अंतर।</span><span data-en="i">Write SUM, AVERAGE, COUNT, MAX, MIN functions with syntax. Difference between COUNTIF and SUMIF.</span></div>
+</div></section>
+
+<section class="uc" id="u6"><div class="uh"><span class="ut"><span data-hi="i">Unit 06 · Functions</span><span data-en="i">Unit 06 · Functions</span></span><h2>Logical Functions (IF, AND, OR)</h2></div>
+<div class="ub">
+<h3 data-hi="f" class="f">IF Function</h3><h3 data-en="f" class="f">IF Function</h3>
+<p data-hi="b" class="b">Syntax: <code>=IF(condition, value_if_true, value_if_false)</code></p>
+<p data-en="b" class="b">Syntax: <code>=IF(condition, value_if_true, value_if_false)</code></p>
+<code>=IF(A1&gt;=40,"Pass","Fail")</code>
+<h3 data-hi="f" class="f">Nested IF</h3><h3 data-en="f" class="f">Nested IF</h3>
+<code>=IF(A1&gt;=90,"A",IF(A1&gt;=75,"B",IF(A1&gt;=60,"C","D")))</code>
+<h3 data-hi="f" class="f">AND, OR, NOT, IFERROR</h3><h3 data-en="f" class="f">AND, OR, NOT, IFERROR</h3>
+<table><tr><th>Function</th><th>Example</th><th data-hi="i">काम</th><th data-en="i">Purpose</th></tr>
+<tr><td>AND</td><td>=AND(A1&gt;0,B1&gt;0)</td><td><span data-hi="i">सभी conditions true होने पर TRUE</span><span data-en="i">TRUE only when all conditions are true</span></td></tr>
+<tr><td>OR</td><td>=OR(A1&gt;0,B1&gt;0)</td><td><span data-hi="i">कोई एक condition true होने पर TRUE</span><span data-en="i">TRUE when any one condition is true</span></td></tr>
+<tr><td>NOT</td><td>=NOT(A1&gt;0)</td><td><span data-hi="i">Condition को reverse करता है</span><span data-en="i">Reverses the condition</span></td></tr>
+<tr><td>IFERROR</td><td>=IFERROR(A1/B1,"Error")</td><td><span data-hi="i">Error आने पर custom message</span><span data-en="i">Custom message when an error occurs</span></td></tr></table>
+<code>=IF(AND(A1&gt;=40,B1&gt;=40),"Pass","Fail")</code>
+<div class="qb"><b data-hi="b" class="b">संभावित परीक्षा प्रश्न</b><b data-en="b" class="b">Likely Exam Questions</b><span data-hi="i">IF function का syntax उदाहरण सहित। Nested IF क्या है? AND और OR में अंतर। IFERROR का उपयोग।</span><span data-en="i">IF function syntax with example. What is Nested IF? Difference between AND and OR. Use of IFERROR.</span></div>
+</div></section>
+
+<section class="uc" id="u7"><div class="uh"><span class="ut"><span data-hi="i">Unit 07 · Functions</span><span data-en="i">Unit 07 · Functions</span></span><h2>Text & Date Functions</h2></div>
+<div class="ub">
+<h3 data-hi="f" class="f">Text Functions</h3><h3 data-en="f" class="f">Text Functions</h3>
+<table><tr><th>Function</th><th>Syntax</th><th data-hi="i">काम</th><th data-en="i">Purpose</th></tr>
+<tr><td>LEFT</td><td>=LEFT(A1,3)</td><td><span data-hi="i">Left से n characters निकालना</span><span data-en="i">Extract n characters from the left</span></td></tr>
+<tr><td>RIGHT</td><td>=RIGHT(A1,3)</td><td><span data-hi="i">Right से n characters निकालना</span><span data-en="i">Extract n characters from the right</span></td></tr>
+<tr><td>MID</td><td>=MID(A1,2,4)</td><td><span data-hi="i">बीच से characters निकालना</span><span data-en="i">Extract characters from the middle</span></td></tr>
+<tr><td>LEN</td><td>=LEN(A1)</td><td><span data-hi="i">Text की length</span><span data-en="i">Length of text</span></td></tr>
+<tr><td>UPPER/LOWER</td><td>=UPPER(A1)</td><td><span data-hi="i">Uppercase/Lowercase में convert</span><span data-en="i">Convert to Uppercase/Lowercase</span></td></tr>
+<tr><td>PROPER</td><td>=PROPER(A1)</td><td><span data-hi="i">हर word का पहला letter capital</span><span data-en="i">Capitalise first letter of each word</span></td></tr>
+<tr><td>TRIM</td><td>=TRIM(A1)</td><td><span data-hi="i">Extra spaces remove करना</span><span data-en="i">Remove extra spaces</span></td></tr>
+<tr><td>CONCATENATE/&amp;</td><td>=A1&amp;" "&amp;B1</td><td><span data-hi="i">Text join करना</span><span data-en="i">Join text</span></td></tr></table>
+<h3 data-hi="f" class="f">Date Functions</h3><h3 data-en="f" class="f">Date Functions</h3>
+<table><tr><th>Function</th><th data-hi="i">काम</th><th data-en="i">Purpose</th></tr>
+<tr><td>TODAY()</td><td><span data-hi="i">आज की date</span><span data-en="i">Today's date</span></td></tr>
+<tr><td>NOW()</td><td><span data-hi="i">आज की date और time</span><span data-en="i">Today's date and time</span></td></tr>
+<tr><td>DAY/MONTH/YEAR</td><td><span data-hi="i">Date से day/month/year निकालना</span><span data-en="i">Extract day/month/year from a date</span></td></tr>
+<tr><td>DATEDIF</td><td><span data-hi="i">दो dates के बीच का difference (days/months/years)</span><span data-en="i">Difference between two dates (days/months/years)</span></td></tr></table>
+<div class="qb"><b data-hi="b" class="b">संभावित परीक्षा प्रश्न</b><b data-en="b" class="b">Likely Exam Questions</b><span data-hi="i">LEFT, RIGHT, MID functions उदाहरण सहित। TODAY() और NOW() में अंतर। Text functions के उपयोग लिखिए।</span><span data-en="i">LEFT, RIGHT, MID functions with examples. Difference between TODAY() and NOW(). Write uses of text functions.</span></div>
+</div></section>
+
+<section class="uc" id="u8"><div class="uh"><span class="ut"><span data-hi="i">Unit 08 · Functions</span><span data-en="i">Unit 08 · Functions</span></span><h2>Lookup Functions (VLOOKUP, HLOOKUP)</h2></div>
+<div class="ub">
+<h3 data-hi="f" class="f">VLOOKUP</h3><h3 data-en="f" class="f">VLOOKUP</h3>
+<p data-hi="b" class="b"><strong>VLOOKUP (Vertical Lookup)</strong> table के पहले column में value ढूँढता है और उसी row से किसी और column की value return करता है।</p>
+<p data-en="b" class="b"><strong>VLOOKUP (Vertical Lookup)</strong> searches for a value in the first column of a table and returns a value from another column in the same row.</p>
+<p><code>=VLOOKUP(lookup_value, table_array, col_index_num, [range_lookup])</code></p>
+<code>=VLOOKUP(A2,Sheet2!A:C,3,FALSE)</code>
+<table><tr><th>Argument</th><th data-hi="i">मतलब</th><th data-en="i">Meaning</th></tr>
+<tr><td>lookup_value</td><td><span data-hi="i">जो value ढूँढनी है</span><span data-en="i">The value to search for</span></td></tr>
+<tr><td>table_array</td><td><span data-hi="i">जिस range में ढूँढना है</span><span data-en="i">The range to search within</span></td></tr>
+<tr><td>col_index_num</td><td><span data-hi="i">किस column से value लानी है</span><span data-en="i">Which column number to return value from</span></td></tr>
+<tr><td>range_lookup</td><td><span data-hi="i">FALSE = exact match, TRUE = approximate</span><span data-en="i">FALSE = exact match, TRUE = approximate</span></td></tr></table>
+<h3 data-hi="f" class="f">VLOOKUP vs HLOOKUP</h3><h3 data-en="f" class="f">VLOOKUP vs HLOOKUP</h3>
+<table><tr><th>VLOOKUP</th><th>HLOOKUP</th></tr>
+<tr><td><span data-hi="i">Vertical — पहले column में ढूँढता है</span><span data-en="i">Vertical — searches in first column</span></td><td><span data-hi="i">Horizontal — पहली row में ढूँढता है</span><span data-en="i">Horizontal — searches in first row</span></td></tr></table>
+<div class="ib"><span data-hi="i"><b>Exam Tip:</b> VLOOKUP में lookup value हमेशा table_array के leftmost column में होनी चाहिए।</span><span data-en="i"><b>Exam Tip:</b> in VLOOKUP, the lookup value must always be in the leftmost column of the table_array.</span></div>
+<div class="qb"><b data-hi="b" class="b">संभावित परीक्षा प्रश्न</b><b data-en="b" class="b">Likely Exam Questions</b><span data-hi="i">VLOOKUP function का syntax उदाहरण सहित लिखिए। VLOOKUP और HLOOKUP में अंतर। range_lookup FALSE/TRUE का क्या मतलब है?</span><span data-en="i">Write VLOOKUP syntax with example. Difference between VLOOKUP and HLOOKUP. What does range_lookup FALSE/TRUE mean?</span></div>
+</div></section>
+
+<section class="uc" id="u9"><div class="uh"><span class="ut"><span data-hi="i">Unit 09 · Data Management</span><span data-en="i">Unit 09 · Data Management</span></span><h2>Sorting, Filtering & Data Validation</h2></div>
+<div class="ub">
+<h3 data-hi="f" class="f">Sorting</h3><h3 data-en="f" class="f">Sorting</h3>
+<table><tr><th>Type</th><th data-hi="i">मतलब</th><th data-en="i">Meaning</th></tr>
+<tr><td>Ascending (A-Z)</td><td><span data-hi="i">छोटे से बड़े, A से Z</span><span data-en="i">Smallest to largest, A to Z</span></td></tr>
+<tr><td>Descending (Z-A)</td><td><span data-hi="i">बड़े से छोटे, Z से A</span><span data-en="i">Largest to smallest, Z to A</span></td></tr>
+<tr><td>Custom Sort</td><td><span data-hi="i">Multiple columns/criteria से sort</span><span data-en="i">Sort by multiple columns/criteria</span></td></tr></table>
+<h3 data-hi="f" class="f">AutoFilter</h3><h3 data-en="f" class="f">AutoFilter</h3>
+<p data-hi="b" class="b">Data Tab → Filter — column headers में dropdown arrows आ जाते हैं। Click करके conditions set करें — सिर्फ matching rows दिखेंगी, बाकी hide।</p>
+<p data-en="b" class="b">Data Tab → Filter — dropdown arrows appear in column headers. Click to set conditions — only matching rows are shown, rest hidden.</p>
+<h3 data-hi="f" class="f">Data Validation</h3><h3 data-en="f" class="f">Data Validation</h3>
+<p data-hi="b" class="b"><strong>Data Validation</strong> (Data Tab → Data Validation) cell में सिर्फ valid data enter होने देता है — Dropdown list, Number range, Date range जैसी restrictions।</p>
+<p data-en="b" class="b"><strong>Data Validation</strong> (Data Tab → Data Validation) only allows valid data to be entered — restrictions like Dropdown list, Number range, Date range.</p>
+<div class="nb"><span data-hi="i"><b>याद रखें:</b> Sort data को permanently reorder करता है, Filter सिर्फ temporarily hide करता है — data delete नहीं होता।</span><span data-en="i"><b>Remember:</b> Sort permanently reorders data, Filter only temporarily hides rows — no data is deleted.</span></div>
+<div class="qb"><b data-hi="b" class="b">संभावित परीक्षा प्रश्न</b><b data-en="b" class="b">Likely Exam Questions</b><span data-hi="i">Sorting और Filtering में अंतर। Data Validation का उपयोग। Dropdown list कैसे बनाएं?</span><span data-en="i">Difference between Sorting and Filtering. Use of Data Validation. How to create a Dropdown list?</span></div>
+</div></section>
+
+<section class="uc" id="u10"><div class="uh"><span class="ut"><span data-hi="i">Unit 10 · Data Management</span><span data-en="i">Unit 10 · Data Management</span></span><h2>Conditional Formatting & Charts</h2></div>
+<div class="ub">
+<h3 data-hi="f" class="f">Conditional Formatting</h3><h3 data-en="f" class="f">Conditional Formatting</h3>
+<p data-hi="b" class="b"><strong>Conditional Formatting</strong> cells को उनकी value के according automatically format करता है — Color Scales, Data Bars, Icon Sets, Highlight Cell Rules।</p>
+<p data-en="b" class="b"><strong>Conditional Formatting</strong> automatically formats cells based on their value — Color Scales, Data Bars, Icon Sets, Highlight Cell Rules.</p>
+<p data-hi="b" class="b">Home Tab → Conditional Formatting → Choose rule type → Set condition → Choose format</p>
+<p data-en="b" class="b">Home Tab → Conditional Formatting → Choose rule type → Set condition → Choose format</p>
+<h3 data-hi="f" class="f">Charts</h3><h3 data-en="f" class="f">Charts</h3>
+<table><tr><th>Chart Type</th><th data-hi="i">कब use करें</th><th data-en="i">When to use</th></tr>
+<tr><td>Column/Bar Chart</td><td><span data-hi="i">Categories compare करने के लिए</span><span data-en="i">For comparing categories</span></td></tr>
+<tr><td>Line Chart</td><td><span data-hi="i">Time के साथ trend दिखाने के लिए</span><span data-en="i">For showing trends over time</span></td></tr>
+<tr><td>Pie Chart</td><td><span data-hi="i">Whole के percentage parts दिखाने के लिए</span><span data-en="i">For showing percentage parts of a whole</span></td></tr>
+<tr><td>Scatter Chart</td><td><span data-hi="i">दो variables का relationship दिखाने के लिए</span><span data-en="i">For showing the relationship between two variables</span></td></tr></table>
+<p data-hi="b" class="b">Chart बनाना: Data select → Insert Tab → Choose chart type. F11 से default chart instantly बनता है।</p>
+<p data-en="b" class="b">To create a chart: Select data → Insert Tab → Choose chart type. F11 instantly creates a default chart.</p>
+<div class="qb"><b data-hi="b" class="b">संभावित परीक्षा प्रश्न</b><b data-en="b" class="b">Likely Exam Questions</b><span data-hi="i">Conditional Formatting क्या है, उदाहरण सहित? Chart के types उनके उपयोग सहित। Pie Chart कब use करते हैं?</span><span data-en="i">What is Conditional Formatting, with example? Types of Charts with their uses. When to use a Pie Chart?</span></div>
+</div></section>
+
+<section class="uc" id="u11"><div class="uh"><span class="ut"><span data-hi="i">Unit 11 · Data Management</span><span data-en="i">Unit 11 · Data Management</span></span><h2>PivotTable & What-If Analysis</h2></div>
+<div class="ub">
+<h3 data-hi="f" class="f">PivotTable</h3><h3 data-en="f" class="f">PivotTable</h3>
+<p data-hi="b" class="b"><strong>PivotTable</strong> बड़े data को quickly summarize और analyze करने का powerful tool है — बिना formula लिखे drag-and-drop से।</p>
+<p data-en="b" class="b"><strong>PivotTable</strong> is a powerful tool for quickly summarising and analysing large data — without formulas, just drag-and-drop.</p>
+<p data-hi="b" class="b">Create: Insert Tab → PivotTable → Select data range → New worksheet → Drag fields into Rows, Columns, Values, Filters.</p>
+<p data-en="b" class="b">Create: Insert Tab → PivotTable → Select data range → New worksheet → Drag fields into Rows, Columns, Values, Filters.</p>
+<h3 data-hi="f" class="f">What-If Analysis Tools</h3><h3 data-en="f" class="f">What-If Analysis Tools</h3>
+<table><tr><th>Tool</th><th data-hi="i">काम</th><th data-en="i">Purpose</th></tr>
+<tr><td>Goal Seek</td><td><span data-hi="i">Desired result बताओ — Excel input calculate करेगा</span><span data-en="i">Specify the desired result — Excel calculates the input</span></td></tr>
+<tr><td>Data Table</td><td><span data-hi="i">Multiple inputs का effect एक table में देखना</span><span data-en="i">Seeing the effect of multiple inputs in one table</span></td></tr>
+<tr><td>Scenario Manager</td><td><span data-hi="i">Multiple scenarios (Best/Worst case) save और compare करना</span><span data-en="i">Saving and comparing multiple scenarios (Best/Worst case)</span></td></tr></table>
+<div class="qb"><b data-hi="b" class="b">संभावित परीक्षा प्रश्न</b><b data-en="b" class="b">Likely Exam Questions</b><span data-hi="i">PivotTable क्या है? इसे बनाने के steps लिखिए। Goal Seek किसे कहते हैं? What-If Analysis के tools।</span><span data-en="i">What is a PivotTable? Write the steps to create it. What is Goal Seek? What-If Analysis tools.</span></div>
+</div></section>
+
+<section class="uc" id="u12"><div class="uh"><span class="ut"><span data-hi="i">Unit 12 · रिवीज़न</span><span data-en="i">Unit 12 · Revision</span></span><h2><span data-hi="i">Important Q&A — फटाफट रिवीज़न</span><span data-en="i">Important Q&A — Quick Revision</span></h2></div>
+<div class="ub">
+<h3 data-hi="f" class="f">Function Syntax Quick Reference</h3><h3 data-en="f" class="f">Function Syntax Quick Reference</h3>
+<table><tr><th>Function</th><th>Syntax</th></tr>
+<tr><td>SUM</td><td>=SUM(range)</td></tr>
+<tr><td>AVERAGE</td><td>=AVERAGE(range)</td></tr>
+<tr><td>IF</td><td>=IF(condition,true_val,false_val)</td></tr>
+<tr><td>VLOOKUP</td><td>=VLOOKUP(val,table,col,FALSE)</td></tr>
+<tr><td>COUNTIF</td><td>=COUNTIF(range,criteria)</td></tr>
+<tr><td>SUMIF</td><td>=SUMIF(range,criteria,sum_range)</td></tr>
+<tr><td>IFERROR</td><td>=IFERROR(formula,"Error msg")</td></tr>
+<tr><td>TODAY</td><td>=TODAY()</td></tr>
+<tr><td>LEFT</td><td>=LEFT(text,n)</td></tr>
+<tr><td>CONCATENATE</td><td>=A1&amp;" "&amp;B1</td></tr></table>
+<h3 data-hi="f" class="f">Frequently Asked Questions</h3><h3 data-en="f" class="f">Frequently Asked Questions</h3>
+<ol data-hi="b" class="b">
+<li>Workbook और Worksheet में अंतर। Cell Address क्या है?</li>
+<li>Relative, Absolute, Mixed Reference में अंतर उदाहरण सहित।</li>
+<li>IF function का syntax और Nested IF उदाहरण।</li>
+<li>VLOOKUP function का syntax और उपयोग।</li>
+<li>Text functions (LEFT, RIGHT, MID, LEN) उदाहरण सहित।</li>
+<li>Sorting और Filtering में अंतर। Data Validation क्या है?</li>
+<li>PivotTable क्या है? Steps लिखिए।</li>
+<li>Charts के types और उनका उपयोग।</li>
+</ol>
+<ol data-en="b" class="b">
+<li>Difference between Workbook and Worksheet. What is Cell Address?</li>
+<li>Difference between Relative, Absolute, Mixed Reference with examples.</li>
+<li>IF function syntax and Nested IF example.</li>
+<li>VLOOKUP function syntax and use.</li>
+<li>Text functions (LEFT, RIGHT, MID, LEN) with examples.</li>
+<li>Difference between Sorting and Filtering. What is Data Validation?</li>
+<li>What is a PivotTable? Write the steps.</li>
+<li>Types of Charts and their uses.</li>
+</ol>
+<div class="ib"><span data-hi="i"><b>आखिरी टिप:</b> पेपर से पहले सभी Function syntaxes और Q&A boxes एक बार ज़रूर पढ़ें।</span><span data-en="i"><b>Final Tip:</b> Before the exam, go through all function syntaxes and Q&A boxes once.</span></div>
+</div></section>
+
+  </main>
+</div>
+<button id="tt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<footer>Made with 💚 for ITI-COPA students &nbsp;·&nbsp; by <a href="https://surajtiwarrii.github.io/Portfolio/" target="_blank">Suraj Tiwari</a></footer>
+<script>
+function sL(l){document.documentElement.lang=l;document.getElementById('lt').dataset.lang=l;document.getElementById('bh').classList.toggle('active',l==='hi');document.getElementById('be').classList.toggle('active',l==='en');localStorage.setItem('exL',l);}
+document.addEventListener('DOMContentLoaded',()=>{sL(localStorage.getItem('exL')||'hi');});
+function tS(e){if(e)e.stopPropagation();document.getElementById('sb').classList.toggle('open');document.getElementById('ov').classList.toggle('open');}
+window.addEventListener('scroll',()=>{document.getElementById('tt').style.display=window.scrollY>400?'flex':'none';});
+function lS(){const q=document.getElementById('si').value.trim().toLowerCase();document.querySelectorAll('.uc').forEach(c=>c.classList.toggle('hide',q&&!c.innerText.toLowerCase().includes(q)));}
+const nls=document.querySelectorAll('.nl');const secs=document.querySelectorAll('.uc');
+window.addEventListener('scroll',()=>{let cur='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-100)cur=s.id;});nls.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+cur));});
+document.querySelectorAll('.nl').forEach(l=>l.addEventListener('click',()=>{if(window.innerWidth<=880)tS();}));
+</script>
+</body>
+</html>

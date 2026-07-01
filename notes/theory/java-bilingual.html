@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Programming Language (JAVA) — Hindi/English | ITI COPA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Hind:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #fff6ed;
+    --bg-soft: #ffe2c2;
+    --panel: rgba(255,255,255,0.45);
+    --panel-solid: rgba(255,255,255,0.78);
+    --panel-glass: rgba(255,255,255,0.35);
+    --peach-deep: #c2540a;
+    --peach: #fb923c;
+    --peach-soft: #fed7aa;
+    --peach-light: #fff1e0;
+    --peach-mist: rgba(251,146,60,0.20);
+    --teal: #ea580c;
+    --teal-mist: rgba(234,88,12,0.10);
+    --ink: #3a2208;
+    --ink-soft: #8a6a45;
+    --line: rgba(194,84,10,0.22);
+    --radius: 18px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Hind',sans-serif;
+    background:
+      radial-gradient(1200px 600px at 10% -10%, var(--peach-mist), transparent 60%),
+      radial-gradient(1000px 700px at 110% 10%, var(--teal-mist), transparent 55%),
+      var(--bg);
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.brand{font-family:'Fraunces',serif;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+
+  .topbar{
+    position:sticky;top:0;z-index:50;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px 20px;
+    background:rgba(255,246,237,0.6);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);
+    gap:10px;
+  }
+  .brand{font-size:1.05rem;font-weight:700;color:var(--peach-deep);display:flex;align-items:center;gap:8px;}
+  .brand .dot{width:9px;height:9px;border-radius:50%;background:linear-gradient(135deg,var(--peach),var(--teal));flex-shrink:0;}
+  .topbar-actions{display:flex;align-items:center;gap:8px;}
+  .menu-btn{
+    background:rgba(251,146,60,0.18);
+    backdrop-filter:blur(6px);
+    color:var(--peach-light);
+    border:1px solid rgba(251,146,60,0.55);
+    padding:9px 16px;border-radius:30px;
+    font-family:'Hind';font-weight:600;font-size:0.9rem;cursor:pointer;
+    text-shadow:0 1px 3px rgba(194,84,10,0.4);
+    background-image:linear-gradient(135deg, rgba(251,146,60,0.6), rgba(194,84,10,0.55));
+    box-shadow:0 6px 16px rgba(194,84,10,0.2);
+  }
+  .lang-toggle{
+    display:flex;align-items:center;background:var(--panel-glass);border:1px solid var(--line);
+    backdrop-filter:blur(8px);
+    border-radius:30px;padding:3px;position:relative;cursor:pointer;
+  }
+  .lang-toggle button{
+    border:none;background:transparent;padding:7px 13px;border-radius:24px;
+    font-family:'Hind';font-weight:700;font-size:0.8rem;cursor:pointer;color:var(--ink-soft);
+    position:relative;z-index:2;transition:color 0.25s;
+  }
+  .lang-toggle button.active{color:var(--peach-light);}
+  .lang-pill{
+    position:absolute;top:3px;bottom:3px;left:3px;width:calc(50% - 3px);
+    background:linear-gradient(135deg,var(--peach),var(--peach-deep));
+    border-radius:24px;transition:transform 0.25s ease;z-index:1;
+  }
+  .lang-toggle[data-lang="en"] .lang-pill{transform:translateX(100%);}
+
+  .hero{padding:64px 20px 40px;text-align:center;position:relative;}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'JetBrains Mono';font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;
+    color:var(--peach-deep);
+    background:var(--panel-glass);
+    backdrop-filter:blur(8px);
+    border:1px solid var(--peach-soft);
+    padding:6px 14px;border-radius:30px;
+    margin-bottom:18px;
+  }
+  .hero h1{font-size:clamp(1.7rem,5.5vw,3.1rem);line-height:1.15;margin:0 0 14px;color:var(--ink);font-weight:700;}
+  .hero h1 .grad{
+    background:linear-gradient(100deg,var(--peach-deep),var(--peach) 45%,var(--teal) 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero p{max-width:620px;margin:0 auto 28px;color:var(--ink-soft);font-size:1.05rem;line-height:1.65;}
+  .hero-stats{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:10px;}
+  .stat-chip{
+    background:var(--panel);border:1px solid var(--line);border-radius:14px;
+    backdrop-filter:blur(8px);
+    padding:12px 18px;min-width:108px;box-shadow:0 4px 14px rgba(194,84,10,0.08);
+  }
+  .stat-chip b{display:block;font-family:'Fraunces';font-size:1.3rem;color:var(--peach-deep);}
+  .stat-chip span{font-size:0.74rem;color:var(--ink-soft);}
+
+  .toolbar{max-width:900px;margin:24px auto 0;padding:0 20px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:center;}
+  .search-wrap{flex:1;min-width:220px;position:relative;}
+  #searchInput{
+    width:100%;padding:13px 16px 13px 42px;border-radius:30px;border:1px solid var(--line);
+    background:var(--panel);backdrop-filter:blur(8px);
+    font-family:'Hind';font-size:0.95rem;color:var(--ink);outline:none;
+  }
+  #searchInput:focus{border-color:var(--peach);}
+  .search-wrap::before{content:"⌕";position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--peach-deep);font-size:1.1rem;}
+
+  .layout{max-width:1180px;margin:14px auto 80px;padding:0 20px;display:grid;grid-template-columns:260px 1fr;gap:26px;}
+  .sidebar{
+    background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    backdrop-filter:blur(10px);
+    padding:18px 14px;height:fit-content;position:sticky;top:78px;max-height:calc(100vh - 100px);overflow-y:auto;
+  }
+  .sidebar h4{font-family:'JetBrains Mono';font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-soft);margin:14px 6px 8px;}
+  .sidebar h4:first-child{margin-top:2px;}
+  .nav-link{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:10px;color:var(--ink);text-decoration:none;font-size:0.88rem;font-weight:500;transition:background 0.15s;}
+  .nav-link:hover{background:var(--peach-mist);}
+  .nav-link.active{background:linear-gradient(120deg,var(--peach-mist),var(--teal-mist));color:var(--peach-deep);font-weight:700;}
+  .nav-link .num{font-family:'JetBrains Mono';font-size:0.68rem;color:var(--teal);min-width:20px;}
+  .close-sidebar{display:none;}
+
+  @media(max-width:880px){
+    .layout{grid-template-columns:1fr;display:block;}
+    .sidebar{position:fixed !important;inset:0 18% 0 0;z-index:60;transform:translateX(-105%);transition:transform 0.3s ease;overflow-y:auto;top:0;height:100vh;max-height:100vh;}
+    .sidebar.open{transform:translateX(0);}
+    .sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(50,25,5,0.4);z-index:55;}
+    .sidebar-overlay.open{display:block;}
+    .close-sidebar{display:block;margin-left:auto;background:none;border:1px solid var(--line);border-radius:50%;width:34px;height:34px;font-size:1rem;color:var(--ink);cursor:pointer;}
+    .brand span.brand-text{display:none;}
+    .menu-btn span.menu-text{display:none;}
+  }
+
+  .content{min-width:0;}
+  .unit-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:22px;overflow:hidden;scroll-margin-top:80px;box-shadow:0 6px 24px rgba(194,84,10,0.08);backdrop-filter:blur(10px);}
+  .unit-head{padding:22px 24px 18px;background:linear-gradient(120deg, rgba(251,146,60,0.22), rgba(194,84,10,0.10));border-bottom:1px solid var(--line);}
+  .unit-tag{font-family:'JetBrains Mono';font-size:0.7rem;color:var(--teal);letter-spacing:0.08em;text-transform:uppercase;display:block;margin-bottom:6px;}
+  .unit-head h2{margin:0;font-size:1.4rem;color:var(--peach-deep);}
+  .unit-body{padding:20px 24px 26px;}
+  .unit-body h3{font-size:1.05rem;color:var(--ink);margin:22px 0 8px;display:flex;align-items:center;gap:8px;}
+  .unit-body h3::before{content:"";width:5px;height:18px;border-radius:3px;background:linear-gradient(180deg,var(--peach),var(--teal));}
+  .unit-body h3:first-child{margin-top:2px;}
+  .unit-body p{line-height:1.75;color:var(--ink);margin:6px 0 10px;font-size:0.97rem;}
+  .unit-body ul, .unit-body ol{margin:6px 0 14px;padding-left:22px;line-height:1.75;}
+  .unit-body li{margin-bottom:6px;font-size:0.95rem;}
+  .unit-body strong{color:var(--peach-deep);}
+
+  .note-box{background:var(--peach-mist);border-left:3px solid var(--peach);border-radius:10px;padding:12px 16px;margin:14px 0;font-size:0.9rem;}
+  .note-box b{color:var(--peach-deep);}
+  .imp-box{background:var(--teal-mist);border-left:3px solid var(--teal);border-radius:10px;padding:12px 16px;margin:14px 0;font-size:0.9rem;}
+  .imp-box b{color:var(--teal);}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0 18px;font-size:0.88rem;border-radius:10px;overflow:hidden;}
+  th{background:linear-gradient(120deg,var(--peach),var(--peach-deep));color:var(--peach-light);text-align:left;padding:10px 12px;font-weight:600;}
+  td{padding:9px 12px;border-bottom:1px solid var(--line);background:var(--panel-solid);}
+  tr:last-child td{border-bottom:none;}
+  tr:nth-child(even) td{background:var(--bg-soft);}
+
+  code, .code-block{font-family:'JetBrains Mono';}
+  .code-block{background:#3a1d05;color:#ffe0b8;padding:14px 16px;border-radius:12px;font-size:0.82rem;line-height:1.6;overflow-x:auto;margin:12px 0;border:1px solid rgba(251,146,60,0.3);}
+  .code-block .cmt{color:#9fe0a0;}
+  .code-block .kw{color:#7dd3fc;}
+  .code-block .str{color:#fcd34d;}
+  code{background:var(--bg-soft);padding:2px 6px;border-radius:5px;font-size:0.85em;color:var(--peach-deep);}
+
+  .qbox{background:var(--bg-soft);border:1px dashed var(--peach-soft);border-radius:12px;padding:14px 16px;margin:16px 0;}
+  .qbox b{color:var(--teal);display:block;margin-bottom:6px;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em;}
+
+  #toTop{
+    position:fixed;bottom:22px;right:22px;z-index:40;width:46px;height:46px;border-radius:50%;
+    background:linear-gradient(135deg,var(--peach),var(--teal));color:var(--peach-light);border:none;font-size:1.2rem;cursor:pointer;
+    box-shadow:0 8px 20px rgba(194,84,10,0.3);display:none;align-items:center;justify-content:center;
+  }
+
+  footer{text-align:center;padding:30px 20px 50px;color:var(--ink-soft);font-size:0.85rem;}
+  footer a{color:var(--peach-deep);text-decoration:none;font-weight:600;}
+
+  mark{background:var(--peach-soft);color:var(--ink);padding:0 2px;border-radius:3px;}
+  .hide{display:none !important;}
+
+  [data-hi], [data-en]{display:none;}
+  html[lang="hi"] [data-hi].inline, html[lang="hi"] span[data-hi]{display:inline;}
+  html[lang="hi"] [data-hi].block{display:block;}
+  html[lang="hi"] [data-hi].flex{display:flex;}
+  html[lang="hi"] th[data-hi], html[lang="hi"] td[data-hi]{display:table-cell;}
+  html[lang="en"] [data-en].inline, html[lang="en"] span[data-en]{display:inline;}
+  html[lang="en"] [data-en].block{display:block;}
+  html[lang="en"] [data-en].flex{display:flex;}
+  html[lang="en"] th[data-en], html[lang="en"] td[data-en]{display:table-cell;}
+</style>
+</head>
+<body>
+<div id="__backNotesBtn" style="position:fixed;top:14px;left:14px;z-index:9999;">
+<a href="../../notes-theory.html" style="display:flex;align-items:center;gap:7px;text-decoration:none;
+background:rgba(255,255,255,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+border:1px solid rgba(0,0,0,.08);color:#2A2620;font-family:'Poppins',Arial,sans-serif;
+font-size:.82rem;font-weight:600;padding:9px 16px 9px 12px;border-radius:30px;
+box-shadow:0 6px 18px rgba(0,0,0,.14);transition:transform .25s,box-shadow .25s;">
+<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+<span>Notes</span></a></div>
+<style>
+#__backNotesBtn a:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,0,0,.2)}
+@media(max-width:600px){#__backNotesBtn{top:10px;left:10px}#__backNotesBtn a{padding:8px 14px 8px 10px;font-size:.78rem}}
+</style>
+
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span><span class="brand-text">Programming (JAVA)</span></div>
+  <div class="topbar-actions">
+    <div class="lang-toggle" id="langToggle" data-lang="hi" onclick="setLang(this.dataset.lang==='hi'?'en':'hi')">
+      <div class="lang-pill"></div>
+      <button type="button" id="btnHi">हिं</button>
+      <button type="button" id="btnEn">EN</button>
+    </div>
+    <button class="menu-btn" onclick="toggleSidebar(event)">🌐 <span class="menu-text" data-hi="inline">विषय सूची</span><span class="menu-text" data-en="inline">Topics</span></button>
+  </div>
+</div>
+
+<div class="hero">
+  <span class="eyebrow">● ITI · COPA · UP Board Pattern</span>
+  <h1>
+    <span data-hi="block" class="block">Programming Language<br>(JAVA)<br><span class="grad">सम्पूर्ण नोट्स</span></span>
+    <span data-en="block" class="block">Programming Language<br>(JAVA)<br><span class="grad">Complete Notes</span></span>
+  </h1>
+  <p data-hi="block" class="block">Java basics से लेकर OOP Concepts और Exception Handling तक — हिंदी और इंग्लिश दोनों में, परीक्षा के हिसाब से तैयार।</p>
+  <p data-en="block" class="block">From Java basics to OOP Concepts and Exception Handling — available in both Hindi and English, exam-ready.</p>
+  <div class="hero-stats">
+    <div class="stat-chip"><b>12</b><span data-hi="inline">Units</span><span data-en="inline">Units</span></div>
+    <div class="stat-chip"><b>75+</b><span data-hi="inline">Topics</span><span data-en="inline">Topics</span></div>
+    <div class="stat-chip"><b>2</b><span data-hi="inline">भाषाएं</span><span data-en="inline">Languages</span></div>
+  </div>
+</div>
+
+<div class="toolbar">
+  <div class="search-wrap">
+    <input type="text" id="searchInput" data-hi-placeholder="कोई भी टॉपिक खोजें... जैसे: Class, Inheritance, Exception" data-en-placeholder="Search any topic... e.g. Class, Inheritance, Exception" placeholder="कोई भी टॉपिक खोजें... जैसे: Class, Inheritance, Exception" oninput="liveSearch()">
+  </div>
+</div>
+
+<div class="sidebar-overlay" id="overlay" onclick="toggleSidebar(event)"></div>
+
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <button class="close-sidebar" onclick="toggleSidebar(event)">✕</button>
+    <h4 data-hi="block" class="block">जावा बेसिक्स</h4>
+    <h4 data-en="block" class="block">Java Basics</h4>
+    <a class="nav-link" href="#unit1"><span class="num">01</span><span data-hi="inline">Java का परिचय</span><span data-en="inline">Introduction to Java</span></a>
+    <a class="nav-link" href="#unit2"><span class="num">02</span><span data-hi="inline">JDK, JRE, JVM</span><span data-en="inline">JDK, JRE, JVM</span></a>
+    <a class="nav-link" href="#unit3"><span class="num">03</span><span data-hi="inline">Basic Syntax & Structure</span><span data-en="inline">Basic Syntax & Structure</span></a>
+    <a class="nav-link" href="#unit4"><span class="num">04</span><span data-hi="inline">Variables & Data Types</span><span data-en="inline">Variables & Data Types</span></a>
+    <a class="nav-link" href="#unit5"><span class="num">05</span><span data-hi="inline">Operators</span><span data-en="inline">Operators</span></a>
+    <h4 data-hi="block" class="block">कंट्रोल फ्लो</h4>
+    <h4 data-en="block" class="block">Control Flow</h4>
+    <a class="nav-link" href="#unit6"><span class="num">06</span><span data-hi="inline">Control Statements</span><span data-en="inline">Control Statements</span></a>
+    <a class="nav-link" href="#unit7"><span class="num">07</span><span data-hi="inline">Loops</span><span data-en="inline">Loops</span></a>
+    <a class="nav-link" href="#unit8"><span class="num">08</span><span data-hi="inline">Arrays</span><span data-en="inline">Arrays</span></a>
+    <h4 data-hi="block" class="block">OOP कांसेप्ट्स</h4>
+    <h4 data-en="block" class="block">OOP Concepts</h4>
+    <a class="nav-link" href="#unit9"><span class="num">09</span><span data-hi="inline">Class, Object & Methods</span><span data-en="inline">Class, Object & Methods</span></a>
+    <a class="nav-link" href="#unit10"><span class="num">10</span><span data-hi="inline">Inheritance, Polymorphism, Encapsulation</span><span data-en="inline">Inheritance, Polymorphism, Encapsulation</span></a>
+    <a class="nav-link" href="#unit11"><span class="num">11</span><span data-hi="inline">Exception Handling</span><span data-en="inline">Exception Handling</span></a>
+    <h4 data-hi="block" class="block">रिवीज़न</h4>
+    <h4 data-en="block" class="block">Revision</h4>
+    <a class="nav-link" href="#unit12"><span class="num">12</span><span data-hi="inline">Important Q&A</span><span data-en="inline">Important Q&A</span></a>
+  </aside>
+
+  <main class="content" id="content">
+    <!-- UNIT 1 -->
+    <section class="unit-card" id="unit1">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 01 · जावा बेसिक्स</span><span data-en="inline">Unit 01 · Java Basics</span></span>
+        <h2><span data-hi="inline">Java का परिचय</span><span data-en="inline">Introduction to Java</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Java क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is Java?</h3>
+        <p data-hi="block" class="block"><strong>Java</strong> एक high-level, object-oriented, platform-independent programming language है, जिसे Sun Microsystems ने 1995 में release किया था (अब Oracle द्वारा maintained)।</p>
+        <p data-en="block" class="block"><strong>Java</strong> is a high-level, object-oriented, platform-independent programming language released by Sun Microsystems in 1995 (now maintained by Oracle).</p>
+
+        <h3 data-hi="flex" class="flex">Java की Key Features</h3>
+        <h3 data-en="flex" class="flex">Key Features of Java</h3>
+        <table>
+          <tr><th>Feature</th><th data-hi="inline">मतलब</th><th data-en="inline">Meaning</th></tr>
+          <tr><td>Platform Independent</td><td><span data-hi="inline">"Write Once, Run Anywhere" — कोई भी OS पर चलता है</span><span data-en="inline">"Write Once, Run Anywhere" — runs on any OS</span></td></tr>
+          <tr><td>Object-Oriented</td><td><span data-hi="inline">Class और Object पर based programming</span><span data-en="inline">Programming based on Class and Object</span></td></tr>
+          <tr><td>Simple</td><td><span data-hi="inline">C++ जैसी complex चीज़ें (pointers) हटा दी गई हैं</span><span data-en="inline">Complex features like pointers (from C++) are removed</span></td></tr>
+          <tr><td>Secure</td><td><span data-hi="inline">Built-in security features (no direct memory access)</span><span data-en="inline">Built-in security features (no direct memory access)</span></td></tr>
+          <tr><td>Robust</td><td><span data-hi="inline">Strong memory management, exception handling</span><span data-en="inline">Strong memory management, exception handling</span></td></tr>
+          <tr><td>Multithreaded</td><td><span data-hi="inline">एक साथ कई tasks execute कर सकता है</span><span data-en="inline">Can execute multiple tasks simultaneously</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Java के उपयोग</h3>
+        <h3 data-en="flex" class="flex">Uses of Java</h3>
+        <ul data-hi="block" class="block">
+          <li>Android app development</li>
+          <li>Web applications (backend)</li>
+          <li>Desktop applications</li>
+          <li>Enterprise-level software</li>
+        </ul>
+        <ul data-en="block" class="block">
+          <li>Android app development</li>
+          <li>Web applications (backend)</li>
+          <li>Desktop applications</li>
+          <li>Enterprise-level software</li>
+        </ul>
+
+        <div class="note-box">
+          <span data-hi="inline"><b>याद रखें:</b> Java का "Write Once, Run Anywhere" (WORA) feature इसकी सबसे famous खासियत है — यह JVM की वजह से मुमकिन होता है।</span>
+          <span data-en="inline"><b>Remember:</b> Java's "Write Once, Run Anywhere" (WORA) feature is its most famous quality — made possible by the JVM.</span>
+        </div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">Java किसे कहते हैं? इसकी कोई 5 features लिखिए। "Write Once, Run Anywhere" का मतलब समझाइए।</span>
+          <span data-en="inline">What is Java? Write any 5 of its features. Explain the meaning of "Write Once, Run Anywhere".</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 2 -->
+    <section class="unit-card" id="unit2">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 02 · जावा बेसिक्स</span><span data-en="inline">Unit 02 · Java Basics</span></span>
+        <h2><span data-hi="inline">JDK, JRE, JVM</span><span data-en="inline">JDK, JRE, JVM</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">JDK, JRE, JVM में अंतर</h3>
+        <h3 data-en="flex" class="flex">Difference between JDK, JRE, JVM</h3>
+        <table>
+          <tr><th>Term</th><th data-hi="inline">मतलब</th><th data-en="inline">Meaning</th></tr>
+          <tr><td>JVM<br><span data-hi="inline">(Java Virtual Machine)</span><span data-en="inline">(Java Virtual Machine)</span></td><td><span data-hi="inline">Bytecode को run करने वाला engine, platform-specific</span><span data-en="inline">The engine that runs bytecode, platform-specific</span></td></tr>
+          <tr><td>JRE<br><span data-hi="inline">(Java Runtime Environment)</span><span data-en="inline">(Java Runtime Environment)</span></td><td><span data-hi="inline">JVM + libraries, सिर्फ Java program चलाने के लिए</span><span data-en="inline">JVM + libraries, used only to run Java programs</span></td></tr>
+          <tr><td>JDK<br><span data-hi="inline">(Java Development Kit)</span><span data-en="inline">(Java Development Kit)</span></td><td><span data-hi="inline">JRE + compiler + development tools, programs बनाने और चलाने दोनों के लिए</span><span data-en="inline">JRE + compiler + development tools, for both building and running programs</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Relationship (JDK ⊃ JRE ⊃ JVM)</h3>
+        <h3 data-en="flex" class="flex">Relationship (JDK ⊃ JRE ⊃ JVM)</h3>
+        <p data-hi="block" class="block">JDK सबसे बड़ा है — इसमें JRE शामिल है, और JRE में JVM शामिल है। Developer को JDK चाहिए, पर सिर्फ program चलाने वाले user को सिर्फ JRE काफी है।</p>
+        <p data-en="block" class="block">JDK is the largest — it includes JRE, and JRE includes JVM. A developer needs JDK, but a user who just runs programs only needs JRE.</p>
+
+        <h3 data-hi="flex" class="flex">Java Program कैसे Run होता है?</h3>
+        <h3 data-en="flex" class="flex">How Does a Java Program Run?</h3>
+        <ol data-hi="block" class="block">
+          <li>Source code (.java file) लिखा जाता है</li>
+          <li>Compiler (javac) इसे Bytecode (.class file) में convert करता है</li>
+          <li>JVM Bytecode को machine code में convert करके run करता है</li>
+        </ol>
+        <ol data-en="block" class="block">
+          <li>Source code (.java file) is written</li>
+          <li>The compiler (javac) converts it into Bytecode (.class file)</li>
+          <li>The JVM converts the Bytecode into machine code and runs it</li>
+        </ol>
+
+        <h3 data-hi="flex" class="flex">Bytecode क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is Bytecode?</h3>
+        <p data-hi="block" class="block"><strong>Bytecode</strong> Java compiler द्वारा generate की गई intermediate code है — यही platform-independent होती है, और इसी वजह से Java "Write Once, Run Anywhere" बन पाती है।</p>
+        <p data-en="block" class="block"><strong>Bytecode</strong> is the intermediate code generated by the Java compiler — it is platform-independent, which is what makes Java "Write Once, Run Anywhere".</p>
+
+        <div class="note-box">
+          <span data-hi="inline"><b>याद रखें:</b> JVM platform-dependent होता है (हर OS का अलग JVM), पर Bytecode platform-independent होता है — इसी combination से Java portable बनती है।</span>
+          <span data-en="inline"><b>Remember:</b> the JVM is platform-dependent (each OS has its own JVM), but Bytecode is platform-independent — this combination makes Java portable.</span>
+        </div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">JDK, JRE, JVM में अंतर बताइए। Java program कैसे compile और run होता है? Bytecode किसे कहते हैं?</span>
+          <span data-en="inline">Differentiate between JDK, JRE, JVM. How is a Java program compiled and run? What is Bytecode?</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 3 -->
+    <section class="unit-card" id="unit3">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 03 · जावा बेसिक्स</span><span data-en="inline">Unit 03 · Java Basics</span></span>
+        <h2><span data-hi="inline">Basic Syntax & Structure</span><span data-en="inline">Basic Syntax & Structure</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">पहला Java Program</h3>
+        <h3 data-en="flex" class="flex">First Java Program</h3>
+        <div class="code-block"><span class="kw">public class</span> HelloWorld {
+  <span class="kw">public static void</span> main(String[] args) {
+    System.out.println(<span class="str">"Hello, World!"</span>);
+  }
+}</div>
+
+        <h3 data-hi="flex" class="flex">Program के हिस्से</h3>
+        <h3 data-en="flex" class="flex">Parts of the Program</h3>
+        <table>
+          <tr><th>Part</th><th data-hi="inline">मतलब</th><th data-en="inline">Meaning</th></tr>
+          <tr><td>class HelloWorld</td><td><span data-hi="inline">Class define करना, file का नाम class name से match होना चाहिए</span><span data-en="inline">Defines a class; the file name must match the class name</span></td></tr>
+          <tr><td>public static void main</td><td><span data-hi="inline">Program शुरू होने वाला main method</span><span data-en="inline">The main method where the program starts</span></td></tr>
+          <tr><td>String[] args</td><td><span data-hi="inline">Command-line arguments लेने के लिए</span><span data-en="inline">Used to accept command-line arguments</span></td></tr>
+          <tr><td>System.out.println()</td><td><span data-hi="inline">Output console पर print करना</span><span data-en="inline">Prints output to the console</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">main Method के Keywords</h3>
+        <h3 data-en="flex" class="flex">Keywords in the main Method</h3>
+        <table>
+          <tr><th>Keyword</th><th data-hi="inline">मतलब</th><th data-en="inline">Meaning</th></tr>
+          <tr><td>public</td><td><span data-hi="inline">Access modifier — कहीं से भी access हो सकता है</span><span data-en="inline">Access modifier — accessible from anywhere</span></td></tr>
+          <tr><td>static</td><td><span data-hi="inline">बिना object बनाए call हो सकता है</span><span data-en="inline">Can be called without creating an object</span></td></tr>
+          <tr><td>void</td><td><span data-hi="inline">Method कोई value return नहीं करता</span><span data-en="inline">The method does not return any value</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Comments</h3>
+        <h3 data-en="flex" class="flex">Comments</h3>
+        <div class="code-block"><span class="cmt">// Single-line comment</span>
+<span class="cmt">/* Multi-line
+   comment */</span></div>
+
+        <div class="note-box">
+          <span data-hi="inline"><b>याद रखें:</b> Java case-sensitive है, और file का नाम public class के नाम से exactly match होना चाहिए, साथ ही extension .java होनी चाहिए।</span>
+          <span data-en="inline"><b>Remember:</b> Java is case-sensitive, and the file name must exactly match the public class name, with a .java extension.</span>
+        </div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">एक basic Java program लिखकर समझाइए। main method के keywords (public, static, void) समझाइए।</span>
+          <span data-en="inline">Write and explain a basic Java program. Explain the keywords in the main method (public, static, void).</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 4 -->
+    <section class="unit-card" id="unit4">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 04 · जावा बेसिक्स</span><span data-en="inline">Unit 04 · Java Basics</span></span>
+        <h2><span data-hi="inline">Variables & Data Types</span><span data-en="inline">Variables & Data Types</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Variable क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is a Variable?</h3>
+        <p data-hi="block" class="block"><strong>Variable</strong> memory का एक named location है जो data store करता है। Java में हर variable को एक data type के साथ declare करना ज़रूरी है (Statically Typed Language)।</p>
+        <p data-en="block" class="block">A <strong>Variable</strong> is a named memory location that stores data. In Java, every variable must be declared with a data type (Statically Typed Language).</p>
+
+        <h3 data-hi="flex" class="flex">Primitive Data Types</h3>
+        <h3 data-en="flex" class="flex">Primitive Data Types</h3>
+        <table>
+          <tr><th>Type</th><th data-hi="inline">Size</th><th data-hi="inline">उदाहरण</th><th data-en="inline">Example</th></tr>
+          <tr><td>byte</td><td>1 byte</td><td colspan="2">10</td></tr>
+          <tr><td>int</td><td>4 bytes</td><td colspan="2">100</td></tr>
+          <tr><td>long</td><td>8 bytes</td><td colspan="2">10000L</td></tr>
+          <tr><td>float</td><td>4 bytes</td><td colspan="2">10.5f</td></tr>
+          <tr><td>double</td><td>8 bytes</td><td colspan="2">10.5</td></tr>
+          <tr><td>char</td><td>2 bytes</td><td colspan="2">'A'</td></tr>
+          <tr><td>boolean</td><td>1 bit</td><td colspan="2">true, false</td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Variable Declaration</h3>
+        <h3 data-en="flex" class="flex">Variable Declaration</h3>
+        <div class="code-block">int age = 21;
+double price = 99.99;
+char grade = <span class="str">'A'</span>;
+boolean isActive = <span class="kw">true</span>;
+String name = <span class="str">"Suraj"</span>;</div>
+
+        <h3 data-hi="flex" class="flex">Primitive vs Non-Primitive (Reference) Types</h3>
+        <h3 data-en="flex" class="flex">Primitive vs Non-Primitive (Reference) Types</h3>
+        <table>
+          <tr><th>Primitive</th><th>Non-Primitive (Reference)</th></tr>
+          <tr><td><span data-hi="inline">int, char, boolean जैसे basic types</span><span data-en="inline">Basic types like int, char, boolean</span></td><td><span data-hi="inline">String, Array, Class जैसे complex types</span><span data-en="inline">Complex types like String, Array, Class</span></td></tr>
+          <tr><td><span data-hi="inline">Memory में सीधे value store होती है</span><span data-en="inline">Stores the value directly in memory</span></td><td><span data-hi="inline">Memory में object का reference (address) store होता है</span><span data-en="inline">Stores a reference (address) to the object in memory</span></td></tr>
+        </table>
+
+        <div class="note-box">
+          <span data-hi="inline"><b>याद रखें:</b> Java में 8 primitive data types होते हैं (byte, short, int, long, float, double, char, boolean), बाकी सब (String, Arrays) non-primitive हैं।</span>
+          <span data-en="inline"><b>Remember:</b> Java has 8 primitive data types (byte, short, int, long, float, double, char, boolean), everything else (String, Arrays) is non-primitive.</span>
+        </div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">Java के Data Types उदाहरण सहित लिखिए। Primitive और Non-Primitive Data Type में अंतर बताइए।</span>
+          <span data-en="inline">Write Java's Data Types with examples. Differentiate between Primitive and Non-Primitive Data Type.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 5 -->
+    <section class="unit-card" id="unit5">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 05 · जावा बेसिक्स</span><span data-en="inline">Unit 05 · Java Basics</span></span>
+        <h2><span data-hi="inline">Operators</span><span data-en="inline">Operators</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Arithmetic Operators</h3>
+        <h3 data-en="flex" class="flex">Arithmetic Operators</h3>
+        <table>
+          <tr><th>Operator</th><th data-hi="inline">काम</th><th data-en="inline">Purpose</th></tr>
+          <tr><td>+ - * /</td><td><span data-hi="inline">जोड़, घटाव, गुणा, भाग</span><span data-en="inline">Addition, subtraction, multiplication, division</span></td></tr>
+          <tr><td>%</td><td><span data-hi="inline">Modulus (शेषफल)</span><span data-en="inline">Modulus (remainder)</span></td></tr>
+          <tr><td>++ / --</td><td><span data-hi="inline">Increment / Decrement</span><span data-en="inline">Increment / Decrement</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Relational & Logical Operators</h3>
+        <h3 data-en="flex" class="flex">Relational & Logical Operators</h3>
+        <table>
+          <tr><th>Operator</th><th data-hi="inline">काम</th><th data-en="inline">Purpose</th></tr>
+          <tr><td>== != &gt; &lt; &gt;= &lt;=</td><td><span data-hi="inline">Comparison करते हैं, boolean result देते हैं</span><span data-en="inline">Compare values, return a boolean result</span></td></tr>
+          <tr><td>&& (AND)</td><td><span data-hi="inline">दोनों conditions true हों तभी true</span><span data-en="inline">True only if both conditions are true</span></td></tr>
+          <tr><td>|| (OR)</td><td><span data-hi="inline">कोई एक true हो तो true</span><span data-en="inline">True if any one is true</span></td></tr>
+          <tr><td>! (NOT)</td><td><span data-hi="inline">Condition उल्टा कर देता है</span><span data-en="inline">Reverses the condition</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Assignment Operators</h3>
+        <h3 data-en="flex" class="flex">Assignment Operators</h3>
+        <div class="code-block">int x = 10;
+x += 5;  <span class="cmt">// x = x + 5 → 15</span>
+x -= 3;  <span class="cmt">// x = x - 3 → 12</span></div>
+
+        <h3 data-hi="flex" class="flex">Type Casting</h3>
+        <h3 data-en="flex" class="flex">Type Casting</h3>
+        <table>
+          <tr><th>Type</th><th data-hi="inline">मतलब</th><th data-en="inline">Meaning</th></tr>
+          <tr><td>Widening (Implicit)</td><td><span data-hi="inline">छोटे type से बड़े type में automatically convert (int → double)</span><span data-en="inline">Smaller type to larger type, automatic (int → double)</span></td></tr>
+          <tr><td>Narrowing (Explicit)</td><td><span data-hi="inline">बड़े type से छोटे type में manually convert (double → int)</span><span data-en="inline">Larger type to smaller type, done manually (double → int)</span></td></tr>
+        </table>
+        <div class="code-block">double d = 10.5;
+int i = (int) d;  <span class="cmt">// Narrowing, i = 10</span></div>
+
+        <div class="note-box">
+          <span data-hi="inline"><b>याद रखें:</b> Narrowing casting में data loss हो सकता है (decimal part छूट जाता है), इसलिए इसे explicitly () में लिखना ज़रूरी है।</span>
+          <span data-en="inline"><b>Remember:</b> narrowing casting can cause data loss (decimal part is dropped), so it must be written explicitly with ().</span>
+        </div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">Java के operators के types उदाहरण सहित लिखिए। Type Casting किसे कहते हैं? Widening और Narrowing में अंतर बताइए।</span>
+          <span data-en="inline">Write the types of operators in Java with examples. What is Type Casting? Differentiate between Widening and Narrowing.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 6 -->
+    <section class="unit-card" id="unit6">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 06 · कंट्रोल फ्लो</span><span data-en="inline">Unit 06 · Control Flow</span></span>
+        <h2><span data-hi="inline">Control Statements</span><span data-en="inline">Control Statements</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">if, else if, else</h3>
+        <h3 data-en="flex" class="flex">if, else if, else</h3>
+        <div class="code-block"><span class="kw">int</span> marks = 75;
+
+<span class="kw">if</span> (marks &gt;= 90) {
+  System.out.println(<span class="str">"Grade A"</span>);
+} <span class="kw">else if</span> (marks &gt;= 60) {
+  System.out.println(<span class="str">"Grade B"</span>);
+} <span class="kw">else</span> {
+  System.out.println(<span class="str">"Grade C"</span>);
+}</div>
+
+        <h3 data-hi="flex" class="flex">switch Statement</h3>
+        <h3 data-en="flex" class="flex">switch Statement</h3>
+        <div class="code-block"><span class="kw">switch</span> (day) {
+  <span class="kw">case</span> 1:
+    System.out.println(<span class="str">"Monday"</span>);
+    <span class="kw">break</span>;
+  <span class="kw">case</span> 2:
+    System.out.println(<span class="str">"Tuesday"</span>);
+    <span class="kw">break</span>;
+  <span class="kw">default</span>:
+    System.out.println(<span class="str">"Other day"</span>);
+}</div>
+        <p data-hi="block" class="block">हर case के बाद <code>break</code> लगाना ज़रूरी है, वरना अगला case भी execute हो जाएगा (fall-through)।</p>
+        <p data-en="block" class="block">A <code>break</code> is required after each case, otherwise the next case also executes (fall-through).</p>
+
+        <h3 data-hi="flex" class="flex">Ternary Operator</h3>
+        <h3 data-en="flex" class="flex">Ternary Operator</h3>
+        <div class="code-block">String result = (age &gt;= 18) ? <span class="str">"Adult"</span> : <span class="str">"Minor"</span>;</div>
+
+        <div class="note-box">
+          <span data-hi="inline"><b>याद रखें:</b> switch सिर्फ int, char, String, और enum types के साथ काम करता है — float/double के साथ नहीं।</span>
+          <span data-en="inline"><b>Remember:</b> switch only works with int, char, String, and enum types — not with float/double.</span>
+        </div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">if-else statement का syntax लिखिए। switch statement कैसे काम करता है? Ternary operator का उदाहरण लिखिए।</span>
+          <span data-en="inline">Write the syntax of if-else. How does the switch statement work? Write an example of the Ternary operator.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 7 -->
+    <section class="unit-card" id="unit7">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 07 · कंट्रोल फ्लो</span><span data-en="inline">Unit 07 · Control Flow</span></span>
+        <h2><span data-hi="inline">Loops</span><span data-en="inline">Loops</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">for Loop</h3>
+        <h3 data-en="flex" class="flex">for Loop</h3>
+        <div class="code-block"><span class="kw">for</span> (<span class="kw">int</span> i = 1; i &lt;= 5; i++) {
+  System.out.println(i);
+}</div>
+
+        <h3 data-hi="flex" class="flex">while & do...while Loop</h3>
+        <h3 data-en="flex" class="flex">while & do...while Loop</h3>
+        <div class="code-block"><span class="kw">int</span> i = 1;
+<span class="kw">while</span> (i &lt;= 5) {
+  System.out.println(i);
+  i++;
+}
+
+<span class="cmt">// do...while runs at least once</span>
+<span class="kw">int</span> j = 1;
+<span class="kw">do</span> {
+  System.out.println(j);
+  j++;
+} <span class="kw">while</span> (j &lt;= 5);</div>
+
+        <h3 data-hi="flex" class="flex">Enhanced for Loop (for-each)</h3>
+        <h3 data-en="flex" class="flex">Enhanced for Loop (for-each)</h3>
+        <p data-hi="block" class="block">Arrays/Collections को iterate करने का simple तरीका — index की ज़रूरत नहीं पड़ती।</p>
+        <p data-en="block" class="block">A simple way to iterate over Arrays/Collections — no need for an index.</p>
+        <div class="code-block"><span class="kw">int</span>[] nums = {1, 2, 3};
+<span class="kw">for</span> (<span class="kw">int</span> n : nums) {
+  System.out.println(n);
+}</div>
+
+        <h3 data-hi="flex" class="flex">break & continue</h3>
+        <h3 data-en="flex" class="flex">break & continue</h3>
+        <table>
+          <tr><th>Keyword</th><th data-hi="inline">काम</th><th data-en="inline">Purpose</th></tr>
+          <tr><td>break</td><td><span data-hi="inline">Loop को पूरी तरह रोक देता है</span><span data-en="inline">Stops the loop completely</span></td></tr>
+          <tr><td>continue</td><td><span data-hi="inline">Current iteration skip करके अगली पर जाता है</span><span data-en="inline">Skips the current iteration and moves to the next</span></td></tr>
+        </table>
+
+        <div class="note-box">
+          <span data-hi="inline"><b>याद रखें:</b> while loop में condition पहले check होती है (body 0 बार चल सकती है), do...while में body पहले run होती है (कम से कम 1 बार ज़रूर)।</span>
+          <span data-en="inline"><b>Remember:</b> while checks the condition first (body may run 0 times), do...while runs the body first (always at least once).</span>
+        </div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">for loop का syntax लिखिए। while और do...while में अंतर बताइए। Enhanced for loop का उपयोग समझाइए।</span>
+          <span data-en="inline">Write the syntax of a for loop. Differentiate between while and do...while. Explain the use of the Enhanced for loop.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 8 -->
+    <section class="unit-card" id="unit8">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 08 · कंट्रोल फ्लो</span><span data-en="inline">Unit 08 · Control Flow</span></span>
+        <h2><span data-hi="inline">Arrays</span><span data-en="inline">Arrays</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Array क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is an Array?</h3>
+        <p data-hi="block" class="block"><strong>Array</strong> एक same data type की कई values को एक continuous memory location में, fixed size के साथ store करता है। Index हमेशा 0 से शुरू होती है।</p>
+        <p data-en="block" class="block">An <strong>Array</strong> stores multiple values of the same data type in a continuous memory location with a fixed size. Indexing always starts at 0.</p>
+
+        <h3 data-hi="flex" class="flex">Array Declaration & Initialization</h3>
+        <h3 data-en="flex" class="flex">Array Declaration & Initialization</h3>
+        <div class="code-block"><span class="kw">int</span>[] nums = <span class="kw">new int</span>[5];
+<span class="kw">int</span>[] arr = {10, 20, 30, 40, 50};
+
+System.out.println(arr[0]); <span class="cmt">// 10</span>
+System.out.println(arr.length); <span class="cmt">// 5</span></div>
+
+        <h3 data-hi="flex" class="flex">1D vs 2D Array</h3>
+        <h3 data-en="flex" class="flex">1D vs 2D Array</h3>
+        <table>
+          <tr><th>1D Array</th><th>2D Array</th></tr>
+          <tr><td><span data-hi="inline">Single row data, जैसे list</span><span data-en="inline">Single row of data, like a list</span></td><td><span data-hi="inline">Rows और columns वाला data, जैसे matrix/table</span><span data-en="inline">Data with rows and columns, like a matrix/table</span></td></tr>
+          <tr><td>int[] arr = {1,2,3};</td><td>int[][] arr = {{1,2},{3,4}};</td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Array की विशेषताएं</h3>
+        <h3 data-en="flex" class="flex">Characteristics of Arrays</h3>
+        <ul data-hi="block" class="block">
+          <li>Fixed size — एक बार बनने के बाद size change नहीं हो सकता</li>
+          <li>Same data type की values ही store होती हैं</li>
+          <li><code>length</code> property से size पता चलती है</li>
+        </ul>
+        <ul data-en="block" class="block">
+          <li>Fixed size — cannot change size once created</li>
+          <li>Stores values of the same data type only</li>
+          <li>The <code>length</code> property gives the size</li>
+        </ul>
+
+        <div class="note-box">
+          <span data-hi="inline"><b>याद रखें:</b> Array index हमेशा 0 से शुरू होती है — n size के array में आखिरी valid index n-1 होगी।</span>
+          <span data-en="inline"><b>Remember:</b> array indexing always starts at 0 — in an array of size n, the last valid index is n-1.</span>
+        </div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">Array किसे कहते हैं, उदाहरण सहित समझाइए। 1D और 2D Array में अंतर बताइए। Array की कोई 3 विशेषताएं लिखिए।</span>
+          <span data-en="inline">What is an Array, explain with an example. Differentiate between 1D and 2D Array. Write any 3 characteristics of Arrays.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 9 -->
+    <section class="unit-card" id="unit9">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 09 · OOP कांसेप्ट्स</span><span data-en="inline">Unit 09 · OOP Concepts</span></span>
+        <h2><span data-hi="inline">Class, Object & Methods</span><span data-en="inline">Class, Object & Methods</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Class क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is a Class?</h3>
+        <p data-hi="block" class="block"><strong>Class</strong> एक blueprint/template है जो objects की properties (variables) और behavior (methods) को define करता है।</p>
+        <p data-en="block" class="block">A <strong>Class</strong> is a blueprint/template that defines an object's properties (variables) and behavior (methods).</p>
+
+        <h3 data-hi="flex" class="flex">Object क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is an Object?</h3>
+        <p data-hi="block" class="block"><strong>Object</strong> किसी Class का actual instance है — Class में defined properties और methods की real-world copy।</p>
+        <p data-en="block" class="block">An <strong>Object</strong> is an actual instance of a Class — a real-world copy of the properties and methods defined in the Class.</p>
+        <div class="code-block"><span class="kw">class</span> Student {
+  String name;
+  <span class="kw">int</span> age;
+
+  <span class="kw">void</span> display() {
+    System.out.println(name + <span class="str">" is "</span> + age);
+  }
+}
+
+<span class="cmt">// Creating an object</span>
+Student s1 = <span class="kw">new</span> Student();
+s1.name = <span class="str">"Suraj"</span>;
+s1.age = 21;
+s1.display();</div>
+
+        <h3 data-hi="flex" class="flex">Constructor</h3>
+        <h3 data-en="flex" class="flex">Constructor</h3>
+        <p data-hi="block" class="block"><strong>Constructor</strong> एक special method है जो object बनते ही automatically call होता है — initialization के लिए use होता है। इसका नाम class के नाम जैसा ही होता है, और कोई return type नहीं होता।</p>
+        <p data-en="block" class="block">A <strong>Constructor</strong> is a special method automatically called when an object is created — used for initialization. It has the same name as the class and no return type.</p>
+        <div class="code-block"><span class="kw">class</span> Student {
+  String name;
+  Student(String n) { <span class="cmt">// Constructor</span>
+    name = n;
+  }
+}</div>
+
+        <h3 data-hi="flex" class="flex">Method Overloading</h3>
+        <h3 data-en="flex" class="flex">Method Overloading</h3>
+        <p data-hi="block" class="block">एक ही class में same नाम के multiple methods, पर अलग parameters के साथ — Compile-time Polymorphism का उदाहरण है।</p>
+        <p data-en="block" class="block">Multiple methods with the same name in one class, but with different parameters — an example of Compile-time Polymorphism.</p>
+
+        <div class="note-box">
+          <span data-hi="inline"><b>याद रखें:</b> एक class से कई objects बनाए जा सकते हैं, और हर object की अपनी अलग copy होती है instance variables की।</span>
+          <span data-en="inline"><b>Remember:</b> multiple objects can be created from one class, and each object has its own separate copy of instance variables.</span>
+        </div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">Class और Object में अंतर बताइए, उदाहरण सहित। Constructor किसे कहते हैं? Method Overloading क्या है?</span>
+          <span data-en="inline">Differentiate between Class and Object with an example. What is a Constructor? What is Method Overloading?</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 10 -->
+    <section class="unit-card" id="unit10">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 10 · OOP कांसेप्ट्स</span><span data-en="inline">Unit 10 · OOP Concepts</span></span>
+        <h2><span data-hi="inline">Inheritance, Polymorphism, Encapsulation</span><span data-en="inline">Inheritance, Polymorphism, Encapsulation</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">4 Pillars of OOP</h3>
+        <h3 data-en="flex" class="flex">4 Pillars of OOP</h3>
+        <table>
+          <tr><th>Pillar</th><th data-hi="inline">मतलब</th><th data-en="inline">Meaning</th></tr>
+          <tr><td>Inheritance</td><td><span data-hi="inline">एक class दूसरी class की properties/methods inherit करती है</span><span data-en="inline">One class inherits properties/methods of another</span></td></tr>
+          <tr><td>Polymorphism</td><td><span data-hi="inline">एक ही चीज़ के कई रूप (same method अलग तरीकों से behave करे)</span><span data-en="inline">One thing taking many forms (same method behaves differently)</span></td></tr>
+          <tr><td>Encapsulation</td><td><span data-hi="inline">Data और methods को एक unit में wrap करना, data hide करना</span><span data-en="inline">Wrapping data and methods into one unit, hiding data</span></td></tr>
+          <tr><td>Abstraction</td><td><span data-hi="inline">सिर्फ ज़रूरी details दिखाना, implementation छुपाना</span><span data-en="inline">Showing only essential details, hiding implementation</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Inheritance Example</h3>
+        <h3 data-en="flex" class="flex">Inheritance Example</h3>
+        <div class="code-block"><span class="kw">class</span> Animal {
+  <span class="kw">void</span> eat() { System.out.println(<span class="str">"Eating..."</span>); }
+}
+
+<span class="kw">class</span> Dog <span class="kw">extends</span> Animal {
+  <span class="kw">void</span> bark() { System.out.println(<span class="str">"Barking..."</span>); }
+}
+
+<span class="cmt">// Dog object can use both eat() and bark()</span></div>
+
+        <h3 data-hi="flex" class="flex">Types of Inheritance</h3>
+        <h3 data-en="flex" class="flex">Types of Inheritance</h3>
+        <table>
+          <tr><th>Type</th><th data-hi="inline">मतलब</th><th data-en="inline">Meaning</th></tr>
+          <tr><td>Single</td><td><span data-hi="inline">एक class दूसरी से inherit करती है</span><span data-en="inline">One class inherits from another</span></td></tr>
+          <tr><td>Multilevel</td><td><span data-hi="inline">Chain में inheritance (A → B → C)</span><span data-en="inline">Inheritance in a chain (A → B → C)</span></td></tr>
+          <tr><td>Hierarchical</td><td><span data-hi="inline">कई classes एक ही parent class से inherit करती हैं</span><span data-en="inline">Multiple classes inherit from one parent class</span></td></tr>
+        </table>
+        <p data-hi="block" class="block">Java multiple inheritance (एक class का दो classes से inherit) को classes के साथ support नहीं करता — सिर्फ interfaces के through मुमकिन है।</p>
+        <p data-en="block" class="block">Java does not support multiple inheritance with classes (one class inheriting from two) — it's only possible through interfaces.</p>
+
+        <h3 data-hi="flex" class="flex">Polymorphism के Types</h3>
+        <h3 data-en="flex" class="flex">Types of Polymorphism</h3>
+        <table>
+          <tr><th>Type</th><th data-hi="inline">मतलब</th><th data-en="inline">Meaning</th></tr>
+          <tr><td>Compile-time (Overloading)</td><td><span data-hi="inline">Same नाम, अलग parameters</span><span data-en="inline">Same name, different parameters</span></td></tr>
+          <tr><td>Run-time (Overriding)</td><td><span data-hi="inline">Child class parent class के method को redefine करती है</span><span data-en="inline">Child class redefines a method from the parent class</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Encapsulation Example</h3>
+        <h3 data-en="flex" class="flex">Encapsulation Example</h3>
+        <div class="code-block"><span class="kw">class</span> Account {
+  <span class="kw">private</span> <span class="kw">double</span> balance; <span class="cmt">// data hidden</span>
+
+  <span class="kw">public double</span> getBalance() {
+    <span class="kw">return</span> balance;
+  }
+}</div>
+        <p data-hi="block" class="block"><code>private</code> keyword से variables को directly बाहर से access करने से रोका जाता है — सिर्फ getter/setter methods से access मिलता है।</p>
+        <p data-en="block" class="block">The <code>private</code> keyword prevents direct outside access to variables — access is given only via getter/setter methods.</p>
+
+        <div class="imp-box">
+          <span data-hi="inline"><b>Exam Tip:</b> Method Overloading Compile-time Polymorphism है, Method Overriding Run-time Polymorphism — exam में अक्सर इनका अंतर पूछा जाता है।</span>
+          <span data-en="inline"><b>Exam Tip:</b> Method Overloading is Compile-time Polymorphism, Method Overriding is Run-time Polymorphism — their difference is frequently asked in exams.</span>
+        </div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">OOP के 4 pillars समझाइए। Inheritance के types लिखिए। Overloading और Overriding में अंतर बताइए।</span>
+          <span data-en="inline">Explain the 4 pillars of OOP. Write the types of Inheritance. Differentiate between Overloading and Overriding.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 11 -->
+    <section class="unit-card" id="unit11">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 11 · OOP कांसेप्ट्स</span><span data-en="inline">Unit 11 · OOP Concepts</span></span>
+        <h2><span data-hi="inline">Exception Handling</span><span data-en="inline">Exception Handling</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Exception क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is an Exception?</h3>
+        <p data-hi="block" class="block"><strong>Exception</strong> program execution के दौरान आने वाली एक unwanted/unexpected event है, जो program के normal flow को disrupt करती है (जैसे divide by zero)।</p>
+        <p data-en="block" class="block">An <strong>Exception</strong> is an unwanted/unexpected event during program execution that disrupts the normal flow of the program (like divide by zero).</p>
+
+        <h3 data-hi="flex" class="flex">try, catch, finally</h3>
+        <h3 data-en="flex" class="flex">try, catch, finally</h3>
+        <div class="code-block"><span class="kw">try</span> {
+  <span class="kw">int</span> result = 10 / 0;
+} <span class="kw">catch</span> (ArithmeticException e) {
+  System.out.println(<span class="str">"Cannot divide by zero"</span>);
+} <span class="kw">finally</span> {
+  System.out.println(<span class="str">"This always runs"</span>);
+}</div>
+        <table>
+          <tr><th>Block</th><th data-hi="inline">काम</th><th data-en="inline">Purpose</th></tr>
+          <tr><td>try</td><td><span data-hi="inline">वो code जिसमें exception आ सकती है</span><span data-en="inline">Code that might throw an exception</span></td></tr>
+          <tr><td>catch</td><td><span data-hi="inline">Exception को handle करता है</span><span data-en="inline">Handles the exception</span></td></tr>
+          <tr><td>finally</td><td><span data-hi="inline">Exception आए या न आए, हमेशा execute होता है</span><span data-en="inline">Always executes, whether an exception occurs or not</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Common Exception Types</h3>
+        <h3 data-en="flex" class="flex">Common Exception Types</h3>
+        <table>
+          <tr><th>Exception</th><th data-hi="inline">कब आता है</th><th data-en="inline">When it occurs</th></tr>
+          <tr><td>ArithmeticException</td><td><span data-hi="inline">किसी number को 0 से divide करने पर</span><span data-en="inline">When dividing a number by 0</span></td></tr>
+          <tr><td>NullPointerException</td><td><span data-hi="inline">null object को access करने की कोशिश पर</span><span data-en="inline">When trying to access a null object</span></td></tr>
+          <tr><td>ArrayIndexOutOfBoundsException</td><td><span data-hi="inline">Array की invalid index access करने पर</span><span data-en="inline">When accessing an invalid array index</span></td></tr>
+          <tr><td>NumberFormatException</td><td><span data-hi="inline">Invalid string को number में convert करने पर</span><span data-en="inline">When converting an invalid string to a number</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Checked vs Unchecked Exception</h3>
+        <h3 data-en="flex" class="flex">Checked vs Unchecked Exception</h3>
+        <table>
+          <tr><th>Checked</th><th>Unchecked</th></tr>
+          <tr><td><span data-hi="inline">Compile-time पर check होती है (जैसे IOException)</span><span data-en="inline">Checked at compile-time (like IOException)</span></td><td><span data-hi="inline">Runtime पर आती है (जैसे ArithmeticException)</span><span data-en="inline">Occurs at runtime (like ArithmeticException)</span></td></tr>
+        </table>
+
+        <div class="note-box">
+          <span data-hi="inline"><b>याद रखें:</b> Exception Handling से program crash होने की जगह gracefully error message दिखा सकता है — यह Java को "Robust" बनाने वाली key feature है।</span>
+          <span data-en="inline"><b>Remember:</b> Exception Handling lets a program show an error message gracefully instead of crashing — a key feature that makes Java "Robust".</span>
+        </div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">Exception किसे कहते हैं? try-catch-finally का syntax उदाहरण सहित लिखिए। कोई 3 common exceptions लिखिए।</span>
+          <span data-en="inline">What is an Exception? Write the syntax of try-catch-finally with an example. Write any 3 common exceptions.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 12 -->
+    <section class="unit-card" id="unit12">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 12 · रिवीज़न</span><span data-en="inline">Unit 12 · Revision</span></span>
+        <h2><span data-hi="inline">Important Q&A — फटाफट रिवीज़न</span><span data-en="inline">Important Q&A — Quick Revision</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">1-line Definitions (रटने के लिए)</h3>
+        <h3 data-en="flex" class="flex">1-line Definitions (to memorize)</h3>
+        <ul data-hi="block" class="block">
+          <li><strong>Java</strong> — Platform-independent, object-oriented programming language</li>
+          <li><strong>JVM</strong> — Bytecode को run करने वाला engine</li>
+          <li><strong>Class</strong> — Objects का blueprint/template</li>
+          <li><strong>Object</strong> — Class का actual instance</li>
+          <li><strong>Constructor</strong> — Object बनते ही automatically call होने वाला method</li>
+          <li><strong>Inheritance</strong> — एक class दूसरी की properties inherit करे</li>
+          <li><strong>Polymorphism</strong> — एक चीज़ के कई रूप</li>
+          <li><strong>Encapsulation</strong> — Data और methods को wrap करके hide करना</li>
+          <li><strong>Array</strong> — Same data type की values को fixed size में store करना</li>
+          <li><strong>Exception</strong> — Program flow को disrupt करने वाली unexpected event</li>
+        </ul>
+        <ul data-en="block" class="block">
+          <li><strong>Java</strong> — a platform-independent, object-oriented programming language</li>
+          <li><strong>JVM</strong> — the engine that runs Bytecode</li>
+          <li><strong>Class</strong> — a blueprint/template for objects</li>
+          <li><strong>Object</strong> — an actual instance of a class</li>
+          <li><strong>Constructor</strong> — a method automatically called when an object is created</li>
+          <li><strong>Inheritance</strong> — one class inheriting properties of another</li>
+          <li><strong>Polymorphism</strong> — one thing taking many forms</li>
+          <li><strong>Encapsulation</strong> — wrapping and hiding data and methods</li>
+          <li><strong>Array</strong> — storing values of the same data type in a fixed size</li>
+          <li><strong>Exception</strong> — an unexpected event that disrupts program flow</li>
+        </ul>
+
+        <h3 data-hi="flex" class="flex">महत्वपूर्ण Full Forms / Terms</h3>
+        <h3 data-en="flex" class="flex">Important Full Forms / Terms</h3>
+        <table>
+          <tr><th>Short</th><th>Full Form</th></tr>
+          <tr><td>JDK</td><td>Java Development Kit</td></tr>
+          <tr><td>JRE</td><td>Java Runtime Environment</td></tr>
+          <tr><td>JVM</td><td>Java Virtual Machine</td></tr>
+          <tr><td>OOP</td><td>Object-Oriented Programming</td></tr>
+          <tr><td>WORA</td><td>Write Once, Run Anywhere</td></tr>
+          <tr><td>API</td><td>Application Programming Interface</td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Frequently Asked Long Questions</h3>
+        <h3 data-en="flex" class="flex">Frequently Asked Long Questions</h3>
+        <ol data-hi="block" class="block">
+          <li>Java किसे कहते हैं? इसकी features लिखिए।</li>
+          <li>JDK, JRE, JVM में अंतर बताइए।</li>
+          <li>Java के Data Types उदाहरण सहित लिखिए।</li>
+          <li>Class और Object में अंतर बताइए, उदाहरण सहित।</li>
+          <li>OOP के 4 pillars समझाइए।</li>
+          <li>Inheritance के types लिखिए।</li>
+          <li>Exception Handling किसे कहते हैं? try-catch-finally समझाइए।</li>
+        </ol>
+        <ol data-en="block" class="block">
+          <li>What is Java? Write its features.</li>
+          <li>Differentiate between JDK, JRE, JVM.</li>
+          <li>Write Java's Data Types with examples.</li>
+          <li>Differentiate between Class and Object with examples.</li>
+          <li>Explain the 4 pillars of OOP.</li>
+          <li>Write the types of Inheritance.</li>
+          <li>What is Exception Handling? Explain try-catch-finally.</li>
+        </ol>
+
+        <div class="imp-box">
+          <span data-hi="inline"><b>आखिरी टिप:</b> पेपर से पहले सभी "संभावित परीक्षा प्रश्न" बॉक्स को एक बार ज़रूर पढ़ लें — यही सबसे common questions हैं।</span>
+          <span data-en="inline"><b>Final Tip:</b> Before the exam, make sure to read through all the "Likely Exam Questions" boxes once — these are the most common questions.</span>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<button id="toTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<footer>
+  <span data-hi="inline">Made with 🧡 for ITI-COPA students</span>
+  <span data-en="inline">Made with 🧡 for ITI-COPA students</span>
+  &nbsp;·&nbsp; by <a href="https://surajtiwarrii.github.io/Portfolio/" target="_blank">Suraj Tiwari</a>
+</footer>
+
+<script>
+function setLang(lang){
+  document.documentElement.lang = lang;
+  document.getElementById('langToggle').dataset.lang = lang;
+  document.getElementById('btnHi').classList.toggle('active', lang==='hi');
+  document.getElementById('btnEn').classList.toggle('active', lang==='en');
+  const input = document.getElementById('searchInput');
+  input.placeholder = lang==='en' ? input.dataset.enPlaceholder : input.dataset.hiPlaceholder;
+  localStorage.setItem('javaNotesLang', lang);
+}
+document.addEventListener('DOMContentLoaded', ()=>{
+  const saved = localStorage.getItem('javaNotesLang') || 'hi';
+  setLang(saved);
+});
+
+function toggleSidebar(e){
+  if(e) e.stopPropagation();
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('open');
+}
+window.addEventListener('scroll',()=>{
+  document.getElementById('toTop').style.display = window.scrollY>400 ? 'flex':'none';
+});
+function liveSearch(){
+  const q = document.getElementById('searchInput').value.trim().toLowerCase();
+  const cards = document.querySelectorAll('.unit-card');
+  if(!q){ cards.forEach(c=>c.classList.remove('hide')); return; }
+  cards.forEach(card=>{
+    const text = card.innerText.toLowerCase();
+    card.classList.toggle('hide', !text.includes(q));
+  });
+}
+const links = document.querySelectorAll('.nav-link');
+const sections = document.querySelectorAll('.unit-card');
+window.addEventListener('scroll',()=>{
+  let current='';
+  sections.forEach(sec=>{ if(window.scrollY >= sec.offsetTop - 100) current = sec.id; });
+  links.forEach(l=>{ l.classList.toggle('active', l.getAttribute('href')==='#'+current); });
+});
+document.querySelectorAll('.nav-link').forEach(l=>{
+  l.addEventListener('click',()=>{ if(window.innerWidth<=880) toggleSidebar(); });
+});
+</script>
+
+</body>
+</html>
