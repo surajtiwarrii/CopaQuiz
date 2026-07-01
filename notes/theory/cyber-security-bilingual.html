@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cyber Security — Hindi/English | ITI COPA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Hind:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #fffdf0;
+    --bg-soft: #fff6c4;
+    --panel: rgba(255,255,255,0.45);
+    --panel-solid: rgba(255,255,255,0.78);
+    --panel-glass: rgba(255,255,255,0.35);
+    --yellow-deep: #a16207;
+    --yellow: #eab308;
+    --yellow-soft: #fef08a;
+    --yellow-light: #fffbe0;
+    --yellow-mist: rgba(234,179,8,0.18);
+    --teal: #ca8a04;
+    --teal-mist: rgba(202,138,4,0.10);
+    --ink: #332b07;
+    --ink-soft: #7a6a3a;
+    --line: rgba(161,98,7,0.22);
+    --radius: 18px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Hind',sans-serif;
+    background:
+      radial-gradient(1200px 600px at 10% -10%, var(--yellow-mist), transparent 60%),
+      radial-gradient(1000px 700px at 110% 10%, var(--teal-mist), transparent 55%),
+      var(--bg);
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.brand{font-family:'Fraunces',serif;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+
+  .topbar{
+    position:sticky;top:0;z-index:50;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px 20px;
+    background:rgba(255,253,240,0.6);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);
+    gap:10px;
+  }
+  .brand{font-size:1.05rem;font-weight:700;color:var(--yellow-deep);display:flex;align-items:center;gap:8px;}
+  .brand .dot{width:9px;height:9px;border-radius:50%;background:linear-gradient(135deg,var(--yellow),var(--teal));flex-shrink:0;}
+  .topbar-actions{display:flex;align-items:center;gap:8px;}
+  .menu-btn{
+    background:rgba(234,179,8,0.18);
+    backdrop-filter:blur(6px);
+    color:var(--yellow-deep);
+    border:1px solid rgba(234,179,8,0.6);
+    padding:9px 16px;border-radius:30px;
+    font-family:'Hind';font-weight:700;font-size:0.9rem;cursor:pointer;
+    background-image:linear-gradient(135deg, rgba(254,240,138,0.7), rgba(234,179,8,0.45));
+    box-shadow:0 6px 16px rgba(161,98,7,0.18);
+  }
+  .lang-toggle{
+    display:flex;align-items:center;background:var(--panel-glass);border:1px solid var(--line);
+    backdrop-filter:blur(8px);
+    border-radius:30px;padding:3px;position:relative;cursor:pointer;
+  }
+  .lang-toggle button{
+    border:none;background:transparent;padding:7px 13px;border-radius:24px;
+    font-family:'Hind';font-weight:700;font-size:0.8rem;cursor:pointer;color:var(--ink-soft);
+    position:relative;z-index:2;transition:color 0.25s;
+  }
+  .lang-toggle button.active{color:var(--yellow-deep);}
+  .lang-pill{
+    position:absolute;top:3px;bottom:3px;left:3px;width:calc(50% - 3px);
+    background:linear-gradient(135deg,var(--yellow-soft),var(--yellow));
+    border-radius:24px;transition:transform 0.25s ease;z-index:1;
+  }
+  .lang-toggle[data-lang="en"] .lang-pill{transform:translateX(100%);}
+
+  .hero{padding:64px 20px 40px;text-align:center;position:relative;}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'JetBrains Mono';font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;
+    color:var(--yellow-deep);
+    background:var(--panel-glass);
+    backdrop-filter:blur(8px);
+    border:1px solid var(--yellow-soft);
+    padding:6px 14px;border-radius:30px;
+    margin-bottom:18px;
+  }
+  .hero h1{font-size:clamp(1.7rem,5.5vw,3.1rem);line-height:1.15;margin:0 0 14px;color:var(--ink);font-weight:700;}
+  .hero h1 .grad{
+    background:linear-gradient(100deg,var(--yellow-deep),var(--yellow) 45%,var(--teal) 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero p{max-width:620px;margin:0 auto 28px;color:var(--ink-soft);font-size:1.05rem;line-height:1.65;}
+  .hero-stats{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:10px;}
+  .stat-chip{
+    background:var(--panel);border:1px solid var(--line);border-radius:14px;
+    backdrop-filter:blur(8px);
+    padding:12px 18px;min-width:108px;box-shadow:0 4px 14px rgba(161,98,7,0.08);
+  }
+  .stat-chip b{display:block;font-family:'Fraunces';font-size:1.3rem;color:var(--yellow-deep);}
+  .stat-chip span{font-size:0.74rem;color:var(--ink-soft);}
+
+  .toolbar{max-width:900px;margin:24px auto 0;padding:0 20px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:center;}
+  .search-wrap{flex:1;min-width:220px;position:relative;}
+  #searchInput{
+    width:100%;padding:13px 16px 13px 42px;border-radius:30px;border:1px solid var(--line);
+    background:var(--panel);backdrop-filter:blur(8px);
+    font-family:'Hind';font-size:0.95rem;color:var(--ink);outline:none;
+  }
+  #searchInput:focus{border-color:var(--yellow);}
+  .search-wrap::before{content:"⌕";position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--yellow-deep);font-size:1.1rem;}
+
+  .layout{max-width:1180px;margin:14px auto 80px;padding:0 20px;display:grid;grid-template-columns:260px 1fr;gap:26px;}
+  .sidebar{
+    background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    backdrop-filter:blur(10px);
+    padding:18px 14px;height:fit-content;position:sticky;top:78px;max-height:calc(100vh - 100px);overflow-y:auto;
+  }
+  .sidebar h4{font-family:'JetBrains Mono';font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-soft);margin:14px 6px 8px;}
+  .sidebar h4:first-child{margin-top:2px;}
+  .nav-link{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:10px;color:var(--ink);text-decoration:none;font-size:0.88rem;font-weight:500;transition:background 0.15s;}
+  .nav-link:hover{background:var(--yellow-mist);}
+  .nav-link.active{background:linear-gradient(120deg,var(--yellow-mist),var(--teal-mist));color:var(--yellow-deep);font-weight:700;}
+  .nav-link .num{font-family:'JetBrains Mono';font-size:0.68rem;color:var(--teal);min-width:20px;}
+  .close-sidebar{display:none;}
+
+  @media(max-width:880px){
+    .layout{grid-template-columns:1fr;display:block;}
+    .sidebar{position:fixed !important;inset:0 18% 0 0;z-index:60;transform:translateX(-105%);transition:transform 0.3s ease;overflow-y:auto;top:0;height:100vh;max-height:100vh;}
+    .sidebar.open{transform:translateX(0);}
+    .sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(50,40,5,0.4);z-index:55;}
+    .sidebar-overlay.open{display:block;}
+    .close-sidebar{display:block;margin-left:auto;background:none;border:1px solid var(--line);border-radius:50%;width:34px;height:34px;font-size:1rem;color:var(--ink);cursor:pointer;}
+    .brand span.brand-text{display:none;}
+    .menu-btn span.menu-text{display:none;}
+  }
+
+  .content{min-width:0;}
+  .unit-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:22px;overflow:hidden;scroll-margin-top:80px;box-shadow:0 6px 24px rgba(161,98,7,0.08);backdrop-filter:blur(10px);}
+  .unit-head{padding:22px 24px 18px;background:linear-gradient(120deg, rgba(234,179,8,0.22), rgba(161,98,7,0.10));border-bottom:1px solid var(--line);}
+  .unit-tag{font-family:'JetBrains Mono';font-size:0.7rem;color:var(--teal);letter-spacing:0.08em;text-transform:uppercase;display:block;margin-bottom:6px;}
+  .unit-head h2{margin:0;font-size:1.4rem;color:var(--yellow-deep);}
+  .unit-body{padding:20px 24px 26px;}
+  .unit-body h3{font-size:1.05rem;color:var(--ink);margin:22px 0 8px;display:flex;align-items:center;gap:8px;}
+  .unit-body h3::before{content:"";width:5px;height:18px;border-radius:3px;background:linear-gradient(180deg,var(--yellow),var(--teal));}
+  .unit-body h3:first-child{margin-top:2px;}
+  .unit-body p{line-height:1.75;color:var(--ink);margin:6px 0 10px;font-size:0.97rem;}
+  .unit-body ul, .unit-body ol{margin:6px 0 14px;padding-left:22px;line-height:1.75;}
+  .unit-body li{margin-bottom:6px;font-size:0.95rem;}
+  .unit-body strong{color:var(--yellow-deep);}
+
+  .note-box{background:var(--yellow-mist);border-left:3px solid var(--yellow);border-radius:10px;padding:12px 16px;margin:14px 0;font-size:0.9rem;}
+  .note-box b{color:var(--yellow-deep);}
+  .imp-box{background:var(--teal-mist);border-left:3px solid var(--teal);border-radius:10px;padding:12px 16px;margin:14px 0;font-size:0.9rem;}
+  .imp-box b{color:var(--teal);}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0 18px;font-size:0.88rem;border-radius:10px;overflow:hidden;}
+  th{background:linear-gradient(120deg,var(--yellow),var(--yellow-deep));color:var(--yellow-light);text-align:left;padding:10px 12px;font-weight:600;}
+  td{padding:9px 12px;border-bottom:1px solid var(--line);background:var(--panel-solid);}
+  tr:last-child td{border-bottom:none;}
+  tr:nth-child(even) td{background:var(--bg-soft);}
+
+  code, .code-block{font-family:'JetBrains Mono';}
+  .code-block{background:#2c2405;color:#fff3b0;padding:14px 16px;border-radius:12px;font-size:0.82rem;line-height:1.6;overflow-x:auto;margin:12px 0;border:1px solid rgba(234,179,8,0.3);}
+  .code-block .cmt{color:#9fe0a0;}
+  code{background:var(--bg-soft);padding:2px 6px;border-radius:5px;font-size:0.85em;color:var(--yellow-deep);}
+
+  .qbox{background:var(--bg-soft);border:1px dashed var(--yellow-soft);border-radius:12px;padding:14px 16px;margin:16px 0;}
+  .qbox b{color:var(--teal);display:block;margin-bottom:6px;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em;}
+
+  #toTop{
+    position:fixed;bottom:22px;right:22px;z-index:40;width:46px;height:46px;border-radius:50%;
+    background:linear-gradient(135deg,var(--yellow),var(--teal));color:var(--yellow-light);border:none;font-size:1.2rem;cursor:pointer;
+    box-shadow:0 8px 20px rgba(161,98,7,0.3);display:none;align-items:center;justify-content:center;
+  }
+
+  footer{text-align:center;padding:30px 20px 50px;color:var(--ink-soft);font-size:0.85rem;}
+  footer a{color:var(--yellow-deep);text-decoration:none;font-weight:600;}
+
+  mark{background:var(--yellow-soft);color:var(--ink);padding:0 2px;border-radius:3px;}
+  .hide{display:none !important;}
+
+  [data-hi], [data-en]{display:none;}
+  html[lang="hi"] [data-hi].inline, html[lang="hi"] span[data-hi]{display:inline;}
+  html[lang="hi"] [data-hi].block{display:block;}
+  html[lang="hi"] [data-hi].flex{display:flex;}
+  html[lang="hi"] th[data-hi], html[lang="hi"] td[data-hi]{display:table-cell;}
+  html[lang="en"] [data-en].inline, html[lang="en"] span[data-en]{display:inline;}
+  html[lang="en"] [data-en].block{display:block;}
+  html[lang="en"] [data-en].flex{display:flex;}
+  html[lang="en"] th[data-en], html[lang="en"] td[data-en]{display:table-cell;}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span><span class="brand-text">Cyber Security</span></div>
+  <div class="topbar-actions">
+    <div class="lang-toggle" id="langToggle" data-lang="hi" onclick="setLang(this.dataset.lang==='hi'?'en':'hi')">
+      <div class="lang-pill"></div>
+      <button type="button" id="btnHi">हिं</button>
+      <button type="button" id="btnEn">EN</button>
+    </div>
+    <button class="menu-btn" onclick="toggleSidebar(event)">🌐 <span class="menu-text" data-hi="inline">विषय सूची</span><span class="menu-text" data-en="inline">Topics</span></button>
+  </div>
+</div>
+
+<div class="hero">
+  <span class="eyebrow">● ITI · COPA · UP Board Pattern</span>
+  <h1>
+    <span data-hi="block" class="block">Cyber Security<br><span class="grad">सम्पूर्ण नोट्स</span></span>
+    <span data-en="block" class="block">Cyber Security<br><span class="grad">Complete Notes</span></span>
+  </h1>
+  <p data-hi="block" class="block">Threats की पहचान से लेकर Cyber Laws तक — हिंदी और इंग्लिश दोनों में, परीक्षा के हिसाब से तैयार।</p>
+  <p data-en="block" class="block">From identifying threats to Cyber Laws — available in both Hindi and English, exam-ready.</p>
+  <div class="hero-stats">
+    <div class="stat-chip"><b>10</b><span data-hi="inline">Units</span><span data-en="inline">Units</span></div>
+    <div class="stat-chip"><b>60+</b><span data-hi="inline">Topics</span><span data-en="inline">Topics</span></div>
+    <div class="stat-chip"><b>2</b><span data-hi="inline">भाषाएं</span><span data-en="inline">Languages</span></div>
+  </div>
+</div>
+
+<div class="toolbar">
+  <div class="search-wrap">
+    <input type="text" id="searchInput" data-hi-placeholder="कोई भी टॉपिक खोजें... जैसे: Phishing, Firewall, Malware" data-en-placeholder="Search any topic... e.g. Phishing, Firewall, Malware" placeholder="कोई भी टॉपिक खोजें... जैसे: Phishing, Firewall, Malware" oninput="liveSearch()">
+  </div>
+</div>
+
+<div class="sidebar-overlay" id="overlay" onclick="toggleSidebar(event)"></div>
+
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <button class="close-sidebar" onclick="toggleSidebar(event)">✕</button>
+    <h4 data-hi="block" class="block">साइबर सिक्योरिटी बेसिक्स</h4>
+    <h4 data-en="block" class="block">Cyber Security Basics</h4>
+    <a class="nav-link" href="#unit1"><span class="num">01</span><span data-hi="inline">परिचय</span><span data-en="inline">Introduction</span></a>
+    <a class="nav-link" href="#unit2"><span class="num">02</span><span data-hi="inline">Cyber Threats के Types</span><span data-en="inline">Types of Cyber Threats</span></a>
+    <a class="nav-link" href="#unit3"><span class="num">03</span><span data-hi="inline">Malware (Virus, Worm, Trojan)</span><span data-en="inline">Malware (Virus, Worm, Trojan)</span></a>
+    <a class="nav-link" href="#unit4"><span class="num">04</span><span data-hi="inline">Social Engineering Attacks</span><span data-en="inline">Social Engineering Attacks</span></a>
+    <h4 data-hi="block" class="block">सुरक्षा उपाय</h4>
+    <h4 data-en="block" class="block">Security Measures</h4>
+    <a class="nav-link" href="#unit5"><span class="num">05</span><span data-hi="inline">Network Security</span><span data-en="inline">Network Security</span></a>
+    <a class="nav-link" href="#unit6"><span class="num">06</span><span data-hi="inline">Cryptography & Encryption</span><span data-en="inline">Cryptography & Encryption</span></a>
+    <a class="nav-link" href="#unit7"><span class="num">07</span><span data-hi="inline">Authentication & Password Security</span><span data-en="inline">Authentication & Password Security</span></a>
+    <a class="nav-link" href="#unit8"><span class="num">08</span><span data-hi="inline">Cyber Security Best Practices</span><span data-en="inline">Cyber Security Best Practices</span></a>
+    <h4 data-hi="block" class="block">कानून</h4>
+    <h4 data-en="block" class="block">Law</h4>
+    <a class="nav-link" href="#unit9"><span class="num">09</span><span data-hi="inline">Cyber Laws & IT Act</span><span data-en="inline">Cyber Laws & IT Act</span></a>
+    <h4 data-hi="block" class="block">रिवीज़न</h4>
+    <h4 data-en="block" class="block">Revision</h4>
+    <a class="nav-link" href="#unit10"><span class="num">10</span><span data-hi="inline">Important Q&A</span><span data-en="inline">Important Q&A</span></a>
+  </aside>
+
+  <main class="content" id="content">
+    <!-- UNIT 1 -->
+    <section class="unit-card" id="unit1">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 01 · साइबर सिक्योरिटी बेसिक्स</span><span data-en="inline">Unit 01 · Cyber Security Basics</span></span>
+        <h2><span data-hi="inline">Cyber Security का परिचय</span><span data-en="inline">Introduction to Cyber Security</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Cyber Security क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is Cyber Security?</h3>
+        <p data-hi="block" class="block"><strong>Cyber Security</strong> computers, networks, programs, और data को unauthorized access, attacks, और damage से बचाने की practice है।</p>
+        <p data-en="block" class="block"><strong>Cyber Security</strong> is the practice of protecting computers, networks, programs, and data from unauthorized access, attacks, and damage.</p>
+
+        <h3 data-hi="flex" class="flex">CIA Triad — Security के 3 Pillars</h3>
+        <h3 data-en="flex" class="flex">CIA Triad — 3 Pillars of Security</h3>
+        <table>
+          <tr><th>Term</th><th data-hi="inline">मतलब</th><th data-en="inline">Meaning</th></tr>
+          <tr><td>Confidentiality</td><td><span data-hi="inline">सिर्फ authorized लोगों को data access मिले</span><span data-en="inline">Only authorized people get access to data</span></td></tr>
+          <tr><td>Integrity</td><td><span data-hi="inline">Data accurate और unaltered रहे</span><span data-en="inline">Data remains accurate and unaltered</span></td></tr>
+          <tr><td>Availability</td><td><span data-hi="inline">Data/system ज़रूरत पड़ने पर हमेशा available रहे</span><span data-en="inline">Data/system remains available whenever needed</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Cyber Security क्यों ज़रूरी है?</h3>
+        <h3 data-en="flex" class="flex">Why is Cyber Security Important?</h3>
+        <ul data-hi="block" class="block">
+          <li>Personal data (banking, identity) की सुरक्षा</li>
+          <li>Business data और reputation की सुरक्षा</li>
+          <li>Financial losses से बचाव</li>
+          <li>National security और critical infrastructure की सुरक्षा</li>
+        </ul>
+        <ul data-en="block" class="block">
+          <li>Protecting personal data (banking, identity)</li>
+          <li>Protecting business data and reputation</li>
+          <li>Preventing financial losses</li>
+          <li>Protecting national security and critical infrastructure</li>
+        </ul>
+
+        <h3 data-hi="flex" class="flex">Cyber Crime क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is Cyber Crime?</h3>
+        <p data-hi="block" class="block"><strong>Cyber Crime</strong> कोई भी illegal activity है जो computer/internet का use करके की जाती है — जैसे hacking, fraud, data theft।</p>
+        <p data-en="block" class="block"><strong>Cyber Crime</strong> is any illegal activity carried out using a computer/internet — like hacking, fraud, data theft.</p>
+
+        <div class="note-box">
+          <span data-hi="inline"><b>याद रखें:</b> CIA Triad (Confidentiality, Integrity, Availability) हर Cyber Security course का सबसे basic और सबसे ज़्यादा पूछा जाने वाला concept है।</span>
+          <span data-en="inline"><b>Remember:</b> the CIA Triad (Confidentiality, Integrity, Availability) is the most basic and most frequently asked concept in any Cyber Security course.</span>
+        </div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">Cyber Security किसे कहते हैं? CIA Triad को समझाइए। Cyber Crime की definition लिखिए।</span>
+          <span data-en="inline">What is Cyber Security? Explain the CIA Triad. Write the definition of Cyber Crime.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 2 -->
+    <section class="unit-card" id="unit2">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 02 · साइबर सिक्योरिटी बेसिक्स</span><span data-en="inline">Unit 02 · Cyber Security Basics</span></span>
+        <h2><span data-hi="inline">Cyber Threats के Types</span><span data-en="inline">Types of Cyber Threats</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Common Cyber Threats</h3>
+        <h3 data-en="flex" class="flex">Common Cyber Threats</h3>
+        <table>
+          <tr><th>Threat</th><th data-hi="inline">मतलब</th><th data-en="inline">Meaning</th></tr>
+          <tr><td>Hacking</td><td><span data-hi="inline">बिना permission किसी system/network में घुसना</span><span data-en="inline">Gaining unauthorized access into a system/network</span></td></tr>
+          <tr><td>Phishing</td><td><span data-hi="inline">Fake email/website से sensitive information चुराना</span><span data-en="inline">Stealing sensitive info via fake email/website</span></td></tr>
+          <tr><td>Ransomware</td><td><span data-hi="inline">Data को lock करके ransom (पैसे) मांगना</span><span data-en="inline">Locking data and demanding ransom money</span></td></tr>
+          <tr><td>DoS/DDoS Attack</td><td><span data-hi="inline">Server को fake traffic से overload करके down करना</span><span data-en="inline">Overloading a server with fake traffic to bring it down</span></td></tr>
+          <tr><td>Man-in-the-Middle</td><td><span data-hi="inline">दो parties के बीच data secretly intercept करना</span><span data-en="inline">Secretly intercepting data between two parties</span></td></tr>
+          <tr><td>SQL Injection</td><td><span data-hi="inline">Malicious SQL code डालकर database को attack करना</span><span data-en="inline">Inserting malicious SQL code to attack a database</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Hacker के Types</h3>
+        <h3 data-en="flex" class="flex">Types of Hackers</h3>
+        <table>
+          <tr><th>Type</th><th data-hi="inline">मतलब</th><th data-en="inline">Meaning</th></tr>
+          <tr><td>White Hat</td><td><span data-hi="inline">Ethical hacker, legally security test करता है</span><span data-en="inline">Ethical hacker, tests security legally</span></td></tr>
+          <tr><td>Black Hat</td><td><span data-hi="inline">Illegal/malicious उद्देश्य से hack करता है</span><span data-en="inline">Hacks with illegal/malicious intent</span></td></tr>
+          <tr><td>Grey Hat</td><td><span data-hi="inline">Permission के बिना hack करता है पर harmful intent नहीं होती</span><span data-en="inline">Hacks without permission but without harmful intent</span></td></tr>
+        </table>
+
+        <div class="note-box">
+          <span data-hi="inline"><b>याद रखें:</b> DoS एक single source से attack करता है, जबकि DDoS (Distributed) कई sources/devices से एक साथ attack करता है।</span>
+          <span data-en="inline"><b>Remember:</b> DoS attacks from a single source, while DDoS (Distributed) attacks from multiple sources/devices simultaneously.</span>
+        </div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">Phishing क्या है? DoS और DDoS attack में अंतर बताइए। White Hat और Black Hat hacker में अंतर लिखिए।</span>
+          <span data-en="inline">What is Phishing? Differentiate between DoS and DDoS attack. Write the difference between White Hat and Black Hat hacker.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 3 -->
+    <section class="unit-card" id="unit3">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 03 · साइबर सिक्योरिटी बेसिक्स</span><span data-en="inline">Unit 03 · Cyber Security Basics</span></span>
+        <h2><span data-hi="inline">Malware (Virus, Worm, Trojan)</span><span data-en="inline">Malware (Virus, Worm, Trojan)</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Malware क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is Malware?</h3>
+        <p data-hi="block" class="block"><strong>Malware (Malicious Software)</strong> कोई भी harmful program है जो system को नुकसान पहुंचाने, data चुराने, या unauthorized access पाने के लिए design किया जाता है।</p>
+        <p data-en="block" class="block"><strong>Malware (Malicious Software)</strong> is any harmful program designed to damage a system, steal data, or gain unauthorized access.</p>
+
+        <h3 data-hi="flex" class="flex">Virus vs Worm vs Trojan</h3>
+        <h3 data-en="flex" class="flex">Virus vs Worm vs Trojan</h3>
+        <table>
+          <tr><th>Type</th><th data-hi="inline">विशेषता</th><th data-en="inline">Feature</th></tr>
+          <tr><td>Virus</td><td><span data-hi="inline">किसी file से attach होता है, फैलने के लिए human action चाहिए</span><span data-en="inline">Attaches to a file, needs human action to spread</span></td></tr>
+          <tr><td>Worm</td><td><span data-hi="inline">खुद-ब-खुद फैलता है, network में बिना human action के</span><span data-en="inline">Self-replicates and spreads across networks without human action</span></td></tr>
+          <tr><td>Trojan Horse</td><td><span data-hi="inline">किसी useful program जैसा दिखता है, पर अंदर harmful code होता है</span><span data-en="inline">Disguises as a useful program but contains harmful code</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">अन्य Malware Types</h3>
+        <h3 data-en="flex" class="flex">Other Malware Types</h3>
+        <table>
+          <tr><th>Type</th><th data-hi="inline">मतलब</th><th data-en="inline">Meaning</th></tr>
+          <tr><td>Spyware</td><td><span data-hi="inline">User की activity को secretly track करता है</span><span data-en="inline">Secretly tracks a user's activity</span></td></tr>
+          <tr><td>Adware</td><td><span data-hi="inline">अनचाहे ads दिखाता है</span><span data-en="inline">Displays unwanted ads</span></td></tr>
+          <tr><td>Keylogger</td><td><span data-hi="inline">Keyboard के हर keystroke को record करता है</span><span data-en="inline">Records every keystroke on the keyboard</span></td></tr>
+          <tr><td>Ransomware</td><td><span data-hi="inline">Files को encrypt करके ransom मांगता है</span><span data-en="inline">Encrypts files and demands ransom</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Antivirus Software</h3>
+        <h3 data-en="flex" class="flex">Antivirus Software</h3>
+        <p data-hi="block" class="block"><strong>Antivirus</strong> malware को detect, block, और remove करने वाला software है — system को regularly scan करता है और known threats को database के through पहचानता है।</p>
+        <p data-en="block" class="block"><strong>Antivirus</strong> software detects, blocks, and removes malware — it regularly scans the system and identifies known threats via a database.</p>
+
+        <div class="note-box">
+          <span data-hi="inline"><b>याद रखें:</b> Virus को फैलने के लिए host file चाहिए और human action (जैसे file open करना) ज़रूरी है, पर Worm बिना किसी human action के खुद फैल सकता है।</span>
+          <span data-en="inline"><b>Remember:</b> a Virus needs a host file and human action (like opening a file) to spread, but a Worm can spread on its own without any human action.</span>
+        </div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">Malware किसे कहते हैं? Virus, Worm और Trojan में अंतर बताइए। Antivirus का क्या काम है?</span>
+          <span data-en="inline">What is Malware? Differentiate between Virus, Worm and Trojan. What is the function of Antivirus?</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 4 -->
+    <section class="unit-card" id="unit4">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 04 · साइबर सिक्योरिटी बेसिक्स</span><span data-en="inline">Unit 04 · Cyber Security Basics</span></span>
+        <h2><span data-hi="inline">Social Engineering Attacks</span><span data-en="inline">Social Engineering Attacks</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Social Engineering क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is Social Engineering?</h3>
+        <p data-hi="block" class="block"><strong>Social Engineering</strong> technical hacking की जगह human psychology का use करके लोगों को सही information देने या गलत action लेने के लिए manipulate करता है।</p>
+        <p data-en="block" class="block"><strong>Social Engineering</strong> manipulates human psychology — instead of technical hacking — to trick people into giving sensitive information or taking incorrect actions.</p>
+
+        <h3 data-hi="flex" class="flex">Common Social Engineering Techniques</h3>
+        <h3 data-en="flex" class="flex">Common Social Engineering Techniques</h3>
+        <table>
+          <tr><th>Technique</th><th data-hi="inline">मतलब</th><th data-en="inline">Meaning</th></tr>
+          <tr><td>Phishing</td><td><span data-hi="inline">Fake email/SMS से sensitive details चुराना</span><span data-en="inline">Stealing sensitive details via fake email/SMS</span></td></tr>
+          <tr><td>Vishing</td><td><span data-hi="inline">Phone call के through फ्रॉड करना (Voice Phishing)</span><span data-en="inline">Committing fraud via phone call (Voice Phishing)</span></td></tr>
+          <tr><td>Smishing</td><td><span data-hi="inline">SMS के through फ्रॉड करना</span><span data-en="inline">Committing fraud via SMS</span></td></tr>
+          <tr><td>Pretexting</td><td><span data-hi="inline">झूठी story बनाकर information निकलवाना</span><span data-en="inline">Creating a false story to extract information</span></td></tr>
+          <tr><td>Baiting</td><td><span data-hi="inline">कोई attractive चीज़ (free offer/USB) से लालच देना</span><span data-en="inline">Luring with something attractive (free offer/USB)</span></td></tr>
+          <tr><td>Shoulder Surfing</td><td><span data-hi="inline">पीछे से देखकर password/PIN चुराना</span><span data-en="inline">Stealing a password/PIN by looking over someone's shoulder</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Phishing कैसे पहचानें</h3>
+        <h3 data-en="flex" class="flex">How to Identify Phishing</h3>
+        <ul data-hi="block" class="block">
+          <li>Urgent/threatening language (जैसे "Account suspend हो जाएगा")</li>
+          <li>Sender का email address अजीब/misspelled लगे</li>
+          <li>Unexpected attachment या link</li>
+          <li>Grammar/spelling की गलतियां</li>
+        </ul>
+        <ul data-en="block" class="block">
+          <li>Urgent/threatening language (like "Your account will be suspended")</li>
+          <li>Sender's email address looks odd/misspelled</li>
+          <li>Unexpected attachment or link</li>
+          <li>Grammar/spelling mistakes</li>
+        </ul>
+
+        <div class="imp-box">
+          <span data-hi="inline"><b>Exam Tip:</b> Social Engineering का मुख्य target technology नहीं बल्कि इंसान (human) होता है — इसलिए इसे "Human Hacking" भी कहते हैं।</span>
+          <span data-en="inline"><b>Exam Tip:</b> the main target of Social Engineering is not technology but humans — that's why it's also called "Human Hacking".</span>
+        </div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">Social Engineering किसे कहते हैं? Phishing, Vishing, Smishing में अंतर बताइए। Phishing email कैसे पहचानें?</span>
+          <span data-en="inline">What is Social Engineering? Differentiate between Phishing, Vishing, Smishing. How to identify a phishing email?</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 5 -->
+    <section class="unit-card" id="unit5">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 05 · सुरक्षा उपाय</span><span data-en="inline">Unit 05 · Security Measures</span></span>
+        <h2><span data-hi="inline">Network Security</span><span data-en="inline">Network Security</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Network Security क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is Network Security?</h3>
+        <p data-hi="block" class="block"><strong>Network Security</strong> किसी computer network को unauthorized access, misuse, और attacks से बचाने की practices और tools का set है।</p>
+        <p data-en="block" class="block"><strong>Network Security</strong> is a set of practices and tools that protect a computer network from unauthorized access, misuse, and attacks.</p>
+
+        <h3 data-hi="flex" class="flex">Firewall</h3>
+        <h3 data-en="flex" class="flex">Firewall</h3>
+        <p data-hi="block" class="block"><strong>Firewall</strong> network और बाहरी दुनिया के बीच एक barrier की तरह काम करता है — incoming/outgoing traffic को rules के according monitor और control करता है।</p>
+        <p data-en="block" class="block">A <strong>Firewall</strong> acts as a barrier between a network and the outside world — monitoring and controlling incoming/outgoing traffic based on rules.</p>
+
+        <h3 data-hi="flex" class="flex">VPN (Virtual Private Network)</h3>
+        <h3 data-en="flex" class="flex">VPN (Virtual Private Network)</h3>
+        <p data-hi="block" class="block"><strong>VPN</strong> internet connection को encrypt करके एक secure, private tunnel बनाता है — public network पर भी data को safe रखता है और IP address छुपाता है।</p>
+        <p data-en="block" class="block">A <strong>VPN</strong> encrypts an internet connection, creating a secure, private tunnel — keeps data safe even on public networks and hides the IP address.</p>
+
+        <h3 data-hi="flex" class="flex">IDS & IPS</h3>
+        <h3 data-en="flex" class="flex">IDS & IPS</h3>
+        <table>
+          <tr><th>Term</th><th data-hi="inline">काम</th><th data-en="inline">Purpose</th></tr>
+          <tr><td>IDS (Intrusion Detection System)</td><td><span data-hi="inline">Suspicious activity को detect करके alert करता है</span><span data-en="inline">Detects suspicious activity and alerts</span></td></tr>
+          <tr><td>IPS (Intrusion Prevention System)</td><td><span data-hi="inline">Suspicious activity को detect करके automatically block करता है</span><span data-en="inline">Detects suspicious activity and automatically blocks it</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Secure Wi-Fi Practices</h3>
+        <h3 data-en="flex" class="flex">Secure Wi-Fi Practices</h3>
+        <ul data-hi="block" class="block">
+          <li>Strong WPA3/WPA2 encryption use करें</li>
+          <li>Default router password ज़रूर बदलें</li>
+          <li>Public Wi-Fi पर sensitive transactions न करें</li>
+        </ul>
+        <ul data-en="block" class="block">
+          <li>Use strong WPA3/WPA2 encryption</li>
+          <li>Always change the default router password</li>
+          <li>Avoid sensitive transactions on public Wi-Fi</li>
+        </ul>
+
+        <div class="note-box">
+          <span data-hi="inline"><b>याद रखें:</b> Firewall traffic को filter करता है (gatekeeper), जबकि VPN data को encrypt करके privacy देता है — दोनों अलग-अलग layer पर काम करते हैं।</span>
+          <span data-en="inline"><b>Remember:</b> a Firewall filters traffic (acts as a gatekeeper), while a VPN provides privacy by encrypting data — both work at different layers.</span>
+        </div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">Firewall किसे कहते हैं, इसका काम समझाइए। VPN का उपयोग क्या है? IDS और IPS में अंतर बताइए।</span>
+          <span data-en="inline">What is a Firewall, explain its function. What is the use of VPN? Differentiate between IDS and IPS.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 6 -->
+    <section class="unit-card" id="unit6">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 06 · सुरक्षा उपाय</span><span data-en="inline">Unit 06 · Security Measures</span></span>
+        <h2><span data-hi="inline">Cryptography & Encryption</span><span data-en="inline">Cryptography & Encryption</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Cryptography क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is Cryptography?</h3>
+        <p data-hi="block" class="block"><strong>Cryptography</strong> data को secret codes में बदलने की science है, ताकि सिर्फ authorized person ही उसे पढ़ सके।</p>
+        <p data-en="block" class="block"><strong>Cryptography</strong> is the science of converting data into secret codes so that only an authorized person can read it.</p>
+
+        <h3 data-hi="flex" class="flex">Encryption & Decryption</h3>
+        <h3 data-en="flex" class="flex">Encryption & Decryption</h3>
+        <table>
+          <tr><th>Term</th><th data-hi="inline">मतलब</th><th data-en="inline">Meaning</th></tr>
+          <tr><td>Plaintext</td><td><span data-hi="inline">Original, readable data</span><span data-en="inline">Original, readable data</span></td></tr>
+          <tr><td>Encryption</td><td><span data-hi="inline">Plaintext को unreadable Ciphertext में बदलना</span><span data-en="inline">Converting plaintext into unreadable ciphertext</span></td></tr>
+          <tr><td>Ciphertext</td><td><span data-hi="inline">Encrypted, unreadable data</span><span data-en="inline">Encrypted, unreadable data</span></td></tr>
+          <tr><td>Decryption</td><td><span data-hi="inline">Ciphertext को वापस readable plaintext में बदलना</span><span data-en="inline">Converting ciphertext back into readable plaintext</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Symmetric vs Asymmetric Encryption</h3>
+        <h3 data-en="flex" class="flex">Symmetric vs Asymmetric Encryption</h3>
+        <table>
+          <tr><th>Symmetric</th><th>Asymmetric</th></tr>
+          <tr><td><span data-hi="inline">Encryption और Decryption के लिए एक ही key use होती है</span><span data-en="inline">Same key used for both encryption and decryption</span></td><td><span data-hi="inline">अलग-अलग keys use होती हैं (Public key और Private key)</span><span data-en="inline">Different keys used (Public key and Private key)</span></td></tr>
+          <tr><td><span data-hi="inline">तेज़, पर key share करना risky</span><span data-en="inline">Faster, but sharing the key is risky</span></td><td><span data-hi="inline">धीमा, पर ज़्यादा secure</span><span data-en="inline">Slower, but more secure</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Digital Signature</h3>
+        <h3 data-en="flex" class="flex">Digital Signature</h3>
+        <p data-hi="block" class="block"><strong>Digital Signature</strong> किसी document/message की authenticity और integrity verify करने का electronic तरीका है — handwritten signature का digital equivalent।</p>
+        <p data-en="block" class="block">A <strong>Digital Signature</strong> is an electronic way to verify a document/message's authenticity and integrity — the digital equivalent of a handwritten signature.</p>
+
+        <div class="note-box">
+          <span data-hi="inline"><b>याद रखें:</b> https:// websites SSL/TLS encryption use करती हैं, जो asymmetric और symmetric दोनों तरीकों को combine करती है।</span>
+          <span data-en="inline"><b>Remember:</b> https:// websites use SSL/TLS encryption, which combines both asymmetric and symmetric methods.</span>
+        </div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">Cryptography किसे कहते हैं? Encryption और Decryption में अंतर बताइए। Symmetric और Asymmetric Encryption में अंतर लिखिए।</span>
+          <span data-en="inline">What is Cryptography? Differentiate between Encryption and Decryption. Write the difference between Symmetric and Asymmetric Encryption.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 7 -->
+    <section class="unit-card" id="unit7">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 07 · सुरक्षा उपाय</span><span data-en="inline">Unit 07 · Security Measures</span></span>
+        <h2><span data-hi="inline">Authentication & Password Security</span><span data-en="inline">Authentication & Password Security</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Authentication क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is Authentication?</h3>
+        <p data-hi="block" class="block"><strong>Authentication</strong> किसी user की identity verify करने की process है — "आप वही हैं जो आप कह रहे हैं" यह confirm करना।</p>
+        <p data-en="block" class="block"><strong>Authentication</strong> is the process of verifying a user's identity — confirming "you are who you say you are".</p>
+
+        <h3 data-hi="flex" class="flex">Authentication Factors</h3>
+        <h3 data-en="flex" class="flex">Authentication Factors</h3>
+        <table>
+          <tr><th>Factor</th><th data-hi="inline">उदाहरण</th><th data-en="inline">Example</th></tr>
+          <tr><td><span data-hi="inline">कुछ जो आप जानते हैं</span><span data-en="inline">Something you know</span></td><td colspan="2">Password, PIN</td></tr>
+          <tr><td><span data-hi="inline">कुछ जो आपके पास है</span><span data-en="inline">Something you have</span></td><td colspan="2">OTP, Security Token</td></tr>
+          <tr><td><span data-hi="inline">कुछ जो आप हैं</span><span data-en="inline">Something you are</span></td><td colspan="2">Fingerprint, Face ID</td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Two-Factor Authentication (2FA)</h3>
+        <h3 data-en="flex" class="flex">Two-Factor Authentication (2FA)</h3>
+        <p data-hi="block" class="block"><strong>2FA</strong> security की एक extra layer है, जिसमें password के अलावा एक और verification step (जैसे OTP) चाहिए होता है — सिर्फ password चुराने से account access नहीं मिलता।</p>
+        <p data-en="block" class="block"><strong>2FA</strong> adds an extra security layer requiring a second verification step (like OTP) besides the password — stealing just the password isn't enough to access the account.</p>
+
+        <h3 data-hi="flex" class="flex">Strong Password बनाने के Rules</h3>
+        <h3 data-en="flex" class="flex">Rules for a Strong Password</h3>
+        <ul data-hi="block" class="block">
+          <li>कम से कम 8-12 characters लंबा हो</li>
+          <li>Uppercase, lowercase, numbers, symbols का mix हो</li>
+          <li>Personal info (नाम, जन्मतिथि) avoid करें</li>
+          <li>हर account के लिए अलग password use करें</li>
+          <li>Regularly password बदलते रहें</li>
+        </ul>
+        <ul data-en="block" class="block">
+          <li>At least 8-12 characters long</li>
+          <li>Mix of uppercase, lowercase, numbers, symbols</li>
+          <li>Avoid personal info (name, date of birth)</li>
+          <li>Use a different password for each account</li>
+          <li>Change passwords regularly</li>
+        </ul>
+
+        <div class="note-box">
+          <span data-hi="inline"><b>याद रखें:</b> Authentication (कौन हो) और Authorization (क्या कर सकते हो) दो अलग concepts हैं — exam में confuse न हों।</span>
+          <span data-en="inline"><b>Remember:</b> Authentication (who you are) and Authorization (what you can do) are two different concepts — don't confuse them in exams.</span>
+        </div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">Authentication किसे कहते हैं? 2FA क्या है, उदाहरण सहित समझाइए। Strong Password के कोई 4 rules लिखिए।</span>
+          <span data-en="inline">What is Authentication? What is 2FA, explain with an example. Write any 4 rules for a strong password.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 8 -->
+    <section class="unit-card" id="unit8">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 08 · सुरक्षा उपाय</span><span data-en="inline">Unit 08 · Security Measures</span></span>
+        <h2><span data-hi="inline">Cyber Security Best Practices</span><span data-en="inline">Cyber Security Best Practices</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Personal Cyber Hygiene</h3>
+        <h3 data-en="flex" class="flex">Personal Cyber Hygiene</h3>
+        <ul data-hi="block" class="block">
+          <li>Software/OS को regularly update करें (security patches के लिए)</li>
+          <li>Unknown links/attachments पर click न करें</li>
+          <li>Trusted antivirus install और updated रखें</li>
+          <li>Important data का regular backup लें</li>
+          <li>Social media पर personal info limit करें</li>
+        </ul>
+        <ul data-en="block" class="block">
+          <li>Regularly update software/OS (for security patches)</li>
+          <li>Don't click unknown links/attachments</li>
+          <li>Install and keep trusted antivirus updated</li>
+          <li>Take regular backups of important data</li>
+          <li>Limit personal info shared on social media</li>
+        </ul>
+
+        <h3 data-hi="flex" class="flex">Organization-Level Practices</h3>
+        <h3 data-en="flex" class="flex">Organization-Level Practices</h3>
+        <table>
+          <tr><th>Practice</th><th data-hi="inline">काम</th><th data-en="inline">Purpose</th></tr>
+          <tr><td>Employee Training</td><td><span data-hi="inline">Staff को security awareness सिखाना</span><span data-en="inline">Teaching staff security awareness</span></td></tr>
+          <tr><td>Access Control</td><td><span data-hi="inline">सिर्फ ज़रूरी लोगों को ज़रूरी data access देना</span><span data-en="inline">Giving access only to those who need it</span></td></tr>
+          <tr><td>Regular Audits</td><td><span data-hi="inline">Security gaps को periodically check करना</span><span data-en="inline">Periodically checking for security gaps</span></td></tr>
+          <tr><td>Incident Response Plan</td><td><span data-hi="inline">Attack होने पर क्या करना है, उसकी पहले से planning</span><span data-en="inline">Pre-planning what to do if an attack occurs</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Backup Strategy — 3-2-1 Rule</h3>
+        <h3 data-en="flex" class="flex">Backup Strategy — 3-2-1 Rule</h3>
+        <p data-hi="block" class="block">Data की 3 copies रखें, 2 अलग-अलग storage types पर, और 1 copy off-site (अलग location) पर — Ransomware और data loss से बचने का best तरीका।</p>
+        <p data-en="block" class="block">Keep 3 copies of data, on 2 different storage types, with 1 copy off-site (different location) — the best way to protect against ransomware and data loss.</p>
+
+        <div class="imp-box">
+          <span data-hi="inline"><b>Exam Tip:</b> Cyber Security में सबसे weak link हमेशा "human error" होता है — इसलिए awareness और training सबसे important practice मानी जाती है।</span>
+          <span data-en="inline"><b>Exam Tip:</b> in Cyber Security, the weakest link is always "human error" — that's why awareness and training are considered the most important practice.</span>
+        </div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">Personal Cyber Hygiene के कोई 5 tips लिखिए। 3-2-1 Backup Rule क्या है? Access Control का क्या उपयोग है?</span>
+          <span data-en="inline">Write any 5 Personal Cyber Hygiene tips. What is the 3-2-1 Backup Rule? What is the use of Access Control?</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 9 -->
+    <section class="unit-card" id="unit9">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 09 · कानून</span><span data-en="inline">Unit 09 · Law</span></span>
+        <h2><span data-hi="inline">Cyber Laws & IT Act</span><span data-en="inline">Cyber Laws & IT Act</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Cyber Law क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is Cyber Law?</h3>
+        <p data-hi="block" class="block"><strong>Cyber Law</strong> वो legal rules हैं जो Internet, computers, और digital transactions से जुड़े crimes और disputes को regulate करते हैं।</p>
+        <p data-en="block" class="block"><strong>Cyber Law</strong> refers to the legal rules that regulate crimes and disputes related to the Internet, computers, and digital transactions.</p>
+
+        <h3 data-hi="flex" class="flex">IT Act 2000 (भारत)</h3>
+        <h3 data-en="flex" class="flex">IT Act 2000 (India)</h3>
+        <p data-hi="block" class="block">भारत में <strong>Information Technology Act, 2000</strong> मुख्य कानून है जो electronic governance, digital signatures, और cyber crimes को cover करता है।</p>
+        <p data-en="block" class="block">In India, the <strong>Information Technology Act, 2000</strong> is the primary law covering electronic governance, digital signatures, and cyber crimes.</p>
+
+        <h3 data-hi="flex" class="flex">महत्वपूर्ण IT Act Sections</h3>
+        <h3 data-en="flex" class="flex">Important IT Act Sections</h3>
+        <table>
+          <tr><th>Section</th><th data-hi="inline">किसके बारे में</th><th data-en="inline">About</th></tr>
+          <tr><td>Section 43</td><td><span data-hi="inline">Computer/data को बिना permission नुकसान पहुंचाने पर penalty</span><span data-en="inline">Penalty for damaging a computer/data without permission</span></td></tr>
+          <tr><td>Section 66</td><td><span data-hi="inline">Hacking से जुड़े crimes और punishment</span><span data-en="inline">Crimes related to hacking and their punishment</span></td></tr>
+          <tr><td>Section 66C</td><td><span data-hi="inline">Identity theft से जुड़े crimes</span><span data-en="inline">Crimes related to identity theft</span></td></tr>
+          <tr><td>Section 66D</td><td><span data-hi="inline">Computer के through cheating/impersonation</span><span data-en="inline">Cheating/impersonation using a computer</span></td></tr>
+          <tr><td>Section 67</td><td><span data-hi="inline">Electronic form में obscene content publish करने पर punishment</span><span data-en="inline">Punishment for publishing obscene content in electronic form</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Cyber Crime की Reporting</h3>
+        <h3 data-en="flex" class="flex">Reporting Cyber Crime</h3>
+        <p data-hi="block" class="block">भारत में Cyber Crime की complaint National Cyber Crime Reporting Portal (cybercrime.gov.in) या local police cyber cell पर की जा सकती है।</p>
+        <p data-en="block" class="block">In India, cyber crime complaints can be filed via the National Cyber Crime Reporting Portal (cybercrime.gov.in) or the local police cyber cell.</p>
+
+        <div class="note-box">
+          <span data-hi="inline"><b>याद रखें:</b> IT Act 2000 भारत का पहला cyber law है, और इसमें Section 66 hacking से directly जुड़ा हुआ सबसे important section माना जाता है।</span>
+          <span data-en="inline"><b>Remember:</b> IT Act 2000 is India's first cyber law, and Section 66 is considered the most important section directly related to hacking.</span>
+        </div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">Cyber Law किसे कहते हैं? IT Act 2000 क्या है? कोई 3 important IT Act sections उनके उपयोग सहित लिखिए।</span>
+          <span data-en="inline">What is Cyber Law? What is the IT Act 2000? Write any 3 important IT Act sections with their use.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 10 -->
+    <section class="unit-card" id="unit10">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 10 · रिवीज़न</span><span data-en="inline">Unit 10 · Revision</span></span>
+        <h2><span data-hi="inline">Important Q&A — फटाफट रिवीज़न</span><span data-en="inline">Important Q&A — Quick Revision</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">1-line Definitions (रटने के लिए)</h3>
+        <h3 data-en="flex" class="flex">1-line Definitions (to memorize)</h3>
+        <ul data-hi="block" class="block">
+          <li><strong>Cyber Security</strong> — computers और data को attacks से बचाने की practice</li>
+          <li><strong>Malware</strong> — system को नुकसान पहुंचाने वाला harmful software</li>
+          <li><strong>Phishing</strong> — fake email/website से information चुराना</li>
+          <li><strong>Firewall</strong> — network traffic को control करने वाला security tool</li>
+          <li><strong>Encryption</strong> — data को unreadable code में बदलना</li>
+          <li><strong>2FA</strong> — password के अलावा extra verification step</li>
+          <li><strong>VPN</strong> — secure, encrypted private network connection</li>
+          <li><strong>Ransomware</strong> — data lock करके ransom मांगने वाला malware</li>
+          <li><strong>IT Act 2000</strong> — भारत का मुख्य cyber law</li>
+          <li><strong>Social Engineering</strong> — human psychology से manipulate करके information चुराना</li>
+        </ul>
+        <ul data-en="block" class="block">
+          <li><strong>Cyber Security</strong> — the practice of protecting computers and data from attacks</li>
+          <li><strong>Malware</strong> — harmful software that damages a system</li>
+          <li><strong>Phishing</strong> — stealing information via fake email/website</li>
+          <li><strong>Firewall</strong> — a security tool that controls network traffic</li>
+          <li><strong>Encryption</strong> — converting data into unreadable code</li>
+          <li><strong>2FA</strong> — an extra verification step besides the password</li>
+          <li><strong>VPN</strong> — a secure, encrypted private network connection</li>
+          <li><strong>Ransomware</strong> — malware that locks data and demands ransom</li>
+          <li><strong>IT Act 2000</strong> — India's primary cyber law</li>
+          <li><strong>Social Engineering</strong> — manipulating human psychology to steal information</li>
+        </ul>
+
+        <h3 data-hi="flex" class="flex">महत्वपूर्ण Full Forms</h3>
+        <h3 data-en="flex" class="flex">Important Full Forms</h3>
+        <table>
+          <tr><th>Short</th><th>Full Form</th></tr>
+          <tr><td>CIA</td><td>Confidentiality, Integrity, Availability</td></tr>
+          <tr><td>VPN</td><td>Virtual Private Network</td></tr>
+          <tr><td>DoS / DDoS</td><td>Denial of Service / Distributed Denial of Service</td></tr>
+          <tr><td>IDS / IPS</td><td>Intrusion Detection/Prevention System</td></tr>
+          <tr><td>2FA</td><td>Two-Factor Authentication</td></tr>
+          <tr><td>IT Act</td><td>Information Technology Act</td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Frequently Asked Long Questions</h3>
+        <h3 data-en="flex" class="flex">Frequently Asked Long Questions</h3>
+        <ol data-hi="block" class="block">
+          <li>Cyber Security किसे कहते हैं? CIA Triad को समझाइए।</li>
+          <li>Cyber Threats के कोई 5 types उदाहरण सहित लिखिए।</li>
+          <li>Virus, Worm और Trojan में अंतर बताइए।</li>
+          <li>Social Engineering Attacks के types समझाइए।</li>
+          <li>Firewall और VPN में अंतर बताइए।</li>
+          <li>Encryption और Decryption किसे कहते हैं?</li>
+          <li>IT Act 2000 के important sections लिखिए।</li>
+        </ol>
+        <ol data-en="block" class="block">
+          <li>What is Cyber Security? Explain the CIA Triad.</li>
+          <li>Write any 5 types of Cyber Threats with examples.</li>
+          <li>Differentiate between Virus, Worm and Trojan.</li>
+          <li>Explain the types of Social Engineering Attacks.</li>
+          <li>Differentiate between Firewall and VPN.</li>
+          <li>What are Encryption and Decryption?</li>
+          <li>Write the important sections of the IT Act 2000.</li>
+        </ol>
+
+        <div class="imp-box">
+          <span data-hi="inline"><b>आखिरी टिप:</b> पेपर से पहले सभी "संभावित परीक्षा प्रश्न" बॉक्स को एक बार ज़रूर पढ़ लें — यही सबसे common questions हैं।</span>
+          <span data-en="inline"><b>Final Tip:</b> Before the exam, make sure to read through all the "Likely Exam Questions" boxes once — these are the most common questions.</span>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<button id="toTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<footer>
+  <span data-hi="inline">Made with 🟡 for ITI-COPA students</span>
+  <span data-en="inline">Made with 🟡 for ITI-COPA students</span>
+  &nbsp;·&nbsp; by <a href="https://surajtiwarrii.github.io/Portfolio/" target="_blank">Suraj Tiwari</a>
+</footer>
+
+<script>
+function setLang(lang){
+  document.documentElement.lang = lang;
+  document.getElementById('langToggle').dataset.lang = lang;
+  document.getElementById('btnHi').classList.toggle('active', lang==='hi');
+  document.getElementById('btnEn').classList.toggle('active', lang==='en');
+  const input = document.getElementById('searchInput');
+  input.placeholder = lang==='en' ? input.dataset.enPlaceholder : input.dataset.hiPlaceholder;
+  localStorage.setItem('cyberSecNotesLang', lang);
+}
+document.addEventListener('DOMContentLoaded', ()=>{
+  const saved = localStorage.getItem('cyberSecNotesLang') || 'hi';
+  setLang(saved);
+});
+
+function toggleSidebar(e){
+  if(e) e.stopPropagation();
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('open');
+}
+window.addEventListener('scroll',()=>{
+  document.getElementById('toTop').style.display = window.scrollY>400 ? 'flex':'none';
+});
+function liveSearch(){
+  const q = document.getElementById('searchInput').value.trim().toLowerCase();
+  const cards = document.querySelectorAll('.unit-card');
+  if(!q){ cards.forEach(c=>c.classList.remove('hide')); return; }
+  cards.forEach(card=>{
+    const text = card.innerText.toLowerCase();
+    card.classList.toggle('hide', !text.includes(q));
+  });
+}
+const links = document.querySelectorAll('.nav-link');
+const sections = document.querySelectorAll('.unit-card');
+window.addEventListener('scroll',()=>{
+  let current='';
+  sections.forEach(sec=>{ if(window.scrollY >= sec.offsetTop - 100) current = sec.id; });
+  links.forEach(l=>{ l.classList.toggle('active', l.getAttribute('href')==='#'+current); });
+});
+document.querySelectorAll('.nav-link').forEach(l=>{
+  l.addEventListener('click',()=>{ if(window.innerWidth<=880) toggleSidebar(); });
+});
+</script>
+
+</body>
+</html>

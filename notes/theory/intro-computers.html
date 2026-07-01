@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Introduction to Computers — Hindi/English | ITI COPA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Hind:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f0f5fb;--bg-soft:#d0e4f5;--panel:rgba(255,255,255,0.45);--panel-solid:rgba(255,255,255,0.78);--panel-glass:rgba(255,255,255,0.35);
+    --b-deep:#1e4d7b;--b:#4682b4;--b-soft:#bfdbf7;--b-light:#e8f2fc;--b-mist:rgba(70,130,180,0.18);
+    --t:#2563a8;--t-mist:rgba(37,99,168,0.10);--ink:#0a1e30;--ink-soft:#4a6a8a;--line:rgba(30,77,123,0.22);--radius:18px;
+  }
+  *{box-sizing:border-box;}html{scroll-behavior:smooth;}
+  body{margin:0;font-family:'Hind',sans-serif;background:radial-gradient(1200px 600px at 10% -10%,var(--b-mist),transparent 60%),radial-gradient(1000px 700px at 110% 10%,var(--t-mist),transparent 55%),var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;}
+  h1,h2,h3,.brand{font-family:'Fraunces',serif;}
+  .topbar{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:rgba(240,245,251,0.6);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);gap:10px;}
+  .brand{font-size:1.05rem;font-weight:700;color:var(--b-deep);display:flex;align-items:center;gap:8px;}
+  .brand .dot{width:9px;height:9px;border-radius:50%;background:linear-gradient(135deg,var(--b),var(--t));flex-shrink:0;}
+  .menu-btn{background:rgba(70,130,180,0.18);backdrop-filter:blur(6px);color:var(--b-light);border:1px solid rgba(70,130,180,0.55);padding:9px 16px;border-radius:30px;font-family:'Hind';font-weight:700;font-size:0.9rem;cursor:pointer;background-image:linear-gradient(135deg,rgba(70,130,180,0.55),rgba(30,77,123,0.55));box-shadow:0 6px 16px rgba(30,77,123,0.2);}
+  .lang-toggle{display:flex;align-items:center;background:var(--panel-glass);border:1px solid var(--line);backdrop-filter:blur(8px);border-radius:30px;padding:3px;position:relative;cursor:pointer;}
+  .lang-toggle button{border:none;background:transparent;padding:7px 13px;border-radius:24px;font-family:'Hind';font-weight:700;font-size:0.8rem;cursor:pointer;color:var(--ink-soft);position:relative;z-index:2;transition:color 0.25s;}
+  .lang-toggle button.active{color:var(--b-light);}
+  .lang-pill{position:absolute;top:3px;bottom:3px;left:3px;width:calc(50% - 3px);background:linear-gradient(135deg,var(--b),var(--b-deep));border-radius:24px;transition:transform 0.25s ease;z-index:1;}
+  .lang-toggle[data-lang="en"] .lang-pill{transform:translateX(100%);}
+  .hero{padding:60px 20px 36px;text-align:center;}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono';font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--b-deep);background:var(--panel-glass);backdrop-filter:blur(8px);border:1px solid var(--b-soft);padding:6px 14px;border-radius:30px;margin-bottom:18px;}
+  .hero h1{font-size:clamp(1.7rem,5.5vw,3rem);line-height:1.15;margin:0 0 14px;color:var(--ink);font-weight:700;}
+  .hero h1 .grad{background:linear-gradient(100deg,var(--b-deep),var(--b) 50%,var(--t));-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .hero p{max-width:620px;margin:0 auto 24px;color:var(--ink-soft);font-size:1rem;line-height:1.65;}
+  .hero-stats{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+  .stat-chip{background:var(--panel);border:1px solid var(--line);border-radius:14px;backdrop-filter:blur(8px);padding:12px 18px;min-width:108px;}
+  .stat-chip b{display:block;font-family:'Fraunces';font-size:1.3rem;color:var(--b-deep);}
+  .stat-chip span{font-size:0.74rem;color:var(--ink-soft);}
+  .toolbar{max-width:900px;margin:22px auto 0;padding:0 20px;}
+  .search-wrap{position:relative;}
+  #searchInput{width:100%;padding:13px 16px 13px 42px;border-radius:30px;border:1px solid var(--line);background:var(--panel);backdrop-filter:blur(8px);font-family:'Hind';font-size:0.95rem;color:var(--ink);outline:none;}
+  #searchInput:focus{border-color:var(--b);}
+  .search-wrap::before{content:"⌕";position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--b-deep);font-size:1.1rem;}
+  .layout{max-width:1180px;margin:14px auto 80px;padding:0 20px;display:grid;grid-template-columns:260px 1fr;gap:26px;}
+  .sidebar{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);backdrop-filter:blur(10px);padding:18px 14px;height:fit-content;position:sticky;top:78px;max-height:calc(100vh - 100px);overflow-y:auto;}
+  .sidebar h4{font-family:'JetBrains Mono';font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-soft);margin:14px 6px 8px;}
+  .sidebar h4:first-child{margin-top:2px;}
+  .nav-link{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:10px;color:var(--ink);text-decoration:none;font-size:0.88rem;font-weight:500;transition:background 0.15s;}
+  .nav-link:hover{background:var(--b-mist);}
+  .nav-link.active{background:linear-gradient(120deg,var(--b-mist),var(--t-mist));color:var(--b-deep);font-weight:700;}
+  .nav-link .num{font-family:'JetBrains Mono';font-size:0.68rem;color:var(--t);min-width:20px;}
+  .close-sidebar{display:none;}
+  @media(max-width:880px){.layout{display:block;}.sidebar{position:fixed !important;inset:0 18% 0 0;z-index:60;transform:translateX(-105%);transition:transform 0.3s ease;overflow-y:auto;top:0;height:100vh;max-height:100vh;}.sidebar.open{transform:translateX(0);}.sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(5,15,30,0.4);z-index:55;}.sidebar-overlay.open{display:block;}.close-sidebar{display:block;margin-left:auto;background:none;border:1px solid var(--line);border-radius:50%;width:34px;height:34px;font-size:1rem;color:var(--ink);cursor:pointer;}.brand span.brand-text{display:none;}.menu-btn span.menu-text{display:none;}}
+  .content{min-width:0;}
+  .unit-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:22px;overflow:hidden;scroll-margin-top:80px;box-shadow:0 6px 24px rgba(30,77,123,0.08);backdrop-filter:blur(10px);}
+  .unit-head{padding:22px 24px 18px;background:linear-gradient(120deg,rgba(70,130,180,0.20),rgba(30,77,123,0.10));border-bottom:1px solid var(--line);}
+  .unit-tag{font-family:'JetBrains Mono';font-size:0.7rem;color:var(--t);letter-spacing:0.08em;text-transform:uppercase;display:block;margin-bottom:6px;}
+  .unit-head h2{margin:0;font-size:1.4rem;color:var(--b-deep);}
+  .unit-body{padding:20px 24px 26px;}
+  .unit-body h3{font-size:1.05rem;color:var(--ink);margin:22px 0 8px;display:flex;align-items:center;gap:8px;}
+  .unit-body h3::before{content:"";width:5px;height:18px;border-radius:3px;background:linear-gradient(180deg,var(--b),var(--t));}
+  .unit-body h3:first-child{margin-top:2px;}
+  .unit-body p{line-height:1.75;color:var(--ink);margin:6px 0 10px;font-size:0.97rem;}
+  .unit-body ul,.unit-body ol{margin:6px 0 14px;padding-left:22px;line-height:1.75;}
+  .unit-body li{margin-bottom:6px;font-size:0.95rem;}
+  .unit-body strong{color:var(--b-deep);}
+  .note-box{background:var(--b-mist);border-left:3px solid var(--b);border-radius:10px;padding:12px 16px;margin:14px 0;font-size:0.9rem;}
+  .note-box b{color:var(--b-deep);}
+  .imp-box{background:var(--t-mist);border-left:3px solid var(--t);border-radius:10px;padding:12px 16px;margin:14px 0;font-size:0.9rem;}
+  .imp-box b{color:var(--t);}
+  table{width:100%;border-collapse:collapse;margin:14px 0 18px;font-size:0.88rem;border-radius:10px;overflow:hidden;}
+  th{background:linear-gradient(120deg,var(--b),var(--b-deep));color:var(--b-light);text-align:left;padding:10px 12px;font-weight:600;}
+  td{padding:9px 12px;border-bottom:1px solid var(--line);background:var(--panel-solid);}
+  tr:last-child td{border-bottom:none;}
+  tr:nth-child(even) td{background:var(--bg-soft);}
+  code,.code-block{font-family:'JetBrains Mono';}
+  .code-block{background:#061828;color:#c8e8ff;padding:14px 16px;border-radius:12px;font-size:0.82rem;line-height:1.6;overflow-x:auto;margin:12px 0;border:1px solid rgba(70,130,180,0.3);}
+  code{background:var(--bg-soft);padding:2px 6px;border-radius:5px;font-size:0.85em;color:var(--b-deep);}
+  .qbox{background:var(--bg-soft);border:1px dashed var(--b-soft);border-radius:12px;padding:14px 16px;margin:16px 0;}
+  .qbox b{color:var(--t);display:block;margin-bottom:6px;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em;}
+  #toTop{position:fixed;bottom:22px;right:22px;z-index:40;width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--b),var(--t));color:var(--b-light);border:none;font-size:1.2rem;cursor:pointer;box-shadow:0 8px 20px rgba(30,77,123,0.3);display:none;align-items:center;justify-content:center;}
+  footer{text-align:center;padding:30px 20px 50px;color:var(--ink-soft);font-size:0.85rem;}
+  footer a{color:var(--b-deep);text-decoration:none;font-weight:600;}
+  .hide{display:none !important;}
+  [data-hi],[data-en]{display:none;}
+  html[lang="hi"] [data-hi].inline,html[lang="hi"] span[data-hi]{display:inline;}
+  html[lang="hi"] [data-hi].block{display:block;}
+  html[lang="hi"] [data-hi].flex{display:flex;}
+  html[lang="hi"] th[data-hi],html[lang="hi"] td[data-hi]{display:table-cell;}
+  html[lang="en"] [data-en].inline,html[lang="en"] span[data-en]{display:inline;}
+  html[lang="en"] [data-en].block{display:block;}
+  html[lang="en"] [data-en].flex{display:flex;}
+  html[lang="en"] th[data-en],html[lang="en"] td[data-en]{display:table-cell;}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="brand"><span class="dot"></span><span class="brand-text">Introduction to Computers</span></div>
+  <div class="topbar-actions" style="display:flex;gap:8px;align-items:center;">
+    <div class="lang-toggle" id="langToggle" data-lang="hi" onclick="setLang(this.dataset.lang==='hi'?'en':'hi')">
+      <div class="lang-pill"></div>
+      <button type="button" id="btnHi">हिं</button>
+      <button type="button" id="btnEn">EN</button>
+    </div>
+    <button class="menu-btn" onclick="toggleSidebar(event)">💻 <span class="menu-text" data-hi="inline">विषय सूची</span><span class="menu-text" data-en="inline">Topics</span></button>
+  </div>
+</div>
+<div class="hero">
+  <span class="eyebrow">● ITI · COPA · UP Board Pattern</span>
+  <h1><span data-hi="block" class="block">Introduction to Computers<br>& Computer System<br><span class="grad">सम्पूर्ण नोट्स</span></span><span data-en="block" class="block">Introduction to Computers<br>& Computer System<br><span class="grad">Complete Notes</span></span></h1>
+  <p data-hi="block" class="block">Computer के परिचय से लेकर Number Systems और Software Types तक — हिंदी और इंग्लिश, परीक्षा के हिसाब से।</p>
+  <p data-en="block" class="block">From the basics of computers to Number Systems and Software Types — Hindi & English, exam-ready.</p>
+  <div class="hero-stats">
+    <div class="stat-chip"><b>13</b><span data-hi="inline">Units</span><span data-en="inline">Units</span></div>
+    <div class="stat-chip"><b>90+</b><span data-hi="inline">Topics</span><span data-en="inline">Topics</span></div>
+    <div class="stat-chip"><b>2</b><span data-hi="inline">भाषाएं</span><span data-en="inline">Languages</span></div>
+  </div>
+</div>
+<div class="toolbar"><div class="search-wrap"><input type="text" id="searchInput" data-hi-placeholder="खोजें... जैसे: RAM, Binary, Input Device" data-en-placeholder="Search... e.g. RAM, Binary, Input Device" placeholder="खोजें..." oninput="liveSearch()"></div></div>
+<div class="sidebar-overlay" id="overlay" onclick="toggleSidebar(event)"></div>
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <button class="close-sidebar" onclick="toggleSidebar(event)">✕</button>
+    <h4 data-hi="block" class="block">कंप्यूटर बेसिक्स</h4><h4 data-en="block" class="block">Computer Basics</h4>
+    <a class="nav-link" href="#u1"><span class="num">01</span><span data-hi="inline">Computer का परिचय</span><span data-en="inline">Introduction to Computer</span></a>
+    <a class="nav-link" href="#u2"><span class="num">02</span><span data-hi="inline">History & Generations</span><span data-en="inline">History & Generations</span></a>
+    <a class="nav-link" href="#u3"><span class="num">03</span><span data-hi="inline">Types of Computers</span><span data-en="inline">Types of Computers</span></a>
+    <h4 data-hi="block" class="block">हार्डवेयर & डिवाइस</h4><h4 data-en="block" class="block">Hardware & Devices</h4>
+    <a class="nav-link" href="#u4"><span class="num">04</span><span data-hi="inline">Computer System Components</span><span data-en="inline">Computer System Components</span></a>
+    <a class="nav-link" href="#u5"><span class="num">05</span><span data-hi="inline">Input Devices</span><span data-en="inline">Input Devices</span></a>
+    <a class="nav-link" href="#u6"><span class="num">06</span><span data-hi="inline">Output Devices</span><span data-en="inline">Output Devices</span></a>
+    <a class="nav-link" href="#u7"><span class="num">07</span><span data-hi="inline">CPU (ALU, CU, MU)</span><span data-en="inline">CPU (ALU, CU, MU)</span></a>
+    <h4 data-hi="block" class="block">मेमोरी & स्टोरेज</h4><h4 data-en="block" class="block">Memory & Storage</h4>
+    <a class="nav-link" href="#u8"><span class="num">08</span><span data-hi="inline">Primary Memory (RAM, ROM)</span><span data-en="inline">Primary Memory (RAM, ROM)</span></a>
+    <a class="nav-link" href="#u9"><span class="num">09</span><span data-hi="inline">Secondary Storage Devices</span><span data-en="inline">Secondary Storage Devices</span></a>
+    <a class="nav-link" href="#u10"><span class="num">10</span><span data-hi="inline">Units of Memory</span><span data-en="inline">Units of Memory</span></a>
+    <h4 data-hi="block" class="block">नंबर सिस्टम & सॉफ्टवेयर</h4><h4 data-en="block" class="block">Number System & Software</h4>
+    <a class="nav-link" href="#u11"><span class="num">11</span><span data-hi="inline">Number Systems</span><span data-en="inline">Number Systems</span></a>
+    <a class="nav-link" href="#u12"><span class="num">12</span><span data-hi="inline">Software Types</span><span data-en="inline">Software Types</span></a>
+    <h4 data-hi="block" class="block">रिवीज़न</h4><h4 data-en="block" class="block">Revision</h4>
+    <a class="nav-link" href="#u13"><span class="num">13</span><span data-hi="inline">Important Q&A</span><span data-en="inline">Important Q&A</span></a>
+  </aside>
+  <main class="content" id="content">
+
+    <!-- U1 -->
+    <section class="unit-card" id="u1">
+      <div class="unit-head"><span class="unit-tag"><span data-hi="inline">Unit 01 · कंप्यूटर बेसिक्स</span><span data-en="inline">Unit 01 · Computer Basics</span></span><h2><span data-hi="inline">Computer का परिचय</span><span data-en="inline">Introduction to Computer</span></h2></div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Computer क्या है?</h3><h3 data-en="flex" class="flex">What is a Computer?</h3>
+        <p data-hi="block" class="block"><strong>Computer</strong> एक electronic machine है जो data को input के रूप में लेता है, उसे process करता है, और output के रूप में result देता है — साथ ही data को store भी कर सकता है।</p>
+        <p data-en="block" class="block">A <strong>Computer</strong> is an electronic machine that takes data as input, processes it, and gives the result as output — it can also store data.</p>
+
+        <h3 data-hi="flex" class="flex">IPO Cycle</h3><h3 data-en="flex" class="flex">IPO Cycle</h3>
+        <p data-hi="block" class="block"><strong>Input → Process → Output</strong> — यह computer का basic working model है। Data → CPU (processing) → Result।</p>
+        <p data-en="block" class="block"><strong>Input → Process → Output</strong> — this is the basic working model of a computer. Data → CPU (processing) → Result.</p>
+
+        <h3 data-hi="flex" class="flex">Characteristics of Computer</h3><h3 data-en="flex" class="flex">Characteristics of Computer</h3>
+        <table>
+          <tr><th>Characteristic</th><th data-hi="inline">मतलब</th><th data-en="inline">Meaning</th></tr>
+          <tr><td>Speed</td><td><span data-hi="inline">Nanoseconds/microseconds में calculations करता है</span><span data-en="inline">Performs calculations in nanoseconds/microseconds</span></td></tr>
+          <tr><td>Accuracy</td><td><span data-hi="inline">बिना गलती के accurate results देता है</span><span data-en="inline">Gives accurate results without errors</span></td></tr>
+          <tr><td>Diligence</td><td><span data-hi="inline">बिना थके लंबे समय तक काम कर सकता है</span><span data-en="inline">Works for long periods without getting tired</span></td></tr>
+          <tr><td>Storage</td><td><span data-hi="inline">बड़ी मात्रा में data store कर सकता है</span><span data-en="inline">Can store large amounts of data</span></td></tr>
+          <tr><td>Automation</td><td><span data-hi="inline">एक बार program होने पर बिना intervention काम करता है</span><span data-en="inline">Once programmed, works without human intervention</span></td></tr>
+          <tr><td>Versatility</td><td><span data-hi="inline">अलग-अलग तरह के tasks perform कर सकता है</span><span data-en="inline">Can perform many different types of tasks</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Limitations of Computer</h3><h3 data-en="flex" class="flex">Limitations of Computer</h3>
+        <ul data-hi="block" class="block">
+          <li>खुद से सोच नहीं सकता — सिर्फ दिए गए instructions follow करता है</li>
+          <li>Common sense नहीं होती</li>
+          <li>Electricity पर depend करता है</li>
+          <li>Virus/malware से affect हो सकता है</li>
+        </ul>
+        <ul data-en="block" class="block">
+          <li>Cannot think on its own — only follows given instructions</li>
+          <li>Has no common sense</li>
+          <li>Dependent on electricity</li>
+          <li>Can be affected by viruses/malware</li>
+        </ul>
+        <div class="note-box"><span data-hi="inline"><b>याद रखें:</b> Computer की full form कोई official नहीं है, पर एक common expansion है: <b>C</b>ommon <b>O</b>perating <b>M</b>achine <b>P</b>urposely <b>U</b>sed for <b>T</b>echnological and <b>E</b>ducational <b>R</b>esearch।</span><span data-en="inline"><b>Remember:</b> Computer has no official full form, but one common expansion is: <b>C</b>ommon <b>O</b>perating <b>M</b>achine <b>P</b>urposely <b>U</b>sed for <b>T</b>echnological and <b>E</b>ducational <b>R</b>esearch.</span></div>
+        <div class="qbox"><b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b><b data-en="block" class="block">Likely Exam Questions</b><span data-hi="inline">Computer किसे कहते हैं? इसकी characteristics और limitations लिखिए। IPO Cycle समझाइए।</span><span data-en="inline">What is a Computer? Write its characteristics and limitations. Explain the IPO Cycle.</span></div>
+      </div>
+    </section>
+
+    <!-- U2 -->
+    <section class="unit-card" id="u2">
+      <div class="unit-head"><span class="unit-tag"><span data-hi="inline">Unit 02 · कंप्यूटर बेसिक्स</span><span data-en="inline">Unit 02 · Computer Basics</span></span><h2><span data-hi="inline">History & Generations of Computers</span><span data-en="inline">History & Generations of Computers</span></h2></div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Important Persons</h3><h3 data-en="flex" class="flex">Important Persons</h3>
+        <table>
+          <tr><th>Person</th><th data-hi="inline">योगदान</th><th data-en="inline">Contribution</th></tr>
+          <tr><td>Charles Babbage</td><td><span data-hi="inline">Analytical Engine बनाया — "Father of Computer"</span><span data-en="inline">Built the Analytical Engine — "Father of Computer"</span></td></tr>
+          <tr><td>Ada Lovelace</td><td><span data-hi="inline">पहला computer program लिखा — "First Programmer"</span><span data-en="inline">Wrote the first computer program — "First Programmer"</span></td></tr>
+          <tr><td>Alan Turing</td><td><span data-hi="inline">Theoretical foundation of computing — "Father of Computer Science"</span><span data-en="inline">Theoretical foundation of computing — "Father of Computer Science"</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Generations of Computers</h3><h3 data-en="flex" class="flex">Generations of Computers</h3>
+        <table>
+          <tr><th>Generation</th><th>Years</th><th data-hi="inline">Technology</th><th data-en="inline">Technology</th><th data-hi="inline">उदाहरण</th><th data-en="inline">Example</th></tr>
+          <tr><td>1st Gen</td><td>1940–56</td><td><span data-hi="inline">Vacuum Tubes — बड़े, slow, heat बहुत</span><span data-en="inline">Vacuum Tubes — large, slow, lots of heat</span></td><td colspan="2">ENIAC, UNIVAC</td></tr>
+          <tr><td>2nd Gen</td><td>1956–63</td><td><span data-hi="inline">Transistors — छोटे, fast, कम heat</span><span data-en="inline">Transistors — smaller, faster, less heat</span></td><td colspan="2">IBM 7094</td></tr>
+          <tr><td>3rd Gen</td><td>1964–71</td><td><span data-hi="inline">Integrated Circuits (IC) — और छोटे, और fast</span><span data-en="inline">Integrated Circuits (IC) — even smaller, even faster</span></td><td colspan="2">IBM 360</td></tr>
+          <tr><td>4th Gen</td><td>1971–present</td><td><span data-hi="inline">Microprocessors (VLSI) — desktop, laptop, mobile</span><span data-en="inline">Microprocessors (VLSI) — desktops, laptops, mobiles</span></td><td colspan="2">Intel Core, Apple M1</td></tr>
+          <tr><td>5th Gen</td><td>Present & future</td><td><span data-hi="inline">AI, Machine Learning — Natural Language Processing</span><span data-en="inline">AI, Machine Learning — Natural Language Processing</span></td><td colspan="2">ChatGPT, Siri</td></tr>
+        </table>
+        <div class="note-box"><span data-hi="inline"><b>याद रखें:</b> ENIAC पहला general-purpose electronic computer था (1st Gen), और पहला commercial computer UNIVAC था।</span><span data-en="inline"><b>Remember:</b> ENIAC was the first general-purpose electronic computer (1st Gen), and UNIVAC was the first commercial computer.</span></div>
+        <div class="qbox"><b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b><b data-en="block" class="block">Likely Exam Questions</b><span data-hi="inline">Computers की generations को technology और examples सहित लिखिए। Charles Babbage को "Father of Computer" क्यों कहते हैं?</span><span data-en="inline">Write the generations of computers with technology and examples. Why is Charles Babbage called the "Father of Computer"?</span></div>
+      </div>
+    </section>
+
+    <!-- U3 -->
+    <section class="unit-card" id="u3">
+      <div class="unit-head"><span class="unit-tag"><span data-hi="inline">Unit 03 · कंप्यूटर बेसिक्स</span><span data-en="inline">Unit 03 · Computer Basics</span></span><h2><span data-hi="inline">Types of Computers</span><span data-en="inline">Types of Computers</span></h2></div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Working Principle के आधार पर</h3><h3 data-en="flex" class="flex">Based on Working Principle</h3>
+        <table>
+          <tr><th>Type</th><th data-hi="inline">मतलब</th><th data-en="inline">Meaning</th></tr>
+          <tr><td>Analog Computer</td><td><span data-hi="inline">Continuous physical quantities (voltage, temperature) से काम करता है। जैसे Speedometer, Thermometer</span><span data-en="inline">Works with continuous physical quantities (voltage, temperature). E.g. Speedometer, Thermometer</span></td></tr>
+          <tr><td>Digital Computer</td><td><span data-hi="inline">Binary digits (0 और 1) से काम करता है। Most modern computers digital हैं</span><span data-en="inline">Works with binary digits (0 and 1). Most modern computers are digital</span></td></tr>
+          <tr><td>Hybrid Computer</td><td><span data-hi="inline">Analog + Digital दोनों का combination। जैसे hospitals में ECG machines</span><span data-en="inline">Combination of Analog + Digital. E.g. ECG machines in hospitals</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Size & Power के आधार पर</h3><h3 data-en="flex" class="flex">Based on Size & Power</h3>
+        <table>
+          <tr><th>Type</th><th data-hi="inline">विशेषता</th><th data-en="inline">Feature</th></tr>
+          <tr><td>Supercomputer</td><td><span data-hi="inline">सबसे powerful, weather forecasting, nuclear research में use। जैसे PARAM (India)</span><span data-en="inline">Most powerful, used for weather forecasting, nuclear research. E.g. PARAM (India)</span></td></tr>
+          <tr><td>Mainframe Computer</td><td><span data-hi="inline">Large organizations के लिए, हज़ारों users एक साथ use करते हैं। जैसे Banks, Airlines</span><span data-en="inline">For large organizations, thousands of users at once. E.g. Banks, Airlines</span></td></tr>
+          <tr><td>Minicomputer</td><td><span data-hi="inline">Medium size, कई users के लिए। जैसे PDP-11</span><span data-en="inline">Medium size, for multiple users. E.g. PDP-11</span></td></tr>
+          <tr><td>Microcomputer</td><td><span data-hi="inline">Personal use के लिए — Desktop, Laptop, Tablet, Smartphone</span><span data-en="inline">For personal use — Desktop, Laptop, Tablet, Smartphone</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Microcomputer के Types</h3><h3 data-en="flex" class="flex">Types of Microcomputer</h3>
+        <table>
+          <tr><th>Type</th><th data-hi="inline">विशेषता</th><th data-en="inline">Feature</th></tr>
+          <tr><td>Desktop</td><td><span data-hi="inline">Table पर रखकर use, separate monitor+CPU</span><span data-en="inline">Used on a table, separate monitor+CPU</span></td></tr>
+          <tr><td>Laptop/Notebook</td><td><span data-hi="inline">Portable, battery-powered, सब एक में</span><span data-en="inline">Portable, battery-powered, all-in-one</span></td></tr>
+          <tr><td>Tablet</td><td><span data-hi="inline">Touch-screen, laptop से छोटा</span><span data-en="inline">Touchscreen, smaller than a laptop</span></td></tr>
+          <tr><td>Smartphone</td><td><span data-hi="inline">Pocket-sized computer+phone</span><span data-en="inline">Pocket-sized computer+phone</span></td></tr>
+        </table>
+        <div class="note-box"><span data-hi="inline"><b>याद रखें:</b> India का पहला supercomputer PARAM 8000 था, जिसे C-DAC ने 1991 में develop किया।</span><span data-en="inline"><b>Remember:</b> India's first supercomputer was PARAM 8000, developed by C-DAC in 1991.</span></div>
+        <div class="qbox"><b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b><b data-en="block" class="block">Likely Exam Questions</b><span data-hi="inline">Analog, Digital, Hybrid computer में अंतर बताइए। Supercomputer और Mainframe में अंतर लिखिए। Microcomputer के types समझाइए।</span><span data-en="inline">Differentiate Analog, Digital, Hybrid computers. Write the difference between Supercomputer and Mainframe. Explain types of Microcomputer.</span></div>
+      </div>
+    </section>
+
+    <!-- U4 -->
+    <section class="unit-card" id="u4">
+      <div class="unit-head"><span class="unit-tag"><span data-hi="inline">Unit 04 · हार्डवेयर & डिवाइस</span><span data-en="inline">Unit 04 · Hardware & Devices</span></span><h2><span data-hi="inline">Computer System Components</span><span data-en="inline">Computer System Components</span></h2></div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Computer System के तीन भाग</h3><h3 data-en="flex" class="flex">Three Parts of a Computer System</h3>
+        <table>
+          <tr><th>Part</th><th data-hi="inline">मतलब</th><th data-en="inline">Meaning</th></tr>
+          <tr><td>Hardware</td><td><span data-hi="inline">Computer के physical/tangible parts जिन्हें हम touch कर सकते हैं</span><span data-en="inline">Physical/tangible parts of a computer that we can touch</span></td></tr>
+          <tr><td>Software</td><td><span data-hi="inline">Programs और instructions जो hardware को control करते हैं (intangible)</span><span data-en="inline">Programs and instructions that control hardware (intangible)</span></td></tr>
+          <tr><td>Humanware/Liveware</td><td><span data-hi="inline">Computer use करने वाले लोग — users, programmers, operators</span><span data-en="inline">People who use the computer — users, programmers, operators</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Hardware के मुख्य भाग</h3><h3 data-en="flex" class="flex">Main Parts of Hardware</h3>
+        <table>
+          <tr><th>Part</th><th data-hi="inline">काम</th><th data-en="inline">Purpose</th></tr>
+          <tr><td>Input Unit</td><td><span data-hi="inline">Data/instructions computer में enter करना</span><span data-en="inline">Entering data/instructions into the computer</span></td></tr>
+          <tr><td>Processing Unit (CPU)</td><td><span data-hi="inline">Data को process करना — calculations और decisions</span><span data-en="inline">Processing data — calculations and decisions</span></td></tr>
+          <tr><td>Output Unit</td><td><span data-hi="inline">Processed results user को दिखाना</span><span data-en="inline">Displaying processed results to the user</span></td></tr>
+          <tr><td>Storage Unit</td><td><span data-hi="inline">Data और programs को store करना</span><span data-en="inline">Storing data and programs</span></td></tr>
+        </table>
+        <div class="note-box"><span data-hi="inline"><b>याद रखें:</b> Hardware को "Heart" और Software को "Soul" of the computer माना जाता है — दोनों के बिना computer work नहीं कर सकता।</span><span data-en="inline"><b>Remember:</b> Hardware is considered the "Heart" and Software the "Soul" of the computer — a computer cannot work without both.</span></div>
+        <div class="qbox"><b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b><b data-en="block" class="block">Likely Exam Questions</b><span data-hi="inline">Hardware और Software में अंतर बताइए। Computer System के तीन मुख्य भाग कौन से हैं?</span><span data-en="inline">Differentiate between Hardware and Software. What are the three main parts of a Computer System?</span></div>
+      </div>
+    </section>
+
+    <!-- U5 -->
+    <section class="unit-card" id="u5">
+      <div class="unit-head"><span class="unit-tag"><span data-hi="inline">Unit 05 · हार्डवेयर & डिवाइस</span><span data-en="inline">Unit 05 · Hardware & Devices</span></span><h2><span data-hi="inline">Input Devices</span><span data-en="inline">Input Devices</span></h2></div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Input Device क्या है?</h3><h3 data-en="flex" class="flex">What is an Input Device?</h3>
+        <p data-hi="block" class="block"><strong>Input Device</strong> वो hardware है जिसके through user data या instructions computer में enter करता है।</p>
+        <p data-en="block" class="block">An <strong>Input Device</strong> is the hardware through which a user enters data or instructions into the computer.</p>
+
+        <h3 data-hi="flex" class="flex">Common Input Devices</h3><h3 data-en="flex" class="flex">Common Input Devices</h3>
+        <table>
+          <tr><th>Device</th><th data-hi="inline">काम</th><th data-en="inline">Purpose</th></tr>
+          <tr><td>Keyboard</td><td><span data-hi="inline">Text, numbers, commands type करने के लिए सबसे common input device</span><span data-en="inline">Most common input device for typing text, numbers, commands</span></td></tr>
+          <tr><td>Mouse</td><td><span data-hi="inline">Pointer device — cursor move, click, drag करने के लिए</span><span data-en="inline">Pointer device — to move cursor, click, drag</span></td></tr>
+          <tr><td>Scanner</td><td><span data-hi="inline">Physical documents/images को digital format में convert करता है</span><span data-en="inline">Converts physical documents/images into digital format</span></td></tr>
+          <tr><td>Webcam</td><td><span data-hi="inline">Video capture करने के लिए</span><span data-en="inline">For capturing video</span></td></tr>
+          <tr><td>Microphone</td><td><span data-hi="inline">Sound/voice input के लिए</span><span data-en="inline">For sound/voice input</span></td></tr>
+          <tr><td>Joystick</td><td><span data-hi="inline">Gaming में cursor/object को control करने के लिए</span><span data-en="inline">For controlling cursor/object in games</span></td></tr>
+          <tr><td>Barcode Reader</td><td><span data-hi="inline">Barcodes को scan करने के लिए (shops, libraries)</span><span data-en="inline">For scanning barcodes (shops, libraries)</span></td></tr>
+          <tr><td>OMR</td><td><span data-hi="inline">Optical Mark Recognition — filled bubbles/marks detect करता है (exam answer sheets)</span><span data-en="inline">Optical Mark Recognition — detects filled bubbles/marks (exam answer sheets)</span></td></tr>
+          <tr><td>OCR</td><td><span data-hi="inline">Optical Character Recognition — printed text को editable text में convert करता है</span><span data-en="inline">Optical Character Recognition — converts printed text into editable text</span></td></tr>
+          <tr><td>Light Pen</td><td><span data-hi="inline">Screen पर directly draw/write करने के लिए</span><span data-en="inline">For drawing/writing directly on the screen</span></td></tr>
+          <tr><td>Touchscreen</td><td><span data-hi="inline">Screen को touch/tap करके input (smartphones, ATMs)</span><span data-en="inline">Input by touching/tapping the screen (smartphones, ATMs)</span></td></tr>
+          <tr><td>Biometric</td><td><span data-hi="inline">Fingerprint, retina, face से identity verify करना</span><span data-en="inline">Verifying identity via fingerprint, retina, face</span></td></tr>
+        </table>
+        <div class="qbox"><b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b><b data-en="block" class="block">Likely Exam Questions</b><span data-hi="inline">Input Device किसे कहते हैं? कोई 5 input devices उनके उपयोग सहित लिखिए। OMR और OCR में अंतर बताइए।</span><span data-en="inline">What is an Input Device? Write any 5 input devices with their uses. Differentiate between OMR and OCR.</span></div>
+      </div>
+    </section>
+
+    <!-- U6 -->
+    <section class="unit-card" id="u6">
+      <div class="unit-head"><span class="unit-tag"><span data-hi="inline">Unit 06 · हार्डवेयर & डिवाइस</span><span data-en="inline">Unit 06 · Hardware & Devices</span></span><h2><span data-hi="inline">Output Devices</span><span data-en="inline">Output Devices</span></h2></div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Output Device क्या है?</h3><h3 data-en="flex" class="flex">What is an Output Device?</h3>
+        <p data-hi="block" class="block"><strong>Output Device</strong> वो hardware है जो computer द्वारा process किए गए results को user को display करता है।</p>
+        <p data-en="block" class="block">An <strong>Output Device</strong> is the hardware that displays the processed results from the computer to the user.</p>
+
+        <h3 data-hi="flex" class="flex">Common Output Devices</h3><h3 data-en="flex" class="flex">Common Output Devices</h3>
+        <table>
+          <tr><th>Device</th><th data-hi="inline">काम</th><th data-en="inline">Purpose</th></tr>
+          <tr><td>Monitor (VDU)</td><td><span data-hi="inline">Visual output display करता है — CRT, LCD, LED types होते हैं</span><span data-en="inline">Displays visual output — comes in CRT, LCD, LED types</span></td></tr>
+          <tr><td>Printer</td><td><span data-hi="inline">Paper पर output print करता है (Hard Copy)</span><span data-en="inline">Prints output on paper (Hard Copy)</span></td></tr>
+          <tr><td>Speaker</td><td><span data-hi="inline">Audio/sound output के लिए</span><span data-en="inline">For audio/sound output</span></td></tr>
+          <tr><td>Projector</td><td><span data-hi="inline">Screen का output बड़ी surface/wall पर project करता है</span><span data-en="inline">Projects screen output onto a large surface/wall</span></td></tr>
+          <tr><td>Plotter</td><td><span data-hi="inline">Large drawings/blueprints print करने के लिए (engineers, architects)</span><span data-en="inline">For printing large drawings/blueprints (engineers, architects)</span></td></tr>
+          <tr><td>Headphones</td><td><span data-hi="inline">Personal audio output</span><span data-en="inline">Personal audio output</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Types of Printer</h3><h3 data-en="flex" class="flex">Types of Printer</h3>
+        <table>
+          <tr><th>Printer</th><th data-hi="inline">काम</th><th data-en="inline">Feature</th></tr>
+          <tr><td>Dot Matrix</td><td><span data-hi="inline">Impact printer, pin से ribbon पर dots बनाता है, noisy, cheap</span><span data-en="inline">Impact printer, uses pins on ribbon to form dots, noisy, cheap</span></td></tr>
+          <tr><td>Inkjet</td><td><span data-hi="inline">Ink drops spray करके print, colour printing, quiet</span><span data-en="inline">Sprays ink drops to print, color printing, quiet</span></td></tr>
+          <tr><td>Laser</td><td><span data-hi="inline">Laser beam से toner fuse करता है, fast, best quality, offices में</span><span data-en="inline">Uses laser beam to fuse toner, fast, best quality, used in offices</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Monitor Types</h3><h3 data-en="flex" class="flex">Monitor Types</h3>
+        <table>
+          <tr><th>Type</th><th data-hi="inline">विशेषता</th><th data-en="inline">Feature</th></tr>
+          <tr><td>CRT</td><td><span data-hi="inline">Cathode Ray Tube — पुराना, bulky, heavy</span><span data-en="inline">Cathode Ray Tube — old, bulky, heavy</span></td></tr>
+          <tr><td>LCD</td><td><span data-hi="inline">Liquid Crystal Display — flat, light, कम power</span><span data-en="inline">Liquid Crystal Display — flat, light, less power</span></td></tr>
+          <tr><td>LED</td><td><span data-hi="inline">Light Emitting Diode — LCD से better, thinner, brighter</span><span data-en="inline">Light Emitting Diode — better than LCD, thinner, brighter</span></td></tr>
+        </table>
+        <div class="qbox"><b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b><b data-en="block" class="block">Likely Exam Questions</b><span data-hi="inline">Output Device किसे कहते हैं? Printer के types उनकी विशेषताओं सहित लिखिए। CRT, LCD, LED Monitor में अंतर बताइए।</span><span data-en="inline">What is an Output Device? Write types of Printer with their features. Differentiate between CRT, LCD, LED Monitor.</span></div>
+      </div>
+    </section>
+
+    <!-- U7 -->
+    <section class="unit-card" id="u7">
+      <div class="unit-head"><span class="unit-tag"><span data-hi="inline">Unit 07 · हार्डवेयर & डिवाइस</span><span data-en="inline">Unit 07 · Hardware & Devices</span></span><h2><span data-hi="inline">CPU (ALU, CU, MU)</span><span data-en="inline">CPU (ALU, CU, MU)</span></h2></div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">CPU क्या है?</h3><h3 data-en="flex" class="flex">What is the CPU?</h3>
+        <p data-hi="block" class="block"><strong>CPU (Central Processing Unit)</strong> computer का brain है — यह सभी instructions को process करता है और सभी operations को control करता है।</p>
+        <p data-en="block" class="block">The <strong>CPU (Central Processing Unit)</strong> is the brain of the computer — it processes all instructions and controls all operations.</p>
+
+        <h3 data-hi="flex" class="flex">CPU के तीन मुख्य भाग</h3><h3 data-en="flex" class="flex">Three Main Parts of CPU</h3>
+        <table>
+          <tr><th>Part</th><th data-hi="inline">काम</th><th data-en="inline">Purpose</th></tr>
+          <tr><td>ALU<br>(Arithmetic Logic Unit)</td><td><span data-hi="inline">सभी Arithmetic calculations (+, -, ×, ÷) और Logical operations (AND, OR, NOT, comparisons) perform करता है</span><span data-en="inline">Performs all Arithmetic calculations (+, -, ×, ÷) and Logical operations (AND, OR, NOT, comparisons)</span></td></tr>
+          <tr><td>CU<br>(Control Unit)</td><td><span data-hi="inline">CPU के सभी operations को coordinate/control करता है, instructions को fetch-decode-execute करता है</span><span data-en="inline">Coordinates/controls all CPU operations, fetches-decodes-executes instructions</span></td></tr>
+          <tr><td>MU/Registers<br>(Memory Unit)</td><td><span data-hi="inline">Small, fast temporary storage जो CPU के अंदर होती है — current processing data store करती है</span><span data-en="inline">Small, fast temporary storage inside the CPU — stores data currently being processed</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">CPU Performance Factors</h3><h3 data-en="flex" class="flex">CPU Performance Factors</h3>
+        <table>
+          <tr><th>Factor</th><th data-hi="inline">मतलब</th><th data-en="inline">Meaning</th></tr>
+          <tr><td>Clock Speed</td><td><span data-hi="inline">CPU कितने operations per second करता है (GHz में measure होती है)</span><span data-en="inline">How many operations per second the CPU performs (measured in GHz)</span></td></tr>
+          <tr><td>Core Count</td><td><span data-hi="inline">कितने processing cores हैं (Dual core, Quad core)</span><span data-en="inline">Number of processing cores (Dual core, Quad core)</span></td></tr>
+          <tr><td>Cache Memory</td><td><span data-hi="inline">CPU के अंदर fastest memory, frequently used data store करती है</span><span data-en="inline">Fastest memory inside the CPU, stores frequently used data</span></td></tr>
+        </table>
+        <div class="note-box"><span data-hi="inline"><b>याद रखें:</b> CPU = "Brain of Computer", ALU = "Calculator", CU = "Traffic Police" (सब control करता है)।</span><span data-en="inline"><b>Remember:</b> CPU = "Brain of Computer", ALU = "Calculator", CU = "Traffic Police" (controls everything).</span></div>
+        <div class="qbox"><b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b><b data-en="block" class="block">Likely Exam Questions</b><span data-hi="inline">CPU किसे कहते हैं? ALU, CU, और MU के काम समझाइए। Clock Speed का क्या मतलब है?</span><span data-en="inline">What is the CPU? Explain the functions of ALU, CU, and MU. What does Clock Speed mean?</span></div>
+      </div>
+    </section>
+
+    <!-- U8 -->
+    <section class="unit-card" id="u8">
+      <div class="unit-head"><span class="unit-tag"><span data-hi="inline">Unit 08 · मेमोरी & स्टोरेज</span><span data-en="inline">Unit 08 · Memory & Storage</span></span><h2><span data-hi="inline">Primary Memory (RAM, ROM, Cache)</span><span data-en="inline">Primary Memory (RAM, ROM, Cache)</span></h2></div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">RAM vs ROM</h3><h3 data-en="flex" class="flex">RAM vs ROM</h3>
+        <table>
+          <tr><th>RAM (Random Access Memory)</th><th>ROM (Read Only Memory)</th></tr>
+          <tr><td><span data-hi="inline">Volatile — power off होने पर data erase हो जाता है</span><span data-en="inline">Volatile — data erases when power is off</span></td><td><span data-hi="inline">Non-volatile — power off होने पर भी data रहता है</span><span data-en="inline">Non-volatile — data remains even when power is off</span></td></tr>
+          <tr><td><span data-hi="inline">Read और Write दोनों होती है</span><span data-en="inline">Both Read and Write</span></td><td><span data-hi="inline">सिर्फ Read होती है (factory में pre-programmed)</span><span data-en="inline">Read only (pre-programmed at factory)</span></td></tr>
+          <tr><td><span data-hi="inline">Current programs और data temporary store करती है</span><span data-en="inline">Temporarily stores current programs and data</span></td><td><span data-hi="inline">BIOS और boot instructions store करती है</span><span data-en="inline">Stores BIOS and boot instructions</span></td></tr>
+          <tr><td><span data-hi="inline">Size बड़ी — 4GB, 8GB, 16GB</span><span data-en="inline">Large size — 4GB, 8GB, 16GB</span></td><td><span data-hi="inline">Size छोटी — MBs में</span><span data-en="inline">Small size — in MBs</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Types of RAM</h3><h3 data-en="flex" class="flex">Types of RAM</h3>
+        <table>
+          <tr><th>Type</th><th data-hi="inline">मतलब</th><th data-en="inline">Meaning</th></tr>
+          <tr><td>SRAM (Static RAM)</td><td><span data-hi="inline">Fast, expensive, refresh की ज़रूरत नहीं — Cache memory में use</span><span data-en="inline">Fast, expensive, no refresh needed — used in Cache memory</span></td></tr>
+          <tr><td>DRAM (Dynamic RAM)</td><td><span data-hi="inline">Slower, cheap, regularly refresh होती है — Main memory में use</span><span data-en="inline">Slower, cheap, needs regular refresh — used as Main memory</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Types of ROM</h3><h3 data-en="flex" class="flex">Types of ROM</h3>
+        <table>
+          <tr><th>Type</th><th data-hi="inline">मतलब</th><th data-en="inline">Meaning</th></tr>
+          <tr><td>PROM</td><td><span data-hi="inline">Programmable ROM — एक बार program होने के बाद change नहीं होती</span><span data-en="inline">Programmable ROM — cannot be changed once programmed</span></td></tr>
+          <tr><td>EPROM</td><td><span data-hi="inline">Erasable PROM — UV light से erase करके reprogram होती है</span><span data-en="inline">Erasable PROM — erased with UV light then reprogrammed</span></td></tr>
+          <tr><td>EEPROM</td><td><span data-hi="inline">Electrically Erasable PROM — electrically erase और reprogram होती है</span><span data-en="inline">Electrically Erasable PROM — erased and reprogrammed electrically</span></td></tr>
+          <tr><td>Flash Memory</td><td><span data-hi="inline">EEPROM का advanced form — Pen drives, SSDs, memory cards में use</span><span data-en="inline">Advanced form of EEPROM — used in pen drives, SSDs, memory cards</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Cache Memory</h3><h3 data-en="flex" class="flex">Cache Memory</h3>
+        <p data-hi="block" class="block"><strong>Cache Memory</strong> CPU और RAM के बीच की सबसे fast memory है — frequently used data को temporarily store करती है ताकि CPU को RAM तक बार-बार न जाना पड़े।</p>
+        <p data-en="block" class="block"><strong>Cache Memory</strong> is the fastest memory between the CPU and RAM — stores frequently used data temporarily so the CPU doesn't have to go to RAM repeatedly.</p>
+        <div class="note-box"><span data-hi="inline"><b>याद रखें:</b> Speed order: Cache > RAM > Hard Disk। Volatile order: RAM volatile है, ROM non-volatile, Hard Disk non-volatile।</span><span data-en="inline"><b>Remember:</b> Speed order: Cache &gt; RAM &gt; Hard Disk. Volatility: RAM is volatile, ROM is non-volatile, Hard Disk is non-volatile.</span></div>
+        <div class="qbox"><b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b><b data-en="block" class="block">Likely Exam Questions</b><span data-hi="inline">RAM और ROM में अंतर बताइए। Cache Memory क्या है? PROM, EPROM, EEPROM में अंतर लिखिए।</span><span data-en="inline">Differentiate between RAM and ROM. What is Cache Memory? Write the difference between PROM, EPROM, EEPROM.</span></div>
+      </div>
+    </section>
+
+    <!-- U9 -->
+    <section class="unit-card" id="u9">
+      <div class="unit-head"><span class="unit-tag"><span data-hi="inline">Unit 09 · मेमोरी & स्टोरेज</span><span data-en="inline">Unit 09 · Memory & Storage</span></span><h2><span data-hi="inline">Secondary Storage Devices</span><span data-en="inline">Secondary Storage Devices</span></h2></div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Secondary Storage क्या है?</h3><h3 data-en="flex" class="flex">What is Secondary Storage?</h3>
+        <p data-hi="block" class="block"><strong>Secondary Storage</strong> non-volatile, permanent storage है — power off होने पर भी data रहता है। यह Primary Memory (RAM) से slow पर बहुत ज़्यादा capacity वाली होती है।</p>
+        <p data-en="block" class="block"><strong>Secondary Storage</strong> is non-volatile, permanent storage — data remains even when power is off. It is slower than Primary Memory (RAM) but has much larger capacity.</p>
+
+        <h3 data-hi="flex" class="flex">Types of Secondary Storage</h3><h3 data-en="flex" class="flex">Types of Secondary Storage</h3>
+        <table>
+          <tr><th>Device</th><th data-hi="inline">विशेषता</th><th data-en="inline">Feature</th></tr>
+          <tr><td>Hard Disk Drive (HDD)</td><td><span data-hi="inline">Magnetic disks, spinning, large capacity (500GB–4TB), slower</span><span data-en="inline">Magnetic disks, spinning platters, large capacity (500GB–4TB), slower</span></td></tr>
+          <tr><td>Solid State Drive (SSD)</td><td><span data-hi="inline">Flash memory, no moving parts, fast, expensive, laptop/PC में</span><span data-en="inline">Flash memory, no moving parts, fast, expensive, used in laptops/PCs</span></td></tr>
+          <tr><td>Pen Drive/USB Flash</td><td><span data-hi="inline">Portable, small, easy to carry, plug-and-play</span><span data-en="inline">Portable, small, easy to carry, plug-and-play</span></td></tr>
+          <tr><td>Memory Card</td><td><span data-hi="inline">Cameras, phones में use होती है (SD Card, Micro SD)</span><span data-en="inline">Used in cameras, phones (SD Card, Micro SD)</span></td></tr>
+          <tr><td>CD (Compact Disc)</td><td><span data-hi="inline">700 MB capacity, laser से read होती है</span><span data-en="inline">700 MB capacity, read by laser</span></td></tr>
+          <tr><td>DVD</td><td><span data-hi="inline">4.7 GB (single layer) capacity, movies, software में use</span><span data-en="inline">4.7 GB (single layer) capacity, used for movies, software</span></td></tr>
+          <tr><td>Blu-ray Disc</td><td><span data-hi="inline">25 GB+ capacity, HD videos के लिए</span><span data-en="inline">25 GB+ capacity, for HD videos</span></td></tr>
+          <tr><td>Floppy Disk</td><td><span data-hi="inline">पुराना, 1.44 MB capacity, अब obsolete है</span><span data-en="inline">Old, 1.44 MB capacity, now obsolete</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">HDD vs SSD</h3><h3 data-en="flex" class="flex">HDD vs SSD</h3>
+        <table>
+          <tr><th>HDD</th><th>SSD</th></tr>
+          <tr><td><span data-hi="inline">Moving parts (spinning disks), slow</span><span data-en="inline">Moving parts (spinning disks), slow</span></td><td><span data-hi="inline">No moving parts, very fast</span><span data-en="inline">No moving parts, very fast</span></td></tr>
+          <tr><td><span data-hi="inline">Cheap, large capacity</span><span data-en="inline">Cheap, large capacity</span></td><td><span data-hi="inline">Expensive, smaller capacity for same price</span><span data-en="inline">Expensive, smaller capacity for same price</span></td></tr>
+        </table>
+        <div class="qbox"><b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b><b data-en="block" class="block">Likely Exam Questions</b><span data-hi="inline">Secondary Storage और Primary Memory में अंतर बताइए। HDD और SSD में अंतर लिखिए। कोई 4 secondary storage devices उनकी capacity सहित लिखिए।</span><span data-en="inline">Differentiate Secondary Storage and Primary Memory. Write the difference between HDD and SSD. Write any 4 secondary storage devices with their capacity.</span></div>
+      </div>
+    </section>
+
+    <!-- U10 -->
+    <section class="unit-card" id="u10">
+      <div class="unit-head"><span class="unit-tag"><span data-hi="inline">Unit 10 · मेमोरी & स्टोरेज</span><span data-en="inline">Unit 10 · Memory & Storage</span></span><h2><span data-hi="inline">Units of Memory</span><span data-en="inline">Units of Memory</span></h2></div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Memory Units (छोटे से बड़े)</h3><h3 data-en="flex" class="flex">Memory Units (Small to Large)</h3>
+        <table>
+          <tr><th>Unit</th><th data-hi="inline">Value</th><th data-en="inline">Value</th></tr>
+          <tr><td>1 Bit</td><td colspan="2"><span data-hi="inline">smallest unit — 0 या 1</span><span data-en="inline">smallest unit — 0 or 1</span></td></tr>
+          <tr><td>1 Nibble</td><td colspan="2">4 Bits</td></tr>
+          <tr><td>1 Byte</td><td colspan="2">8 Bits</td></tr>
+          <tr><td>1 KB (Kilobyte)</td><td colspan="2">1024 Bytes</td></tr>
+          <tr><td>1 MB (Megabyte)</td><td colspan="2">1024 KB</td></tr>
+          <tr><td>1 GB (Gigabyte)</td><td colspan="2">1024 MB</td></tr>
+          <tr><td>1 TB (Terabyte)</td><td colspan="2">1024 GB</td></tr>
+          <tr><td>1 PB (Petabyte)</td><td colspan="2">1024 TB</td></tr>
+          <tr><td>1 EB (Exabyte)</td><td colspan="2">1024 PB</td></tr>
+        </table>
+        <div class="imp-box"><span data-hi="inline"><b>Exam Tip:</b> Bit smallest unit है, Byte = 8 Bits, और हर बड़ी unit पिछली से 1024 गुना होती है — यह sequence ज़रूर याद करें।</span><span data-en="inline"><b>Exam Tip:</b> Bit is the smallest unit, Byte = 8 Bits, and each larger unit is 1024 times the previous — memorise this sequence.</span></div>
+        <div class="qbox"><b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b><b data-en="block" class="block">Likely Exam Questions</b><span data-hi="inline">Bit, Byte, KB, MB, GB, TB के relations लिखिए। Memory की smallest unit कौन सी है? 1 GB में कितने MB होते हैं?</span><span data-en="inline">Write the relations between Bit, Byte, KB, MB, GB, TB. What is the smallest unit of memory? How many MB are in 1 GB?</span></div>
+      </div>
+    </section>
+
+    <!-- U11 -->
+    <section class="unit-card" id="u11">
+      <div class="unit-head"><span class="unit-tag"><span data-hi="inline">Unit 11 · नंबर सिस्टम & सॉफ्टवेयर</span><span data-en="inline">Unit 11 · Number System & Software</span></span><h2><span data-hi="inline">Number Systems</span><span data-en="inline">Number Systems</span></h2></div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Number Systems क्या हैं?</h3><h3 data-en="flex" class="flex">What are Number Systems?</h3>
+        <table>
+          <tr><th>System</th><th>Base</th><th data-hi="inline">Digits</th><th data-en="inline">Digits</th></tr>
+          <tr><td>Decimal</td><td>10</td><td colspan="2">0–9 (everyday use)</td></tr>
+          <tr><td>Binary</td><td>2</td><td colspan="2">0, 1 (computers use this)</td></tr>
+          <tr><td>Octal</td><td>8</td><td colspan="2">0–7</td></tr>
+          <tr><td>Hexadecimal</td><td>16</td><td colspan="2">0–9, A–F</td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Decimal to Binary Conversion</h3><h3 data-en="flex" class="flex">Decimal to Binary Conversion</h3>
+        <p data-hi="block" class="block">Number को 2 से divide करते रहो, remainder ऊपर से नीचे लिखते रहो। Example: 13 → 1101</p>
+        <p data-en="block" class="block">Keep dividing the number by 2, write remainders from bottom to top. Example: 13 → 1101</p>
+        <div class="code-block">13 ÷ 2 = 6 remainder 1
+ 6 ÷ 2 = 3 remainder 0
+ 3 ÷ 2 = 1 remainder 1
+ 1 ÷ 2 = 0 remainder 1
+ → Read remainders bottom to top: 1101₂</div>
+
+        <h3 data-hi="flex" class="flex">Binary to Decimal Conversion</h3><h3 data-en="flex" class="flex">Binary to Decimal Conversion</h3>
+        <p data-hi="block" class="block">हर digit को 2 की power से multiply करो (right से left, power 0 से शुरू)। Example: 1101 = 1×8 + 1×4 + 0×2 + 1×1 = 13</p>
+        <p data-en="block" class="block">Multiply each digit by the power of 2 (right to left, starting at power 0). Example: 1101 = 1×8 + 1×4 + 0×2 + 1×1 = 13</p>
+
+        <h3 data-hi="flex" class="flex">Hexadecimal में A-F का मतलब</h3><h3 data-en="flex" class="flex">Meaning of A-F in Hexadecimal</h3>
+        <table>
+          <tr><th>Hex</th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th></tr>
+          <tr><td>Decimal</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td></tr>
+        </table>
+        <div class="note-box"><span data-hi="inline"><b>याद रखें:</b> Computer सिर्फ Binary (0 और 1) समझता है। Programming में Hexadecimal use होती है क्योंकि यह Binary को compact form में represent करती है।</span><span data-en="inline"><b>Remember:</b> Computers only understand Binary (0 and 1). Hexadecimal is used in programming because it represents Binary in a compact form.</span></div>
+        <div class="qbox"><b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b><b data-en="block" class="block">Likely Exam Questions</b><span data-hi="inline">Decimal को Binary में convert करना उदाहरण सहित समझाइए। Binary को Decimal में convert करना समझाइए। Hexadecimal में A-F क्या represent करते हैं?</span><span data-en="inline">Explain converting Decimal to Binary with an example. Explain Binary to Decimal conversion. What do A-F represent in Hexadecimal?</span></div>
+      </div>
+    </section>
+
+    <!-- U12 -->
+    <section class="unit-card" id="u12">
+      <div class="unit-head"><span class="unit-tag"><span data-hi="inline">Unit 12 · नंबर सिस्टम & सॉफ्टवेयर</span><span data-en="inline">Unit 12 · Number System & Software</span></span><h2><span data-hi="inline">Software Types</span><span data-en="inline">Software Types</span></h2></div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Software क्या है?</h3><h3 data-en="flex" class="flex">What is Software?</h3>
+        <p data-hi="block" class="block"><strong>Software</strong> programs और instructions का set है जो computer hardware को बताता है कि क्या और कैसे करना है।</p>
+        <p data-en="block" class="block"><strong>Software</strong> is a set of programs and instructions that tells the computer hardware what to do and how to do it.</p>
+
+        <h3 data-hi="flex" class="flex">Software के Types</h3><h3 data-en="flex" class="flex">Types of Software</h3>
+        <table>
+          <tr><th>Type</th><th data-hi="inline">मतलब</th><th data-en="inline">Meaning</th><th data-hi="inline">उदाहरण</th><th data-en="inline">Example</th></tr>
+          <tr><td>System Software</td><td><span data-hi="inline">Hardware को manage करता है, application software को platform देता है</span><span data-en="inline">Manages hardware, provides a platform for application software</span></td><td colspan="2">Windows, Linux, macOS</td></tr>
+          <tr><td>Application Software</td><td><span data-hi="inline">Specific user tasks के लिए बनाया जाता है</span><span data-en="inline">Built for specific user tasks</span></td><td colspan="2">MS Word, Chrome, VLC</td></tr>
+          <tr><td>Utility Software</td><td><span data-hi="inline">Computer maintenance और optimization के लिए</span><span data-en="inline">For computer maintenance and optimization</span></td><td colspan="2">Antivirus, Disk Cleanup, WinZip</td></tr>
+          <tr><td>Programming Language</td><td><span data-hi="inline">Programs/software develop करने के लिए</span><span data-en="inline">For developing programs/software</span></td><td colspan="2">Python, Java, C++</td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">System Software के भाग</h3><h3 data-en="flex" class="flex">Parts of System Software</h3>
+        <table>
+          <tr><th>Part</th><th data-hi="inline">काम</th><th data-en="inline">Purpose</th></tr>
+          <tr><td>Operating System</td><td><span data-hi="inline">Hardware और user के बीच interface, सभी resources manage करता है</span><span data-en="inline">Interface between hardware and user, manages all resources</span></td></tr>
+          <tr><td>Device Drivers</td><td><span data-hi="inline">Hardware devices (printer, scanner) को OS से communicate करने देते हैं</span><span data-en="inline">Allow hardware devices (printer, scanner) to communicate with the OS</span></td></tr>
+          <tr><td>BIOS/Firmware</td><td><span data-hi="inline">Computer ON होने पर पहला software run होता है, hardware check करता है</span><span data-en="inline">First software to run when computer starts, checks hardware</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Application Software के Types</h3><h3 data-en="flex" class="flex">Types of Application Software</h3>
+        <table>
+          <tr><th>Type</th><th data-hi="inline">उदाहरण</th><th data-en="inline">Example</th></tr>
+          <tr><td>Word Processor</td><td colspan="2">MS Word, LibreOffice Writer</td></tr>
+          <tr><td>Spreadsheet</td><td colspan="2">MS Excel, Google Sheets</td></tr>
+          <tr><td>Presentation</td><td colspan="2">MS PowerPoint, Google Slides</td></tr>
+          <tr><td>Database</td><td colspan="2">MS Access, MySQL</td></tr>
+          <tr><td>Web Browser</td><td colspan="2">Chrome, Firefox, Edge</td></tr>
+          <tr><td>Media Player</td><td colspan="2">VLC, Windows Media Player</td></tr>
+        </table>
+        <div class="note-box"><span data-hi="inline"><b>याद रखें:</b> System Software computer के लिए है (background में काम करता है), Application Software user के लिए है (direct tasks perform करता है)।</span><span data-en="inline"><b>Remember:</b> System Software is for the computer (works in the background), Application Software is for the user (performs direct tasks).</span></div>
+        <div class="qbox"><b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b><b data-en="block" class="block">Likely Exam Questions</b><span data-hi="inline">System Software और Application Software में अंतर बताइए। Utility Software क्या है? Software के types उदाहरण सहित लिखिए।</span><span data-en="inline">Differentiate between System Software and Application Software. What is Utility Software? Write types of Software with examples.</span></div>
+      </div>
+    </section>
+
+    <!-- U13 -->
+    <section class="unit-card" id="u13">
+      <div class="unit-head"><span class="unit-tag"><span data-hi="inline">Unit 13 · रिवीज़न</span><span data-en="inline">Unit 13 · Revision</span></span><h2><span data-hi="inline">Important Q&A — फटाफट रिवीज़न</span><span data-en="inline">Important Q&A — Quick Revision</span></h2></div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">1-line Definitions</h3><h3 data-en="flex" class="flex">1-line Definitions</h3>
+        <ul data-hi="block" class="block">
+          <li><strong>Computer</strong> — Electronic machine जो data input लेकर process करके output देता है</li>
+          <li><strong>CPU</strong> — Computer का brain, सभी operations process और control करता है</li>
+          <li><strong>RAM</strong> — Volatile, read-write primary memory जो current data store करती है</li>
+          <li><strong>ROM</strong> — Non-volatile, read-only memory जो BIOS store करती है</li>
+          <li><strong>Input Device</strong> — User से data computer में enter करवाने वाला device</li>
+          <li><strong>Output Device</strong> — Computer का result user को display करने वाला device</li>
+          <li><strong>Hardware</strong> — Computer के physical parts जिन्हें touch किया जा सकता है</li>
+          <li><strong>Software</strong> — Programs और instructions जो hardware को control करते हैं</li>
+          <li><strong>Binary</strong> — Computer की language जिसमें सिर्फ 0 और 1 होते हैं</li>
+          <li><strong>Cache Memory</strong> — CPU के अंदर fastest memory</li>
+        </ul>
+        <ul data-en="block" class="block">
+          <li><strong>Computer</strong> — Electronic machine that takes data input, processes it, and gives output</li>
+          <li><strong>CPU</strong> — Brain of the computer, processes and controls all operations</li>
+          <li><strong>RAM</strong> — Volatile, read-write primary memory that stores current data</li>
+          <li><strong>ROM</strong> — Non-volatile, read-only memory that stores BIOS</li>
+          <li><strong>Input Device</strong> — Device that allows users to enter data into the computer</li>
+          <li><strong>Output Device</strong> — Device that displays the computer's result to the user</li>
+          <li><strong>Hardware</strong> — Physical parts of a computer that can be touched</li>
+          <li><strong>Software</strong> — Programs and instructions that control hardware</li>
+          <li><strong>Binary</strong> — Computer's language consisting only of 0 and 1</li>
+          <li><strong>Cache Memory</strong> — The fastest memory inside the CPU</li>
+        </ul>
+
+        <h3 data-hi="flex" class="flex">Full Forms</h3><h3 data-en="flex" class="flex">Full Forms</h3>
+        <table>
+          <tr><th>Short</th><th>Full Form</th></tr>
+          <tr><td>CPU</td><td>Central Processing Unit</td></tr>
+          <tr><td>ALU</td><td>Arithmetic Logic Unit</td></tr>
+          <tr><td>CU</td><td>Control Unit</td></tr>
+          <tr><td>RAM</td><td>Random Access Memory</td></tr>
+          <tr><td>ROM</td><td>Read Only Memory</td></tr>
+          <tr><td>HDD</td><td>Hard Disk Drive</td></tr>
+          <tr><td>SSD</td><td>Solid State Drive</td></tr>
+          <tr><td>OMR</td><td>Optical Mark Recognition</td></tr>
+          <tr><td>OCR</td><td>Optical Character Recognition</td></tr>
+          <tr><td>BIOS</td><td>Basic Input Output System</td></tr>
+          <tr><td>VDU</td><td>Visual Display Unit</td></tr>
+          <tr><td>USB</td><td>Universal Serial Bus</td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Frequently Asked Long Questions</h3><h3 data-en="flex" class="flex">Frequently Asked Long Questions</h3>
+        <ol data-hi="block" class="block">
+          <li>Computer किसे कहते हैं? इसकी characteristics लिखिए।</li>
+          <li>Computer की generations को table में समझाइए।</li>
+          <li>Analog, Digital, Hybrid computer में अंतर बताइए।</li>
+          <li>CPU के भागों (ALU, CU, MU) को समझाइए।</li>
+          <li>RAM और ROM में अंतर बताइए।</li>
+          <li>Input और Output devices के examples लिखिए।</li>
+          <li>Decimal को Binary में convert करने का तरीका लिखिए।</li>
+          <li>Memory units (Bit से TB तक) लिखिए।</li>
+          <li>System Software और Application Software में अंतर बताइए।</li>
+        </ol>
+        <ol data-en="block" class="block">
+          <li>What is a Computer? Write its characteristics.</li>
+          <li>Explain the generations of computers in a table.</li>
+          <li>Differentiate Analog, Digital, Hybrid computers.</li>
+          <li>Explain the parts of the CPU (ALU, CU, MU).</li>
+          <li>Differentiate between RAM and ROM.</li>
+          <li>Write examples of Input and Output devices.</li>
+          <li>Write the method of converting Decimal to Binary.</li>
+          <li>Write memory units (from Bit to TB).</li>
+          <li>Differentiate between System Software and Application Software.</li>
+        </ol>
+        <div class="imp-box"><span data-hi="inline"><b>आखिरी टिप:</b> पेपर से पहले सभी "संभावित परीक्षा प्रश्न" बॉक्स एक बार ज़रूर पढ़ें।</span><span data-en="inline"><b>Final Tip:</b> Before the exam, read through all "Likely Exam Questions" boxes once.</span></div>
+      </div>
+    </section>
+
+  </main>
+</div>
+<button id="toTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<footer>Made with 💙 for ITI-COPA students &nbsp;·&nbsp; by <a href="https://surajtiwarrii.github.io/Portfolio/" target="_blank">Suraj Tiwari</a></footer>
+<script>
+function setLang(lang){document.documentElement.lang=lang;document.getElementById('langToggle').dataset.lang=lang;document.getElementById('btnHi').classList.toggle('active',lang==='hi');document.getElementById('btnEn').classList.toggle('active',lang==='en');localStorage.setItem('itcLang',lang);}
+document.addEventListener('DOMContentLoaded',()=>{setLang(localStorage.getItem('itcLang')||'hi');});
+function toggleSidebar(e){if(e)e.stopPropagation();document.getElementById('sidebar').classList.toggle('open');document.getElementById('overlay').classList.toggle('open');}
+window.addEventListener('scroll',()=>{document.getElementById('toTop').style.display=window.scrollY>400?'flex':'none';});
+function liveSearch(){const q=document.getElementById('searchInput').value.trim().toLowerCase();document.querySelectorAll('.unit-card').forEach(c=>c.classList.toggle('hide',q&&!c.innerText.toLowerCase().includes(q)));}
+const links=document.querySelectorAll('.nav-link');const sections=document.querySelectorAll('.unit-card');
+window.addEventListener('scroll',()=>{let cur='';sections.forEach(s=>{if(window.scrollY>=s.offsetTop-100)cur=s.id;});links.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+cur));});
+document.querySelectorAll('.nav-link').forEach(l=>l.addEventListener('click',()=>{if(window.innerWidth<=880)toggleSidebar();}));
+</script>
+</body>
+</html>

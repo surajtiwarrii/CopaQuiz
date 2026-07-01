@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Network Communication & Internet Concepts — Hindi/English | ITI COPA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Hind:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #fff8f3;
+    --bg-soft: #ffe8d1;
+    --panel: #ffffff;
+    --panel-glass: rgba(255,255,255,0.55);
+    --orange-deep: #e8550c;
+    --orange: #ff7a1a;
+    --orange-soft: #ffcb99;
+    --orange-mist: rgba(255,122,26,0.18);
+    --teal: #e8550c;
+    --teal-mist: rgba(255,122,26,0.10);
+    --ink: #2b211d;
+    --ink-soft: #6b5b50;
+    --line: rgba(232,85,12,0.22);
+    --radius: 18px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Hind',sans-serif;
+    background:
+      radial-gradient(1200px 600px at 10% -10%, var(--orange-mist), transparent 60%),
+      radial-gradient(1000px 700px at 110% 10%, var(--teal-mist), transparent 55%),
+      var(--bg);
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.brand{font-family:'Fraunces',serif;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+
+  .topbar{
+    position:sticky;top:0;z-index:50;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px 20px;
+    background:rgba(251,246,240,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+    gap:10px;
+  }
+  .brand{font-size:1.05rem;font-weight:700;color:var(--orange-deep);display:flex;align-items:center;gap:8px;}
+  .brand .dot{width:9px;height:9px;border-radius:50%;background:linear-gradient(135deg,var(--orange),var(--teal));flex-shrink:0;}
+  .topbar-actions{display:flex;align-items:center;gap:8px;}
+  .menu-btn{
+    background:linear-gradient(135deg,var(--orange),var(--orange-deep));
+    color:#fff;border:none;padding:9px 16px;border-radius:30px;
+    font-family:'Hind';font-weight:600;font-size:0.9rem;cursor:pointer;
+    box-shadow:0 6px 16px rgba(201,98,26,0.25);
+  }
+  .lang-toggle{
+    display:flex;align-items:center;background:var(--bg-soft);border:1px solid var(--line);
+    border-radius:30px;padding:3px;position:relative;cursor:pointer;
+  }
+  .lang-toggle button{
+    border:none;background:transparent;padding:7px 13px;border-radius:24px;
+    font-family:'Hind';font-weight:700;font-size:0.8rem;cursor:pointer;color:var(--ink-soft);
+    position:relative;z-index:2;transition:color 0.25s;
+  }
+  .lang-toggle button.active{color:#fff;}
+  .lang-pill{
+    position:absolute;top:3px;bottom:3px;left:3px;width:calc(50% - 3px);
+    background:linear-gradient(135deg,var(--orange),var(--orange-deep));
+    border-radius:24px;transition:transform 0.25s ease;z-index:1;
+  }
+  .lang-toggle[data-lang="en"] .lang-pill{transform:translateX(100%);}
+
+  .hero{padding:64px 20px 40px;text-align:center;position:relative;}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'JetBrains Mono';font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;
+    color:var(--orange-deep);
+    background:var(--panel-glass);
+    border:1px solid var(--orange-soft);
+    padding:6px 14px;border-radius:30px;
+    margin-bottom:18px;
+  }
+  .hero h1{font-size:clamp(1.7rem,5.5vw,3.1rem);line-height:1.15;margin:0 0 14px;color:var(--ink);font-weight:700;}
+  .hero h1 .grad{
+    background:linear-gradient(100deg,var(--orange-deep),var(--orange) 45%,var(--teal) 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero p{max-width:620px;margin:0 auto 28px;color:var(--ink-soft);font-size:1.05rem;line-height:1.65;}
+  .hero-stats{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:10px;}
+  .stat-chip{
+    background:var(--panel);border:1px solid var(--line);border-radius:14px;
+    padding:12px 18px;min-width:108px;box-shadow:0 4px 14px rgba(201,98,26,0.07);
+  }
+  .stat-chip b{display:block;font-family:'Fraunces';font-size:1.3rem;color:var(--orange-deep);}
+  .stat-chip span{font-size:0.74rem;color:var(--ink-soft);}
+
+  .toolbar{max-width:900px;margin:24px auto 0;padding:0 20px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:center;}
+  .search-wrap{flex:1;min-width:220px;position:relative;}
+  #searchInput{
+    width:100%;padding:13px 16px 13px 42px;border-radius:30px;border:1px solid var(--line);
+    background:var(--panel);font-family:'Hind';font-size:0.95rem;color:var(--ink);outline:none;
+  }
+  #searchInput:focus{border-color:var(--orange);}
+  .search-wrap::before{content:"⌕";position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--orange-deep);font-size:1.1rem;}
+
+  .layout{max-width:1180px;margin:14px auto 80px;padding:0 20px;display:grid;grid-template-columns:260px 1fr;gap:26px;}
+  .sidebar{
+    background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    padding:18px 14px;height:fit-content;position:sticky;top:78px;max-height:calc(100vh - 100px);overflow-y:auto;
+  }
+  .sidebar h4{font-family:'JetBrains Mono';font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-soft);margin:14px 6px 8px;}
+  .sidebar h4:first-child{margin-top:2px;}
+  .nav-link{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:10px;color:var(--ink);text-decoration:none;font-size:0.88rem;font-weight:500;transition:background 0.15s;}
+  .nav-link:hover{background:var(--orange-mist);}
+  .nav-link.active{background:linear-gradient(120deg,var(--orange-mist),var(--teal-mist));color:var(--orange-deep);font-weight:700;}
+  .nav-link .num{font-family:'JetBrains Mono';font-size:0.68rem;color:var(--teal);min-width:20px;}
+  .close-sidebar{display:none;}
+
+  @media(max-width:880px){
+    .layout{grid-template-columns:1fr;display:block;}
+    .sidebar{position:fixed !important;inset:0 18% 0 0;z-index:60;transform:translateX(-105%);transition:transform 0.3s ease;overflow-y:auto;top:0;height:100vh;max-height:100vh;}
+    .sidebar.open{transform:translateX(0);}
+    .sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(40,25,15,0.45);z-index:55;}
+    .sidebar-overlay.open{display:block;}
+    .close-sidebar{display:block;margin-left:auto;background:none;border:1px solid var(--line);border-radius:50%;width:34px;height:34px;font-size:1rem;color:var(--ink);cursor:pointer;}
+    .brand span.brand-text{display:none;}
+    .menu-btn span.menu-text{display:none;}
+  }
+
+  .content{min-width:0;}
+  .unit-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:22px;overflow:hidden;scroll-margin-top:80px;box-shadow:0 6px 24px rgba(201,98,26,0.06);}
+  .unit-head{padding:22px 24px 18px;background:linear-gradient(120deg, rgba(255,122,26,0.18), rgba(232,85,12,0.10));border-bottom:1px solid var(--line);}
+  .unit-tag{font-family:'JetBrains Mono';font-size:0.7rem;color:var(--teal);letter-spacing:0.08em;text-transform:uppercase;display:block;margin-bottom:6px;}
+  .unit-head h2{margin:0;font-size:1.4rem;color:var(--orange-deep);}
+  .unit-body{padding:20px 24px 26px;}
+  .unit-body h3{font-size:1.05rem;color:var(--ink);margin:22px 0 8px;display:flex;align-items:center;gap:8px;}
+  .unit-body h3::before{content:"";width:5px;height:18px;border-radius:3px;background:linear-gradient(180deg,var(--orange),var(--teal));}
+  .unit-body h3:first-child{margin-top:2px;}
+  .unit-body p{line-height:1.75;color:var(--ink);margin:6px 0 10px;font-size:0.97rem;}
+  .unit-body ul, .unit-body ol{margin:6px 0 14px;padding-left:22px;line-height:1.75;}
+  .unit-body li{margin-bottom:6px;font-size:0.95rem;}
+  .unit-body strong{color:var(--orange-deep);}
+
+  .note-box{background:var(--orange-mist);border-left:3px solid var(--orange);border-radius:10px;padding:12px 16px;margin:14px 0;font-size:0.9rem;}
+  .note-box b{color:var(--orange-deep);}
+  .imp-box{background:var(--teal-mist);border-left:3px solid var(--teal);border-radius:10px;padding:12px 16px;margin:14px 0;font-size:0.9rem;}
+  .imp-box b{color:var(--teal);}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0 18px;font-size:0.88rem;border-radius:10px;overflow:hidden;}
+  th{background:linear-gradient(120deg,var(--orange),var(--orange-deep));color:#fff;text-align:left;padding:10px 12px;font-weight:600;}
+  td{padding:9px 12px;border-bottom:1px solid var(--line);background:var(--panel);}
+  tr:last-child td{border-bottom:none;}
+  tr:nth-child(even) td{background:var(--bg-soft);}
+
+  code, .code-block{font-family:'JetBrains Mono';}
+  .code-block{background:#2b211d;color:#ffe0c2;padding:14px 16px;border-radius:12px;font-size:0.82rem;line-height:1.6;overflow-x:auto;margin:12px 0;}
+  .code-block .cmt{color:#9ddc8a;}
+  code{background:var(--bg-soft);padding:2px 6px;border-radius:5px;font-size:0.85em;color:var(--orange-deep);}
+
+  .key-table-wrap{overflow-x:auto;}
+
+  .qbox{background:var(--bg-soft);border:1px dashed var(--orange-soft);border-radius:12px;padding:14px 16px;margin:16px 0;}
+  .qbox b{color:var(--teal);display:block;margin-bottom:6px;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em;}
+
+  #toTop{
+    position:fixed;bottom:22px;right:22px;z-index:40;width:46px;height:46px;border-radius:50%;
+    background:linear-gradient(135deg,var(--orange),var(--teal));color:#fff;border:none;font-size:1.2rem;cursor:pointer;
+    box-shadow:0 8px 20px rgba(201,98,26,0.3);display:none;align-items:center;justify-content:center;
+  }
+
+  footer{text-align:center;padding:30px 20px 50px;color:var(--ink-soft);font-size:0.85rem;}
+  footer a{color:var(--orange-deep);text-decoration:none;font-weight:600;}
+
+  mark{background:var(--orange-soft);color:var(--ink);padding:0 2px;border-radius:3px;}
+  .hide{display:none !important;}
+
+  /* Language switching */
+  [data-hi], [data-en]{display:none;}
+  html[lang="hi"] [data-hi].inline, html[lang="hi"] span[data-hi]{display:inline;}
+  html[lang="hi"] [data-hi].block{display:block;}
+  html[lang="hi"] [data-hi].flex{display:flex;}
+  html[lang="hi"] th[data-hi], html[lang="hi"] td[data-hi]{display:table-cell;}
+  html[lang="en"] [data-en].inline, html[lang="en"] span[data-en]{display:inline;}
+  html[lang="en"] [data-en].block{display:block;}
+  html[lang="en"] [data-en].flex{display:flex;}
+  html[lang="en"] th[data-en], html[lang="en"] td[data-en]{display:table-cell;}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span><span class="brand-text">Network Comm. & Internet</span></div>
+  <div class="topbar-actions">
+    <div class="lang-toggle" id="langToggle" data-lang="hi" onclick="setLang(this.dataset.lang==='hi'?'en':'hi')">
+      <div class="lang-pill"></div>
+      <button type="button" id="btnHi">हिं</button>
+      <button type="button" id="btnEn">EN</button>
+    </div>
+    <button class="menu-btn" onclick="toggleSidebar(event)">🌐 <span class="menu-text" data-hi="inline">विषय सूची</span><span class="menu-text" data-en="inline">Topics</span></button>
+  </div>
+</div>
+
+<div class="hero">
+  <span class="eyebrow">● ITI · COPA · UP Board Pattern</span>
+  <h1>
+    <span data-hi="block" class="block">Network Communication<br>& Internet Concepts<br><span class="grad">सम्पूर्ण नोट्स</span></span>
+    <span data-en="block" class="block">Network Communication<br>& Internet Concepts<br><span class="grad">Complete Notes</span></span>
+  </h1>
+  <p data-hi="block" class="block">Communication की बुनियाद से Internet की हर सर्विस तक — हिंदी और इंग्लिश दोनों में, परीक्षा के हिसाब से तैयार।</p>
+  <p data-en="block" class="block">From the basics of Communication to every Internet service — available in both Hindi and English, exam-ready.</p>
+  <div class="hero-stats">
+    <div class="stat-chip"><b>10</b><span data-hi="inline">Units</span><span data-en="inline">Units</span></div>
+    <div class="stat-chip"><b>60+</b><span data-hi="inline">Topics</span><span data-en="inline">Topics</span></div>
+    <div class="stat-chip"><b>2</b><span data-hi="inline">भाषाएं</span><span data-en="inline">Languages</span></div>
+  </div>
+</div>
+
+<div class="toolbar">
+  <div class="search-wrap">
+    <input type="text" id="searchInput" data-hi-placeholder="कोई भी टॉपिक खोजें... जैसे: Switching, Email, Browser" data-en-placeholder="Search any topic... e.g. Switching, Email, Browser" placeholder="कोई भी टॉपिक खोजें... जैसे: Switching, Email, Browser" oninput="liveSearch()">
+  </div>
+</div>
+
+<div class="sidebar-overlay" id="overlay" onclick="toggleSidebar(event)"></div>
+
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <button class="close-sidebar" onclick="toggleSidebar(event)">✕</button>
+    <h4 data-hi="block" class="block">कम्युनिकेशन बेसिक्स</h4>
+    <h4 data-en="block" class="block">Communication Basics</h4>
+    <a class="nav-link" href="#unit1"><span class="num">01</span><span data-hi="inline">Data Communication परिचय</span><span data-en="inline">Data Communication Intro</span></a>
+    <a class="nav-link" href="#unit2"><span class="num">02</span><span data-hi="inline">Transmission Modes</span><span data-en="inline">Transmission Modes</span></a>
+    <a class="nav-link" href="#unit3"><span class="num">03</span><span data-hi="inline">Switching Techniques</span><span data-en="inline">Switching Techniques</span></a>
+    <h4 data-hi="block" class="block">इंटरनेट बेसिक्स</h4>
+    <h4 data-en="block" class="block">Internet Basics</h4>
+    <a class="nav-link" href="#unit4"><span class="num">04</span><span data-hi="inline">Internet का परिचय</span><span data-en="inline">Introduction to Internet</span></a>
+    <a class="nav-link" href="#unit5"><span class="num">05</span><span data-hi="inline">Internet vs Intranet vs Extranet</span><span data-en="inline">Internet vs Intranet vs Extranet</span></a>
+    <a class="nav-link" href="#unit6"><span class="num">06</span><span data-hi="inline">Web Browsers & Search Engines</span><span data-en="inline">Web Browsers & Search Engines</span></a>
+    <h4 data-hi="block" class="block">इंटरनेट सर्विसेज</h4>
+    <h4 data-en="block" class="block">Internet Services</h4>
+    <a class="nav-link" href="#unit7"><span class="num">07</span><span data-hi="inline">Email & Communication Services</span><span data-en="inline">Email & Communication Services</span></a>
+    <a class="nav-link" href="#unit8"><span class="num">08</span><span data-hi="inline">Web Hosting & E-Commerce</span><span data-en="inline">Web Hosting & E-Commerce</span></a>
+    <a class="nav-link" href="#unit9"><span class="num">09</span><span data-hi="inline">Internet Connectivity & Security</span><span data-en="inline">Internet Connectivity & Security</span></a>
+    <h4 data-hi="block" class="block">रिवीज़न</h4>
+    <h4 data-en="block" class="block">Revision</h4>
+    <a class="nav-link" href="#unit10"><span class="num">10</span><span data-hi="inline">Important Q&A</span><span data-en="inline">Important Q&A</span></a>
+  </aside>
+
+  <main class="content" id="content">
+    <!-- UNIT 1 -->
+    <section class="unit-card" id="unit1">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 01 · कम्युनिकेशन बेसिक्स</span><span data-en="inline">Unit 01 · Communication Basics</span></span>
+        <h2><span data-hi="inline">Data Communication परिचय</span><span data-en="inline">Data Communication Introduction</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Data Communication क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is Data Communication?</h3>
+        <p data-hi="block" class="block"><strong>Data Communication</strong> दो devices के बीच data (information) को एक माध्यम (medium) से भेजने और प्राप्त करने की प्रक्रिया है। इसमें एक sender, एक receiver और बीच में एक transmission medium होता है।</p>
+        <p data-en="block" class="block"><strong>Data Communication</strong> is the process of sending and receiving data (information) between two devices through a medium. It involves a sender, a receiver, and a transmission medium in between.</p>
+
+        <h3 data-hi="flex" class="flex">Data Communication के Components</h3>
+        <h3 data-en="flex" class="flex">Components of Data Communication</h3>
+        <table>
+          <tr><th>Component</th><th data-hi="inline">काम</th><th data-en="inline">Function</th></tr>
+          <tr><td>Message</td><td><span data-hi="inline">वो information जो भेजी जा रही है (text, number, image, audio, video)</span><span data-en="inline">The information being sent (text, number, image, audio, video)</span></td></tr>
+          <tr><td>Sender</td><td><span data-hi="inline">वो device जो message भेजता है</span><span data-en="inline">The device that sends the message</span></td></tr>
+          <tr><td>Receiver</td><td><span data-hi="inline">वो device जो message प्राप्त करता है</span><span data-en="inline">The device that receives the message</span></td></tr>
+          <tr><td>Medium</td><td><span data-hi="inline">वो रास्ता जिससे data भेजा जाता है (cable, wireless)</span><span data-en="inline">The path through which data travels (cable, wireless)</span></td></tr>
+          <tr><td>Protocol</td><td><span data-hi="inline">नियमों का सेट जो communication को control करता है</span><span data-en="inline">A set of rules that controls the communication</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Analog vs Digital Signal</h3>
+        <h3 data-en="flex" class="flex">Analog vs Digital Signal</h3>
+        <table>
+          <tr><th>Analog Signal</th><th>Digital Signal</th></tr>
+          <tr><td><span data-hi="inline">Continuous (लगातार बदलने वाला) signal होता है</span><span data-en="inline">A continuous, ever-changing signal</span></td><td><span data-hi="inline">Discrete signal होता है, सिर्फ 0 और 1 में</span><span data-en="inline">A discrete signal, only in 0s and 1s</span></td></tr>
+          <tr><td><span data-hi="inline">Noise का असर ज़्यादा पड़ता है</span><span data-en="inline">More affected by noise</span></td><td><span data-hi="inline">Noise का असर कम पड़ता है</span><span data-en="inline">Less affected by noise</span></td></tr>
+          <tr><td><span data-hi="inline">Example: पुराना Telephone, Radio</span><span data-en="inline">Example: old Telephone, Radio</span></td><td><span data-hi="inline">Example: Computer, Mobile</span><span data-en="inline">Example: Computer, Mobile</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Bandwidth और Data Transfer Rate</h3>
+        <h3 data-en="flex" class="flex">Bandwidth and Data Transfer Rate</h3>
+        <p data-hi="block" class="block"><strong>Bandwidth</strong> यह बताता है कि एक medium पर एक समय में कितना data transfer हो सकता है — इसे Hz (Hertz) या bps (bits per second) में मापा जाता है। ज़्यादा bandwidth मतलब ज़्यादा तेज़ data transfer।</p>
+        <p data-en="block" class="block"><strong>Bandwidth</strong> tells how much data can be transferred over a medium at a time — measured in Hz (Hertz) or bps (bits per second). Higher bandwidth means faster data transfer.</p>
+
+        <div class="note-box">
+          <span data-hi="inline"><b>याद रखें:</b> Data Communication = Message + Sender + Receiver + Medium + Protocol।</span>
+          <span data-en="inline"><b>Remember:</b> Data Communication = Message + Sender + Receiver + Medium + Protocol.</span>
+        </div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">Data Communication किसे कहते हैं? इसके Components लिखिए। Analog और Digital Signal में अंतर बताइए।</span>
+          <span data-en="inline">What is Data Communication? List its Components. Differentiate between Analog and Digital Signal.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 2 -->
+    <section class="unit-card" id="unit2">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 02 · कम्युनिकेशन बेसिक्स</span><span data-en="inline">Unit 02 · Communication Basics</span></span>
+        <h2><span data-hi="inline">Transmission Modes (संचरण विधियाँ)</span><span data-en="inline">Transmission Modes</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Transmission Mode क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is a Transmission Mode?</h3>
+        <p data-hi="block" class="block">Transmission Mode बताता है कि दो devices के बीच data किस दिशा (direction) में भेजा जा सकता है।</p>
+        <p data-en="block" class="block">Transmission Mode describes the direction in which data can be sent between two devices.</p>
+
+        <h3 data-hi="flex" class="flex">Transmission Modes के प्रकार</h3>
+        <h3 data-en="flex" class="flex">Types of Transmission Modes</h3>
+        <table>
+          <tr><th>Mode</th><th data-hi="inline">विशेषता</th><th data-en="inline">Feature</th><th data-hi="inline">उदाहरण</th><th data-en="inline">Example</th></tr>
+          <tr><td>Simplex</td><td><span data-hi="inline">Data सिर्फ एक दिशा में भेजा जाता है</span><span data-en="inline">Data flows in only one direction</span></td><td><span data-hi="inline">Keyboard से Computer, TV Broadcast</span><span data-en="inline">Keyboard to Computer, TV Broadcast</span></td></tr>
+          <tr><td>Half-Duplex</td><td><span data-hi="inline">दोनों दिशाओं में data जा सकता है, पर एक समय में सिर्फ एक दिशा में</span><span data-en="inline">Data can go both ways, but only one direction at a time</span></td><td><span data-hi="inline">Walkie-Talkie</span><span data-en="inline">Walkie-Talkie</span></td></tr>
+          <tr><td>Full-Duplex</td><td><span data-hi="inline">दोनों दिशाओं में एक साथ data जा सकता है</span><span data-en="inline">Data can flow both ways at the same time</span></td><td><span data-hi="inline">Telephone, Mobile Call</span><span data-en="inline">Telephone, Mobile Call</span></td></tr>
+        </table>
+
+        <div class="note-box">
+          <span data-hi="inline"><b>याद रखने का तरीका:</b> Simplex = एक तरफा रास्ता, Half-Duplex = दोनों तरफ पर बारी-बारी, Full-Duplex = दोनों तरफ एक साथ (जैसे फोन कॉल)।</span>
+          <span data-en="inline"><b>Memory tip:</b> Simplex = one-way road, Half-Duplex = both ways but one at a time, Full-Duplex = both ways at once (like a phone call).</span>
+        </div>
+
+        <h3 data-hi="flex" class="flex">Serial vs Parallel Transmission</h3>
+        <h3 data-en="flex" class="flex">Serial vs Parallel Transmission</h3>
+        <table>
+          <tr><th>Serial Transmission</th><th>Parallel Transmission</th></tr>
+          <tr><td><span data-hi="inline">Data एक-एक bit करके, एक ही line पर भेजा जाता है</span><span data-en="inline">Data is sent bit-by-bit over a single line</span></td><td><span data-hi="inline">कई bits एक साथ, कई lines पर भेजे जाते हैं</span><span data-en="inline">Multiple bits are sent together over multiple lines</span></td></tr>
+          <tr><td><span data-hi="inline">लंबी दूरी के लिए बेहतर</span><span data-en="inline">Better for long distances</span></td><td><span data-hi="inline">कम दूरी के लिए तेज़</span><span data-en="inline">Faster for short distances</span></td></tr>
+          <tr><td><span data-hi="inline">Example: USB, Internet</span><span data-en="inline">Example: USB, Internet</span></td><td><span data-hi="inline">Example: पुराने Printer cables</span><span data-en="inline">Example: old Printer cables</span></td></tr>
+        </table>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">Simplex, Half-Duplex और Full-Duplex में अंतर बताइए उदाहरण सहित। Serial और Parallel Transmission में अंतर बताइए।</span>
+          <span data-en="inline">Differentiate between Simplex, Half-Duplex and Full-Duplex with examples. Differentiate between Serial and Parallel Transmission.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 3 -->
+    <section class="unit-card" id="unit3">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 03 · कम्युनिकेशन बेसिक्स</span><span data-en="inline">Unit 03 · Communication Basics</span></span>
+        <h2><span data-hi="inline">Switching Techniques (स्विचिंग तकनीक)</span><span data-en="inline">Switching Techniques</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Switching क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is Switching?</h3>
+        <p data-hi="block" class="block">Switching वो तकनीक है जिससे network में data को source से destination तक भेजने के लिए सही रास्ता चुना जाता है, खासकर जब कई devices एक ही network share कर रहे हों।</p>
+        <p data-en="block" class="block">Switching is the technique used to choose the right path for sending data from source to destination in a network, especially when multiple devices share the same network.</p>
+
+        <h3 data-hi="flex" class="flex">Switching के प्रकार</h3>
+        <h3 data-en="flex" class="flex">Types of Switching</h3>
+        <table>
+          <tr><th>Switching Type</th><th data-hi="inline">विशेषता</th><th data-en="inline">Feature</th></tr>
+          <tr><td>Circuit Switching</td><td><span data-hi="inline">Communication शुरू होने से पहले एक dedicated path बनाया जाता है जो पूरी बातचीत के लिए reserved रहता है — जैसे पुराना Telephone System</span><span data-en="inline">A dedicated path is established before communication starts and stays reserved for the entire conversation — like old Telephone System</span></td></tr>
+          <tr><td>Packet Switching</td><td><span data-hi="inline">Data को छोटे-छोटे packets में तोड़कर भेजा जाता है, हर packet अलग रास्ते से जा सकता है — Internet इसी पर काम करता है</span><span data-en="inline">Data is broken into small packets and sent, each packet can take a different path — the Internet works on this</span></td></tr>
+          <tr><td>Message Switching</td><td><span data-hi="inline">पूरा message एक साथ भेजा जाता है, हर node पर store होकर फिर आगे भेजा जाता है (Store and Forward)</span><span data-en="inline">The whole message is sent together, stored at each node, then forwarded (Store and Forward)</span></td></tr>
+        </table>
+
+        <div class="note-box">
+          <span data-hi="inline"><b>याद रखें:</b> Internet <strong>Packet Switching</strong> पर काम करता है — यही वजह है कि data efficiently और तेज़ी से भेजा जा सकता है।</span>
+          <span data-en="inline"><b>Remember:</b> The Internet works on <strong>Packet Switching</strong> — that's why data can be sent efficiently and quickly.</span>
+        </div>
+
+        <h3 data-hi="flex" class="flex">Circuit Switching vs Packet Switching</h3>
+        <h3 data-en="flex" class="flex">Circuit Switching vs Packet Switching</h3>
+        <table>
+          <tr><th>Circuit Switching</th><th>Packet Switching</th></tr>
+          <tr><td><span data-hi="inline">Dedicated path पहले से बना होता है</span><span data-en="inline">Dedicated path is pre-established</span></td><td><span data-hi="inline">कोई fixed path नहीं, packets अलग-अलग रास्तों से जाते हैं</span><span data-en="inline">No fixed path, packets take different routes</span></td></tr>
+          <tr><td><span data-hi="inline">Resources waste हो सकते हैं अगर इस्तेमाल न हों</span><span data-en="inline">Resources can be wasted if unused</span></td><td><span data-hi="inline">Resources efficiently इस्तेमाल होते हैं</span><span data-en="inline">Resources are used efficiently</span></td></tr>
+          <tr><td><span data-hi="inline">Delay कम होता है क्योंकि path fixed है</span><span data-en="inline">Less delay since the path is fixed</span></td><td><span data-hi="inline">थोड़ा delay हो सकता है (packets अलग रास्तों से आते हैं)</span><span data-en="inline">Slight delay possible (packets arrive via different paths)</span></td></tr>
+        </table>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">Switching किसे कहते हैं? Circuit Switching और Packet Switching में अंतर बताइए। Internet किस switching technique पर काम करता है?</span>
+          <span data-en="inline">What is Switching? Differentiate between Circuit Switching and Packet Switching. Which switching technique does the Internet work on?</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 4 -->
+    <section class="unit-card" id="unit4">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 04 · इंटरनेट बेसिक्स</span><span data-en="inline">Unit 04 · Internet Basics</span></span>
+        <h2><span data-hi="inline">Internet का परिचय</span><span data-en="inline">Introduction to Internet</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Internet क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is the Internet?</h3>
+        <p data-hi="block" class="block"><strong>Internet</strong> दुनियाभर के लाखों-करोड़ों computers और networks को आपस में जोड़ने वाला सबसे बड़ा network है। इसे "Network of Networks" भी कहा जाता है। यह Packet Switching तकनीक पर काम करता है।</p>
+        <p data-en="block" class="block">The <strong>Internet</strong> is the largest network connecting millions of computers and networks worldwide. It is also called the "Network of Networks". It works on Packet Switching technology.</p>
+
+        <h3 data-hi="flex" class="flex">Internet का इतिहास (संक्षेप में)</h3>
+        <h3 data-en="flex" class="flex">History of Internet (Brief)</h3>
+        <p data-hi="block" class="block">Internet की शुरुआत 1960 के दशक में <strong>ARPANET</strong> (US Defence project) से हुई थी। 1990 में Tim Berners-Lee ने <strong>WWW (World Wide Web)</strong> बनाया, जिसके बाद Internet आम लोगों तक पहुंचना शुरू हुआ।</p>
+        <p data-en="block" class="block">The Internet began in the 1960s with <strong>ARPANET</strong> (a US Defence project). In 1990, Tim Berners-Lee created the <strong>WWW (World Wide Web)</strong>, after which the Internet started reaching common people.</p>
+
+        <h3 data-hi="flex" class="flex">Internet कैसे काम करता है?</h3>
+        <h3 data-en="flex" class="flex">How Does the Internet Work?</h3>
+        <p data-hi="block" class="block">जब हम किसी website को खोलते हैं, तो हमारा computer (client) एक request, ISP और routers के through, उस website के server तक भेजता है। Server response को वापस उसी रास्ते से client तक भेजता है — यह सब seconds में होता है।</p>
+        <p data-en="block" class="block">When we open a website, our computer (client) sends a request through the ISP and routers to that website's server. The server sends the response back to the client via the same path — all this happens in seconds.</p>
+
+        <h3 data-hi="flex" class="flex">Internet से जुड़े मुख्य Devices/Concepts</h3>
+        <h3 data-en="flex" class="flex">Key Devices/Concepts Related to Internet</h3>
+        <table>
+          <tr><th>Term</th><th data-hi="inline">मतलब</th><th data-en="inline">Meaning</th></tr>
+          <tr><td>ISP</td><td><span data-hi="inline">Internet Service Provider — Internet connection देने वाली कंपनी (जैसे Jio, Airtel)</span><span data-en="inline">Internet Service Provider — the company that gives Internet connection (e.g., Jio, Airtel)</span></td></tr>
+          <tr><td>Modem</td><td><span data-hi="inline">Digital signal को Analog में और वापस बदलने वाला device, Internet connection के लिए ज़रूरी</span><span data-en="inline">A device that converts Digital signal to Analog and back, necessary for Internet connection</span></td></tr>
+          <tr><td>Router</td><td><span data-hi="inline">Data के लिए सही रास्ता चुनता है और network को connect करता है</span><span data-en="inline">Chooses the right path for data and connects networks</span></td></tr>
+          <tr><td>Bandwidth</td><td><span data-hi="inline">Internet की speed/data transfer capacity</span><span data-en="inline">Internet's speed/data transfer capacity</span></td></tr>
+        </table>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">Internet किसे कहते हैं? Internet का इतिहास संक्षेप में लिखिए। Internet कैसे काम करता है समझाइए।</span>
+          <span data-en="inline">What is the Internet? Briefly write the history of the Internet. Explain how the Internet works.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 5 -->
+    <section class="unit-card" id="unit5">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 05 · इंटरनेट बेसिक्स</span><span data-en="inline">Unit 05 · Internet Basics</span></span>
+        <h2><span data-hi="inline">Internet vs Intranet vs Extranet</span><span data-en="inline">Internet vs Intranet vs Extranet</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">तीनों में अंतर</h3>
+        <h3 data-en="flex" class="flex">Difference Between All Three</h3>
+        <table>
+          <tr><th>Type</th><th data-hi="inline">विशेषता</th><th data-en="inline">Feature</th></tr>
+          <tr><td>Internet</td><td><span data-hi="inline">पूरी दुनिया का public network, कोई भी access कर सकता है</span><span data-en="inline">A public network of the whole world, anyone can access it</span></td></tr>
+          <tr><td>Intranet</td><td><span data-hi="inline">एक organization का private network, सिर्फ employees इस्तेमाल कर सकते हैं</span><span data-en="inline">A private network of one organization, only employees can use it</span></td></tr>
+          <tr><td>Extranet</td><td><span data-hi="inline">Intranet का बढ़ा हुआ रूप, कुछ बाहरी लोगों (partners, vendors) को भी सीमित access मिलता है</span><span data-en="inline">An extended form of Intranet, some outsiders (partners, vendors) also get limited access</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">URL और Domain Name</h3>
+        <h3 data-en="flex" class="flex">URL and Domain Name</h3>
+        <p data-hi="block" class="block"><strong>URL (Uniform Resource Locator)</strong> किसी web page का पूरा पता होता है — जैसे https://www.google.com। <strong>Domain Name</strong> website का नाम होता है (google.com), जिसे लोग आसानी से याद रख सकें, जबकि असल में server का IP Address इस्तेमाल होता है।</p>
+        <p data-en="block" class="block">A <strong>URL (Uniform Resource Locator)</strong> is the full address of a web page — like https://www.google.com. A <strong>Domain Name</strong> is the website's name (google.com), which people can easily remember, while the server actually uses an IP Address.</p>
+
+        <h3 data-hi="flex" class="flex">URL के Parts</h3>
+        <h3 data-en="flex" class="flex">Parts of a URL</h3>
+        <table>
+          <tr><th>Part</th><th>Example</th><th data-hi="inline">मतलब</th><th data-en="inline">Meaning</th></tr>
+          <tr><td>Protocol</td><td>https://</td><td><span data-hi="inline">कौन सा protocol इस्तेमाल हो रहा है</span><span data-en="inline">Which protocol is being used</span></td></tr>
+          <tr><td>Domain Name</td><td>www.google.com</td><td><span data-hi="inline">Website का नाम</span><span data-en="inline">The website's name</span></td></tr>
+          <tr><td>Path</td><td>/search</td><td><span data-hi="inline">Website के अंदर किस पेज पर जाना है</span><span data-en="inline">Which page within the website to go to</span></td></tr>
+        </table>
+
+        <div class="note-box">
+          <span data-hi="inline"><b>याद रखें:</b> DNS (Domain Name System) Domain Name को IP Address में बदलता है ताकि Internet समझ सके कौन सा server access करना है।</span>
+          <span data-en="inline"><b>Remember:</b> DNS (Domain Name System) converts a Domain Name into an IP Address so the Internet knows which server to access.</span>
+        </div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">Internet, Intranet और Extranet में अंतर बताइए। URL किसे कहते हैं? URL के parts लिखिए।</span>
+          <span data-en="inline">Differentiate between Internet, Intranet and Extranet. What is a URL? List the parts of a URL.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 6 -->
+    <section class="unit-card" id="unit6">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 06 · इंटरनेट बेसिक्स</span><span data-en="inline">Unit 06 · Internet Basics</span></span>
+        <h2><span data-hi="inline">Web Browsers & Search Engines</span><span data-en="inline">Web Browsers & Search Engines</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Web Browser क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is a Web Browser?</h3>
+        <p data-hi="block" class="block">Web Browser एक software होता है जिससे हम Internet पर websites देख सकते हैं। यह HTML, CSS, JavaScript जैसी files को पढ़कर उन्हें readable web pages के रूप में दिखाता है।</p>
+        <p data-en="block" class="block">A Web Browser is software used to view websites on the Internet. It reads files like HTML, CSS, JavaScript and displays them as readable web pages.</p>
+
+        <h3 data-hi="flex" class="flex">लोकप्रिय Web Browsers</h3>
+        <h3 data-en="flex" class="flex">Popular Web Browsers</h3>
+        <ul data-hi="block" class="block">
+          <li>Google Chrome</li>
+          <li>Mozilla Firefox</li>
+          <li>Microsoft Edge</li>
+          <li>Safari (Apple devices)</li>
+          <li>Opera</li>
+        </ul>
+        <ul data-en="block" class="block">
+          <li>Google Chrome</li>
+          <li>Mozilla Firefox</li>
+          <li>Microsoft Edge</li>
+          <li>Safari (Apple devices)</li>
+          <li>Opera</li>
+        </ul>
+
+        <h3 data-hi="flex" class="flex">Search Engine क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is a Search Engine?</h3>
+        <p data-hi="block" class="block">Search Engine एक ऐसा tool/website है जो Internet पर मौजूद लाखों pages में से user के keywords से मिलते-जुलते results ढूंढ कर दिखाता है। जैसे — Google, Bing, Yahoo।</p>
+        <p data-en="block" class="block">A Search Engine is a tool/website that searches through millions of pages on the Internet to find results matching the user's keywords. Examples — Google, Bing, Yahoo.</p>
+
+        <h3 data-hi="flex" class="flex">Browser vs Search Engine</h3>
+        <h3 data-en="flex" class="flex">Browser vs Search Engine</h3>
+        <table>
+          <tr><th>Web Browser</th><th>Search Engine</th></tr>
+          <tr><td><span data-hi="inline">Software है जो websites खोलने के लिए इस्तेमाल होता है</span><span data-en="inline">Software used to open websites</span></td><td><span data-hi="inline">एक website है जो दूसरी websites ढूंढने में मदद करती है</span><span data-en="inline">A website that helps find other websites</span></td></tr>
+          <tr><td><span data-hi="inline">Example: Chrome, Firefox</span><span data-en="inline">Example: Chrome, Firefox</span></td><td><span data-hi="inline">Example: Google, Bing</span><span data-en="inline">Example: Google, Bing</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Web 1.0, 2.0 और 3.0</h3>
+        <h3 data-en="flex" class="flex">Web 1.0, 2.0 and 3.0</h3>
+        <table>
+          <tr><th>Version</th><th data-hi="inline">विशेषता</th><th data-en="inline">Feature</th></tr>
+          <tr><td>Web 1.0</td><td><span data-hi="inline">सिर्फ पढ़ने (Read-only) वाली static websites</span><span data-en="inline">Read-only static websites</span></td></tr>
+          <tr><td>Web 2.0</td><td><span data-hi="inline">Interactive websites — users comment, like, share कर सकते हैं (Social Media)</span><span data-en="inline">Interactive websites — users can comment, like, share (Social Media)</span></td></tr>
+          <tr><td>Web 3.0</td><td><span data-hi="inline">AI और smart technology वाला Internet, personalized experiences</span><span data-en="inline">AI and smart technology-driven Internet, personalized experiences</span></td></tr>
+        </table>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">Web Browser और Search Engine में अंतर बताइए। किन्हीं 3 Web Browsers के नाम लिखिए। Web 2.0 क्या है?</span>
+          <span data-en="inline">Differentiate between Web Browser and Search Engine. Name any 3 Web Browsers. What is Web 2.0?</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 7 -->
+    <section class="unit-card" id="unit7">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 07 · इंटरनेट सर्विसेज</span><span data-en="inline">Unit 07 · Internet Services</span></span>
+        <h2><span data-hi="inline">Email & Communication Services</span><span data-en="inline">Email & Communication Services</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Email क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is Email?</h3>
+        <p data-hi="block" class="block"><strong>Email (Electronic Mail)</strong> Internet के through electronic messages भेजने और प्राप्त करने का तरीका है। यह तेज़, सस्ता और कागज़ की बचत करता है।</p>
+        <p data-en="block" class="block"><strong>Email (Electronic Mail)</strong> is a way to send and receive electronic messages over the Internet. It is fast, cheap, and saves paper.</p>
+
+        <h3 data-hi="flex" class="flex">Email Protocols</h3>
+        <h3 data-en="flex" class="flex">Email Protocols</h3>
+        <table>
+          <tr><th>Protocol</th><th>Full Form</th><th data-hi="inline">काम</th><th data-en="inline">Function</th></tr>
+          <tr><td>SMTP</td><td>Simple Mail Transfer Protocol</td><td><span data-hi="inline">Email भेजने के लिए इस्तेमाल</span><span data-en="inline">Used for sending email</span></td></tr>
+          <tr><td>POP3</td><td>Post Office Protocol</td><td><span data-hi="inline">Email को server से download करके पढ़ने के लिए</span><span data-en="inline">For downloading and reading email from the server</span></td></tr>
+          <tr><td>IMAP</td><td>Internet Message Access Protocol</td><td><span data-hi="inline">Email को server पर रखते हुए access करने के लिए</span><span data-en="inline">For accessing email while keeping it on the server</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Email Address की संरचना</h3>
+        <h3 data-en="flex" class="flex">Structure of an Email Address</h3>
+        <p data-hi="block" class="block">जैसे: <code>suraj123@gmail.com</code> — यहाँ <strong>suraj123</strong> username है, <strong>@</strong> separator है, और <strong>gmail.com</strong> domain name है (mail server का नाम)।</p>
+        <p data-en="block" class="block">Example: <code>suraj123@gmail.com</code> — here <strong>suraj123</strong> is the username, <strong>@</strong> is the separator, and <strong>gmail.com</strong> is the domain name (the mail server's name).</p>
+
+        <h3 data-hi="flex" class="flex">अन्य Communication Services</h3>
+        <h3 data-en="flex" class="flex">Other Communication Services</h3>
+        <ul data-hi="block" class="block">
+          <li><strong>Instant Messaging (IM)</strong> — Real-time text chat (WhatsApp, Telegram)</li>
+          <li><strong>VoIP (Voice over IP)</strong> — Internet के through voice calls (Skype, WhatsApp Call)</li>
+          <li><strong>Video Conferencing</strong> — Internet के through एक साथ कई लोगों से video call (Zoom, Google Meet)</li>
+          <li><strong>Social Networking</strong> — लोगों को आपस में जोड़ने वाली services (Facebook, Instagram)</li>
+        </ul>
+        <ul data-en="block" class="block">
+          <li><strong>Instant Messaging (IM)</strong> — Real-time text chat (WhatsApp, Telegram)</li>
+          <li><strong>VoIP (Voice over IP)</strong> — voice calls over the Internet (Skype, WhatsApp Call)</li>
+          <li><strong>Video Conferencing</strong> — video calls with multiple people over the Internet (Zoom, Google Meet)</li>
+          <li><strong>Social Networking</strong> — services that connect people (Facebook, Instagram)</li>
+        </ul>
+
+        <div class="imp-box">
+          <span data-hi="inline"><b>Exam Tip:</b> Email Protocols (SMTP, POP3, IMAP) ke Full Forms aur काम zaroor याद रखें।</span>
+          <span data-en="inline"><b>Exam Tip:</b> Be sure to remember the Full Forms and functions of Email Protocols (SMTP, POP3, IMAP).</span>
+        </div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">Email किसे कहते हैं? SMTP, POP3 और IMAP में अंतर बताइए। Email Address की संरचना समझाइए। VoIP क्या है?</span>
+          <span data-en="inline">What is Email? Differentiate between SMTP, POP3 and IMAP. Explain the structure of an Email Address. What is VoIP?</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 8 -->
+    <section class="unit-card" id="unit8">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 08 · इंटरनेट सर्विसेज</span><span data-en="inline">Unit 08 · Internet Services</span></span>
+        <h2><span data-hi="inline">Web Hosting & E-Commerce</span><span data-en="inline">Web Hosting & E-Commerce</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Web Hosting क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is Web Hosting?</h3>
+        <p data-hi="block" class="block">Web Hosting एक service है जिसमें website की files (HTML, images, videos) को एक powerful computer (Web Server) पर store किया जाता है ताकि वो Internet पर हमेशा उपलब्ध (available) रहे।</p>
+        <p data-en="block" class="block">Web Hosting is a service where a website's files (HTML, images, videos) are stored on a powerful computer (Web Server) so it remains available on the Internet at all times.</p>
+
+        <h3 data-hi="flex" class="flex">Web Hosting के प्रकार</h3>
+        <h3 data-en="flex" class="flex">Types of Web Hosting</h3>
+        <table>
+          <tr><th>Type</th><th data-hi="inline">विशेषता</th><th data-en="inline">Feature</th></tr>
+          <tr><td>Shared Hosting</td><td><span data-hi="inline">कई websites एक ही server share करती हैं — सस्ता</span><span data-en="inline">Multiple websites share the same server — cheap</span></td></tr>
+          <tr><td>Dedicated Hosting</td><td><span data-hi="inline">एक पूरा server सिर्फ एक website के लिए — महंगा पर तेज़</span><span data-en="inline">A whole server for just one website — expensive but fast</span></td></tr>
+          <tr><td>Cloud Hosting</td><td><span data-hi="inline">कई servers मिलकर एक website को host करते हैं — flexible</span><span data-en="inline">Multiple servers together host a website — flexible</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">E-Commerce क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is E-Commerce?</h3>
+        <p data-hi="block" class="block"><strong>E-Commerce (Electronic Commerce)</strong> Internet के through online सामान या services खरीदने-बेचने की प्रक्रिया है। जैसे Amazon, Flipkart।</p>
+        <p data-en="block" class="block"><strong>E-Commerce (Electronic Commerce)</strong> is the process of buying or selling goods or services online via the Internet. Examples: Amazon, Flipkart.</p>
+
+        <h3 data-hi="flex" class="flex">E-Commerce के प्रकार</h3>
+        <h3 data-en="flex" class="flex">Types of E-Commerce</h3>
+        <table>
+          <tr><th>Type</th><th data-hi="inline">मतलब</th><th data-en="inline">Meaning</th><th data-hi="inline">उदाहरण</th><th data-en="inline">Example</th></tr>
+          <tr><td>B2B</td><td><span data-hi="inline">Business to Business — एक company दूसरी company को बेचती है</span><span data-en="inline">Business to Business — one company sells to another</span></td><td>IndiaMART</td></tr>
+          <tr><td>B2C</td><td><span data-hi="inline">Business to Consumer — company सीधे customer को बेचती है</span><span data-en="inline">Business to Consumer — company sells directly to customer</span></td><td>Amazon, Flipkart</td></tr>
+          <tr><td>C2C</td><td><span data-hi="inline">Consumer to Consumer — एक व्यक्ति दूसरे व्यक्ति को बेचता है</span><span data-en="inline">Consumer to Consumer — one person sells to another</span></td><td>OLX</td></tr>
+          <tr><td>C2B</td><td><span data-hi="inline">Consumer to Business — व्यक्ति company को service देता है</span><span data-en="inline">Consumer to Business — a person provides service to a company</span></td><td>Freelancing</td></tr>
+        </table>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">Web Hosting किसे कहते हैं? E-Commerce क्या है? B2B और B2C में अंतर बताइए।</span>
+          <span data-en="inline">What is Web Hosting? What is E-Commerce? Differentiate between B2B and B2C.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 9 -->
+    <section class="unit-card" id="unit9">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 09 · इंटरनेट सर्विसेज</span><span data-en="inline">Unit 09 · Internet Services</span></span>
+        <h2><span data-hi="inline">Internet Connectivity & Security</span><span data-en="inline">Internet Connectivity & Security</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Internet Connectivity के तरीके</h3>
+        <h3 data-en="flex" class="flex">Methods of Internet Connectivity</h3>
+        <table>
+          <tr><th>Type</th><th data-hi="inline">विशेषता</th><th data-en="inline">Feature</th></tr>
+          <tr><td>Dial-Up</td><td><span data-hi="inline">पुराना तरीका, Telephone line से, बहुत धीमा</span><span data-en="inline">Old method, via telephone line, very slow</span></td></tr>
+          <tr><td>Broadband</td><td><span data-hi="inline">तेज़ Internet, हमेशा connected रहता है</span><span data-en="inline">Fast Internet, always connected</span></td></tr>
+          <tr><td>Wi-Fi</td><td><span data-hi="inline">Wireless Internet connection, कम दूरी के लिए</span><span data-en="inline">Wireless Internet connection, for short range</span></td></tr>
+          <tr><td>Mobile Data (3G/4G/5G)</td><td><span data-hi="inline">Mobile network के through Internet</span><span data-en="inline">Internet via mobile network</span></td></tr>
+          <tr><td>Satellite Internet</td><td><span data-hi="inline">Satellite के through, दूर-दराज़ इलाकों के लिए</span><span data-en="inline">Via satellite, for remote areas</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Internet Security क्यों ज़रूरी है?</h3>
+        <h3 data-en="flex" class="flex">Why is Internet Security Important?</h3>
+        <p data-hi="block" class="block">Internet इस्तेमाल करते समय data चोरी, hacking, और fraud का खतरा रहता है। इसलिए सुरक्षित practices अपनाना ज़रूरी है।</p>
+        <p data-en="block" class="block">While using the Internet, there is a risk of data theft, hacking, and fraud. Therefore, it is important to follow safe practices.</p>
+
+        <h3 data-hi="flex" class="flex">Internet Security के खतरे</h3>
+        <h3 data-en="flex" class="flex">Internet Security Threats</h3>
+        <table>
+          <tr><th>Threat</th><th data-hi="inline">क्या है</th><th data-en="inline">What it is</th></tr>
+          <tr><td>Phishing</td><td><span data-hi="inline">Fake emails/websites से personal जानकारी चुराना</span><span data-en="inline">Stealing personal info via fake emails/websites</span></td></tr>
+          <tr><td>Malware</td><td><span data-hi="inline">Harmful software जो device को नुकसान पहुंचाता है</span><span data-en="inline">Harmful software that damages a device</span></td></tr>
+          <tr><td>Cyberstalking</td><td><span data-hi="inline">Internet के through किसी को परेशान करना/पीछा करना</span><span data-en="inline">Harassing/stalking someone online</span></td></tr>
+          <tr><td>Identity Theft</td><td><span data-hi="inline">किसी की personal जानकारी चुराकर उसका misuse करना</span><span data-en="inline">Stealing someone's personal info and misusing it</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Safe Browsing Tips</h3>
+        <h3 data-en="flex" class="flex">Safe Browsing Tips</h3>
+        <ul data-hi="block" class="block">
+          <li>हमेशा strong और unique passwords इस्तेमाल करें</li>
+          <li>HTTPS वाली websites पर ही sensitive जानकारी डालें</li>
+          <li>Unknown links और attachments पर click न करें</li>
+          <li>Antivirus और Firewall चालू रखें</li>
+          <li>Public Wi-Fi पर banking/payment न करें</li>
+        </ul>
+        <ul data-en="block" class="block">
+          <li>Always use strong and unique passwords</li>
+          <li>Only enter sensitive information on HTTPS websites</li>
+          <li>Don't click on unknown links and attachments</li>
+          <li>Keep Antivirus and Firewall enabled</li>
+          <li>Don't do banking/payments on public Wi-Fi</li>
+        </ul>
+
+        <div class="note-box">
+          <span data-hi="inline"><b>याद रखें:</b> HTTPS वाली website ज़्यादा सुरक्षित होती है क्योंकि data encrypted (कोडित) form में भेजा जाता है।</span>
+          <span data-en="inline"><b>Remember:</b> An HTTPS website is more secure because data is sent in encrypted form.</span>
+        </div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">Internet Connectivity के तरीके लिखिए। Phishing क्या है? Safe Browsing के लिए कोई 4 tips लिखिए।</span>
+          <span data-en="inline">List the methods of Internet Connectivity. What is Phishing? Write any 4 tips for Safe Browsing.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 10 -->
+    <section class="unit-card" id="unit10">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 10 · रिवीज़न</span><span data-en="inline">Unit 10 · Revision</span></span>
+        <h2><span data-hi="inline">Important Q&A — फटाफट रिवीज़न</span><span data-en="inline">Important Q&A — Quick Revision</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">1-line Definitions (रटने के लिए)</h3>
+        <h3 data-en="flex" class="flex">1-line Definitions (to memorize)</h3>
+        <ul data-hi="block" class="block">
+          <li><strong>Data Communication</strong> — दो devices के बीच data भेजने-पाने की प्रक्रिया</li>
+          <li><strong>Simplex</strong> — सिर्फ एक दिशा में data transfer</li>
+          <li><strong>Full-Duplex</strong> — दोनों दिशाओं में एक साथ data transfer</li>
+          <li><strong>Packet Switching</strong> — data को packets में तोड़कर अलग रास्तों से भेजना (Internet इसी पर चलता है)</li>
+          <li><strong>Internet</strong> — दुनियाभर के networks को जोड़ने वाला सबसे बड़ा network</li>
+          <li><strong>Intranet</strong> — एक organization का private network</li>
+          <li><strong>URL</strong> — किसी web page का पूरा पता</li>
+          <li><strong>ISP</strong> — Internet connection देने वाली कंपनी</li>
+          <li><strong>Email</strong> — Internet के through electronic messages भेजना</li>
+          <li><strong>E-Commerce</strong> — Internet के through online खरीदना-बेचना</li>
+        </ul>
+        <ul data-en="block" class="block">
+          <li><strong>Data Communication</strong> — the process of sending-receiving data between two devices</li>
+          <li><strong>Simplex</strong> — data transfer in only one direction</li>
+          <li><strong>Full-Duplex</strong> — data transfer in both directions at once</li>
+          <li><strong>Packet Switching</strong> — breaking data into packets sent via different paths (the Internet runs on this)</li>
+          <li><strong>Internet</strong> — the largest network connecting networks worldwide</li>
+          <li><strong>Intranet</strong> — a private network of one organization</li>
+          <li><strong>URL</strong> — the complete address of a web page</li>
+          <li><strong>ISP</strong> — the company that provides Internet connection</li>
+          <li><strong>Email</strong> — sending electronic messages over the Internet</li>
+          <li><strong>E-Commerce</strong> — buying-selling online via the Internet</li>
+        </ul>
+
+        <h3 data-hi="flex" class="flex">महत्वपूर्ण Full Forms</h3>
+        <h3 data-en="flex" class="flex">Important Full Forms</h3>
+        <table>
+          <tr><th>Short</th><th>Full Form</th></tr>
+          <tr><td>ARPANET</td><td>Advanced Research Projects Agency Network</td></tr>
+          <tr><td>WWW</td><td>World Wide Web</td></tr>
+          <tr><td>URL</td><td>Uniform Resource Locator</td></tr>
+          <tr><td>ISP</td><td>Internet Service Provider</td></tr>
+          <tr><td>SMTP</td><td>Simple Mail Transfer Protocol</td></tr>
+          <tr><td>POP3</td><td>Post Office Protocol</td></tr>
+          <tr><td>IMAP</td><td>Internet Message Access Protocol</td></tr>
+          <tr><td>VoIP</td><td>Voice over Internet Protocol</td></tr>
+          <tr><td>B2B</td><td>Business to Business</td></tr>
+          <tr><td>B2C</td><td>Business to Consumer</td></tr>
+          <tr><td>C2C</td><td>Consumer to Consumer</td></tr>
+          <tr><td>HTTPS</td><td>HyperText Transfer Protocol Secure</td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Frequently Asked Long Questions</h3>
+        <h3 data-en="flex" class="flex">Frequently Asked Long Questions</h3>
+        <ol data-hi="block" class="block">
+          <li>Data Communication किसे कहते हैं? इसके Components समझाइए।</li>
+          <li>Transmission Modes के प्रकार उदाहरण सहित लिखिए।</li>
+          <li>Switching Techniques क्या हैं? Circuit और Packet Switching में अंतर बताइए।</li>
+          <li>Internet, Intranet और Extranet में अंतर स्पष्ट कीजिए।</li>
+          <li>Email Protocols (SMTP, POP3, IMAP) को समझाइए।</li>
+          <li>E-Commerce के प्रकार उदाहरण सहित लिखिए।</li>
+          <li>Internet Security के खतरे और Safe Browsing tips लिखिए।</li>
+        </ol>
+        <ol data-en="block" class="block">
+          <li>What is Data Communication? Explain its Components.</li>
+          <li>Write the types of Transmission Modes with examples.</li>
+          <li>What are Switching Techniques? Differentiate between Circuit and Packet Switching.</li>
+          <li>Differentiate between Internet, Intranet and Extranet.</li>
+          <li>Explain Email Protocols (SMTP, POP3, IMAP).</li>
+          <li>Write the types of E-Commerce with examples.</li>
+          <li>Write the threats of Internet Security and Safe Browsing tips.</li>
+        </ol>
+
+        <div class="imp-box">
+          <span data-hi="inline"><b>आखिरी टिप:</b> पेपर से पहले सभी "संभावित परीक्षा प्रश्न" बॉक्स को एक बार ज़रूर पढ़ लें — यही सबसे common questions हैं।</span>
+          <span data-en="inline"><b>Final Tip:</b> Before the exam, make sure to read through all the "Likely Exam Questions" boxes once — these are the most common questions.</span>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<button id="toTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<footer>
+  <span data-hi="inline">Made with 🧡 for ITI-COPA students</span>
+  <span data-en="inline">Made with 🧡 for ITI-COPA students</span>
+  &nbsp;·&nbsp; by <a href="https://surajtiwarrii.github.io/Portfolio/" target="_blank">Suraj Tiwari</a>
+</footer>
+
+<script>
+function setLang(lang){
+  document.documentElement.lang = lang;
+  document.getElementById('langToggle').dataset.lang = lang;
+  document.getElementById('btnHi').classList.toggle('active', lang==='hi');
+  document.getElementById('btnEn').classList.toggle('active', lang==='en');
+  const input = document.getElementById('searchInput');
+  input.placeholder = lang==='en' ? input.dataset.enPlaceholder : input.dataset.hiPlaceholder;
+  localStorage.setItem('netCommNotesLang', lang);
+}
+document.addEventListener('DOMContentLoaded', ()=>{
+  const saved = localStorage.getItem('netCommNotesLang') || 'hi';
+  setLang(saved);
+});
+
+function toggleSidebar(e){
+  if(e) e.stopPropagation();
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('open');
+}
+window.addEventListener('scroll',()=>{
+  document.getElementById('toTop').style.display = window.scrollY>400 ? 'flex':'none';
+});
+function liveSearch(){
+  const q = document.getElementById('searchInput').value.trim().toLowerCase();
+  const cards = document.querySelectorAll('.unit-card');
+  if(!q){ cards.forEach(c=>c.classList.remove('hide')); return; }
+  cards.forEach(card=>{
+    const text = card.innerText.toLowerCase();
+    card.classList.toggle('hide', !text.includes(q));
+  });
+}
+const links = document.querySelectorAll('.nav-link');
+const sections = document.querySelectorAll('.unit-card');
+window.addEventListener('scroll',()=>{
+  let current='';
+  sections.forEach(sec=>{ if(window.scrollY >= sec.offsetTop - 100) current = sec.id; });
+  links.forEach(l=>{ l.classList.toggle('active', l.getAttribute('href')==='#'+current); });
+});
+document.querySelectorAll('.nav-link').forEach(l=>{
+  l.addEventListener('click',()=>{ if(window.innerWidth<=880) toggleSidebar(); });
+});
+</script>
+
+</body>
+</html>

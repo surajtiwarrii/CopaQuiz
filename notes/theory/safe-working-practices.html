@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Safe Working Practices — Hindi/English | ITI COPA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Hind:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f6ffe6;--bg-soft:#dff7aa;--panel:rgba(255,255,255,0.45);--panel-solid:rgba(255,255,255,0.78);--panel-glass:rgba(255,255,255,0.35);
+    --g-deep:#3a6b09;--g:#65a30d;--g-soft:#d9f99d;--g-light:#f2ffe0;--g-mist:rgba(101,163,13,0.18);
+    --t:#4d7c0f;--t-mist:rgba(77,124,15,0.10);--ink:#1a2e06;--ink-soft:#5a7a3a;--line:rgba(58,107,9,0.22);--radius:18px;
+  }
+  *{box-sizing:border-box;}html{scroll-behavior:smooth;}
+  body{margin:0;font-family:'Hind',sans-serif;background:radial-gradient(1200px 600px at 10% -10%,var(--g-mist),transparent 60%),radial-gradient(1000px 700px at 110% 10%,var(--t-mist),transparent 55%),var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;}
+  h1,h2,h3,.brand{font-family:'Fraunces',serif;}
+  .topbar{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:rgba(246,255,230,0.6);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);gap:10px;}
+  .brand{font-size:1.05rem;font-weight:700;color:var(--g-deep);display:flex;align-items:center;gap:8px;}
+  .brand .dot{width:9px;height:9px;border-radius:50%;background:linear-gradient(135deg,var(--g),var(--t));flex-shrink:0;}
+  .menu-btn{background:rgba(101,163,13,0.18);backdrop-filter:blur(6px);color:var(--g-deep);border:1px solid rgba(101,163,13,0.55);padding:9px 16px;border-radius:30px;font-family:'Hind';font-weight:700;font-size:0.9rem;cursor:pointer;background-image:linear-gradient(135deg,rgba(217,249,157,0.7),rgba(101,163,13,0.4));box-shadow:0 6px 16px rgba(58,107,9,0.15);}
+  .lang-toggle{display:flex;align-items:center;background:var(--panel-glass);border:1px solid var(--line);backdrop-filter:blur(8px);border-radius:30px;padding:3px;position:relative;cursor:pointer;}
+  .lang-toggle button{border:none;background:transparent;padding:7px 13px;border-radius:24px;font-family:'Hind';font-weight:700;font-size:0.8rem;cursor:pointer;color:var(--ink-soft);position:relative;z-index:2;transition:color 0.25s;}
+  .lang-toggle button.active{color:var(--g-deep);}
+  .lang-pill{position:absolute;top:3px;bottom:3px;left:3px;width:calc(50% - 3px);background:linear-gradient(135deg,var(--g-soft),var(--g));border-radius:24px;transition:transform 0.25s ease;z-index:1;}
+  .lang-toggle[data-lang="en"] .lang-pill{transform:translateX(100%);}
+  .hero{padding:60px 20px 36px;text-align:center;}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono';font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--g-deep);background:var(--panel-glass);backdrop-filter:blur(8px);border:1px solid var(--g-soft);padding:6px 14px;border-radius:30px;margin-bottom:18px;}
+  .hero h1{font-size:clamp(1.7rem,5.5vw,3rem);line-height:1.15;margin:0 0 14px;color:var(--ink);font-weight:700;}
+  .hero h1 .grad{background:linear-gradient(100deg,var(--g-deep),var(--g) 50%,var(--t));-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .hero p{max-width:600px;margin:0 auto 24px;color:var(--ink-soft);font-size:1rem;line-height:1.65;}
+  .hero-stats{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+  .stat-chip{background:var(--panel);border:1px solid var(--line);border-radius:14px;backdrop-filter:blur(8px);padding:12px 18px;min-width:108px;}
+  .stat-chip b{display:block;font-family:'Fraunces';font-size:1.3rem;color:var(--g-deep);}
+  .stat-chip span{font-size:0.74rem;color:var(--ink-soft);}
+  .toolbar{max-width:900px;margin:22px auto 0;padding:0 20px;}
+  .search-wrap{position:relative;}
+  #searchInput{width:100%;padding:13px 16px 13px 42px;border-radius:30px;border:1px solid var(--line);background:var(--panel);backdrop-filter:blur(8px);font-family:'Hind';font-size:0.95rem;color:var(--ink);outline:none;}
+  #searchInput:focus{border-color:var(--g);}
+  .search-wrap::before{content:"⌕";position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--g-deep);font-size:1.1rem;}
+  .layout{max-width:1180px;margin:14px auto 80px;padding:0 20px;display:grid;grid-template-columns:260px 1fr;gap:26px;}
+  .sidebar{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);backdrop-filter:blur(10px);padding:18px 14px;height:fit-content;position:sticky;top:78px;max-height:calc(100vh - 100px);overflow-y:auto;}
+  .sidebar h4{font-family:'JetBrains Mono';font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-soft);margin:14px 6px 8px;}
+  .sidebar h4:first-child{margin-top:2px;}
+  .nav-link{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:10px;color:var(--ink);text-decoration:none;font-size:0.88rem;font-weight:500;transition:background 0.15s;}
+  .nav-link:hover{background:var(--g-mist);}
+  .nav-link.active{background:linear-gradient(120deg,var(--g-mist),var(--t-mist));color:var(--g-deep);font-weight:700;}
+  .nav-link .num{font-family:'JetBrains Mono';font-size:0.68rem;color:var(--t);min-width:20px;}
+  .close-sidebar{display:none;}
+  @media(max-width:880px){.layout{display:block;}.sidebar{position:fixed !important;inset:0 18% 0 0;z-index:60;transform:translateX(-105%);transition:transform 0.3s ease;overflow-y:auto;top:0;height:100vh;max-height:100vh;}.sidebar.open{transform:translateX(0);}.sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(10,30,5,0.4);z-index:55;}.sidebar-overlay.open{display:block;}.close-sidebar{display:block;margin-left:auto;background:none;border:1px solid var(--line);border-radius:50%;width:34px;height:34px;font-size:1rem;color:var(--ink);cursor:pointer;}.brand span.brand-text{display:none;}.menu-btn span.menu-text{display:none;}}
+  .content{min-width:0;}
+  .unit-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:22px;overflow:hidden;scroll-margin-top:80px;box-shadow:0 6px 24px rgba(58,107,9,0.08);backdrop-filter:blur(10px);}
+  .unit-head{padding:22px 24px 18px;background:linear-gradient(120deg,rgba(101,163,13,0.20),rgba(77,124,15,0.10));border-bottom:1px solid var(--line);}
+  .unit-tag{font-family:'JetBrains Mono';font-size:0.7rem;color:var(--t);letter-spacing:0.08em;text-transform:uppercase;display:block;margin-bottom:6px;}
+  .unit-head h2{margin:0;font-size:1.4rem;color:var(--g-deep);}
+  .unit-body{padding:20px 24px 26px;}
+  .unit-body h3{font-size:1.05rem;color:var(--ink);margin:22px 0 8px;display:flex;align-items:center;gap:8px;}
+  .unit-body h3::before{content:"";width:5px;height:18px;border-radius:3px;background:linear-gradient(180deg,var(--g),var(--t));}
+  .unit-body h3:first-child{margin-top:2px;}
+  .unit-body p{line-height:1.75;color:var(--ink);margin:6px 0 10px;font-size:0.97rem;}
+  .unit-body ul,.unit-body ol{margin:6px 0 14px;padding-left:22px;line-height:1.75;}
+  .unit-body li{margin-bottom:6px;font-size:0.95rem;}
+  .unit-body strong{color:var(--g-deep);}
+  .note-box{background:var(--g-mist);border-left:3px solid var(--g);border-radius:10px;padding:12px 16px;margin:14px 0;font-size:0.9rem;}
+  .note-box b{color:var(--g-deep);}
+  .imp-box{background:var(--t-mist);border-left:3px solid var(--t);border-radius:10px;padding:12px 16px;margin:14px 0;font-size:0.9rem;}
+  .imp-box b{color:var(--t);}
+  table{width:100%;border-collapse:collapse;margin:14px 0 18px;font-size:0.88rem;border-radius:10px;overflow:hidden;}
+  th{background:linear-gradient(120deg,var(--g),var(--g-deep));color:var(--g-light);text-align:left;padding:10px 12px;font-weight:600;}
+  td{padding:9px 12px;border-bottom:1px solid var(--line);background:var(--panel-solid);}
+  tr:last-child td{border-bottom:none;}
+  tr:nth-child(even) td{background:var(--bg-soft);}
+  code{font-family:'JetBrains Mono';background:var(--bg-soft);padding:2px 6px;border-radius:5px;font-size:0.85em;color:var(--g-deep);}
+  .qbox{background:var(--bg-soft);border:1px dashed var(--g-soft);border-radius:12px;padding:14px 16px;margin:16px 0;}
+  .qbox b{color:var(--t);display:block;margin-bottom:6px;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em;}
+  #toTop{position:fixed;bottom:22px;right:22px;z-index:40;width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--g),var(--t));color:var(--g-light);border:none;font-size:1.2rem;cursor:pointer;box-shadow:0 8px 20px rgba(58,107,9,0.3);display:none;align-items:center;justify-content:center;}
+  footer{text-align:center;padding:30px 20px 50px;color:var(--ink-soft);font-size:0.85rem;}
+  footer a{color:var(--g-deep);text-decoration:none;font-weight:600;}
+  .hide{display:none !important;}
+  [data-hi],[data-en]{display:none;}
+  html[lang="hi"] [data-hi].inline,html[lang="hi"] span[data-hi]{display:inline;}
+  html[lang="hi"] [data-hi].block{display:block;}
+  html[lang="hi"] [data-hi].flex{display:flex;}
+  html[lang="hi"] th[data-hi],html[lang="hi"] td[data-hi]{display:table-cell;}
+  html[lang="en"] [data-en].inline,html[lang="en"] span[data-en]{display:inline;}
+  html[lang="en"] [data-en].block{display:block;}
+  html[lang="en"] [data-en].flex{display:flex;}
+  html[lang="en"] th[data-en],html[lang="en"] td[data-en]{display:table-cell;}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="brand"><span class="dot"></span><span class="brand-text">Safe Working Practices</span></div>
+  <div class="topbar-actions" style="display:flex;gap:8px;align-items:center;">
+    <div class="lang-toggle" id="langToggle" data-lang="hi" onclick="setLang(this.dataset.lang==='hi'?'en':'hi')">
+      <div class="lang-pill"></div>
+      <button type="button" id="btnHi">हिं</button>
+      <button type="button" id="btnEn">EN</button>
+    </div>
+    <button class="menu-btn" onclick="toggleSidebar(event)">🌿 <span class="menu-text" data-hi="inline">विषय सूची</span><span class="menu-text" data-en="inline">Topics</span></button>
+  </div>
+</div>
+<div class="hero">
+  <span class="eyebrow">● ITI · COPA · UP Board Pattern</span>
+  <h1><span data-hi="block" class="block">Safe Working Practices<br><span class="grad">सम्पूर्ण नोट्स</span></span><span data-en="block" class="block">Safe Working Practices<br><span class="grad">Complete Notes</span></span></h1>
+  <p data-hi="block" class="block">Workplace Safety से लेकर Data Security और E-Waste तक — हिंदी और इंग्लिश दोनों में, परीक्षा के हिसाब से तैयार।</p>
+  <p data-en="block" class="block">From Workplace Safety to Data Security and E-Waste — both Hindi and English, exam-ready.</p>
+  <div class="hero-stats">
+    <div class="stat-chip"><b>10</b><span data-hi="inline">Units</span><span data-en="inline">Units</span></div>
+    <div class="stat-chip"><b>55+</b><span data-hi="inline">Topics</span><span data-en="inline">Topics</span></div>
+    <div class="stat-chip"><b>2</b><span data-hi="inline">भाषाएं</span><span data-en="inline">Languages</span></div>
+  </div>
+</div>
+<div class="toolbar"><div class="search-wrap"><input type="text" id="searchInput" data-hi-placeholder="खोजें... जैसे: Ergonomics, Fire Safety, E-Waste" data-en-placeholder="Search... e.g. Ergonomics, Fire Safety, E-Waste" placeholder="खोजें..." oninput="liveSearch()"></div></div>
+<div class="sidebar-overlay" id="overlay" onclick="toggleSidebar(event)"></div>
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <button class="close-sidebar" onclick="toggleSidebar(event)">✕</button>
+    <h4 data-hi="block" class="block">सेफ्टी बेसिक्स</h4>
+    <h4 data-en="block" class="block">Safety Basics</h4>
+    <a class="nav-link" href="#u1"><span class="num">01</span><span data-hi="inline">परिचय & Workplace Safety</span><span data-en="inline">Intro & Workplace Safety</span></a>
+    <a class="nav-link" href="#u2"><span class="num">02</span><span data-hi="inline">Computer Lab Safety Rules</span><span data-en="inline">Computer Lab Safety Rules</span></a>
+    <a class="nav-link" href="#u3"><span class="num">03</span><span data-hi="inline">Electrical Safety</span><span data-en="inline">Electrical Safety</span></a>
+    <a class="nav-link" href="#u4"><span class="num">04</span><span data-hi="inline">Fire Safety</span><span data-en="inline">Fire Safety</span></a>
+    <h4 data-hi="block" class="block">स्वास्थ्य & एर्गोनोमिक्स</h4>
+    <h4 data-en="block" class="block">Health & Ergonomics</h4>
+    <a class="nav-link" href="#u5"><span class="num">05</span><span data-hi="inline">Ergonomics & Posture</span><span data-en="inline">Ergonomics & Posture</span></a>
+    <a class="nav-link" href="#u6"><span class="num">06</span><span data-hi="inline">Eye Care & Health Hazards</span><span data-en="inline">Eye Care & Health Hazards</span></a>
+    <h4 data-hi="block" class="block">डेटा & सॉफ्टवेयर सेफ्टी</h4>
+    <h4 data-en="block" class="block">Data & Software Safety</h4>
+    <a class="nav-link" href="#u7"><span class="num">07</span><span data-hi="inline">Hardware Handling Safety</span><span data-en="inline">Hardware Handling Safety</span></a>
+    <a class="nav-link" href="#u8"><span class="num">08</span><span data-hi="inline">Data Safety & Backup</span><span data-en="inline">Data Safety & Backup</span></a>
+    <a class="nav-link" href="#u9"><span class="num">09</span><span data-hi="inline">Software Licensing & E-Waste</span><span data-en="inline">Software Licensing & E-Waste</span></a>
+    <h4 data-hi="block" class="block">रिवीज़न</h4><h4 data-en="block" class="block">Revision</h4>
+    <a class="nav-link" href="#u10"><span class="num">10</span><span data-hi="inline">Important Q&A</span><span data-en="inline">Important Q&A</span></a>
+  </aside>
+  <main class="content" id="content">
+
+    <!-- U1 -->
+    <section class="unit-card" id="u1">
+      <div class="unit-head"><span class="unit-tag"><span data-hi="inline">Unit 01 · सेफ्टी बेसिक्स</span><span data-en="inline">Unit 01 · Safety Basics</span></span><h2><span data-hi="inline">परिचय & Workplace Safety</span><span data-en="inline">Introduction & Workplace Safety</span></h2></div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Safe Working Practices क्या हैं?</h3><h3 data-en="flex" class="flex">What are Safe Working Practices?</h3>
+        <p data-hi="block" class="block"><strong>Safe Working Practices</strong> वो rules और guidelines हैं जो workplace पर accidents, injuries, और health hazards को रोकने के लिए follow किए जाते हैं — computer lab में भी इन्हें follow करना ज़रूरी है।</p>
+        <p data-en="block" class="block"><strong>Safe Working Practices</strong> are the rules and guidelines followed at the workplace to prevent accidents, injuries, and health hazards — equally important in a computer lab.</p>
+
+        <h3 data-hi="flex" class="flex">Safety क्यों ज़रूरी है?</h3><h3 data-en="flex" class="flex">Why is Safety Important?</h3>
+        <ul data-hi="block" class="block">
+          <li>Accidents और injuries से बचाव</li>
+          <li>Equipment की life बढ़ाना</li>
+          <li>Data और software की सुरक्षा</li>
+          <li>Healthy work environment बनाए रखना</li>
+          <li>Legal compliance (laws का पालन)</li>
+        </ul>
+        <ul data-en="block" class="block">
+          <li>Prevention of accidents and injuries</li>
+          <li>Extending the life of equipment</li>
+          <li>Protection of data and software</li>
+          <li>Maintaining a healthy work environment</li>
+          <li>Legal compliance (following laws)</li>
+        </ul>
+
+        <h3 data-hi="flex" class="flex">Types of Hazards</h3><h3 data-en="flex" class="flex">Types of Hazards</h3>
+        <table>
+          <tr><th>Hazard Type</th><th data-hi="inline">मतलब</th><th data-en="inline">Meaning</th></tr>
+          <tr><td>Physical</td><td><span data-hi="inline">Slips, falls, noise, fire</span><span data-en="inline">Slips, falls, noise, fire</span></td></tr>
+          <tr><td>Electrical</td><td><span data-hi="inline">Electric shock, short circuit, overloading</span><span data-en="inline">Electric shock, short circuit, overloading</span></td></tr>
+          <tr><td>Ergonomic</td><td><span data-hi="inline">गलत posture, RSI (Repetitive Strain Injury)</span><span data-en="inline">Wrong posture, RSI (Repetitive Strain Injury)</span></td></tr>
+          <tr><td>Cyber/Data</td><td><span data-hi="inline">Virus, data loss, unauthorized access</span><span data-en="inline">Virus, data loss, unauthorized access</span></td></tr>
+          <tr><td>Environmental</td><td><span data-hi="inline">E-waste, radiation from screens</span><span data-en="inline">E-waste, radiation from screens</span></td></tr>
+        </table>
+        <div class="note-box"><span data-hi="inline"><b>याद रखें:</b> Safety सिर्फ physical नहीं होती — digital safety (data, password, software) भी उतनी ही ज़रूरी है।</span><span data-en="inline"><b>Remember:</b> safety is not only physical — digital safety (data, password, software) is equally important.</span></div>
+        <div class="qbox"><b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b><b data-en="block" class="block">Likely Exam Questions</b><span data-hi="inline">Safe Working Practices किसे कहते हैं? Hazards के types लिखिए। Workplace safety क्यों ज़रूरी है?</span><span data-en="inline">What are Safe Working Practices? Write the types of hazards. Why is workplace safety important?</span></div>
+      </div>
+    </section>
+
+    <!-- U2 -->
+    <section class="unit-card" id="u2">
+      <div class="unit-head"><span class="unit-tag"><span data-hi="inline">Unit 02 · सेफ्टी बेसिक्स</span><span data-en="inline">Unit 02 · Safety Basics</span></span><h2><span data-hi="inline">Computer Lab Safety Rules</span><span data-en="inline">Computer Lab Safety Rules</span></h2></div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Do's — ये ज़रूर करें</h3><h3 data-en="flex" class="flex">Do's — Always Follow These</h3>
+        <ul data-hi="block" class="block">
+          <li>Lab में enter करने से पहले permission लें</li>
+          <li>Computer को properly Shut Down करके छोड़ें</li>
+          <li>Wires और cables को organized रखें</li>
+          <li>Lab छोड़ने से पहले computer OFF करें</li>
+          <li>Antivirus software updated रखें</li>
+          <li>Pen drive use करने से पहले scan करें</li>
+          <li>Data का नियमित backup लें</li>
+          <li>Lab में proper footwear पहनें (rubber sole बेहतर)</li>
+        </ul>
+        <ul data-en="block" class="block">
+          <li>Take permission before entering the lab</li>
+          <li>Always properly Shut Down the computer before leaving</li>
+          <li>Keep wires and cables organized</li>
+          <li>Turn OFF the computer before leaving the lab</li>
+          <li>Keep antivirus software updated</li>
+          <li>Scan pen drives before use</li>
+          <li>Take regular data backups</li>
+          <li>Wear proper footwear in the lab (rubber soles better)</li>
+        </ul>
+
+        <h3 data-hi="flex" class="flex">Don'ts — ये कभी न करें</h3><h3 data-en="flex" class="flex">Don'ts — Never Do These</h3>
+        <ul data-hi="block" class="block">
+          <li>Lab में खाना-पीना लेकर न जाएं</li>
+          <li>बिना permission किसी का computer use न करें</li>
+          <li>खुले पानी/liquids को computer के पास न रखें</li>
+          <li>Computer को एकदम बंद (Power off) न करें — हमेशा Shut Down करें</li>
+          <li>Unknown USB/Pen drive insert न करें</li>
+          <li>Pirated software install न करें</li>
+          <li>Computer पर lean/झुककर न बैठें</li>
+          <li>Monitor को छुएं/touch न करें</li>
+        </ul>
+        <ul data-en="block" class="block">
+          <li>Never bring food/drinks into the lab</li>
+          <li>Never use someone else's computer without permission</li>
+          <li>Never keep open water/liquids near computers</li>
+          <li>Never force-cut power — always Shut Down properly</li>
+          <li>Never insert unknown USB/pen drives</li>
+          <li>Never install pirated software</li>
+          <li>Never lean on or slump over the computer</li>
+          <li>Never touch/tap the monitor screen</li>
+        </ul>
+        <div class="imp-box"><span data-hi="inline"><b>Exam Tip:</b> Computer Lab Safety Rules के Do's और Don'ts की list exam में अक्सर पूछी जाती है — कम से कम 5-5 याद करें।</span><span data-en="inline"><b>Exam Tip:</b> Lists of Do's and Don'ts of Computer Lab Safety are often asked in exams — memorize at least 5 of each.</span></div>
+        <div class="qbox"><b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b><b data-en="block" class="block">Likely Exam Questions</b><span data-hi="inline">Computer Lab में safety के कोई 5 Do's और 5 Don'ts लिखिए।</span><span data-en="inline">Write any 5 Do's and 5 Don'ts of safety in a Computer Lab.</span></div>
+      </div>
+    </section>
+
+    <!-- U3 -->
+    <section class="unit-card" id="u3">
+      <div class="unit-head"><span class="unit-tag"><span data-hi="inline">Unit 03 · सेफ्टी बेसिक्स</span><span data-en="inline">Unit 03 · Safety Basics</span></span><h2><span data-hi="inline">Electrical Safety</span><span data-en="inline">Electrical Safety</span></h2></div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Electrical Safety क्यों ज़रूरी है?</h3><h3 data-en="flex" class="flex">Why is Electrical Safety Important?</h3>
+        <p data-hi="block" class="block">Computer पूरी तरह electricity पर depend करता है — improper handling से electric shock, short circuit, fire, या equipment damage हो सकता है।</p>
+        <p data-en="block" class="block">Computers fully depend on electricity — improper handling can cause electric shock, short circuits, fire, or equipment damage.</p>
+
+        <h3 data-hi="flex" class="flex">Key Electrical Safety Rules</h3><h3 data-en="flex" class="flex">Key Electrical Safety Rules</h3>
+        <ul data-hi="block" class="block">
+          <li>सभी electrical connections proper earthing (grounding) के साथ होने चाहिए</li>
+          <li>Overloading से बचें — एक plug point पर बहुत सारे devices न लगाएं</li>
+          <li>Damaged/frayed wires को तुरंत replace करें</li>
+          <li>Wet hands से electrical equipment कभी न छुएं</li>
+          <li>Computer repair/servicing से पहले power supply बंद करें</li>
+          <li>UPS (Uninterruptible Power Supply) use करें — sudden power cut से बचाता है</li>
+          <li>Surge protector/spike guard use करें — voltage fluctuation से बचाता है</li>
+          <li>Fuse/MCB (Miniature Circuit Breaker) का proper use करें</li>
+        </ul>
+        <ul data-en="block" class="block">
+          <li>All electrical connections must have proper earthing (grounding)</li>
+          <li>Avoid overloading — don't plug too many devices into one outlet</li>
+          <li>Replace damaged/frayed wires immediately</li>
+          <li>Never touch electrical equipment with wet hands</li>
+          <li>Always turn off power before repairing/servicing a computer</li>
+          <li>Use a UPS (Uninterruptible Power Supply) — protects from sudden power cuts</li>
+          <li>Use a surge protector/spike guard — protects from voltage fluctuations</li>
+          <li>Properly use Fuse/MCB (Miniature Circuit Breaker)</li>
+        </ul>
+
+        <h3 data-hi="flex" class="flex">महत्वपूर्ण Terms</h3><h3 data-en="flex" class="flex">Important Terms</h3>
+        <table>
+          <tr><th>Term</th><th data-hi="inline">मतलब</th><th data-en="inline">Meaning</th></tr>
+          <tr><td>Earthing/Grounding</td><td><span data-hi="inline">Extra current को earth में safely discharge करना</span><span data-en="inline">Safely discharging excess current into the earth</span></td></tr>
+          <tr><td>UPS</td><td><span data-hi="inline">Power cut पर battery backup देता है, proper shutdown का time मिलता है</span><span data-en="inline">Provides battery backup on power cut, gives time for proper shutdown</span></td></tr>
+          <tr><td>Fuse</td><td><span data-hi="inline">Excess current आने पर खुद जल जाता है, circuit protect करता है</span><span data-en="inline">Burns out on excess current, protects the circuit</span></td></tr>
+          <tr><td>MCB</td><td><span data-hi="inline">Automatic switch जो overload/short circuit पर trip कर जाता है</span><span data-en="inline">Automatic switch that trips on overload/short circuit</span></td></tr>
+          <tr><td>Surge Protector</td><td><span data-hi="inline">Voltage spikes से devices को बचाता है</span><span data-en="inline">Protects devices from voltage spikes</span></td></tr>
+        </table>
+        <div class="note-box"><span data-hi="inline"><b>याद रखें:</b> Electric shock की situation में — पहले power switch OFF करें, तब victim को छुएं — direct touch मत करें, वरना आपको भी shock लग सकता है।</span><span data-en="inline"><b>Remember:</b> in case of electric shock — first turn OFF the power switch, then touch the victim — never touch directly, or you may get shocked too.</span></div>
+        <div class="qbox"><b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b><b data-en="block" class="block">Likely Exam Questions</b><span data-hi="inline">Electrical safety के कोई 5 rules लिखिए। UPS क्या है? Earthing का क्या काम है?</span><span data-en="inline">Write any 5 electrical safety rules. What is a UPS? What is the function of earthing?</span></div>
+      </div>
+    </section>
+
+    <!-- U4 -->
+    <section class="unit-card" id="u4">
+      <div class="unit-head"><span class="unit-tag"><span data-hi="inline">Unit 04 · सेफ्टी बेसिक्स</span><span data-en="inline">Unit 04 · Safety Basics</span></span><h2><span data-hi="inline">Fire Safety</span><span data-en="inline">Fire Safety</span></h2></div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Fire Triangle</h3><h3 data-en="flex" class="flex">Fire Triangle</h3>
+        <p data-hi="block" class="block">आग लगने के लिए तीन चीज़ें ज़रूरी हैं — <strong>Fuel (ईंधन) + Oxygen (हवा) + Heat (गर्मी)</strong>। इनमें से कोई एक हटा दो, आग बुझ जाएगी।</p>
+        <p data-en="block" class="block">Three things are needed for fire — <strong>Fuel + Oxygen + Heat</strong>. Remove any one of them and the fire will go out.</p>
+
+        <h3 data-hi="flex" class="flex">Types of Fire</h3><h3 data-en="flex" class="flex">Types of Fire</h3>
+        <table>
+          <tr><th>Class</th><th data-hi="inline">Fuel</th><th data-en="inline">Fuel</th></tr>
+          <tr><td>Class A</td><td><span data-hi="inline">Wood, paper, कपड़ा (solid combustibles)</span><span data-en="inline">Wood, paper, cloth (solid combustibles)</span></td></tr>
+          <tr><td>Class B</td><td><span data-hi="inline">Petrol, oil, grease (liquid flammables)</span><span data-en="inline">Petrol, oil, grease (liquid flammables)</span></td></tr>
+          <tr><td>Class C</td><td><span data-hi="inline">Electrical equipment, wires</span><span data-en="inline">Electrical equipment, wires</span></td></tr>
+          <tr><td>Class D</td><td><span data-hi="inline">Metals (magnesium, sodium)</span><span data-en="inline">Metals (magnesium, sodium)</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Types of Fire Extinguisher</h3><h3 data-en="flex" class="flex">Types of Fire Extinguisher</h3>
+        <table>
+          <tr><th>Type</th><th data-hi="inline">किसके लिए</th><th data-en="inline">Used for</th></tr>
+          <tr><td>Water (Red)</td><td><span data-hi="inline">Class A fire</span><span data-en="inline">Class A fire</span></td></tr>
+          <tr><td>CO₂ (Black)</td><td><span data-hi="inline">Class B & C (Electrical fire) — computer lab के लिए best</span><span data-en="inline">Class B & C (Electrical fire) — best for computer labs</span></td></tr>
+          <tr><td>Foam (Cream)</td><td><span data-hi="inline">Class A & B</span><span data-en="inline">Class A & B</span></td></tr>
+          <tr><td>Dry Powder (Blue)</td><td><span data-hi="inline">Class A, B & C</span><span data-en="inline">Class A, B & C</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">PASS Method — Extinguisher use करने का तरीका</h3><h3 data-en="flex" class="flex">PASS Method — How to Use an Extinguisher</h3>
+        <ul data-hi="block" class="block">
+          <li><strong>P</strong> — Pull the pin (pin निकालें)</li>
+          <li><strong>A</strong> — Aim at the base of fire (आग की जड़ पर aim करें)</li>
+          <li><strong>S</strong> — Squeeze the handle (handle दबाएं)</li>
+          <li><strong>S</strong> — Sweep side to side (side to side sweep करें)</li>
+        </ul>
+        <ul data-en="block" class="block">
+          <li><strong>P</strong> — Pull the pin</li>
+          <li><strong>A</strong> — Aim at the base of the fire</li>
+          <li><strong>S</strong> — Squeeze the handle</li>
+          <li><strong>S</strong> — Sweep side to side</li>
+        </ul>
+        <div class="imp-box"><span data-hi="inline"><b>Exam Tip:</b> Electrical fire (computer/wire) के लिए CO₂ extinguisher use करें — Water extinguisher से electrical fire और बढ़ जाती है।</span><span data-en="inline"><b>Exam Tip:</b> Use a CO₂ extinguisher for electrical fires (computers/wires) — a water extinguisher makes electrical fires worse.</span></div>
+        <div class="qbox"><b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b><b data-en="block" class="block">Likely Exam Questions</b><span data-hi="inline">Fire Triangle किसे कहते हैं? Fire के types लिखिए। Computer Lab में कौन सा Fire Extinguisher use करें और क्यों?</span><span data-en="inline">What is the Fire Triangle? Write the types of fire. Which fire extinguisher should be used in a Computer Lab and why?</span></div>
+      </div>
+    </section>
+
+    <!-- U5 -->
+    <section class="unit-card" id="u5">
+      <div class="unit-head"><span class="unit-tag"><span data-hi="inline">Unit 05 · स्वास्थ्य & एर्गोनोमिक्स</span><span data-en="inline">Unit 05 · Health & Ergonomics</span></span><h2><span data-hi="inline">Ergonomics & Posture</span><span data-en="inline">Ergonomics & Posture</span></h2></div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Ergonomics क्या है?</h3><h3 data-en="flex" class="flex">What is Ergonomics?</h3>
+        <p data-hi="block" class="block"><strong>Ergonomics</strong> workplace को इंसान के शरीर के हिसाब से design करने की science है — ताकि काम comfortable हो, injuries न हों, और productivity बढ़े।</p>
+        <p data-en="block" class="block"><strong>Ergonomics</strong> is the science of designing the workplace to suit the human body — so work is comfortable, injuries are prevented, and productivity increases.</p>
+
+        <h3 data-hi="flex" class="flex">Correct Workstation Setup</h3><h3 data-en="flex" class="flex">Correct Workstation Setup</h3>
+        <table>
+          <tr><th data-hi="inline">Part</th><th data-en="inline">Part</th><th data-hi="inline">Correct Position</th><th data-en="inline">Correct Position</th></tr>
+          <tr><td><span data-hi="inline">Chair</span><span data-en="inline">Chair</span></td><td colspan="2"><span data-hi="inline">पीठ सीधी, feet flat on floor, hips at 90°</span><span data-en="inline">Back straight, feet flat on floor, hips at 90°</span></td></tr>
+          <tr><td><span data-hi="inline">Monitor</span><span data-en="inline">Monitor</span></td><td colspan="2"><span data-hi="inline">Eye level पर, 45-70 cm दूर</span><span data-en="inline">At eye level, 45-70 cm away</span></td></tr>
+          <tr><td><span data-hi="inline">Keyboard</span><span data-en="inline">Keyboard</span></td><td colspan="2"><span data-hi="inline">Elbows 90° angle पर, wrists straight</span><span data-en="inline">Elbows at 90°, wrists straight</span></td></tr>
+          <tr><td><span data-hi="inline">Mouse</span><span data-en="inline">Mouse</span></td><td colspan="2"><span data-hi="inline">Keyboard के बगल में, same level पर</span><span data-en="inline">Next to keyboard, at the same level</span></td></tr>
+          <tr><td><span data-hi="inline">Lighting</span><span data-en="inline">Lighting</span></td><td colspan="2"><span data-hi="inline">Natural light side से आए, monitor पर glare न हो</span><span data-en="inline">Natural light from the side, no glare on monitor</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">RSI — Repetitive Strain Injury</h3><h3 data-en="flex" class="flex">RSI — Repetitive Strain Injury</h3>
+        <p data-hi="block" class="block"><strong>RSI</strong> एक ही motion बार-बार करने से muscles और nerves में injury है — जैसे लंबे समय तक typing करने से wrists में दर्द (Carpal Tunnel Syndrome)।</p>
+        <p data-en="block" class="block"><strong>RSI</strong> is an injury to muscles and nerves from repeating the same motion — like wrist pain from prolonged typing (Carpal Tunnel Syndrome).</p>
+
+        <h3 data-hi="flex" class="flex">Break Routine</h3><h3 data-en="flex" class="flex">Break Routine</h3>
+        <p data-hi="block" class="block">हर 1-2 घंटे काम के बाद 5-10 minutes का break लें — stretching करें, चलें, हाथ-पैर हिलाएं। लंबे समय तक एक ही position में बैठना harmful होता है।</p>
+        <p data-en="block" class="block">Take a 5-10 minute break after every 1-2 hours of work — stretch, walk, and move your hands and legs. Sitting in one position for too long is harmful.</p>
+        <div class="note-box"><span data-hi="inline"><b>याद रखें:</b> Monitor की brightness और contrast comfortable level पर रखें — बहुत ज़्यादा brightness से आंखें थक जाती हैं।</span><span data-en="inline"><b>Remember:</b> keep monitor brightness and contrast at a comfortable level — too much brightness tires the eyes.</span></div>
+        <div class="qbox"><b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b><b data-en="block" class="block">Likely Exam Questions</b><span data-hi="inline">Ergonomics किसे कहते हैं? Correct workstation setup समझाइए। RSI क्या है?</span><span data-en="inline">What is Ergonomics? Explain correct workstation setup. What is RSI?</span></div>
+      </div>
+    </section>
+
+    <!-- U6 -->
+    <section class="unit-card" id="u6">
+      <div class="unit-head"><span class="unit-tag"><span data-hi="inline">Unit 06 · स्वास्थ्य & एर्गोनोमिक्स</span><span data-en="inline">Unit 06 · Health & Ergonomics</span></span><h2><span data-hi="inline">Eye Care & Health Hazards</span><span data-en="inline">Eye Care & Health Hazards</span></h2></div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Computer Vision Syndrome (CVS)</h3><h3 data-en="flex" class="flex">Computer Vision Syndrome (CVS)</h3>
+        <p data-hi="block" class="block"><strong>CVS</strong> लंबे समय तक computer screen देखने से होने वाली eye और vision problems का group है — जैसे आंखें थकना, जलन, headache, blurred vision।</p>
+        <p data-en="block" class="block"><strong>CVS</strong> is a group of eye and vision problems caused by prolonged computer screen use — such as eye fatigue, burning, headache, blurred vision.</p>
+
+        <h3 data-hi="flex" class="flex">20-20-20 Rule</h3><h3 data-en="flex" class="flex">20-20-20 Rule</h3>
+        <p data-hi="block" class="block">हर <strong>20 minutes</strong> काम के बाद, <strong>20 feet (6 मीटर)</strong> दूर किसी चीज़ को <strong>20 seconds</strong> तक देखें — eye strain कम होती है।</p>
+        <p data-en="block" class="block">Every <strong>20 minutes</strong> of work, look at something <strong>20 feet (6 metres)</strong> away for <strong>20 seconds</strong> — reduces eye strain.</p>
+
+        <h3 data-hi="flex" class="flex">Eye Care Tips</h3><h3 data-en="flex" class="flex">Eye Care Tips</h3>
+        <ul data-hi="block" class="block">
+          <li>Monitor को eye level पर रखें</li>
+          <li>Monitor से 45-70 cm दूरी रखें</li>
+          <li>Anti-glare screen/glasses use करें</li>
+          <li>Proper lighting रखें — monitor पर glare न हो</li>
+          <li>Screen की brightness comfortable level पर रखें</li>
+          <li>पलकें (blink) ज़्यादा झपकाएं — screen देखते समय blinking कम हो जाती है</li>
+        </ul>
+        <ul data-en="block" class="block">
+          <li>Keep the monitor at eye level</li>
+          <li>Maintain a distance of 45-70 cm from the monitor</li>
+          <li>Use anti-glare screens/glasses</li>
+          <li>Ensure proper lighting — no glare on the monitor</li>
+          <li>Set screen brightness to a comfortable level</li>
+          <li>Blink more often — blinking decreases when staring at a screen</li>
+        </ul>
+
+        <h3 data-hi="flex" class="flex">Other Health Hazards</h3><h3 data-en="flex" class="flex">Other Health Hazards</h3>
+        <table>
+          <tr><th>Hazard</th><th data-hi="inline">मतलब</th><th data-en="inline">Meaning</th></tr>
+          <tr><td>Back Pain</td><td><span data-hi="inline">गलत posture से lower/upper back में दर्द</span><span data-en="inline">Lower/upper back pain from wrong posture</span></td></tr>
+          <tr><td>Neck Pain</td><td><span data-hi="inline">Monitor बहुत ऊपर/नीचे होने से</span><span data-en="inline">From monitor being too high or too low</span></td></tr>
+          <tr><td>Carpal Tunnel</td><td><span data-hi="inline">Wrong wrist position से wrist/hand में दर्द</span><span data-en="inline">Wrist/hand pain from wrong wrist position</span></td></tr>
+          <tr><td>Headache</td><td><span data-hi="inline">Eye strain, glare, poor lighting से</span><span data-en="inline">From eye strain, glare, poor lighting</span></td></tr>
+        </table>
+        <div class="note-box"><span data-hi="inline"><b>याद रखें:</b> 20-20-20 Rule exam में अक्सर पूछा जाता है — हर 20 min बाद 20 feet दूर 20 seconds देखें।</span><span data-en="inline"><b>Remember:</b> the 20-20-20 Rule is often asked in exams — every 20 min, look 20 feet away for 20 seconds.</span></div>
+        <div class="qbox"><b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b><b data-en="block" class="block">Likely Exam Questions</b><span data-hi="inline">CVS किसे कहते हैं? 20-20-20 Rule समझाइए। Computer use के कोई 4 eye care tips लिखिए।</span><span data-en="inline">What is CVS? Explain the 20-20-20 Rule. Write any 4 eye care tips for computer use.</span></div>
+      </div>
+    </section>
+
+    <!-- U7 -->
+    <section class="unit-card" id="u7">
+      <div class="unit-head"><span class="unit-tag"><span data-hi="inline">Unit 07 · डेटा & सॉफ्टवेयर सेफ्टी</span><span data-en="inline">Unit 07 · Data & Software Safety</span></span><h2><span data-hi="inline">Hardware Handling Safety</span><span data-en="inline">Hardware Handling Safety</span></h2></div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Hardware Handling के Rules</h3><h3 data-en="flex" class="flex">Hardware Handling Rules</h3>
+        <ul data-hi="block" class="block">
+          <li>Hardware install/remove करने से पहले computer बंद करें और power unplug करें</li>
+          <li>ESD (Electrostatic Discharge) से बचने के लिए Anti-static wrist strap use करें</li>
+          <li>Components को किनारों से पकड़ें, circuit board को directly touch न करें</li>
+          <li>Hard disk को shock/vibration से बचाएं</li>
+          <li>Monitor/LCD को surface पर रखने से पहले cloth बिछाएं</li>
+          <li>Printer में paper jam को carefully हटाएं — force न लगाएं</li>
+          <li>Cleaning के लिए dry/anti-static cloth use करें — chemicals avoid करें</li>
+          <li>Hardware को moisture/liquid से दूर रखें</li>
+        </ul>
+        <ul data-en="block" class="block">
+          <li>Turn off and unplug the computer before installing/removing hardware</li>
+          <li>Use an anti-static wrist strap to prevent ESD (Electrostatic Discharge)</li>
+          <li>Hold components by the edges — never touch circuit boards directly</li>
+          <li>Protect hard disks from shock/vibration</li>
+          <li>Lay a cloth before placing a monitor/LCD on a surface</li>
+          <li>Remove printer paper jams carefully — never force them</li>
+          <li>Use a dry/anti-static cloth for cleaning — avoid chemicals</li>
+          <li>Keep hardware away from moisture/liquid</li>
+        </ul>
+
+        <h3 data-hi="flex" class="flex">ESD (Electrostatic Discharge)</h3><h3 data-en="flex" class="flex">ESD (Electrostatic Discharge)</h3>
+        <p data-hi="block" class="block"><strong>ESD</strong> body में build-up हुई static electricity का sudden discharge है — यह computer components को damage कर सकती है। इससे बचने के लिए Anti-static wrist strap या metal surface touch करने के बाद components handle करें।</p>
+        <p data-en="block" class="block"><strong>ESD</strong> is the sudden discharge of static electricity built up in the body — it can damage computer components. Prevent it by using an anti-static wrist strap or touching a metal surface before handling components.</p>
+
+        <div class="note-box"><span data-hi="inline"><b>याद रखें:</b> CPU cabinet खोलते समय हमेशा power OFF करें और कम से कम 5 minutes बाद खोलें — capacitors discharge होने में time लगता है।</span><span data-en="inline"><b>Remember:</b> always power OFF and wait at least 5 minutes before opening a CPU cabinet — capacitors take time to discharge.</span></div>
+        <div class="qbox"><b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b><b data-en="block" class="block">Likely Exam Questions</b><span data-hi="inline">Hardware handling के कोई 5 safety rules लिखिए। ESD किसे कहते हैं?</span><span data-en="inline">Write any 5 hardware handling safety rules. What is ESD?</span></div>
+      </div>
+    </section>
+
+    <!-- U8 -->
+    <section class="unit-card" id="u8">
+      <div class="unit-head"><span class="unit-tag"><span data-hi="inline">Unit 08 · डेटा & सॉफ्टवेयर सेफ्टी</span><span data-en="inline">Unit 08 · Data & Software Safety</span></span><h2><span data-hi="inline">Data Safety & Backup</span><span data-en="inline">Data Safety & Backup</span></h2></div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Data Safety क्यों ज़रूरी है?</h3><h3 data-en="flex" class="flex">Why is Data Safety Important?</h3>
+        <p data-hi="block" class="block">Data किसी भी organization का सबसे valuable asset होता है — virus, hardware failure, human error, या theft से data permanently loss हो सकता है।</p>
+        <p data-en="block" class="block">Data is the most valuable asset of any organization — virus, hardware failure, human error, or theft can cause permanent data loss.</p>
+
+        <h3 data-hi="flex" class="flex">Data Safety के उपाय</h3><h3 data-en="flex" class="flex">Data Safety Measures</h3>
+        <table>
+          <tr><th>Measure</th><th data-hi="inline">काम</th><th data-en="inline">Purpose</th></tr>
+          <tr><td>Password Protection</td><td><span data-hi="inline">Strong password से unauthorized access रोकना</span><span data-en="inline">Preventing unauthorized access with strong passwords</span></td></tr>
+          <tr><td>Antivirus Software</td><td><span data-hi="inline">Virus, malware से data की सुरक्षा</span><span data-en="inline">Protecting data from viruses and malware</span></td></tr>
+          <tr><td>Regular Updates</td><td><span data-hi="inline">OS और software updates से security patches मिलते हैं</span><span data-en="inline">OS and software updates provide security patches</span></td></tr>
+          <tr><td>Encryption</td><td><span data-hi="inline">Data को unreadable code में convert करना</span><span data-en="inline">Converting data into unreadable code</span></td></tr>
+          <tr><td>Access Control</td><td><span data-hi="inline">सिर्फ authorized users को data access देना</span><span data-en="inline">Giving data access only to authorized users</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Backup क्या है?</h3><h3 data-en="flex" class="flex">What is Backup?</h3>
+        <p data-hi="block" class="block"><strong>Backup</strong> data की एक duplicate/extra copy है जो किसी safe/different location पर रखी जाती है — original data खो जाने पर restore किया जा सकता है।</p>
+        <p data-en="block" class="block">A <strong>Backup</strong> is a duplicate/extra copy of data stored in a safe/different location — it can be restored if the original data is lost.</p>
+
+        <h3 data-hi="flex" class="flex">Types of Backup</h3><h3 data-en="flex" class="flex">Types of Backup</h3>
+        <table>
+          <tr><th>Type</th><th data-hi="inline">मतलब</th><th data-en="inline">Meaning</th></tr>
+          <tr><td>Full Backup</td><td><span data-hi="inline">पूरे data का complete backup, हर बार</span><span data-en="inline">Complete backup of all data, every time</span></td></tr>
+          <tr><td>Incremental Backup</td><td><span data-hi="inline">सिर्फ last backup के बाद बदले हुए data का backup</span><span data-en="inline">Backup of only data changed since the last backup</span></td></tr>
+          <tr><td>Differential Backup</td><td><span data-hi="inline">Last Full backup के बाद बदले सभी data का backup</span><span data-en="inline">Backup of all data changed since the last full backup</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">3-2-1 Backup Rule</h3><h3 data-en="flex" class="flex">3-2-1 Backup Rule</h3>
+        <p data-hi="block" class="block">Data की <strong>3 copies</strong>, <strong>2 अलग-अलग media</strong> पर, जिसमें से <strong>1 off-site</strong> (अलग location) पर हो।</p>
+        <p data-en="block" class="block">Keep <strong>3 copies</strong> of data, on <strong>2 different media</strong>, with <strong>1 stored off-site</strong> (different location).</p>
+        <div class="note-box"><span data-hi="inline"><b>याद रखें:</b> Backup को regularly test करें — backup है या नहीं, यह सिर्फ restore करके पता चलता है।</span><span data-en="inline"><b>Remember:</b> regularly test your backup — you only know it works when you can actually restore it.</span></div>
+        <div class="qbox"><b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b><b data-en="block" class="block">Likely Exam Questions</b><span data-hi="inline">Backup किसे कहते हैं? Types of Backup लिखिए। 3-2-1 Backup Rule समझाइए।</span><span data-en="inline">What is a Backup? Write the Types of Backup. Explain the 3-2-1 Backup Rule.</span></div>
+      </div>
+    </section>
+
+    <!-- U9 -->
+    <section class="unit-card" id="u9">
+      <div class="unit-head"><span class="unit-tag"><span data-hi="inline">Unit 09 · डेटा & सॉफ्टवेयर सेफ्टी</span><span data-en="inline">Unit 09 · Data & Software Safety</span></span><h2><span data-hi="inline">Software Licensing & E-Waste</span><span data-en="inline">Software Licensing & E-Waste</span></h2></div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Software License क्या है?</h3><h3 data-en="flex" class="flex">What is a Software License?</h3>
+        <p data-hi="block" class="block"><strong>Software License</strong> एक legal agreement है जो define करता है कि software को कैसे use, copy, और distribute किया जा सकता है — बिना license software use करना illegal है।</p>
+        <p data-en="block" class="block">A <strong>Software License</strong> is a legal agreement defining how software may be used, copied, and distributed — using software without a license is illegal.</p>
+
+        <h3 data-hi="flex" class="flex">Types of Software License</h3><h3 data-en="flex" class="flex">Types of Software License</h3>
+        <table>
+          <tr><th>Type</th><th data-hi="inline">मतलब</th><th data-en="inline">Meaning</th></tr>
+          <tr><td>Proprietary</td><td><span data-hi="inline">Paid software, source code closed (जैसे MS Office)</span><span data-en="inline">Paid software, closed source code (like MS Office)</span></td></tr>
+          <tr><td>Freeware</td><td><span data-hi="inline">Free use, पर source code नहीं मिलता</span><span data-en="inline">Free to use, but source code not available</span></td></tr>
+          <tr><td>Shareware</td><td><span data-hi="inline">Limited time/features free trial, फिर pay करना पड़ता है</span><span data-en="inline">Free trial with limited time/features, then requires payment</span></td></tr>
+          <tr><td>Open Source</td><td><span data-hi="inline">Free + source code available, modify कर सकते हैं (जैसे Linux)</span><span data-en="inline">Free + source code available, can be modified (like Linux)</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Software Piracy क्या है?</h3><h3 data-en="flex" class="flex">What is Software Piracy?</h3>
+        <p data-hi="block" class="block"><strong>Software Piracy</strong> बिना license के software को copy, distribute, या use करना है — यह illegal है और IT Act के तहत दंडनीय है।</p>
+        <p data-en="block" class="block"><strong>Software Piracy</strong> is copying, distributing, or using software without a license — it is illegal and punishable under the IT Act.</p>
+
+        <h3 data-hi="flex" class="flex">E-Waste क्या है?</h3><h3 data-en="flex" class="flex">What is E-Waste?</h3>
+        <p data-hi="block" class="block"><strong>E-Waste (Electronic Waste)</strong> पुराने/खराब electronic devices हैं जैसे old computers, monitors, mobiles, printers। इनमें hazardous materials (lead, mercury) होते हैं।</p>
+        <p data-en="block" class="block"><strong>E-Waste (Electronic Waste)</strong> consists of old/broken electronic devices like old computers, monitors, mobiles, printers. These contain hazardous materials (lead, mercury).</p>
+
+        <h3 data-hi="flex" class="flex">E-Waste का Safe Disposal</h3><h3 data-en="flex" class="flex">Safe Disposal of E-Waste</h3>
+        <ul data-hi="block" class="block">
+          <li>Authorized E-Waste collection centers पर जमा करें</li>
+          <li>Electronics को regular garbage में न फेंकें</li>
+          <li>पुराने devices donate/refurbish करें</li>
+          <li>Manufacturer take-back programs use करें</li>
+        </ul>
+        <ul data-en="block" class="block">
+          <li>Deposit at authorized E-Waste collection centres</li>
+          <li>Never throw electronics in regular garbage</li>
+          <li>Donate/refurbish old devices</li>
+          <li>Use manufacturer take-back programs</li>
+        </ul>
+        <div class="note-box"><span data-hi="inline"><b>याद रखें:</b> Pirated software use करने पर legal action हो सकता है और security risk भी रहता है — हमेशा licensed software ही use करें।</span><span data-en="inline"><b>Remember:</b> using pirated software can lead to legal action and creates security risks — always use licensed software.</span></div>
+        <div class="qbox"><b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b><b data-en="block" class="block">Likely Exam Questions</b><span data-hi="inline">Software Piracy किसे कहते हैं? E-Waste क्या है, इसका safe disposal कैसे करें? Software license के types लिखिए।</span><span data-en="inline">What is Software Piracy? What is E-Waste, how to dispose of it safely? Write the types of software license.</span></div>
+      </div>
+    </section>
+
+    <!-- U10 -->
+    <section class="unit-card" id="u10">
+      <div class="unit-head"><span class="unit-tag"><span data-hi="inline">Unit 10 · रिवीज़न</span><span data-en="inline">Unit 10 · Revision</span></span><h2><span data-hi="inline">Important Q&A — फटाफट रिवीज़न</span><span data-en="inline">Important Q&A — Quick Revision</span></h2></div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">1-line Definitions</h3><h3 data-en="flex" class="flex">1-line Definitions</h3>
+        <ul data-hi="block" class="block">
+          <li><strong>Ergonomics</strong> — Workplace को human body के हिसाब से design करने की science</li>
+          <li><strong>RSI</strong> — एक ही motion repeat करने से muscles में injury</li>
+          <li><strong>CVS</strong> — Screen देखते रहने से होने वाली eye problems</li>
+          <li><strong>UPS</strong> — Power cut पर battery backup देने वाला device</li>
+          <li><strong>ESD</strong> — Body की static electricity का sudden discharge</li>
+          <li><strong>Backup</strong> — Data की duplicate copy जो loss होने पर restore हो सके</li>
+          <li><strong>E-Waste</strong> — पुराने/खराब electronic devices</li>
+          <li><strong>Software Piracy</strong> — बिना license software use/copy करना</li>
+          <li><strong>Fuse</strong> — Excess current से circuit protect करने वाला device</li>
+          <li><strong>20-20-20 Rule</strong> — हर 20 min बाद 20 feet दूर 20 sec देखें</li>
+        </ul>
+        <ul data-en="block" class="block">
+          <li><strong>Ergonomics</strong> — the science of designing the workplace to suit the human body</li>
+          <li><strong>RSI</strong> — injury to muscles from repeating the same motion</li>
+          <li><strong>CVS</strong> — eye problems caused by prolonged screen viewing</li>
+          <li><strong>UPS</strong> — a device providing battery backup on power cut</li>
+          <li><strong>ESD</strong> — sudden discharge of static electricity from the body</li>
+          <li><strong>Backup</strong> — a duplicate copy of data that can be restored if lost</li>
+          <li><strong>E-Waste</strong> — old/broken electronic devices</li>
+          <li><strong>Software Piracy</strong> — using/copying software without a license</li>
+          <li><strong>Fuse</strong> — a device that protects a circuit from excess current</li>
+          <li><strong>20-20-20 Rule</strong> — every 20 min, look 20 feet away for 20 sec</li>
+        </ul>
+
+        <h3 data-hi="flex" class="flex">Full Forms</h3><h3 data-en="flex" class="flex">Full Forms</h3>
+        <table>
+          <tr><th>Short</th><th>Full Form</th></tr>
+          <tr><td>UPS</td><td>Uninterruptible Power Supply</td></tr>
+          <tr><td>MCB</td><td>Miniature Circuit Breaker</td></tr>
+          <tr><td>ESD</td><td>Electrostatic Discharge</td></tr>
+          <tr><td>RSI</td><td>Repetitive Strain Injury</td></tr>
+          <tr><td>CVS</td><td>Computer Vision Syndrome</td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Frequently Asked Long Questions</h3><h3 data-en="flex" class="flex">Frequently Asked Long Questions</h3>
+        <ol data-hi="block" class="block">
+          <li>Computer Lab के Do's और Don'ts लिखिए।</li>
+          <li>Fire Triangle और Fire Extinguisher के types समझाइए।</li>
+          <li>Ergonomics और सही workstation setup समझाइए।</li>
+          <li>20-20-20 Rule और CVS के बारे में लिखिए।</li>
+          <li>Data Safety के उपाय और Backup के types लिखिए।</li>
+          <li>E-Waste किसे कहते हैं? इसका safe disposal कैसे करें?</li>
+          <li>Electrical Safety के rules उदाहरण सहित लिखिए।</li>
+        </ol>
+        <ol data-en="block" class="block">
+          <li>Write the Do's and Don'ts of a Computer Lab.</li>
+          <li>Explain the Fire Triangle and types of Fire Extinguisher.</li>
+          <li>Explain Ergonomics and correct workstation setup.</li>
+          <li>Write about the 20-20-20 Rule and CVS.</li>
+          <li>Write the measures of Data Safety and types of Backup.</li>
+          <li>What is E-Waste? How to dispose of it safely?</li>
+          <li>Write Electrical Safety rules with examples.</li>
+        </ol>
+        <div class="imp-box"><span data-hi="inline"><b>आखिरी टिप:</b> पेपर से पहले सभी "संभावित परीक्षा प्रश्न" बॉक्स एक बार ज़रूर पढ़ें।</span><span data-en="inline"><b>Final Tip:</b> Before the exam, read through all "Likely Exam Questions" boxes once.</span></div>
+      </div>
+    </section>
+
+  </main>
+</div>
+<button id="toTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<footer>Made with 💚 for ITI-COPA students &nbsp;·&nbsp; by <a href="https://surajtiwarrii.github.io/Portfolio/" target="_blank">Suraj Tiwari</a></footer>
+<script>
+function setLang(lang){document.documentElement.lang=lang;document.getElementById('langToggle').dataset.lang=lang;document.getElementById('btnHi').classList.toggle('active',lang==='hi');document.getElementById('btnEn').classList.toggle('active',lang==='en');localStorage.setItem('swpLang',lang);}
+document.addEventListener('DOMContentLoaded',()=>{setLang(localStorage.getItem('swpLang')||'hi');});
+function toggleSidebar(e){if(e)e.stopPropagation();document.getElementById('sidebar').classList.toggle('open');document.getElementById('overlay').classList.toggle('open');}
+window.addEventListener('scroll',()=>{document.getElementById('toTop').style.display=window.scrollY>400?'flex':'none';});
+function liveSearch(){const q=document.getElementById('searchInput').value.trim().toLowerCase();document.querySelectorAll('.unit-card').forEach(c=>c.classList.toggle('hide',q&&!c.innerText.toLowerCase().includes(q)));}
+const links=document.querySelectorAll('.nav-link');const sections=document.querySelectorAll('.unit-card');
+window.addEventListener('scroll',()=>{let cur='';sections.forEach(s=>{if(window.scrollY>=s.offsetTop-100)cur=s.id;});links.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+cur));});
+document.querySelectorAll('.nav-link').forEach(l=>l.addEventListener('click',()=>{if(window.innerWidth<=880)toggleSidebar();}));
+</script>
+</body>
+</html>

@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Windows OS — Hindi/English | ITI COPA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Hind:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3f0ff;--bg-soft:#ddd6fe;--panel:rgba(255,255,255,0.45);--ps:rgba(255,255,255,0.78);--pg:rgba(255,255,255,0.35);--d:#3730a3;--m:#6366f1;--s:#c7d2fe;--l:#eef0ff;--ms:rgba(99,102,241,0.18);--t:#4f46e5;--ts:rgba(79,70,229,0.10);--ink:#1e1b4b;--is:#5b5a8a;--ln:rgba(55,48,163,0.22);--r:18px;}
+*{box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{margin:0;font-family:'Hind',sans-serif;background:radial-gradient(1200px 600px at 10% -10%,var(--ms),transparent 60%),radial-gradient(1000px 700px at 110% 10%,var(--ts),transparent 55%),var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;}
+h1,h2,h3,.brand{font-family:'Fraunces',serif;}
+.tb{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:rgba(243,240,255,0.6);backdrop-filter:blur(12px);border-bottom:1px solid var(--ln);gap:10px;}
+.brand{font-size:1rem;font-weight:700;color:var(--d);display:flex;align-items:center;gap:8px;}
+.brand .dot{width:9px;height:9px;border-radius:50%;background:linear-gradient(135deg,var(--m),var(--t));flex-shrink:0;}
+.ta{display:flex;gap:8px;align-items:center;}
+.mb{background:rgba(99,102,241,0.18);color:var(--l);border:1px solid rgba(99,102,241,0.55);padding:9px 16px;border-radius:30px;font-family:'Hind';font-weight:700;font-size:0.9rem;cursor:pointer;background-image:linear-gradient(135deg,rgba(99,102,241,0.55),rgba(55,48,163,0.55));box-shadow:0 6px 16px rgba(55,48,163,0.2);}
+.lt{display:flex;align-items:center;background:var(--pg);border:1px solid var(--ln);backdrop-filter:blur(8px);border-radius:30px;padding:3px;position:relative;cursor:pointer;}
+.lt button{border:none;background:transparent;padding:7px 13px;border-radius:24px;font-family:'Hind';font-weight:700;font-size:0.8rem;cursor:pointer;color:var(--is);position:relative;z-index:2;transition:color 0.25s;}
+.lt button.active{color:var(--l);}
+.lp{position:absolute;top:3px;bottom:3px;left:3px;width:calc(50% - 3px);background:linear-gradient(135deg,var(--m),var(--d));border-radius:24px;transition:transform 0.25s ease;z-index:1;}
+.lt[data-lang="en"] .lp{transform:translateX(100%);}
+.hero{padding:60px 20px 36px;text-align:center;}
+.ey{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono';font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--d);background:var(--pg);backdrop-filter:blur(8px);border:1px solid var(--s);padding:6px 14px;border-radius:30px;margin-bottom:18px;}
+.hero h1{font-size:clamp(1.7rem,5.5vw,2.8rem);line-height:1.15;margin:0 0 14px;color:var(--ink);font-weight:700;}
+.grad{background:linear-gradient(100deg,var(--d),var(--m) 50%,var(--t));-webkit-background-clip:text;background-clip:text;color:transparent;}
+.hero p{max-width:600px;margin:0 auto 24px;color:var(--is);font-size:1rem;line-height:1.65;}
+.hs{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+.sc{background:var(--panel);border:1px solid var(--ln);border-radius:14px;backdrop-filter:blur(8px);padding:12px 18px;min-width:108px;}
+.sc b{display:block;font-family:'Fraunces';font-size:1.3rem;color:var(--d);}
+.sc span{font-size:0.74rem;color:var(--is);}
+.tw{max-width:900px;margin:22px auto 0;padding:0 20px;}
+.sw{position:relative;}
+#si{width:100%;padding:13px 16px 13px 42px;border-radius:30px;border:1px solid var(--ln);background:var(--panel);backdrop-filter:blur(8px);font-family:'Hind';font-size:0.95rem;color:var(--ink);outline:none;}
+#si:focus{border-color:var(--m);}
+.sw::before{content:"⌕";position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--d);font-size:1.1rem;}
+.layout{max-width:1180px;margin:14px auto 80px;padding:0 20px;display:grid;grid-template-columns:255px 1fr;gap:26px;}
+.sidebar{background:var(--panel);border:1px solid var(--ln);border-radius:var(--r);backdrop-filter:blur(10px);padding:18px 14px;height:fit-content;position:sticky;top:78px;max-height:calc(100vh - 100px);overflow-y:auto;}
+.sidebar h4{font-family:'JetBrains Mono';font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--is);margin:14px 6px 8px;}
+.sidebar h4:first-child{margin-top:2px;}
+.nl{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:10px;color:var(--ink);text-decoration:none;font-size:0.88rem;font-weight:500;transition:background 0.15s;}
+.nl:hover{background:var(--ms);}
+.nl.active{background:linear-gradient(120deg,var(--ms),var(--ts));color:var(--d);font-weight:700;}
+.nl .nm{font-family:'JetBrains Mono';font-size:0.68rem;color:var(--t);min-width:20px;}
+.cs{display:none;}
+@media(max-width:880px){.layout{display:block;}.sidebar{position:fixed !important;inset:0 18% 0 0;z-index:60;transform:translateX(-105%);transition:transform 0.3s ease;overflow-y:auto;top:0;height:100vh;max-height:100vh;}.sidebar.open{transform:translateX(0);}.ov{display:none;position:fixed;inset:0;background:rgba(10,5,40,0.4);z-index:55;}.ov.open{display:block;}.cs{display:block;margin-left:auto;background:none;border:1px solid var(--ln);border-radius:50%;width:34px;height:34px;font-size:1rem;color:var(--ink);cursor:pointer;}.brand span.bt{display:none;}.mb span.mt{display:none;}}
+.content{min-width:0;}
+.uc{background:var(--panel);border:1px solid var(--ln);border-radius:var(--r);margin-bottom:22px;overflow:hidden;scroll-margin-top:80px;box-shadow:0 6px 24px rgba(55,48,163,0.08);backdrop-filter:blur(10px);}
+.uh{padding:22px 24px 18px;background:linear-gradient(120deg,rgba(99,102,241,0.20),rgba(55,48,163,0.10));border-bottom:1px solid var(--ln);}
+.ut{font-family:'JetBrains Mono';font-size:0.7rem;color:var(--t);letter-spacing:0.08em;text-transform:uppercase;display:block;margin-bottom:6px;}
+.uh h2{margin:0;font-size:1.4rem;color:var(--d);}
+.ub{padding:20px 24px 26px;}
+.ub h3{font-size:1.05rem;color:var(--ink);margin:22px 0 8px;display:flex;align-items:center;gap:8px;}
+.ub h3::before{content:"";width:5px;height:18px;border-radius:3px;background:linear-gradient(180deg,var(--m),var(--t));}
+.ub h3:first-child{margin-top:2px;}
+.ub p,.ub ul,.ub ol{line-height:1.75;color:var(--ink);margin:6px 0 12px;font-size:0.97rem;}
+.ub ul,.ub ol{padding-left:22px;}
+.ub li{margin-bottom:6px;font-size:0.95rem;}
+.ub strong{color:var(--d);}
+.nb{background:var(--ms);border-left:3px solid var(--m);border-radius:10px;padding:12px 16px;margin:14px 0;font-size:0.9rem;}
+.nb b{color:var(--d);}
+.ib{background:var(--ts);border-left:3px solid var(--t);border-radius:10px;padding:12px 16px;margin:14px 0;font-size:0.9rem;}
+.ib b{color:var(--t);}
+table{width:100%;border-collapse:collapse;margin:14px 0 18px;font-size:0.88rem;border-radius:10px;overflow:hidden;}
+th{background:linear-gradient(120deg,var(--m),var(--d));color:var(--l);text-align:left;padding:10px 12px;font-weight:600;}
+td{padding:9px 12px;border-bottom:1px solid var(--ln);background:var(--ps);}
+tr:last-child td{border-bottom:none;}
+tr:nth-child(even) td{background:var(--bg-soft);}
+code{font-family:'JetBrains Mono';background:var(--bg-soft);padding:2px 6px;border-radius:5px;font-size:0.85em;color:var(--d);}
+.qb{background:var(--bg-soft);border:1px dashed var(--s);border-radius:12px;padding:14px 16px;margin:16px 0;}
+.qb b{color:var(--t);display:block;margin-bottom:6px;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em;}
+#tt{position:fixed;bottom:22px;right:22px;z-index:40;width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--m),var(--t));color:var(--l);border:none;font-size:1.2rem;cursor:pointer;box-shadow:0 8px 20px rgba(55,48,163,0.3);display:none;align-items:center;justify-content:center;}
+footer{text-align:center;padding:30px 20px 50px;color:var(--is);font-size:0.85rem;}
+footer a{color:var(--d);text-decoration:none;font-weight:600;}
+.hide{display:none !important;}
+[data-hi],[data-en]{display:none;}
+html[lang="hi"] [data-hi].i,html[lang="hi"] span[data-hi]{display:inline;}
+html[lang="hi"] [data-hi].b{display:block;}
+html[lang="hi"] [data-hi].f{display:flex;}
+html[lang="hi"] th[data-hi],html[lang="hi"] td[data-hi]{display:table-cell;}
+html[lang="en"] [data-en].i,html[lang="en"] span[data-en]{display:inline;}
+html[lang="en"] [data-en].b{display:block;}
+html[lang="en"] [data-en].f{display:flex;}
+html[lang="en"] th[data-en],html[lang="en"] td[data-en]{display:table-cell;}
+</style>
+</head>
+<body>
+<div class="tb">
+  <div class="brand"><span class="dot"></span><span class="bt">Windows Operating System</span></div>
+  <div class="ta">
+    <div class="lt" id="lt" data-lang="hi" onclick="sL(this.dataset.lang==='hi'?'en':'hi')"><div class="lp"></div><button type="button" id="bh">हिं</button><button type="button" id="be">EN</button></div>
+    <button class="mb" onclick="tS(event)">🪟 <span class="mt" data-hi="i">विषय सूची</span><span class="mt" data-en="i">Topics</span></button>
+  </div>
+</div>
+<div class="hero">
+  <span class="ey">● ITI · COPA · UP Board Pattern</span>
+  <h1><span data-hi="b" class="b">Windows Operating System<br><span class="grad">सम्पूर्ण नोट्स</span></span><span data-en="b" class="b">Windows Operating System<br><span class="grad">Complete Notes</span></span></h1>
+  <p data-hi="b" class="b">OS के परिचय से लेकर Shortcuts, Disk Tools, और Maintenance तक — हिंदी और इंग्लिश, परीक्षा के हिसाब से।</p>
+  <p data-en="b" class="b">From OS basics to Shortcuts, Disk Tools, and Maintenance — Hindi & English, exam-ready.</p>
+  <div class="hs"><div class="sc"><b>12</b><span data-hi="i">Units</span><span data-en="i">Units</span></div><div class="sc"><b>80+</b><span data-hi="i">Topics</span><span data-en="i">Topics</span></div><div class="sc"><b>2</b><span data-hi="i">भाषाएं</span><span data-en="i">Languages</span></div></div>
+</div>
+<div class="tw"><div class="sw"><input type="text" id="si" placeholder="खोजें..." oninput="lS()"></div></div>
+<div class="ov" id="ov" onclick="tS(event)"></div>
+<div class="layout">
+  <aside class="sidebar" id="sb">
+    <button class="cs" onclick="tS(event)">✕</button>
+    <h4 data-hi="b" class="b">OS बेसिक्स</h4><h4 data-en="b" class="b">OS Basics</h4>
+    <a class="nl" href="#u1"><span class="nm">01</span><span data-hi="i">OS का परिचय & Functions</span><span data-en="i">OS Intro & Functions</span></a>
+    <a class="nl" href="#u2"><span class="nm">02</span><span data-hi="i">Types of OS & GUI vs CLI</span><span data-en="i">Types of OS & GUI vs CLI</span></a>
+    <a class="nl" href="#u3"><span class="nm">03</span><span data-hi="i">Windows Intro & Versions</span><span data-en="i">Windows Intro & Versions</span></a>
+    <h4 data-hi="b" class="b">Windows इंटरफेस</h4><h4 data-en="b" class="b">Windows Interface</h4>
+    <a class="nl" href="#u4"><span class="nm">04</span><span data-hi="i">Desktop & Taskbar</span><span data-en="i">Desktop & Taskbar</span></a>
+    <a class="nl" href="#u5"><span class="nm">05</span><span data-hi="i">Window Parts & Dialog Box</span><span data-en="i">Window Parts & Dialog Box</span></a>
+    <a class="nl" href="#u6"><span class="nm">06</span><span data-hi="i">File & Folder Management</span><span data-en="i">File & Folder Management</span></a>
+    <a class="nl" href="#u7"><span class="nm">07</span><span data-hi="i">Control Panel & Settings</span><span data-en="i">Control Panel & Settings</span></a>
+    <h4 data-hi="b" class="b">टूल्स & शॉर्टकट्स</h4><h4 data-en="b" class="b">Tools & Shortcuts</h4>
+    <a class="nl" href="#u8"><span class="nm">08</span><span data-hi="i">Windows Accessories</span><span data-en="i">Windows Accessories</span></a>
+    <a class="nl" href="#u9"><span class="nm">09</span><span data-hi="i">Keyboard Shortcuts</span><span data-en="i">Keyboard Shortcuts</span></a>
+    <a class="nl" href="#u10"><span class="nm">10</span><span data-hi="i">Task Manager & Run Commands</span><span data-en="i">Task Manager & Run Commands</span></a>
+    <a class="nl" href="#u11"><span class="nm">11</span><span data-hi="i">Disk Tools & Maintenance</span><span data-en="i">Disk Tools & Maintenance</span></a>
+    <h4 data-hi="b" class="b">रिवीज़न</h4><h4 data-en="b" class="b">Revision</h4>
+    <a class="nl" href="#u12"><span class="nm">12</span><span data-hi="i">Important Q&A</span><span data-en="i">Important Q&A</span></a>
+  </aside>
+  <main class="content" id="cn">
+
+<section class="uc" id="u1"><div class="uh"><span class="ut"><span data-hi="i">Unit 01 · OS बेसिक्स</span><span data-en="i">Unit 01 · OS Basics</span></span><h2><span data-hi="i">OS का परिचय & Functions</span><span data-en="i">OS Introduction & Functions</span></h2></div>
+<div class="ub">
+<h3 data-hi="f" class="f">Operating System क्या है?</h3><h3 data-en="f" class="f">What is an Operating System?</h3>
+<p data-hi="b" class="b"><strong>Operating System (OS)</strong> एक System Software है जो computer hardware और user के बीच interface का काम करता है — hardware resources को manage करता है और application software को platform देता है।</p>
+<p data-en="b" class="b">An <strong>Operating System (OS)</strong> is System Software that acts as an interface between computer hardware and the user — it manages hardware resources and provides a platform for application software.</p>
+<h3 data-hi="f" class="f">Functions of OS</h3><h3 data-en="f" class="f">Functions of OS</h3>
+<table><tr><th>Function</th><th data-hi="i">काम</th><th data-en="i">Description</th></tr>
+<tr><td>Process Management</td><td><span data-hi="i">Running programs को manage करना, CPU time allocate करना</span><span data-en="i">Managing running programs, allocating CPU time</span></td></tr>
+<tr><td>Memory Management</td><td><span data-hi="i">RAM को programs में allocate और free करना</span><span data-en="i">Allocating and freeing RAM for programs</span></td></tr>
+<tr><td>File Management</td><td><span data-hi="i">Files/folders को create, read, write, delete करना</span><span data-en="i">Creating, reading, writing, deleting files/folders</span></td></tr>
+<tr><td>Device Management</td><td><span data-hi="i">Printer, keyboard, mouse जैसे devices को drivers के through manage करना</span><span data-en="i">Managing devices like printer, keyboard, mouse via drivers</span></td></tr>
+<tr><td>Security & Access Control</td><td><span data-hi="i">Unauthorized access से system को protect करना</span><span data-en="i">Protecting the system from unauthorized access</span></td></tr>
+<tr><td>User Interface</td><td><span data-hi="i">User को system से interact करने का तरीका देना (GUI/CLI)</span><span data-en="i">Providing a way for users to interact with the system (GUI/CLI)</span></td></tr>
+<tr><td>Error Detection</td><td><span data-hi="i">Errors detect करके user को notify करना</span><span data-en="i">Detecting errors and notifying the user</span></td></tr></table>
+<div class="nb"><span data-hi="i"><b>याद रखें:</b> OS के बिना computer hardware useless है। OS = "Soul of Computer"।</span><span data-en="i"><b>Remember:</b> without an OS, computer hardware is useless. OS = "Soul of Computer".</span></div>
+<div class="qb"><b data-hi="b" class="b">संभावित परीक्षा प्रश्न</b><b data-en="b" class="b">Likely Exam Questions</b><span data-hi="i">Operating System किसे कहते हैं? इसके functions लिखिए। OS को "Interface" क्यों कहते हैं?</span><span data-en="i">What is an Operating System? Write its functions. Why is an OS called an "Interface"?</span></div>
+</div></section>
+
+<section class="uc" id="u2"><div class="uh"><span class="ut"><span data-hi="i">Unit 02 · OS बेसिक्स</span><span data-en="i">Unit 02 · OS Basics</span></span><h2><span data-hi="i">Types of OS & GUI vs CLI</span><span data-en="i">Types of OS & GUI vs CLI</span></h2></div>
+<div class="ub">
+<h3 data-hi="f" class="f">OS के Types</h3><h3 data-en="f" class="f">Types of OS</h3>
+<table><tr><th>Type</th><th data-hi="i">मतलब</th><th data-en="i">Meaning</th></tr>
+<tr><td>Single User Single Tasking</td><td><span data-hi="i">एक user, एक समय एक task। जैसे MS-DOS</span><span data-en="i">One user, one task at a time. E.g. MS-DOS</span></td></tr>
+<tr><td>Single User Multitasking</td><td><span data-hi="i">एक user, एक साथ कई tasks। जैसे Windows</span><span data-en="i">One user, multiple tasks simultaneously. E.g. Windows</span></td></tr>
+<tr><td>Multi-User OS</td><td><span data-hi="i">कई users एक साथ। जैसे Linux servers, Unix</span><span data-en="i">Multiple users simultaneously. E.g. Linux servers, Unix</span></td></tr>
+<tr><td>Batch OS</td><td><span data-hi="i">Jobs को batch में collect करके process करता है</span><span data-en="i">Collects jobs in batches and processes them</span></td></tr>
+<tr><td>Real-Time OS (RTOS)</td><td><span data-hi="i">Fixed time में tasks complete। जैसे medical devices, missiles</span><span data-en="i">Completes tasks in fixed time. E.g. medical devices, missiles</span></td></tr>
+<tr><td>Distributed OS</td><td><span data-hi="i">कई computers पर run, एक ही system जैसा दिखता है</span><span data-en="i">Runs on multiple computers, appears as one system</span></td></tr>
+<tr><td>Network OS</td><td><span data-hi="i">Network resources और users manage करता है</span><span data-en="i">Manages network resources and users</span></td></tr></table>
+<h3 data-hi="f" class="f">GUI vs CLI</h3><h3 data-en="f" class="f">GUI vs CLI</h3>
+<table><tr><th>GUI (Graphical User Interface)</th><th>CLI (Command Line Interface)</th></tr>
+<tr><td><span data-hi="i">Icons, windows, menus — mouse से interact। जैसे Windows</span><span data-en="i">Icons, windows, menus — mouse interaction. E.g. Windows</span></td><td><span data-hi="i">Text commands type करने पड़ते हैं। जैसे MS-DOS, Linux terminal</span><span data-en="i">Must type text commands. E.g. MS-DOS, Linux terminal</span></td></tr>
+<tr><td><span data-hi="i">Easy to use, beginners के लिए best</span><span data-en="i">Easy to use, best for beginners</span></td><td><span data-hi="i">Fast, powerful, advanced users के लिए</span><span data-en="i">Fast, powerful, best for advanced users</span></td></tr></table>
+<div class="qb"><b data-hi="b" class="b">संभावित परीक्षा प्रश्न</b><b data-en="b" class="b">Likely Exam Questions</b><span data-hi="i">OS के types उदाहरण सहित लिखिए। GUI और CLI में अंतर बताइए। RTOS किसे कहते हैं?</span><span data-en="i">Write the types of OS with examples. Differentiate GUI and CLI. What is RTOS?</span></div>
+</div></section>
+
+<section class="uc" id="u3"><div class="uh"><span class="ut"><span data-hi="i">Unit 03 · OS बेसिक्स</span><span data-en="i">Unit 03 · OS Basics</span></span><h2><span data-hi="i">Windows परिचय & Versions</span><span data-en="i">Windows Introduction & Versions</span></h2></div>
+<div class="ub">
+<p data-hi="b" class="b"><strong>Microsoft Windows</strong> Microsoft द्वारा develop किया गया GUI-based OS है — दुनिया में सबसे ज़्यादा use होने वाला desktop OS।</p>
+<p data-en="b" class="b"><strong>Microsoft Windows</strong> is a GUI-based OS developed by Microsoft — the world's most widely used desktop OS.</p>
+<h3 data-hi="f" class="f">Windows Versions</h3><h3 data-en="f" class="f">Windows Versions</h3>
+<table><tr><th>Version</th><th>Year</th><th data-hi="i">विशेषता</th><th data-en="i">Feature</th></tr>
+<tr><td>Windows 1.0</td><td>1985</td><td colspan="2"><span data-hi="i">पहला GUI version</span><span data-en="i">First GUI version</span></td></tr>
+<tr><td>Windows 95</td><td>1995</td><td colspan="2"><span data-hi="i">Start button और Taskbar introduce किया</span><span data-en="i">Introduced Start button and Taskbar</span></td></tr>
+<tr><td>Windows 98</td><td>1998</td><td colspan="2"><span data-hi="i">Better Internet support</span><span data-en="i">Better Internet support</span></td></tr>
+<tr><td>Windows XP</td><td>2001</td><td colspan="2"><span data-hi="i">सबसे popular, stable — users का favorite</span><span data-en="i">Most popular and stable — users' favourite</span></td></tr>
+<tr><td>Windows Vista</td><td>2007</td><td colspan="2"><span data-hi="i">Aero glass UI, पर heavy और slow था</span><span data-en="i">Aero glass UI, but heavy and slow</span></td></tr>
+<tr><td>Windows 7</td><td>2009</td><td colspan="2"><span data-hi="i">Vista से improved, fast और stable</span><span data-en="i">Improved over Vista, fast and stable</span></td></tr>
+<tr><td>Windows 8/8.1</td><td>2012</td><td colspan="2"><span data-hi="i">Touch-friendly, Start menu हटाया — unpopular</span><span data-en="i">Touch-friendly, Start menu removed — unpopular</span></td></tr>
+<tr><td>Windows 10</td><td>2015</td><td colspan="2"><span data-hi="i">Start menu वापस आया, Cortana, Edge browser</span><span data-en="i">Start menu returned, Cortana, Edge browser</span></td></tr>
+<tr><td>Windows 11</td><td>2021</td><td colspan="2"><span data-hi="i">Centered Taskbar, Android app support, modern UI</span><span data-en="i">Centred Taskbar, Android app support, modern UI</span></td></tr></table>
+<div class="qb"><b data-hi="b" class="b">संभावित परीक्षा प्रश्न</b><b data-en="b" class="b">Likely Exam Questions</b><span data-hi="i">Windows OS किसे कहते हैं? Windows versions chronological order में लिखिए।</span><span data-en="i">What is Windows OS? Write the Windows versions in chronological order.</span></div>
+</div></section>
+
+<section class="uc" id="u4"><div class="uh"><span class="ut"><span data-hi="i">Unit 04 · Windows इंटरफेस</span><span data-en="i">Unit 04 · Windows Interface</span></span><h2><span data-hi="i">Desktop & Taskbar</span><span data-en="i">Desktop & Taskbar</span></h2></div>
+<div class="ub">
+<p data-hi="b" class="b"><strong>Desktop</strong> Windows का main screen है जो login के बाद दिखता है — workspace जहाँ files, folders, shortcuts रखे जाते हैं।</p>
+<p data-en="b" class="b">The <strong>Desktop</strong> is Windows' main screen shown after login — the workspace where files, folders, and shortcuts are kept.</p>
+<h3 data-hi="f" class="f">Desktop Components</h3><h3 data-en="f" class="f">Desktop Components</h3>
+<table><tr><th>Component</th><th data-hi="i">काम</th><th data-en="i">Purpose</th></tr>
+<tr><td>Icons</td><td><span data-hi="i">Files, folders, programs के visual representation — double-click से open</span><span data-en="i">Visual representation of files, folders, programs — open by double-clicking</span></td></tr>
+<tr><td>Wallpaper</td><td><span data-hi="i">Desktop का background image</span><span data-en="i">Background image of the desktop</span></td></tr>
+<tr><td>Taskbar</td><td><span data-hi="i">Bottom bar — Start button, running apps, system tray, clock</span><span data-en="i">Bottom bar — Start button, running apps, system tray, clock</span></td></tr>
+<tr><td>Start Button</td><td><span data-hi="i">All programs, settings, search का main entry point</span><span data-en="i">Main entry point for all programs, settings, search</span></td></tr>
+<tr><td>System Tray</td><td><span data-hi="i">Taskbar के right में — clock, volume, Wi-Fi, battery icons</span><span data-en="i">Right side of Taskbar — clock, volume, Wi-Fi, battery icons</span></td></tr>
+<tr><td>Recycle Bin</td><td><span data-hi="i">Deleted files temporary store होते हैं — restore या permanently delete कर सकते हैं</span><span data-en="i">Temporarily stores deleted files — can be restored or permanently deleted</span></td></tr>
+<tr><td>This PC (My Computer)</td><td><span data-hi="i">Drives (C:, D:), connected devices तक access</span><span data-en="i">Access to drives (C:, D:) and connected devices</span></td></tr></table>
+<div class="qb"><b data-hi="b" class="b">संभावित परीक्षा प्रश्न</b><b data-en="b" class="b">Likely Exam Questions</b><span data-hi="i">Desktop किसे कहते हैं? Desktop के components समझाइए। Recycle Bin का क्या काम है? Taskbar क्या है?</span><span data-en="i">What is the Desktop? Explain the components of the Desktop. What is the function of the Recycle Bin? What is the Taskbar?</span></div>
+</div></section>
+
+<section class="uc" id="u5"><div class="uh"><span class="ut"><span data-hi="i">Unit 05 · Windows इंटरफेस</span><span data-en="i">Unit 05 · Windows Interface</span></span><h2><span data-hi="i">Window Parts & Dialog Box</span><span data-en="i">Window Parts & Dialog Box</span></h2></div>
+<div class="ub">
+<h3 data-hi="f" class="f">एक Window के Parts</h3><h3 data-en="f" class="f">Parts of a Window</h3>
+<table><tr><th>Part</th><th data-hi="i">काम</th><th data-en="i">Purpose</th></tr>
+<tr><td>Title Bar</td><td><span data-hi="i">Window का नाम दिखाता है — drag करके move होती है</span><span data-en="i">Shows window name — drag to move</span></td></tr>
+<tr><td>Menu Bar</td><td><span data-hi="i">File, Edit, View जैसे menus</span><span data-en="i">Menus like File, Edit, View</span></td></tr>
+<tr><td>Toolbar</td><td><span data-hi="i">Common tasks के quick buttons</span><span data-en="i">Quick buttons for common tasks</span></td></tr>
+<tr><td>Scroll Bar</td><td><span data-hi="i">Vertical/Horizontal — content scroll करने के लिए</span><span data-en="i">Vertical/Horizontal — for scrolling content</span></td></tr>
+<tr><td>Status Bar</td><td><span data-hi="i">Bottom में current status/info दिखाता है</span><span data-en="i">Shows current status/info at the bottom</span></td></tr>
+<tr><td>Minimize (−)</td><td><span data-hi="i">Window को Taskbar में hide करता है</span><span data-en="i">Hides the window to the Taskbar</span></td></tr>
+<tr><td>Maximize (□)</td><td><span data-hi="i">Window को fullscreen करता है</span><span data-en="i">Makes the window full screen</span></td></tr>
+<tr><td>Restore Down</td><td><span data-hi="i">Maximized window को previous size में लाता है</span><span data-en="i">Returns maximized window to its previous size</span></td></tr>
+<tr><td>Close (✕)</td><td><span data-hi="i">Window बंद करता है</span><span data-en="i">Closes the window</span></td></tr></table>
+<h3 data-hi="f" class="f">Dialog Box</h3><h3 data-en="f" class="f">Dialog Box</h3>
+<p data-hi="b" class="b"><strong>Dialog Box</strong> एक छोटा box है जो OS/program user से additional information या confirmation लेने के लिए display करता है — जैसे Save As, Print, Open।</p>
+<p data-en="b" class="b">A <strong>Dialog Box</strong> is a small box displayed to get additional information or confirmation from the user — like Save As, Print, Open.</p>
+<div class="nb"><span data-hi="i"><b>याद रखें:</b> Alt+F4 = window close, Alt+Tab = applications switch, Win+D = Desktop show।</span><span data-en="i"><b>Remember:</b> Alt+F4 = close window, Alt+Tab = switch applications, Win+D = show Desktop.</span></div>
+<div class="qb"><b data-hi="b" class="b">संभावित परीक्षा प्रश्न</b><b data-en="b" class="b">Likely Exam Questions</b><span data-hi="i">Window के parts समझाइए। Dialog Box किसे कहते हैं? Minimize, Maximize, Restore Down में अंतर बताइए।</span><span data-en="i">Explain the parts of a Window. What is a Dialog Box? Differentiate Minimize, Maximize, Restore Down.</span></div>
+</div></section>
+
+<section class="uc" id="u6"><div class="uh"><span class="ut"><span data-hi="i">Unit 06 · Windows इंटरफेस</span><span data-en="i">Unit 06 · Windows Interface</span></span><h2><span data-hi="i">File & Folder Management</span><span data-en="i">File & Folder Management</span></h2></div>
+<div class="ub">
+<h3 data-hi="f" class="f">File vs Folder</h3><h3 data-en="f" class="f">File vs Folder</h3>
+<table><tr><th>File</th><th>Folder (Directory)</th></tr>
+<tr><td><span data-hi="i">Data का collection — .txt, .docx, .jpg, .mp3 जैसी extension होती है</span><span data-en="i">Collection of data — has an extension like .txt, .docx, .jpg, .mp3</span></td><td><span data-hi="i">Files और sub-folders को organize करने का container</span><span data-en="i">A container for organising files and sub-folders</span></td></tr></table>
+<h3 data-hi="f" class="f">Common File Extensions</h3><h3 data-en="f" class="f">Common File Extensions</h3>
+<table><tr><th>Extension</th><th data-hi="i">File Type</th><th data-en="i">File Type</th></tr>
+<tr><td>.txt</td><td colspan="2"><span data-hi="i">Plain text</span><span data-en="i">Plain text</span></td></tr>
+<tr><td>.docx/.doc</td><td colspan="2"><span data-hi="i">MS Word document</span><span data-en="i">MS Word document</span></td></tr>
+<tr><td>.xlsx/.xls</td><td colspan="2"><span data-hi="i">MS Excel spreadsheet</span><span data-en="i">MS Excel spreadsheet</span></td></tr>
+<tr><td>.pptx/.ppt</td><td colspan="2"><span data-hi="i">MS PowerPoint</span><span data-en="i">MS PowerPoint</span></td></tr>
+<tr><td>.pdf</td><td colspan="2"><span data-hi="i">Portable Document Format</span><span data-en="i">Portable Document Format</span></td></tr>
+<tr><td>.jpg/.png/.gif</td><td colspan="2"><span data-hi="i">Image files</span><span data-en="i">Image files</span></td></tr>
+<tr><td>.mp3/.wav</td><td colspan="2"><span data-hi="i">Audio files</span><span data-en="i">Audio files</span></td></tr>
+<tr><td>.mp4/.avi</td><td colspan="2"><span data-hi="i">Video files</span><span data-en="i">Video files</span></td></tr>
+<tr><td>.exe</td><td colspan="2"><span data-hi="i">Executable/program file</span><span data-en="i">Executable/program file</span></td></tr>
+<tr><td>.zip/.rar</td><td colspan="2"><span data-hi="i">Compressed archive</span><span data-en="i">Compressed archive</span></td></tr></table>
+<h3 data-hi="f" class="f">File Operations</h3><h3 data-en="f" class="f">File Operations</h3>
+<table><tr><th>Operation</th><th data-hi="i">Shortcut/Method</th><th data-en="i">Shortcut/Method</th></tr>
+<tr><td>Copy</td><td colspan="2">Ctrl+C → Ctrl+V</td></tr>
+<tr><td>Cut (Move)</td><td colspan="2">Ctrl+X → Ctrl+V</td></tr>
+<tr><td>Delete (Recycle Bin)</td><td colspan="2">Delete key</td></tr>
+<tr><td>Permanent Delete</td><td colspan="2">Shift + Delete</td></tr>
+<tr><td>Rename</td><td colspan="2">F2 या Right click → Rename</td></tr>
+<tr><td>Create New</td><td colspan="2">Right click → New → Folder/File</td></tr>
+<tr><td>Properties</td><td colspan="2">Right click → Properties</td></tr></table>
+<p data-hi="b" class="b"><strong>File Explorer</strong> (Win+E) — files और folders browse करने का main tool।</p>
+<p data-en="b" class="b"><strong>File Explorer</strong> (Win+E) — the main tool for browsing files and folders.</p>
+<div class="qb"><b data-hi="b" class="b">संभावित परीक्षा प्रश्न</b><b data-en="b" class="b">Likely Exam Questions</b><span data-hi="i">File और Folder में अंतर बताइए। कोई 5 file extensions लिखिए। Delete और Shift+Delete में क्या अंतर है?</span><span data-en="i">Differentiate File and Folder. Write any 5 file extensions. What is the difference between Delete and Shift+Delete?</span></div>
+</div></section>
+
+<section class="uc" id="u7"><div class="uh"><span class="ut"><span data-hi="i">Unit 07 · Windows इंटरफेस</span><span data-en="i">Unit 07 · Windows Interface</span></span><h2><span data-hi="i">Control Panel & Settings</span><span data-en="i">Control Panel & Settings</span></h2></div>
+<div class="ub">
+<p data-hi="b" class="b"><strong>Control Panel</strong> Windows का central hub है जहाँ से सभी system settings configure की जाती हैं।</p>
+<p data-en="b" class="b"><strong>Control Panel</strong> is Windows' central hub for configuring all system settings.</p>
+<h3 data-hi="f" class="f">Important Control Panel Options</h3><h3 data-en="f" class="f">Important Control Panel Options</h3>
+<table><tr><th>Option</th><th data-hi="i">काम</th><th data-en="i">Purpose</th></tr>
+<tr><td>Display / Personalization</td><td><span data-hi="i">Screen resolution, wallpaper, theme, brightness change</span><span data-en="i">Change screen resolution, wallpaper, theme, brightness</span></td></tr>
+<tr><td>User Accounts</td><td><span data-hi="i">Users add/remove/modify, password change</span><span data-en="i">Add/remove/modify users, change password</span></td></tr>
+<tr><td>Date and Time</td><td><span data-hi="i">System date, time, time zone set करना</span><span data-en="i">Set system date, time, time zone</span></td></tr>
+<tr><td>Programs & Features</td><td><span data-hi="i">Installed software view, modify, uninstall</span><span data-en="i">View, modify, or uninstall installed software</span></td></tr>
+<tr><td>Network & Internet</td><td><span data-hi="i">Network, Wi-Fi, VPN manage करना</span><span data-en="i">Manage network, Wi-Fi, VPN</span></td></tr>
+<tr><td>Devices & Printers</td><td><span data-hi="i">Printer, scanner, keyboard, mouse add/configure</span><span data-en="i">Add/configure printer, scanner, keyboard, mouse</span></td></tr>
+<tr><td>Sound</td><td><span data-hi="i">Volume, audio devices, sounds set</span><span data-en="i">Set volume, audio devices, notification sounds</span></td></tr>
+<tr><td>System</td><td><span data-hi="i">Computer name, RAM, OS version, performance</span><span data-en="i">Computer name, RAM, OS version, performance</span></td></tr>
+<tr><td>Windows Defender</td><td><span data-hi="i">Antivirus, Firewall settings</span><span data-en="i">Antivirus, Firewall settings</span></td></tr></table>
+<div class="nb"><span data-hi="i"><b>याद रखें:</b> Windows 10/11 में Settings app (Win+I) ने Control Panel को mostly replace किया है — दोनों से settings change होती हैं।</span><span data-en="i"><b>Remember:</b> in Windows 10/11, the Settings app (Win+I) has mostly replaced Control Panel — settings can be changed from both.</span></div>
+<div class="qb"><b data-hi="b" class="b">संभावित परीक्षा प्रश्न</b><b data-en="b" class="b">Likely Exam Questions</b><span data-hi="i">Control Panel किसे कहते हैं? इसके कोई 5 options और उनके उपयोग लिखिए।</span><span data-en="i">What is Control Panel? Write any 5 of its options with their uses.</span></div>
+</div></section>
+
+<section class="uc" id="u8"><div class="uh"><span class="ut"><span data-hi="i">Unit 08 · टूल्स & शॉर्टकट्स</span><span data-en="i">Unit 08 · Tools & Shortcuts</span></span><h2><span data-hi="i">Windows Accessories</span><span data-en="i">Windows Accessories</span></h2></div>
+<div class="ub">
+<p data-hi="b" class="b"><strong>Windows Accessories</strong> Windows के साथ built-in small utility programs हैं — install की ज़रूरत नहीं।</p>
+<p data-en="b" class="b"><strong>Windows Accessories</strong> are small utility programs built into Windows — no installation needed.</p>
+<table><tr><th>Accessory</th><th data-hi="i">काम</th><th data-en="i">Purpose</th></tr>
+<tr><td>Notepad</td><td><span data-hi="i">Plain text (.txt) notes के लिए simple text editor</span><span data-en="i">Simple text editor for plain text (.txt) notes</span></td></tr>
+<tr><td>WordPad</td><td><span data-hi="i">Basic word processor — formatting support, Notepad से advanced</span><span data-en="i">Basic word processor — formatting support, more advanced than Notepad</span></td></tr>
+<tr><td>Paint</td><td><span data-hi="i">Basic image editor — shapes, colours, pencil tool</span><span data-en="i">Basic image editor — shapes, colours, pencil tool</span></td></tr>
+<tr><td>Calculator</td><td><span data-hi="i">Standard, Scientific, Programmer modes में calculations</span><span data-en="i">Calculations in Standard, Scientific, Programmer modes</span></td></tr>
+<tr><td>Snipping Tool</td><td><span data-hi="i">Screen का screenshot लेने के लिए (Win+Shift+S)</span><span data-en="i">For taking screenshots (Win+Shift+S)</span></td></tr>
+<tr><td>Character Map</td><td><span data-hi="i">Special characters और symbols ढूँढना और copy करना</span><span data-en="i">Finding and copying special characters and symbols</span></td></tr>
+<tr><td>Sticky Notes</td><td><span data-hi="i">Desktop पर virtual sticky notes</span><span data-en="i">Virtual sticky notes on the desktop</span></td></tr></table>
+<h3 data-hi="f" class="f">Notepad vs WordPad</h3><h3 data-en="f" class="f">Notepad vs WordPad</h3>
+<table><tr><th>Notepad</th><th>WordPad</th></tr>
+<tr><td><span data-hi="i">Plain text only, no formatting, .txt save करता है</span><span data-en="i">Plain text only, no formatting, saves as .txt</span></td><td><span data-hi="i">Bold, italic, font, color — basic formatting, .rtf/.docx save करता है</span><span data-en="i">Bold, italic, font, colour — basic formatting, saves as .rtf/.docx</span></td></tr></table>
+<div class="qb"><b data-hi="b" class="b">संभावित परीक्षा प्रश्न</b><b data-en="b" class="b">Likely Exam Questions</b><span data-hi="i">Windows Accessories क्या हैं? Notepad और WordPad में अंतर बताइए। कोई 5 accessories उनके उपयोग सहित लिखिए।</span><span data-en="i">What are Windows Accessories? Differentiate Notepad and WordPad. Write any 5 accessories with their uses.</span></div>
+</div></section>
+
+<section class="uc" id="u9"><div class="uh"><span class="ut"><span data-hi="i">Unit 09 · टूल्स & शॉर्टकट्स</span><span data-en="i">Unit 09 · Tools & Shortcuts</span></span><h2><span data-hi="i">Keyboard Shortcuts</span><span data-en="i">Keyboard Shortcuts</span></h2></div>
+<div class="ub">
+<h3 data-hi="f" class="f">Basic Shortcuts</h3><h3 data-en="f" class="f">Basic Shortcuts</h3>
+<table><tr><th>Shortcut</th><th data-hi="i">काम</th><th data-en="i">Purpose</th></tr>
+<tr><td>Ctrl+C</td><td colspan="2"><span data-hi="i">Copy</span><span data-en="i">Copy</span></td></tr>
+<tr><td>Ctrl+X</td><td colspan="2"><span data-hi="i">Cut</span><span data-en="i">Cut</span></td></tr>
+<tr><td>Ctrl+V</td><td colspan="2"><span data-hi="i">Paste</span><span data-en="i">Paste</span></td></tr>
+<tr><td>Ctrl+Z</td><td colspan="2"><span data-hi="i">Undo</span><span data-en="i">Undo</span></td></tr>
+<tr><td>Ctrl+Y</td><td colspan="2"><span data-hi="i">Redo</span><span data-en="i">Redo</span></td></tr>
+<tr><td>Ctrl+A</td><td colspan="2"><span data-hi="i">Select All</span><span data-en="i">Select All</span></td></tr>
+<tr><td>Ctrl+S</td><td colspan="2"><span data-hi="i">Save</span><span data-en="i">Save</span></td></tr>
+<tr><td>Ctrl+P</td><td colspan="2"><span data-hi="i">Print</span><span data-en="i">Print</span></td></tr>
+<tr><td>Ctrl+F</td><td colspan="2"><span data-hi="i">Find</span><span data-en="i">Find</span></td></tr>
+<tr><td>Ctrl+N</td><td colspan="2"><span data-hi="i">New file/window</span><span data-en="i">New file/window</span></td></tr>
+<tr><td>Ctrl+O</td><td colspan="2"><span data-hi="i">Open file</span><span data-en="i">Open file</span></td></tr></table>
+<h3 data-hi="f" class="f">Windows Key Shortcuts</h3><h3 data-en="f" class="f">Windows Key Shortcuts</h3>
+<table><tr><th>Shortcut</th><th data-hi="i">काम</th><th data-en="i">Purpose</th></tr>
+<tr><td>Win</td><td colspan="2"><span data-hi="i">Start Menu open/close</span><span data-en="i">Open/close Start Menu</span></td></tr>
+<tr><td>Win+D</td><td colspan="2"><span data-hi="i">Desktop show (all windows minimize)</span><span data-en="i">Show Desktop (minimise all windows)</span></td></tr>
+<tr><td>Win+E</td><td colspan="2"><span data-hi="i">File Explorer open</span><span data-en="i">Open File Explorer</span></td></tr>
+<tr><td>Win+R</td><td colspan="2"><span data-hi="i">Run dialog open</span><span data-en="i">Open Run dialog</span></td></tr>
+<tr><td>Win+L</td><td colspan="2"><span data-hi="i">Computer lock</span><span data-en="i">Lock the computer</span></td></tr>
+<tr><td>Win+I</td><td colspan="2"><span data-hi="i">Settings app open</span><span data-en="i">Open Settings app</span></td></tr>
+<tr><td>Win+S</td><td colspan="2"><span data-hi="i">Search open</span><span data-en="i">Open Search</span></td></tr></table>
+<h3 data-hi="f" class="f">Other Important Shortcuts</h3><h3 data-en="f" class="f">Other Important Shortcuts</h3>
+<table><tr><th>Shortcut</th><th data-hi="i">काम</th><th data-en="i">Purpose</th></tr>
+<tr><td>F1</td><td colspan="2"><span data-hi="i">Help</span><span data-en="i">Help</span></td></tr>
+<tr><td>F2</td><td colspan="2"><span data-hi="i">Rename</span><span data-en="i">Rename</span></td></tr>
+<tr><td>F5</td><td colspan="2"><span data-hi="i">Refresh</span><span data-en="i">Refresh</span></td></tr>
+<tr><td>Alt+Tab</td><td colspan="2"><span data-hi="i">Running apps switch</span><span data-en="i">Switch between running apps</span></td></tr>
+<tr><td>Alt+F4</td><td colspan="2"><span data-hi="i">Current window close</span><span data-en="i">Close current window</span></td></tr>
+<tr><td>Delete</td><td colspan="2"><span data-hi="i">Recycle Bin में भेजना</span><span data-en="i">Send to Recycle Bin</span></td></tr>
+<tr><td>Shift+Delete</td><td colspan="2"><span data-hi="i">Permanently delete</span><span data-en="i">Permanently delete</span></td></tr>
+<tr><td>Ctrl+Alt+Del</td><td colspan="2"><span data-hi="i">Security screen (Task Manager, Lock, Sign out)</span><span data-en="i">Security screen (Task Manager, Lock, Sign out)</span></td></tr>
+<tr><td>Ctrl+Shift+Esc</td><td colspan="2"><span data-hi="i">Task Manager directly open</span><span data-en="i">Directly open Task Manager</span></td></tr>
+<tr><td>PrtSc</td><td colspan="2"><span data-hi="i">Full screen screenshot (clipboard में)</span><span data-en="i">Full screen screenshot (to clipboard)</span></td></tr></table>
+<div class="ib"><span data-hi="i"><b>Exam Tip:</b> Ctrl+C/X/V/Z/A/S/P — ये 7 shortcuts exam में सबसे ज़्यादा पूछे जाते हैं, ज़रूर याद करें।</span><span data-en="i"><b>Exam Tip:</b> Ctrl+C/X/V/Z/A/S/P — these 7 shortcuts are asked most often in exams, definitely memorise them.</span></div>
+<div class="qb"><b data-hi="b" class="b">संभावित परीक्षा प्रश्न</b><b data-en="b" class="b">Likely Exam Questions</b><span data-hi="i">कोई 10 keyboard shortcuts और उनके उपयोग लिखिए। Ctrl+C और Ctrl+X में क्या अंतर है? Delete और Shift+Delete में क्या अंतर है?</span><span data-en="i">Write any 10 keyboard shortcuts with their uses. Difference between Ctrl+C and Ctrl+X? Difference between Delete and Shift+Delete?</span></div>
+</div></section>
+
+<section class="uc" id="u10"><div class="uh"><span class="ut"><span data-hi="i">Unit 10 · टूल्स & शॉर्टकट्स</span><span data-en="i">Unit 10 · Tools & Shortcuts</span></span><h2><span data-hi="i">Task Manager & Run Commands</span><span data-en="i">Task Manager & Run Commands</span></h2></div>
+<div class="ub">
+<p data-hi="b" class="b"><strong>Task Manager</strong> एक built-in tool है जो running processes, performance, और system resources monitor करता है — <code>Ctrl+Shift+Esc</code> या <code>Ctrl+Alt+Del</code> से खुलता है।</p>
+<p data-en="b" class="b"><strong>Task Manager</strong> is a built-in tool that monitors running processes, performance, and system resources — opened via <code>Ctrl+Shift+Esc</code> or <code>Ctrl+Alt+Del</code>.</p>
+<h3 data-hi="f" class="f">Task Manager Tabs</h3><h3 data-en="f" class="f">Task Manager Tabs</h3>
+<table><tr><th>Tab</th><th data-hi="i">काम</th><th data-en="i">Purpose</th></tr>
+<tr><td>Processes</td><td><span data-hi="i">All running programs list — CPU/Memory usage, hung apps end कर सकते हैं</span><span data-en="i">Lists all running programs — CPU/Memory usage; can end hung apps</span></td></tr>
+<tr><td>Performance</td><td><span data-hi="i">CPU, RAM, Disk, Network real-time graphs</span><span data-en="i">CPU, RAM, Disk, Network real-time graphs</span></td></tr>
+<tr><td>Startup</td><td><span data-hi="i">Windows start होने पर auto-start programs manage करना</span><span data-en="i">Manage programs that auto-start when Windows starts</span></td></tr>
+<tr><td>Users</td><td><span data-hi="i">Logged-in users और उनका resource usage</span><span data-en="i">Logged-in users and their resource usage</span></td></tr></table>
+<p data-hi="b" class="b">Hung program बंद करना: Task Manager → program select → <strong>End Task</strong></p>
+<p data-en="b" class="b">To close a hung program: Task Manager → select program → <strong>End Task</strong></p>
+<h3 data-hi="f" class="f">Run Commands (Win+R)</h3><h3 data-en="f" class="f">Run Commands (Win+R)</h3>
+<table><tr><th>Command</th><th data-hi="i">क्या खुलता है</th><th data-en="i">What opens</th></tr>
+<tr><td>notepad</td><td colspan="2">Notepad</td></tr>
+<tr><td>calc</td><td colspan="2">Calculator</td></tr>
+<tr><td>mspaint</td><td colspan="2">Paint</td></tr>
+<tr><td>control</td><td colspan="2">Control Panel</td></tr>
+<tr><td>taskmgr</td><td colspan="2">Task Manager</td></tr>
+<tr><td>cmd</td><td colspan="2">Command Prompt</td></tr>
+<tr><td>msconfig</td><td colspan="2"><span data-hi="i">System Configuration</span><span data-en="i">System Configuration</span></td></tr>
+<tr><td>diskmgmt.msc</td><td colspan="2"><span data-hi="i">Disk Management</span><span data-en="i">Disk Management</span></td></tr></table>
+<div class="qb"><b data-hi="b" class="b">संभावित परीक्षा प्रश्न</b><b data-en="b" class="b">Likely Exam Questions</b><span data-hi="i">Task Manager किसे कहते हैं? Hung program कैसे close करें? Run command के कोई 5 examples लिखिए।</span><span data-en="i">What is Task Manager? How to close a hung program? Write any 5 Run command examples.</span></div>
+</div></section>
+
+<section class="uc" id="u11"><div class="uh"><span class="ut"><span data-hi="i">Unit 11 · टूल्स & शॉर्टकट्स</span><span data-en="i">Unit 11 · Tools & Shortcuts</span></span><h2><span data-hi="i">Disk Tools & Windows Maintenance</span><span data-en="i">Disk Tools & Windows Maintenance</span></h2></div>
+<div class="ub">
+<h3 data-hi="f" class="f">Disk Cleanup</h3><h3 data-en="f" class="f">Disk Cleanup</h3>
+<p data-hi="b" class="b"><strong>Disk Cleanup</strong> hard disk से unnecessary files (temp files, recycle bin, cached files) delete करके disk space free करता है।</p>
+<p data-en="b" class="b"><strong>Disk Cleanup</strong> frees up disk space by deleting unnecessary files (temp files, recycle bin, cached files) from the hard disk.</p>
+<p data-hi="b" class="b">Access: This PC → Drive Right Click → Properties → Disk Cleanup</p>
+<p data-en="b" class="b">Access: This PC → Right Click Drive → Properties → Disk Cleanup</p>
+
+<h3 data-hi="f" class="f">Disk Defragmenter</h3><h3 data-en="f" class="f">Disk Defragmenter</h3>
+<p data-hi="b" class="b"><strong>Disk Defragmenter (Defrag)</strong> HDD पर scattered file fragments को reorganize करता है ताकि data access faster हो। SSD के लिए use नहीं करना चाहिए।</p>
+<p data-en="b" class="b"><strong>Disk Defragmenter (Defrag)</strong> reorganises scattered file fragments on an HDD so data access becomes faster. Should not be used for SSDs.</p>
+
+<h3 data-hi="f" class="f">System Restore</h3><h3 data-en="f" class="f">System Restore</h3>
+<p data-hi="b" class="b"><strong>System Restore</strong> computer को पहले की एक stable state (Restore Point) पर वापस ले जाता है — software problem या virus के बाद useful।</p>
+<p data-en="b" class="b"><strong>System Restore</strong> takes the computer back to an earlier stable state (Restore Point) — useful after a software problem or virus.</p>
+
+<h3 data-hi="f" class="f">Windows Update</h3><h3 data-en="f" class="f">Windows Update</h3>
+<p data-hi="b" class="b"><strong>Windows Update</strong> OS को latest security patches, bug fixes, और new features से update करता है — system secure रखने के लिए ज़रूरी है।</p>
+<p data-en="b" class="b"><strong>Windows Update</strong> updates the OS with the latest security patches, bug fixes, and new features — essential for keeping the system secure.</p>
+
+<h3 data-hi="f" class="f">Recycle Bin Management</h3><h3 data-en="f" class="f">Recycle Bin Management</h3>
+<table><tr><th>Action</th><th data-hi="i">कैसे करें</th><th data-en="i">How to Do</th></tr>
+<tr><td>Restore File</td><td><span data-hi="i">Recycle Bin → file select → Restore</span><span data-en="i">Recycle Bin → select file → Restore</span></td></tr>
+<tr><td>Empty Recycle Bin</td><td><span data-hi="i">Recycle Bin icon Right click → Empty Recycle Bin</span><span data-en="i">Right click Recycle Bin icon → Empty Recycle Bin</span></td></tr></table>
+
+<div class="nb"><span data-hi="i"><b>याद रखें:</b> Disk Cleanup = space free करना, Defragmenter = speed improve करना, System Restore = previous state में वापस जाना — तीनों अलग tools हैं।</span><span data-en="i"><b>Remember:</b> Disk Cleanup = free up space, Defragmenter = improve speed, System Restore = go back to a previous state — all three are different tools.</span></div>
+<div class="qb"><b data-hi="b" class="b">संभावित परीक्षा प्रश्न</b><b data-en="b" class="b">Likely Exam Questions</b><span data-hi="i">Disk Cleanup और Disk Defragmenter में अंतर बताइए। System Restore क्या है? Windows Update क्यों ज़रूरी है?</span><span data-en="i">Differentiate Disk Cleanup and Disk Defragmenter. What is System Restore? Why is Windows Update important?</span></div>
+</div></section>
+
+<section class="uc" id="u12"><div class="uh"><span class="ut"><span data-hi="i">Unit 12 · रिवीज़न</span><span data-en="i">Unit 12 · Revision</span></span><h2><span data-hi="i">Important Q&A — फटाफट रिवीज़न</span><span data-en="i">Important Q&A — Quick Revision</span></h2></div>
+<div class="ub">
+<h3 data-hi="f" class="f">1-line Definitions</h3><h3 data-en="f" class="f">1-line Definitions</h3>
+<ul data-hi="b" class="b">
+<li><strong>OS</strong> — Hardware और user के बीच interface का काम करने वाला system software</li>
+<li><strong>GUI</strong> — Icons, windows और mouse से interact करने वाला graphical interface</li>
+<li><strong>Desktop</strong> — Login के बाद दिखने वाला Windows का main working screen</li>
+<li><strong>Taskbar</strong> — Desktop के bottom की bar जिसमें Start button और running apps हैं</li>
+<li><strong>Recycle Bin</strong> — Delete किए गए files का temporary storage</li>
+<li><strong>Control Panel</strong> — System settings configure करने का central hub</li>
+<li><strong>Task Manager</strong> — Running processes और resources monitor करने वाला tool</li>
+<li><strong>Disk Cleanup</strong> — Unnecessary files delete करके disk space free करना</li>
+<li><strong>System Restore</strong> — Computer को पहले की stable state पर वापस ले जाना</li>
+<li><strong>File Explorer</strong> — Files और folders browse करने का main tool</li>
+</ul>
+<ul data-en="b" class="b">
+<li><strong>OS</strong> — system software acting as interface between hardware and user</li>
+<li><strong>GUI</strong> — a graphical interface for interacting with icons, windows, and a mouse</li>
+<li><strong>Desktop</strong> — Windows' main working screen shown after login</li>
+<li><strong>Taskbar</strong> — bar at the bottom of the desktop with Start button and running apps</li>
+<li><strong>Recycle Bin</strong> — temporary storage for deleted files</li>
+<li><strong>Control Panel</strong> — central hub for configuring system settings</li>
+<li><strong>Task Manager</strong> — tool for monitoring running processes and resources</li>
+<li><strong>Disk Cleanup</strong> — freeing disk space by deleting unnecessary files</li>
+<li><strong>System Restore</strong> — taking the computer back to an earlier stable state</li>
+<li><strong>File Explorer</strong> — the main tool for browsing files and folders</li>
+</ul>
+<h3 data-hi="f" class="f">Must-Know Shortcuts Summary</h3><h3 data-en="f" class="f">Must-Know Shortcuts Summary</h3>
+<table><tr><th>Shortcut</th><th data-hi="i">काम</th><th data-en="i">Purpose</th></tr>
+<tr><td>Ctrl+C/X/V</td><td><span data-hi="i">Copy/Cut/Paste</span><span data-en="i">Copy/Cut/Paste</span></td></tr>
+<tr><td>Ctrl+Z/Y</td><td><span data-hi="i">Undo/Redo</span><span data-en="i">Undo/Redo</span></td></tr>
+<tr><td>Ctrl+A/S/P</td><td><span data-hi="i">Select All/Save/Print</span><span data-en="i">Select All/Save/Print</span></td></tr>
+<tr><td>Win+D/E</td><td><span data-hi="i">Desktop/File Explorer</span><span data-en="i">Desktop/File Explorer</span></td></tr>
+<tr><td>Win+L/R</td><td><span data-hi="i">Lock/Run dialog</span><span data-en="i">Lock/Run dialog</span></td></tr>
+<tr><td>Alt+Tab/F4</td><td><span data-hi="i">App switch/Close window</span><span data-en="i">App switch/Close window</span></td></tr>
+<tr><td>F2/F5</td><td><span data-hi="i">Rename/Refresh</span><span data-en="i">Rename/Refresh</span></td></tr>
+<tr><td>Shift+Delete</td><td><span data-hi="i">Permanent delete</span><span data-en="i">Permanent delete</span></td></tr>
+<tr><td>Ctrl+Shift+Esc</td><td><span data-hi="i">Task Manager</span><span data-en="i">Task Manager</span></td></tr></table>
+<h3 data-hi="f" class="f">Frequently Asked Long Questions</h3><h3 data-en="f" class="f">Frequently Asked Long Questions</h3>
+<ol data-hi="b" class="b">
+<li>Operating System किसे कहते हैं? इसके functions लिखिए।</li>
+<li>GUI और CLI में अंतर बताइए।</li>
+<li>Windows के versions chronological order में लिखिए।</li>
+<li>Desktop के components समझाइए।</li>
+<li>Window के parts (Title Bar, Menu Bar, Toolbar, Scroll Bar etc.) लिखिए।</li>
+<li>File और Folder में अंतर, common file extensions के examples।</li>
+<li>Control Panel के कोई 5 options उनके उपयोग सहित।</li>
+<li>Windows Accessories — Notepad, WordPad, Paint, Calculator, Snipping Tool।</li>
+<li>कोई 10 Keyboard shortcuts और उनके उपयोग।</li>
+<li>Disk Cleanup और Disk Defragmenter में अंतर, System Restore का उपयोग।</li>
+</ol>
+<ol data-en="b" class="b">
+<li>What is an Operating System? Write its functions.</li>
+<li>Differentiate between GUI and CLI.</li>
+<li>Write Windows versions in chronological order.</li>
+<li>Explain the components of the Desktop.</li>
+<li>Write the parts of a Window (Title Bar, Menu Bar, Toolbar, Scroll Bar etc.).</li>
+<li>Difference between File and Folder, common file extension examples.</li>
+<li>Any 5 Control Panel options with their uses.</li>
+<li>Windows Accessories — Notepad, WordPad, Paint, Calculator, Snipping Tool.</li>
+<li>Any 10 Keyboard shortcuts and their uses.</li>
+<li>Difference between Disk Cleanup and Disk Defragmenter, use of System Restore.</li>
+</ol>
+<div class="ib"><span data-hi="i"><b>आखिरी टिप:</b> पेपर से पहले सभी "संभावित परीक्षा प्रश्न" बॉक्स एक बार ज़रूर पढ़ें।</span><span data-en="i"><b>Final Tip:</b> Before the exam, read through all "Likely Exam Questions" boxes once.</span></div>
+</div></section>
+
+  </main>
+</div>
+<button id="tt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<footer>Made with 💜 for ITI-COPA students &nbsp;·&nbsp; by <a href="https://surajtiwarrii.github.io/Portfolio/" target="_blank">Suraj Tiwari</a></footer>
+<script>
+function sL(l){document.documentElement.lang=l;document.getElementById('lt').dataset.lang=l;document.getElementById('bh').classList.toggle('active',l==='hi');document.getElementById('be').classList.toggle('active',l==='en');localStorage.setItem('wosL',l);}
+document.addEventListener('DOMContentLoaded',()=>{sL(localStorage.getItem('wosL')||'hi');});
+function tS(e){if(e)e.stopPropagation();document.getElementById('sb').classList.toggle('open');document.getElementById('ov').classList.toggle('open');}
+window.addEventListener('scroll',()=>{document.getElementById('tt').style.display=window.scrollY>400?'flex':'none';});
+function lS(){const q=document.getElementById('si').value.trim().toLowerCase();document.querySelectorAll('.uc').forEach(c=>c.classList.toggle('hide',q&&!c.innerText.toLowerCase().includes(q)));}
+const nls=document.querySelectorAll('.nl');const secs=document.querySelectorAll('.uc');
+window.addEventListener('scroll',()=>{let cur='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-100)cur=s.id;});nls.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+cur));});
+document.querySelectorAll('.nl').forEach(l=>l.addEventListener('click',()=>{if(window.innerWidth<=880)tS();}));
+</script>
+</body>
+</html>

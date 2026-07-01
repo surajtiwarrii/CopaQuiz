@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DBMS Complete Notes — Hindi/English | ITI COPA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Hind:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #f5fbf2;
+    --bg-soft: #e9f9e4;
+    --panel: #ffffff;
+    --panel-glass: rgba(255,255,255,0.55);
+    --green-deep: #4ab828;
+    --green: #7ed321;
+    --green-soft: #c3f29a;
+    --green-mist: rgba(126,211,33,0.18);
+    --orange: #6fd83a;
+    --orange-soft: #d4f7b0;
+    --orange-mist: rgba(157,224,60,0.18);
+    --ink: #1d2b1f;
+    --ink-soft: #56655a;
+    --line: rgba(74,184,40,0.22);
+    --radius: 18px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Hind',sans-serif;
+    background:
+      radial-gradient(1200px 600px at 10% -10%, var(--green-mist), transparent 60%),
+      radial-gradient(1000px 700px at 110% 10%, var(--orange-mist), transparent 55%),
+      var(--bg);
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.brand{font-family:'Fraunces',serif;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+
+  .topbar{
+    position:sticky;top:0;z-index:50;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px 20px;
+    background:rgba(247,250,245,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+    gap:10px;
+  }
+  .brand{font-size:1.15rem;font-weight:700;color:var(--green-deep);display:flex;align-items:center;gap:8px;}
+  .brand .dot{width:9px;height:9px;border-radius:50%;background:linear-gradient(135deg,var(--orange),var(--green));}
+  .topbar-actions{display:flex;align-items:center;gap:8px;}
+  .menu-btn{
+    background:linear-gradient(135deg,var(--green),var(--green-deep));
+    color:#fff;border:none;padding:9px 16px;border-radius:30px;
+    font-family:'Hind';font-weight:600;font-size:0.9rem;cursor:pointer;
+    box-shadow:0 6px 16px rgba(47,107,63,0.25);
+  }
+  .lang-toggle{
+    display:flex;align-items:center;background:var(--bg-soft);border:1px solid var(--line);
+    border-radius:30px;padding:3px;position:relative;cursor:pointer;
+  }
+  .lang-toggle button{
+    border:none;background:transparent;padding:7px 13px;border-radius:24px;
+    font-family:'Hind';font-weight:700;font-size:0.8rem;cursor:pointer;color:var(--ink-soft);
+    position:relative;z-index:2;transition:color 0.25s;
+  }
+  .lang-toggle button.active{color:#fff;}
+  .lang-pill{
+    position:absolute;top:3px;bottom:3px;left:3px;width:calc(50% - 3px);
+    background:linear-gradient(135deg,var(--green),var(--green-deep));
+    border-radius:24px;transition:transform 0.25s ease;z-index:1;
+  }
+  .lang-toggle[data-lang="en"] .lang-pill{transform:translateX(100%);}
+
+  .hero{padding:64px 20px 40px;text-align:center;position:relative;}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'JetBrains Mono';font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;
+    color:var(--green-deep);
+    background:var(--panel-glass);
+    border:1px solid var(--green-soft);
+    padding:6px 14px;border-radius:30px;
+    margin-bottom:18px;
+  }
+  .hero h1{font-size:clamp(2rem,6vw,3.4rem);line-height:1.12;margin:0 0 14px;color:var(--ink);font-weight:700;}
+  .hero h1 .grad{
+    background:linear-gradient(100deg,var(--green-deep),var(--green) 45%,var(--orange) 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero p{max-width:620px;margin:0 auto 28px;color:var(--ink-soft);font-size:1.05rem;line-height:1.65;}
+  .hero-stats{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:10px;}
+  .stat-chip{
+    background:var(--panel);border:1px solid var(--line);border-radius:14px;
+    padding:12px 18px;min-width:108px;box-shadow:0 4px 14px rgba(47,107,63,0.06);
+  }
+  .stat-chip b{display:block;font-family:'Fraunces';font-size:1.3rem;color:var(--green-deep);}
+  .stat-chip span{font-size:0.74rem;color:var(--ink-soft);}
+
+  .toolbar{max-width:900px;margin:24px auto 0;padding:0 20px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:center;}
+  .search-wrap{flex:1;min-width:220px;position:relative;}
+  #searchInput{
+    width:100%;padding:13px 16px 13px 42px;border-radius:30px;border:1px solid var(--line);
+    background:var(--panel);font-family:'Hind';font-size:0.95rem;color:var(--ink);outline:none;
+  }
+  #searchInput:focus{border-color:var(--green);}
+  .search-wrap::before{content:"⌕";position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--green-deep);font-size:1.1rem;}
+
+  .layout{max-width:1180px;margin:14px auto 80px;padding:0 20px;display:grid;grid-template-columns:260px 1fr;gap:26px;}
+  .sidebar{
+    background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    padding:18px 14px;height:fit-content;position:sticky;top:78px;max-height:calc(100vh - 100px);overflow-y:auto;
+  }
+  .sidebar h4{font-family:'JetBrains Mono';font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-soft);margin:14px 6px 8px;}
+  .sidebar h4:first-child{margin-top:2px;}
+  .nav-link{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:10px;color:var(--ink);text-decoration:none;font-size:0.88rem;font-weight:500;transition:background 0.15s;}
+  .nav-link:hover{background:var(--green-mist);}
+  .nav-link.active{background:linear-gradient(120deg,var(--green-mist),var(--orange-mist));color:var(--green-deep);font-weight:700;}
+  .nav-link .num{font-family:'JetBrains Mono';font-size:0.68rem;color:var(--orange);min-width:20px;}
+  .close-sidebar{display:none;}
+
+  @media(max-width:880px){
+    .layout{grid-template-columns:1fr;display:block;}
+    .sidebar{position:fixed !important;inset:0 18% 0 0;z-index:60;transform:translateX(-105%);transition:transform 0.3s ease;overflow-y:auto;top:0;height:100vh;max-height:100vh;}
+    .sidebar.open{transform:translateX(0);}
+    .sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(20,30,20,0.45);z-index:55;}
+    .sidebar-overlay.open{display:block;}
+    .close-sidebar{display:block;margin-left:auto;background:none;border:1px solid var(--line);border-radius:50%;width:34px;height:34px;font-size:1rem;color:var(--ink);cursor:pointer;}
+    .brand span.brand-text{display:none;}
+    .menu-btn span.menu-text{display:none;}
+  }
+
+  .content{min-width:0;}
+  .unit-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:22px;overflow:hidden;scroll-margin-top:80px;box-shadow:0 6px 24px rgba(47,107,63,0.05);}
+  .unit-head{padding:22px 24px 18px;background:linear-gradient(120deg, rgba(143,212,158,0.20), rgba(74,184,40,0.10));border-bottom:1px solid var(--line);}
+  .unit-tag{font-family:'JetBrains Mono';font-size:0.7rem;color:var(--orange);letter-spacing:0.08em;text-transform:uppercase;display:block;margin-bottom:6px;}
+  .unit-head h2{margin:0;font-size:1.5rem;color:var(--green-deep);}
+  .unit-body{padding:20px 24px 26px;}
+  .unit-body h3{font-size:1.05rem;color:var(--ink);margin:22px 0 8px;display:flex;align-items:center;gap:8px;}
+  .unit-body h3::before{content:"";width:5px;height:18px;border-radius:3px;background:linear-gradient(180deg,var(--green),var(--orange));}
+  .unit-body h3:first-child{margin-top:2px;}
+  .unit-body p{line-height:1.75;color:var(--ink);margin:6px 0 10px;font-size:0.97rem;}
+  .unit-body ul, .unit-body ol{margin:6px 0 14px;padding-left:22px;line-height:1.75;}
+  .unit-body li{margin-bottom:6px;font-size:0.95rem;}
+  .unit-body strong{color:var(--green-deep);}
+
+  .note-box{background:var(--green-mist);border-left:3px solid var(--green);border-radius:10px;padding:12px 16px;margin:14px 0;font-size:0.9rem;}
+  .note-box b{color:var(--green-deep);}
+  .imp-box{background:var(--orange-mist);border-left:3px solid var(--orange);border-radius:10px;padding:12px 16px;margin:14px 0;font-size:0.9rem;}
+  .imp-box b{color:#3f8a1f;}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0 18px;font-size:0.88rem;border-radius:10px;overflow:hidden;}
+  th{background:linear-gradient(120deg,var(--green),var(--green-deep));color:#fff;text-align:left;padding:10px 12px;font-weight:600;}
+  td{padding:9px 12px;border-bottom:1px solid var(--line);background:var(--panel);}
+  tr:last-child td{border-bottom:none;}
+  tr:nth-child(even) td{background:var(--bg-soft);}
+
+  code, .code-block{font-family:'JetBrains Mono';}
+  .code-block{background:#1d2b1f;color:#cdeed3;padding:14px 16px;border-radius:12px;font-size:0.82rem;line-height:1.6;overflow-x:auto;margin:12px 0;}
+  .code-block .cmt{color:#ffb27a;}
+  code{background:var(--bg-soft);padding:2px 6px;border-radius:5px;font-size:0.85em;color:var(--green-deep);}
+
+  .key-table-wrap{overflow-x:auto;}
+
+  .qbox{background:var(--bg-soft);border:1px dashed var(--green-soft);border-radius:12px;padding:14px 16px;margin:16px 0;}
+  .qbox b{color:var(--orange);display:block;margin-bottom:6px;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em;}
+
+  #toTop{
+    position:fixed;bottom:22px;right:22px;z-index:40;width:46px;height:46px;border-radius:50%;
+    background:linear-gradient(135deg,var(--green),var(--orange));color:#fff;border:none;font-size:1.2rem;cursor:pointer;
+    box-shadow:0 8px 20px rgba(47,107,63,0.3);display:none;align-items:center;justify-content:center;
+  }
+
+  footer{text-align:center;padding:30px 20px 50px;color:var(--ink-soft);font-size:0.85rem;}
+  footer a{color:var(--green-deep);text-decoration:none;font-weight:600;}
+
+  mark{background:var(--orange-soft);color:var(--ink);padding:0 2px;border-radius:3px;}
+  .hide{display:none !important;}
+
+  /* Language switching */
+  [data-hi], [data-en]{display:none;}
+  html[lang="hi"] [data-hi].inline, html[lang="hi"] span[data-hi]{display:inline;}
+  html[lang="hi"] [data-hi].block{display:block;}
+  html[lang="hi"] [data-hi].flex{display:flex;}
+  html[lang="hi"] th[data-hi], html[lang="hi"] td[data-hi]{display:table-cell;}
+  html[lang="en"] [data-en].inline, html[lang="en"] span[data-en]{display:inline;}
+  html[lang="en"] [data-en].block{display:block;}
+  html[lang="en"] [data-en].flex{display:flex;}
+  html[lang="en"] th[data-en], html[lang="en"] td[data-en]{display:table-cell;}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span><span class="brand-text">DBMS Notes</span></div>
+  <div class="topbar-actions">
+    <div class="lang-toggle" id="langToggle" data-lang="hi" onclick="setLang(this.dataset.lang==='hi'?'en':'hi')">
+      <div class="lang-pill"></div>
+      <button type="button" id="btnHi">हिं</button>
+      <button type="button" id="btnEn">EN</button>
+    </div>
+    <button class="menu-btn" onclick="toggleSidebar(event)">📚 <span class="menu-text" data-hi="inline">विषय सूची</span><span class="menu-text" data-en="inline">Topics</span></button>
+  </div>
+</div>
+
+<div class="hero">
+  <span class="eyebrow">● ITI · COPA · UP Board Pattern</span>
+  <h1>
+    <span data-hi="block" class="block">Database Management System<br><span class="grad">सम्पूर्ण नोट्स</span></span>
+    <span data-en="block" class="block">Database Management System<br><span class="grad">Complete Notes</span></span>
+  </h1>
+  <p data-hi="block" class="block">A से Z तक पूरा DBMS सिलेबस — हिंदी और इंग्लिश दोनों में, परीक्षा के हिसाब से तैयार।</p>
+  <p data-en="block" class="block">Complete DBMS syllabus from A to Z — available in both Hindi and English, exam-ready.</p>
+  <div class="hero-stats">
+    <div class="stat-chip"><b>14</b><span data-hi="inline">Units</span><span data-en="inline">Units</span></div>
+    <div class="stat-chip"><b>60+</b><span data-hi="inline">Topics</span><span data-en="inline">Topics</span></div>
+    <div class="stat-chip"><b>2</b><span data-hi="inline">भाषाएं</span><span data-en="inline">Languages</span></div>
+  </div>
+</div>
+
+<div class="toolbar">
+  <div class="search-wrap">
+    <input type="text" id="searchInput" data-hi-placeholder="कोई भी टॉपिक खोजें... जैसे: Normalization, SQL, Key" data-en-placeholder="Search any topic... e.g. Normalization, SQL, Key" placeholder="कोई भी टॉपिक खोजें... जैसे: Normalization, SQL, Key" oninput="liveSearch()">
+  </div>
+</div>
+
+<div class="sidebar-overlay" id="overlay" onclick="toggleSidebar(event)"></div>
+
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <button class="close-sidebar" onclick="toggleSidebar(event)">✕</button>
+    <h4 data-hi="block" class="block">शुरुआत</h4>
+    <h4 data-en="block" class="block">Basics</h4>
+    <a class="nav-link" href="#unit1"><span class="num">01</span><span data-hi="inline">DBMS परिचय</span><span data-en="inline">DBMS Introduction</span></a>
+    <a class="nav-link" href="#unit2"><span class="num">02</span><span data-hi="inline">Data Models</span><span data-en="inline">Data Models</span></a>
+    <h4 data-hi="block" class="block">डिज़ाइन</h4>
+    <h4 data-en="block" class="block">Design</h4>
+    <a class="nav-link" href="#unit3"><span class="num">03</span><span data-hi="inline">ER Model</span><span data-en="inline">ER Model</span></a>
+    <a class="nav-link" href="#unit4"><span class="num">04</span><span data-hi="inline">Relational Model</span><span data-en="inline">Relational Model</span></a>
+    <a class="nav-link" href="#unit5"><span class="num">05</span><span data-hi="inline">Keys</span><span data-en="inline">Keys</span></a>
+    <a class="nav-link" href="#unit6"><span class="num">06</span><span data-hi="inline">Normalization</span><span data-en="inline">Normalization</span></a>
+    <h4 data-hi="block" class="block">SQL</h4>
+    <h4 data-en="block" class="block">SQL</h4>
+    <a class="nav-link" href="#unit7"><span class="num">07</span><span data-hi="inline">SQL Basics</span><span data-en="inline">SQL Basics</span></a>
+    <a class="nav-link" href="#unit8"><span class="num">08</span><span data-hi="inline">SQL Commands</span><span data-en="inline">SQL Commands</span></a>
+    <a class="nav-link" href="#unit9"><span class="num">09</span><span data-hi="inline">Joins & Functions</span><span data-en="inline">Joins & Functions</span></a>
+    <h4 data-hi="block" class="block">एडवांस</h4>
+    <h4 data-en="block" class="block">Advanced</h4>
+    <a class="nav-link" href="#unit10"><span class="num">10</span><span data-hi="inline">Transactions & ACID</span><span data-en="inline">Transactions & ACID</span></a>
+    <a class="nav-link" href="#unit11"><span class="num">11</span><span data-hi="inline">Concurrency Control</span><span data-en="inline">Concurrency Control</span></a>
+    <a class="nav-link" href="#unit12"><span class="num">12</span><span data-hi="inline">Indexing & File Org</span><span data-en="inline">Indexing & File Org</span></a>
+    <a class="nav-link" href="#unit13"><span class="num">13</span><span data-hi="inline">Backup & Security</span><span data-en="inline">Backup & Security</span></a>
+    <h4 data-hi="block" class="block">रिवीज़न</h4>
+    <h4 data-en="block" class="block">Revision</h4>
+    <a class="nav-link" href="#unit14"><span class="num">14</span><span data-hi="inline">Important Q&A</span><span data-en="inline">Important Q&A</span></a>
+  </aside>
+
+  <main class="content" id="content">
+    <!-- UNIT 1 -->
+    <section class="unit-card" id="unit1">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 01 · शुरुआत</span><span data-en="inline">Unit 01 · Basics</span></span>
+        <h2><span data-hi="inline">DBMS परिचय (Introduction)</span><span data-en="inline">DBMS Introduction</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Data, Information और Database क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is Data, Information and Database?</h3>
+        <p data-hi="block" class="block"><strong>Data</strong> कच्चे facts और figures होते हैं जिनका अभी कोई मतलब नहीं निकला होता — जैसे "25", "Suraj", "Gonda"। जब इस data को व्यवस्थित करके किसी रूप में लाया जाता है तो वो <strong>Information</strong> बन जाता है — जैसे "Suraj की उम्र 25 साल है और वो Gonda में रहता है।"</p>
+        <p data-en="block" class="block"><strong>Data</strong> consists of raw facts and figures with no meaning extracted yet — like "25", "Suraj", "Gonda". When this data is organized into some form, it becomes <strong>Information</strong> — like "Suraj is 25 years old and lives in Gonda."</p>
+        <p data-hi="block" class="block"><strong>Database</strong> related data का एक संगठित collection होता है जिसे आसानी से access, manage और update किया जा सकता है।</p>
+        <p data-en="block" class="block">A <strong>Database</strong> is an organized collection of related data that can be easily accessed, managed, and updated.</p>
+
+        <h3 data-hi="flex" class="flex">DBMS की परिभाषा</h3>
+        <h3 data-en="flex" class="flex">Definition of DBMS</h3>
+        <p data-hi="block" class="block"><strong>DBMS (Database Management System)</strong> एक software होता है जो database को बनाने, उसमें data store करने, उसे manage करने और retrieve करने का काम करता है। यह user और database के बीच एक interface का काम करता है।</p>
+        <p data-en="block" class="block">A <strong>DBMS (Database Management System)</strong> is software used to create databases, store data, manage it, and retrieve it. It acts as an interface between the user and the database.</p>
+
+        <div class="note-box">
+          <span data-hi="inline"><b>याद रखें:</b> DBMS = Software जो Database को Manage करता है। Examples: MySQL, Oracle, MS Access, SQL Server, MongoDB</span>
+          <span data-en="inline"><b>Remember:</b> DBMS = Software that manages a Database. Examples: MySQL, Oracle, MS Access, SQL Server, MongoDB</span>
+        </div>
+
+        <h3 data-hi="flex" class="flex">File System vs DBMS</h3>
+        <h3 data-en="flex" class="flex">File System vs DBMS</h3>
+        <table>
+          <tr><th>File System</th><th>DBMS</th></tr>
+          <tr><td><span data-hi="inline">Data redundancy ज़्यादा होती है</span><span data-en="inline">High data redundancy</span></td><td><span data-hi="inline">Data redundancy कम होती है</span><span data-en="inline">Low data redundancy</span></td></tr>
+          <tr><td><span data-hi="inline">Data inconsistency की समस्या रहती है</span><span data-en="inline">Data inconsistency issues exist</span></td><td><span data-hi="inline">Data consistency बनी रहती है</span><span data-en="inline">Data consistency is maintained</span></td></tr>
+          <tr><td><span data-hi="inline">Security कमज़ोर होती है</span><span data-en="inline">Weak security</span></td><td><span data-hi="inline">Strong security & access control मिलता है</span><span data-en="inline">Strong security & access control</span></td></tr>
+          <tr><td><span data-hi="inline">Backup/Recovery मुश्किल होता है</span><span data-en="inline">Backup/Recovery is difficult</span></td><td><span data-hi="inline">Backup और Recovery आसान होता है</span><span data-en="inline">Backup and Recovery is easy</span></td></tr>
+          <tr><td><span data-hi="inline">Multiple users एक साथ access नहीं कर सकते</span><span data-en="inline">Multiple users cannot access at once</span></td><td><span data-hi="inline">Concurrent access आसानी से सम्भव है</span><span data-en="inline">Concurrent access is easily possible</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">DBMS के लाभ (Advantages)</h3>
+        <h3 data-en="flex" class="flex">Advantages of DBMS</h3>
+        <ul data-hi="block" class="block">
+          <li><strong>Data Redundancy कम होती है</strong> — एक ही data बार-बार store नहीं होता।</li>
+          <li><strong>Data Sharing आसान</strong> — कई users एक साथ data इस्तेमाल कर सकते हैं।</li>
+          <li><strong>Data Security</strong> — passwords और permissions से data सुरक्षित रहता है।</li>
+          <li><strong>Data Integrity</strong> — data सही और सटीक बना रहता है।</li>
+          <li><strong>Backup और Recovery</strong> — system crash होने पर data वापस मिल सकता है।</li>
+        </ul>
+        <ul data-en="block" class="block">
+          <li><strong>Reduced Data Redundancy</strong> — the same data is not stored repeatedly.</li>
+          <li><strong>Easy Data Sharing</strong> — multiple users can use the data at the same time.</li>
+          <li><strong>Data Security</strong> — data stays protected via passwords and permissions.</li>
+          <li><strong>Data Integrity</strong> — data remains accurate and correct.</li>
+          <li><strong>Backup and Recovery</strong> — data can be recovered after a system crash.</li>
+        </ul>
+
+        <h3 data-hi="flex" class="flex">DBMS के नुकसान (Disadvantages)</h3>
+        <h3 data-en="flex" class="flex">Disadvantages of DBMS</h3>
+        <ul data-hi="block" class="block">
+          <li>Software और hardware की cost ज़्यादा होती है।</li>
+          <li>System को चलाने के लिए trained staff चाहिए होता है।</li>
+          <li>Complex system होने की वजह से सीखना मुश्किल होता है।</li>
+        </ul>
+        <ul data-en="block" class="block">
+          <li>Software and hardware costs are higher.</li>
+          <li>Trained staff is needed to run the system.</li>
+          <li>It is difficult to learn due to the system's complexity.</li>
+        </ul>
+
+        <h3 data-hi="flex" class="flex">DBMS के Components (Architecture)</h3>
+        <h3 data-en="flex" class="flex">Components of DBMS (Architecture)</h3>
+        <ul data-hi="block" class="block">
+          <li><strong>Hardware</strong> — physical devices जैसे computer, storage</li>
+          <li><strong>Software</strong> — DBMS software खुद (जैसे MySQL)</li>
+          <li><strong>Data</strong> — actual database में रखा data</li>
+          <li><strong>Procedures</strong> — instructions और rules जिनसे DBMS चलता है</li>
+          <li><strong>Database Access Language</strong> — जैसे SQL, जिससे data से बात की जाती है</li>
+          <li><strong>Users</strong> — DBMS को इस्तेमाल करने वाले लोग</li>
+        </ul>
+        <ul data-en="block" class="block">
+          <li><strong>Hardware</strong> — physical devices like computer, storage</li>
+          <li><strong>Software</strong> — the DBMS software itself (like MySQL)</li>
+          <li><strong>Data</strong> — actual data kept in the database</li>
+          <li><strong>Procedures</strong> — instructions and rules by which the DBMS runs</li>
+          <li><strong>Database Access Language</strong> — like SQL, used to interact with data</li>
+          <li><strong>Users</strong> — people who use the DBMS</li>
+        </ul>
+
+        <h3 data-hi="flex" class="flex">DBMS के Users के प्रकार</h3>
+        <h3 data-en="flex" class="flex">Types of DBMS Users</h3>
+        <table>
+          <tr><th>User Type</th><th data-hi="inline">काम</th><th data-en="inline">Role</th></tr>
+          <tr><td>Database Administrator (DBA)</td><td><span data-hi="inline">पूरे database को control और manage करता है</span><span data-en="inline">Controls and manages the entire database</span></td></tr>
+          <tr><td>Application Programmer</td><td><span data-hi="inline">DBMS के लिए application/software बनाता है</span><span data-en="inline">Builds applications/software for the DBMS</span></td></tr>
+          <tr><td>End User</td><td><span data-hi="inline">सीधे database को query या update करता है</span><span data-en="inline">Directly queries or updates the database</span></td></tr>
+          <tr><td>Sophisticated User</td><td><span data-hi="inline">SQL जानने वाला user जो सीधे query करता है</span><span data-en="inline">A user who knows SQL and queries directly</span></td></tr>
+        </table>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">DBMS की परिभाषा दीजिए। File System और DBMS में अंतर बताइए। DBMS के कोई 4 लाभ लिखिए।</span>
+          <span data-en="inline">Define DBMS. Differentiate between File System and DBMS. Write any 4 advantages of DBMS.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 2 -->
+    <section class="unit-card" id="unit2">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 02 · शुरुआत</span><span data-en="inline">Unit 02 · Basics</span></span>
+        <h2><span data-hi="inline">Data Models (डेटा मॉडल)</span><span data-en="inline">Data Models</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Data Model क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is a Data Model?</h3>
+        <p data-hi="block" class="block">Data Model एक concept या तरीका है जिससे यह बताया जाता है कि data को कैसे store, organize और access किया जाएगा। यह database की संरचना को logically represent करता है।</p>
+        <p data-en="block" class="block">A Data Model is a concept or method that describes how data will be stored, organized, and accessed. It logically represents the structure of the database.</p>
+
+        <h3 data-hi="flex" class="flex">Data Models के प्रकार</h3>
+        <h3 data-en="flex" class="flex">Types of Data Models</h3>
+        <ul data-hi="block" class="block">
+          <li><strong>Hierarchical Model</strong> — data को tree जैसी structure में रखा जाता है, parent-child relationship होती है। एक parent के कई child हो सकते हैं पर एक child का सिर्फ एक parent होता है।</li>
+          <li><strong>Network Model</strong> — Hierarchical model का improved version, इसमें एक child के कई parents हो सकते हैं (graph structure)।</li>
+          <li><strong>Relational Model</strong> — सबसे ज़्यादा इस्तेमाल होने वाला model, data को rows और columns वाली tables में रखा जाता है। E.F. Codd ने इसे 1970 में प्रस्तावित किया था।</li>
+          <li><strong>Object-Oriented Model</strong> — data को objects के रूप में रखा जाता है, जैसे OOP programming में होता है।</li>
+          <li><strong>E-R Model</strong> — database design के लिए इस्तेमाल होता है, entities और उनके बीच relationships को दिखाता है।</li>
+        </ul>
+        <ul data-en="block" class="block">
+          <li><strong>Hierarchical Model</strong> — data is kept in a tree-like structure, with parent-child relationships. A parent can have multiple children, but a child has only one parent.</li>
+          <li><strong>Network Model</strong> — an improved version of the Hierarchical model, where a child can have multiple parents (graph structure).</li>
+          <li><strong>Relational Model</strong> — the most widely used model, where data is kept in tables with rows and columns. Proposed by E.F. Codd in 1970.</li>
+          <li><strong>Object-Oriented Model</strong> — data is kept as objects, like in OOP programming.</li>
+          <li><strong>E-R Model</strong> — used for database design, shows entities and relationships between them.</li>
+        </ul>
+
+        <div class="note-box">
+          <span data-hi="inline"><b>याद रखें:</b> आजकल लगभग सभी popular DBMS (MySQL, Oracle, SQL Server) <strong>Relational Model</strong> पर आधारित होते हैं।</span>
+          <span data-en="inline"><b>Remember:</b> Nowadays almost all popular DBMS (MySQL, Oracle, SQL Server) are based on the <strong>Relational Model</strong>.</span>
+        </div>
+
+        <h3 data-hi="flex" class="flex">Schema और Instance</h3>
+        <h3 data-en="flex" class="flex">Schema and Instance</h3>
+        <ul data-hi="block" class="block">
+          <li><strong>Schema</strong> — database की overall design/structure (जो बार-बार नहीं बदलती)</li>
+          <li><strong>Instance</strong> — किसी particular समय पर database में मौजूद actual data (जो लगातार बदलता रहता है)</li>
+        </ul>
+        <ul data-en="block" class="block">
+          <li><strong>Schema</strong> — the overall design/structure of the database (which doesn't change often)</li>
+          <li><strong>Instance</strong> — the actual data present in the database at a particular time (which keeps changing)</li>
+        </ul>
+
+        <h3 data-hi="flex" class="flex">Data Independence</h3>
+        <h3 data-en="flex" class="flex">Data Independence</h3>
+        <p data-hi="block" class="block">इसका मतलब है कि database की internal structure बदलने पर application programs पर असर न पड़े।</p>
+        <p data-en="block" class="block">This means that changing the database's internal structure should not affect application programs.</p>
+        <ul data-hi="block" class="block">
+          <li><strong>Physical Data Independence</strong> — storage structure बदलने पर logical schema पर असर नहीं पड़ता</li>
+          <li><strong>Logical Data Independence</strong> — logical schema बदलने पर application programs पर असर नहीं पड़ता</li>
+        </ul>
+        <ul data-en="block" class="block">
+          <li><strong>Physical Data Independence</strong> — changing storage structure does not affect the logical schema</li>
+          <li><strong>Logical Data Independence</strong> — changing the logical schema does not affect application programs</li>
+        </ul>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">Data Model किसे कहते हैं? Hierarchical और Network Model में अंतर बताइए। Data Independence क्या है?</span>
+          <span data-en="inline">What is a Data Model? Differentiate between Hierarchical and Network Model. What is Data Independence?</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 3 -->
+    <section class="unit-card" id="unit3">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 03 · डिज़ाइन</span><span data-en="inline">Unit 03 · Design</span></span>
+        <h2><span data-hi="inline">ER Model (Entity-Relationship Model)</span><span data-en="inline">ER Model (Entity-Relationship Model)</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">ER Model क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is ER Model?</h3>
+        <p data-hi="block" class="block">ER Model database design के लिए इस्तेमाल होने वाला एक graphical तरीका है जिसमें real-world चीज़ों (entities) और उनके आपसी संबंधों को diagram के रूप में दिखाया जाता है। इसे <strong>ER Diagram (ERD)</strong> भी कहते हैं।</p>
+        <p data-en="block" class="block">The ER Model is a graphical method used for database design, in which real-world things (entities) and the relationships between them are shown in a diagram. It is also called an <strong>ER Diagram (ERD)</strong>.</p>
+
+        <h3 data-hi="flex" class="flex">Entity क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is an Entity?</h3>
+        <p data-hi="block" class="block">Entity एक real-world object या concept है जिसके बारे में database में data store किया जाता है। जैसे — Student, Teacher, Book, Car।</p>
+        <p data-en="block" class="block">An Entity is a real-world object or concept about which data is stored in a database. For example — Student, Teacher, Book, Car.</p>
+        <ul data-hi="block" class="block">
+          <li><strong>Entity Set</strong> — एक जैसी properties वाली entities का group (जैसे सभी Students)</li>
+          <li><strong>Weak Entity</strong> — जिस entity की अपनी primary key नहीं होती, वो किसी दूसरी entity पर निर्भर रहती है</li>
+        </ul>
+        <ul data-en="block" class="block">
+          <li><strong>Entity Set</strong> — a group of entities with similar properties (e.g., all Students)</li>
+          <li><strong>Weak Entity</strong> — an entity that doesn't have its own primary key, and depends on another entity</li>
+        </ul>
+
+        <h3 data-hi="flex" class="flex">Attribute क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is an Attribute?</h3>
+        <p data-hi="block" class="block">Attribute किसी entity की property या characteristic होती है। जैसे Student entity के attributes — Name, Roll Number, Age।</p>
+        <p data-en="block" class="block">An Attribute is a property or characteristic of an entity. For example, the Student entity's attributes — Name, Roll Number, Age.</p>
+        <table>
+          <tr><th data-hi="inline">Attribute Type</th><th data-en="inline">Attribute Type</th><th data-hi="inline">उदाहरण</th><th data-en="inline">Example</th></tr>
+          <tr><td>Simple Attribute</td><td><span data-hi="inline">आगे divide नहीं हो सकता — जैसे Age</span><span data-en="inline">Cannot be divided further — like Age</span></td></tr>
+          <tr><td>Composite Attribute</td><td><span data-hi="inline">कई हिस्सों में बंट सकता है — जैसे Name (First + Last)</span><span data-en="inline">Can be split into parts — like Name (First + Last)</span></td></tr>
+          <tr><td>Single-valued</td><td><span data-hi="inline">एक ही value रखता है — जैसे Roll Number</span><span data-en="inline">Holds only one value — like Roll Number</span></td></tr>
+          <tr><td>Multi-valued</td><td><span data-hi="inline">कई values रख सकता है — जैसे Phone Numbers</span><span data-en="inline">Can hold multiple values — like Phone Numbers</span></td></tr>
+          <tr><td>Derived Attribute</td><td><span data-hi="inline">दूसरे attribute से calculate होता है — जैसे Age (DOB से)</span><span data-en="inline">Calculated from another attribute — like Age (from DOB)</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Relationship क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is a Relationship?</h3>
+        <p data-hi="block" class="block">Relationship बताता है कि दो या ज़्यादा entities आपस में कैसे जुड़ी हुई हैं। जैसे — "Student enrolls in Course"।</p>
+        <p data-en="block" class="block">A Relationship describes how two or more entities are connected to each other. For example — "Student enrolls in Course".</p>
+
+        <h3 data-hi="flex" class="flex">Relationship के प्रकार (Cardinality)</h3>
+        <h3 data-en="flex" class="flex">Types of Relationship (Cardinality)</h3>
+        <ul data-hi="block" class="block">
+          <li><strong>One-to-One (1:1)</strong> — एक entity का दूसरी entity से सिर्फ एक संबंध। जैसे एक व्यक्ति का एक ही Passport।</li>
+          <li><strong>One-to-Many (1:M)</strong> — एक entity कई entities से जुड़ी हो सकती है। जैसे एक Teacher कई Students को पढ़ाता है।</li>
+          <li><strong>Many-to-One (M:1)</strong> — कई entities एक entity से जुड़ी हों। जैसे कई Students एक Class में।</li>
+          <li><strong>Many-to-Many (M:N)</strong> — कई entities कई entities से जुड़ी हों। जैसे Students कई Courses लेते हैं और एक Course में कई Students होते हैं।</li>
+        </ul>
+        <ul data-en="block" class="block">
+          <li><strong>One-to-One (1:1)</strong> — one entity has only one connection to another entity. Example: a person has only one Passport.</li>
+          <li><strong>One-to-Many (1:M)</strong> — one entity can be connected to many entities. Example: one Teacher teaches many Students.</li>
+          <li><strong>Many-to-One (M:1)</strong> — many entities connect to one entity. Example: many Students belong to one Class.</li>
+          <li><strong>Many-to-Many (M:N)</strong> — many entities connect to many entities. Example: Students take many Courses and a Course has many Students.</li>
+        </ul>
+
+        <h3 data-hi="flex" class="flex">ER Diagram के Symbols</h3>
+        <h3 data-en="flex" class="flex">Symbols of ER Diagram</h3>
+        <table>
+          <tr><th>Symbol</th><th data-hi="inline">क्या दिखाता है</th><th data-en="inline">What it represents</th></tr>
+          <tr><td><span data-hi="inline">Rectangle (आयत)</span><span data-en="inline">Rectangle</span></td><td>Entity</td></tr>
+          <tr><td><span data-hi="inline">Ellipse (अंडाकार)</span><span data-en="inline">Ellipse</span></td><td>Attribute</td></tr>
+          <tr><td><span data-hi="inline">Diamond (समचतुर्भुज)</span><span data-en="inline">Diamond</span></td><td>Relationship</td></tr>
+          <tr><td><span data-hi="inline">Lines (रेखाएं)</span><span data-en="inline">Lines</span></td><td><span data-hi="inline">Entity को Attribute/Relationship से जोड़ती हैं</span><span data-en="inline">Connect Entity to Attribute/Relationship</span></td></tr>
+          <tr><td>Double Ellipse</td><td>Multi-valued Attribute</td></tr>
+          <tr><td>Double Rectangle</td><td>Weak Entity</td></tr>
+        </table>
+
+        <div class="imp-box">
+          <span data-hi="inline"><b>Exam Tip:</b> ER Diagram बनाना और उसके symbols पहचानना बहुत common question है — practice ज़रूर करें।</span>
+          <span data-en="inline"><b>Exam Tip:</b> Drawing an ER Diagram and recognizing its symbols is a very common question — be sure to practice.</span>
+        </div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">ER Model क्या है? Entity और Attribute में अंतर बताइए। Cardinality के प्रकार समझाइए। एक simple ER diagram बनाइए।</span>
+          <span data-en="inline">What is ER Model? Differentiate between Entity and Attribute. Explain types of Cardinality. Draw a simple ER diagram.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 4 -->
+    <section class="unit-card" id="unit4">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 04 · डिज़ाइन</span><span data-en="inline">Unit 04 · Design</span></span>
+        <h2><span data-hi="inline">Relational Model (रिलेशनल मॉडल)</span><span data-en="inline">Relational Model</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Relational Model क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is Relational Model?</h3>
+        <p data-hi="block" class="block">Relational Model में data को <strong>Tables (Relations)</strong> के रूप में रखा जाता है। हर table में rows और columns होते हैं। इसे E.F. Codd ने 1970 में propose किया था।</p>
+        <p data-en="block" class="block">In the Relational Model, data is stored as <strong>Tables (Relations)</strong>. Every table has rows and columns. It was proposed by E.F. Codd in 1970.</p>
+
+        <h3 data-hi="flex" class="flex">ज़रूरी Terminology</h3>
+        <h3 data-en="flex" class="flex">Important Terminology</h3>
+        <table>
+          <tr><th>Term</th><th data-hi="inline">मतलब</th><th data-en="inline">Meaning</th></tr>
+          <tr><td>Relation (Table)</td><td><span data-hi="inline">Data को rows-columns में रखने वाली structure</span><span data-en="inline">A structure that holds data in rows-columns</span></td></tr>
+          <tr><td>Tuple (Row)</td><td><span data-hi="inline">Table की एक row, एक record को represent करती है</span><span data-en="inline">A single row in a table, represents one record</span></td></tr>
+          <tr><td>Attribute (Column)</td><td><span data-hi="inline">Table का एक column, data का एक field</span><span data-en="inline">A column in the table, a field of data</span></td></tr>
+          <tr><td>Domain</td><td><span data-hi="inline">किसी attribute की valid values की range</span><span data-en="inline">The range of valid values for an attribute</span></td></tr>
+          <tr><td>Degree</td><td><span data-hi="inline">Table में columns की संख्या</span><span data-en="inline">Number of columns in a table</span></td></tr>
+          <tr><td>Cardinality</td><td><span data-hi="inline">Table में rows की संख्या</span><span data-en="inline">Number of rows in a table</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Relational Model की Properties</h3>
+        <h3 data-en="flex" class="flex">Properties of Relational Model</h3>
+        <ul data-hi="block" class="block">
+          <li>हर cell में सिर्फ एक ही value होती है (Atomic value)</li>
+          <li>हर column का एक unique नाम होता है</li>
+          <li>एक table में सभी rows unique होती हैं (कोई duplicate row नहीं)</li>
+          <li>rows और columns का कोई fixed order नहीं होता</li>
+        </ul>
+        <ul data-en="block" class="block">
+          <li>Every cell has only one value (Atomic value)</li>
+          <li>Every column has a unique name</li>
+          <li>All rows in a table are unique (no duplicate rows)</li>
+          <li>Rows and columns have no fixed order</li>
+        </ul>
+
+        <h3 data-hi="flex" class="flex">उदाहरण Table — Student</h3>
+        <h3 data-en="flex" class="flex">Example Table — Student</h3>
+        <table>
+          <tr><th>Roll_No</th><th>Name</th><th>Class</th><th>Marks</th></tr>
+          <tr><td>1</td><td>Suraj</td><td>COPA</td><td>85</td></tr>
+          <tr><td>2</td><td>Aman</td><td>COPA</td><td>78</td></tr>
+          <tr><td>3</td><td>Riya</td><td>COPA</td><td>92</td></tr>
+        </table>
+        <p data-hi="block" class="block">यहाँ Degree = 4 (चार columns), Cardinality = 3 (तीन rows)।</p>
+        <p data-en="block" class="block">Here Degree = 4 (four columns), Cardinality = 3 (three rows).</p>
+
+        <h3 data-hi="flex" class="flex">Integrity Constraints (अखंडता नियम)</h3>
+        <h3 data-en="flex" class="flex">Integrity Constraints</h3>
+        <ul data-hi="block" class="block">
+          <li><strong>Entity Integrity</strong> — Primary Key कभी भी NULL नहीं हो सकती</li>
+          <li><strong>Referential Integrity</strong> — Foreign Key का value या तो NULL होगा या किसी existing Primary Key से match होगा</li>
+          <li><strong>Domain Integrity</strong> — Column की value उसके defined domain के अनुसार ही होनी चाहिए</li>
+        </ul>
+        <ul data-en="block" class="block">
+          <li><strong>Entity Integrity</strong> — Primary Key can never be NULL</li>
+          <li><strong>Referential Integrity</strong> — Foreign Key's value must either be NULL or match an existing Primary Key</li>
+          <li><strong>Domain Integrity</strong> — a column's value must match its defined domain</li>
+        </ul>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">Relational Model क्या है? Tuple और Attribute में अंतर बताइए। Degree और Cardinality समझाइए। Integrity Constraints कौन-कौन से हैं?</span>
+          <span data-en="inline">What is Relational Model? Differentiate between Tuple and Attribute. Explain Degree and Cardinality. What are the Integrity Constraints?</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 5 -->
+    <section class="unit-card" id="unit5">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 05 · डिज़ाइन</span><span data-en="inline">Unit 05 · Design</span></span>
+        <h2><span data-hi="inline">Keys in DBMS (कुंजियाँ)</span><span data-en="inline">Keys in DBMS</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Key क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is a Key?</h3>
+        <p data-hi="block" class="block">Key एक या एक से ज़्यादा attributes का set होता है जो किसी table की किसी row (tuple) को <strong>uniquely identify</strong> करने में मदद करता है।</p>
+        <p data-en="block" class="block">A Key is a set of one or more attributes that help to <strong>uniquely identify</strong> a row (tuple) in a table.</p>
+
+        <h3 data-hi="flex" class="flex">Keys के प्रकार</h3>
+        <h3 data-en="flex" class="flex">Types of Keys</h3>
+        <table>
+          <tr><th>Key</th><th data-hi="inline">परिभाषा</th><th data-en="inline">Definition</th></tr>
+          <tr><td>Candidate Key</td><td><span data-hi="inline">वो सभी attributes जो किसी row को uniquely identify कर सकते हैं</span><span data-en="inline">All attributes that can uniquely identify a row</span></td></tr>
+          <tr><td>Primary Key</td><td><span data-hi="inline">Candidate Keys में से चुनी गई एक key जिसे row identify करने के लिए use किया जाता है — यह NULL नहीं हो सकती</span><span data-en="inline">One key chosen from Candidate Keys, used to identify a row — cannot be NULL</span></td></tr>
+          <tr><td>Alternate Key</td><td><span data-hi="inline">बाकी के candidate keys जो primary key नहीं बनीं</span><span data-en="inline">The remaining candidate keys that didn't become the primary key</span></td></tr>
+          <tr><td>Foreign Key</td><td><span data-hi="inline">एक table का attribute जो दूसरी table की primary key को refer करता है</span><span data-en="inline">An attribute of one table that refers to another table's primary key</span></td></tr>
+          <tr><td>Composite Key</td><td><span data-hi="inline">दो या ज़्यादा attributes मिलकर बनाई गई key जो row को uniquely identify करती है</span><span data-en="inline">A key made of two or more attributes that uniquely identifies a row</span></td></tr>
+          <tr><td>Super Key</td><td><span data-hi="inline">एक या ज़्यादा attributes का ऐसा set जो row को uniquely identify करता है</span><span data-en="inline">A set of one or more attributes that uniquely identifies a row</span></td></tr>
+          <tr><td>Unique Key</td><td><span data-hi="inline">row को uniquely identify करती है, पर एक NULL value allow करती है</span><span data-en="inline">Uniquely identifies a row, but allows one NULL value</span></td></tr>
+        </table>
+
+        <div class="note-box">
+          <span data-hi="inline"><b>याद रखने का आसान तरीका:</b> Super Key ⊃ Candidate Key → Primary Key चुनी जाती है, बाकी Alternate Key बन जाती हैं।</span>
+          <span data-en="inline"><b>Easy memory tip:</b> Super Key ⊃ Candidate Key → one is chosen as Primary Key, the rest become Alternate Keys.</span>
+        </div>
+
+        <h3 data-hi="flex" class="flex">उदाहरण — Foreign Key</h3>
+        <h3 data-en="flex" class="flex">Example — Foreign Key</h3>
+        <p data-hi="block" class="block">Student table में StudentID Primary Key है। Marks table में StudentID column है जो Student table के StudentID को refer करता है — यह Marks table में <strong>Foreign Key</strong> कहलाएगा।</p>
+        <p data-en="block" class="block">In the Student table, StudentID is the Primary Key. In the Marks table, there's a StudentID column that refers to the Student table's StudentID — this is called a <strong>Foreign Key</strong> in the Marks table.</p>
+
+        <div class="code-block"><span class="cmt" data-hi="inline">-- Primary Key और Foreign Key example</span><span class="cmt" data-en="inline">-- Primary Key and Foreign Key example</span>
+CREATE TABLE Student (
+  StudentID INT PRIMARY KEY,
+  Name VARCHAR(50)
+);
+
+CREATE TABLE Marks (
+  MarkID INT PRIMARY KEY,
+  StudentID INT,
+  Marks INT,
+  FOREIGN KEY (StudentID) REFERENCES Student(StudentID)
+);</div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">Primary Key और Foreign Key में अंतर बताइए। Candidate Key किसे कहते हैं? Composite Key का उदाहरण दीजिए।</span>
+          <span data-en="inline">Differentiate between Primary Key and Foreign Key. What is a Candidate Key? Give an example of Composite Key.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 6 -->
+    <section class="unit-card" id="unit6">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 06 · डिज़ाइन</span><span data-en="inline">Unit 06 · Design</span></span>
+        <h2><span data-hi="inline">Normalization (नॉर्मलाइज़ेशन)</span><span data-en="inline">Normalization</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Normalization क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is Normalization?</h3>
+        <p data-hi="block" class="block">Normalization एक process है जिसमें database के tables को इस तरह design किया जाता है कि <strong>data redundancy</strong> कम हो और <strong>data integrity</strong> बनी रहे।</p>
+        <p data-en="block" class="block">Normalization is a process in which database tables are designed so that <strong>data redundancy</strong> is reduced and <strong>data integrity</strong> is maintained.</p>
+
+        <h3 data-hi="flex" class="flex">Normalization क्यों ज़रूरी है?</h3>
+        <h3 data-en="flex" class="flex">Why is Normalization Needed?</h3>
+        <ul data-hi="block" class="block">
+          <li>Data की duplicate copies को कम करता है</li>
+          <li>Insert, Update, Delete में होने वाली anomalies को रोकता है</li>
+          <li>Database की storage space बचाता है</li>
+          <li>Data को consistent और accurate रखता है</li>
+        </ul>
+        <ul data-en="block" class="block">
+          <li>Reduces duplicate copies of data</li>
+          <li>Prevents anomalies that occur during Insert, Update, Delete</li>
+          <li>Saves database storage space</li>
+          <li>Keeps data consistent and accurate</li>
+        </ul>
+
+        <h3 data-hi="flex" class="flex">Anomalies जो बिना Normalization के होती हैं</h3>
+        <h3 data-en="flex" class="flex">Anomalies Without Normalization</h3>
+        <table>
+          <tr><th>Anomaly</th><th data-hi="inline">समस्या</th><th data-en="inline">Problem</th></tr>
+          <tr><td>Insertion Anomaly</td><td><span data-hi="inline">नया data डालने में दिक्कत आती है</span><span data-en="inline">Difficulty in inserting new data</span></td></tr>
+          <tr><td>Update Anomaly</td><td><span data-hi="inline">एक value को update करने पर कई जगह बदलाव करना पड़ता है</span><span data-en="inline">Updating one value requires changes in multiple places</span></td></tr>
+          <tr><td>Deletion Anomaly</td><td><span data-hi="inline">एक record delete करने से कभी-कभी ज़रूरी data भी चला जाता है</span><span data-en="inline">Deleting a record sometimes removes necessary data too</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">1NF — First Normal Form</h3>
+        <h3 data-en="flex" class="flex">1NF — First Normal Form</h3>
+        <p data-hi="block" class="block">नियम: हर column में <strong>atomic (अविभाज्य) value</strong> होनी चाहिए — कोई multi-valued या repeating group नहीं होना चाहिए।</p>
+        <p data-en="block" class="block">Rule: every column must have an <strong>atomic value</strong> — no multi-valued or repeating groups allowed.</p>
+
+        <h3 data-hi="flex" class="flex">2NF — Second Normal Form</h3>
+        <h3 data-en="flex" class="flex">2NF — Second Normal Form</h3>
+        <p data-hi="block" class="block">नियम: Table पहले 1NF में होनी चाहिए, और सभी non-key attributes पूरी Primary Key पर <strong>fully functionally dependent</strong> होने चाहिए (कोई Partial Dependency नहीं)।</p>
+        <p data-en="block" class="block">Rule: the table must first be in 1NF, and all non-key attributes must be <strong>fully functionally dependent</strong> on the entire Primary Key (no Partial Dependency).</p>
+
+        <h3 data-hi="flex" class="flex">3NF — Third Normal Form</h3>
+        <h3 data-en="flex" class="flex">3NF — Third Normal Form</h3>
+        <p data-hi="block" class="block">नियम: Table पहले 2NF में होनी चाहिए, और कोई <strong>Transitive Dependency</strong> नहीं होनी चाहिए।</p>
+        <p data-en="block" class="block">Rule: the table must first be in 2NF, and there should be no <strong>Transitive Dependency</strong>.</p>
+
+        <h3 data-hi="flex" class="flex">BCNF — Boyce-Codd Normal Form</h3>
+        <h3 data-en="flex" class="flex">BCNF — Boyce-Codd Normal Form</h3>
+        <p data-hi="block" class="block">3NF का strict version। नियम: हर Functional Dependency में, बायीं ओर वाला attribute (Determinant) एक <strong>Super Key</strong> होना चाहिए।</p>
+        <p data-en="block" class="block">A stricter version of 3NF. Rule: in every Functional Dependency, the left-side attribute (Determinant) must be a <strong>Super Key</strong>.</p>
+
+        <table>
+          <tr><th>Normal Form</th><th data-hi="inline">मुख्य शर्त</th><th data-en="inline">Main Condition</th></tr>
+          <tr><td>1NF</td><td><span data-hi="inline">Atomic values, कोई repeating group नहीं</span><span data-en="inline">Atomic values, no repeating groups</span></td></tr>
+          <tr><td>2NF</td><td><span data-hi="inline">1NF + कोई Partial Dependency नहीं</span><span data-en="inline">1NF + no Partial Dependency</span></td></tr>
+          <tr><td>3NF</td><td><span data-hi="inline">2NF + कोई Transitive Dependency नहीं</span><span data-en="inline">2NF + no Transitive Dependency</span></td></tr>
+          <tr><td>BCNF</td><td><span data-hi="inline">3NF + हर Determinant एक Super Key हो</span><span data-en="inline">3NF + every Determinant must be a Super Key</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Functional Dependency क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is Functional Dependency?</h3>
+        <p data-hi="block" class="block">अगर attribute A की value से attribute B की value निश्चित होती है, तो कहते हैं B, A पर functionally dependent है — इसे <code>A → B</code> लिखा जाता है। जैसे: Roll_No → Name।</p>
+        <p data-en="block" class="block">If the value of attribute A determines the value of attribute B, then B is said to be functionally dependent on A — written as <code>A → B</code>. Example: Roll_No → Name.</p>
+
+        <div class="imp-box">
+          <span data-hi="inline"><b>Exam Tip:</b> 1NF, 2NF, 3NF की परिभाषा और उदाहरण देना बहुत common question है।</span>
+          <span data-en="inline"><b>Exam Tip:</b> Giving definitions and examples of 1NF, 2NF, 3NF is a very common question.</span>
+        </div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">Normalization किसे कहते हैं? 1NF, 2NF, 3NF को उदाहरण सहित समझाइए। Normalization के लाभ लिखिए। Functional Dependency क्या है?</span>
+          <span data-en="inline">What is Normalization? Explain 1NF, 2NF, 3NF with examples. Write the benefits of Normalization. What is Functional Dependency?</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 7 -->
+    <section class="unit-card" id="unit7">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 07 · SQL</span><span data-en="inline">Unit 07 · SQL</span></span>
+        <h2><span data-hi="inline">SQL Basics (एसक्यूएल की बुनियाद)</span><span data-en="inline">SQL Basics</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">SQL क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is SQL?</h3>
+        <p data-hi="block" class="block"><strong>SQL (Structured Query Language)</strong> एक standard language है जिसका इस्तेमाल relational database के साथ काम करने के लिए होता है — जैसे data store करना, retrieve करना, update करना और delete करना।</p>
+        <p data-en="block" class="block"><strong>SQL (Structured Query Language)</strong> is a standard language used to work with relational databases — such as storing, retrieving, updating, and deleting data.</p>
+
+        <h3 data-hi="flex" class="flex">SQL Commands की Categories</h3>
+        <h3 data-en="flex" class="flex">Categories of SQL Commands</h3>
+        <table>
+          <tr><th>Category</th><th>Full Form</th><th data-hi="inline">काम</th><th data-en="inline">Function</th><th>Commands</th></tr>
+          <tr><td>DDL</td><td>Data Definition Language</td><td><span data-hi="inline">Database structure बनाना/बदलना</span><span data-en="inline">Create/change database structure</span></td><td>CREATE, ALTER, DROP, TRUNCATE</td></tr>
+          <tr><td>DML</td><td>Data Manipulation Language</td><td><span data-hi="inline">Data को manipulate करना</span><span data-en="inline">Manipulate data</span></td><td>INSERT, UPDATE, DELETE</td></tr>
+          <tr><td>DQL</td><td>Data Query Language</td><td><span data-hi="inline">Data को query/retrieve करना</span><span data-en="inline">Query/retrieve data</span></td><td>SELECT</td></tr>
+          <tr><td>DCL</td><td>Data Control Language</td><td><span data-hi="inline">Access permissions देना/हटाना</span><span data-en="inline">Give/remove access permissions</span></td><td>GRANT, REVOKE</td></tr>
+          <tr><td>TCL</td><td>Transaction Control Language</td><td><span data-hi="inline">Transactions को control करना</span><span data-en="inline">Control transactions</span></td><td>COMMIT, ROLLBACK, SAVEPOINT</td></tr>
+        </table>
+
+        <div class="note-box">
+          <span data-hi="inline"><b>याद रखने का तरीका:</b> "DDL बनाता है, DML बदलता है, DQL पूछता है, DCL अनुमति देता है, TCL नियंत्रण रखता है।"</span>
+          <span data-en="inline"><b>Memory tip:</b> "DDL defines, DML modifies, DQL queries, DCL controls access, TCL controls transactions."</span>
+        </div>
+
+        <h3 data-hi="flex" class="flex">SQL Data Types (सामान्य)</h3>
+        <h3 data-en="flex" class="flex">SQL Data Types (Common)</h3>
+        <table>
+          <tr><th>Data Type</th><th data-hi="inline">इस्तेमाल</th><th data-en="inline">Usage</th></tr>
+          <tr><td>INT</td><td><span data-hi="inline">पूर्णांक (whole numbers)</span><span data-en="inline">Whole numbers</span></td></tr>
+          <tr><td>VARCHAR(n)</td><td><span data-hi="inline">Variable length text (n characters तक)</span><span data-en="inline">Variable length text (up to n characters)</span></td></tr>
+          <tr><td>CHAR(n)</td><td><span data-hi="inline">Fixed length text</span><span data-en="inline">Fixed length text</span></td></tr>
+          <tr><td>DATE</td><td><span data-hi="inline">तारीख (YYYY-MM-DD)</span><span data-en="inline">Date (YYYY-MM-DD)</span></td></tr>
+          <tr><td>FLOAT / DECIMAL</td><td><span data-hi="inline">दशमलव संख्या</span><span data-en="inline">Decimal numbers</span></td></tr>
+          <tr><td>BOOLEAN</td><td><span data-hi="inline">True/False value</span><span data-en="inline">True/False value</span></td></tr>
+        </table>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">SQL क्या है? DDL और DML में अंतर बताइए। SQL की categories कौन-कौन सी हैं?</span>
+          <span data-en="inline">What is SQL? Differentiate between DDL and DML. What are the categories of SQL?</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 8 -->
+    <section class="unit-card" id="unit8">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 08 · SQL</span><span data-en="inline">Unit 08 · SQL</span></span>
+        <h2><span data-hi="inline">SQL Commands (पूरी सूची के साथ)</span><span data-en="inline">SQL Commands (Full List)</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">DDL Commands</h3>
+        <h3 data-en="flex" class="flex">DDL Commands</h3>
+        <div class="code-block"><span class="cmt" data-hi="inline">-- Database बनाना</span><span class="cmt" data-en="inline">-- Creating a database</span>
+CREATE DATABASE School;
+
+<span class="cmt" data-hi="inline">-- Table बनाना</span><span class="cmt" data-en="inline">-- Creating a table</span>
+CREATE TABLE Student (
+  Roll_No INT PRIMARY KEY,
+  Name VARCHAR(50),
+  Class VARCHAR(20),
+  Marks INT
+);
+
+<span class="cmt" data-hi="inline">-- Table की structure बदलना (नया column जोड़ना)</span><span class="cmt" data-en="inline">-- Changing table structure (adding new column)</span>
+ALTER TABLE Student ADD Email VARCHAR(50);
+
+<span class="cmt" data-hi="inline">-- Table को पूरी तरह डिलीट करना</span><span class="cmt" data-en="inline">-- Deleting the table completely</span>
+DROP TABLE Student;
+
+<span class="cmt" data-hi="inline">-- Table का सारा data हटाना (structure रहती है)</span><span class="cmt" data-en="inline">-- Removing all data (structure remains)</span>
+TRUNCATE TABLE Student;</div>
+
+        <h3 data-hi="flex" class="flex">DML Commands</h3>
+        <h3 data-en="flex" class="flex">DML Commands</h3>
+        <div class="code-block"><span class="cmt" data-hi="inline">-- नया record डालना</span><span class="cmt" data-en="inline">-- Inserting a new record</span>
+INSERT INTO Student (Roll_No, Name, Class, Marks)
+VALUES (1, 'Suraj', 'COPA', 85);
+
+<span class="cmt" data-hi="inline">-- Record update करना</span><span class="cmt" data-en="inline">-- Updating a record</span>
+UPDATE Student
+SET Marks = 90
+WHERE Roll_No = 1;
+
+<span class="cmt" data-hi="inline">-- Record डिलीट करना</span><span class="cmt" data-en="inline">-- Deleting a record</span>
+DELETE FROM Student
+WHERE Roll_No = 1;</div>
+
+        <h3 data-hi="flex" class="flex">DQL Command — SELECT</h3>
+        <h3 data-en="flex" class="flex">DQL Command — SELECT</h3>
+        <div class="code-block"><span class="cmt" data-hi="inline">-- सारा data देखना</span><span class="cmt" data-en="inline">-- View all data</span>
+SELECT * FROM Student;
+
+<span class="cmt" data-hi="inline">-- खास columns देखना</span><span class="cmt" data-en="inline">-- View specific columns</span>
+SELECT Name, Marks FROM Student;
+
+<span class="cmt" data-hi="inline">-- शर्त के साथ data देखना</span><span class="cmt" data-en="inline">-- View data with condition</span>
+SELECT * FROM Student WHERE Marks > 80;
+
+<span class="cmt" data-hi="inline">-- Sorting करना</span><span class="cmt" data-en="inline">-- Sorting</span>
+SELECT * FROM Student ORDER BY Marks DESC;
+
+<span class="cmt" data-hi="inline">-- Grouping करना</span><span class="cmt" data-en="inline">-- Grouping</span>
+SELECT Class, COUNT(*) FROM Student GROUP BY Class;</div>
+
+        <h3 data-hi="flex" class="flex">DCL Commands</h3>
+        <h3 data-en="flex" class="flex">DCL Commands</h3>
+        <div class="code-block"><span class="cmt" data-hi="inline">-- Permission देना</span><span class="cmt" data-en="inline">-- Giving permission</span>
+GRANT SELECT, INSERT ON Student TO 'user1';
+
+<span class="cmt" data-hi="inline">-- Permission हटाना</span><span class="cmt" data-en="inline">-- Removing permission</span>
+REVOKE INSERT ON Student FROM 'user1';</div>
+
+        <h3 data-hi="flex" class="flex">TCL Commands</h3>
+        <h3 data-en="flex" class="flex">TCL Commands</h3>
+        <div class="code-block"><span class="cmt" data-hi="inline">-- बदलावों को permanently save करना</span><span class="cmt" data-en="inline">-- Permanently saving changes</span>
+COMMIT;
+
+<span class="cmt" data-hi="inline">-- बदलावों को पीछे (undo) करना</span><span class="cmt" data-en="inline">-- Undoing changes</span>
+ROLLBACK;
+
+<span class="cmt" data-hi="inline">-- एक checkpoint बनाना</span><span class="cmt" data-en="inline">-- Creating a checkpoint</span>
+SAVEPOINT sp1;</div>
+
+        <h3 data-hi="flex" class="flex">WHERE Clause में Operators</h3>
+        <h3 data-en="flex" class="flex">Operators in WHERE Clause</h3>
+        <table>
+          <tr><th>Operator</th><th data-hi="inline">मतलब</th><th data-en="inline">Meaning</th></tr>
+          <tr><td>=, &gt;, &lt;, &gt;=, &lt;=, !=</td><td><span data-hi="inline">तुलना करना</span><span data-en="inline">Comparison</span></td></tr>
+          <tr><td>AND, OR, NOT</td><td><span data-hi="inline">एक से ज़्यादा conditions जोड़ना</span><span data-en="inline">Combine multiple conditions</span></td></tr>
+          <tr><td>BETWEEN</td><td><span data-hi="inline">दो values के बीच की range चुनना</span><span data-en="inline">Select a range between two values</span></td></tr>
+          <tr><td>IN</td><td><span data-hi="inline">दी गई list में से कोई value match करे</span><span data-en="inline">Match any value from a given list</span></td></tr>
+          <tr><td>LIKE</td><td><span data-hi="inline">pattern match करना</span><span data-en="inline">Pattern matching</span></td></tr>
+          <tr><td>IS NULL</td><td><span data-hi="inline">खाली (NULL) values खोजना</span><span data-en="inline">Find NULL values</span></td></tr>
+        </table>
+
+        <div class="code-block"><span class="cmt" data-hi="inline">-- Operators के उदाहरण</span><span class="cmt" data-en="inline">-- Operator examples</span>
+SELECT * FROM Student WHERE Marks BETWEEN 70 AND 90;
+SELECT * FROM Student WHERE Class IN ('COPA','Fitter');
+SELECT * FROM Student WHERE Name LIKE 'S%';
+SELECT * FROM Student WHERE Email IS NULL;</div>
+
+        <div class="imp-box">
+          <span data-hi="inline"><b>Exam Tip:</b> Syntax याद रखते हुए हर command के साथ एक छोटा example भी लिख दें।</span>
+          <span data-en="inline"><b>Exam Tip:</b> While memorizing syntax, also write a small example for each command.</span>
+        </div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">SELECT, INSERT, UPDATE, DELETE की syntax लिखिए। WHERE clause में कौन-कौन से operators इस्तेमाल होते हैं? DROP और TRUNCATE में अंतर बताइए।</span>
+          <span data-en="inline">Write the syntax of SELECT, INSERT, UPDATE, DELETE. What operators are used in the WHERE clause? Differentiate between DROP and TRUNCATE.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 9 -->
+    <section class="unit-card" id="unit9">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 09 · SQL</span><span data-en="inline">Unit 09 · SQL</span></span>
+        <h2><span data-hi="inline">Joins & Functions</span><span data-en="inline">Joins & Functions</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">SQL Joins क्या हैं?</h3>
+        <h3 data-en="flex" class="flex">What are SQL Joins?</h3>
+        <p data-hi="block" class="block">Join का इस्तेमाल दो या ज़्यादा tables का data एक साथ जोड़कर निकालने के लिए होता है, आमतौर पर एक common column के आधार पर।</p>
+        <p data-en="block" class="block">A Join is used to combine data from two or more tables, usually based on a common column.</p>
+
+        <table>
+          <tr><th>Join Type</th><th data-hi="inline">क्या करता है</th><th data-en="inline">What it does</th></tr>
+          <tr><td>INNER JOIN</td><td><span data-hi="inline">सिर्फ वो rows देता है जो दोनों tables में match करती हैं</span><span data-en="inline">Returns only rows that match in both tables</span></td></tr>
+          <tr><td>LEFT JOIN</td><td><span data-hi="inline">बायीं table की सारी rows + matching rows दायीं table से</span><span data-en="inline">All rows from left table + matching rows from right table</span></td></tr>
+          <tr><td>RIGHT JOIN</td><td><span data-hi="inline">दायीं table की सारी rows + matching rows बायीं table से</span><span data-en="inline">All rows from right table + matching rows from left table</span></td></tr>
+          <tr><td>FULL JOIN</td><td><span data-hi="inline">दोनों tables की सारी rows, चाहे match हों या नहीं</span><span data-en="inline">All rows from both tables, matched or not</span></td></tr>
+          <tr><td>SELF JOIN</td><td><span data-hi="inline">एक table को खुद के साथ join करना</span><span data-en="inline">Joining a table with itself</span></td></tr>
+        </table>
+
+        <div class="code-block"><span class="cmt" data-hi="inline">-- INNER JOIN उदाहरण</span><span class="cmt" data-en="inline">-- INNER JOIN example</span>
+SELECT Student.Name, Marks.Marks
+FROM Student
+INNER JOIN Marks
+ON Student.Roll_No = Marks.Roll_No;</div>
+
+        <h3 data-hi="flex" class="flex">Aggregate Functions</h3>
+        <h3 data-en="flex" class="flex">Aggregate Functions</h3>
+        <table>
+          <tr><th>Function</th><th data-hi="inline">काम</th><th data-en="inline">Function</th></tr>
+          <tr><td>COUNT()</td><td><span data-hi="inline">rows की संख्या गिनना</span><span data-en="inline">Counts number of rows</span></td></tr>
+          <tr><td>SUM()</td><td><span data-hi="inline">values का योग निकालना</span><span data-en="inline">Adds up values</span></td></tr>
+          <tr><td>AVG()</td><td><span data-hi="inline">औसत निकालना</span><span data-en="inline">Calculates average</span></td></tr>
+          <tr><td>MAX()</td><td><span data-hi="inline">सबसे बड़ी value निकालना</span><span data-en="inline">Finds maximum value</span></td></tr>
+          <tr><td>MIN()</td><td><span data-hi="inline">सबसे छोटी value निकालना</span><span data-en="inline">Finds minimum value</span></td></tr>
+        </table>
+
+        <div class="code-block"><span class="cmt" data-hi="inline">-- Aggregate Functions उदाहरण</span><span class="cmt" data-en="inline">-- Aggregate Functions example</span>
+SELECT AVG(Marks) FROM Student;
+SELECT MAX(Marks), MIN(Marks) FROM Student;
+SELECT COUNT(*) FROM Student WHERE Class='COPA';</div>
+
+        <h3 data-hi="flex" class="flex">GROUP BY और HAVING</h3>
+        <h3 data-en="flex" class="flex">GROUP BY and HAVING</h3>
+        <p data-hi="block" class="block"><strong>GROUP BY</strong> rows को groups में बांटता है। <strong>HAVING</strong> उन groups पर condition लगाता है (WHERE की तरह, पर groups के लिए)।</p>
+        <p data-en="block" class="block"><strong>GROUP BY</strong> divides rows into groups. <strong>HAVING</strong> applies a condition on those groups (like WHERE, but for groups).</p>
+        <div class="code-block">SELECT Class, AVG(Marks)
+FROM Student
+GROUP BY Class
+HAVING AVG(Marks) > 75;</div>
+
+        <h3 data-hi="flex" class="flex">Subquery (उप-प्रश्न)</h3>
+        <h3 data-en="flex" class="flex">Subquery</h3>
+        <p data-hi="block" class="block">एक query के अंदर दूसरी query — पहले अंदर वाली query चलती है, फिर उसका result बाहर वाली query इस्तेमाल करती है।</p>
+        <p data-en="block" class="block">A query inside another query — the inner query runs first, then its result is used by the outer query.</p>
+        <div class="code-block">SELECT Name FROM Student
+WHERE Marks > (SELECT AVG(Marks) FROM Student);</div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">JOIN किसे कहते हैं? INNER JOIN और LEFT JOIN में अंतर बताइए। Aggregate Functions के नाम और उदाहरण लिखिए। GROUP BY और HAVING में अंतर बताइए।</span>
+          <span data-en="inline">What is JOIN? Differentiate between INNER JOIN and LEFT JOIN. Write names and examples of Aggregate Functions. Differentiate between GROUP BY and HAVING.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 10 -->
+    <section class="unit-card" id="unit10">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 10 · एडवांस</span><span data-en="inline">Unit 10 · Advanced</span></span>
+        <h2><span data-hi="inline">Transactions & ACID Properties</span><span data-en="inline">Transactions & ACID Properties</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Transaction क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is a Transaction?</h3>
+        <p data-hi="block" class="block">Transaction database पर किए गए operations का एक logical unit होता है, जो या तो पूरी तरह complete होता है या बिल्कुल नहीं होता। जैसे बैंक में पैसे transfer करना।</p>
+        <p data-en="block" class="block">A Transaction is a logical unit of operations performed on a database, which either completes fully or not at all. Example: transferring money in a bank.</p>
+
+        <h3 data-hi="flex" class="flex">Transaction के States</h3>
+        <h3 data-en="flex" class="flex">States of a Transaction</h3>
+        <ul data-hi="block" class="block">
+          <li><strong>Active</strong> — Transaction चल रहा है</li>
+          <li><strong>Partially Committed</strong> — आखिरी operation पूरा हो गया है</li>
+          <li><strong>Committed</strong> — Transaction सफलतापूर्वक पूरा हो गया</li>
+          <li><strong>Failed</strong> — Transaction में कोई error आ गया</li>
+          <li><strong>Aborted</strong> — Transaction को rollback कर दिया गया</li>
+        </ul>
+        <ul data-en="block" class="block">
+          <li><strong>Active</strong> — the transaction is running</li>
+          <li><strong>Partially Committed</strong> — the last operation has completed</li>
+          <li><strong>Committed</strong> — the transaction has completed successfully</li>
+          <li><strong>Failed</strong> — an error occurred in the transaction</li>
+          <li><strong>Aborted</strong> — the transaction has been rolled back</li>
+        </ul>
+
+        <h3 data-hi="flex" class="flex">ACID Properties</h3>
+        <h3 data-en="flex" class="flex">ACID Properties</h3>
+        <table>
+          <tr><th>Property</th><th data-hi="inline">मतलब</th><th data-en="inline">Meaning</th></tr>
+          <tr><td><strong>A</strong>tomicity</td><td><span data-hi="inline">Transaction या तो पूरा होगा या बिल्कुल नहीं होगा</span><span data-en="inline">Transaction either completes fully or not at all</span></td></tr>
+          <tr><td><strong>C</strong>onsistency</td><td><span data-hi="inline">Transaction के पहले और बाद database हमेशा valid state में रहेगा</span><span data-en="inline">Database remains in a valid state before and after the transaction</span></td></tr>
+          <tr><td><strong>I</strong>solation</td><td><span data-hi="inline">एक साथ चल रहे कई transactions एक-दूसरे को प्रभावित नहीं करेंगे</span><span data-en="inline">Multiple transactions running simultaneously won't affect each other</span></td></tr>
+          <tr><td><strong>D</strong>urability</td><td><span data-hi="inline">एक बार commit होने के बाद changes permanent रहेंगे</span><span data-en="inline">Once committed, changes remain permanent</span></td></tr>
+        </table>
+
+        <div class="note-box">
+          <span data-hi="inline"><b>याद रखने का तरीका:</b> "ACID" शब्द ही याद रखें — Atomicity, Consistency, Isolation, Durability।</span>
+          <span data-en="inline"><b>Memory tip:</b> Just remember the word "ACID" — Atomicity, Consistency, Isolation, Durability.</span>
+        </div>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">Transaction किसे कहते हैं? ACID Properties को उदाहरण सहित समझाइए। Transaction के States कौन-कौन से हैं?</span>
+          <span data-en="inline">What is a Transaction? Explain ACID Properties with examples. What are the States of a Transaction?</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 11 -->
+    <section class="unit-card" id="unit11">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 11 · एडवांस</span><span data-en="inline">Unit 11 · Advanced</span></span>
+        <h2><span data-hi="inline">Concurrency Control</span><span data-en="inline">Concurrency Control</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Concurrency Control क्यों ज़रूरी है?</h3>
+        <h3 data-en="flex" class="flex">Why is Concurrency Control Needed?</h3>
+        <p data-hi="block" class="block">जब कई users एक साथ database को access करते हैं तो data में गड़बड़ी हो सकती है। Concurrency Control techniques इसे रोकती हैं।</p>
+        <p data-en="block" class="block">When multiple users access a database simultaneously, data inconsistencies can occur. Concurrency Control techniques prevent this.</p>
+
+        <h3 data-hi="flex" class="flex">Concurrency से होने वाली समस्याएं</h3>
+        <h3 data-en="flex" class="flex">Problems Caused by Concurrency</h3>
+        <table>
+          <tr><th data-hi="inline">समस्या</th><th data-en="inline">Problem</th><th data-hi="inline">क्या होता है</th><th data-en="inline">What happens</th></tr>
+          <tr><td>Lost Update</td><td><span data-hi="inline">दो transactions एक साथ data update करते हैं और एक का update खो जाता है</span><span data-en="inline">Two transactions update data simultaneously and one's update is lost</span></td></tr>
+          <tr><td>Dirty Read</td><td><span data-hi="inline">एक transaction दूसरे का uncommitted data पढ़ लेता है</span><span data-en="inline">A transaction reads another's uncommitted data</span></td></tr>
+          <tr><td>Unrepeatable Read</td><td><span data-hi="inline">एक transaction में बार-बार पढ़ने पर अलग-अलग value मिलती है</span><span data-en="inline">Reading repeatedly within one transaction gives different values</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Concurrency Control की Techniques</h3>
+        <h3 data-en="flex" class="flex">Concurrency Control Techniques</h3>
+        <ul data-hi="block" class="block">
+          <li><strong>Lock-Based Protocol</strong> — data पर lock लगाकर एक समय में सिर्फ एक transaction को access देना</li>
+          <li><strong>Time-Stamping Protocol</strong> — हर transaction को एक unique timestamp देकर उनका order तय करना</li>
+          <li><strong>Optimistic Control</strong> — मान लेना कि conflict कम होगा, और सिर्फ अंत में check करना</li>
+        </ul>
+        <ul data-en="block" class="block">
+          <li><strong>Lock-Based Protocol</strong> — gives access to only one transaction at a time by locking the data</li>
+          <li><strong>Time-Stamping Protocol</strong> — gives every transaction a unique timestamp to fix their order</li>
+          <li><strong>Optimistic Control</strong> — assumes conflicts will be rare, checks only at the end</li>
+        </ul>
+
+        <h3 data-hi="flex" class="flex">Deadlock क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is a Deadlock?</h3>
+        <p data-hi="block" class="block">Deadlock तब होता है जब दो या ज़्यादा transactions एक-दूसरे के resource को पाने के लिए wait करते रहते हैं और कोई भी आगे नहीं बढ़ पाता।</p>
+        <p data-en="block" class="block">A Deadlock occurs when two or more transactions keep waiting for each other's resources, and none can proceed.</p>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">Concurrency Control क्यों ज़रूरी है? Lock-Based Protocol क्या है? Deadlock किसे कहते हैं?</span>
+          <span data-en="inline">Why is Concurrency Control needed? What is a Lock-Based Protocol? What is a Deadlock?</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 12 -->
+    <section class="unit-card" id="unit12">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 12 · एडवांस</span><span data-en="inline">Unit 12 · Advanced</span></span>
+        <h2><span data-hi="inline">Indexing & File Organization</span><span data-en="inline">Indexing & File Organization</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Indexing क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is Indexing?</h3>
+        <p data-hi="block" class="block">Index एक data structure है जो database में data को तेज़ी से ढूंढने में मदद करता है — ठीक उसी तरह जैसे किताब के Index से कोई topic जल्दी मिल जाता है।</p>
+        <p data-en="block" class="block">An Index is a data structure that helps search data faster in a database — just like a book's Index helps find a topic quickly.</p>
+
+        <h3 data-hi="flex" class="flex">Index के प्रकार</h3>
+        <h3 data-en="flex" class="flex">Types of Index</h3>
+        <table>
+          <tr><th>Index Type</th><th data-hi="inline">विशेषता</th><th data-en="inline">Feature</th></tr>
+          <tr><td>Primary Index</td><td><span data-hi="inline">Primary Key पर बना index, data sorted order में रहता है</span><span data-en="inline">Index built on Primary Key, data stays in sorted order</span></td></tr>
+          <tr><td>Secondary Index</td><td><span data-hi="inline">Non-key attribute पर बना index</span><span data-en="inline">Index built on a non-key attribute</span></td></tr>
+          <tr><td>Clustered Index</td><td><span data-hi="inline">Table के actual data को sort करके रखता है (एक table में सिर्फ एक हो सकता है)</span><span data-en="inline">Sorts the actual table data (only one allowed per table)</span></td></tr>
+          <tr><td>Non-Clustered Index</td><td><span data-hi="inline">Data को sort नहीं करता, सिर्फ एक pointer table बनाता है</span><span data-en="inline">Doesn't sort data, just creates a pointer table</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">File Organization के तरीके</h3>
+        <h3 data-en="flex" class="flex">File Organization Methods</h3>
+        <ul data-hi="block" class="block">
+          <li><strong>Sequential File Organization</strong> — records को क्रम में, एक के बाद एक store करना</li>
+          <li><strong>Heap File Organization</strong> — records को बिना किसी क्रम के कहीं भी खाली जगह में store करना</li>
+          <li><strong>Hash File Organization</strong> — एक hash function की मदद से record का location निकालना</li>
+          <li><strong>Clustered File Organization</strong> — related records को पास-पास store करना</li>
+        </ul>
+        <ul data-en="block" class="block">
+          <li><strong>Sequential File Organization</strong> — stores records in order, one after another</li>
+          <li><strong>Heap File Organization</strong> — stores records anywhere in available free space, with no order</li>
+          <li><strong>Hash File Organization</strong> — finds a record's location using a hash function</li>
+          <li><strong>Clustered File Organization</strong> — stores related records close together</li>
+        </ul>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">Indexing क्या है और क्यों ज़रूरी है? Clustered और Non-Clustered Index में अंतर बताइए। File Organization के प्रकार लिखिए।</span>
+          <span data-en="inline">What is Indexing and why is it needed? Differentiate between Clustered and Non-Clustered Index. List the types of File Organization.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 13 -->
+    <section class="unit-card" id="unit13">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 13 · एडवांस</span><span data-en="inline">Unit 13 · Advanced</span></span>
+        <h2><span data-hi="inline">Backup, Recovery & Security</span><span data-en="inline">Backup, Recovery & Security</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">Backup क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is Backup?</h3>
+        <p data-hi="block" class="block">Backup database की एक copy बनाने की process है ताकि अगर original data खराब हो जाए या खो जाए, तो उसे वापस पाया जा सके।</p>
+        <p data-en="block" class="block">Backup is the process of making a copy of the database so that if the original data is damaged or lost, it can be recovered.</p>
+
+        <h3 data-hi="flex" class="flex">Backup के प्रकार</h3>
+        <h3 data-en="flex" class="flex">Types of Backup</h3>
+        <ul data-hi="block" class="block">
+          <li><strong>Full Backup</strong> — पूरे database की पूरी copy</li>
+          <li><strong>Incremental Backup</strong> — सिर्फ वो data जो पिछले backup के बाद बदला है</li>
+          <li><strong>Differential Backup</strong> — आखिरी full backup के बाद का सारा बदला हुआ data</li>
+        </ul>
+        <ul data-en="block" class="block">
+          <li><strong>Full Backup</strong> — a complete copy of the entire database</li>
+          <li><strong>Incremental Backup</strong> — only the data that changed since the last backup</li>
+          <li><strong>Differential Backup</strong> — all changed data since the last full backup</li>
+        </ul>
+
+        <h3 data-hi="flex" class="flex">Recovery क्या है?</h3>
+        <h3 data-en="flex" class="flex">What is Recovery?</h3>
+        <p data-hi="block" class="block">System crash या failure होने के बाद database को वापस एक consistent state में लाने की process को Recovery कहते हैं। इसमें Log files का इस्तेमाल होता है।</p>
+        <p data-en="block" class="block">Recovery is the process of bringing the database back to a consistent state after a system crash or failure. Log files are used for this.</p>
+
+        <h3 data-hi="flex" class="flex">Database Security</h3>
+        <h3 data-en="flex" class="flex">Database Security</h3>
+        <ul data-hi="block" class="block">
+          <li><strong>Authentication</strong> — username/password से user की पहचान verify करना</li>
+          <li><strong>Authorization</strong> — user को सिर्फ उतनी permission देना जितनी ज़रूरी है</li>
+          <li><strong>Encryption</strong> — data को code में बदलना ताकि कोई बिना key के पढ़ न सके</li>
+          <li><strong>Views</strong> — user को सिर्फ ज़रूरी data दिखाना, पूरा table नहीं</li>
+        </ul>
+        <ul data-en="block" class="block">
+          <li><strong>Authentication</strong> — verifying user identity via username/password</li>
+          <li><strong>Authorization</strong> — giving users only as much permission as necessary</li>
+          <li><strong>Encryption</strong> — converting data into code so no one can read it without the key</li>
+          <li><strong>Views</strong> — showing users only necessary data, not the whole table</li>
+        </ul>
+
+        <div class="qbox">
+          <b data-hi="block" class="block">संभावित परीक्षा प्रश्न</b>
+          <b data-en="block" class="block">Likely Exam Questions</b>
+          <span data-hi="inline">Backup और Recovery में अंतर बताइए। Database Security के तरीके लिखिए। Authentication और Authorization में अंतर बताइए।</span>
+          <span data-en="inline">Differentiate between Backup and Recovery. List the methods of Database Security. Differentiate between Authentication and Authorization.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT 14 -->
+    <section class="unit-card" id="unit14">
+      <div class="unit-head">
+        <span class="unit-tag"><span data-hi="inline">Unit 14 · रिवीज़न</span><span data-en="inline">Unit 14 · Revision</span></span>
+        <h2><span data-hi="inline">Important Q&A — फटाफट रिवीज़न</span><span data-en="inline">Important Q&A — Quick Revision</span></h2>
+      </div>
+      <div class="unit-body">
+        <h3 data-hi="flex" class="flex">1-line Definitions (रटने के लिए)</h3>
+        <h3 data-en="flex" class="flex">1-line Definitions (to memorize)</h3>
+        <ul data-hi="block" class="block">
+          <li><strong>DBMS</strong> — Software जो database को manage करता है</li>
+          <li><strong>RDBMS</strong> — DBMS जो data को tables में store करता है</li>
+          <li><strong>Primary Key</strong> — Unique identifier, NULL नहीं हो सकती</li>
+          <li><strong>Foreign Key</strong> — दूसरी table की Primary Key को refer करने वाला attribute</li>
+          <li><strong>Normalization</strong> — Data redundancy कम करने की process</li>
+          <li><strong>SQL</strong> — Database से बात करने की standard language</li>
+          <li><strong>Transaction</strong> — Database operations का logical unit</li>
+          <li><strong>ACID</strong> — Atomicity, Consistency, Isolation, Durability</li>
+          <li><strong>Index</strong> — Data खोजने को तेज़ बनाने वाली structure</li>
+          <li><strong>Join</strong> — कई tables का data जोड़कर निकालना</li>
+        </ul>
+        <ul data-en="block" class="block">
+          <li><strong>DBMS</strong> — software that manages a database</li>
+          <li><strong>RDBMS</strong> — a DBMS that stores data in tables</li>
+          <li><strong>Primary Key</strong> — unique identifier, cannot be NULL</li>
+          <li><strong>Foreign Key</strong> — an attribute that refers to another table's Primary Key</li>
+          <li><strong>Normalization</strong> — the process of reducing data redundancy</li>
+          <li><strong>SQL</strong> — the standard language for talking to databases</li>
+          <li><strong>Transaction</strong> — a logical unit of database operations</li>
+          <li><strong>ACID</strong> — Atomicity, Consistency, Isolation, Durability</li>
+          <li><strong>Index</strong> — a structure that speeds up data searching</li>
+          <li><strong>Join</strong> — combining data from multiple tables</li>
+        </ul>
+
+        <h3 data-hi="flex" class="flex">DBMS vs RDBMS</h3>
+        <h3 data-en="flex" class="flex">DBMS vs RDBMS</h3>
+        <table>
+          <tr><th>DBMS</th><th>RDBMS</th></tr>
+          <tr><td><span data-hi="inline">Data files के रूप में store होता है</span><span data-en="inline">Data is stored as files</span></td><td><span data-hi="inline">Data tables के रूप में store होता है</span><span data-en="inline">Data is stored as tables</span></td></tr>
+          <tr><td><span data-hi="inline">Relationships ज़रूरी नहीं</span><span data-en="inline">Relationships not necessary</span></td><td><span data-hi="inline">Tables के बीच relationships होती हैं</span><span data-en="inline">Relationships exist between tables</span></td></tr>
+          <tr><td><span data-hi="inline">Example: XML, File System DBs</span><span data-en="inline">Example: XML, File System DBs</span></td><td><span data-hi="inline">Example: MySQL, Oracle, SQL Server</span><span data-en="inline">Example: MySQL, Oracle, SQL Server</span></td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">महत्वपूर्ण Full Forms</h3>
+        <h3 data-en="flex" class="flex">Important Full Forms</h3>
+        <table>
+          <tr><th>Short</th><th>Full Form</th></tr>
+          <tr><td>DBMS</td><td>Database Management System</td></tr>
+          <tr><td>RDBMS</td><td>Relational Database Management System</td></tr>
+          <tr><td>SQL</td><td>Structured Query Language</td></tr>
+          <tr><td>DDL</td><td>Data Definition Language</td></tr>
+          <tr><td>DML</td><td>Data Manipulation Language</td></tr>
+          <tr><td>DCL</td><td>Data Control Language</td></tr>
+          <tr><td>TCL</td><td>Transaction Control Language</td></tr>
+          <tr><td>ER</td><td>Entity Relationship</td></tr>
+          <tr><td>ACID</td><td>Atomicity, Consistency, Isolation, Durability</td></tr>
+          <tr><td>BCNF</td><td>Boyce-Codd Normal Form</td></tr>
+        </table>
+
+        <h3 data-hi="flex" class="flex">Frequently Asked Long Questions</h3>
+        <h3 data-en="flex" class="flex">Frequently Asked Long Questions</h3>
+        <ol data-hi="block" class="block">
+          <li>DBMS की परिभाषा देते हुए इसके लाभ और हानि लिखिए।</li>
+          <li>ER Model क्या है? एक उदाहरण के साथ समझाइए और diagram बनाइए।</li>
+          <li>Normalization क्या है? 1NF, 2NF, 3NF को उदाहरण सहित समझाइए।</li>
+          <li>Primary Key, Foreign Key और Candidate Key में अंतर स्पष्ट कीजिए।</li>
+          <li>SQL की categories (DDL, DML, DCL, TCL) को उदाहरण सहित समझाइए।</li>
+          <li>ACID Properties को उदाहरण सहित समझाइए।</li>
+          <li>JOIN क्या है? इसके प्रकार उदाहरण सहित लिखिए।</li>
+          <li>Concurrency Control क्यों ज़रूरी है? इसकी techniques लिखिए।</li>
+        </ol>
+        <ol data-en="block" class="block">
+          <li>Define DBMS and write its advantages and disadvantages.</li>
+          <li>What is ER Model? Explain with an example and draw a diagram.</li>
+          <li>What is Normalization? Explain 1NF, 2NF, 3NF with examples.</li>
+          <li>Differentiate between Primary Key, Foreign Key and Candidate Key.</li>
+          <li>Explain SQL categories (DDL, DML, DCL, TCL) with examples.</li>
+          <li>Explain ACID Properties with examples.</li>
+          <li>What is JOIN? Write its types with examples.</li>
+          <li>Why is Concurrency Control needed? Write its techniques.</li>
+        </ol>
+
+        <div class="imp-box">
+          <span data-hi="inline"><b>आखिरी टिप:</b> पेपर से पहले सभी "संभावित परीक्षा प्रश्न" बॉक्स को एक बार ज़रूर पढ़ लें।</span>
+          <span data-en="inline"><b>Final Tip:</b> Before the exam, make sure to read through all the "Likely Exam Questions" boxes once.</span>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<button id="toTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<footer>
+  <span data-hi="inline">Made with 💚 for ITI-COPA students</span>
+  <span data-en="inline">Made with 💚 for ITI-COPA students</span>
+  &nbsp;·&nbsp; by <a href="https://surajtiwarrii.github.io/Portfolio/" target="_blank">Suraj Tiwari</a>
+</footer>
+
+<script>
+function setLang(lang){
+  document.documentElement.lang = lang;
+  document.getElementById('langToggle').dataset.lang = lang;
+  document.getElementById('btnHi').classList.toggle('active', lang==='hi');
+  document.getElementById('btnEn').classList.toggle('active', lang==='en');
+  const input = document.getElementById('searchInput');
+  input.placeholder = lang==='en' ? input.dataset.enPlaceholder : input.dataset.hiPlaceholder;
+  localStorage.setItem('dbmsNotesLang', lang);
+}
+document.addEventListener('DOMContentLoaded', ()=>{
+  const saved = localStorage.getItem('dbmsNotesLang') || 'hi';
+  setLang(saved);
+});
+
+function toggleSidebar(e){
+  if(e) e.stopPropagation();
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('open');
+}
+window.addEventListener('scroll',()=>{
+  document.getElementById('toTop').style.display = window.scrollY>400 ? 'flex':'none';
+});
+function liveSearch(){
+  const q = document.getElementById('searchInput').value.trim().toLowerCase();
+  const cards = document.querySelectorAll('.unit-card');
+  if(!q){ cards.forEach(c=>c.classList.remove('hide')); return; }
+  cards.forEach(card=>{
+    const text = card.innerText.toLowerCase();
+    card.classList.toggle('hide', !text.includes(q));
+  });
+}
+const links = document.querySelectorAll('.nav-link');
+const sections = document.querySelectorAll('.unit-card');
+window.addEventListener('scroll',()=>{
+  let current='';
+  sections.forEach(sec=>{ if(window.scrollY >= sec.offsetTop - 100) current = sec.id; });
+  links.forEach(l=>{ l.classList.toggle('active', l.getAttribute('href')==='#'+current); });
+});
+document.querySelectorAll('.nav-link').forEach(l=>{
+  l.addEventListener('click',()=>{ if(window.innerWidth<=880) toggleSidebar(); });
+});
+</script>
+
+</body>
+</html>

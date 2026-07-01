@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DOS Command Line & Linux OS — Hindi/English | ITI COPA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Hind:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f0fdf8;--bs:#ccfbef;--p:rgba(255,255,255,0.45);--ps:rgba(255,255,255,0.82);--pg:rgba(255,255,255,0.35);--d:#0f766e;--m:#0d9488;--s:#99f6e4;--l:#ecfdf8;--ms:rgba(13,148,136,0.18);--t:#0891b2;--ts:rgba(8,145,178,0.10);--ink:#042f2e;--is:#4f9090;--ln:rgba(15,118,110,0.22);--r:18px;}
+*{box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{margin:0;font-family:'Hind',sans-serif;background:radial-gradient(1200px 600px at 10% -10%,var(--ms),transparent 60%),radial-gradient(1000px 700px at 110% 10%,var(--ts),transparent 55%),var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;}
+h1,h2,h3{font-family:'Fraunces',serif;}
+.tb{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:rgba(240,253,248,0.6);backdrop-filter:blur(12px);border-bottom:1px solid var(--ln);gap:10px;}
+.brand{font-size:1rem;font-weight:700;color:var(--d);display:flex;align-items:center;gap:8px;font-family:'Fraunces',serif;}
+.brand .dot{width:9px;height:9px;border-radius:50%;background:linear-gradient(135deg,var(--m),var(--t));}
+.ta{display:flex;gap:8px;align-items:center;}
+.mb{background:rgba(13,148,136,0.18);color:var(--l);border:1px solid rgba(13,148,136,0.55);padding:9px 16px;border-radius:30px;font-family:'Hind';font-weight:700;font-size:0.9rem;cursor:pointer;background-image:linear-gradient(135deg,rgba(13,148,136,0.55),rgba(15,118,110,0.55));box-shadow:0 6px 16px rgba(15,118,110,0.2);}
+.lt{display:flex;align-items:center;background:var(--pg);border:1px solid var(--ln);backdrop-filter:blur(8px);border-radius:30px;padding:3px;position:relative;cursor:pointer;}
+.lt button{border:none;background:transparent;padding:7px 13px;border-radius:24px;font-family:'Hind';font-weight:700;font-size:0.8rem;cursor:pointer;color:var(--is);position:relative;z-index:2;transition:color 0.25s;}
+.lt button.active{color:var(--l);}
+.lp{position:absolute;top:3px;bottom:3px;left:3px;width:calc(50% - 3px);background:linear-gradient(135deg,var(--m),var(--d));border-radius:24px;transition:transform 0.25s ease;z-index:1;}
+.lt[data-lang="en"] .lp{transform:translateX(100%);}
+.hero{padding:60px 20px 36px;text-align:center;}
+.ey{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono';font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--d);background:var(--pg);backdrop-filter:blur(8px);border:1px solid var(--s);padding:6px 14px;border-radius:30px;margin-bottom:18px;}
+.hero h1{font-size:clamp(1.7rem,5.5vw,2.8rem);line-height:1.15;margin:0 0 14px;color:var(--ink);font-weight:700;}
+.grad{background:linear-gradient(100deg,var(--d),var(--m) 50%,var(--t));-webkit-background-clip:text;background-clip:text;color:transparent;}
+.hero p{max-width:600px;margin:0 auto 24px;color:var(--is);font-size:1rem;line-height:1.65;}
+.hs{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+.sc{background:var(--p);border:1px solid var(--ln);border-radius:14px;backdrop-filter:blur(8px);padding:12px 18px;min-width:108px;}
+.sc b{display:block;font-family:'Fraunces',serif;font-size:1.3rem;color:var(--d);}
+.sc span{font-size:0.74rem;color:var(--is);}
+.tw{max-width:900px;margin:22px auto 0;padding:0 20px;}
+.sw{position:relative;}
+#si{width:100%;padding:13px 16px 13px 42px;border-radius:30px;border:1px solid var(--ln);background:var(--p);backdrop-filter:blur(8px);font-family:'Hind';font-size:0.95rem;color:var(--ink);outline:none;}
+#si:focus{border-color:var(--m);}
+.sw::before{content:"⌕";position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--d);font-size:1.1rem;}
+.layout{max-width:1180px;margin:14px auto 80px;padding:0 20px;display:grid;grid-template-columns:255px 1fr;gap:26px;}
+.sidebar{background:var(--p);border:1px solid var(--ln);border-radius:var(--r);backdrop-filter:blur(10px);padding:18px 14px;height:fit-content;position:sticky;top:78px;max-height:calc(100vh - 100px);overflow-y:auto;}
+.sidebar h4{font-family:'JetBrains Mono';font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--is);margin:14px 6px 8px;}
+.sidebar h4:first-child{margin-top:2px;}
+.nl{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:10px;color:var(--ink);text-decoration:none;font-size:0.88rem;font-weight:500;transition:background 0.15s;}
+.nl:hover{background:var(--ms);}
+.nl.active{background:linear-gradient(120deg,var(--ms),var(--ts));color:var(--d);font-weight:700;}
+.nl .nm{font-family:'JetBrains Mono';font-size:0.68rem;color:var(--t);min-width:20px;}
+.cs{display:none;}
+@media(max-width:880px){.layout{display:block;}.sidebar{position:fixed !important;inset:0 18% 0 0;z-index:60;transform:translateX(-105%);transition:transform 0.3s ease;overflow-y:auto;top:0;height:100vh;max-height:100vh;}.sidebar.open{transform:translateX(0);}.ov{display:none;position:fixed;inset:0;background:rgba(2,20,18,0.4);z-index:55;}.ov.open{display:block;}.cs{display:block;margin-left:auto;background:none;border:1px solid var(--ln);border-radius:50%;width:34px;height:34px;font-size:1rem;color:var(--ink);cursor:pointer;}.brand span.bt{display:none;}.mb span.mt{display:none;}}
+.content{min-width:0;}
+.uc{background:var(--p);border:1px solid var(--ln);border-radius:var(--r);margin-bottom:22px;overflow:hidden;scroll-margin-top:80px;box-shadow:0 6px 24px rgba(15,118,110,0.08);backdrop-filter:blur(10px);}
+.uh{padding:22px 24px 18px;background:linear-gradient(120deg,rgba(13,148,136,0.18),rgba(15,118,110,0.10));border-bottom:1px solid var(--ln);}
+.ut{font-family:'JetBrains Mono';font-size:0.7rem;color:var(--t);letter-spacing:0.08em;text-transform:uppercase;display:block;margin-bottom:6px;}
+.uh h2{margin:0;font-size:1.4rem;color:var(--d);}
+.ub{padding:20px 24px 26px;}
+.ub h3{font-size:1.05rem;color:var(--ink);margin:22px 0 8px;display:flex;align-items:center;gap:8px;}
+.ub h3::before{content:"";width:5px;height:18px;border-radius:3px;background:linear-gradient(180deg,var(--m),var(--t));}
+.ub h3:first-child{margin-top:2px;}
+.ub p,.ub ul,.ub ol{line-height:1.75;color:var(--ink);margin:6px 0 12px;font-size:0.97rem;}
+.ub ul,.ub ol{padding-left:22px;}
+.ub li{margin-bottom:6px;font-size:0.95rem;}
+.ub strong{color:var(--d);}
+.nb{background:var(--ms);border-left:3px solid var(--m);border-radius:10px;padding:12px 16px;margin:14px 0;font-size:0.9rem;}
+.nb b{color:var(--d);}
+.ib{background:var(--ts);border-left:3px solid var(--t);border-radius:10px;padding:12px 16px;margin:14px 0;font-size:0.9rem;}
+.ib b{color:var(--t);}
+table{width:100%;border-collapse:collapse;margin:14px 0 18px;font-size:0.88rem;border-radius:10px;overflow:hidden;}
+th{background:linear-gradient(120deg,var(--m),var(--d));color:var(--l);text-align:left;padding:10px 12px;font-weight:600;}
+td{padding:9px 12px;border-bottom:1px solid var(--ln);background:var(--ps);}
+tr:last-child td{border-bottom:none;}
+tr:nth-child(even) td{background:var(--bs);}
+code,.cb{font-family:'JetBrains Mono';}
+.cb{background:#012b22;color:#7dffd4;padding:14px 16px;border-radius:12px;font-size:0.82rem;line-height:1.6;overflow-x:auto;margin:12px 0;border:1px solid rgba(13,148,136,0.3);}
+code{background:var(--bs);padding:2px 6px;border-radius:5px;font-size:0.85em;color:var(--d);}
+.qb{background:var(--bs);border:1px dashed var(--s);border-radius:12px;padding:14px 16px;margin:16px 0;}
+.qb b{color:var(--t);display:block;margin-bottom:6px;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em;}
+#tt{position:fixed;bottom:22px;right:22px;z-index:40;width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--m),var(--t));color:var(--l);border:none;font-size:1.2rem;cursor:pointer;box-shadow:0 8px 20px rgba(15,118,110,0.3);display:none;align-items:center;justify-content:center;}
+footer{text-align:center;padding:30px 20px 50px;color:var(--is);font-size:0.85rem;}
+footer a{color:var(--d);text-decoration:none;font-weight:600;}
+.hide{display:none !important;}
+[data-hi],[data-en]{display:none;}
+html[lang="hi"] [data-hi].i,html[lang="hi"] span[data-hi]{display:inline;}
+html[lang="hi"] [data-hi].b{display:block;}
+html[lang="hi"] [data-hi].f{display:flex;}
+html[lang="hi"] th[data-hi],html[lang="hi"] td[data-hi]{display:table-cell;}
+html[lang="en"] [data-en].i,html[lang="en"] span[data-en]{display:inline;}
+html[lang="en"] [data-en].b{display:block;}
+html[lang="en"] [data-en].f{display:flex;}
+html[lang="en"] th[data-en],html[lang="en"] td[data-en]{display:table-cell;}
+</style>
+</head>
+<body>
+<div class="tb">
+  <div class="brand"><span class="dot"></span><span class="bt">DOS & Linux OS</span></div>
+  <div class="ta">
+    <div class="lt" id="lt" data-lang="hi" onclick="sL(this.dataset.lang==='hi'?'en':'hi')"><div class="lp"></div><button type="button" id="bh">हिं</button><button type="button" id="be">EN</button></div>
+    <button class="mb" onclick="tS(event)">🐧 <span class="mt" data-hi="i">विषय सूची</span><span class="mt" data-en="i">Topics</span></button>
+  </div>
+</div>
+<div class="hero">
+  <span class="ey">● ITI · COPA · UP Board Pattern</span>
+  <h1><span data-hi="b" class="b">DOS Command Line<br>& Linux OS<br><span class="grad">सम्पूर्ण नोट्स</span></span><span data-en="b" class="b">DOS Command Line<br>& Linux OS<br><span class="grad">Complete Notes</span></span></h1>
+  <p data-hi="b" class="b">DOS commands से लेकर Linux OS, Linux Commands और Distributions तक — हिंदी और इंग्लिश, परीक्षा के हिसाब से।</p>
+  <p data-en="b" class="b">From DOS commands to Linux OS, Linux Commands and Distributions — Hindi & English, exam-ready.</p>
+  <div class="hs"><div class="sc"><b>12</b><span>Units</span></div><div class="sc"><b>70+</b><span>Topics</span></div><div class="sc"><b>2</b><span data-hi="i">भाषाएं</span><span data-en="i">Languages</span></div></div>
+</div>
+<div class="tw"><div class="sw"><input type="text" id="si" placeholder="खोजें... DIR, ls, Linux, chmod..." oninput="lS()"></div></div>
+<div class="ov" id="ov" onclick="tS(event)"></div>
+<div class="layout">
+  <aside class="sidebar" id="sb">
+    <button class="cs" onclick="tS(event)">✕</button>
+    <h4 data-hi="b" class="b">DOS कमांड्स</h4><h4 data-en="b" class="b">DOS Commands</h4>
+    <a class="nl" href="#u1"><span class="nm">01</span><span data-hi="i">DOS परिचय</span><span data-en="i">DOS Introduction</span></a>
+    <a class="nl" href="#u2"><span class="nm">02</span><span data-hi="i">DOS Internal Commands - I</span><span data-en="i">DOS Internal Commands - I</span></a>
+    <a class="nl" href="#u3"><span class="nm">03</span><span data-hi="i">DOS Internal Commands - II</span><span data-en="i">DOS Internal Commands - II</span></a>
+    <a class="nl" href="#u4"><span class="nm">04</span><span data-hi="i">DOS External Commands</span><span data-en="i">DOS External Commands</span></a>
+    <a class="nl" href="#u5"><span class="nm">05</span><span data-hi="i">DOS File Naming & Wild Cards</span><span data-en="i">DOS File Naming & Wild Cards</span></a>
+    <h4 data-hi="b" class="b">Linux OS</h4><h4 data-en="b" class="b">Linux OS</h4>
+    <a class="nl" href="#u6"><span class="nm">06</span><span data-hi="i">Linux OS परिचय & Features</span><span data-en="i">Linux OS Intro & Features</span></a>
+    <a class="nl" href="#u7"><span class="nm">07</span><span data-hi="i">Linux vs Windows</span><span data-en="i">Linux vs Windows</span></a>
+    <a class="nl" href="#u8"><span class="nm">08</span><span data-hi="i">Linux File System</span><span data-en="i">Linux File System</span></a>
+    <a class="nl" href="#u9"><span class="nm">09</span><span data-hi="i">Linux Commands - I</span><span data-en="i">Linux Commands - I</span></a>
+    <a class="nl" href="#u10"><span class="nm">10</span><span data-hi="i">Linux Commands - II</span><span data-en="i">Linux Commands - II</span></a>
+    <a class="nl" href="#u11"><span class="nm">11</span><span data-hi="i">Linux Distributions</span><span data-en="i">Linux Distributions</span></a>
+    <h4 data-hi="b" class="b">रिवीज़न</h4><h4 data-en="b" class="b">Revision</h4>
+    <a class="nl" href="#u12"><span class="nm">12</span><span data-hi="i">Important Q&A</span><span data-en="i">Important Q&A</span></a>
+  </aside>
+  <main class="content" id="cn">
+
+<section class="uc" id="u1"><div class="uh"><span class="ut"><span data-hi="i">Unit 01 · DOS कमांड्स</span><span data-en="i">Unit 01 · DOS Commands</span></span><h2><span data-hi="i">DOS परिचय</span><span data-en="i">DOS Introduction</span></h2></div>
+<div class="ub">
+<h3 data-hi="f" class="f">DOS क्या है?</h3><h3 data-en="f" class="f">What is DOS?</h3>
+<p data-hi="b" class="b"><strong>DOS (Disk Operating System)</strong> एक text-based, single-user, single-tasking operating system है जो 1980s-90s में PCs पर use होता था। Microsoft का version <strong>MS-DOS</strong> सबसे popular था।</p>
+<p data-en="b" class="b"><strong>DOS (Disk Operating System)</strong> is a text-based, single-user, single-tasking operating system used on PCs in the 1980s-90s. Microsoft's version, <strong>MS-DOS</strong>, was the most popular.</p>
+<h3 data-hi="f" class="f">DOS की विशेषताएं</h3><h3 data-en="f" class="f">Features of DOS</h3>
+<ul data-hi="b" class="b">
+<li>Command Line Interface (CLI) — commands type करके use करना पड़ता है</li>
+<li>Single user — एक समय पर एक user</li>
+<li>Single tasking — एक समय पर एक task</li>
+<li>No graphics — pure text interface</li>
+<li>Case insensitive — commands uppercase या lowercase दोनों में काम करते हैं</li>
+</ul>
+<ul data-en="b" class="b">
+<li>Command Line Interface (CLI) — must type commands to use</li>
+<li>Single user — one user at a time</li>
+<li>Single tasking — one task at a time</li>
+<li>No graphics — pure text interface</li>
+<li>Case insensitive — commands work in uppercase or lowercase</li>
+</ul>
+<h3 data-hi="f" class="f">Internal vs External Commands</h3><h3 data-en="f" class="f">Internal vs External Commands</h3>
+<table><tr><th>Internal Commands</th><th>External Commands</th></tr>
+<tr><td><span data-hi="i">DOS kernel में built-in — हमेशा available, अलग file नहीं चाहिए</span><span data-en="i">Built into the DOS kernel — always available, no separate file needed</span></td><td><span data-hi="i">Separate .exe या .com files के रूप में stored — disk पर available होना ज़रूरी है</span><span data-en="i">Stored as separate .exe or .com files — must be available on disk</span></td></tr>
+<tr><td>DIR, CD, MD, RD, CLS, DATE, TIME, COPY, DEL, REN, TYPE, VER, PATH</td><td>FORMAT, XCOPY, DISKCOPY, ATTRIB, TREE, CHKDSK, MORE, SORT</td></tr></table>
+<div class="qb"><b data-hi="b" class="b">संभावित परीक्षा प्रश्न</b><b data-en="b" class="b">Likely Exam Questions</b><span data-hi="i">DOS किसे कहते हैं? Internal और External commands में अंतर बताइए।</span><span data-en="i">What is DOS? Differentiate between Internal and External commands.</span></div>
+</div></section>
+
+<section class="uc" id="u2"><div class="uh"><span class="ut"><span data-hi="i">Unit 02 · DOS कमांड्स</span><span data-en="i">Unit 02 · DOS Commands</span></span><h2><span data-hi="i">DOS Internal Commands - I</span><span data-en="i">DOS Internal Commands - I</span></h2></div>
+<div class="ub">
+<table><tr><th>Command</th><th data-hi="i">काम</th><th data-en="i">Purpose</th><th data-hi="i">Syntax/Example</th><th data-en="i">Syntax/Example</th></tr>
+<tr><td>DIR</td><td><span data-hi="i">Current directory की files और folders list करता है</span><span data-en="i">Lists files and folders in the current directory</span></td><td colspan="2"><code>DIR</code> <code>DIR C:\</code></td></tr>
+<tr><td>CD (CHDIR)</td><td><span data-hi="i">Directory change करता है</span><span data-en="i">Changes the directory</span></td><td colspan="2"><code>CD foldername</code> <code>CD..</code> (parent)</td></tr>
+<tr><td>MD (MKDIR)</td><td><span data-hi="i">New directory बनाता है</span><span data-en="i">Creates a new directory</span></td><td colspan="2"><code>MD myfolder</code></td></tr>
+<tr><td>RD (RMDIR)</td><td><span data-hi="i">Empty directory delete करता है</span><span data-en="i">Deletes an empty directory</span></td><td colspan="2"><code>RD myfolder</code></td></tr>
+<tr><td>CLS</td><td><span data-hi="i">Screen clear करता है</span><span data-en="i">Clears the screen</span></td><td colspan="2"><code>CLS</code></td></tr>
+<tr><td>DATE</td><td><span data-hi="i">Current date दिखाता है और change करने देता है</span><span data-en="i">Shows and allows changing the current date</span></td><td colspan="2"><code>DATE</code></td></tr>
+<tr><td>TIME</td><td><span data-hi="i">Current time दिखाता है और change करने देता है</span><span data-en="i">Shows and allows changing the current time</span></td><td colspan="2"><code>TIME</code></td></tr></table>
+<div class="nb"><span data-hi="i"><b>याद रखें:</b> <code>CD..</code> एक level ऊपर जाता है, <code>CD\</code> root directory में जाता है।</span><span data-en="i"><b>Remember:</b> <code>CD..</code> goes one level up, <code>CD\</code> goes to the root directory.</span></div>
+<div class="qb"><b data-hi="b" class="b">संभावित परीक्षा प्रश्न</b><b data-en="b" class="b">Likely Exam Questions</b><span data-hi="i">DIR, CD, MD, RD, CLS commands उनके syntax सहित लिखिए।</span><span data-en="i">Write DIR, CD, MD, RD, CLS commands with their syntax.</span></div>
+</div></section>
+
+<section class="uc" id="u3"><div class="uh"><span class="ut"><span data-hi="i">Unit 03 · DOS कमांड्स</span><span data-en="i">Unit 03 · DOS Commands</span></span><h2><span data-hi="i">DOS Internal Commands - II</span><span data-en="i">DOS Internal Commands - II</span></h2></div>
+<div class="ub">
+<table><tr><th>Command</th><th data-hi="i">काम</th><th data-en="i">Purpose</th><th data-hi="i">Syntax/Example</th><th data-en="i">Syntax/Example</th></tr>
+<tr><td>COPY</td><td><span data-hi="i">File को एक location से दूसरे में copy करता है</span><span data-en="i">Copies a file from one location to another</span></td><td colspan="2"><code>COPY file.txt D:\</code></td></tr>
+<tr><td>DEL (ERASE)</td><td><span data-hi="i">File delete करता है</span><span data-en="i">Deletes a file</span></td><td colspan="2"><code>DEL file.txt</code></td></tr>
+<tr><td>REN (RENAME)</td><td><span data-hi="i">File या folder का नाम बदलता है</span><span data-en="i">Renames a file or folder</span></td><td colspan="2"><code>REN old.txt new.txt</code></td></tr>
+<tr><td>TYPE</td><td><span data-hi="i">Text file का content screen पर दिखाता है</span><span data-en="i">Displays the content of a text file on screen</span></td><td colspan="2"><code>TYPE file.txt</code></td></tr>
+<tr><td>VER</td><td><span data-hi="i">DOS version number दिखाता है</span><span data-en="i">Shows the DOS version number</span></td><td colspan="2"><code>VER</code></td></tr>
+<tr><td>PATH</td><td><span data-hi="i">External commands के लिए search path set करता है</span><span data-en="i">Sets the search path for external commands</span></td><td colspan="2"><code>PATH C:\DOS</code></td></tr>
+<tr><td>PROMPT</td><td><span data-hi="i">DOS prompt को customize करता है</span><span data-en="i">Customises the DOS prompt</span></td><td colspan="2"><code>PROMPT $P$G</code></td></tr>
+<tr><td>VOL</td><td><span data-hi="i">Disk का volume label दिखाता है</span><span data-en="i">Shows the disk volume label</span></td><td colspan="2"><code>VOL</code></td></tr></table>
+<div class="qb"><b data-hi="b" class="b">संभावित परीक्षा प्रश्न</b><b data-en="b" class="b">Likely Exam Questions</b><span data-hi="i">COPY, DEL, REN, TYPE commands उनके syntax सहित लिखिए। COPY और MOVE में क्या अंतर है?</span><span data-en="i">Write COPY, DEL, REN, TYPE commands with syntax. What is the difference between COPY and MOVE?</span></div>
+</div></section>
+
+<section class="uc" id="u4"><div class="uh"><span class="ut"><span data-hi="i">Unit 04 · DOS कमांड्स</span><span data-en="i">Unit 04 · DOS Commands</span></span><h2><span data-hi="i">DOS External Commands</span><span data-en="i">DOS External Commands</span></h2></div>
+<div class="ub">
+<table><tr><th>Command</th><th data-hi="i">काम</th><th data-en="i">Purpose</th><th data-hi="i">Syntax/Example</th><th data-en="i">Syntax/Example</th></tr>
+<tr><td>FORMAT</td><td><span data-hi="i">Disk को format करता है (सभी data erase होता है)</span><span data-en="i">Formats a disk (erases all data)</span></td><td colspan="2"><code>FORMAT D:</code></td></tr>
+<tr><td>XCOPY</td><td><span data-hi="i">Files और directories को sub-directories सहित copy करता है</span><span data-en="i">Copies files and directories including sub-directories</span></td><td colspan="2"><code>XCOPY C:\folder D:\</code></td></tr>
+<tr><td>DISKCOPY</td><td><span data-hi="i">एक disk की contents दूसरे में exact copy करता है</span><span data-en="i">Makes an exact copy of one disk to another</span></td><td colspan="2"><code>DISKCOPY A: B:</code></td></tr>
+<tr><td>ATTRIB</td><td><span data-hi="i">File attributes (Read-only, Hidden, Archive, System) set/remove करता है</span><span data-en="i">Sets/removes file attributes (Read-only, Hidden, Archive, System)</span></td><td colspan="2"><code>ATTRIB +H file.txt</code></td></tr>
+<tr><td>TREE</td><td><span data-hi="i">Directory structure को tree format में दिखाता है</span><span data-en="i">Shows directory structure in tree format</span></td><td colspan="2"><code>TREE C:\</code></td></tr>
+<tr><td>CHKDSK</td><td><span data-hi="i">Disk errors check करता है</span><span data-en="i">Checks the disk for errors</span></td><td colspan="2"><code>CHKDSK C:</code></td></tr>
+<tr><td>MORE</td><td><span data-hi="i">Output को page by page दिखाता है</span><span data-en="i">Displays output page by page</span></td><td colspan="2"><code>DIR | MORE</code></td></tr>
+<tr><td>SORT</td><td><span data-hi="i">Input को alphabetically sort करता है</span><span data-en="i">Sorts input alphabetically</span></td><td colspan="2"><code>SORT file.txt</code></td></tr></table>
+<div class="nb"><span data-hi="i"><b>याद रखें:</b> COPY और XCOPY में अंतर — COPY single files copy करता है, XCOPY entire directory trees copy कर सकता है।</span><span data-en="i"><b>Remember:</b> difference between COPY and XCOPY — COPY copies single files, XCOPY can copy entire directory trees.</span></div>
+<div class="qb"><b data-hi="b" class="b">संभावित परीक्षा प्रश्न</b><b data-en="b" class="b">Likely Exam Questions</b><span data-hi="i">FORMAT command का क्या काम है? XCOPY और COPY में अंतर बताइए। ATTRIB command समझाइए।</span><span data-en="i">What does the FORMAT command do? Differentiate XCOPY and COPY. Explain the ATTRIB command.</span></div>
+</div></section>
+
+<section class="uc" id="u5"><div class="uh"><span class="ut"><span data-hi="i">Unit 05 · DOS कमांड्स</span><span data-en="i">Unit 05 · DOS Commands</span></span><h2><span data-hi="i">DOS File Naming Rules & Wildcards</span><span data-en="i">DOS File Naming Rules & Wildcards</span></h2></div>
+<div class="ub">
+<h3 data-hi="f" class="f">DOS File Naming Rules (8.3 Format)</h3><h3 data-en="f" class="f">DOS File Naming Rules (8.3 Format)</h3>
+<ul data-hi="b" class="b">
+<li>Filename maximum <strong>8 characters</strong>, extension maximum <strong>3 characters</strong></li>
+<li>Extension dot (.) से separate होती है — जैसे <code>FILE.TXT</code></li>
+<li>Spaces allowed नहीं हैं filename में</li>
+<li>Special characters (<code>/ \ : * ? " &lt; &gt; |</code>) allowed नहीं</li>
+<li>Case insensitive — <code>FILE.TXT</code> और <code>file.txt</code> same हैं</li>
+</ul>
+<ul data-en="b" class="b">
+<li>Filename maximum <strong>8 characters</strong>, extension maximum <strong>3 characters</strong></li>
+<li>Extension is separated by a dot (.) — e.g. <code>FILE.TXT</code></li>
+<li>Spaces are not allowed in filenames</li>
+<li>Special characters (<code>/ \ : * ? " &lt; &gt; |</code>) are not allowed</li>
+<li>Case insensitive — <code>FILE.TXT</code> and <code>file.txt</code> are the same</li>
+</ul>
+<h3 data-hi="f" class="f">Wildcard Characters</h3><h3 data-en="f" class="f">Wildcard Characters</h3>
+<table><tr><th>Wildcard</th><th data-hi="i">मतलब</th><th data-en="i">Meaning</th></tr>
+<tr><td>* (Asterisk)</td><td><span data-hi="i">Zero या ज़्यादा characters represent करता है। <code>*.TXT</code> = सभी .txt files</span><span data-en="i">Represents zero or more characters. <code>*.TXT</code> = all .txt files</span></td></tr>
+<tr><td>? (Question Mark)</td><td><span data-hi="i">Exactly एक character represent करता है। <code>FILE?.TXT</code> = FILE1.TXT, FILE2.TXT etc.</span><span data-en="i">Represents exactly one character. <code>FILE?.TXT</code> = FILE1.TXT, FILE2.TXT etc.</span></td></tr></table>
+<div class="cb">DIR *.TXT      → सभी .TXT files list
+DEL FILE*.DOC  → FILE से शुरू होने वाली सभी .DOC files delete
+COPY *.* D:\   → सभी files copy</div>
+<div class="qb"><b data-hi="b" class="b">संभावित परीक्षा प्रश्न</b><b data-en="b" class="b">Likely Exam Questions</b><span data-hi="i">DOS में file naming rules लिखिए। Wildcard characters किसे कहते हैं? * और ? में अंतर बताइए।</span><span data-en="i">Write file naming rules in DOS. What are Wildcard characters? Differentiate between * and ?.</span></div>
+</div></section>
+
+<section class="uc" id="u6"><div class="uh"><span class="ut"><span data-hi="i">Unit 06 · Linux OS</span><span data-en="i">Unit 06 · Linux OS</span></span><h2><span data-hi="i">Linux OS परिचय & Features</span><span data-en="i">Linux OS Introduction & Features</span></h2></div>
+<div class="ub">
+<h3 data-hi="f" class="f">Linux क्या है?</h3><h3 data-en="f" class="f">What is Linux?</h3>
+<p data-hi="b" class="b"><strong>Linux</strong> एक open-source, Unix-like operating system है जिसे <strong>Linus Torvalds</strong> ने 1991 में develop किया था। यह free में available है और दुनिया के most servers, smartphones (Android), और supercomputers पर run होता है।</p>
+<p data-en="b" class="b"><strong>Linux</strong> is an open-source, Unix-like operating system developed by <strong>Linus Torvalds</strong> in 1991. It is freely available and runs on most of the world's servers, smartphones (Android), and supercomputers.</p>
+<h3 data-hi="f" class="f">Key Features of Linux</h3><h3 data-en="f" class="f">Key Features of Linux</h3>
+<table><tr><th>Feature</th><th data-hi="i">विवरण</th><th data-en="i">Description</th></tr>
+<tr><td>Open Source</td><td><span data-hi="i">Source code freely available — anyone modify और distribute कर सकता है</span><span data-en="i">Source code freely available — anyone can modify and distribute it</span></td></tr>
+<tr><td>Free</td><td><span data-hi="i">अधिकांश distributions free में available हैं</span><span data-en="i">Most distributions are available for free</span></td></tr>
+<tr><td>Multi-User</td><td><span data-hi="i">कई users एक साथ system use कर सकते हैं</span><span data-en="i">Multiple users can use the system simultaneously</span></td></tr>
+<tr><td>Multitasking</td><td><span data-hi="i">एक साथ कई tasks run हो सकते हैं</span><span data-en="i">Multiple tasks can run simultaneously</span></td></tr>
+<tr><td>Secure</td><td><span data-hi="i">Virus का risk कम, strong permission system</span><span data-en="i">Low virus risk, strong permission system</span></td></tr>
+<tr><td>Portable</td><td><span data-hi="i">अलग-अलग hardware platforms पर run होता है</span><span data-en="i">Runs on various hardware platforms</span></td></tr>
+<tr><td>Case Sensitive</td><td><span data-hi="i">file.txt और FILE.TXT अलग-अलग files हैं</span><span data-en="i">file.txt and FILE.TXT are different files</span></td></tr></table>
+<div class="nb"><span data-hi="i"><b>याद रखें:</b> Linux का Kernel Linus Torvalds ने बनाया, और GNU tools Richard Stallman ने। पूरा system "GNU/Linux" कहलाता है।</span><span data-en="i"><b>Remember:</b> the Linux Kernel was created by Linus Torvalds, and GNU tools by Richard Stallman. The full system is called "GNU/Linux".</span></div>
+<div class="qb"><b data-hi="b" class="b">संभावित परीक्षा प्रश्न</b><b data-en="b" class="b">Likely Exam Questions</b><span data-hi="i">Linux OS किसे कहते हैं? इसकी features लिखिए। Linux किसने develop किया?</span><span data-en="i">What is Linux OS? Write its features. Who developed Linux?</span></div>
+</div></section>
+
+<section class="uc" id="u7"><div class="uh"><span class="ut"><span data-hi="i">Unit 07 · Linux OS</span><span data-en="i">Unit 07 · Linux OS</span></span><h2>Linux vs Windows</h2></div>
+<div class="ub">
+<table><tr><th>Feature</th><th>Linux</th><th>Windows</th></tr>
+<tr><td>Cost</td><td><span data-hi="i">Free (mostly)</span><span data-en="i">Free (mostly)</span></td><td><span data-hi="i">Paid (license fee)</span><span data-en="i">Paid (licence fee)</span></td></tr>
+<tr><td>Source Code</td><td><span data-hi="i">Open Source</span><span data-en="i">Open Source</span></td><td><span data-hi="i">Closed/Proprietary</span><span data-en="i">Closed/Proprietary</span></td></tr>
+<tr><td>Security</td><td><span data-hi="i">ज़्यादा secure, कम viruses</span><span data-en="i">More secure, fewer viruses</span></td><td><span data-hi="i">More virus attacks, antivirus ज़रूरी</span><span data-en="i">More virus attacks, antivirus needed</span></td></tr>
+<tr><td>Interface</td><td><span data-hi="i">CLI primarily, GUI also available</span><span data-en="i">CLI primarily, GUI also available</span></td><td><span data-hi="i">GUI primarily</span><span data-en="i">GUI primarily</span></td></tr>
+<tr><td>Case Sensitive</td><td><span data-hi="i">Yes — file और FILE अलग</span><span data-en="i">Yes — file and FILE are different</span></td><td><span data-hi="i">No — case insensitive</span><span data-en="i">No — case insensitive</span></td></tr>
+<tr><td>Stability</td><td><span data-hi="i">Very stable, servers पर years तक बिना restart</span><span data-en="i">Very stable, servers run for years without restart</span></td><td><span data-hi="i">Less stable, needs regular restarts/updates</span><span data-en="i">Less stable, needs regular restarts/updates</span></td></tr>
+<tr><td>Usage</td><td><span data-hi="i">Servers, developers, supercomputers</span><span data-en="i">Servers, developers, supercomputers</span></td><td><span data-hi="i">Home users, offices, gaming</span><span data-en="i">Home users, offices, gaming</span></td></tr></table>
+<div class="qb"><b data-hi="b" class="b">संभावित परीक्षा प्रश्न</b><b data-en="b" class="b">Likely Exam Questions</b><span data-hi="i">Linux और Windows में अंतर बताइए। Linux ज़्यादा secure क्यों है? Open Source software किसे कहते हैं?</span><span data-en="i">Differentiate between Linux and Windows. Why is Linux more secure? What is Open Source software?</span></div>
+</div></section>
+
+<section class="uc" id="u8"><div class="uh"><span class="ut"><span data-hi="i">Unit 08 · Linux OS</span><span data-en="i">Unit 08 · Linux OS</span></span><h2><span data-hi="i">Linux File System</span><span data-en="i">Linux File System</span></h2></div>
+<div class="ub">
+<h3 data-hi="f" class="f">Linux File System Structure</h3><h3 data-en="f" class="f">Linux File System Structure</h3>
+<p data-hi="b" class="b">Linux में एक single tree structure होती है जो root (<code>/</code>) से शुरू होती है — Windows की तरह C:, D: drives नहीं होते।</p>
+<p data-en="b" class="b">Linux has a single tree structure starting from root (<code>/</code>) — unlike Windows, there are no C:, D: drives.</p>
+<table><tr><th>Directory</th><th data-hi="i">काम</th><th data-en="i">Purpose</th></tr>
+<tr><td>/</td><td><span data-hi="i">Root directory — सभी का parent</span><span data-en="i">Root directory — parent of everything</span></td></tr>
+<tr><td>/home</td><td><span data-hi="i">Users की personal files — जैसे Windows का Users folder</span><span data-en="i">Users' personal files — like Windows' Users folder</span></td></tr>
+<tr><td>/bin</td><td><span data-hi="i">Essential command binaries (ls, cd, cp etc.)</span><span data-en="i">Essential command binaries (ls, cd, cp etc.)</span></td></tr>
+<tr><td>/etc</td><td><span data-hi="i">Configuration files — system settings</span><span data-en="i">Configuration files — system settings</span></td></tr>
+<tr><td>/dev</td><td><span data-hi="i">Device files (hard disk, USB, printer)</span><span data-en="i">Device files (hard disk, USB, printer)</span></td></tr>
+<tr><td>/usr</td><td><span data-hi="i">User-installed programs और utilities</span><span data-en="i">User-installed programs and utilities</span></td></tr>
+<tr><td>/tmp</td><td><span data-hi="i">Temporary files — reboot पर delete हो जाती हैं</span><span data-en="i">Temporary files — deleted on reboot</span></td></tr>
+<tr><td>/root</td><td><span data-hi="i">Root user (admin) का home directory</span><span data-en="i">Home directory of the root user (admin)</span></td></tr></table>
+<div class="nb"><span data-hi="i"><b>याद रखें:</b> Linux में files और directories names में case sensitive होते हैं — <code>File.txt</code> और <code>file.txt</code> दो अलग files हैं।</span><span data-en="i"><b>Remember:</b> Linux file and directory names are case sensitive — <code>File.txt</code> and <code>file.txt</code> are two different files.</span></div>
+<div class="qb"><b data-hi="b" class="b">संभावित परीक्षा प्रश्न</b><b data-en="b" class="b">Likely Exam Questions</b><span data-hi="i">Linux file system structure समझाइए। / (root) directory का क्या महत्व है? /home और /root में क्या अंतर है?</span><span data-en="i">Explain the Linux file system structure. What is the significance of / (root) directory? What is the difference between /home and /root?</span></div>
+</div></section>
+
+<section class="uc" id="u9"><div class="uh"><span class="ut"><span data-hi="i">Unit 09 · Linux OS</span><span data-en="i">Unit 09 · Linux OS</span></span><h2><span data-hi="i">Linux Commands - I (File & Directory)</span><span data-en="i">Linux Commands - I (File & Directory)</span></h2></div>
+<div class="ub">
+<table><tr><th>Command</th><th data-hi="i">काम</th><th data-en="i">Purpose</th><th>Example</th></tr>
+<tr><td>ls</td><td><span data-hi="i">Files और directories list करना (DOS DIR की तरह)</span><span data-en="i">List files and directories (like DOS DIR)</span></td><td><code>ls</code> <code>ls -l</code> <code>ls -a</code></td></tr>
+<tr><td>cd</td><td><span data-hi="i">Directory change करना</span><span data-en="i">Change directory</span></td><td><code>cd /home</code> <code>cd ..</code></td></tr>
+<tr><td>pwd</td><td><span data-hi="i">Present Working Directory का path दिखाना</span><span data-en="i">Show Present Working Directory path</span></td><td><code>pwd</code></td></tr>
+<tr><td>mkdir</td><td><span data-hi="i">New directory बनाना</span><span data-en="i">Create a new directory</span></td><td><code>mkdir myfolder</code></td></tr>
+<tr><td>rmdir</td><td><span data-hi="i">Empty directory delete करना</span><span data-en="i">Delete an empty directory</span></td><td><code>rmdir myfolder</code></td></tr>
+<tr><td>cp</td><td><span data-hi="i">File copy करना</span><span data-en="i">Copy a file</span></td><td><code>cp file.txt /home/</code></td></tr>
+<tr><td>mv</td><td><span data-hi="i">File move/rename करना</span><span data-en="i">Move/rename a file</span></td><td><code>mv old.txt new.txt</code></td></tr>
+<tr><td>rm</td><td><span data-hi="i">File delete करना</span><span data-en="i">Delete a file</span></td><td><code>rm file.txt</code> <code>rm -r folder</code></td></tr>
+<tr><td>cat</td><td><span data-hi="i">File का content display करना</span><span data-en="i">Display file content</span></td><td><code>cat file.txt</code></td></tr>
+<tr><td>touch</td><td><span data-hi="i">Empty file create करना</span><span data-en="i">Create an empty file</span></td><td><code>touch newfile.txt</code></td></tr></table>
+<div class="qb"><b data-hi="b" class="b">संभावित परीक्षा प्रश्न</b><b data-en="b" class="b">Likely Exam Questions</b><span data-hi="i">Linux के file management commands उदाहरण सहित लिखिए। ls और dir में क्या अंतर है? pwd command का क्या काम है?</span><span data-en="i">Write Linux file management commands with examples. What is the difference between ls and dir? What is the use of the pwd command?</span></div>
+</div></section>
+
+<section class="uc" id="u10"><div class="uh"><span class="ut"><span data-hi="i">Unit 10 · Linux OS</span><span data-en="i">Unit 10 · Linux OS</span></span><h2><span data-hi="i">Linux Commands - II (System & Permission)</span><span data-en="i">Linux Commands - II (System & Permission)</span></h2></div>
+<div class="ub">
+<table><tr><th>Command</th><th data-hi="i">काम</th><th data-en="i">Purpose</th><th>Example</th></tr>
+<tr><td>clear</td><td><span data-hi="i">Terminal screen clear करना (DOS CLS की तरह)</span><span data-en="i">Clear terminal screen (like DOS CLS)</span></td><td><code>clear</code></td></tr>
+<tr><td>date</td><td><span data-hi="i">Current date और time दिखाना</span><span data-en="i">Show current date and time</span></td><td><code>date</code></td></tr>
+<tr><td>whoami</td><td><span data-hi="i">Current logged-in user का name दिखाना</span><span data-en="i">Show the name of the current logged-in user</span></td><td><code>whoami</code></td></tr>
+<tr><td>echo</td><td><span data-hi="i">Text print करना या variable value दिखाना</span><span data-en="i">Print text or show variable value</span></td><td><code>echo Hello</code></td></tr>
+<tr><td>man</td><td><span data-hi="i">किसी command का manual/help दिखाना</span><span data-en="i">Show the manual/help for a command</span></td><td><code>man ls</code></td></tr>
+<tr><td>sudo</td><td><span data-hi="i">Root (admin) permissions से command run करना</span><span data-en="i">Run a command with root (admin) permissions</span></td><td><code>sudo apt install</code></td></tr>
+<tr><td>chmod</td><td><span data-hi="i">File/directory permissions change करना (read/write/execute)</span><span data-en="i">Change file/directory permissions (read/write/execute)</span></td><td><code>chmod 755 file.txt</code></td></tr>
+<tr><td>ps</td><td><span data-hi="i">Running processes दिखाना</span><span data-en="i">Show running processes</span></td><td><code>ps</code></td></tr>
+<tr><td>grep</td><td><span data-hi="i">File में specific text search करना</span><span data-en="i">Search for specific text in a file</span></td><td><code>grep "hello" file.txt</code></td></tr></table>
+<h3 data-hi="f" class="f">Linux File Permissions (chmod)</h3><h3 data-en="f" class="f">Linux File Permissions (chmod)</h3>
+<p data-hi="b" class="b">Linux में हर file के लिए 3 types की permissions होती हैं: <strong>r (read=4), w (write=2), x (execute=1)</strong> — तीन levels पर: Owner, Group, Others।</p>
+<p data-en="b" class="b">Every file in Linux has 3 types of permissions: <strong>r (read=4), w (write=2), x (execute=1)</strong> — at three levels: Owner, Group, Others.</p>
+<div class="cb">chmod 755 file.txt
+# Owner: rwx(7), Group: r-x(5), Others: r-x(5)</div>
+<div class="qb"><b data-hi="b" class="b">संभावित परीक्षा प्रश्न</b><b data-en="b" class="b">Likely Exam Questions</b><span data-hi="i">chmod command किसे कहते हैं? Linux permissions (r,w,x) समझाइए। sudo का क्या काम है?</span><span data-en="i">What is the chmod command? Explain Linux permissions (r,w,x). What is the use of sudo?</span></div>
+</div></section>
+
+<section class="uc" id="u11"><div class="uh"><span class="ut"><span data-hi="i">Unit 11 · Linux OS</span><span data-en="i">Unit 11 · Linux OS</span></span><h2><span data-hi="i">Linux Distributions</span><span data-en="i">Linux Distributions</span></h2></div>
+<div class="ub">
+<h3 data-hi="f" class="f">Linux Distribution (Distro) क्या है?</h3><h3 data-en="f" class="f">What is a Linux Distribution (Distro)?</h3>
+<p data-hi="b" class="b"><strong>Linux Distribution</strong> Linux Kernel के ऊपर एक complete OS package है जिसमें GUI, applications, और tools शामिल होते हैं। अलग-अलग uses के लिए अलग-अलग distros available हैं।</p>
+<p data-en="b" class="b">A <strong>Linux Distribution</strong> is a complete OS package built on the Linux Kernel including a GUI, applications, and tools. Different distros are available for different uses.</p>
+<table><tr><th>Distribution</th><th data-hi="i">विशेषता</th><th data-en="i">Feature</th></tr>
+<tr><td>Ubuntu</td><td><span data-hi="i">Beginners के लिए most popular, user-friendly</span><span data-en="i">Most popular for beginners, user-friendly</span></td></tr>
+<tr><td>Fedora</td><td><span data-hi="i">Red Hat द्वारा supported, latest features</span><span data-en="i">Supported by Red Hat, latest features</span></td></tr>
+<tr><td>CentOS / RHEL</td><td><span data-hi="i">Enterprise servers के लिए, stable</span><span data-en="i">For enterprise servers, stable</span></td></tr>
+<tr><td>Kali Linux</td><td><span data-hi="i">Cybersecurity और ethical hacking के लिए</span><span data-en="i">For cybersecurity and ethical hacking</span></td></tr>
+<tr><td>Linux Mint</td><td><span data-hi="i">Windows जैसा interface, beginners-friendly</span><span data-en="i">Windows-like interface, beginners-friendly</span></td></tr>
+<tr><td>Debian</td><td><span data-hi="i">Very stable, Ubuntu का parent distro</span><span data-en="i">Very stable, parent distro of Ubuntu</span></td></tr>
+<tr><td>Android</td><td><span data-hi="i">Linux Kernel based mobile OS</span><span data-en="i">Linux Kernel based mobile OS</span></td></tr></table>
+<div class="qb"><b data-hi="b" class="b">संभावित परीक्षा प्रश्न</b><b data-en="b" class="b">Likely Exam Questions</b><span data-hi="i">Linux Distribution किसे कहते हैं? कोई 4 Linux distros उनकी विशेषताओं सहित लिखिए।</span><span data-en="i">What is a Linux Distribution? Write any 4 Linux distros with their features.</span></div>
+</div></section>
+
+<section class="uc" id="u12"><div class="uh"><span class="ut"><span data-hi="i">Unit 12 · रिवीज़न</span><span data-en="i">Unit 12 · Revision</span></span><h2><span data-hi="i">Important Q&A — फटाफट रिवीज़न</span><span data-en="i">Important Q&A — Quick Revision</span></h2></div>
+<div class="ub">
+<h3 data-hi="f" class="f">DOS Commands Quick Reference</h3><h3 data-en="f" class="f">DOS Commands Quick Reference</h3>
+<table><tr><th>Command</th><th data-hi="i">काम</th><th data-en="i">Purpose</th></tr>
+<tr><td>DIR</td><td><span data-hi="i">Directory listing</span><span data-en="i">Directory listing</span></td></tr>
+<tr><td>CD</td><td><span data-hi="i">Change directory</span><span data-en="i">Change directory</span></td></tr>
+<tr><td>MD/RD</td><td><span data-hi="i">Make/Remove directory</span><span data-en="i">Make/Remove directory</span></td></tr>
+<tr><td>COPY/XCOPY</td><td><span data-hi="i">File copy / Directory copy</span><span data-en="i">File copy / Directory copy</span></td></tr>
+<tr><td>DEL/REN</td><td><span data-hi="i">Delete / Rename</span><span data-en="i">Delete / Rename</span></td></tr>
+<tr><td>CLS</td><td><span data-hi="i">Clear screen</span><span data-en="i">Clear screen</span></td></tr>
+<tr><td>FORMAT</td><td><span data-hi="i">Disk format</span><span data-en="i">Disk format</span></td></tr>
+<tr><td>ATTRIB</td><td><span data-hi="i">File attributes</span><span data-en="i">File attributes</span></td></tr></table>
+<h3 data-hi="f" class="f">Linux Commands Quick Reference</h3><h3 data-en="f" class="f">Linux Commands Quick Reference</h3>
+<table><tr><th>Linux</th><th>DOS Equivalent</th><th data-hi="i">काम</th><th data-en="i">Purpose</th></tr>
+<tr><td>ls</td><td>DIR</td><td><span data-hi="i">List files</span><span data-en="i">List files</span></td></tr>
+<tr><td>cd</td><td>CD</td><td><span data-hi="i">Change directory</span><span data-en="i">Change directory</span></td></tr>
+<tr><td>mkdir</td><td>MD</td><td><span data-hi="i">Make directory</span><span data-en="i">Make directory</span></td></tr>
+<tr><td>rm</td><td>DEL</td><td><span data-hi="i">Delete file</span><span data-en="i">Delete file</span></td></tr>
+<tr><td>cp</td><td>COPY</td><td><span data-hi="i">Copy file</span><span data-en="i">Copy file</span></td></tr>
+<tr><td>mv</td><td>REN/MOVE</td><td><span data-hi="i">Move/Rename</span><span data-en="i">Move/Rename</span></td></tr>
+<tr><td>clear</td><td>CLS</td><td><span data-hi="i">Clear screen</span><span data-en="i">Clear screen</span></td></tr>
+<tr><td>cat</td><td>TYPE</td><td><span data-hi="i">Show file content</span><span data-en="i">Show file content</span></td></tr></table>
+<h3 data-hi="f" class="f">Full Forms</h3><h3 data-en="f" class="f">Full Forms</h3>
+<table><tr><th>Short</th><th>Full Form</th></tr>
+<tr><td>DOS</td><td>Disk Operating System</td></tr>
+<tr><td>MS-DOS</td><td>Microsoft Disk Operating System</td></tr>
+<tr><td>CLI</td><td>Command Line Interface</td></tr>
+<tr><td>GNU</td><td>GNU's Not Unix</td></tr></table>
+<h3 data-hi="f" class="f">Frequently Asked Questions</h3><h3 data-en="f" class="f">Frequently Asked Questions</h3>
+<ol data-hi="b" class="b">
+<li>DOS किसे कहते हैं? Internal और External commands में अंतर।</li>
+<li>DOS के कोई 10 Internal commands syntax सहित।</li>
+<li>COPY और XCOPY में अंतर। FORMAT command का उपयोग।</li>
+<li>Linux OS किसे कहते हैं? इसकी features।</li>
+<li>Linux और Windows में अंतर।</li>
+<li>Linux file system (directory structure) समझाइए।</li>
+<li>Linux के कोई 10 commands syntax सहित।</li>
+<li>chmod command और Linux permissions समझाइए।</li>
+</ol>
+<ol data-en="b" class="b">
+<li>What is DOS? Difference between Internal and External commands.</li>
+<li>Any 10 DOS Internal commands with syntax.</li>
+<li>Difference between COPY and XCOPY. Use of FORMAT command.</li>
+<li>What is Linux OS? Its features.</li>
+<li>Difference between Linux and Windows.</li>
+<li>Explain Linux file system (directory structure).</li>
+<li>Any 10 Linux commands with syntax.</li>
+<li>Explain chmod command and Linux permissions.</li>
+</ol>
+<div class="ib"><span data-hi="i"><b>आखिरी टिप:</b> DOS और Linux commands की comparison table बनाकर याद करें — exam में दोनों side-by-side पूछे जाते हैं।</span><span data-en="i"><b>Final Tip:</b> Memorise using a DOS vs Linux commands comparison table — both are asked side-by-side in exams.</span></div>
+</div></section>
+
+  </main>
+</div>
+<button id="tt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<footer>Made with 🐧 for ITI-COPA students &nbsp;·&nbsp; by <a href="https://surajtiwarrii.github.io/Portfolio/" target="_blank">Suraj Tiwari</a></footer>
+<script>
+function sL(l){document.documentElement.lang=l;document.getElementById('lt').dataset.lang=l;document.getElementById('bh').classList.toggle('active',l==='hi');document.getElementById('be').classList.toggle('active',l==='en');localStorage.setItem('dlL',l);}
+document.addEventListener('DOMContentLoaded',()=>{sL(localStorage.getItem('dlL')||'hi');});
+function tS(e){if(e)e.stopPropagation();document.getElementById('sb').classList.toggle('open');document.getElementById('ov').classList.toggle('open');}
+window.addEventListener('scroll',()=>{document.getElementById('tt').style.display=window.scrollY>400?'flex':'none';});
+function lS(){const q=document.getElementById('si').value.trim().toLowerCase();document.querySelectorAll('.uc').forEach(c=>c.classList.toggle('hide',q&&!c.innerText.toLowerCase().includes(q)));}
+const nls=document.querySelectorAll('.nl');const secs=document.querySelectorAll('.uc');
+window.addEventListener('scroll',()=>{let cur='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-100)cur=s.id;});nls.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+cur));});
+document.querySelectorAll('.nl').forEach(l=>l.addEventListener('click',()=>{if(window.innerWidth<=880)tS();}));
+</script>
+</body>
+</html>
