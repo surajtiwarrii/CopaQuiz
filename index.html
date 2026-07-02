@@ -6,126 +6,216 @@
 <title>COPA Workspace — ITI NCVT</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#F4F1EA;--panel:rgba(255,255,255,.62);
-  --panel-h:rgba(255,255,255,.85);--border:rgba(180,160,120,.28);
-  --border-h:rgba(190,160,100,.5);
-  --ink:#2A2620;--ink-soft:#736A58;--ink-dim:#A79C86;
-  --gold:#B8862F;--gold-d:#9A6E22;
-  --grad:linear-gradient(120deg,#E8C06A 0%,#C79432 100%);
-  --violet:#7B6FE0;--teal:#3FB5A4;--rose:#DB6E97;--sky:#5B9BE6;
+  --bg:#F7F8FB;
+  --ink:#171D33;
+  --ink-soft:#586074;
+  --ink-dim:#98A0B3;
+  --line:#E9ECF2;
+  --accent:#F4511E;
+  --accent-soft:rgba(244,81,30,.09);
+  --violet:#6D5BE8;--mint:#0FA37F;--amber:#D9880A;--rose:#E0517F;
+  --sh-sm:0 2px 10px rgba(23,29,51,.05);
+  --sh-md:0 14px 34px rgba(23,29,51,.08);
+  --sh-lg:0 26px 60px rgba(23,29,51,.13);
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:'Poppins',sans-serif;color:var(--ink);min-height:100vh;overflow-x:hidden;position:relative;background:var(--bg)}
-body[data-lang="hi"]{font-family:'Noto Sans Devanagari','Poppins',sans-serif}
+body{
+  font-family:'Plus Jakarta Sans',sans-serif;color:var(--ink);min-height:100vh;
+  overflow-x:hidden;position:relative;background:var(--bg);
+  -webkit-font-smoothing:antialiased;
+}
+body[data-lang="hi"]{font-family:'Noto Sans Devanagari','Plus Jakarta Sans',sans-serif}
 body.exit{animation:pageOut .45s ease forwards}
-@keyframes pageOut{to{opacity:0;transform:scale(.97)}}
+@keyframes pageOut{to{opacity:0;transform:scale(.98)}}
+::selection{background:rgba(244,81,30,.2)}
 
+/* ---------- soft background + floating blobs ---------- */
 .wall{position:fixed;inset:0;z-index:-3;background:
-  radial-gradient(65% 55% at 15% 8%,rgba(232,192,106,.28) 0%,transparent 55%),
-  radial-gradient(60% 50% at 90% 15%,rgba(123,111,224,.14) 0%,transparent 55%),
-  radial-gradient(70% 60% at 50% 100%,rgba(63,181,164,.13) 0%,transparent 60%),
-  linear-gradient(165deg,#FAF7EF,#F1ECE0)}
-.orbs{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
-.orb{position:absolute;border-radius:50%;filter:blur(58px);opacity:.35;mix-blend-mode:multiply;animation:float 20s ease-in-out infinite}
-.orb.o1{width:300px;height:300px;background:radial-gradient(circle,#F0CE7E,transparent 70%);top:-70px;left:-50px}
-.orb.o2{width:340px;height:340px;background:radial-gradient(circle,#A99FF0,transparent 70%);bottom:-90px;right:-70px;animation-delay:-7s}
-.orb.o3{width:240px;height:240px;background:radial-gradient(circle,#8AD9CC,transparent 70%);top:44%;left:62%;animation-delay:-13s}
-@keyframes float{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(28px,-32px) scale(1.08)}66%{transform:translate(-22px,20px) scale(.93)}}
-.grain{position:fixed;inset:0;z-index:-1;opacity:.04;pointer-events:none;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+  radial-gradient(55% 42% at 10% 0%,rgba(244,81,30,.07) 0%,transparent 60%),
+  radial-gradient(50% 40% at 92% 8%,rgba(109,91,232,.07) 0%,transparent 60%),
+  radial-gradient(60% 45% at 55% 108%,rgba(15,163,127,.06) 0%,transparent 60%),
+  linear-gradient(180deg,#FCFCFE 0%,#F4F6FA 100%)}
+.blobs{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
+.blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.5;animation:drift 22s ease-in-out infinite}
+.blob.p1{width:340px;height:340px;background:radial-gradient(closest-side,#FBD9CB,transparent);top:-100px;left:-60px}
+.blob.p2{width:300px;height:300px;background:radial-gradient(closest-side,#DCD5FB,transparent);top:30%;right:-90px;animation-delay:-8s}
+.blob.p3{width:320px;height:320px;background:radial-gradient(closest-side,#CDEFE2,transparent);bottom:-110px;left:34%;animation-delay:-15s}
+@keyframes drift{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(34px,-26px) scale(1.07)}66%{transform:translate(-26px,22px) scale(.94)}}
+.dots{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.5;
+  background-image:radial-gradient(rgba(23,29,51,.06) 1px,transparent 1px);
+  background-size:26px 26px;
+  mask-image:radial-gradient(70% 50% at 50% 0%,#000,transparent);
+  -webkit-mask-image:radial-gradient(70% 50% at 50% 0%,#000,transparent)}
 
-.menubar{position:fixed;top:0;left:0;right:0;z-index:60;height:54px;display:flex;align-items:center;justify-content:space-between;
-  padding:0 clamp(14px,4vw,32px);background:rgba(250,247,239,.72);backdrop-filter:blur(22px) saturate(150%);
-  border-bottom:1px solid var(--border);animation:slideDown .6s cubic-bezier(.2,.8,.2,1) both}
-@keyframes slideDown{from{transform:translateY(-100%)}to{transform:translateY(0)}}
+/* ---------- floating pill nav ---------- */
+.menubar{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:60;
+  width:min(1060px,calc(100% - 28px));height:62px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 10px 0 16px;border-radius:100px;
+  background:rgba(255,255,255,.82);backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);
+  border:1px solid rgba(255,255,255,.9);box-shadow:var(--sh-md);
+  animation:navIn .7s cubic-bezier(.2,.8,.2,1) both}
+@keyframes navIn{from{transform:translate(-50%,-120%)}to{transform:translate(-50%,0)}}
 .mb-left{display:flex;align-items:center;gap:11px}
-.logo{width:32px;height:32px;border-radius:10px;background:var(--grad);display:grid;place-items:center;
-  box-shadow:0 4px 14px rgba(199,148,50,.35)}
-.logo svg{width:17px;height:17px;color:#3A2A08}
-.mb-left b{letter-spacing:.5px;font-size:1rem;font-weight:700;color:var(--ink)}
-.mb-left .tag{font-size:.6rem;font-weight:600;letter-spacing:1px;color:var(--gold-d);background:rgba(184,134,47,.1);
-  padding:4px 9px;border-radius:20px;text-transform:uppercase;border:1px solid rgba(184,134,47,.24)}
-.mb-right{display:flex;align-items:center;gap:12px;font-family:'JetBrains Mono';color:var(--ink-soft)}
-.langbtn{display:flex;background:var(--panel);border:1px solid var(--border);border-radius:20px;padding:3px;cursor:pointer;position:relative;font-weight:700}
-.langbtn .pill{position:absolute;top:3px;bottom:3px;width:calc(50% - 3px);left:3px;background:var(--grad);border-radius:20px;transition:transform .35s cubic-bezier(.6,.2,.1,1);box-shadow:0 2px 10px rgba(199,148,50,.4)}
+.logo{width:38px;height:38px;border-radius:50%;background:var(--accent);display:grid;place-items:center;
+  box-shadow:0 6px 16px rgba(244,81,30,.35);animation:logoBob 4s ease-in-out infinite}
+@keyframes logoBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+.logo svg{width:18px;height:18px;color:#fff}
+.mb-left b{letter-spacing:-.2px;font-size:1.05rem;font-weight:800;color:var(--ink)}
+.mb-left .tag{font-size:.58rem;font-weight:700;letter-spacing:1.4px;color:var(--accent);
+  background:var(--accent-soft);padding:5px 11px;border-radius:20px;text-transform:uppercase}
+.mb-right{display:flex;align-items:center;gap:9px;font-family:'JetBrains Mono';color:var(--ink-soft)}
+.langbtn{display:flex;background:#EFF2F8;border-radius:100px;padding:4px;cursor:pointer;position:relative;overflow:hidden;font-weight:700;
+  transition:transform .2s}
+.langbtn:active{transform:scale(.94)}
+.langbtn .pill{position:absolute;top:4px;bottom:4px;width:calc(50% - 4px);left:4px;background:#fff;border-radius:100px;
+  transition:transform .35s cubic-bezier(.6,.2,.1,1);box-shadow:var(--sh-sm)}
 body[data-lang="hi"] .langbtn .pill{transform:translateX(100%)}
-.langbtn span{position:relative;z-index:1;padding:4px 13px;font-size:.72rem;color:var(--ink-soft);transition:color .3s}
-.langbtn span.on{color:#3A2A08}
-#clock{font-size:.78rem;background:var(--panel);padding:5px 11px;border-radius:20px;border:1px solid var(--border)}
+.langbtn span{position:relative;z-index:1;padding:6px 15px;font-size:.72rem;color:var(--ink-dim);transition:color .3s}
+.langbtn span.on{color:var(--ink)}
+#clock{font-size:.76rem;background:#EFF2F8;padding:9px 14px;border-radius:100px;
+  color:var(--ink-soft);font-variant-numeric:tabular-nums;font-weight:700}
 
-.stage{max-width:1080px;margin:0 auto;padding:88px clamp(18px,5vw,40px) 30px}
+/* ---------- stage ---------- */
+.stage{max-width:1060px;margin:0 auto;padding:132px clamp(18px,5vw,40px) 30px}
 
-.hero{margin-bottom:40px;animation:fadeUp .7s .15s both}
-.greet{display:inline-flex;align-items:center;gap:9px;font-size:.72rem;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;
-  color:var(--gold-d);background:rgba(184,134,47,.09);padding:8px 16px;border-radius:30px;margin-bottom:20px;border:1px solid rgba(184,134,47,.2)}
-.greet .dot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pulse 1.8s infinite}
-@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(184,134,47,.5)}50%{box-shadow:0 0 0 7px rgba(184,134,47,0)}}
-h1{font-size:clamp(2.1rem,6vw,3.7rem);font-weight:700;line-height:1.08;letter-spacing:-1.4px;color:var(--ink)}
-h1 .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
-.sub{max-width:560px;margin:18px 0 0;color:var(--ink-soft);font-size:clamp(.95rem,2vw,1.06rem);line-height:1.6}
+/* ---------- hero (centered) ---------- */
+.hero{text-align:center;margin-bottom:64px;animation:fadeUp .8s .1s both}
+.greet{display:inline-flex;align-items:center;gap:8px;font-size:.72rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  color:var(--accent);background:#fff;padding:9px 18px;border-radius:100px;margin-bottom:24px;
+  border:1px solid var(--line);box-shadow:var(--sh-sm)}
+.greet .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(244,81,30,.45)}50%{box-shadow:0 0 0 8px rgba(244,81,30,0)}}
+h1{font-size:clamp(2.3rem,6.5vw,4rem);font-weight:800;line-height:1.08;letter-spacing:-.03em;color:var(--ink)}
+body[data-lang="hi"] h1{letter-spacing:0}
+h1 .g{color:var(--accent);position:relative;white-space:nowrap;display:inline-block}
+h1 .g::after{content:"";position:absolute;left:2%;right:2%;bottom:.02em;height:.09em;background:var(--accent);
+  border-radius:8px;opacity:.28;transform:scaleX(0);transform-origin:left;
+  animation:sweep .9s .9s cubic-bezier(.2,.8,.2,1) forwards}
+@keyframes sweep{to{transform:scaleX(1)}}
+.sub{max-width:540px;margin:20px auto 0;color:var(--ink-soft);font-size:clamp(.95rem,2vw,1.05rem);line-height:1.7;font-weight:500}
 @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 
-.seclabel{display:flex;align-items:center;gap:13px;margin:36px 0 16px;animation:fadeUp .6s both}
-.seclabel .ico{width:28px;height:28px;border-radius:9px;display:grid;place-items:center;flex-shrink:0;
-  background:var(--panel);border:1px solid var(--border)}
-.seclabel .ico svg{width:15px;height:15px;color:var(--gold-d)}
-.seclabel .txt{font-size:.76rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-soft);white-space:nowrap}
-.seclabel .line{flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent)}
+/* ---------- 3D orbit ring ---------- */
+.orbit3d{--r:180px;height:200px;margin-top:38px;perspective:1100px;position:relative;
+  cursor:grab;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.orbit3d:active{cursor:grabbing}
+.orbit3d .hint{position:absolute;left:50%;bottom:-6px;transform:translateX(-50%);
+  font-size:.6rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-dim);
+  font-family:'JetBrains Mono';pointer-events:none;white-space:nowrap}
+.ring{position:absolute;inset:0;transform-style:preserve-3d;will-change:transform}
+.sat{position:absolute;left:50%;top:50%;width:68px;height:68px;margin:-34px 0 0 -34px;border-radius:21px;
+  background:#fff;border:1px solid var(--line);box-shadow:var(--sh-md);display:grid;place-items:center;
+  backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  transform:rotateY(var(--a)) translateZ(var(--r))}
+.sat svg{width:29px;height:29px}
+.sat.c1 svg{color:var(--violet)}
+.sat.c2 svg{color:var(--mint)}
+.sat.c3 svg{color:var(--amber)}
+.sat.c4 svg{color:var(--rose)}
+.sat.c5 svg{color:var(--accent)}
+.sat.c6 svg{color:var(--ink-soft)}
+@media(max-width:700px){.orbit3d{--r:125px;height:170px;margin-top:30px}.sat{width:58px;height:58px;margin:-29px 0 0 -29px;border-radius:18px}.sat svg{width:25px;height:25px}}
 
-.dock{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
-.win{position:relative;border-radius:22px;cursor:pointer;overflow:hidden;background:var(--panel);
-  backdrop-filter:blur(24px) saturate(150%);border:1px solid var(--border);
-  box-shadow:0 16px 40px rgba(120,95,40,.1),inset 0 1px 0 rgba(255,255,255,.7);
-  transition:transform .5s cubic-bezier(.2,.8,.2,1),box-shadow .5s,border-color .5s,background .5s;animation:winIn .7s both}
-@keyframes winIn{from{opacity:0;transform:translateY(32px) scale(.96)}to{opacity:1;transform:none}}
-.win:hover{transform:translateY(-8px);box-shadow:0 28px 56px rgba(120,95,40,.18),inset 0 1px 0 rgba(255,255,255,.8);border-color:var(--border-h);background:var(--panel-h)}
-.win .body{padding:26px 26px 24px}
-.win .top{display:flex;align-items:center;gap:15px;margin-bottom:16px}
-.win .icon{width:56px;height:56px;flex-shrink:0;border-radius:16px;display:grid;place-items:center;
-  transition:transform .5s;border:1px solid var(--border)}
-.win .icon svg{width:26px;height:26px}
-.win.theory .icon{background:rgba(123,111,224,.13);color:var(--violet)}
-.win.emp .icon{background:rgba(63,181,164,.13);color:var(--teal)}
-.win.notes1 .icon{background:rgba(184,134,47,.14);color:var(--gold)}
-.win.notes2 .icon{background:rgba(219,110,151,.13);color:var(--rose)}
-.win:hover .icon{transform:scale(1.08) rotate(-4deg)}
-.win h2{font-size:1.26rem;font-weight:600;letter-spacing:-.3px;line-height:1.2;color:var(--ink)}
-.win .tagline{font-size:.7rem;font-weight:500;color:var(--ink-dim);margin-top:4px;font-family:'JetBrains Mono'}
-.win p{color:var(--ink-soft);font-size:.85rem;line-height:1.6;margin-bottom:20px}
-.win .foot{display:flex;align-items:center;justify-content:space-between}
-.win .meta{display:flex;gap:22px}
-.win .meta b{display:block;font-size:1.2rem;font-weight:700;font-family:'JetBrains Mono';color:var(--ink);line-height:1}
-.win .meta span{font-size:.62rem;color:var(--ink-dim);margin-top:3px;display:block;letter-spacing:.3px}
-.win .go{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;
-  background:var(--grad);box-shadow:0 8px 18px rgba(199,148,50,.32);
-  transition:transform .3s;position:relative;overflow:hidden}
-.win .go svg{width:16px;height:16px;color:#3A2A08;position:relative}
-.win .go::before{content:"";position:absolute;inset:0;left:-60%;width:50%;background:linear-gradient(120deg,transparent,rgba(255,255,255,.7),transparent);transform:skewX(-20deg);transition:left .6s}
-.win:hover .go{transform:translateX(3px)}
-.win:hover .go::before{left:130%}
+/* ---------- scroll reveal ---------- */
+.rev{opacity:0}
+.rev.in{animation:fadeUp .75s both}
+.win.rev.in{animation:winIn .8s both}
+@keyframes winIn{from{opacity:0;transform:translateY(34px) scale(.96)}to{opacity:1;transform:none}}
 
-.foots{margin-top:38px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;
-  padding:18px 22px;border-radius:18px;background:var(--panel);backdrop-filter:blur(20px);border:1px solid var(--border);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.7);animation:fadeUp .6s .5s both}
-.foots .who{font-size:.82rem;color:var(--ink-soft)}
-.foots .who b{color:var(--ink);font-weight:600}
+/* ---------- section headings ---------- */
+.seclabel{display:flex;align-items:center;gap:12px;margin:44px 0 20px}
+.seclabel .ico{width:40px;height:40px;border-radius:14px;display:grid;place-items:center;flex-shrink:0;
+  background:#fff;border:1px solid var(--line);box-shadow:var(--sh-sm)}
+.seclabel .ico svg{width:18px;height:18px;color:var(--accent)}
+.seclabel .txt{font-size:1.15rem;font-weight:800;letter-spacing:-.02em;color:var(--ink)}
+.seclabel .line{display:none}
+
+/* ---------- pastel cards ---------- */
+.dock{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.win{position:relative;border-radius:28px;cursor:pointer;overflow:hidden;
+  border:1px solid rgba(255,255,255,.85);
+  box-shadow:var(--sh-md);
+  background-size:170% 170%;animation:winIn .8s both,shift 9s ease-in-out infinite;
+  transition:transform .45s cubic-bezier(.2,.8,.2,1),box-shadow .45s;
+  -webkit-tap-highlight-color:transparent}
+@keyframes shift{0%,100%{background-position:0% 0%}50%{background-position:100% 100%}}
+.win:hover{transform:translateY(-7px);box-shadow:var(--sh-lg)}
+.win:active{transform:scale(.97);box-shadow:var(--sh-sm);transition-duration:.15s}
+.win:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.win.theory{background-image:linear-gradient(160deg,#F3F0FF 0%,#E7E2FD 55%,#F3F0FF 100%)}
+.win.emp{background-image:linear-gradient(160deg,#E9FAF3 0%,#D8F4E7 55%,#E9FAF3 100%)}
+.win.notes1{background-image:linear-gradient(160deg,#FFF6E5 0%,#FFEBCB 55%,#FFF6E5 100%)}
+.win.notes2{background-image:linear-gradient(160deg,#FEF0F5 0%,#FBDFEA 55%,#FEF0F5 100%)}
+.win .body{padding:26px;position:relative;z-index:1}
+.win .top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px}
+.win .icon{width:58px;height:58px;border-radius:19px;display:grid;place-items:center;
+  background:#fff;box-shadow:var(--sh-sm);transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+.win .icon svg{width:27px;height:27px}
+.win.theory .icon svg{color:var(--violet)}
+.win.emp .icon svg{color:var(--mint)}
+.win.notes1 .icon svg{color:var(--amber)}
+.win.notes2 .icon svg{color:var(--rose)}
+.win:hover .icon{transform:scale(1.07) rotate(-5deg)}
+.win .go{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;
+  background:var(--ink);box-shadow:0 8px 20px rgba(23,29,51,.25);
+  transition:transform .4s cubic-bezier(.2,.8,.2,1),background .3s}
+.win .go svg{width:17px;height:17px;color:#fff;transform:rotate(-45deg);transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+.win:hover .go{transform:scale(1.08);background:var(--accent)}
+.win:hover .go svg{transform:rotate(0deg)}
+.win h2{font-size:1.3rem;font-weight:800;letter-spacing:-.02em;line-height:1.2;color:var(--ink)}
+.win .tagline{font-size:.68rem;font-weight:700;color:var(--ink-soft);opacity:.75;margin-top:6px;font-family:'JetBrains Mono';letter-spacing:.3px}
+.win p{color:var(--ink-soft);font-size:.87rem;line-height:1.65;font-weight:500;margin:12px 0 20px}
+.win .foot{display:flex;align-items:center;gap:12px;border-top:1.5px dashed rgba(23,29,51,.12);padding-top:16px}
+.win .meta{display:flex;gap:12px;width:100%}
+.win .meta > div{flex:1;background:rgba(255,255,255,.65);border-radius:14px;padding:11px 14px;
+  display:flex;align-items:baseline;gap:7px}
+.win .meta b{font-size:1.22rem;font-weight:800;font-family:'JetBrains Mono';color:var(--ink);line-height:1;font-variant-numeric:tabular-nums}
+.win .meta span{font-size:.64rem;font-weight:700;color:var(--ink-soft);letter-spacing:.4px;text-transform:uppercase}
+
+/* ---------- tap ripple ---------- */
+.ripple{position:absolute;border-radius:50%;background:rgba(23,29,51,.14);
+  transform:translate(-50%,-50%) scale(0);pointer-events:none;z-index:2;
+  animation:rip .65s ease-out forwards}
+@keyframes rip{to{transform:translate(-50%,-50%) scale(1);opacity:0}}
+
+/* ---------- footer strip ---------- */
+.foots{margin-top:52px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;
+  padding:20px 26px;border-radius:100px;
+  background:#fff;border:1px solid var(--line);box-shadow:var(--sh-sm)}
+.foots .who{font-size:.83rem;color:var(--ink-soft);font-weight:500}
+.foots .who b{color:var(--ink);font-weight:800}
 .foots .chips{display:flex;gap:8px;flex-wrap:wrap}
-.foots .chip{font-size:.68rem;font-weight:500;color:var(--ink-soft);background:rgba(255,255,255,.55);padding:6px 12px;border-radius:20px;font-family:'JetBrains Mono';border:1px solid var(--border)}
-footer{text-align:center;padding:24px;color:var(--ink-dim);font-size:.76rem}
-footer b{color:var(--ink-soft);font-weight:600}
+.foots .chip{font-size:.66rem;font-weight:700;color:var(--accent);background:var(--accent-soft);
+  padding:8px 14px;border-radius:100px;font-family:'JetBrains Mono';letter-spacing:.4px;
+  transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+.foots .chip:hover{transform:translateY(-3px)}
+footer{text-align:center;padding:28px;color:var(--ink-dim);font-size:.78rem;font-weight:500}
+footer b{color:var(--ink-soft);font-weight:800}
 
-@media(max-width:700px){.dock{grid-template-columns:1fr}h1{letter-spacing:-.8px}.mb-left .tag{display:none}}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media(max-width:700px){
+  .dock{grid-template-columns:1fr}
+  .mb-left .tag{display:none}
+  .stage{padding-top:112px}
+  .hero{text-align:left}
+  .sub{margin-left:0}
+  .foots{border-radius:24px}
+  .win .body{padding:22px}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .rev{opacity:1}
+}
 </style>
 </head>
 <body data-lang="en">
 <div class="wall"></div>
-<div class="orbs"><span class="orb o1"></span><span class="orb o2"></span><span class="orb o3"></span></div>
-<div class="grain"></div>
+<div class="blobs"><span class="blob p1"></span><span class="blob p2"></span><span class="blob p3"></span></div>
+<div class="dots"></div>
 
 <div class="menubar">
   <div class="mb-left">
@@ -144,89 +234,92 @@ footer b{color:var(--ink-soft);font-weight:600}
     <div class="greet"><span class="dot"></span><span id="greetTxt" data-en="Ready to study" data-hi="पढ़ाई के लिए तैयार">Ready to study</span></div>
     <h1 data-en="Your <span class='g'>COPA</span> exam,<br>all in one place" data-hi="आपकी <span class='g'>COPA</span> परीक्षा,<br>एक ही जगह">Your <span class="g">COPA</span> exam,<br>all in one place</h1>
     <p class="sub" data-en="Practice chapter-wise tests and revise with bilingual notes — built to match the real NCVT paper." data-hi="अध्यायवार टेस्ट का अभ्यास करें और द्विभाषी नोट्स से रिवीजन करें — असली NCVT पेपर के अनुसार।">Practice chapter-wise tests and revise with bilingual notes — built to match the real NCVT paper.</p>
+    <div class="orbit3d" id="orbit3d" aria-hidden="true">
+      <div class="ring" id="ring">
+        <div class="sat c1" style="--a:0deg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+        <div class="sat c2" style="--a:60deg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
+        <div class="sat c3" style="--a:120deg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+        <div class="sat c4" style="--a:180deg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h4"/></svg></div>
+        <div class="sat c5" style="--a:240deg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+        <div class="sat c6" style="--a:300deg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+      </div>
+      <span class="hint" data-en="Drag to spin" data-hi="घुमाने के लिए खींचें">Drag to spin</span>
+    </div>
   </div>
 
-  <div class="seclabel practice">
+  <div class="seclabel practice rev">
     <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
     <span class="txt" data-en="Practice Tests" data-hi="प्रैक्टिस टेस्ट">Practice Tests</span>
     <span class="line"></span>
   </div>
   <div class="dock">
-    <div class="win theory" style="animation-delay:.3s" onclick="goTo('copa.html')">
+    <div class="win theory rev" style="animation-delay:.1s" onclick="goTo('copa.html')" tabindex="0" role="link">
       <div class="body">
         <div class="top">
           <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
-          <div>
-            <h2 data-en="COPA Theory" data-hi="COPA थ्योरी">COPA Theory</h2>
-            <div class="tagline" data-en="18 chapters · 3 modes" data-hi="18 अध्याय · 3 मोड">18 chapters · 3 modes</div>
-          </div>
+          <div class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
+        <h2 data-en="COPA Theory" data-hi="COPA थ्योरी">COPA Theory</h2>
+        <div class="tagline" data-en="18 chapters · 3 modes" data-hi="18 अध्याय · 3 मोड">18 chapters · 3 modes</div>
         <p data-en="Chapter-wise practice and full mock tests on the NCVT pattern, with multiple sets like the real paper." data-hi="NCVT पैटर्न पर अध्यायवार अभ्यास और पूर्ण मॉक टेस्ट, असली पेपर जैसे कई सेट के साथ।">Chapter-wise practice and full mock tests on the NCVT pattern, with multiple sets like the real paper.</p>
         <div class="foot">
-          <div class="meta"><div><b>100</b><span data-en="Questions" data-hi="प्रश्न">Questions</span></div><div><b>10</b><span data-en="Sets" data-hi="सेट">Sets</span></div></div>
-          <div class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+          <div class="meta"><div><b data-count="100">100</b><span data-en="Questions" data-hi="प्रश्न">Questions</span></div><div><b data-count="10">10</b><span data-en="Sets" data-hi="सेट">Sets</span></div></div>
         </div>
       </div>
     </div>
-    <div class="win emp" style="animation-delay:.4s" onclick="goTo('employability.html')">
+    <div class="win emp rev" style="animation-delay:.2s" onclick="goTo('employability.html')" tabindex="0" role="link">
       <div class="body">
         <div class="top">
           <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
-          <div>
-            <h2 data-en="Employability Skills" data-hi="रोज़गार कौशल">Employability Skills</h2>
-            <div class="tagline" data-en="13 chapters · 3 modes" data-hi="13 अध्याय · 3 मोड">13 chapters · 3 modes</div>
-          </div>
+          <div class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
+        <h2 data-en="Employability Skills" data-hi="रोज़गार कौशल">Employability Skills</h2>
+        <div class="tagline" data-en="13 chapters · 3 modes" data-hi="13 अध्याय · 3 मोड">13 chapters · 3 modes</div>
         <p data-en="Subject-wise practice and full mock tests per the NCVT syllabus, with multiple sets for real exam feel." data-hi="NCVT पाठ्यक्रम के अनुसार विषयवार अभ्यास और पूर्ण मॉक टेस्ट, वास्तविक परीक्षा अनुभव के लिए कई सेट।">Subject-wise practice and full mock tests per the NCVT syllabus, with multiple sets for real exam feel.</p>
         <div class="foot">
-          <div class="meta"><div><b>75</b><span data-en="Questions" data-hi="प्रश्न">Questions</span></div><div><b>10</b><span data-en="Sets" data-hi="सेट">Sets</span></div></div>
-          <div class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+          <div class="meta"><div><b data-count="75">75</b><span data-en="Questions" data-hi="प्रश्न">Questions</span></div><div><b data-count="10">10</b><span data-en="Sets" data-hi="सेट">Sets</span></div></div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="seclabel notes">
+  <div class="seclabel notes rev">
     <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
     <span class="txt" data-en="Revision Notes" data-hi="रिवीजन नोट्स">Revision Notes</span>
     <span class="line"></span>
   </div>
   <div class="dock">
-    <div class="win notes1" style="animation-delay:.5s" onclick="goTo('notes-theory.html')">
+    <div class="win notes1 rev" style="animation-delay:.1s" onclick="goTo('notes-theory.html')" tabindex="0" role="link">
       <div class="body">
         <div class="top">
           <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
-          <div>
-            <h2 data-en="Theory Notes" data-hi="थ्योरी नोट्स">Theory Notes</h2>
-            <div class="tagline" data-en="18 chapters · EN / हिं" data-hi="18 अध्याय · EN / हिं">18 chapters · EN / हिं</div>
-          </div>
+          <div class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
+        <h2 data-en="Theory Notes" data-hi="थ्योरी नोट्स">Theory Notes</h2>
+        <div class="tagline" data-en="18 chapters · EN / हिं" data-hi="18 अध्याय · EN / हिं">18 chapters · EN / हिं</div>
         <p data-en="Concise, exam-focused notes for every COPA topic — quick to revise before the paper." data-hi="हर COPA विषय के लिए संक्षिप्त, परीक्षा-केंद्रित नोट्स — पेपर से पहले तुरंत रिवीजन।">Concise, exam-focused notes for every COPA topic — quick to revise before the paper.</p>
         <div class="foot">
-          <div class="meta"><div><b>18</b><span data-en="Chapters" data-hi="अध्याय">Chapters</span></div><div><b>2</b><span data-en="Languages" data-hi="भाषाएं">Languages</span></div></div>
-          <div class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+          <div class="meta"><div><b data-count="18">18</b><span data-en="Chapters" data-hi="अध्याय">Chapters</span></div><div><b data-count="2">2</b><span data-en="Languages" data-hi="भाषाएं">Languages</span></div></div>
         </div>
       </div>
     </div>
-    <div class="win notes2" style="animation-delay:.6s" onclick="goTo('notes-employability.html')">
+    <div class="win notes2 rev" style="animation-delay:.2s" onclick="goTo('notes-employability.html')" tabindex="0" role="link">
       <div class="body">
         <div class="top">
           <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h4"/></svg></div>
-          <div>
-            <h2 data-en="Employability Notes" data-hi="रोज़गार कौशल नोट्स">Employability Notes</h2>
-            <div class="tagline" data-en="13 chapters · EN / हिं" data-hi="13 अध्याय · EN / हिं">13 chapters · EN / हिं</div>
-          </div>
+          <div class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
+        <h2 data-en="Employability Notes" data-hi="रोज़गार कौशल नोट्स">Employability Notes</h2>
+        <div class="tagline" data-en="13 chapters · EN / हिं" data-hi="13 अध्याय · EN / हिं">13 chapters · EN / हिं</div>
         <p data-en="Short, to-the-point notes on every Employability Skills concept — everything summed up for fast revision." data-hi="हर रोज़गार कौशल कॉन्सेप्ट के छोटे, सीधे नोट्स — तेज़ रिवीजन के लिए सब कुछ संक्षेप में।">Short, to-the-point notes on every Employability Skills concept — everything summed up for fast revision.</p>
         <div class="foot">
-          <div class="meta"><div><b>13</b><span data-en="Chapters" data-hi="अध्याय">Chapters</span></div><div><b>2</b><span data-en="Languages" data-hi="भाषाएं">Languages</span></div></div>
-          <div class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+          <div class="meta"><div><b data-count="13">13</b><span data-en="Chapters" data-hi="अध्याय">Chapters</span></div><div><b data-count="2">2</b><span data-en="Languages" data-hi="भाषाएं">Languages</span></div></div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="foots">
+  <div class="foots rev">
     <div class="who" data-en="Built for ITI students · <b>UP NCVT COPA</b> · 1st Year" data-hi="आईटीआई छात्रों के लिए · <b>यूपी एनसीवीटी COPA</b> · प्रथम वर्ष">Built for ITI students · <b>UP NCVT COPA</b> · 1st Year</div>
     <div class="chips">
       <span class="chip" data-en="31 Chapters" data-hi="31 अध्याय">31 Chapters</span>
@@ -263,6 +356,115 @@ window.addEventListener('pageshow', function(e){
   if(e.persisted || performance.getEntriesByType('navigation')[0]?.type === 'back_forward'){
     document.body.classList.remove('exit');
     document.body.style.opacity='1';document.body.style.transform='none';
+  }
+});
+
+/* ---------- scroll reveal ---------- */
+const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const revEls=document.querySelectorAll('.rev');
+if('IntersectionObserver' in window){
+  const io=new IntersectionObserver(es=>{
+    es.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        if(e.target.classList.contains('win'))countUp(e.target);
+        io.unobserve(e.target);
+      }
+    });
+  },{threshold:.15});
+  revEls.forEach(el=>io.observe(el));
+}else{
+  revEls.forEach(el=>{el.classList.add('in');if(el.classList.contains('win'))countUp(el)});
+}
+
+/* ---------- number count-up ---------- */
+function countUp(card){
+  card.querySelectorAll('[data-count]').forEach(el=>{
+    const target=parseInt(el.dataset.count,10);
+    if(reduced||isNaN(target)){el.textContent=target;return}
+    const dur=900,start=performance.now();
+    function step(now){
+      const p=Math.min((now-start)/dur,1);
+      const ease=1-Math.pow(1-p,3);
+      el.textContent=Math.round(target*ease);
+      if(p<1)requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  });
+}
+
+/* ---------- tap ripple (cards + buttons) ---------- */
+function addRipple(el){
+  el.addEventListener('pointerdown',e=>{
+    if(reduced)return;
+    const r=el.getBoundingClientRect();
+    const d=Math.max(r.width,r.height)*2.2;
+    const s=document.createElement('span');
+    s.className='ripple';
+    s.style.width=s.style.height=d+'px';
+    s.style.left=(e.clientX-r.left)+'px';
+    s.style.top=(e.clientY-r.top)+'px';
+    el.appendChild(s);
+    setTimeout(()=>s.remove(),700);
+  });
+}
+document.querySelectorAll('.win,.langbtn').forEach(addRipple);
+
+/* ---------- keyboard access ---------- */
+document.querySelectorAll('.win').forEach(w=>{
+  w.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();w.click()}});
+});
+
+/* ---------- 3D orbit: auto spin + drag + scroll ---------- */
+const ring=document.getElementById('ring'),orbit=document.getElementById('orbit3d');
+if(ring&&!reduced){
+  let rot=0,vel=0,dragging=false,lastX=0,lastT=0,lastScroll=window.scrollY;
+  orbit.addEventListener('pointerdown',e=>{
+    dragging=true;lastX=e.clientX;lastT=performance.now();vel=0;
+    orbit.setPointerCapture(e.pointerId);
+  });
+  orbit.addEventListener('pointermove',e=>{
+    if(!dragging)return;
+    const dx=e.clientX-lastX,now=performance.now(),dt=Math.max(now-lastT,1);
+    rot+=dx*0.45;vel=(dx*0.45)/(dt/16.7);
+    lastX=e.clientX;lastT=now;
+  });
+  const endDrag=()=>{dragging=false};
+  orbit.addEventListener('pointerup',endDrag);
+  orbit.addEventListener('pointercancel',endDrag);
+  window.addEventListener('scroll',()=>{
+    const y=window.scrollY;rot+=(y-lastScroll)*0.12;lastScroll=y;
+  },{passive:true});
+  let prev=performance.now();
+  (function spin(now){
+    const dt=(now-prev)/1000;prev=now;
+    if(!dragging){rot+=10*dt+vel;vel*=0.94;if(Math.abs(vel)<.01)vel=0}
+    ring.style.transform='rotateX(-10deg) rotateY('+rot+'deg)';
+    requestAnimationFrame(spin);
+  })(prev);
+}
+
+/* ---------- 3D card tilt ---------- */
+const canHover=window.matchMedia('(hover: hover)').matches;
+document.querySelectorAll('.win').forEach(w=>{
+  if(reduced)return;
+  if(canHover){
+    w.addEventListener('pointermove',e=>{
+      const r=w.getBoundingClientRect();
+      const px=(e.clientX-r.left)/r.width-.5,py=(e.clientY-r.top)/r.height-.5;
+      w.style.transform='perspective(900px) translateY(-7px) rotateX('+(-py*7)+'deg) rotateY('+(px*7)+'deg)';
+    });
+    w.addEventListener('pointerleave',()=>{w.style.transform=''});
+  }else{
+    w.addEventListener('pointerdown',e=>{
+      const r=w.getBoundingClientRect();
+      const px=(e.clientX-r.left)/r.width-.5,py=(e.clientY-r.top)/r.height-.5;
+      w.style.transform='perspective(900px) scale(.97) rotateX('+(-py*6)+'deg) rotateY('+(px*6)+'deg)';
+    });
+    const clr=()=>{w.style.transform=''};
+    w.addEventListener('pointerup',clr);
+    w.addEventListener('pointercancel',clr);
+    w.addEventListener('pointerleave',clr);
   }
 });
 </script>
