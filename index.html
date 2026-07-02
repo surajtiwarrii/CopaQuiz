@@ -9,23 +9,25 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#F7F8FB;
-  --ink:#171D33;
-  --ink-soft:#586074;
-  --ink-dim:#98A0B3;
-  --line:#E9ECF2;
+  --bg:#FFF6EE;
+  --card:#FFFFFF;
+  --line:#F4DFC9;
+  --ink:#4A382B;
+  --ink-soft:#8A7362;
+  --ink-dim:#BFA893;
   --accent:#F4511E;
-  --accent-soft:rgba(244,81,30,.09);
-  --violet:#6D5BE8;--mint:#0FA37F;--amber:#D9880A;--rose:#E0517F;
-  --sh-sm:0 2px 10px rgba(23,29,51,.05);
-  --sh-md:0 14px 34px rgba(23,29,51,.08);
-  --sh-lg:0 26px 60px rgba(23,29,51,.13);
+  --accent-soft:rgba(244,81,30,.1);
+  --violet:#8F7DF3;--mint:#2FBE92;--amber:#EFA22C;--rose:#EE6E9E;
+  --sh-sm:0 2px 10px rgba(120,80,50,.08);
+  --sh-md:0 14px 34px rgba(120,80,50,.13);
+  --sh-lg:0 28px 64px rgba(120,80,50,.2);
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
   font-family:'Plus Jakarta Sans',sans-serif;color:var(--ink);min-height:100vh;
-  overflow-x:hidden;position:relative;background:var(--bg);
+  overflow-x:hidden;position:relative;
+  background:linear-gradient(180deg,#FFF9F2 0%,#FFEFDF 100%);
   -webkit-font-smoothing:antialiased;
 }
 body[data-lang="hi"]{font-family:'Noto Sans Devanagari','Plus Jakarta Sans',sans-serif}
@@ -33,189 +35,153 @@ body.exit{animation:pageOut .45s ease forwards}
 @keyframes pageOut{to{opacity:0;transform:scale(.98)}}
 ::selection{background:rgba(244,81,30,.2)}
 
-/* ---------- soft background + floating blobs ---------- */
-.wall{position:fixed;inset:0;z-index:-3;background:
-  radial-gradient(55% 42% at 10% 0%,rgba(244,81,30,.07) 0%,transparent 60%),
-  radial-gradient(50% 40% at 92% 8%,rgba(109,91,232,.07) 0%,transparent 60%),
-  radial-gradient(60% 45% at 55% 108%,rgba(15,163,127,.06) 0%,transparent 60%),
-  linear-gradient(180deg,#FCFCFE 0%,#F4F6FA 100%)}
-.blobs{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
-.blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.5;animation:drift 22s ease-in-out infinite}
-.blob.p1{width:340px;height:340px;background:radial-gradient(closest-side,#FBD9CB,transparent);top:-100px;left:-60px}
-.blob.p2{width:300px;height:300px;background:radial-gradient(closest-side,#DCD5FB,transparent);top:30%;right:-90px;animation-delay:-8s}
-.blob.p3{width:320px;height:320px;background:radial-gradient(closest-side,#CDEFE2,transparent);bottom:-110px;left:34%;animation-delay:-15s}
-@keyframes drift{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(34px,-26px) scale(1.07)}66%{transform:translate(-26px,22px) scale(.94)}}
-.dots{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.5;
-  background-image:radial-gradient(rgba(23,29,51,.06) 1px,transparent 1px);
-  background-size:26px 26px;
-  mask-image:radial-gradient(70% 50% at 50% 0%,#000,transparent);
-  -webkit-mask-image:radial-gradient(70% 50% at 50% 0%,#000,transparent)}
-
-/* ---------- floating pill nav ---------- */
-.menubar{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:60;
-  width:min(1060px,calc(100% - 28px));height:62px;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 10px 0 16px;border-radius:100px;
-  background:rgba(255,255,255,.82);backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);
-  border:1px solid rgba(255,255,255,.9);box-shadow:var(--sh-md);
-  animation:navIn .7s cubic-bezier(.2,.8,.2,1) both}
-@keyframes navIn{from{transform:translate(-50%,-120%)}to{transform:translate(-50%,0)}}
+/* ---------- light header (scrolls with page) ---------- */
+.menubar{max-width:1020px;margin:0 auto;height:76px;display:flex;align-items:center;justify-content:space-between;
+  padding:0 clamp(16px,4vw,36px);animation:fadeUp .6s both}
 .mb-left{display:flex;align-items:center;gap:11px}
-.logo{width:38px;height:38px;border-radius:50%;background:var(--accent);display:grid;place-items:center;
+.logo{width:40px;height:40px;border-radius:50%;background:var(--accent);display:grid;place-items:center;
   box-shadow:0 6px 16px rgba(244,81,30,.35);animation:logoBob 4s ease-in-out infinite}
 @keyframes logoBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
-.logo svg{width:18px;height:18px;color:#fff}
-.mb-left b{letter-spacing:-.2px;font-size:1.05rem;font-weight:800;color:var(--ink)}
+.logo svg{width:19px;height:19px;color:#fff}
+.mb-left b{letter-spacing:-.2px;font-size:1.08rem;font-weight:800;color:var(--ink)}
 .mb-left .tag{font-size:.58rem;font-weight:700;letter-spacing:1.4px;color:var(--accent);
   background:var(--accent-soft);padding:5px 11px;border-radius:20px;text-transform:uppercase}
-.mb-right{display:flex;align-items:center;gap:9px;font-family:'JetBrains Mono';color:var(--ink-soft)}
-.langbtn{display:flex;background:#EFF2F8;border-radius:100px;padding:4px;cursor:pointer;position:relative;overflow:hidden;font-weight:700;
-  transition:transform .2s}
+.mb-right{display:flex;align-items:center;gap:9px;font-family:'JetBrains Mono'}
+.langbtn{display:flex;background:#FFE7D0;border-radius:100px;padding:4px;cursor:pointer;position:relative;overflow:hidden;font-weight:700;transition:transform .2s}
 .langbtn:active{transform:scale(.94)}
 .langbtn .pill{position:absolute;top:4px;bottom:4px;width:calc(50% - 4px);left:4px;background:#fff;border-radius:100px;
   transition:transform .35s cubic-bezier(.6,.2,.1,1);box-shadow:var(--sh-sm)}
 body[data-lang="hi"] .langbtn .pill{transform:translateX(100%)}
-.langbtn span{position:relative;z-index:1;padding:6px 15px;font-size:.72rem;color:var(--ink-dim);transition:color .3s}
+.langbtn span{position:relative;z-index:1;padding:6px 15px;font-size:.72rem;color:var(--ink-soft);transition:color .3s}
 .langbtn span.on{color:var(--ink)}
-#clock{font-size:.76rem;background:#EFF2F8;padding:9px 14px;border-radius:100px;
+#clock{font-size:.76rem;background:#FFE7D0;padding:9px 14px;border-radius:100px;
   color:var(--ink-soft);font-variant-numeric:tabular-nums;font-weight:700}
 
-/* ---------- stage ---------- */
-.stage{max-width:1060px;margin:0 auto;padding:132px clamp(18px,5vw,40px) 30px}
-
-/* ---------- hero (centered) ---------- */
-.hero{text-align:center;margin-bottom:64px;animation:fadeUp .8s .1s both}
-.greet{display:inline-flex;align-items:center;gap:8px;font-size:.72rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;
-  color:var(--accent);background:#fff;padding:9px 18px;border-radius:100px;margin-bottom:24px;
+/* ---------- hero ---------- */
+.hero{text-align:center;max-width:720px;margin:16px auto 6px;padding:0 20px;animation:fadeUp .8s .1s both}
+.greet{display:inline-flex;align-items:center;gap:8px;font-size:.7rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  color:var(--accent);background:#fff;padding:9px 18px;border-radius:100px;margin-bottom:18px;
   border:1px solid var(--line);box-shadow:var(--sh-sm)}
 .greet .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(244,81,30,.45)}50%{box-shadow:0 0 0 8px rgba(244,81,30,0)}}
-h1{font-size:clamp(2.3rem,6.5vw,4rem);font-weight:800;line-height:1.08;letter-spacing:-.03em;color:var(--ink)}
+h1{font-size:clamp(2rem,5.6vw,3.2rem);font-weight:800;line-height:1.1;letter-spacing:-.03em;color:var(--ink)}
 body[data-lang="hi"] h1{letter-spacing:0}
-h1 .g{color:var(--accent);position:relative;white-space:nowrap;display:inline-block}
-h1 .g::after{content:"";position:absolute;left:2%;right:2%;bottom:.02em;height:.09em;background:var(--accent);
-  border-radius:8px;opacity:.28;transform:scaleX(0);transform-origin:left;
-  animation:sweep .9s .9s cubic-bezier(.2,.8,.2,1) forwards}
-@keyframes sweep{to{transform:scaleX(1)}}
-.sub{max-width:540px;margin:20px auto 0;color:var(--ink-soft);font-size:clamp(.95rem,2vw,1.05rem);line-height:1.7;font-weight:500}
+h1 .g{color:var(--accent)}
+.sub{max-width:500px;margin:14px auto 0;color:var(--ink-soft);font-size:clamp(.92rem,2vw,1rem);line-height:1.66;font-weight:500}
 @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 
-/* ---------- 3D orbit ring ---------- */
-.orbit3d{--r:180px;height:200px;margin-top:38px;perspective:1100px;position:relative;
-  cursor:grab;touch-action:pan-y;user-select:none;-webkit-user-select:none}
-.orbit3d:active{cursor:grabbing}
-.orbit3d .hint{position:absolute;left:50%;bottom:-6px;transform:translateX(-50%);
-  font-size:.6rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-dim);
-  font-family:'JetBrains Mono';pointer-events:none;white-space:nowrap}
-.ring{position:absolute;inset:0;transform-style:preserve-3d;will-change:transform}
-.sat{position:absolute;left:50%;top:50%;width:68px;height:68px;margin:-34px 0 0 -34px;border-radius:21px;
-  background:#fff;border:1px solid var(--line);box-shadow:var(--sh-md);display:grid;place-items:center;
-  backface-visibility:hidden;-webkit-backface-visibility:hidden;
-  transform:rotateY(var(--a)) translateZ(var(--r))}
-.sat svg{width:29px;height:29px}
-.sat.c1 svg{color:var(--violet)}
-.sat.c2 svg{color:var(--mint)}
-.sat.c3 svg{color:var(--amber)}
-.sat.c4 svg{color:var(--rose)}
-.sat.c5 svg{color:var(--accent)}
-.sat.c6 svg{color:var(--ink-soft)}
-@media(max-width:700px){.orbit3d{--r:125px;height:170px;margin-top:30px}.sat{width:58px;height:58px;margin:-29px 0 0 -29px;border-radius:18px}.sat svg{width:25px;height:25px}}
+/* ---------- swipe deck ---------- */
+.deckwrap{position:relative;margin-top:26px;animation:fadeUp .8s .25s both}
+.track{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;
+  padding:26px calc(50vw - min(255px,44vw)) 30px;
+  scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.track::-webkit-scrollbar{display:none}
+.slide{position:relative;flex:0 0 min(510px,88vw);scroll-snap-align:center;
+  background:var(--card);border:1px solid var(--line);border-radius:30px;
+  box-shadow:var(--sh-md);overflow:hidden;
+  transform:scale(.9);opacity:.55;
+  transition:transform .35s cubic-bezier(.2,.8,.2,1),opacity .35s,box-shadow .35s;
+  will-change:transform}
+.slide.focus{transform:scale(1);opacity:1;box-shadow:var(--sh-lg)}
 
-/* ---------- scroll reveal ---------- */
-.rev{opacity:0}
-.rev.in{animation:fadeUp .75s both}
-.win.rev.in{animation:winIn .8s both}
-@keyframes winIn{from{opacity:0;transform:translateY(34px) scale(.96)}to{opacity:1;transform:none}}
+/* card header band */
+.shead{position:relative;height:118px;overflow:hidden}
+.slide[data-k="1"] .shead{background:linear-gradient(160deg,#EFEBFD 0%,#E1DBFB 100%)}
+.slide[data-k="2"] .shead{background:linear-gradient(160deg,#E2F7EE 0%,#CFF0DF 100%)}
+.slide[data-k="3"] .shead{background:linear-gradient(160deg,#FDF0DA 0%,#F9E3BC 100%)}
+.slide[data-k="4"] .shead{background:linear-gradient(160deg,#FCE8F0 0%,#F8D7E5 100%)}
+.shead::after{content:"";position:absolute;left:-4%;right:-4%;top:56%;
+  border-top:3px dashed rgba(244,81,30,.4);transform:rotate(-5deg)}
+.shead .idx{position:absolute;right:16px;top:2px;font-family:'JetBrains Mono';font-weight:700;
+  font-size:5.2rem;line-height:1;color:transparent;-webkit-text-stroke:2px rgba(74,56,43,.16);letter-spacing:-4px}
+.shead .step{position:absolute;left:20px;top:18px;font-size:.62rem;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;
+  color:var(--ink);background:rgba(255,255,255,.85);padding:7px 14px;border-radius:100px;
+  font-family:'JetBrains Mono';box-shadow:var(--sh-sm)}
+.sicon{position:absolute;left:22px;top:84px;width:64px;height:64px;border-radius:50%;z-index:2;
+  background:#fff;box-shadow:0 0 0 4px #fff,var(--sh-md);display:grid;place-items:center}
+.sicon svg{width:28px;height:28px}
+.slide[data-k="1"] .sicon svg{color:var(--violet)}
+.slide[data-k="2"] .sicon svg{color:var(--mint)}
+.slide[data-k="3"] .sicon svg{color:var(--amber)}
+.slide[data-k="4"] .sicon svg{color:var(--rose)}
 
-/* ---------- section headings ---------- */
-.seclabel{display:flex;align-items:center;gap:12px;margin:44px 0 20px}
-.seclabel .ico{width:40px;height:40px;border-radius:14px;display:grid;place-items:center;flex-shrink:0;
-  background:#fff;border:1px solid var(--line);box-shadow:var(--sh-sm)}
-.seclabel .ico svg{width:18px;height:18px;color:var(--accent)}
-.seclabel .txt{font-size:1.15rem;font-weight:800;letter-spacing:-.02em;color:var(--ink)}
-.seclabel .line{display:none}
-
-/* ---------- pastel cards ---------- */
-.dock{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
-.win{position:relative;border-radius:28px;cursor:pointer;overflow:hidden;
-  border:1px solid rgba(255,255,255,.85);
-  box-shadow:var(--sh-md);
-  background-size:170% 170%;animation:winIn .8s both,shift 9s ease-in-out infinite;
-  transition:transform .45s cubic-bezier(.2,.8,.2,1),box-shadow .45s;
+.sbody{padding:42px 24px 24px}
+.slide h2{font-size:1.42rem;font-weight:800;letter-spacing:-.02em;line-height:1.2;color:var(--ink)}
+.slide .tagline{font-size:.7rem;font-weight:700;color:var(--ink-soft);opacity:.85;margin-top:6px;font-family:'JetBrains Mono';letter-spacing:.3px}
+.slide p{color:var(--ink-soft);font-size:.9rem;line-height:1.68;font-weight:500;margin:14px 0 18px}
+.slide .meta{display:flex;gap:10px;margin-bottom:20px}
+.slide .meta > div{flex:1;background:#FFF3E6;border:1px solid var(--line);border-radius:16px;padding:12px 14px}
+.slide .meta b{display:block;font-size:1.3rem;font-weight:800;font-family:'JetBrains Mono';color:var(--ink);line-height:1;font-variant-numeric:tabular-nums}
+.slide .meta span{display:block;font-size:.6rem;font-weight:700;color:var(--ink-soft);letter-spacing:.5px;text-transform:uppercase;margin-top:5px}
+.openbtn{width:100%;border:none;cursor:pointer;position:relative;overflow:hidden;
+  background:var(--accent);color:#fff;font-family:inherit;font-size:.98rem;font-weight:800;
+  padding:17px;border-radius:100px;display:flex;align-items:center;justify-content:center;gap:10px;
+  box-shadow:0 10px 24px rgba(244,81,30,.32);transition:transform .25s,box-shadow .25s;
   -webkit-tap-highlight-color:transparent}
-@keyframes shift{0%,100%{background-position:0% 0%}50%{background-position:100% 100%}}
-.win:hover{transform:translateY(-7px);box-shadow:var(--sh-lg)}
-.win:active{transform:scale(.97);box-shadow:var(--sh-sm);transition-duration:.15s}
-.win:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
-.win.theory{background-image:linear-gradient(160deg,#F3F0FF 0%,#E7E2FD 55%,#F3F0FF 100%)}
-.win.emp{background-image:linear-gradient(160deg,#E9FAF3 0%,#D8F4E7 55%,#E9FAF3 100%)}
-.win.notes1{background-image:linear-gradient(160deg,#FFF6E5 0%,#FFEBCB 55%,#FFF6E5 100%)}
-.win.notes2{background-image:linear-gradient(160deg,#FEF0F5 0%,#FBDFEA 55%,#FEF0F5 100%)}
-.win .body{padding:26px;position:relative;z-index:1}
-.win .top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px}
-.win .icon{width:58px;height:58px;border-radius:19px;display:grid;place-items:center;
-  background:#fff;box-shadow:var(--sh-sm);transition:transform .45s cubic-bezier(.2,.8,.2,1)}
-.win .icon svg{width:27px;height:27px}
-.win.theory .icon svg{color:var(--violet)}
-.win.emp .icon svg{color:var(--mint)}
-.win.notes1 .icon svg{color:var(--amber)}
-.win.notes2 .icon svg{color:var(--rose)}
-.win:hover .icon{transform:scale(1.07) rotate(-5deg)}
-.win .go{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;
-  background:var(--ink);box-shadow:0 8px 20px rgba(23,29,51,.25);
-  transition:transform .4s cubic-bezier(.2,.8,.2,1),background .3s}
-.win .go svg{width:17px;height:17px;color:#fff;transform:rotate(-45deg);transition:transform .4s cubic-bezier(.2,.8,.2,1)}
-.win:hover .go{transform:scale(1.08);background:var(--accent)}
-.win:hover .go svg{transform:rotate(0deg)}
-.win h2{font-size:1.3rem;font-weight:800;letter-spacing:-.02em;line-height:1.2;color:var(--ink)}
-.win .tagline{font-size:.68rem;font-weight:700;color:var(--ink-soft);opacity:.75;margin-top:6px;font-family:'JetBrains Mono';letter-spacing:.3px}
-.win p{color:var(--ink-soft);font-size:.87rem;line-height:1.65;font-weight:500;margin:12px 0 20px}
-.win .foot{display:flex;align-items:center;gap:12px;border-top:1.5px dashed rgba(23,29,51,.12);padding-top:16px}
-.win .meta{display:flex;gap:12px;width:100%}
-.win .meta > div{flex:1;background:rgba(255,255,255,.65);border-radius:14px;padding:11px 14px;
-  display:flex;align-items:baseline;gap:7px}
-.win .meta b{font-size:1.22rem;font-weight:800;font-family:'JetBrains Mono';color:var(--ink);line-height:1;font-variant-numeric:tabular-nums}
-.win .meta span{font-size:.64rem;font-weight:700;color:var(--ink-soft);letter-spacing:.4px;text-transform:uppercase}
+.openbtn:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(244,81,30,.42)}
+.openbtn:active{transform:scale(.97)}
+.openbtn svg{width:17px;height:17px;transition:transform .3s}
+.openbtn:hover svg{transform:translateX(4px)}
+body[data-lang="hi"] .openbtn{font-family:'Noto Sans Devanagari',sans-serif}
 
-/* ---------- tap ripple ---------- */
-.ripple{position:absolute;border-radius:50%;background:rgba(23,29,51,.14);
-  transform:translate(-50%,-50%) scale(0);pointer-events:none;z-index:2;
+/* arrows (desktop) */
+.arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:5;width:52px;height:52px;border-radius:50%;
+  border:1px solid var(--line);background:#fff;color:var(--ink);cursor:pointer;
+  display:grid;place-items:center;box-shadow:var(--sh-md);transition:transform .25s,background .25s,color .25s}
+.arrow:hover{background:var(--accent);color:#fff;transform:translateY(-50%) scale(1.06)}
+.arrow:active{transform:translateY(-50%) scale(.94)}
+.arrow svg{width:20px;height:20px}
+.arrow.prev{left:max(14px,calc(50vw - 350px))}
+.arrow.next{right:max(14px,calc(50vw - 350px))}
+@media(max-width:860px){.arrow{display:none}}
+
+/* progress */
+.progress{display:flex;flex-direction:column;align-items:center;gap:12px;margin-top:2px;animation:fadeUp .8s .35s both}
+.bars{display:flex;gap:8px}
+.bars .bar{width:22px;height:6px;border-radius:100px;background:#F2DEC8;cursor:pointer;border:none;padding:0;
+  transition:width .35s cubic-bezier(.2,.8,.2,1),background .35s}
+.bars .bar.on{width:46px;background:var(--accent)}
+.pcount{font-family:'JetBrains Mono';font-size:.72rem;font-weight:700;color:var(--ink-soft);letter-spacing:1px}
+.swipehint{display:inline-flex;align-items:center;gap:9px;font-size:.62rem;font-weight:700;letter-spacing:1.2px;
+  text-transform:uppercase;color:var(--ink-dim);font-family:'JetBrains Mono'}
+.swipehint svg{width:15px;height:15px;color:var(--accent)}
+.swipehint .l{animation:nudgeL 1.6s ease-in-out infinite}
+.swipehint .r{animation:nudgeR 1.6s ease-in-out infinite}
+@keyframes nudgeL{0%,100%{transform:translateX(0)}50%{transform:translateX(-4px)}}
+@keyframes nudgeR{0%,100%{transform:translateX(0)}50%{transform:translateX(4px)}}
+
+/* ---------- ripple ---------- */
+.ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,.35);
+  transform:translate(-50%,-50%) scale(0);pointer-events:none;z-index:3;
   animation:rip .65s ease-out forwards}
+.langbtn .ripple{background:rgba(120,80,50,.15)}
 @keyframes rip{to{transform:translate(-50%,-50%) scale(1);opacity:0}}
 
-/* ---------- footer strip ---------- */
-.foots{margin-top:52px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;
-  padding:20px 26px;border-radius:100px;
-  background:#fff;border:1px solid var(--line);box-shadow:var(--sh-sm)}
-.foots .who{font-size:.83rem;color:var(--ink-soft);font-weight:500}
+/* ---------- footer ---------- */
+.foots{max-width:1020px;margin:34px auto 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;
+  padding:18px 24px;border-radius:100px;
+  background:#fff;border:1px solid var(--line);box-shadow:var(--sh-sm);animation:fadeUp .8s .45s both}
+.foots .who{font-size:.82rem;color:var(--ink-soft);font-weight:500}
 .foots .who b{color:var(--ink);font-weight:800}
 .foots .chips{display:flex;gap:8px;flex-wrap:wrap}
 .foots .chip{font-size:.66rem;font-weight:700;color:var(--accent);background:var(--accent-soft);
-  padding:8px 14px;border-radius:100px;font-family:'JetBrains Mono';letter-spacing:.4px;
-  transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+  padding:8px 14px;border-radius:100px;font-family:'JetBrains Mono';letter-spacing:.4px;transition:transform .3s}
 .foots .chip:hover{transform:translateY(-3px)}
-footer{text-align:center;padding:28px;color:var(--ink-dim);font-size:.78rem;font-weight:500}
+footer{text-align:center;padding:26px;color:var(--ink-dim);font-size:.78rem;font-weight:500}
 footer b{color:var(--ink-soft);font-weight:800}
+.wrap-pad{padding:0 clamp(14px,4vw,28px)}
 
 @media(max-width:700px){
-  .dock{grid-template-columns:1fr}
   .mb-left .tag{display:none}
-  .stage{padding-top:112px}
-  .hero{text-align:left}
-  .sub{margin-left:0}
-  .foots{border-radius:24px}
-  .win .body{padding:22px}
+  .sbody{padding:40px 20px 20px}
 }
 @media(prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
-  .rev{opacity:1}
+  .slide{transform:none;opacity:1}
 }
 </style>
 </head>
 <body data-lang="en">
-<div class="wall"></div>
-<div class="blobs"><span class="blob p1"></span><span class="blob p2"></span><span class="blob p3"></span></div>
-<div class="dots"></div>
 
 <div class="menubar">
   <div class="mb-left">
@@ -229,97 +195,114 @@ footer b{color:var(--ink-soft);font-weight:800}
   </div>
 </div>
 
-<div class="stage">
-  <div class="hero">
-    <div class="greet"><span class="dot"></span><span id="greetTxt" data-en="Ready to study" data-hi="पढ़ाई के लिए तैयार">Ready to study</span></div>
-    <h1 data-en="Your <span class='g'>COPA</span> exam,<br>all in one place" data-hi="आपकी <span class='g'>COPA</span> परीक्षा,<br>एक ही जगह">Your <span class="g">COPA</span> exam,<br>all in one place</h1>
-    <p class="sub" data-en="Practice chapter-wise tests and revise with bilingual notes — built to match the real NCVT paper." data-hi="अध्यायवार टेस्ट का अभ्यास करें और द्विभाषी नोट्स से रिवीजन करें — असली NCVT पेपर के अनुसार।">Practice chapter-wise tests and revise with bilingual notes — built to match the real NCVT paper.</p>
-    <div class="orbit3d" id="orbit3d" aria-hidden="true">
-      <div class="ring" id="ring">
-        <div class="sat c1" style="--a:0deg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
-        <div class="sat c2" style="--a:60deg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
-        <div class="sat c3" style="--a:120deg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
-        <div class="sat c4" style="--a:180deg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h4"/></svg></div>
-        <div class="sat c5" style="--a:240deg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
-        <div class="sat c6" style="--a:300deg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
-      </div>
-      <span class="hint" data-en="Drag to spin" data-hi="घुमाने के लिए खींचें">Drag to spin</span>
-    </div>
-  </div>
+<div class="hero">
+  <div class="greet"><span class="dot"></span><span id="greetTxt" data-en="Ready to study" data-hi="पढ़ाई के लिए तैयार">Ready to study</span></div>
+  <h1 data-en="Your <span class='g'>COPA</span> exam,<br>one step at a time" data-hi="आपकी <span class='g'>COPA</span> परीक्षा,<br>एक-एक कदम">Your <span class="g">COPA</span> exam,<br>one step at a time</h1>
+  <p class="sub" data-en="Swipe through 4 steps — from practice tests to revision notes, built for the real NCVT paper." data-hi="4 स्टेप स्वाइप करें — प्रैक्टिस टेस्ट से रिवीजन नोट्स तक, असली NCVT पेपर के लिए।">Swipe through 4 steps — from practice tests to revision notes, built for the real NCVT paper.</p>
+</div>
 
-  <div class="seclabel practice rev">
-    <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
-    <span class="txt" data-en="Practice Tests" data-hi="प्रैक्टिस टेस्ट">Practice Tests</span>
-    <span class="line"></span>
-  </div>
-  <div class="dock">
-    <div class="win theory rev" style="animation-delay:.1s" onclick="goTo('copa.html')" tabindex="0" role="link">
-      <div class="body">
-        <div class="top">
-          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
-          <div class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-        </div>
+<div class="deckwrap">
+  <button class="arrow prev" id="prevBtn" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg></button>
+  <button class="arrow next" id="nextBtn" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+
+  <div class="track" id="track">
+
+    <!-- STEP 1 -->
+    <div class="slide" data-k="1">
+      <div class="shead">
+        <span class="step" data-en="Step 1 of 4" data-hi="स्टेप 1 / 4">Step 1 of 4</span>
+        <span class="idx">01</span>
+      </div>
+      <div class="sicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+      <div class="sbody">
         <h2 data-en="COPA Theory" data-hi="COPA थ्योरी">COPA Theory</h2>
         <div class="tagline" data-en="18 chapters · 3 modes" data-hi="18 अध्याय · 3 मोड">18 chapters · 3 modes</div>
         <p data-en="Chapter-wise practice and full mock tests on the NCVT pattern, with multiple sets like the real paper." data-hi="NCVT पैटर्न पर अध्यायवार अभ्यास और पूर्ण मॉक टेस्ट, असली पेपर जैसे कई सेट के साथ।">Chapter-wise practice and full mock tests on the NCVT pattern, with multiple sets like the real paper.</p>
-        <div class="foot">
-          <div class="meta"><div><b data-count="100">100</b><span data-en="Questions" data-hi="प्रश्न">Questions</span></div><div><b data-count="10">10</b><span data-en="Sets" data-hi="सेट">Sets</span></div></div>
+        <div class="meta">
+          <div><b data-count="100">100</b><span data-en="Questions" data-hi="प्रश्न">Questions</span></div>
+          <div><b data-count="10">10</b><span data-en="Sets" data-hi="सेट">Sets</span></div>
         </div>
+        <button class="openbtn" data-url="copa.html"><span data-en="Start the test" data-hi="टेस्ट शुरू करें">Start the test</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
       </div>
     </div>
-    <div class="win emp rev" style="animation-delay:.2s" onclick="goTo('employability.html')" tabindex="0" role="link">
-      <div class="body">
-        <div class="top">
-          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
-          <div class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-        </div>
+
+    <!-- STEP 2 -->
+    <div class="slide" data-k="2">
+      <div class="shead">
+        <span class="step" data-en="Step 2 of 4" data-hi="स्टेप 2 / 4">Step 2 of 4</span>
+        <span class="idx">02</span>
+      </div>
+      <div class="sicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
+      <div class="sbody">
         <h2 data-en="Employability Skills" data-hi="रोज़गार कौशल">Employability Skills</h2>
         <div class="tagline" data-en="13 chapters · 3 modes" data-hi="13 अध्याय · 3 मोड">13 chapters · 3 modes</div>
         <p data-en="Subject-wise practice and full mock tests per the NCVT syllabus, with multiple sets for real exam feel." data-hi="NCVT पाठ्यक्रम के अनुसार विषयवार अभ्यास और पूर्ण मॉक टेस्ट, वास्तविक परीक्षा अनुभव के लिए कई सेट।">Subject-wise practice and full mock tests per the NCVT syllabus, with multiple sets for real exam feel.</p>
-        <div class="foot">
-          <div class="meta"><div><b data-count="75">75</b><span data-en="Questions" data-hi="प्रश्न">Questions</span></div><div><b data-count="10">10</b><span data-en="Sets" data-hi="सेट">Sets</span></div></div>
+        <div class="meta">
+          <div><b data-count="75">75</b><span data-en="Questions" data-hi="प्रश्न">Questions</span></div>
+          <div><b data-count="10">10</b><span data-en="Sets" data-hi="सेट">Sets</span></div>
         </div>
+        <button class="openbtn" data-url="employability.html"><span data-en="Start the test" data-hi="टेस्ट शुरू करें">Start the test</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
       </div>
     </div>
-  </div>
 
-  <div class="seclabel notes rev">
-    <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
-    <span class="txt" data-en="Revision Notes" data-hi="रिवीजन नोट्स">Revision Notes</span>
-    <span class="line"></span>
-  </div>
-  <div class="dock">
-    <div class="win notes1 rev" style="animation-delay:.1s" onclick="goTo('notes-theory.html')" tabindex="0" role="link">
-      <div class="body">
-        <div class="top">
-          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
-          <div class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-        </div>
+    <!-- STEP 3 -->
+    <div class="slide" data-k="3">
+      <div class="shead">
+        <span class="step" data-en="Step 3 of 4" data-hi="स्टेप 3 / 4">Step 3 of 4</span>
+        <span class="idx">03</span>
+      </div>
+      <div class="sicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+      <div class="sbody">
         <h2 data-en="Theory Notes" data-hi="थ्योरी नोट्स">Theory Notes</h2>
         <div class="tagline" data-en="18 chapters · EN / हिं" data-hi="18 अध्याय · EN / हिं">18 chapters · EN / हिं</div>
         <p data-en="Concise, exam-focused notes for every COPA topic — quick to revise before the paper." data-hi="हर COPA विषय के लिए संक्षिप्त, परीक्षा-केंद्रित नोट्स — पेपर से पहले तुरंत रिवीजन।">Concise, exam-focused notes for every COPA topic — quick to revise before the paper.</p>
-        <div class="foot">
-          <div class="meta"><div><b data-count="18">18</b><span data-en="Chapters" data-hi="अध्याय">Chapters</span></div><div><b data-count="2">2</b><span data-en="Languages" data-hi="भाषाएं">Languages</span></div></div>
+        <div class="meta">
+          <div><b data-count="18">18</b><span data-en="Chapters" data-hi="अध्याय">Chapters</span></div>
+          <div><b data-count="2">2</b><span data-en="Languages" data-hi="भाषाएं">Languages</span></div>
         </div>
+        <button class="openbtn" data-url="notes-theory.html"><span data-en="Open the notes" data-hi="नोट्स खोलें">Open the notes</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
       </div>
     </div>
-    <div class="win notes2 rev" style="animation-delay:.2s" onclick="goTo('notes-employability.html')" tabindex="0" role="link">
-      <div class="body">
-        <div class="top">
-          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h4"/></svg></div>
-          <div class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-        </div>
+
+    <!-- STEP 4 -->
+    <div class="slide" data-k="4">
+      <div class="shead">
+        <span class="step" data-en="Step 4 of 4" data-hi="स्टेप 4 / 4">Step 4 of 4</span>
+        <span class="idx">04</span>
+      </div>
+      <div class="sicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h4"/></svg></div>
+      <div class="sbody">
         <h2 data-en="Employability Notes" data-hi="रोज़गार कौशल नोट्स">Employability Notes</h2>
         <div class="tagline" data-en="13 chapters · EN / हिं" data-hi="13 अध्याय · EN / हिं">13 chapters · EN / हिं</div>
         <p data-en="Short, to-the-point notes on every Employability Skills concept — everything summed up for fast revision." data-hi="हर रोज़गार कौशल कॉन्सेप्ट के छोटे, सीधे नोट्स — तेज़ रिवीजन के लिए सब कुछ संक्षेप में।">Short, to-the-point notes on every Employability Skills concept — everything summed up for fast revision.</p>
-        <div class="foot">
-          <div class="meta"><div><b data-count="13">13</b><span data-en="Chapters" data-hi="अध्याय">Chapters</span></div><div><b data-count="2">2</b><span data-en="Languages" data-hi="भाषाएं">Languages</span></div></div>
+        <div class="meta">
+          <div><b data-count="13">13</b><span data-en="Chapters" data-hi="अध्याय">Chapters</span></div>
+          <div><b data-count="2">2</b><span data-en="Languages" data-hi="भाषाएं">Languages</span></div>
         </div>
+        <button class="openbtn" data-url="notes-employability.html"><span data-en="Open the notes" data-hi="नोट्स खोलें">Open the notes</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
       </div>
     </div>
-  </div>
 
-  <div class="foots rev">
+  </div>
+</div>
+
+<div class="progress">
+  <div class="bars" id="bars">
+    <button class="bar on" data-i="0" aria-label="Step 1"></button>
+    <button class="bar" data-i="1" aria-label="Step 2"></button>
+    <button class="bar" data-i="2" aria-label="Step 3"></button>
+    <button class="bar" data-i="3" aria-label="Step 4"></button>
+  </div>
+  <span class="pcount" id="pcount">01 / 04</span>
+  <span class="swipehint">
+    <svg class="l" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+    <span data-en="Swipe to explore" data-hi="स्वाइप करके देखें">Swipe to explore</span>
+    <svg class="r" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+  </span>
+</div>
+
+<div class="wrap-pad">
+  <div class="foots">
     <div class="who" data-en="Built for ITI students · <b>UP NCVT COPA</b> · 1st Year" data-hi="आईटीआई छात्रों के लिए · <b>यूपी एनसीवीटी COPA</b> · प्रथम वर्ष">Built for ITI students · <b>UP NCVT COPA</b> · 1st Year</div>
     <div class="chips">
       <span class="chip" data-en="31 Chapters" data-hi="31 अध्याय">31 Chapters</span>
@@ -359,41 +342,9 @@ window.addEventListener('pageshow', function(e){
   }
 });
 
-/* ---------- scroll reveal ---------- */
 const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const revEls=document.querySelectorAll('.rev');
-if('IntersectionObserver' in window){
-  const io=new IntersectionObserver(es=>{
-    es.forEach(e=>{
-      if(e.isIntersecting){
-        e.target.classList.add('in');
-        if(e.target.classList.contains('win'))countUp(e.target);
-        io.unobserve(e.target);
-      }
-    });
-  },{threshold:.15});
-  revEls.forEach(el=>io.observe(el));
-}else{
-  revEls.forEach(el=>{el.classList.add('in');if(el.classList.contains('win'))countUp(el)});
-}
 
-/* ---------- number count-up ---------- */
-function countUp(card){
-  card.querySelectorAll('[data-count]').forEach(el=>{
-    const target=parseInt(el.dataset.count,10);
-    if(reduced||isNaN(target)){el.textContent=target;return}
-    const dur=900,start=performance.now();
-    function step(now){
-      const p=Math.min((now-start)/dur,1);
-      const ease=1-Math.pow(1-p,3);
-      el.textContent=Math.round(target*ease);
-      if(p<1)requestAnimationFrame(step);
-    }
-    requestAnimationFrame(step);
-  });
-}
-
-/* ---------- tap ripple (cards + buttons) ---------- */
+/* ---------- tap ripple ---------- */
 function addRipple(el){
   el.addEventListener('pointerdown',e=>{
     if(reduced)return;
@@ -408,65 +359,81 @@ function addRipple(el){
     setTimeout(()=>s.remove(),700);
   });
 }
-document.querySelectorAll('.win,.langbtn').forEach(addRipple);
+document.querySelectorAll('.openbtn,.langbtn').forEach(addRipple);
 
-/* ---------- keyboard access ---------- */
-document.querySelectorAll('.win').forEach(w=>{
-  w.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();w.click()}});
-});
-
-/* ---------- 3D orbit: auto spin + drag + scroll ---------- */
-const ring=document.getElementById('ring'),orbit=document.getElementById('orbit3d');
-if(ring&&!reduced){
-  let rot=0,vel=0,dragging=false,lastX=0,lastT=0,lastScroll=window.scrollY;
-  orbit.addEventListener('pointerdown',e=>{
-    dragging=true;lastX=e.clientX;lastT=performance.now();vel=0;
-    orbit.setPointerCapture(e.pointerId);
+/* ---------- number count-up ---------- */
+const counted=new Set();
+function countUp(scope){
+  if(counted.has(scope))return;
+  counted.add(scope);
+  scope.querySelectorAll('[data-count]').forEach(el=>{
+    const target=parseInt(el.dataset.count,10);
+    if(reduced||isNaN(target)){el.textContent=target;return}
+    const dur=800,start=performance.now();
+    function step(now){
+      const p=Math.min((now-start)/dur,1);
+      el.textContent=Math.round(target*(1-Math.pow(1-p,3)));
+      if(p<1)requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
   });
-  orbit.addEventListener('pointermove',e=>{
-    if(!dragging)return;
-    const dx=e.clientX-lastX,now=performance.now(),dt=Math.max(now-lastT,1);
-    rot+=dx*0.45;vel=(dx*0.45)/(dt/16.7);
-    lastX=e.clientX;lastT=now;
-  });
-  const endDrag=()=>{dragging=false};
-  orbit.addEventListener('pointerup',endDrag);
-  orbit.addEventListener('pointercancel',endDrag);
-  window.addEventListener('scroll',()=>{
-    const y=window.scrollY;rot+=(y-lastScroll)*0.12;lastScroll=y;
-  },{passive:true});
-  let prev=performance.now();
-  (function spin(now){
-    const dt=(now-prev)/1000;prev=now;
-    if(!dragging){rot+=10*dt+vel;vel*=0.94;if(Math.abs(vel)<.01)vel=0}
-    ring.style.transform='rotateX(-10deg) rotateY('+rot+'deg)';
-    requestAnimationFrame(spin);
-  })(prev);
 }
 
-/* ---------- 3D card tilt ---------- */
-const canHover=window.matchMedia('(hover: hover)').matches;
-document.querySelectorAll('.win').forEach(w=>{
-  if(reduced)return;
-  if(canHover){
-    w.addEventListener('pointermove',e=>{
-      const r=w.getBoundingClientRect();
-      const px=(e.clientX-r.left)/r.width-.5,py=(e.clientY-r.top)/r.height-.5;
-      w.style.transform='perspective(900px) translateY(-7px) rotateX('+(-py*7)+'deg) rotateY('+(px*7)+'deg)';
-    });
-    w.addEventListener('pointerleave',()=>{w.style.transform=''});
-  }else{
-    w.addEventListener('pointerdown',e=>{
-      const r=w.getBoundingClientRect();
-      const px=(e.clientX-r.left)/r.width-.5,py=(e.clientY-r.top)/r.height-.5;
-      w.style.transform='perspective(900px) scale(.97) rotateX('+(-py*6)+'deg) rotateY('+(px*6)+'deg)';
-    });
-    const clr=()=>{w.style.transform=''};
-    w.addEventListener('pointerup',clr);
-    w.addEventListener('pointercancel',clr);
-    w.addEventListener('pointerleave',clr);
+/* ---------- swipe deck: focus zoom + progress ---------- */
+const track=document.getElementById('track');
+const slides=[...document.querySelectorAll('.slide')];
+const bars=[...document.querySelectorAll('.bar')];
+const pcount=document.getElementById('pcount');
+let activeIdx=0,ticking=false;
+
+function updateDeck(){
+  ticking=false;
+  const mid=track.getBoundingClientRect().left+track.clientWidth/2;
+  let best=0,bestD=Infinity;
+  slides.forEach((s,i)=>{
+    const r=s.getBoundingClientRect();
+    const c=r.left+r.width/2;
+    const d=Math.abs(c-mid);
+    if(d<bestD){bestD=d;best=i}
+    s.classList.toggle('focus',false);
+  });
+  slides[best].classList.add('focus');
+  if(best!==activeIdx||!counted.has(slides[best])){
+    activeIdx=best;
+    bars.forEach((b,i)=>b.classList.toggle('on',i===best));
+    pcount.textContent='0'+(best+1)+' / 04';
+    countUp(slides[best]);
   }
+}
+track.addEventListener('scroll',()=>{
+  if(!ticking){ticking=true;requestAnimationFrame(updateDeck)}
+},{passive:true});
+window.addEventListener('resize',updateDeck);
+
+function goToSlide(i){
+  i=Math.max(0,Math.min(slides.length-1,i));
+  const s=slides[i];
+  const target=s.offsetLeft - (track.clientWidth - s.offsetWidth)/2;
+  track.scrollTo({left:target,behavior:reduced?'auto':'smooth'});
+}
+document.getElementById('prevBtn').addEventListener('click',()=>goToSlide(activeIdx-1));
+document.getElementById('nextBtn').addEventListener('click',()=>goToSlide(activeIdx+1));
+bars.forEach(b=>b.addEventListener('click',()=>goToSlide(parseInt(b.dataset.i,10))));
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight')goToSlide(activeIdx+1);
+  if(e.key==='ArrowLeft')goToSlide(activeIdx-1);
 });
+
+/* open buttons navigate */
+document.querySelectorAll('.openbtn').forEach(b=>{
+  b.addEventListener('click',()=>{
+    setTimeout(()=>goTo(b.dataset.url),150);
+  });
+});
+
+/* start on card 1 */
+window.addEventListener('load',()=>{goToSlide(0);updateDeck()});
+updateDeck();
 </script>
 </body>
 </html>
